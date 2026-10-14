@@ -1,8 +1,9 @@
 import '@testing-library/jest-dom/vitest';
 
-// Node 25+ defines its own experimental localStorage global, which shadows jsdom's.
-// Replace it with a simple in-memory Storage so tests behave the same on every Node version.
-if (typeof globalThis.localStorage?.clear !== 'function') {
+// Node 25+ defines its own experimental localStorage global, which shadows jsdom's, and
+// jsdom's Storage can't be spied on per instance. Use a plain in-memory Storage everywhere
+// so tests behave the same on every Node version.
+{
   class MemoryStorage {
     private m = new Map<string, string>();
     get length() {
