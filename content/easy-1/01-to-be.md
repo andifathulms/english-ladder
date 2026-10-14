@@ -70,7 +70,7 @@ glossary:
   - { en: ready, id: "siap" }
   - { en: right, id: "benar" }
   - { en: sick, id: "sakit" }
-next: null
+next: easy1-02-pronouns
 ---
 
 ## concept.id

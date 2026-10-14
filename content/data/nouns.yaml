@@ -1,0 +1,160 @@
+# Noun builder data. Every value is authored: the component never guesses.
+# initial_sound is about the first SOUND, not the first letter.
+
+# Vowel sounds
+- { word: apple, initial_sound: vowel, ipa_hint: "/æ/", plural: apples, plural_rule: s, id: apel }
+- { word: egg, initial_sound: vowel, ipa_hint: "/e/", plural: eggs, plural_rule: s, id: telur }
+- { word: orange, initial_sound: vowel, ipa_hint: "/ɒ/", plural: oranges, plural_rule: s, id: jeruk }
+- { word: umbrella, initial_sound: vowel, ipa_hint: "/ʌ/", plural: umbrellas, plural_rule: s, id: payung }
+- { word: uncle, initial_sound: vowel, ipa_hint: "/ʌ/", plural: uncles, plural_rule: s, id: paman }
+- { word: aunt, initial_sound: vowel, ipa_hint: "/ɑː/", plural: aunts, plural_rule: s, id: bibi }
+- { word: hour, initial_sound: vowel, ipa_hint: "/aʊ/", plural: hours, plural_rule: s, id: jam }
+- { word: island, initial_sound: vowel, ipa_hint: "/aɪ/", plural: islands, plural_rule: s, id: pulau }
+- { word: idea, initial_sound: vowel, ipa_hint: "/aɪ/", plural: ideas, plural_rule: s, id: ide }
+- { word: office, initial_sound: vowel, ipa_hint: "/ɒ/", plural: offices, plural_rule: s, id: kantor }
+- { word: onion, initial_sound: vowel, ipa_hint: "/ʌ/", plural: onions, plural_rule: s, id: bawang }
+- { word: elephant, initial_sound: vowel, ipa_hint: "/e/", plural: elephants, plural_rule: s, id: gajah }
+- { word: ant, initial_sound: vowel, ipa_hint: "/æ/", plural: ants, plural_rule: s, id: semut }
+- { word: arm, initial_sound: vowel, ipa_hint: "/ɑː/", plural: arms, plural_rule: s, id: lengan }
+- { word: ear, initial_sound: vowel, ipa_hint: "/ɪə/", plural: ears, plural_rule: s, id: telinga }
+- { word: eye, initial_sound: vowel, ipa_hint: "/aɪ/", plural: eyes, plural_rule: s, id: mata }
+- { word: engineer, initial_sound: vowel, ipa_hint: "/e/", plural: engineers, plural_rule: s, id: insinyur }
+- { word: answer, initial_sound: vowel, ipa_hint: "/ɑː/", plural: answers, plural_rule: s, id: jawaban }
+- { word: airport, initial_sound: vowel, ipa_hint: "/eə/", plural: airports, plural_rule: s, id: bandara }
+- { word: oven, initial_sound: vowel, ipa_hint: "/ʌ/", plural: ovens, plural_rule: s, id: oven }
+- { word: avocado, initial_sound: vowel, ipa_hint: "/æ/", plural: avocados, plural_rule: s, id: alpukat }
+- { word: envelope, initial_sound: vowel, ipa_hint: "/e/", plural: envelopes, plural_rule: s, id: amplop }
+- { word: angkot, initial_sound: vowel, ipa_hint: "/æ/", plural: angkots, plural_rule: s, id: angkot }
+- { word: ox, initial_sound: vowel, ipa_hint: "/ɒ/", plural: oxen, plural_rule: irregular, id: sapi jantan }
+
+# Vowel letter, consonant sound: these take "a"
+- { word: university, initial_sound: consonant, ipa_hint: "/j/", plural: universities, plural_rule: y-ies, id: universitas }
+- { word: uniform, initial_sound: consonant, ipa_hint: "/j/", plural: uniforms, plural_rule: s, id: seragam }
+- { word: user, initial_sound: consonant, ipa_hint: "/j/", plural: users, plural_rule: s, id: pengguna }
+- { word: ukulele, initial_sound: consonant, ipa_hint: "/j/", plural: ukuleles, plural_rule: s, id: ukulele }
+
+# Consonant sounds, plural +s
+- { word: book, initial_sound: consonant, ipa_hint: "/b/", plural: books, plural_rule: s, id: buku }
+- { word: bag, initial_sound: consonant, ipa_hint: "/b/", plural: bags, plural_rule: s, id: tas }
+- { word: motorbike, initial_sound: consonant, ipa_hint: "/m/", plural: motorbikes, plural_rule: s, id: motor }
+- { word: durian, initial_sound: consonant, ipa_hint: "/d/", plural: durians, plural_rule: s, id: durian }
+- { word: kitchen, initial_sound: consonant, ipa_hint: "/k/", plural: kitchens, plural_rule: s, id: dapur }
+- { word: mosque, initial_sound: consonant, ipa_hint: "/m/", plural: mosques, plural_rule: s, id: masjid }
+- { word: rice cooker, initial_sound: consonant, ipa_hint: "/r/", plural: rice cookers, plural_rule: s, id: magic com }
+- { word: warung, initial_sound: consonant, ipa_hint: "/w/", plural: warungs, plural_rule: s, id: warung }
+- { word: phone, initial_sound: consonant, ipa_hint: "/f/", plural: phones, plural_rule: s, id: HP }
+- { word: house, initial_sound: consonant, ipa_hint: "/h/", plural: houses, plural_rule: s, id: rumah }
+- { word: table, initial_sound: consonant, ipa_hint: "/t/", plural: tables, plural_rule: s, id: meja }
+- { word: chair, initial_sound: consonant, ipa_hint: "/tʃ/", plural: chairs, plural_rule: s, id: kursi }
+- { word: bed, initial_sound: consonant, ipa_hint: "/b/", plural: beds, plural_rule: s, id: kasur }
+- { word: door, initial_sound: consonant, ipa_hint: "/d/", plural: doors, plural_rule: s, id: pintu }
+- { word: window, initial_sound: consonant, ipa_hint: "/w/", plural: windows, plural_rule: s, id: jendela }
+- { word: car, initial_sound: consonant, ipa_hint: "/k/", plural: cars, plural_rule: s, id: mobil }
+- { word: bicycle, initial_sound: consonant, ipa_hint: "/b/", plural: bicycles, plural_rule: s, id: sepeda }
+- { word: school, initial_sound: consonant, ipa_hint: "/s/", plural: schools, plural_rule: s, id: sekolah }
+- { word: teacher, initial_sound: consonant, ipa_hint: "/t/", plural: teachers, plural_rule: s, id: guru }
+- { word: student, initial_sound: consonant, ipa_hint: "/s/", plural: students, plural_rule: s, id: pelajar }
+- { word: doctor, initial_sound: consonant, ipa_hint: "/d/", plural: doctors, plural_rule: s, id: dokter }
+- { word: nurse, initial_sound: consonant, ipa_hint: "/n/", plural: nurses, plural_rule: s, id: perawat }
+- { word: driver, initial_sound: consonant, ipa_hint: "/d/", plural: drivers, plural_rule: s, id: sopir }
+- { word: farmer, initial_sound: consonant, ipa_hint: "/f/", plural: farmers, plural_rule: s, id: petani }
+- { word: friend, initial_sound: consonant, ipa_hint: "/f/", plural: friends, plural_rule: s, id: teman }
+- { word: sister, initial_sound: consonant, ipa_hint: "/s/", plural: sisters, plural_rule: s, id: saudara perempuan }
+- { word: brother, initial_sound: consonant, ipa_hint: "/b/", plural: brothers, plural_rule: s, id: saudara laki-laki }
+- { word: mother, initial_sound: consonant, ipa_hint: "/m/", plural: mothers, plural_rule: s, id: ibu }
+- { word: father, initial_sound: consonant, ipa_hint: "/f/", plural: fathers, plural_rule: s, id: ayah }
+- { word: cat, initial_sound: consonant, ipa_hint: "/k/", plural: cats, plural_rule: s, id: kucing }
+- { word: dog, initial_sound: consonant, ipa_hint: "/d/", plural: dogs, plural_rule: s, id: anjing }
+- { word: chicken, initial_sound: consonant, ipa_hint: "/tʃ/", plural: chickens, plural_rule: s, id: ayam }
+- { word: cow, initial_sound: consonant, ipa_hint: "/k/", plural: cows, plural_rule: s, id: sapi }
+- { word: bird, initial_sound: consonant, ipa_hint: "/b/", plural: birds, plural_rule: s, id: burung }
+- { word: shoe, initial_sound: consonant, ipa_hint: "/ʃ/", plural: shoes, plural_rule: s, id: sepatu }
+- { word: shirt, initial_sound: consonant, ipa_hint: "/ʃ/", plural: shirts, plural_rule: s, id: kemeja }
+- { word: hat, initial_sound: consonant, ipa_hint: "/h/", plural: hats, plural_rule: s, id: topi }
+- { word: pen, initial_sound: consonant, ipa_hint: "/p/", plural: pens, plural_rule: s, id: pulpen }
+- { word: pencil, initial_sound: consonant, ipa_hint: "/p/", plural: pencils, plural_rule: s, id: pensil }
+- { word: cup, initial_sound: consonant, ipa_hint: "/k/", plural: cups, plural_rule: s, id: cangkir }
+- { word: plate, initial_sound: consonant, ipa_hint: "/p/", plural: plates, plural_rule: s, id: piring }
+- { word: spoon, initial_sound: consonant, ipa_hint: "/s/", plural: spoons, plural_rule: s, id: sendok }
+- { word: banana, initial_sound: consonant, ipa_hint: "/b/", plural: bananas, plural_rule: s, id: pisang }
+- { word: coconut, initial_sound: consonant, ipa_hint: "/k/", plural: coconuts, plural_rule: s, id: kelapa }
+- { word: road, initial_sound: consonant, ipa_hint: "/r/", plural: roads, plural_rule: s, id: jalan }
+- { word: market, initial_sound: consonant, ipa_hint: "/m/", plural: markets, plural_rule: s, id: pasar }
+- { word: hospital, initial_sound: consonant, ipa_hint: "/h/", plural: hospitals, plural_rule: s, id: rumah sakit }
+- { word: village, initial_sound: consonant, ipa_hint: "/v/", plural: villages, plural_rule: s, id: desa }
+- { word: mountain, initial_sound: consonant, ipa_hint: "/m/", plural: mountains, plural_rule: s, id: gunung }
+- { word: river, initial_sound: consonant, ipa_hint: "/r/", plural: rivers, plural_rule: s, id: sungai }
+- { word: tree, initial_sound: consonant, ipa_hint: "/t/", plural: trees, plural_rule: s, id: pohon }
+- { word: flower, initial_sound: consonant, ipa_hint: "/f/", plural: flowers, plural_rule: s, id: bunga }
+- { word: star, initial_sound: consonant, ipa_hint: "/s/", plural: stars, plural_rule: s, id: bintang }
+- { word: song, initial_sound: consonant, ipa_hint: "/s/", plural: songs, plural_rule: s, id: lagu }
+- { word: helmet, initial_sound: consonant, ipa_hint: "/h/", plural: helmets, plural_rule: s, id: helm }
+- { word: laptop, initial_sound: consonant, ipa_hint: "/l/", plural: laptops, plural_rule: s, id: laptop }
+- { word: wallet, initial_sound: consonant, ipa_hint: "/w/", plural: wallets, plural_rule: s, id: dompet }
+- { word: ticket, initial_sound: consonant, ipa_hint: "/t/", plural: tickets, plural_rule: s, id: tiket }
+- { word: week, initial_sound: consonant, ipa_hint: "/w/", plural: weeks, plural_rule: s, id: minggu }
+- { word: year, initial_sound: consonant, ipa_hint: "/j/", plural: years, plural_rule: s, id: tahun }
+- { word: name, initial_sound: consonant, ipa_hint: "/n/", plural: names, plural_rule: s, id: nama }
+- { word: hand, initial_sound: consonant, ipa_hint: "/h/", plural: hands, plural_rule: s, id: tangan }
+- { word: key, initial_sound: consonant, ipa_hint: "/k/", plural: keys, plural_rule: s, id: kunci }
+- { word: day, initial_sound: consonant, ipa_hint: "/d/", plural: days, plural_rule: s, id: hari }
+- { word: boy, initial_sound: consonant, ipa_hint: "/b/", plural: boys, plural_rule: s, id: anak laki-laki }
+- { word: toy, initial_sound: consonant, ipa_hint: "/t/", plural: toys, plural_rule: s, id: mainan }
+- { word: holiday, initial_sound: consonant, ipa_hint: "/h/", plural: holidays, plural_rule: s, id: liburan }
+- { word: photo, initial_sound: consonant, ipa_hint: "/f/", plural: photos, plural_rule: s, id: foto }
+- { word: radio, initial_sound: consonant, ipa_hint: "/r/", plural: radios, plural_rule: s, id: radio }
+- { word: piano, initial_sound: consonant, ipa_hint: "/p/", plural: pianos, plural_rule: s, id: piano }
+- { word: video, initial_sound: consonant, ipa_hint: "/v/", plural: videos, plural_rule: s, id: video }
+- { word: roof, initial_sound: consonant, ipa_hint: "/r/", plural: roofs, plural_rule: s, id: atap }
+- { word: chef, initial_sound: consonant, ipa_hint: "/ʃ/", plural: chefs, plural_rule: s, id: koki }
+
+# Plural +es (after s, sh, ch, x, z and some o endings)
+- { word: bus, initial_sound: consonant, ipa_hint: "/b/", plural: buses, plural_rule: es, id: bus }
+- { word: box, initial_sound: consonant, ipa_hint: "/b/", plural: boxes, plural_rule: es, id: kotak }
+- { word: watch, initial_sound: consonant, ipa_hint: "/w/", plural: watches, plural_rule: es, id: jam tangan }
+- { word: dish, initial_sound: consonant, ipa_hint: "/d/", plural: dishes, plural_rule: es, id: hidangan }
+- { word: glass, initial_sound: consonant, ipa_hint: "/ɡ/", plural: glasses, plural_rule: es, id: gelas }
+- { word: class, initial_sound: consonant, ipa_hint: "/k/", plural: classes, plural_rule: es, id: kelas }
+- { word: church, initial_sound: consonant, ipa_hint: "/tʃ/", plural: churches, plural_rule: es, id: gereja }
+- { word: beach, initial_sound: consonant, ipa_hint: "/b/", plural: beaches, plural_rule: es, id: pantai }
+- { word: sandwich, initial_sound: consonant, ipa_hint: "/s/", plural: sandwiches, plural_rule: es, id: roti isi }
+- { word: bench, initial_sound: consonant, ipa_hint: "/b/", plural: benches, plural_rule: es, id: bangku }
+- { word: brush, initial_sound: consonant, ipa_hint: "/b/", plural: brushes, plural_rule: es, id: sikat }
+- { word: dress, initial_sound: consonant, ipa_hint: "/d/", plural: dresses, plural_rule: es, id: gaun }
+- { word: fox, initial_sound: consonant, ipa_hint: "/f/", plural: foxes, plural_rule: es, id: rubah }
+- { word: tomato, initial_sound: consonant, ipa_hint: "/t/", plural: tomatoes, plural_rule: es, id: tomat }
+- { word: potato, initial_sound: consonant, ipa_hint: "/p/", plural: potatoes, plural_rule: es, id: kentang }
+- { word: mango, initial_sound: consonant, ipa_hint: "/m/", plural: mangoes, plural_rule: es, id: mangga }
+- { word: mosquito, initial_sound: consonant, ipa_hint: "/m/", plural: mosquitoes, plural_rule: es, id: nyamuk }
+- { word: hero, initial_sound: consonant, ipa_hint: "/h/", plural: heroes, plural_rule: es, id: pahlawan }
+
+# y → ies (consonant before y)
+- { word: city, initial_sound: consonant, ipa_hint: "/s/", plural: cities, plural_rule: y-ies, id: kota }
+- { word: baby, initial_sound: consonant, ipa_hint: "/b/", plural: babies, plural_rule: y-ies, id: bayi }
+- { word: family, initial_sound: consonant, ipa_hint: "/f/", plural: families, plural_rule: y-ies, id: keluarga }
+- { word: country, initial_sound: consonant, ipa_hint: "/k/", plural: countries, plural_rule: y-ies, id: negara }
+- { word: party, initial_sound: consonant, ipa_hint: "/p/", plural: parties, plural_rule: y-ies, id: pesta }
+- { word: story, initial_sound: consonant, ipa_hint: "/s/", plural: stories, plural_rule: y-ies, id: cerita }
+- { word: dictionary, initial_sound: consonant, ipa_hint: "/d/", plural: dictionaries, plural_rule: y-ies, id: kamus }
+- { word: butterfly, initial_sound: consonant, ipa_hint: "/b/", plural: butterflies, plural_rule: y-ies, id: kupu-kupu }
+
+# f / fe → ves
+- { word: knife, initial_sound: consonant, ipa_hint: "/n/", plural: knives, plural_rule: f-ves, id: pisau }
+- { word: wife, initial_sound: consonant, ipa_hint: "/w/", plural: wives, plural_rule: f-ves, id: istri }
+- { word: leaf, initial_sound: consonant, ipa_hint: "/l/", plural: leaves, plural_rule: f-ves, id: daun }
+- { word: shelf, initial_sound: consonant, ipa_hint: "/ʃ/", plural: shelves, plural_rule: f-ves, id: rak }
+- { word: half, initial_sound: consonant, ipa_hint: "/h/", plural: halves, plural_rule: f-ves, id: setengah }
+- { word: thief, initial_sound: consonant, ipa_hint: "/θ/", plural: thieves, plural_rule: f-ves, id: pencuri }
+
+# Irregular
+- { word: child, initial_sound: consonant, ipa_hint: "/tʃ/", plural: children, plural_rule: irregular, id: anak }
+- { word: man, initial_sound: consonant, ipa_hint: "/m/", plural: men, plural_rule: irregular, id: laki-laki }
+- { word: woman, initial_sound: consonant, ipa_hint: "/w/", plural: women, plural_rule: irregular, id: perempuan }
+- { word: person, initial_sound: consonant, ipa_hint: "/p/", plural: people, plural_rule: irregular, id: orang }
+- { word: tooth, initial_sound: consonant, ipa_hint: "/t/", plural: teeth, plural_rule: irregular, id: gigi }
+- { word: foot, initial_sound: consonant, ipa_hint: "/f/", plural: feet, plural_rule: irregular, id: kaki }
+- { word: mouse, initial_sound: consonant, ipa_hint: "/m/", plural: mice, plural_rule: irregular, id: tikus }
+
+# Same form
+- { word: fish, initial_sound: consonant, ipa_hint: "/f/", plural: fish, plural_rule: same, id: ikan }
+- { word: sheep, initial_sound: consonant, ipa_hint: "/ʃ/", plural: sheep, plural_rule: same, id: domba }

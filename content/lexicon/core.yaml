@@ -1,0 +1,48 @@
+# Words allowed in English lesson text per rung, on top of the glossaries of this and earlier lessons.
+# content:check flags anything else (errors in reviewed lessons, warnings in drafts).
+easy-1:
+  # to be and contractions
+  - am
+  - is
+  - are
+  - "i'm"
+  - "you're"
+  - "we're"
+  - "he's"
+  - "she's"
+  - "it's"
+  - "they're"
+  - "that's"
+  - "isn't"
+  - "aren't"
+  # pronouns
+  - i
+  - you
+  - we
+  # articles and small words
+  - a
+  - an
+  - the
+  - and
+  - of
+  - at
+  - here
+  - too
+  # numbers
+  - one
+  - two
+  - five
+  # scene objects used by the place-scene visual
+  - ball
+  # Indonesian names (CLAUDE.md §6.5)
+  - rina
+  - budi
+  - dewi
+  - andi
+  - putu
+  - siti
+  - yohanes
+  - mei
+  # deliberate errors shown in wrong sentences
+  - "amn't"
+  - childrens

@@ -125,7 +125,7 @@ export function CheckItemView(props: Practice | Test) {
   const sentenceOptions = item.type === 'fix' || item.type === 'scene';
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5" data-item={item.id}>
       {item.cue && (
         <p lang="id" className="id-text">
           {item.cue}

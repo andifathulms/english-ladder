@@ -19,6 +19,8 @@ export function itemText(item: CheckItem): string {
 /** The correct answer as a sentence-ish string. */
 export function answerText(item: CheckItem): string {
   if (item.type === 'order') return item.answer.join(' ');
-  if (item.type === 'gap') return item.prompt.replace('___', item.answer);
+  if ((item.type === 'gap' || item.type === 'choice') && item.prompt.includes('___')) {
+    return stripMarkup(item.prompt.replace('___', item.answer));
+  }
   return stripMarkup(item.answer);
 }
