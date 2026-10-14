@@ -2,7 +2,7 @@
 
 import type { Noun } from '@/lib/types';
 
-type Props = { visual: { id: string; props: Record<string, unknown> }; nouns?: Noun[] };
+type Props = { visual: { id: string; props: Record<string, unknown> }; nouns?: Noun[]; interactive?: boolean };
 
 /** Placeholder until the visual components land. */
 export function VisualStage({ visual }: Props) {

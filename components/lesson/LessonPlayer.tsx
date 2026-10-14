@@ -42,8 +42,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
   const [dir, setDir] = useState<'fwd' | 'back'>('fwd');
   const [ready, setReady] = useState(false);
   const [checkIndex, setCheckIndex] = useState(0);
-  const [checksDone, setChecksDone] = useState(false);
-  const [missed, setMissed] = useState(0);
+  const [solved, setSolved] = useState<boolean[]>(() => lesson.check.map(() => false));
   const [freshNotch, setFreshNotch] = useState<number | undefined>(undefined);
   const headingRef = useRef<HTMLDivElement>(null);
   const announceRef = useRef<HTMLParagraphElement>(null);
@@ -53,14 +52,18 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
     const lp = store.getState().lessons[lesson.id];
     if (lp && !lp.completed) {
       setStep(lp.step);
-      if (lp.checkIndex !== undefined) setCheckIndex(lp.checkIndex);
+      if (lp.checkIndex !== undefined) {
+        const k = Math.min(lp.checkIndex, lesson.check.length - 1);
+        setCheckIndex(k);
+        setSolved(lesson.check.map((_, i) => i < k));
+      }
     } else if (lp?.completed) {
       store.restartLesson(lesson.id);
     } else {
       store.setLessonStep(lesson.id, 0);
     }
     setReady(true);
-  }, [lesson.id]);
+  }, [lesson.id, lesson.check]);
 
   // Save position silently on every step / check change.
   useEffect(() => {
@@ -92,7 +95,15 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
     headingRef.current?.querySelector<HTMLElement>('h2[tabindex]')?.focus({ preventScroll: true });
   }, [step, ready, t]);
 
-  const canContinue = step !== 4 || checksDone;
+  const checksDone = solved.every(Boolean);
+  const canContinue = step !== 4 || solved[checkIndex];
+  const advance = useCallback(() => {
+    if (step === 4 && checkIndex < lesson.check.length - 1) {
+      setCheckIndex(checkIndex + 1);
+      return;
+    }
+    go(step + 1);
+  }, [step, checkIndex, lesson.check.length, go]);
 
   // Keyboard: ←/→ between steps, Enter to continue, Space to play the first sentence.
   useEffect(() => {
@@ -105,7 +116,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
       if (e.key === 'ArrowRight' && !el?.closest('[data-visual]')) {
         if (canContinue && step < 5) {
           e.preventDefault();
-          go(step + 1);
+          advance();
         }
       } else if (e.key === 'ArrowLeft' && !el?.closest('[data-visual]')) {
         if (step > 0) {
@@ -115,7 +126,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
       } else if (e.key === 'Enter' && !onControl) {
         if (canContinue && step < 5) {
           e.preventDefault();
-          go(step + 1);
+          advance();
         }
       } else if (e.key === ' ' && !onControl) {
         const btn = document.querySelector<HTMLButtonElement>('main [data-play]');
@@ -127,7 +138,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [step, canContinue, go]);
+  }, [step, canContinue, go, advance]);
 
   const effective = settings.explain === 'rung' ? rung.explain_lang : settings.explain;
   const toggle = (
@@ -155,6 +166,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
       </div>
     );
 
+  const missed = lesson.check.filter((c) => progress.items[c.id]?.firstTry === false).length;
   const done = rungLessons.filter((l) => progress.lessons[l.id]?.completed).length;
   const climbed = !!progress.rungs[rung.id]?.climbed;
 
@@ -230,11 +242,8 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
           <CheckStep
             items={lesson.check}
             index={checkIndex}
-            onIndexChange={setCheckIndex}
-            onComplete={(m) => {
-              setChecksDone(true);
-              setMissed(m);
-            }}
+            solved={solved}
+            onSolved={(i) => setSolved((s) => s.map((v, j) => (j === i ? true : v)))}
             nouns={nouns}
           />
         </>
@@ -325,9 +334,9 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
             type="button"
             className="btn btn-primary w-full max-w-[360px]"
             disabled={!canContinue}
-            onClick={() => go(step + 1)}
+            onClick={advance}
           >
-            {canContinue ? t('lesson.next') : t('lesson.finishChecks')} <IconArrowRight />
+            {t('lesson.next')} <IconArrowRight />
           </button>
         ) : (
           <div className="flex w-full flex-wrap items-center justify-center gap-3">
