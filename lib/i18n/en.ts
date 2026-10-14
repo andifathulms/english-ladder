@@ -111,6 +111,7 @@ export const en: Record<StringKey, string> = {
   'review.summary': '{c} of {n} correct on the first try.',
   'review.summaryAll': 'All correct. These questions move up a box.',
   'review.empty': 'Finish two lessons first, then quick review will appear here.',
+  'review.start': 'Start',
   'review.done': 'Back to the ladder',
   'review.again': 'Review again',
 

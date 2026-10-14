@@ -110,6 +110,7 @@ export const id = {
   'review.summary': '{c} dari {n} tepat di percobaan pertama.',
   'review.summaryAll': 'Semua tepat. Soal-soal ini naik kotak.',
   'review.empty': 'Selesaikan dua pelajaran dulu, lalu ulang cepat akan muncul di sini.',
+  'review.start': 'Mulai',
   'review.done': 'Kembali ke tangga',
   'review.again': 'Ulang lagi',
 
