@@ -3,6 +3,7 @@ import '@/styles/globals.css';
 import { body, display, mono } from './fonts';
 import { themeScript } from './themeScript';
 import { withBase } from '@/lib/basePath';
+import { ProgressProvider } from '@/components/ProgressProvider';
 
 export const metadata: Metadata = {
   title: { default: 'English Ladder', template: '%s · English Ladder' },
@@ -31,7 +32,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <ProgressProvider>{children}</ProgressProvider>
+      </body>
     </html>
   );
 }
