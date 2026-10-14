@@ -74,13 +74,13 @@ next: null
 ---
 
 ## concept.id
-Dalam bahasa Inggris, kalimat butuh kata kerja. Kalau tidak ada kata kerja lain, pakai **to be**: *am*, *is* atau *are*. Pakai **am** dengan *I*, **are** dengan *you* dan *we*, dan **is** dengan satu orang lain, misalnya *Rina*.
+Dalam bahasa Inggris, kalimat butuh kata kerja. Kalau tidak ada kata kerja lain, pakai **to be**: **am**, **is** atau **are**. Pakai **am** dengan **I**, **are** dengan **you** dan **we**, dan **is** dengan satu orang lain, misalnya **Rina**.
 
 ## concept.en
-An English sentence needs a verb. When there is no other verb, use **to be**: *am*, *is* or *are*. Use **am** with *I*, **are** with *you* and *we*, and **is** with one other person, like *Rina*.
+An English sentence needs a verb. When there is no other verb, use **to be**: **am**, **is** or **are**. Use **am** with **I**, **are** with **you** and **we**, and **is** with one other person, like **Rina**.
 
 ## contrast.id
-Bahasa Indonesia bilang *Aku senang* tanpa kata tambahan. Bahasa Inggris tidak bisa begitu: *I happy* terdengar seperti bahasa bayi. Selalu taruh *am*, *is* atau *are* di tengah.
+Bahasa Indonesia bilang *Aku senang* tanpa kata tambahan. Bahasa Inggris tidak bisa begitu: **I happy** terdengar seperti bahasa bayi. Selalu taruh **am**, **is** atau **are** di tengah.
 
 ## contrast.en
-Indonesian says *Aku senang* with no extra word. English can't: *I happy* sounds like baby talk. Always put *am*, *is* or *are* in the middle.
+Indonesian says *Aku senang* with no extra word. English can't: **I happy** sounds like baby talk. Always put **am**, **is** or **are** in the middle.

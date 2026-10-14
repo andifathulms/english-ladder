@@ -5,6 +5,7 @@ import * as store from '@/lib/progress/store';
 import type { ProgressState, Settings } from '@/lib/progress/types';
 import { translate, type StringKey, type UiLang } from '@/lib/i18n';
 import { registerServiceWorker } from '@/lib/sw';
+import { setSfxEnabled } from '@/lib/speech/sfx';
 
 const Ctx = createContext<ProgressState | null>(null);
 
@@ -22,6 +23,7 @@ function applySettings(s: Settings) {
 export function ProgressProvider({ children }: { children: React.ReactNode }) {
   const state = useSyncExternalStore(store.subscribe, store.getState, store.getServerState);
   useEffect(() => applySettings(state.settings), [state.settings]);
+  useEffect(() => setSfxEnabled(state.settings.sfx), [state.settings.sfx]);
   useEffect(() => registerServiceWorker(), []);
   return <Ctx.Provider value={state}>{children}</Ctx.Provider>;
 }
