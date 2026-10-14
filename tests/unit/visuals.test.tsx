@@ -35,7 +35,7 @@ describe('PlaceScene', () => {
   it('puts the behind ball in the slot before the box, so the box covers it', () => {
     const { container } = wrap(<PlaceScene lang="en" state="behind" interactive={false} />);
     const svg = container.querySelector('svg')!;
-    const kids = Array.from(svg.children);
+    const kids = Array.from(svg.querySelector(':scope > g')!.children);
     const ball = kids.findIndex((el) => el.getAttribute('data-ball') === 'behind');
     const boxBack = kids.findIndex((el) => el.getAttribute('points')?.startsWith('148,124 168,108'));
     expect(ball).toBeGreaterThan(-1);
