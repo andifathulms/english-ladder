@@ -7,7 +7,7 @@
     "dev": "next dev",
     "prebuild": "npm run content:check",
     "build": "next build",
-    "preview": "npx serve@14.2.4 out",
+    "preview": "node scripts/serve.mjs",
     "content:check": "tsx scripts/content-check.ts",
     "test": "vitest run",
     "test:watch": "vitest",

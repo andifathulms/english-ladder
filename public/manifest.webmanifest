@@ -1,0 +1,17 @@
+{
+  "name": "English Ladder",
+  "short_name": "English Ladder",
+  "description": "Kursus bahasa Inggris bertingkat untuk penutur bahasa Indonesia.",
+  "lang": "id",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F4F6F5",
+  "theme_color": "#1D6A5A",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

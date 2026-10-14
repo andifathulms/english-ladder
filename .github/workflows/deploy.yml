@@ -37,6 +37,24 @@ jobs:
         with:
           path: out
 
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Build without base path for e2e
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SHOW_DRAFTS: 'true'
+      - run: npm run test:e2e
+        env:
+          CI: 'true'
+
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
