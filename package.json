@@ -5,7 +5,7 @@
   "description": "A calm, levelled English course for Indonesian speakers.",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "echo no content yet",
+    "prebuild": "npm run content:check",
     "build": "next build",
     "preview": "npx serve@14.2.4 out",
     "content:check": "tsx scripts/content-check.ts",

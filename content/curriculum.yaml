@@ -1,0 +1,127 @@
+# Single source of truth for the ladder. Bottom (easy-1) to top (hard-3).
+rungs:
+  - id: easy-1
+    name: Easy 1
+    tier: easy
+    cefr: A1
+    explain_lang: id
+    status: live
+    lessons: 8
+    description:
+      id: "Kalimat pertamamu: siapa, apa, punya siapa, dan di mana."
+      en: "Your first sentences: who, what, whose and where."
+    topics: [to be, he/she/it/they, a/an and plurals, this/that, have/has, possessives, prepositions of place, to be questions]
+    threads: [be, pronouns, articles, demonstratives, have, possessives, prepositions, questions]
+    inventory: [be-present, subject-pronouns, articles-a-an, plural-regular, plural-irregular-core, demonstratives, have-present, possessive-adj, possessive-s, prep-place-basic, be-questions-negatives]
+
+  - id: easy-2
+    name: Easy 2
+    tier: easy
+    cefr: A1
+    explain_lang: id
+    status: soon
+    lessons: 8
+    description:
+      id: "Kegiatan sehari-hari: apa yang kamu lakukan, kapan, dan apa yang bisa kamu lakukan."
+      en: "Daily life: what you do, when, and what you can do."
+    topics: [present simple, do/does questions, don't/doesn't, there is/there are, can and can't, how often, object pronouns, at/on/in for time]
+    threads: [tense, questions, modals, prepositions, pronouns, word-order]
+    inventory: []
+
+  - id: easy-3
+    name: Easy 3
+    tier: easy
+    cefr: A2−
+    explain_lang: id
+    status: soon
+    lessons: 8
+    description:
+      id: "Sekarang dan kemarin: yang sedang terjadi, yang sudah terjadi, dan rencana."
+      en: "Now and yesterday: what is happening, what happened, and plans."
+    topics: [present continuous, was/were, past simple regular, past simple irregular, some/any, much/many, going to, comparatives]
+    threads: [tense, articles, comparison, future]
+    inventory: []
+
+  - id: medium-1
+    name: Medium 1
+    tier: medium
+    cefr: A2
+    explain_lang: mixed
+    status: soon
+    lessons: 8
+    description:
+      id: "Cerita dan rencana yang lebih panjang, plus aturan dan nasihat."
+      en: "Longer stories and plans, plus rules and advice."
+    topics: [past continuous, superlatives, will vs going to, present perfect with ever/never, should/must/have to, first conditional, too/enough, adverbs of manner]
+    threads: [tense, comparison, future, modals, conditionals]
+    inventory: []
+
+  - id: medium-2
+    name: Medium 2
+    tier: medium
+    cefr: B1
+    explain_lang: mixed
+    status: soon
+    lessons: 8
+    description:
+      en: "Connecting time and ideas: experience, habits in the past, and who did what."
+      id: "Menghubungkan waktu dan ide: pengalaman, kebiasaan dulu, dan siapa melakukan apa."
+    topics: [present perfect vs past simple, present perfect continuous, used to, passive voice, relative clauses, second conditional, reported speech, gerund or infinitive]
+    threads: [tense, passive, clauses, conditionals, reporting]
+    inventory: []
+
+  - id: medium-3
+    name: Medium 3
+    tier: medium
+    cefr: B1+
+    explain_lang: en
+    status: soon
+    lessons: 8
+    description:
+      en: "Guessing, regretting and linking: sounding more natural in longer talk."
+      id: "Menebak, menyesal dan menyambung: terdengar lebih alami saat bicara panjang."
+    topics: [past perfect, modals of deduction, third conditional, wish, passive in all tenses, articles in depth, phrasal verbs, linking words]
+    threads: [tense, modals, conditionals, passive, articles, discourse]
+    inventory: []
+
+  - id: hard-1
+    name: Hard 1
+    tier: hard
+    cefr: B2
+    explain_lang: en
+    status: soon
+    lessons: 8
+    description:
+      en: "Precision and emphasis: saying exactly what you mean, and stressing what matters."
+      id: "Presisi dan penekanan: bilang persis yang kamu maksud, dan tekankan yang penting."
+    topics: [mixed conditionals, future continuous and perfect, it is said that, have something done, non-defining relative clauses, cleft sentences, emphasis with do, introduction to inversion]
+    threads: [conditionals, future, passive, clauses, emphasis]
+    inventory: []
+
+  - id: hard-2
+    name: Hard 2
+    tier: hard
+    cefr: B2+
+    explain_lang: en
+    status: soon
+    lessons: 7
+    description:
+      en: "Writing and speaking with control: register, hedging and compact sentences."
+      id: "Menulis dan bicara dengan kendali: register, hedging, dan kalimat yang ringkas."
+    topics: [participle clauses, subjunctive, hedging, nominalisation, advanced article use, collocations, register]
+    threads: [clauses, modals, articles, style]
+    inventory: []
+
+  - id: hard-3
+    name: Hard 3
+    tier: hard
+    cefr: C1
+    explain_lang: en
+    status: soon
+    lessons: 7
+    description:
+      en: "Polish: the small choices that make English sound fluent and deliberate."
+      id: "Polesan akhir: pilihan kecil yang membuat bahasa Inggrismu terdengar fasih dan sengaja."
+    topics: [inversion, ellipsis and substitution, discourse markers, nuance in modals, fronting, academic style, idiomatic precision]
+    threads: [emphasis, discourse, modals, style]
+    inventory: []
