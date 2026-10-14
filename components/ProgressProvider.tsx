@@ -60,12 +60,16 @@ export function useReducedMotion(): boolean {
   const pref = useSettings().motion;
   const sys = useSyncExternalStore(
     (cb) => {
-      const m = window.matchMedia('(prefers-reduced-motion: reduce)');
-      m.addEventListener('change', cb);
-      return () => m.removeEventListener('change', cb);
+      const m = motionQuery();
+      m?.addEventListener('change', cb);
+      return () => m?.removeEventListener('change', cb);
     },
-    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    () => motionQuery()?.matches ?? false,
     () => false,
   );
   return pref === 'reduce' || sys;
+}
+
+function motionQuery(): MediaQueryList | null {
+  return typeof window.matchMedia === 'function' ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
 }
