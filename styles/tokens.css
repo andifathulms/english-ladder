@@ -43,6 +43,8 @@
   --t-body: 1.0625rem;
   --t-small: 0.9rem;
   --t-label: 0.74rem;
+  --t-tab: 0.72rem;
+  --t-wordmark: 1.125rem;
 
   /* Space (DESIGN §5.1) */
   --s-1: 4px;

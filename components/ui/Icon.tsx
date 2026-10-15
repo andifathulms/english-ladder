@@ -46,7 +46,45 @@ export const IconSettings = ({ size = 22, className }: P) => (
 );
 export const IconBook = ({ size = 22, className }: P) => (
   <svg {...base(size, className)}>
-    <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5" />
+    <path d="M5 4.5h10a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h10" />
+  </svg>
+);
+export const IconLadder = ({ size = 22, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="M7 3v18M17 3v18M7 7.5h10M7 12h10M7 16.5h10" />
+  </svg>
+);
+export const IconReview = ({ size = 22, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4" />
+  </svg>
+);
+export const IconUser = ({ size = 22, className }: P) => (
+  <svg {...base(size, className)}>
+    <circle cx="12" cy="8" r="4" />
+    <path d="M4 21a8 8 0 0 1 16 0" />
+  </svg>
+);
+export const IconFlag = ({ size = 20, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="M6 21V4M6 4h11l-2 4 2 4H6" />
+  </svg>
+);
+export const IconSearch = ({ size = 18, className }: P) => (
+  <svg {...base(size, className)}>
+    <circle cx="11" cy="11" r="6.5" />
+    <path d="M16 16l4 4" />
+  </svg>
+);
+export const IconInfo = ({ size = 20, className }: P) => (
+  <svg {...base(size, className)}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 11v6M12 7.5v.5" />
+  </svg>
+);
+export const IconChevron = ({ size = 18, className }: P) => (
+  <svg {...base(size, className)}>
+    <path d="M9 6l6 6-6 6" />
   </svg>
 );
 export const IconHalf = ({ size = 18, className }: P) => (

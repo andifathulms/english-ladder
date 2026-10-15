@@ -6,13 +6,11 @@ import type { LessonSummary, Rung } from '@/lib/types';
 import { completedCount, continueTarget, currentRung } from '@/lib/progress/derive';
 import { lessonHref } from '@/lib/routes';
 import { useProgress, useT } from '../ProgressProvider';
-import { AppHeader } from '../ui/AppHeader';
-import { Footer } from '../ui/Footer';
+import { AppShell } from '../ui/AppShell';
 import { IconArrowRight } from '../ui/Icon';
 import { ContinueCard } from './ContinueCard';
 import { LadderRail } from './LadderRail';
 import { RungDetail } from './RungDetail';
-import { WeekStrip } from './WeekStrip';
 
 type Props = { rungs: Rung[]; lessons: LessonSummary[]; testRungs: string[] };
 
@@ -34,8 +32,7 @@ export function HomeView({ rungs, lessons, testRungs }: Props) {
   };
 
   return (
-    <>
-      <AppHeader />
+    <AppShell>
       <main className="page flex max-w-home flex-col gap-7 py-6">
         <h1 className="sr-only">English Ladder</h1>
         <ContinueCard target={target} firstLessonHref={first ? lessonHref(first) : null} rungs={rungs} />
@@ -75,9 +72,7 @@ export function HomeView({ rungs, lessons, testRungs }: Props) {
             {t('home.quickReview')} <IconArrowRight />
           </Link>
         )}
-        <WeekStrip progress={progress} />
       </main>
-      <Footer />
-    </>
+    </AppShell>
   );
 }

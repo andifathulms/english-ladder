@@ -11,6 +11,7 @@ const routes = [
   '/rung/easy-1/test/',
   '/review/',
   '/words/',
+  '/me/',
   '/settings/',
   '/about/',
 ];

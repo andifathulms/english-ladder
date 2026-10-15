@@ -55,7 +55,7 @@ const copy = {
 export function AboutView() {
   const { t, lang } = useT();
   return (
-    <PageShell title={t('about.title')}>
+    <PageShell title={t('about.title')} back={{ href: '/me/', label: t('nav.me') }}>
       {copy[lang].map((s) => (
         <section key={s.h} className="flex flex-col gap-2">
           <h2 className="text-h2">{s.h}</h2>

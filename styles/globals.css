@@ -155,6 +155,17 @@
     margin-inline: auto;
     width: 100%;
   }
+  /* Content area under the tab bar (phones) or beside the sidebar (wide screens). */
+  .shell {
+    min-height: 100dvh;
+    padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + var(--s-5));
+  }
+  @media (min-width: 900px) {
+    .shell {
+      padding-left: var(--sidebar-w);
+      padding-bottom: var(--s-7);
+    }
+  }
   .sr-only {
     position: absolute;
     width: 1px;

@@ -135,7 +135,22 @@ No glassmorphism, no glows, no gradient fills on UI.
 
 ## 6. Layout and screens
 
-Mobile-first, 360px minimum. Lesson column max 640px; home max 960px.
+Mobile-first, 360px minimum. Lesson column max 640px; home max 1040px.
+
+### 6.0 Navigation
+Four places, each with a visible name. One `<nav>` landmark, two layouts:
+
+| Tab | Route | Holds |
+|---|---|---|
+| **Tangga** | `/`, `/rung/*` | Home, rung pages (lessons and test start from here) |
+| **Ulang** | `/review/` | Quick review; a kind empty state before two lessons are done |
+| **Kata** | `/words/` | My words |
+| **Saya** | `/me/` | A quiet progress summary, the week strip, links to Settings and About |
+
+- Phones: a bottom tab bar on `--surface` with icon + short label, active tab in `--accent` with an `--accent-soft` pill behind the icon. Safe-area padding below.
+- From 900px: a 232px sidebar with the wordmark, long labels, and the week strip at the bottom.
+- The lesson player, the rung test and a running review hide the navigation entirely: focus mode is a full screen.
+- No badges or counts on tabs.
 
 ### 6.1 Home — the Ladder
 
@@ -248,7 +263,7 @@ The one celebratory moment in the app. Full screen, `--rung-soft` background:
 6. Buttons: "Lihat tangga" / "Mulai Easy 2" (or "Easy 2 coming soon" in v1).
 
 ### 6.8 My words, Settings, About
-Simple, list-based, using the same type rules. Settings groups: Bahasa, Suara, Tampilan, Progres. Reset progress uses an inline confirm that requires typing nothing but a second tap on a clearly worded button.
+Simple, list-based, using the same type rules. Settings and About open from Saya and link back to it. Settings groups are cards under eyebrow headings. Settings groups: Bahasa, Suara, Tampilan, Progres. Reset progress uses an inline confirm that requires typing nothing but a second tap on a clearly worded button.
 
 ---
 

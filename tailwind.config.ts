@@ -49,6 +49,8 @@ const config: Config = {
       body: ['var(--t-body)', { lineHeight: '1.6' }],
       small: ['var(--t-small)', { lineHeight: '1.5' }],
       label: ['var(--t-label)', { lineHeight: '1.3', letterSpacing: '0.1em' }],
+      tab: ['var(--t-tab)', { lineHeight: '1.2' }],
+      wordmark: ['var(--t-wordmark)', { lineHeight: '1', letterSpacing: '-0.01em' }],
     },
     spacing: {
       0: '0',

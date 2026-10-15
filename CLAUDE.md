@@ -59,10 +59,11 @@ app/
   rung/[rung]/test/page.tsx  # Rung test
   review/page.tsx            # Quick review
   words/page.tsx             # My words
+  me/page.tsx                # Saya: progress summary, week, links to settings/about
   settings/page.tsx
   about/page.tsx
 components/
-  ladder/  lesson/  check/  ui/
+  ladder/  lesson/  check/  ui/      # ui/AppShell + AppNav: tab bar (phone) / sidebar (≥900px)
   visuals/
     PlaceScene.tsx
     NounBuilder.tsx

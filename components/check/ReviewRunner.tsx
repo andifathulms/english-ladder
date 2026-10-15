@@ -8,7 +8,7 @@ import * as store from '@/lib/progress/store';
 import { useProgress, useT } from '../ProgressProvider';
 import { PageShell } from '../ui/PageShell';
 import { BottomActionBar } from '../lesson/BottomActionBar';
-import { IconArrowRight } from '../ui/Icon';
+import { IconArrowRight, IconReview } from '../ui/Icon';
 import { CheckItemView } from './CheckItemView';
 
 type Props = { items: { item: CheckItem; lessonId: string }[]; nouns?: Noun[] };
@@ -45,14 +45,27 @@ export function ReviewRunner({ items, nouns }: Props) {
             </div>
           </>
         ) : completed < 2 ? (
-          <p className="text-muted">{t('review.empty')}</p>
+          <div className="card flex flex-col items-start gap-3 p-5">
+            <span className="flex h-[48px] w-[48px] items-center justify-center rounded-md bg-paper-2 text-muted">
+              <IconReview size={24} />
+            </span>
+            <h2 className="text-h2">{t('review.emptyTitle')}</h2>
+            <p className="max-w-measure text-muted">{t('review.empty')}</p>
+            <Link href="/" className="btn btn-ghost no-underline">
+              {t('review.done')}
+            </Link>
+          </div>
         ) : (
-          <>
-            <p className="max-w-measure">{t('review.intro')}</p>
-            <button type="button" className="btn btn-primary self-start" onClick={start}>
+          <div className="card flex flex-col items-start gap-3 p-5">
+            <span className="flex h-[48px] w-[48px] items-center justify-center rounded-md bg-accent-soft text-accent">
+              <IconReview size={24} />
+            </span>
+            <h2 className="text-h2">{t('review.readyTitle')}</h2>
+            <p className="max-w-measure text-muted">{t('review.intro')}</p>
+            <button type="button" className="btn btn-primary" onClick={start}>
               {t('review.start')} <IconArrowRight />
             </button>
-          </>
+          </div>
         )}
       </PageShell>
     );

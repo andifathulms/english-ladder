@@ -11,9 +11,9 @@ import { useCanSpeak } from './useSpeech';
 
 function Group({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="flex flex-col gap-5 border-t border-rule pt-5" aria-labelledby={`g-${title}`}>
+    <section className="flex flex-col gap-2" aria-labelledby={`g-${title}`}>
       <h2 id={`g-${title}`} className="eyebrow">{title}</h2>
-      {children}
+      <div className="card flex flex-col gap-5 p-5">{children}</div>
     </section>
   );
 }
@@ -55,7 +55,7 @@ export function SettingsView() {
   };
 
   return (
-    <PageShell title={t('settings.title')}>
+    <PageShell title={t('settings.title')} back={{ href: '/me/', label: t('nav.me') }}>
       {!storageOk && (
         <p className="rounded-md bg-paper-2 px-4 py-3 text-small" role="status">
           {t('settings.storageOff')}
@@ -162,10 +162,10 @@ export function SettingsView() {
 
       <Group title={t('settings.group.progress')}>
         <div className="flex flex-wrap gap-2">
-          <button type="button" className="btn border-2 border-rule bg-surface text-ink" onClick={doExport}>
+          <button type="button" className="btn btn-ghost" onClick={doExport}>
             {t('settings.export')}
           </button>
-          <button type="button" className="btn border-2 border-rule bg-surface text-ink" onClick={() => fileRef.current?.click()}>
+          <button type="button" className="btn btn-ghost" onClick={() => fileRef.current?.click()}>
             {t('settings.import')}
           </button>
           <input

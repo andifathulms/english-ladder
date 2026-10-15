@@ -1,20 +1,27 @@
 'use client';
 
-import { AppHeader, BackLink } from './AppHeader';
-import { Footer } from './Footer';
-import { useT } from '../ProgressProvider';
+import { AppShell } from './AppShell';
+import { BackLink } from './AppHeader';
 
-export function PageShell({ title, children }: { title: string; children: React.ReactNode }) {
-  const { t } = useT();
+type Props = {
+  title: string;
+  subtitle?: React.ReactNode;
+  /** Where the back link goes; tab roots have none. */
+  back?: { href: string; label: string };
+  children: React.ReactNode;
+};
+
+export function PageShell({ title, subtitle, back, children }: Props) {
   return (
-    <>
-      <AppHeader />
-      <main className="page flex max-w-lesson flex-col gap-6 py-5">
-        <BackLink href="/" label={t('nav.home')} />
-        <h1 className="text-h1">{title}</h1>
+    <AppShell>
+      <main className="page flex max-w-lesson flex-col gap-6 py-5 min-[900px]:py-8">
+        <header className="flex flex-col gap-1">
+          {back && <BackLink href={back.href} label={back.label} />}
+          <h1 className="text-h1 tracking-[-0.015em]">{title}</h1>
+          {subtitle && <p className="text-muted">{subtitle}</p>}
+        </header>
         {children}
       </main>
-      <Footer />
-    </>
+    </AppShell>
   );
 }

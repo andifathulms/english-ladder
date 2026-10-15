@@ -3,7 +3,7 @@ const CACHE_VERSION = 'v1.0.0';
 const CACHE = `english-ladder-${CACHE_VERSION}`;
 // Works under any base path: everything is relative to the registration scope.
 const SCOPE = self.registration.scope;
-const SHELL = ['', 'rung/easy-1/', 'review/', 'words/', 'settings/', 'about/', 'manifest.webmanifest', 'icons/icon.svg'];
+const SHELL = ['', 'rung/easy-1/', 'review/', 'words/', 'me/', 'settings/', 'about/', 'manifest.webmanifest', 'icons/icon.svg'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
