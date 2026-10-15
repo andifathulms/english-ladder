@@ -4,9 +4,9 @@ import Link from 'next/link';
 import type { LessonSummary, Rung } from '@/lib/types';
 import type { ProgressState } from '@/lib/progress/types';
 import { lessonState } from '@/lib/progress/derive';
-import { testHref, rungHref } from '@/lib/routes';
+import { readHref, testHref, rungHref } from '@/lib/routes';
 import { LessonRow } from './LessonRow';
-import { IconArrowLeft, IconChevron, IconFlag } from '../ui/Icon';
+import { IconArrowLeft, IconChevron, IconFlag, IconPlay } from '../ui/Icon';
 import { Contours } from '../ui/Contours';
 import { ProgressRing } from '../ui/ProgressRing';
 import { tierName } from '../ui/tier';
@@ -18,11 +18,13 @@ type Props = {
   lessons: LessonSummary[];
   progress: ProgressState;
   test: TestInfo | null;
+  reading?: ReadingInfo | null;
 };
 
 export type TestInfo = { draw: number; pass: number };
+export type ReadingInfo = { title: { en: string; id: string }; items: number };
 
-export function RungDetail({ rung, rungs, lessons, progress, test }: Props) {
+export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Props) {
   const { t, lang } = useT();
   const mine = lessons.filter((l) => l.rung === rung.id).sort((a, b) => a.order - b.order);
   const tests = progress.rungs[rung.id]?.tests ?? [];
@@ -101,6 +103,23 @@ export function RungDetail({ rung, rungs, lessons, progress, test }: Props) {
                 <LessonRow key={l.id} lesson={l} state={states[i]} current={i === currentIdx} />
               ))}
             </ol>
+          )}
+          {reading && (
+            <Link
+              href={readHref(rung.id)}
+              className="mt-3 flex min-h-[72px] items-center gap-4 rounded-lg bg-accent-soft p-4 text-ink no-underline transition-colors duration-quick hover:bg-paper-2"
+            >
+              <span className="flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-md bg-surface text-accent">
+                <IconPlay />
+              </span>
+              <span className="flex min-w-0 flex-1 flex-col">
+                <span className="font-display text-card font-medium">
+                  {t('read.title')}: <span lang="en">{reading.title.en}</span>
+                </span>
+                <span className="text-small text-muted tnum">{t('read.meta', { n: reading.items })}</span>
+              </span>
+              <IconChevron className="shrink-0 text-muted" />
+            </Link>
           )}
           {test && (
             <Link

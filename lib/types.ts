@@ -1,6 +1,7 @@
 import type { z } from 'zod';
 import type {
   CheckItemSchema,
+  ReadingSchema,
   LessonFrontmatterSchema,
   NounSchema,
   RungSchema,
@@ -34,5 +35,7 @@ export type LessonSummary = {
   checkTexts: string[];
   glossary: { en: string; id: string }[];
 };
+
+export type Reading = z.infer<typeof ReadingSchema>;
 
 export type TestPool = { rung: string; draw: number; pass: number; items: CheckItem[] };

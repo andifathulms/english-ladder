@@ -215,6 +215,11 @@ export const id = {
   'check.listenNoAudio': 'Browser ini tidak punya suara bahasa Inggris. Baca kalimat ini, lalu pilih yang sama:',
   'home.starterLink': 'Benar-benar baru? Mulai dari Starter: bunyi, huruf, angka dan sapaan.',
   'rung.optional': 'pilihan',
+  'read.title': 'Baca dan dengar',
+  'read.meta': 'Satu teks pendek · {n} soal',
+  'read.translation': 'Lihat terjemahan',
+  'read.questions': 'Soal',
+  'read.done': 'Selesai. Kamu baru saja membaca satu teks utuh dalam bahasa Inggris.',
 } as const;
 
 export type StringKey = keyof typeof id;

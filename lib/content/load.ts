@@ -8,12 +8,13 @@ import {
   LessonFrontmatterSchema,
   LexiconSchema,
   NounsSchema,
+  ReadingSchema,
   TestPoolSchema,
 } from './schema';
 import { parseSections } from './sections';
 import { itemText } from '../check/text';
 import { stripMarkup } from '../markup';
-import type { Lesson, LessonSummary, Noun, Rung, TestPool } from '../types';
+import type { Lesson, LessonSummary, Noun, Reading, Rung, TestPool } from '../types';
 
 export const CONTENT_DIR = path.join(process.cwd(), 'content');
 
@@ -108,6 +109,12 @@ export function getTestPool(rungId: string): TestPool | null {
   const file = path.join(CONTENT_DIR, rungId, 'test.yaml');
   if (!fs.existsSync(file)) return null;
   return TestPoolSchema.parse(readYaml(`${rungId}/test.yaml`));
+}
+
+export function getReading(rungId: string): Reading | null {
+  const file = path.join(CONTENT_DIR, rungId, 'reading.yaml');
+  if (!fs.existsSync(file)) return null;
+  return ReadingSchema.parse(readYaml(`${rungId}/reading.yaml`));
 }
 
 export function getNouns(): Noun[] {

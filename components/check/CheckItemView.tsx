@@ -14,7 +14,12 @@ import { IconPlay } from '../ui/Icon';
 import { useT } from '../ProgressProvider';
 import { useCanSpeak, useSpeak } from '../useSpeech';
 
-type Common = { item: CheckItem; nouns?: Noun[] };
+type Common = {
+  item: CheckItem;
+  nouns?: Noun[];
+  /** 1–4 picks an answer. Turn off when several items share a page. */
+  numberKeys?: boolean;
+};
 type Practice = Common & {
   mode: 'practice';
   /** Already solved earlier (e.g. going back to a finished item). */
@@ -34,9 +39,12 @@ function Prompt({ text, fill }: { text: string; fill?: string }) {
       {fill ? (
         <span className="focus-word">{fill}</span>
       ) : (
-        <span aria-label="blank" className="inline-block w-[3.5em] border-b-2 border-ink align-baseline">
-          &nbsp;
-        </span>
+        <>
+          <span aria-hidden className="inline-block w-[3.5em] border-b-2 border-ink align-baseline">
+            &nbsp;
+          </span>
+          <span className="sr-only">blank</span>
+        </>
       )}
       {stripMarkup(b)}
     </p>
@@ -136,7 +144,9 @@ export function CheckItemView(props: Practice | Test) {
   };
 
   // 1–4 picks an answer.
+  const numberKeys = props.numberKeys ?? true;
   useEffect(() => {
+    if (!numberKeys) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.altKey || e.ctrlKey || e.metaKey) return;
       const tag = (document.activeElement as HTMLElement | null)?.tagName;

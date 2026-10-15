@@ -216,4 +216,9 @@ export const en: Record<StringKey, string> = {
   'check.listenNoAudio': 'This browser has no English voice. Read this sentence, then choose the same one:',
   'home.starterLink': 'Completely new? Begin with Starter: sounds, letters, numbers and greetings.',
   'rung.optional': 'optional',
+  'read.title': 'Read and listen',
+  'read.meta': 'One short text · {n} questions',
+  'read.translation': 'Show the translation',
+  'read.questions': 'Questions',
+  'read.done': 'Done. You just read a whole text in English.',
 };

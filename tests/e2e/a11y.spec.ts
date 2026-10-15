@@ -11,6 +11,7 @@ const routes = [
   '/rung/easy-1/03-a-an/',
   '/rung/easy-1/09-prepositions-place/',
   '/rung/easy-1/test/',
+  '/rung/easy-1/read/',
   '/review/',
   '/words/',
   '/me/',

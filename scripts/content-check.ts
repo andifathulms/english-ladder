@@ -6,6 +6,7 @@ import {
   CONTENT_DIR,
   getCurriculum,
   getNouns,
+  getReading,
   getTestPool,
   lessonFiles,
   parseLessonFile,
@@ -118,6 +119,21 @@ for (const rung of rungs) {
     }
   } catch (e) {
     err(fmtZod(`${rung.id}/test.yaml`, e));
+  }
+}
+
+// 3b. Readings
+for (const rung of rungs) {
+  if (!fs.existsSync(path.join(CONTENT_DIR, rung.id, 'reading.yaml'))) continue;
+  try {
+    const reading = getReading(rung.id)!;
+    if (reading.rung !== rung.id) err(`${rung.id}/reading.yaml: rung "${reading.rung}" does not match folder`);
+    for (const item of reading.items) {
+      if (itemIds.has(item.id)) err(`${rung.id}/reading.yaml: ${item.id} already used in ${itemIds.get(item.id)}`);
+      itemIds.set(item.id, `${rung.id}/reading.yaml`);
+    }
+  } catch (e) {
+    err(fmtZod(`${rung.id}/reading.yaml`, e));
   }
 }
 

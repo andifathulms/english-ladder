@@ -1,0 +1,47 @@
+# Read & listen capstone for Easy 1. Uses only the Easy 1 inventory; new words go in glossary.
+# Item ids are permanent: never rename them after release.
+rung: easy-1
+title: { en: "Rina's family", id: "Keluarga Rina" }
+text: >-
+  This is Rina. She is a nurse. Her hospital is next to a big mosque.
+  Rina has two brothers, Budi and Andi. Budi is a teacher, and Andi is a university student.
+  Their house is small, but it is near the market. Rina's motorbike is red.
+  It is in front of the house. Is Rina tired today? Yes, she is. But she is happy.
+translation: >-
+  Ini Rina. Dia perawat. Rumah sakitnya di sebelah masjid besar.
+  Rina punya dua saudara laki-laki, Budi dan Andi. Budi guru, dan Andi mahasiswa.
+  Rumah mereka kecil, tapi dekat pasar. Motor Rina merah.
+  Motornya di depan rumah. Rina capek hari ini? Iya. Tapi dia senang.
+glossary:
+  - { en: hospital, id: "rumah sakit" }
+  - { en: market, id: "pasar" }
+  - { en: today, id: "hari ini" }
+  - { en: but, id: "tapi" }
+items:
+  - id: rd-e1-c1
+    type: choice
+    cue: "Rina perawat?"
+    prompt: "Is Rina a nurse?"
+    options: ["Yes, she is.", "No, she isn't."]
+    answer: "Yes, she is."
+    why: { id: "She is a nurse: iya.", en: "She is a nurse: yes." }
+  - id: rd-e1-c2
+    type: gap
+    cue: "Siapa yang mahasiswa?"
+    prompt: "___ is a university student."
+    options: [Andi, Budi, Rina]
+    answer: Andi
+    why: { id: "Andi is a university student.", en: "Andi is a university student." }
+  - id: rd-e1-c3
+    type: gap
+    cue: "Di mana motornya?"
+    prompt: "The motorbike is ___."
+    options: [in front of the house, behind the mosque, in the market]
+    answer: in front of the house
+    why: { id: "It is in front of the house: di depan rumah.", en: "It is in front of the house." }
+  - id: rd-e1-c4
+    type: listen
+    audio: "Their house is small."
+    options: ["Their house is small.", "Their house is big."]
+    answer: "Their house is small."
+    why: { id: "Small = kecil.", en: "Small, not big." }

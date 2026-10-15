@@ -30,7 +30,10 @@ function BoardSentence({ text }: { text: string }) {
         <span key={i}>
           {p}
           {i < parts.length - 1 && (
-            <span aria-label="___" className="mx-[2px] inline-block h-[0.9em] w-[2.4em] border-b-[3px] align-[-0.1em]" style={{ borderColor: 'var(--brass)' }} />
+            <>
+              <span aria-hidden className="mx-[2px] inline-block h-[0.9em] w-[2.4em] border-b-[3px] align-[-0.1em]" style={{ borderColor: 'var(--brass)' }} />
+              <span className="sr-only">blank</span>
+            </>
           )}
         </span>
       ))}

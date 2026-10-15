@@ -191,6 +191,9 @@ Every item needs a globally unique `id` and a bilingual `why`. Ids are permanent
 ### 5.5 Rung test `content/<rung>/test.yaml`
 A pool of ~24 items in the same item shape, each with `from: <lesson id>`. The test draws 16 using a seeded shuffle (seed stored per attempt) with at least one item from every lesson.
 
+### 5.5b Read & listen `content/<rung>/reading.yaml`
+One connected text of 80–120 words per rung, written only with that rung's inventory, plus `translation`, an optional `glossary` (≤ 8 new words) and 2–4 check items. Shown at `/rung/<rung>/read/`, read aloud by `speak()`. Linted like the test pool.
+
 ### 5.6 `content/data/nouns.yaml`
 
 ```yaml

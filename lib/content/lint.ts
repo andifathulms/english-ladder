@@ -1,6 +1,6 @@
 import type { CheckItem, Lesson, Rung } from '../types';
 import { stripMarkup } from '../markup';
-import { getLexicon, getNouns, getTestPool } from './load';
+import { getLexicon, getNouns, getReading, getTestPool } from './load';
 
 export type Finding = { level: 'error' | 'warn'; message: string };
 
@@ -151,6 +151,28 @@ export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>): Findi
         }
       }
       if (unknown.size) findings.push({ level: 'warn', message: `${rung.id}/test.yaml: words not in the ${rung.name} lexicon or glossaries: ${[...unknown].join(', ')}` });
+    }
+
+    // 5. Reading: the rung's whole lexicon plus its own glossary, and the structure rules.
+    let reading = null;
+    try {
+      reading = getReading(rung.id);
+    } catch {
+      reading = null; // schema errors are reported by content-check
+    }
+    if (reading) {
+      const lex = new Set([...rungLex, ...glossSoFar, ...reading.glossary.flatMap((g) => words(g.en))]);
+      const texts = [reading.text, ...reading.items.flatMap((i) => itemTexts(i))].map(stripMarkup);
+      const unknown = new Set<string>();
+      for (const text of texts) {
+        for (const rule of rules) {
+          if (rule.re.test(text)) findings.push({ level: 'error', message: `${rung.id}/reading.yaml: ${rule.name} is not taught in ${rung.name}: "${text}"` });
+        }
+        for (const w of words(text)) {
+          if (!knownWord(w, lex) && !(irregular.has(w) && lex.has(irregular.get(w)!))) unknown.add(w);
+        }
+      }
+      if (unknown.size) findings.push({ level: 'warn', message: `${rung.id}/reading.yaml: words not in the ${rung.name} lexicon or glossaries: ${[...unknown].join(', ')}` });
     }
 
     earlierInventory.push(...rung.inventory);

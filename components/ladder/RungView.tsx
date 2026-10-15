@@ -3,16 +3,16 @@
 import type { LessonSummary, Rung } from '@/lib/types';
 import { useProgress } from '../ProgressProvider';
 import { AppShell } from '../ui/AppShell';
-import { RungDetail, type TestInfo } from './RungDetail';
+import { RungDetail, type ReadingInfo, type TestInfo } from './RungDetail';
 
-type Props = { rung: Rung; rungs: Rung[]; lessons: LessonSummary[]; test: TestInfo | null };
+type Props = { rung: Rung; rungs: Rung[]; lessons: LessonSummary[]; test: TestInfo | null; reading: ReadingInfo | null };
 
-export function RungView({ rung, rungs, lessons, test }: Props) {
+export function RungView({ rung, rungs, lessons, test, reading }: Props) {
   const progress = useProgress();
   return (
     <AppShell>
       <main className="page flex max-w-lesson flex-col py-4 min-[900px]:py-8">
-        <RungDetail rung={rung} rungs={rungs} lessons={lessons} progress={progress} test={test} />
+        <RungDetail rung={rung} rungs={rungs} lessons={lessons} progress={progress} test={test} reading={reading} />
       </main>
     </AppShell>
   );

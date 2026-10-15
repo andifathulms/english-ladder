@@ -152,6 +152,18 @@ export const TestPoolSchema = z
   })
   .strict();
 
+/** One short connected text per rung, using only that rung's inventory, with a few questions. */
+export const ReadingSchema = z
+  .object({
+    rung: z.string(),
+    title: Bilingual,
+    text: z.string().min(1),
+    translation: z.string().min(1),
+    glossary: z.array(z.object({ en: z.string().min(1), id: z.string().min(1) }).strict()).max(8).default([]),
+    items: z.array(CheckItemSchema).min(2).max(4),
+  })
+  .strict();
+
 export const NounSchema = z
   .object({
     word: z.string(),

@@ -120,3 +120,12 @@ describe('Starter content', () => {
     expect(new Set(drawn.map((i) => i.from)).size).toBe(8);
   });
 });
+
+describe('readings', () => {
+  it('loads the Easy 1 capstone with questions', async () => {
+    const { getReading } = await import('@/lib/content/load');
+    const r = getReading('easy-1')!;
+    expect(r.items.length).toBeGreaterThanOrEqual(2);
+    expect(r.text).toContain('Rina');
+  });
+});
