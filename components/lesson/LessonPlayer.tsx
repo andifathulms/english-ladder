@@ -18,6 +18,7 @@ import { Sentence } from './Sentence';
 import { StepBar } from './StepBar';
 import { StepLabel } from './StepLabel';
 import { ExplainToggle } from './ExplainToggle';
+import { SoundCard, TalkCard, WordsCard } from './StrandCards';
 import { CheckStep } from '../check/CheckStep';
 import { VisualStage } from '../visuals/VisualStage';
 import { STEP_KEYS } from './steps';
@@ -140,6 +141,8 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
   }, [step, canContinue, go, advance]);
 
   const effective = settings.explain === 'rung' ? rung.explain_lang : settings.explain;
+  // Short strand cards have no collapsed translation, so mixed shows English.
+  const cardLang = effective === 'id' ? 'id' : 'en';
   const explain = (b: { id: string; en: string }) =>
     effective === 'id' ? (
       <Prose text={b.id} lang="id" />
@@ -210,6 +213,8 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
               </li>
             ))}
           </ul>
+          {lesson.talk && <TalkCard talk={lesson.talk} />}
+          {lesson.sound && <SoundCard sound={lesson.sound} explain={cardLang} />}
         </>
       );
       break;
@@ -219,6 +224,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
           <StepLabel>{t('step.contrast')}</StepLabel>
           {explain(lesson.contrast)}
           <PairCard off={lesson.pair.off} natural={lesson.pair.natural} />
+          {lesson.words && <WordsCard words={lesson.words} explain={cardLang} />}
         </>
       );
       break;

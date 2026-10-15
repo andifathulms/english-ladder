@@ -206,4 +206,12 @@ export const en: Record<StringKey, string> = {
   'words.subtitle': '{n} words from {l} lessons',
   'words.searchPlaceholder': 'Search in English or Indonesian',
   'words.all': 'All',
+
+  // Strands and listen items
+  'lesson.talk': 'In conversation',
+  'lesson.sound': 'Sound',
+  'lesson.words': 'Words apart',
+  'check.listenPrompt': 'Listen, then choose the sentence you hear.',
+  'check.listenPlay': 'Play the sentence',
+  'check.listenNoAudio': 'This browser has no English voice. Read this sentence, then choose the same one:',
 };

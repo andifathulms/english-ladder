@@ -205,6 +205,14 @@ export const id = {
   'words.subtitle': '{n} kata dari {l} pelajaran',
   'words.searchPlaceholder': 'Cari kata, Inggris atau Indonesia',
   'words.all': 'Semua',
+
+  // Strands and listen items
+  'lesson.talk': 'Dalam percakapan',
+  'lesson.sound': 'Bunyi',
+  'lesson.words': 'Beda kata',
+  'check.listenPrompt': 'Dengarkan, lalu pilih kalimat yang kamu dengar.',
+  'check.listenPlay': 'Putar kalimat',
+  'check.listenNoAudio': 'Browser ini tidak punya suara bahasa Inggris. Baca kalimat ini, lalu pilih yang sama:',
 } as const;
 
 export type StringKey = keyof typeof id;

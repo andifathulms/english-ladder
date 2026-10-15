@@ -141,6 +141,15 @@ check:
     why: { id: "On: di atas permukaan.", en: "On: on top of a surface." }
 glossary:
   - { en: under, id: "di bawah" }
+# Optional strand cards (one each, 1–2 sentences):
+sound:                            # Examples step: one pronunciation point
+  focus: "weak of, to"
+  words: ["in front of", "next to"]   # 1–4 things to play; not lexicon-linted
+  tip: { id: "Of dan to dibaca lemah …", en: "Of and to are weak …" }
+talk:                             # Examples step: 2–4 lines, lexicon-linted
+  - { who: Andi, en: "Where's my phone?", id: "HP-ku di mana?" }
+  - { who: Mei, en: "It's on the table.", id: "Di atas meja.", note: { id: "…", en: "…" } }
+words: { id: "**At home**, **at school** …", en: "…" }   # Contrast step: meanings the languages split differently
 next: easy1-08-to-be-questions
 ```
 
@@ -173,6 +182,9 @@ Indonesian uses **di** for almost every position …
 | `order` | tiles (array), answer (array), optional `accept` (array of arrays) |
 | `scene` | visual `{id, props}`, options (sentences), answer |
 | `fix` | wrong (sentence), options (sentences), answer |
+| `listen` | audio (sentence played by `speak()`), options (sentences), answer, optional prompt. Shows the sentence when the browser has no English voice |
+
+`cue` (the Indonesian line) is optional on every type. Leave it out for English-only items, so learners stop translating; aim for about a third from Easy 2 on.
 
 Every item needs a globally unique `id` and a bilingual `why`. Ids are permanent: progress and Leitner boxes are keyed by them, so never rename an id after release. Replace items by adding new ids.
 

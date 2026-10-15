@@ -17,6 +17,12 @@ describe('grade', () => {
     expect(grade(f, 'She has two cats.').correct).toBe(true);
   });
 
+  it('grades listen items by the option chosen, not the audio text', () => {
+    const l: CheckItem = { id: 'l', type: 'listen', audio: 'The doctors are busy.', options: ['The doctors are busy.', 'The doctor is busy.'], answer: 'The doctors are busy.', why };
+    expect(grade(l, 'The doctors are busy.').correct).toBe(true);
+    expect(grade(l, 'The doctor is busy.').correct).toBe(false);
+  });
+
   it('grades order against answer and accept alternatives', () => {
     const o: CheckItem = {
       id: 'c',

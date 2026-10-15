@@ -84,3 +84,21 @@ describe('feedback sheet', () => {
     expect(screen.getByText(why.id)).toBeInTheDocument();
   });
 });
+
+describe('CheckItemView (listen)', () => {
+  const listen: CheckItem = {
+    id: 'l1',
+    type: 'listen',
+    audio: "I'm tired.",
+    options: ["I'm tired.", 'I tired.'],
+    answer: "I'm tired.",
+    why,
+  };
+  it('shows the sentence when the browser has no English voice, and still grades', () => {
+    const onSolved = vi.fn();
+    wrap(<CheckItemView mode="practice" item={listen} onSolved={onSolved} />);
+    expect(screen.getByText(/tidak punya suara bahasa Inggris/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: "I'm tired." }));
+    expect(onSolved).toHaveBeenCalledWith(true);
+  });
+});

@@ -10,7 +10,9 @@ import { TileTray } from './TileTray';
 import { WhyLine } from './WhyLine';
 import { Sentence } from '../lesson/Sentence';
 import { VisualStage } from '../visuals/VisualStage';
+import { IconPlay } from '../ui/Icon';
 import { useT } from '../ProgressProvider';
+import { useCanSpeak, useSpeak } from '../useSpeech';
 
 type Common = { item: CheckItem; nouns?: Noun[] };
 type Practice = Common & {
@@ -38,6 +40,40 @@ function Prompt({ text, fill }: { text: string; fill?: string }) {
       )}
       {stripMarkup(b)}
     </p>
+  );
+}
+
+/** Plays the sentence to identify. Without an English voice, the sentence is shown instead. */
+function ListenPrompt({ audio, prompt }: { audio: string; prompt?: string }) {
+  const { t } = useT();
+  const canSpeak = useCanSpeak();
+  const speak = useSpeak();
+  const [playing, setPlaying] = useState(false);
+  const plain = stripMarkup(audio);
+  const play = async () => {
+    setPlaying(true);
+    await speak(plain);
+    setPlaying(false);
+  };
+  return (
+    <div className="flex flex-col gap-3">
+      <p className="text-small text-muted">{prompt ?? t('check.listenPrompt')}</p>
+      {canSpeak ? (
+        <button
+          type="button"
+          onClick={play}
+          aria-pressed={playing || undefined}
+          className={`btn self-start ${playing ? 'btn-primary' : 'btn-ghost'}`}
+        >
+          <IconPlay size={18} /> {t('check.listenPlay')}
+        </button>
+      ) : (
+        <div className="flex flex-col gap-1 rounded-md bg-paper-2 p-4">
+          <p className="text-small text-muted">{t('check.listenNoAudio')}</p>
+          <Sentence en={audio} play={false} />
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -125,7 +161,7 @@ export function CheckItemView(props: Practice | Test) {
   const missed = wrong.length;
   const inSheet = practice && !!props.whyInSheet;
   const showWhy = practice && (solved ? !inSheet : missed >= 2);
-  const sentenceOptions = item.type === 'fix' || item.type === 'scene';
+  const sentenceOptions = item.type === 'fix' || item.type === 'scene' || item.type === 'listen';
 
   return (
     <div className="flex flex-col gap-5" data-item={item.id}>
@@ -150,6 +186,7 @@ export function CheckItemView(props: Practice | Test) {
           <p className="text-small text-muted">{item.prompt ?? t('check.scenePrompt')}</p>
         </div>
       )}
+      {item.type === 'listen' && <ListenPrompt audio={item.audio} prompt={item.prompt} />}
       {item.type === 'order' && item.prompt && <Prompt text={item.prompt} />}
 
       {item.type === 'order' ? (

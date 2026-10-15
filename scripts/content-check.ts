@@ -36,6 +36,8 @@ function sentencesOf(item: CheckItem): string[] {
       return item.options;
     case 'fix':
       return [item.wrong, ...item.options];
+    case 'listen':
+      return [item.audio, ...item.options];
   }
 }
 
@@ -74,7 +76,7 @@ for (const rung of rungs) {
           if (focusCount(s) > 1) err(`${where}: ${c.id}: more than one [[focus]] in "${s}"`);
         }
       }
-      for (const s of [...l.examples.map((e) => e.en), l.pair.natural, l.pair.off]) {
+      for (const s of [...l.examples.map((e) => e.en), ...(l.talk ?? []).map((t) => t.en), l.pair.natural, l.pair.off]) {
         if (focusCount(s) > 1) err(`${where}: more than one [[focus]] in "${s}"`);
       }
       lessons.push(l);

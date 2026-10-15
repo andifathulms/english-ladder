@@ -48,8 +48,20 @@ export const FixItem = z
   .object({ ...itemBase, type: z.literal('fix'), wrong: z.string(), options: Options, answer: z.string() })
   .strict();
 
+/** Played through speech; the sentence is shown only when the browser has no English voice. */
+export const ListenItem = z
+  .object({
+    ...itemBase,
+    type: z.literal('listen'),
+    prompt: z.string().optional(),
+    audio: z.string().min(1),
+    options: Options,
+    answer: z.string(),
+  })
+  .strict();
+
 export const CheckItemSchema = z
-  .discriminatedUnion('type', [ChoiceItem, GapItem, OrderItem, SceneItem, FixItem])
+  .discriminatedUnion('type', [ChoiceItem, GapItem, OrderItem, SceneItem, FixItem, ListenItem])
   .superRefine((item, ctx) => {
     if ('options' in item && !answerInOptions(item)) {
       ctx.addIssue({ code: 'custom', path: ['answer'], ...optionsMsg });
@@ -71,6 +83,16 @@ const Example = z
   .object({ en: z.string().min(1), id: z.string().min(1), note: Bilingual.optional() })
   .strict();
 
+/** One pronunciation point: a label, words to play, and a short tip. */
+const Sound = z
+  .object({ focus: z.string().min(1), words: z.array(z.string().min(1)).min(1).max(4), tip: Bilingual })
+  .strict();
+
+/** A short exchange showing the structure in use. */
+const TalkLine = z
+  .object({ who: z.string().min(1), en: z.string().min(1), id: z.string().min(1), note: Bilingual.optional() })
+  .strict();
+
 export const LessonFrontmatterSchema = z
   .object({
     id: z.string().regex(/^[a-z0-9-]+$/),
@@ -86,6 +108,9 @@ export const LessonFrontmatterSchema = z
     worked: z.array(Example).min(2).max(8).optional(),
     examples: z.array(Example).min(4).max(6),
     pair: z.object({ off: z.string(), natural: z.string() }).strict(),
+    sound: Sound.optional(),
+    words: Bilingual.optional(),
+    talk: z.array(TalkLine).min(2).max(4).optional(),
     check: z.array(CheckItemSchema).min(4).max(6),
     glossary: z
       .array(z.object({ en: z.string().min(1), id: z.string().min(1) }).strict())

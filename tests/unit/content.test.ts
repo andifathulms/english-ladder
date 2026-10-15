@@ -42,6 +42,10 @@ describe('check item schema', () => {
     const r = CheckItemSchema.safeParse({ id: 'a', type: 'gap', prompt: 'no gap', options: ['a', 'b'], answer: 'a', why });
     expect(r.success).toBe(false);
   });
+  it('requires a listen answer among options', () => {
+    const r = CheckItemSchema.safeParse({ id: 'a', type: 'listen', audio: 'x', options: ['a', 'b'], answer: 'x', why });
+    expect(r.success).toBe(false);
+  });
   it('requires order answers to use the tiles', () => {
     const r = CheckItemSchema.safeParse({ id: 'a', type: 'order', tiles: ['a', 'b'], answer: ['a', 'c'], why });
     expect(r.success).toBe(false);

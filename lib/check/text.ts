@@ -13,6 +13,8 @@ export function itemText(item: CheckItem): string {
       return item.prompt ? stripMarkup(item.prompt) : stripMarkup(item.answer);
     case 'fix':
       return stripMarkup(item.wrong);
+    case 'listen':
+      return item.prompt ? stripMarkup(item.prompt) : 'Listen and choose.';
   }
 }
 

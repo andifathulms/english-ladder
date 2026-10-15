@@ -47,6 +47,8 @@ function itemTexts(item: CheckItem): string[] {
       return [...item.options, item.prompt ?? ''];
     case 'fix':
       return [item.wrong, ...item.options];
+    case 'listen':
+      return [item.audio, ...item.options, item.prompt ?? ''];
   }
 }
 
@@ -58,6 +60,7 @@ export function englishTexts(l: Lesson): { where: string; text: string }[] {
   out.push({ where: 'pair.natural', text: l.pair.natural }, { where: 'pair.off', text: l.pair.off });
   l.check.forEach((c) => itemTexts(c).forEach((t) => out.push({ where: c.id, text: t })));
   l.glossary.forEach((g) => out.push({ where: 'glossary', text: g.en }));
+  l.talk?.forEach((t, i) => out.push({ where: `talk[${i}]`, text: t.en }));
   return out.map((x) => ({ ...x, text: stripMarkup(x.text) })).filter((x) => x.text.trim());
 }
 
