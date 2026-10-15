@@ -16,7 +16,7 @@ items:
 
   # 3 · a, an and plurals
   - { id: e1-t-07, from: easy1-03-articles-plurals, type: gap, cue: "Itu payung.", prompt: "It is ___ umbrella.", options: [a, an], answer: an, why: { id: "Bunyi vokal di depan: an.", en: "A vowel sound first: an." } }
-  - { id: e1-t-08, from: easy1-03-articles-plurals, type: gap, cue: "Itu jam.", prompt: "It is ___ hour.", options: [a, an], answer: an, why: { id: "H di hour tidak dibunyikan, jadi bunyinya vokal: an.", en: "The h in hour is silent, so it starts with a vowel sound: an." } }
+  - { id: e1-t-08, from: easy1-03-articles-plurals, type: gap, cue: "satu jam", prompt: "___ hour", options: [a, an], answer: an, why: { id: "H di hour tidak dibunyikan, jadi bunyinya vokal: an.", en: "The h in hour is silent, so it starts with a vowel sound: an." } }
   - { id: e1-t-09, from: easy1-03-articles-plurals, type: fix, cue: "Mereka anak-anak.", wrong: "They are childs.", options: ["They are children.", "They are a children.", "They are childrens."], answer: "They are children.", why: { id: "Child menjadi children.", en: "Child becomes children." } }
 
   # 4 · this, that, these, those
@@ -41,5 +41,5 @@ items:
 
   # 8 · questions and negatives
   - { id: e1-t-22, from: easy1-08-to-be-questions, type: gap, cue: "Dia perawat?", prompt: "___ she a nurse?", options: [Is, Are, Am], answer: Is, why: { id: "She memakai is, dan is pindah ke depan.", en: "She takes is, and is moves to the front." } }
-  - { id: e1-t-23, from: easy1-08-to-be-questions, type: fix, cue: "Aku nggak lapar.", wrong: "I amn't hungry.", options: ["I'm not hungry.", "I not hungry.", "I isn't hungry."], answer: "I'm not hungry.", why: { id: "Pakai I'm not. Amn't tidak ada.", en: "Use I'm not. There is no amn't." } }
+  - { id: e1-t-23, from: easy1-08-to-be-questions, type: fix, cue: "Aku nggak lapar.", wrong: "I amn't hungry.", options: ["I'm not hungry.", "I not hungry.", "I isn't hungry."], answer: "I'm not hungry.", why: { id: "Pakai I'm not. Amn't tidak dipakai dalam bahasa Inggris standar.", en: "Use I'm not. Standard English doesn't use amn't." } }
   - { id: e1-t-24, from: easy1-08-to-be-questions, type: choice, cue: "Kamu sibuk? Bukan.", prompt: "Are you busy? No, I'm ___.", options: [not, no, "isn't"], answer: not, why: { id: "I'm not: not sesudah I'm.", en: "I'm not: not comes after I'm." } }

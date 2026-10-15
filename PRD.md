@@ -202,7 +202,7 @@ A table, a box on the table, and a ball. The learner picks a preposition and the
 ### 7.2 Noun builder
 The learner picks a noun from a set (or a random one) and sees:
 - **a / an** chosen by the first **sound**, with the sound shown (`/j/` university → *a*; silent h hour → *an*).
-- The plural built step by step, with the rule named: +s, +es (s/sh/ch/x/o endings), y → ies, f → ves, irregular, same form.
+- The plural built step by step, with the rule named: +s, +es (s/sh/ch/x endings and some -o words, authored per noun), y → ies, f → ves, irregular, same form.
 - Data comes from `content/data/nouns.yaml` (~120 common nouns with `initial_sound: vowel | consonant`, `ipa_hint`, `plural`, `plural_rule`). No computed guessing; every noun is authored.
 
 ---

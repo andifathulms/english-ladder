@@ -22,8 +22,8 @@ examples:
   - { en: "[[My]] name is Dewi.", id: "Namaku Dewi." }
   - { en: "Budi? [[His]] bag is new.", id: "Budi? Tasnya baru.", note: { id: "-nya untuk laki-laki: his.", en: "-nya for a man: his." } }
   - { en: "Siti? [[Her]] phone is new.", id: "Siti? HP-nya baru.", note: { id: "-nya untuk perempuan: her.", en: "-nya for a woman: her." } }
-  - { en: "This is Putu[['s]] motorbike.", id: "Ini motornya Putu.", note: { id: "Nama ditambah 's artinya punya orang itu.", en: "A name plus 's means it belongs to that person." } }
-  - { en: "[[Our]] house is small.", id: "Rumah kami kecil." }
+  - { en: "This is Putu[['s]] motorbike.", id: "Ini motornya Putu.", note: { id: "Nama ditambah 's artinya punya orang itu. Nama yang berakhiran s, seperti Yohanes: Yohanes's atau Yohanes', dua-duanya dipakai.", en: "A name plus 's means it belongs to that person. A name ending in s, like Yohanes: Yohanes's or Yohanes', both are used." } }
+  - { en: "My phone is new. [[Its]] box is small.", id: "HP-ku baru. Kotaknya kecil.", note: { id: "Its = -nya untuk benda atau hewan. Jangan tertukar dengan it's, yaitu it is.", en: "Its = -nya for a thing or an animal. Don't mix it up with it's, which means it is." } }
   - { en: "[[Their]] children are students.", id: "Anak-anak mereka pelajar." }
 pair:
   off: "This is the bag of Rina."

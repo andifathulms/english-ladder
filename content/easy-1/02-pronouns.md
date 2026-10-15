@@ -60,7 +60,7 @@ check:
     prompt: "Rina and I? ___ are ready."
     options: [We, They, She]
     answer: We
-    why: { id: "Aku dan orang lain: we.", en: "Me and someone else: we." }
+    why: { id: "Aku dan orang lain: we. Sebut dirimu terakhir: Rina and I, bukan I and Rina.", en: "Me and someone else: we. Put yourself last: Rina and I, not I and Rina." }
   - id: e1-02-c6
     type: order
     cue: "Siti? Dia sakit."
@@ -80,10 +80,10 @@ next: easy1-03-articles-plurals
 ---
 
 ## concept.id
-Bahasa Indonesia punya satu kata, *dia*, untuk laki-laki dan perempuan. Bahasa Inggris memisahkannya: **he** untuk laki-laki dan **she** untuk perempuan. **It** dipakai untuk benda, hewan dan cuaca, dan **they** untuk lebih dari satu, seperti *mereka*.
+Bahasa Indonesia punya satu kata, *dia*, untuk laki-laki dan perempuan. Bahasa Inggris memisahkannya: **he** untuk laki-laki dan **she** untuk perempuan. **It** dipakai untuk benda, hewan dan cuaca, dan **they** untuk lebih dari satu, seperti *mereka*. Kalau kamu tidak tahu laki-laki atau perempuan, **they** juga bisa dipakai untuk satu orang.
 
 ## concept.en
-Indonesian has one word, *dia*, for both men and women. English splits it: **he** for a man and **she** for a woman. **It** is for things, animals and the weather, and **they** is for more than one, like *mereka*.
+Indonesian has one word, *dia*, for both men and women. English splits it: **he** for a man and **she** for a woman. **It** is for things, animals and the weather, and **they** is for more than one, like *mereka*. When you don't know if it's a man or a woman, **they** also works for one person.
 
 ## contrast.id
 Karena *dia* mencakup keduanya, **he** dan **she** gampang tertukar, apalagi saat bicara cepat. Sebelum bicara, cek dulu: laki-laki atau perempuan? Satu lagi: bahasa Inggris selalu butuh subjek, jadi *Panas* menjadi **It is hot**, bukan **Is hot**.

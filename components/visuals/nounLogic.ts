@@ -19,7 +19,7 @@ export function article(n: Pick<Noun, 'initial_sound'>): 'a' | 'an' {
 
 export const RULE_LABEL: Record<Noun['plural_rule'], { en: string; id: string }> = {
   s: { en: '+s', id: '+s' },
-  es: { en: '+es (after s, sh, ch, x, o)', id: '+es (setelah s, sh, ch, x, o)' },
+  es: { en: '+es (after s, sh, ch, x and some -o words)', id: '+es (setelah s, sh, ch, x dan beberapa kata -o)' },
   'y-ies': { en: 'y → ies', id: 'y → ies' },
   'f-ves': { en: 'f / fe → ves', id: 'f / fe → ves' },
   irregular: { en: 'irregular: learn it as a word', id: 'tidak beraturan: hafalkan saja' },

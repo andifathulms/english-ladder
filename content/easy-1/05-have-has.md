@@ -16,9 +16,9 @@ worked:
   - { en: "She [[has]] a motorbike.", id: "Dia punya motor." }
   - { en: "They [[have]] two motorbikes.", id: "Mereka punya dua motor." }
 examples:
-  - { en: "I [[have]] two sisters.", id: "Aku punya dua saudara perempuan." }
+  - { en: "I [[have]] two sisters.", id: "Aku punya dua saudara perempuan.", note: { id: "Sister bisa kakak atau adik perempuan. Bahasa Inggris tidak menyebut umur kecuali kamu menambahkannya.", en: "Sister can be older or younger. English only says which if you add a word for it." } }
   - { en: "Budi [[has]] a cat.", id: "Budi punya kucing.", note: { id: "Satu nama orang: has.", en: "One person's name: has." } }
-  - { en: "We [[have]] a rice cooker.", id: "Kami punya magic com." }
+  - { en: "We [[have]] a rice cooker.", id: "Kami punya magic com.", note: { id: "Di Inggris sering terdengar I've got. Artinya sama dengan I have.", en: "In the UK you will often hear I've got. It means the same as I have." } }
   - { en: "She [[has]] an umbrella.", id: "Dia punya payung." }
   - { en: "They [[have]] three children.", id: "Mereka punya tiga anak." }
   - { en: "It [[has]] four legs.", id: "Kakinya empat.", note: { id: "It juga memakai has.", en: "It takes has too." } }

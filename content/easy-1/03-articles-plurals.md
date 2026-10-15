@@ -16,7 +16,7 @@ examples:
   - { en: "It is [[an]] umbrella.", id: "Itu payung.", note: { id: "Umbrella diawali bunyi vokal, jadi an.", en: "Umbrella starts with a vowel sound, so an." } }
   - { en: "Andi is [[a]] university student.", id: "Andi mahasiswa.", note: { id: "University diawali bunyi /j/, seperti y. Itu bunyi konsonan, jadi a.", en: "University starts with a /j/ sound, like y. That is a consonant sound, so a." } }
   - { en: "They are [[students]].", id: "Mereka pelajar.", note: { id: "Lebih dari satu: tambah -s, tanpa a.", en: "More than one: add -s, no a." } }
-  - { en: "Two [[children]] are here.", id: "Ada dua anak di sini.", note: { id: "Child menjadi children. Bentuk ini harus dihafal.", en: "Child becomes children. Learn this one by heart." } }
+  - { en: "The [[children]] are here.", id: "Anak-anaknya di sini.", note: { id: "Child menjadi children. Bentuk ini harus dihafal.", en: "Child becomes children. Learn this one by heart." } }
   - { en: "We are [[nurses]].", id: "Kami perawat." }
 pair:
   off: "Rina is teacher."
@@ -78,10 +78,10 @@ next: easy1-04-demonstratives
 ---
 
 ## concept.id
-Untuk **satu** orang atau benda, pakai **a** atau **an**. Pilihannya ditentukan oleh **bunyi** pertama, bukan huruf: **an** sebelum bunyi vokal (**an umbrella**, **an hour**) dan **a** sebelum bunyi konsonan (**a book**, **a university**). Untuk lebih dari satu, tambahkan **-s** (**books**), **-es** setelah s, sh, ch, x atau o (**boxes**), dan hafalkan beberapa kata yang berubah total (**child**, **children**).
+Untuk **satu** orang atau benda, pakai **a** atau **an**. Pilihannya ditentukan oleh **bunyi** pertama, bukan huruf: **an** sebelum bunyi vokal (**an umbrella**, **an hour**) dan **a** sebelum bunyi konsonan (**a book**, **a university**). Untuk lebih dari satu, tambahkan **-s** (**books**), **-es** setelah s, sh, ch atau x (**boxes**; kata berakhiran -o berbeda-beda: **photos**, tapi **tomatoes**), dan hafalkan beberapa kata yang berubah total (**child**, **children**).
 
 ## concept.en
-For **one** person or thing, use **a** or **an**. The choice depends on the first **sound**, not the letter: **an** before a vowel sound (**an umbrella**, **an hour**) and **a** before a consonant sound (**a book**, **a university**). For more than one, add **-s** (**books**), **-es** after s, sh, ch, x or o (**boxes**), and learn the few words that change completely (**child**, **children**).
+For **one** person or thing, use **a** or **an**. The choice depends on the first **sound**, not the letter: **an** before a vowel sound (**an umbrella**, **an hour**) and **a** before a consonant sound (**a book**, **a university**). For more than one, add **-s** (**books**), **-es** after s, sh, ch or x (**boxes**; words ending in -o vary: **photos**, but **tomatoes**), and learn the few words that change completely (**child**, **children**).
 
 ## contrast.id
 Bahasa Indonesia bilang *Dia guru* dan *dua buku* tanpa tambahan apa pun. Bahasa Inggris butuh **a** untuk satu (**She is a teacher**) dan **-s** setelah angka (**two books**). Dua pengecualian yang akan sering kamu temui: **hour** (h tidak dibunyikan) dan **university** (bunyinya /j/).

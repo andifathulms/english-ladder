@@ -18,9 +18,9 @@ worked:
 examples:
   - { en: "[[Is]] she a nurse?", id: "Dia perawat?", note: { id: "Untuk bertanya, is pindah ke depan.", en: "To ask, is moves to the front." } }
   - { en: "Yes, she [[is]].", id: "Iya.", note: { id: "Jawaban pendek memakai bentuk penuh: she is, bukan she's.", en: "Short answers use the full form: she is, not she's." } }
-  - { en: "[[Are]] they ready?", id: "Mereka sudah siap?" }
-  - { en: "No, they [[aren't]].", id: "Belum." }
-  - { en: "I[['m not]] hungry.", id: "Aku nggak lapar.", note: { id: "Bentuk I amn't tidak ada. Pakai I'm not.", en: "There is no I amn't. Use I'm not." } }
+  - { en: "[[Are]] they ready?", id: "Mereka siap?" }
+  - { en: "No, they [[aren't]].", id: "Nggak.", note: { id: "Kalau maksudmu belum, bilang Not yet.", en: "If you mean belum, say Not yet." } }
+  - { en: "I[['m not]] hungry.", id: "Aku nggak lapar.", note: { id: "I amn't tidak dipakai dalam bahasa Inggris standar. Pakai I'm not.", en: "Standard English doesn't use I amn't. Use I'm not." } }
   - { en: "The keys [[aren't]] on the table.", id: "Kuncinya nggak ada di atas meja." }
 pair:
   off: "You are teacher?"
@@ -46,7 +46,7 @@ check:
     wrong: "I amn't tired."
     options: ["I'm not tired.", "I not tired.", "I isn't tired."]
     answer: "I'm not tired."
-    why: { id: "I am not menjadi I'm not. Bentuk amn't tidak ada.", en: "I am not becomes I'm not. There is no amn't." }
+    why: { id: "I am not menjadi I'm not. Amn't tidak dipakai dalam bahasa Inggris standar.", en: "I am not becomes I'm not. Standard English doesn't use amn't." }
   - id: e1-08-c4
     type: gap
     cue: "Mereka nggak telat."
@@ -84,7 +84,7 @@ Untuk bertanya, pindahkan **am**, **is** atau **are** ke depan: **You are ready*
 To ask a question, move **am**, **is** or **are** to the front: **You are ready** becomes **Are you ready?** For *no* or *not*, put **not** after it: **I'm not**, **he isn't**, **they aren't**. Short answers use the full form: **Yes, I am**, not **Yes, I'm**.
 
 ## contrast.id
-Bahasa Indonesia bisa bertanya hanya dengan nada naik: *Kamu guru?* Bahasa Inggris juga mengubah urutan kata: **Are you a teacher?** Dan bentuk **I amn't** tidak ada; pakai **I'm not**.
+Bahasa Indonesia bisa bertanya hanya dengan nada naik: *Kamu guru?* Bahasa Inggris juga mengubah urutan kata: **Are you a teacher?** Dan **I amn't** tidak dipakai dalam bahasa Inggris standar; pakai **I'm not**.
 
 ## contrast.en
-Indonesian can ask a question with rising intonation alone: *Kamu guru?* English also changes the word order: **Are you a teacher?** And **I amn't** doesn't exist; use **I'm not**.
+Indonesian can ask a question with rising intonation alone: *Kamu guru?* English also changes the word order: **Are you a teacher?** And standard English doesn't use **I amn't**; use **I'm not**.

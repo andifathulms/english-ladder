@@ -17,8 +17,8 @@ worked:
   - { en: "Rina [[is]] ready.", id: "Rina siap." }
 examples:
   - { en: "I [[am]] Budi.", id: "Aku Budi.", note: { id: "Am hanya dipakai dengan I.", en: "Am goes only with I." } }
-  - { en: "You [[are]] late.", id: "Kamu telat." }
-  - { en: "We [[are]] hungry.", id: "Kami lapar." }
+  - { en: "Budi [[is]] here.", id: "Budi di sini.", note: { id: "Sebelum tempat juga butuh is: Budi di sini menjadi Budi is here.", en: "A place needs is too: Budi di sini becomes Budi is here." } }
+  - { en: "Mei [[is]] five.", id: "Mei umurnya lima tahun.", note: { id: "Umur juga memakai am, is atau are.", en: "Age also takes am, is or are." } }
   - { en: "Dewi [[is]] busy.", id: "Dewi lagi sibuk.", note: { id: "Satu orang, pakai is.", en: "One person, so is." } }
   - { en: "I[['m]] tired.", id: "Aku capek.", note: { id: "I'm adalah I am yang dipendekkan. Biasa dipakai saat bicara.", en: "I'm is short for I am. Common in speech." } }
   - { en: "You[['re]] right.", id: "Kamu benar." }

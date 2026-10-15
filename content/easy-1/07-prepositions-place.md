@@ -78,13 +78,13 @@ next: easy1-08-to-be-questions
 ---
 
 ## concept.id
-Kata depan tempat (**preposition**) menjawab pertanyaan *di mana?* Bahasa Inggris punya kata yang berbeda untuk tiap posisi: **in** (di dalam), **on** (di atas, menempel), **under** (di bawah), **next to** (di sebelah), **behind** (di belakang) dan **in front of** (di depan). Perhatikan juga patokannya: bola **under the table**, tapi bola **on the box**.
+Kata depan tempat (**preposition**) menjawab pertanyaan *di mana?* Bahasa Inggris punya kata yang berbeda untuk tiap posisi: **in** (di dalam), **on** (menempel di permukaan, atas atau samping), **under** (di bawah), **next to** (di sebelah), **behind** (di belakang) dan **in front of** (di depan). Perhatikan juga patokannya: bola **under the table**, tapi bola **on the box**. Kata **the** menunjuk benda yang sudah jelas, mirip *-nya*: *kuncinya* menjadi **the keys**.
 
 ## concept.en
-Prepositions of place answer the question *di mana?* English has a different word for each position: **in**, **on** (on top, touching), **under**, **next to**, **behind** and **in front of**. Notice the reference object too: the ball is **under the table**, but **on the box**.
+Prepositions of place answer the question *di mana?* English has a different word for each position: **in**, **on** (touching a surface, top or side), **under**, **next to**, **behind** and **in front of**. Notice the reference object too: the ball is **under the table**, but **on the box**. **The** points to a thing we both know, a bit like *-nya*: *kuncinya* becomes **the keys**.
 
 ## contrast.id
-Bahasa Indonesia memakai *di* untuk hampir semua posisi, dan *di* terasa seperti **at**. Akibatnya muncul kalimat seperti **The book is at the table**. Pilih kata yang menunjukkan posisinya: di atas permukaan **on**, di dalam **in**.
+Bahasa Indonesia memakai *di* untuk hampir semua posisi, dan *di* terasa seperti **at**. **At the table** memang ada, tapi artinya *di dekat meja*, seperti orang yang duduk di meja makan. Untuk buku yang ada di atasnya, pilih kata yang menunjukkan posisinya: **on**.
 
 ## contrast.en
-Indonesian uses *di* for almost every position, and *di* feels like **at**. That leads to sentences like **The book is at the table**. Choose the word that shows the position: on top of a surface is **on**, inside is **in**.
+Indonesian uses *di* for almost every position, and *di* feels like **at**. **At the table** is real English, but it means *by the table*, like people sitting down to eat. For a book lying on top, choose the word that shows the position: **on**.
