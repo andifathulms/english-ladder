@@ -11,6 +11,16 @@ type Raw = Record<string, unknown> & { schemaVersion?: unknown };
 const steps: Record<number, (s: Raw) => Raw> = {
   // 0 → 1: pre-release shape had no schemaVersion. Nothing to move.
   0: (s) => ({ ...s, schemaVersion: 1 }),
+  // 1 → 2: the bright cream theme became the default. "system" was the untouched old default,
+  // so it moves to "light" once; dark stays one tap away in Settings.
+  1: (s) => {
+    const settings = isObj(s.settings) ? s.settings : {};
+    return {
+      ...s,
+      schemaVersion: 2,
+      settings: settings.theme === 'system' || settings.theme === undefined ? { ...settings, theme: 'light' } : settings,
+    };
+  },
 };
 
 const isObj = (v: unknown): v is Record<string, unknown> =>

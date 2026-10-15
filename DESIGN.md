@@ -64,6 +64,7 @@ Illustration tokens are in §10.
 - **The italic accent:** the last word of a hero line can be set in display italic: brass on navy ("Mulai dari anak tangga *pertama*"), accent blue on cream ("Selamat *siang*.").
 - **Document cards** (lessons on home) are cream sheets with a 14px grid, a 6px spine (accent = done, brass = current, rule = new), a mono catalogue number, a serif title and a status pill (dot + word).
 - Contrast: body text and controls meet WCAG AA in both themes. `--muted` on `--paper` must stay ≥ 4.5:1. Check it when tuning values.
+- **Light is the default.** The app opens in the bright cream theme for everyone; dark (and "follow system") are choices in Settings. Stored progress from before this change moved from "system" to light once (schema v2).
 - Dark mode is a **night study**, not an inversion: same hues, lowered saturation on surfaces, lifted tier colours.
 
 ---

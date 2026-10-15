@@ -141,9 +141,9 @@ export function SettingsView() {
             value={s.theme}
             onChange={(v) => set({ theme: v })}
             options={[
-              { value: 'system', label: t('settings.theme.system') },
               { value: 'light', label: t('settings.theme.light') },
               { value: 'dark', label: t('settings.theme.dark') },
+              { value: 'system', label: t('settings.theme.system') },
             ]}
           />
         </Row>

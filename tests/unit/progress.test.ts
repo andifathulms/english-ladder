@@ -19,10 +19,16 @@ describe('migrations', () => {
     expect(s.settings.uiLang).toBe('id');
   });
   it('drops invalid settings values', () => {
-    expect(migrate({ schemaVersion: 1, settings: { theme: 'neon', textSize: 115 } }).settings).toMatchObject({ theme: 'system', textSize: 115 });
+    expect(migrate({ schemaVersion: 1, settings: { theme: 'neon', textSize: 115 } }).settings).toMatchObject({ theme: 'light', textSize: 115 });
   });
   it('refuses newer versions and non-objects', () => {
     expect(() => migrate({ schemaVersion: 99 })).toThrow(MigrationError);
+  });
+
+  it('moves the old "system" default to the bright theme once, keeps an explicit dark', () => {
+    expect(migrate({ schemaVersion: 1, settings: { theme: 'system' } }).settings.theme).toBe('light');
+    expect(migrate({ schemaVersion: 1, settings: { theme: 'dark' } }).settings.theme).toBe('dark');
+    expect(migrate({ schemaVersion: 2, settings: { theme: 'system' } }).settings.theme).toBe('system');
     expect(() => migrate('nope')).toThrow(MigrationError);
   });
 });

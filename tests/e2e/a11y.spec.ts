@@ -20,6 +20,12 @@ for (const scheme of ['light', 'dark'] as const) {
   for (const route of routes) {
     test(`axe: ${route} (${scheme})`, async ({ page }) => {
       await page.emulateMedia({ colorScheme: scheme });
+      // Light is the default theme; dark is a setting, so choose it explicitly.
+      if (scheme === 'dark') {
+        await page.addInitScript(() =>
+          localStorage.setItem('english-ladder:v1', JSON.stringify({ schemaVersion: 2, settings: { theme: 'dark' } })),
+        );
+      }
       await page.goto(route);
       // Visit the See step too, so visuals are checked.
       if (route.includes('/rung/easy-1/0')) await page.getByRole('button', { name: /^Lanjut/ }).click();
