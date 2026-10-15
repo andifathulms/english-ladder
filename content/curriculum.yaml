@@ -14,48 +14,56 @@ rungs:
     threads: [be, pronouns, articles, demonstratives, word-order, have, possessives, prepositions, questions]
     inventory: [be-present, subject-pronouns, articles-a-an, plural-regular, plural-irregular-core, demonstratives, adjective-before-noun, have-present, possessive-adj, possessive-s, prep-place-basic, be-questions-negatives]
 
+  # Contrast plan: present simple pair: *I am work* → I work (overcorrection after Easy 1). there is: *In my house have…* (ada covers have and there is).
+  # Words strand: pinjam = borrow and lend. Phrasal verbs start here as vocabulary (get up, turn on).
   - id: easy-2
     name: Easy 2
     tier: easy
     cefr: A1
     explain_lang: id
     status: soon
-    lessons: 8
+    lessons: 10
     description:
       id: "Kegiatan sehari-hari: apa yang kamu lakukan, kapan, dan apa yang bisa kamu lakukan."
       en: "Daily life: what you do, when, and what you can do."
-    topics: [present simple, do/does questions, don't/doesn't, there is/there are, can and can't, how often, object pronouns, at/on/in for time]
-    threads: [tense, questions, modals, prepositions, pronouns, word-order]
+    topics: [what/who/where with be, present simple, do/does questions, "don't/doesn't", there is/there are, want to and would like, imperatives, can and can't, object pronouns, the vs a, at/on/in for time]
+    threads: [tense, questions, modals, prepositions, pronouns, word-order, articles]
     inventory: []
 
+  # Contrast plan: present continuous: sedang → -ing; no *I am knowing*. Past regular: the -ed sounds /t d ɪd/.
+  # Comparatives: *bigger from* (dari = than) and *more better*.
   - id: easy-3
     name: Easy 3
     tier: easy
     cefr: A2−
     explain_lang: id
     status: soon
-    lessons: 8
+    lessons: 9
     description:
       id: "Sekarang dan kemarin: yang sedang terjadi, yang sudah terjadi, dan rencana."
       en: "Now and yesterday: what is happening, what happened, and plans."
-    topics: [present continuous, was/were, past simple regular, past simple irregular, some/any, much/many, going to, comparatives]
+    topics: [present continuous, was/were, past simple regular, past simple irregular (the top 30), past simple irregular (the rest), countable and uncountable with some/any, much/many, going to, comparatives]
     threads: [tense, articles, comparison, future]
     inventory: []
 
+  # Contrast plan: already/yet/still map to sudah/belum/masih: the key lesson for Indonesian speakers (*I already eat*).
+  # Modals: mustn't vs don't have to = tidak boleh vs tidak harus. Ever = pernah. too/enough: *too delicious*.
   - id: medium-1
     name: Medium 1
     tier: medium
     cefr: A2
     explain_lang: mixed
     status: soon
-    lessons: 8
+    lessons: 9
     description:
       id: "Cerita dan rencana yang lebih panjang, plus aturan dan nasihat."
       en: "Longer stories and plans, plus rules and advice."
-    topics: [past continuous, superlatives, will vs going to, present perfect with ever/never, should/must/have to, first conditional, too/enough, adverbs of manner]
+    topics: [past continuous, superlatives, will vs going to, present perfect with ever/never, already/yet/still, -ed and -ing adjectives, should/must/have to, first conditional, too/enough, adverbs of manner]
     threads: [tense, comparison, future, modals, conditionals]
     inventory: []
 
+  # Contrast plan: passive: Indonesian di- is far more frequent, so teach when not to use it; *The house built* lacks be.
+  # Relative clauses: *the book that I read it*. Question tags: kan? is one tag, English has many.
   - id: medium-2
     name: Medium 2
     tier: medium
@@ -66,24 +74,26 @@ rungs:
     description:
       en: "Connecting time and ideas: experience, habits in the past, and who did what."
       id: "Menghubungkan waktu dan ide: pengalaman, kebiasaan dulu, dan siapa melakukan apa."
-    topics: [present perfect vs past simple, present perfect continuous, used to, passive voice, relative clauses, second conditional, reported speech, gerund or infinitive]
-    threads: [tense, passive, clauses, conditionals, reporting]
+    topics: [present perfect vs past simple, present perfect continuous, used to, passive voice, relative clauses, second conditional, verb patterns (stop to, stop -ing), question tags]
+    threads: [tense, passive, clauses, conditionals, questions]
     inventory: []
 
+  # Contrast plan: linking words pair: *Although it rained, but we went* (walaupun…, tetapi…). Articles: go to school vs go to the school.
   - id: medium-3
     name: Medium 3
     tier: medium
     cefr: B1+
     explain_lang: en
     status: soon
-    lessons: 8
+    lessons: 9
     description:
       en: "Guessing, regretting and linking: sounding more natural in longer talk."
       id: "Menebak, menyesal dan menyambung: terdengar lebih alami saat bicara panjang."
-    topics: [past perfect, modals of deduction, third conditional, wish, passive in all tenses, articles in depth, phrasal verbs, linking words]
-    threads: [tense, modals, conditionals, passive, articles, discourse]
+    topics: [past perfect, reported speech, modals of deduction, third conditional, wish, passive in all tenses, articles in depth, phrasal verbs, linking words]
+    threads: [tense, reporting, modals, conditionals, passive, articles, discourse]
     inventory: []
 
+  # Contrast plan: it is said that ↔ katanya / konon: Indonesian is the helpful bridge here.
   - id: hard-1
     name: Hard 1
     tier: hard
@@ -94,34 +104,36 @@ rungs:
     description:
       en: "Precision and emphasis: saying exactly what you mean, and stressing what matters."
       id: "Presisi dan penekanan: bilang persis yang kamu maksud, dan tekankan yang penting."
-    topics: [mixed conditionals, future continuous and perfect, it is said that, have something done, non-defining relative clauses, cleft sentences, emphasis with do, introduction to inversion]
+    topics: [mixed conditionals, future continuous and perfect, it is said that, causatives (make, let, get, have something done), non-defining relative clauses, cleft sentences, emphasis with do, introduction to inversion]
     threads: [conditionals, future, passive, clauses, emphasis]
     inventory: []
 
+  # Contrast plan: emails: Dengan hormat ≠ With respect; Dear Ms Sari, the request first, then the reason.
   - id: hard-2
     name: Hard 2
     tier: hard
     cefr: B2+
     explain_lang: en
     status: soon
-    lessons: 7
+    lessons: 8
     description:
       en: "Writing and speaking with control: register, hedging and compact sentences."
       id: "Menulis dan bicara dengan kendali: register, hedging, dan kalimat yang ringkas."
-    topics: [participle clauses, subjunctive, hedging, nominalisation, advanced article use, collocations, register]
+    topics: [participle clauses, subjunctive, hedging, nominalisation, advanced article use, collocations, register, emails and formal letters]
     threads: [clauses, modals, articles, style]
     inventory: []
 
+  # Contrast plan: stress for meaning: I didn't say SHE took it. Teach modal nuance as pragmatics (softening disagreement).
   - id: hard-3
     name: Hard 3
     tier: hard
     cefr: C1
     explain_lang: en
     status: soon
-    lessons: 7
+    lessons: 8
     description:
       en: "Polish: the small choices that make English sound fluent and deliberate."
       id: "Polesan akhir: pilihan kecil yang membuat bahasa Inggrismu terdengar fasih dan sengaja."
-    topics: [inversion, ellipsis and substitution, discourse markers, nuance in modals, fronting, academic style, idiomatic precision]
+    topics: [inversion, ellipsis and substitution, discourse markers, nuance in modals and softening, fronting, academic style, idiomatic precision, stress and intonation for meaning]
     threads: [emphasis, discourse, modals, style]
     inventory: []
