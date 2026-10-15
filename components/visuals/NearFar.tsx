@@ -98,7 +98,7 @@ export function NearFar({ state, interactive = true, onStateChange, lang }: Visu
                     : { background: 'var(--surface)', borderColor: 'var(--rule)' }
                 }
               >
-                <span lang="en" className="font-display font-bold text-ink">{v}</span>
+                <span lang="en" className="font-display font-semibold text-ink">{v}</span>
                 <span className="text-small text-muted">
                   {lang === 'en'
                     ? `${INFO[v].near ? 'near' : 'far'} · ${INFO[v].many ? 'many' : 'one'}`

@@ -102,7 +102,7 @@ export function WordsView({ lessons, nouns = [] }: { lessons: LessonSummary[]; n
                     return (
                       <li key={w.en} className="flex min-h-[60px] items-center gap-3 px-4 py-2">
                         <span className="flex min-w-0 flex-1 flex-col">
-                          <span lang="en" className="font-display text-body font-bold">
+                          <span lang="en" className="font-display text-body font-semibold">
                             {w.en}
                             {noun && noun.plural_rule === 'irregular' && (
                               <span className="font-medium text-muted"> → {noun.plural}</span>

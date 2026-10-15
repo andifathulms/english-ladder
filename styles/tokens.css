@@ -1,42 +1,43 @@
 /* Every token from DESIGN.md. Components never use literal colours. */
 :root {
   color-scheme: light;
-  --paper: #F3F5F0;
-  --paper-2: #E7ECE4;
-  --surface: #FFFFFF;
-  --ink: #132420;
-  --muted: #4F605A;
-  --rule: #D5DDD6;
-  --accent: #08715E;
+  --paper: #F6F2E9;
+  --paper-2: #EDE6D6;
+  --surface: #FFFDF8;
+  --ink: #14213D;
+  --muted: #596277;
+  --rule: #E2D9C6;
+  --accent: #2A4A7F;
   --accent-ink: #FFFFFF;
-  --accent-soft: #DDEFE8;
-  --board: #0D3B33;
-  --board-2: #145045;
-  --board-ink: #F1F5EE;
-  --board-muted: #A9C4BB;
-  --rung: #E9A825;
-  --rung-soft: #FCF0D2;
-  --good: #1F6E3C;
-  --good-bg: #E1F3E6;
-  --off: #B2432C;
-  --off-bg: #FBE6E0;
-  --easy: #2F8F6B;
-  --easy-soft: #E1F2EA;
-  --medium: #2B6CA3;
-  --medium-soft: #E2EDF8;
-  --hard: #6E4FA8;
-  --hard-soft: #EEE8F8;
+  --accent-soft: #E4E9F2;
+  --board: #13213F;
+  --board-2: #1E2F55;
+  --board-ink: #F6F2E9;
+  --board-muted: #B3BCD0;
+  --brass: #D2AE72;
+  --rung: #B8862E;
+  --rung-soft: #F7EBCF;
+  --good: #2F6B45;
+  --good-bg: #E3F0E4;
+  --off: #A84432;
+  --off-bg: #F8E4DD;
+  --easy: #3D7A5F;
+  --easy-soft: #E5EFE6;
+  --medium: #2A4A7F;
+  --medium-soft: #E4E9F2;
+  --hard: #6A4E8F;
+  --hard-soft: #EDE7F3;
   --wood: #B98A5A;
   --wood-dark: #8C6440;
   --card: #D9C3A0;
   --card-top: #E8D7BA;
   --card-side: #B79E77;
-  --subject: #D2553A;
-  --shadow-rgb: 15 30 25;
+  --subject: #C2533A;
+  --shadow-rgb: 20 33 61;
 
   /* Type scale (DESIGN §4.1), rem so the text-size setting scales everything */
-  --t-hero: 2.75rem;
-  --t-h1: 2rem;
+  --t-hero: 3rem;
+  --t-h1: 2.125rem;
   --t-h2: 1.5rem;
   --t-sentence: 1.6rem;
   --t-sentence-lh: 1.3;
@@ -44,6 +45,7 @@
   --t-small: 0.9rem;
   --t-label: 0.74rem;
   --t-tab: 0.72rem;
+  --t-card: 1.3rem;
   --t-wordmark: 1.125rem;
 
   /* Space (DESIGN §5.1) */
@@ -59,14 +61,14 @@
 
   /* Layout chrome */
   --tabbar-h: 64px;
-  --sidebar-w: 232px;
+  --sidebar-w: 256px;
 
   /* Shape and depth (DESIGN §5.2–5.3) */
   --r-sm: 6px;
   --r-md: 10px;
-  --r-lg: 16px;
-  --r-xl: 22px;
-  --e-1: 0 1px 0 var(--rule), 0 1px 3px rgb(var(--shadow-rgb) / 0.04);
+  --r-lg: 18px;
+  --r-xl: 24px;
+  --e-1: 0 0 0 1px var(--rule), 0 1px 2px rgb(var(--shadow-rgb) / 0.04), 0 8px 24px -16px rgb(var(--shadow-rgb) / 0.18);
   --e-2: 0 18px 40px -28px rgb(var(--shadow-rgb) / 0.45);
 
   /* Motion (DESIGN §5.4) */
@@ -95,31 +97,32 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     color-scheme: dark;
-    --paper: #0E1513;
-    --paper-2: #141D1A;
-    --surface: #18221F;
-    --ink: #E6EEEA;
-    --muted: #9AABA4;
-    --rule: #26332F;
-    --accent: #5FD0B3;
-    --accent-ink: #08201A;
-    --accent-soft: #17322B;
-    --board: #10302A;
-    --board-2: #1A4239;
-    --board-ink: #EAF2EE;
-    --board-muted: #94B5AA;
-    --rung: #F0C14E;
-    --rung-soft: #2F2615;
-    --good: #8AD3A0;
-    --good-bg: #16291D;
-    --off: #F0977F;
-    --off-bg: #331E18;
-    --easy: #66CFA4;
-    --easy-soft: #15291F;
-    --medium: #7DB8E8;
-    --medium-soft: #142231;
-    --hard: #BBA0E8;
-    --hard-soft: #221B33;
+    --paper: #0D1526;
+    --paper-2: #121C31;
+    --surface: #16213A;
+    --ink: #EEE8DA;
+    --muted: #A6AFC3;
+    --rule: #26324D;
+    --accent: #9DB8E6;
+    --accent-ink: #0D1526;
+    --accent-soft: #1E2C4B;
+    --board: #1B2B4F;
+    --board-2: #25386A;
+    --board-ink: #F2ECDF;
+    --board-muted: #AEB9D2;
+    --brass: #DDBA7E;
+    --rung: #E2B45A;
+    --rung-soft: #2C2516;
+    --good: #8FCB9F;
+    --good-bg: #16281F;
+    --off: #EE9A84;
+    --off-bg: #331F1B;
+    --easy: #7CC4A0;
+    --easy-soft: #152A22;
+    --medium: #9DB8E6;
+    --medium-soft: #1E2C4B;
+    --hard: #C1A8E6;
+    --hard-soft: #251E37;
     --wood: #9C7550;
     --wood-dark: #6E5236;
     --card: #B39C78;
@@ -132,31 +135,32 @@
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --paper: #0E1513;
-  --paper-2: #141D1A;
-  --surface: #18221F;
-  --ink: #E6EEEA;
-  --muted: #9AABA4;
-  --rule: #26332F;
-  --accent: #5FD0B3;
-  --accent-ink: #08201A;
-  --accent-soft: #17322B;
-  --board: #10302A;
-  --board-2: #1A4239;
-  --board-ink: #EAF2EE;
-  --board-muted: #94B5AA;
-  --rung: #F0C14E;
-  --rung-soft: #2F2615;
-  --good: #8AD3A0;
-  --good-bg: #16291D;
-  --off: #F0977F;
-  --off-bg: #331E18;
-  --easy: #66CFA4;
-  --easy-soft: #15291F;
-  --medium: #7DB8E8;
-  --medium-soft: #142231;
-  --hard: #BBA0E8;
-  --hard-soft: #221B33;
+  --paper: #0D1526;
+  --paper-2: #121C31;
+  --surface: #16213A;
+  --ink: #EEE8DA;
+  --muted: #A6AFC3;
+  --rule: #26324D;
+  --accent: #9DB8E6;
+  --accent-ink: #0D1526;
+  --accent-soft: #1E2C4B;
+  --board: #1B2B4F;
+  --board-2: #25386A;
+  --board-ink: #F2ECDF;
+  --board-muted: #AEB9D2;
+  --brass: #DDBA7E;
+  --rung: #E2B45A;
+  --rung-soft: #2C2516;
+  --good: #8FCB9F;
+  --good-bg: #16281F;
+  --off: #EE9A84;
+  --off-bg: #331F1B;
+  --easy: #7CC4A0;
+  --easy-soft: #152A22;
+  --medium: #9DB8E6;
+  --medium-soft: #1E2C4B;
+  --hard: #C1A8E6;
+  --hard-soft: #251E37;
   --wood: #9C7550;
   --wood-dark: #6E5236;
   --card: #B39C78;

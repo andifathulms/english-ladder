@@ -1,16 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { Mark } from './Mark';
+import { Wordmark } from './Mark';
 import { IconArrowLeft } from './Icon';
 
 /** Wordmark bar for phones. On wide screens the sidebar carries the wordmark instead. */
 export function AppHeader({ aside }: { aside?: React.ReactNode }) {
   return (
     <header className="page flex max-w-home items-center justify-between gap-3 pt-4 min-[900px]:hidden">
-      <Link href="/" className="flex items-center gap-2 text-ink no-underline">
-        <Mark size={24} />
-        <span className="font-display text-wordmark font-bold">English Ladder</span>
+      <Link href="/" className="flex items-center text-ink no-underline">
+        <Wordmark />
       </Link>
       {aside}
     </header>

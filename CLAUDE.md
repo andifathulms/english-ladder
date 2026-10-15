@@ -16,7 +16,7 @@ A static, levelled English course for Indonesian speakers. Nine rungs (Easy 1 â†
 |---|---|
 | Framework | Next.js 14, App Router, **`output: 'export'`** (fully static), TypeScript strict |
 | Styling | Tailwind CSS, with every colour, radius, shadow and motion value mapped to the CSS custom properties defined in `DESIGN.md` (no Tailwind default palette in components) |
-| Fonts | `next/font/google` (self-hosted at build): Bricolage Grotesque, Atkinson Hyperlegible, IBM Plex Mono |
+| Fonts | Self-hosted at build: Newsreader and IBM Plex Mono via `next/font/google`; Atkinson Hyperlegible Next via `next/font/local` (`app/font-files`) |
 | Content | Markdown + YAML frontmatter, parsed at build with `gray-matter` and `js-yaml`, validated with `zod` |
 | Visuals | React components rendering inline SVG. No D3 or canvas needed for v1 |
 | Audio | Web Speech API for speech; Web Audio API for sound effects (synthesised, no files) |

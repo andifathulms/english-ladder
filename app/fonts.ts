@@ -1,15 +1,19 @@
 import localFont from 'next/font/local';
-import { Bricolage_Grotesque } from 'next/font/google';
+import { IBM_Plex_Mono, Newsreader } from 'next/font/google';
 
 // Self-hosted at build: no runtime requests to Google.
-export const display = Bricolage_Grotesque({
+export const display = Newsreader({
   subsets: ['latin'],
   axes: ['opsz'],
+  style: ['normal', 'italic'],
   variable: '--font-display',
   display: 'swap',
+  fallback: ['Georgia', 'serif'],
+  // Next has no fallback metrics for Newsreader; Georgia is close enough without adjustment.
+  adjustFontFallback: false,
 });
 
-// Atkinson Hyperlegible Next and Mono aren't in next/font/google for Next 14, so they ship from app/font-files.
+// Atkinson Hyperlegible Next isn't in next/font/google for Next 14, so it ships from app/font-files.
 export const body = localFont({
   src: [
     { path: './font-files/AtkinsonNext-Variable.woff2', weight: '200 800', style: 'normal' },
@@ -20,9 +24,9 @@ export const body = localFont({
   fallback: ['system-ui', 'sans-serif'],
 });
 
-export const mono = localFont({
-  src: [{ path: './font-files/AtkinsonMono-Variable.woff2', weight: '200 800', style: 'normal' }],
+export const mono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
   variable: '--font-mono',
   display: 'swap',
-  fallback: ['ui-monospace', 'monospace'],
 });

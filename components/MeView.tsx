@@ -27,10 +27,10 @@ export function MeView({ lessons }: { lessons: LessonSummary[] }) {
 
   return (
     <PageShell title={t('me.title')}>
-      <ul className="grid grid-cols-3 gap-3">
+      <ul className="card grid grid-cols-3 divide-x divide-rule overflow-hidden">
         {stats.map((s) => (
-          <li key={s.label} className="card flex flex-col gap-1 p-4">
-            <span className="font-display text-h1 font-bold leading-none tnum">{s.n}</span>
+          <li key={s.label} className="flex flex-col gap-2 px-4 py-5 min-[640px]:px-6">
+            <span className="font-display text-hero font-normal leading-none tnum">{s.n}</span>
             <span className="text-small leading-tight text-muted">{s.label}</span>
           </li>
         ))}
@@ -56,7 +56,7 @@ export function MeView({ lessons }: { lessons: LessonSummary[] }) {
                   <Icon size={20} />
                 </span>
                 <span className="flex min-w-0 flex-1 flex-col">
-                  <span className="font-display font-bold">{title}</span>
+                  <span className="font-body font-bold">{title}</span>
                   <span className="text-small text-muted">{hint}</span>
                 </span>
                 <IconChevron className="shrink-0 text-muted" />

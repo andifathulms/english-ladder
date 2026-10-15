@@ -33,28 +33,26 @@ The English you are learning is the hero of every screen. Explanations, chrome a
 
 All colour comes from these tokens. Components never use literal colours.
 
-Palette name: **Pagi** (morning). Revised 15 Oct 2026: a slightly deeper teal, a new board colour, and soft tier tints.
+Palette name: **Navy & cream** (revised 15 Oct 2026, after a reference the owner chose): a printed-catalogue feel. Cream paper, navy ink and boards, a quiet blue for actions, brass for typographic accents on navy.
 
 | Token | Light | Dark | Role |
 |---|---|---|---|
-| `--paper` | `#F3F5F0` | `#0E1513` | App background |
-| `--paper-2` | `#E7ECE4` | `#141D1A` | Stage behind visuals, inset areas |
-| `--surface` | `#FFFFFF` | `#18221F` | Cards, lesson column, sheets, tab bar |
-| `--ink` | `#132420` | `#E6EEEA` | Primary text, English sentences |
-| `--muted` | `#4F605A` | `#9AABA4` | Secondary text, Indonesian translations |
-| `--rule` | `#D5DDD6` | `#26332F` | Borders, dividers |
-| `--accent` | `#08715E` | `#5FD0B3` | Primary actions, grammar focus words, links |
-| `--accent-ink` | `#FFFFFF` | `#08201A` | Text on accent |
-| `--accent-soft` | `#DDEFE8` | `#17322B` | Selected states, soft highlights |
-| `--board` / `--board-2` | `#0D3B33` / `#145045` | `#10302A` / `#1A4239` | The board: the one "do this next" card per screen (home continue card, rung test intro, climb backdrop accents) |
-| `--board-ink` / `--board-muted` | `#F1F5EE` / `#A9C4BB` | `#EAF2EE` / `#94B5AA` | Text on the board |
-| `--rung` | `#E9A825` | `#F0C14E` | Achievement only: climbed rungs, the climb moment, the fresh notch. Also the blank in a quoted sentence on the board |
-| `--rung-soft` | `#FCF0D2` | `#2F2615` | Background behind achievement |
-| `--good` / `--good-bg` | `#1F6E3C` / `#E1F3E6` | `#8AD3A0` / `#16291D` | Correct answers |
-| `--off` / `--off-bg` | `#B2432C` / `#FBE6E0` | `#F0977F` / `#331E18` | Wrong answers, the "sounds off" side of a pair |
-| `--easy` / `--easy-soft` | `#2F8F6B` / `#E1F2EA` | `#66CFA4` / `#15291F` | Easy tier marker / tint |
-| `--medium` / `--medium-soft` | `#2B6CA3` / `#E2EDF8` | `#7DB8E8` / `#142231` | Medium tier marker / tint |
-| `--hard` / `--hard-soft` | `#6E4FA8` / `#EEE8F8` | `#BBA0E8` / `#221B33` | Hard tier marker / tint |
+| `--paper` | `#F6F2E9` | `#0D1526` | App background (cream / night navy) |
+| `--paper-2` | `#EDE6D6` | `#121C31` | Document sheets (with `.doc-grid`), inset areas, visual stages |
+| `--surface` | `#FFFDF8` | `#16213A` | Cards, lesson column, tab bar |
+| `--ink` | `#14213D` | `#EEE8DA` | Primary text, English sentences |
+| `--muted` | `#596277` | `#A6AFC3` | Secondary text, Indonesian translations |
+| `--rule` | `#E2D9C6` | `#26324D` | Borders, dividers, card rings |
+| `--accent` | `#2A4A7F` | `#9DB8E6` | Primary actions, grammar focus words, links |
+| `--accent-ink` | `#FFFFFF` | `#0D1526` | Text on accent |
+| `--accent-soft` | `#E4E9F2` | `#1E2C4B` | Selected and current rows |
+| `--board` / `--board-2` | `#13213F` / `#1E2F55` | `#1B2B4F` / `#25386A` | Navy surfaces: the home board, the rung header, the desktop sidebar, the climb moment |
+| `--board-ink` / `--board-muted` | `#F6F2E9` / `#B3BCD0` | `#F2ECDF` / `#AEB9D2` | Text on navy |
+| `--brass` | `#D2AE72` | `#DDBA7E` | **On navy only**: mono eyebrows, the italic accent word, the step dots, contour highlights. Never on cream (it fails contrast there) |
+| `--rung` / `--rung-soft` | `#B8862E` / `#F7EBCF` | `#E2B45A` / `#2C2516` | Achievement only: climbed rungs, the climb, the fresh notch |
+| `--good` / `--good-bg` | `#2F6B45` / `#E3F0E4` | `#8FCB9F` / `#16281F` | Correct answers, "selesai" dots |
+| `--off` / `--off-bg` | `#A84432` / `#F8E4DD` | `#EE9A84` / `#331F1B` | Wrong answers, "to review" dots |
+| `--easy` / `--medium` / `--hard` | `#3D7A5F` / `#2A4A7F` / `#6A4E8F` | `#7CC4A0` / `#9DB8E6` / `#C1A8E6` | Tier dots only |
 
 Illustration tokens are in §10.
 
@@ -62,7 +60,9 @@ Illustration tokens are in §10.
 - **Gold means earned.** `--rung` appears only for things the learner achieved: climbed rungs, the climb moment, the done-lesson notch. Never on buttons, never decorative.
 - **Red is gentle.** `--off` marks wrong answers and the wrong half of a pair, always with a reason next to it. There are no full-screen red states.
 - Tier colours appear as small markers (dots, rings, the progress fill inside that tier). Tier **soft** tints may fill one area only: the header of that tier's rung page. Tier colours are never used for small text (Easy green fails AA as text in light mode); text next to them stays `--ink` or `--muted`.
-- **The board** is the one place with a dark surface in light mode. At most one per screen, always holding the single next action. Its blank or highlight uses `--rung` only as an underline.
+- **Navy surfaces** carry topographic contour lines (`Contours`, decorative, `aria-hidden`): elevation lines for a course about climbing. At most one board per screen; the sidebar doesn't count.
+- **The italic accent:** the last word of a hero line can be set in display italic: brass on navy ("Mulai dari anak tangga *pertama*"), accent blue on cream ("Selamat *siang*.").
+- **Document cards** (lessons on home) are cream sheets with a 14px grid, a 6px spine (accent = done, brass = current, rule = new), a mono catalogue number, a serif title and a status pill (dot + word).
 - Contrast: body text and controls meet WCAG AA in both themes. `--muted` on `--paper` must stay ≥ 4.5:1. Check it when tuning values.
 - Dark mode is a **night study**, not an inversion: same hues, lowered saturation on surfaces, lifted tier colours.
 
@@ -72,13 +72,13 @@ Illustration tokens are in §10.
 
 | Role | Face | Use |
 |---|---|---|
-| Display | **Bricolage Grotesque** 500/700 (opsz on) | Headings, rung names, and **English sentences in lessons** |
+| Display | **Newsreader** 400/500/600, italic (opsz on) | Headings, rung names, lesson titles, big numerals and **English sentences in lessons** |
 | Body | **Atkinson Hyperlegible Next** 400/600/700, italic (variable) | Explanations, UI text, Indonesian translations, section headings |
-| Utility | **Atkinson Hyperlegible Mono** 600 | CEFR codes, counters, minutes: numbers and codes only |
+| Utility | **IBM Plex Mono** 500 | Uppercase tracked labels and eyebrows, CEFR codes, counters, minutes |
 
-Atkinson Hyperlegible is chosen on purpose: it was designed for low-vision readers and keeps similar letters distinct (I/l/1, rn/m). For a language learner reading unfamiliar words, that matters. The Next and Mono versions (2025) keep that and add weights; they are self-hosted from `app/font-files` because Next 14's font list predates them.
+Atkinson Hyperlegible is chosen on purpose: it was designed for low-vision readers and keeps similar letters distinct (I/l/1, rn/m). For a language learner reading unfamiliar words, that matters. Atkinson Hyperlegible Next (2025) is self-hosted from `app/font-files` because Next 14's font list predates it. Body text stays in it even though the display face is a serif: legibility for learners wins.
 
-**Section headings** use the `.eyebrow` style (body 700, `--t-small`, `--muted`, sentence case), not uppercase mono. Uppercase mono (`.label`) is for counters, CEFR codes and step names only.
+**Section labels** use `.eyebrow` (mono 500, uppercase, 0.16em tracking, `--muted`), like a catalogue index. Page titles are Newsreader at `--t-hero`, weight 500. Buttons, pills, tiles and tab labels use the body face, never the serif.
 
 ### 4.1 Scale (rem, base 16px; scaled by the text-size setting)
 

@@ -7,7 +7,7 @@ import { lessonHref, rungHref } from '@/lib/routes';
 import { useHydrated, useProgress, useT, type T } from '../ProgressProvider';
 import { AppShell } from '../ui/AppShell';
 import { IconChevron, IconReview } from '../ui/Icon';
-import { ContinueCard } from './ContinueCard';
+import { Accented, ContinueCard } from './ContinueCard';
 import { LadderRail } from './LadderRail';
 import { LessonStrip } from './LessonStrip';
 
@@ -50,10 +50,12 @@ export function HomeView({ rungs, lessons }: Props) {
       <main className="page grid max-w-home grid-cols-1 gap-7 py-5 min-[900px]:grid-cols-[minmax(0,1fr)_320px] min-[900px]:py-8">
         <div className="flex min-w-0 flex-col gap-6">
           <header className="flex flex-col gap-1">
-            <p className="text-small font-bold text-muted" aria-hidden={!date}>
+            <p className="eyebrow" aria-hidden={!date}>
               {date ?? ' '}
             </p>
-            <h1 className="text-h1 tracking-[-0.02em] min-[900px]:text-hero">{now ? greeting(t, now) : 'English Ladder'}</h1>
+            <h1 className="text-hero tracking-[-0.02em]">
+              {now ? <Accented text={greeting(t, now)} tone="text-accent" /> : 'English Ladder'}
+            </h1>
           </header>
 
           <ContinueCard target={target} firstLessonHref={first ? lessonHref(first) : null} rungs={rungs} />
@@ -61,10 +63,10 @@ export function HomeView({ rungs, lessons }: Props) {
           {mine.length > 0 && (
             <section aria-labelledby="rung-lessons" className="flex flex-col gap-3">
               <div className="flex items-baseline justify-between gap-3">
-                <h2 id="rung-lessons" className="font-display text-body font-bold tnum">
+                <h2 id="rung-lessons" className="text-h2 tnum">
                   {t('home.rungProgress', { rung: here.name, n: done, total: here.lessons })}
                 </h2>
-                <Link href={rungHref(here.id)} className="text-small font-bold no-underline">
+                <Link href={rungHref(here.id)} className="text-small font-bold underline-offset-4 hover:underline">
                   {t('home.allLessons')}
                 </Link>
               </div>
@@ -85,7 +87,7 @@ export function HomeView({ rungs, lessons }: Props) {
                 <IconReview />
               </span>
               <span className="flex min-w-0 flex-1 flex-col">
-                <span className="font-display font-bold">{t('home.quickReview')}</span>
+                <span className="font-body font-bold">{t('home.quickReview')}</span>
                 <span className="text-small text-muted">{t('home.quickReviewMeta')}</span>
               </span>
               <IconChevron className="shrink-0 text-muted" />
@@ -95,7 +97,7 @@ export function HomeView({ rungs, lessons }: Props) {
 
         <aside aria-labelledby="ladder-title" className="flex flex-col gap-3 min-[900px]:self-start">
           <div className="flex items-baseline justify-between gap-3">
-            <h2 id="ladder-title" className="font-display text-body font-bold">
+            <h2 id="ladder-title" className="text-h2">
               {t('home.ladder')}
             </h2>
             <span className="label tnum text-muted">{t('home.ladderMeta', { n: live, total: rungs.length })}</span>

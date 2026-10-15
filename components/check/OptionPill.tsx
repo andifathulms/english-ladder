@@ -33,7 +33,7 @@ export function OptionPill({ label, state, index, disabled, onClick, wide }: Pro
       aria-keyshortcuts={index < 4 ? String(index + 1) : undefined}
       data-state={state}
       lang="en"
-      className={`inline-flex min-h-pill items-center gap-2 border-2 px-5 py-2 text-left font-display text-body font-medium transition-colors duration-quick ${
+      className={`inline-flex min-h-pill items-center gap-2 border-2 px-5 py-2 text-left font-body text-body font-semibold transition-colors duration-quick ${
         wide ? 'w-full rounded-md' : 'rounded-full'
       } ${state === 'idle' && !disabled ? 'hover:border-accent' : ''}`}
       style={styles[state]}

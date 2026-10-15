@@ -50,7 +50,7 @@ export function NounBuilder({ nouns, state, interactive = true, onStateChange, l
                 lang="en"
                 aria-pressed={w === word}
                 onClick={() => set(w)}
-                className="min-h-touch rounded-full border-2 px-4 font-display font-medium transition-colors duration-quick"
+                className="min-h-touch rounded-full border-2 px-4 font-body font-semibold transition-colors duration-quick"
                 style={
                   w === word
                     ? { background: 'var(--accent)', color: 'var(--accent-ink)', borderColor: 'var(--accent)' }

@@ -7,6 +7,7 @@ import { sfx } from '@/lib/speech/sfx';
 import { rungHref } from '@/lib/routes';
 import { useReducedMotion, useT } from '../ProgressProvider';
 import { NotchBar } from '../ladder/NotchBar';
+import { Contours } from '../ui/Contours';
 
 type Props = { rung: Rung; next: Rung | null; onReview: () => void };
 
@@ -25,13 +26,13 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
   const ROW = 76;
   return (
     <div
-      className="fixed inset-0 z-30 overflow-y-auto"
-      style={{ background: 'var(--rung-soft)' }}
+      className="fixed inset-0 z-30 overflow-y-auto bg-board text-board-ink"
       role="dialog"
       aria-modal="true"
       aria-labelledby="climb-title"
     >
-      <div className="page flex min-h-full max-w-lesson flex-col justify-center gap-7 py-8">
+      <Contours />
+      <div className="page relative flex min-h-full max-w-lesson flex-col justify-center gap-7 py-8">
         {/* Ladder fragment: this rung and the next */}
         <div className="relative mx-auto w-full max-w-[340px] px-[18px]" style={{ height: ROW * 2 + 16 }} aria-hidden>
           <span className="absolute bottom-0 left-[4px] top-0 w-[6px] rounded-full" style={{ background: 'var(--wood)' }} />
@@ -43,12 +44,12 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
               style={{
                 top: 8 + i * ROW,
                 height: ROW - 16,
-                background: i === 1 ? 'var(--surface)' : 'transparent',
+                background: i === 1 ? 'var(--board-2)' : 'transparent',
                 boxShadow: i === 1 && climbed ? '0 0 0 3px var(--rung)' : 'none',
                 transition: reduced ? 'box-shadow var(--m-quick-d) linear' : 'box-shadow var(--m-moment-d) var(--ease-moment)',
               }}
             >
-              <span className="font-display font-bold text-ink">{r?.name ?? ''}</span>
+              <span className="font-display text-card font-medium text-board-ink">{r?.name ?? ''}</span>
               {i === 1 && (
                 <span style={{ opacity: climbed ? 1 : 0, transition: `opacity var(--m-moment-d) var(--ease-moment)` }}>
                   <NotchBar total={rung.lessons} done={rung.lessons} climbed />
@@ -63,7 +64,7 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
           <span
             className="absolute left-[-15px] h-0 w-0 border-y-[8px] border-l-[12px] border-y-transparent"
             style={{
-              borderLeftColor: 'var(--accent)',
+              borderLeftColor: 'var(--brass)',
               top: 8 + (ROW - 16) / 2 - 8 + (climbed ? 0 : ROW),
               transition: reduced ? 'none' : 'top var(--m-moment-d) var(--ease-moment)',
             }}
@@ -71,24 +72,24 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
         </div>
 
         <div className="flex flex-col gap-3 text-center">
-          <h1 id="climb-title" className="text-hero" lang="en">
+          <h1 id="climb-title" className="text-hero text-board-ink" lang="en">
             {t('climb.title', { rung: rung.name })}
           </h1>
-          <p className="font-display text-h2 font-medium">{t('climb.line')}</p>
+          <p className="font-display text-h2 italic text-brass">{t('climb.line')}</p>
         </div>
 
         <div className="flex flex-col items-center gap-3">
           {next && next.status === 'live' ? (
-            <Link href={rungHref(next.id)} className="btn btn-primary no-underline">
+            <Link href={rungHref(next.id)} className="btn btn-board no-underline">
               {t('climb.next', { rung: next.name })}
             </Link>
           ) : next ? (
-            <p className="label text-muted">{t('climb.nextSoon', { rung: next.name })}</p>
+            <p className="label text-board-muted">{t('climb.nextSoon', { rung: next.name })}</p>
           ) : null}
-          <Link href="/" className="btn btn-primary no-underline">
+          <Link href="/" className="btn btn-board no-underline">
             {t('climb.viewLadder')}
           </Link>
-          <button type="button" className="btn btn-quiet" onClick={onReview}>
+          <button type="button" className="btn text-board-ink hover:bg-board-2" onClick={onReview}>
             {t('test.reviewTitle')}
           </button>
         </div>

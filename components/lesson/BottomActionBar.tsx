@@ -22,7 +22,7 @@ export function BottomActionBar({ children, feedback }: Props) {
       <div aria-live="polite" className="page max-w-lesson">
         {feedback && (
           <div key={feedback.id} className="sheet-up flex flex-col gap-2 pt-4">
-            <p className="flex items-center gap-2 font-display text-h2 font-bold text-good">
+            <p className="flex items-center gap-2 font-display text-h2 font-semibold text-good">
               <span className="flex h-[30px] w-[30px] items-center justify-center rounded-full bg-good text-good-bg">
                 <IconCheck size={18} draw />
               </span>

@@ -60,7 +60,7 @@ export function TileTray({ tiles, placed, onChange, locked, tone = 'idle' }: Pro
       lang="en"
       onClick={() => move(i)}
       disabled={locked}
-      className="min-h-pill min-w-touch rounded-sm border-2 px-4 font-display text-body font-medium"
+      className="min-h-pill min-w-touch rounded-sm border-2 px-4 font-body text-body font-semibold"
       style={{
         background: inLine && tone === 'good' ? 'var(--good-bg)' : 'var(--surface)',
         borderColor: inLine && tone === 'good' ? 'var(--good)' : inLine && tone === 'off' ? 'var(--off)' : 'var(--rule)',

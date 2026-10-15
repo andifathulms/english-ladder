@@ -138,7 +138,7 @@ export function PlaceScene({ state, interactive = true, onStateChange, lang, ini
                 type="button"
                 lang="en"
                 {...roving.itemProps(p, i)}
-                className="min-h-touch rounded-full border-2 px-4 font-display font-medium transition-colors duration-quick"
+                className="min-h-touch rounded-full border-2 px-4 font-body font-semibold transition-colors duration-quick"
                 style={
                   p === place
                     ? { background: 'var(--accent)', color: 'var(--accent-ink)', borderColor: 'var(--accent)' }

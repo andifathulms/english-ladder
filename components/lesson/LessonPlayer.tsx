@@ -254,7 +254,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
           </div>
           <div className="card flex flex-col gap-3 p-4">
             <p className="flex items-baseline justify-between gap-3">
-              <span className="font-display font-bold">{rung.name}</span>
+              <span className="font-display font-semibold">{rung.name}</span>
               <span className="label tnum text-muted">
                 {climbed ? rung.lessons : done} / {rung.lessons}
               </span>
@@ -266,7 +266,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
             <ul className="flex flex-wrap gap-2">
               {lesson.glossary.map((g) => (
                 <li key={g.en} className="card flex items-baseline gap-2 px-3 py-1">
-                  <span lang="en" className="font-display font-bold">
+                  <span lang="en" className="font-display font-semibold">
                     {g.en}
                   </span>
                   <span lang="id" className="id-text text-small">

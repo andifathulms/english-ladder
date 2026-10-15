@@ -25,7 +25,7 @@ export function LadderRail({ rungs, lessons, progress, hereId, label }: Props) {
         if (!inTier.length) return null;
         return (
           <section key={tier} aria-label={`${tierName(tier)} · ${tierRange(rungs, tier)}`} className="flex flex-col gap-1">
-            <p aria-hidden className="label flex items-center gap-2 px-2 text-muted">
+            <p aria-hidden className="eyebrow flex items-center gap-2 px-2">
               <span className="h-[8px] w-[8px] rounded-full" style={{ background: `var(--${tier})` }} />
               {tierName(tier)} · {tierRange(rungs, tier)}
             </p>
@@ -62,7 +62,7 @@ function LadderRow({ rung, state, here }: { rung: Rung; state: RungState; here: 
           <span className="absolute left-[2px] right-[2px] top-1/2 h-[3px] -translate-y-1/2 rounded-full" style={{ background: bar }} />
         </span>
         <span className="flex min-w-0 items-baseline gap-2">
-          <span className={`font-display ${soon ? 'font-medium text-muted' : 'font-bold'}`}>{rung.name}</span>
+          <span className={`font-display text-body ${soon ? 'text-muted' : 'font-semibold'}`}>{rung.name}</span>
           <span className="label text-muted">{rung.cefr}</span>
           {here && <span className="sr-only">· {t('home.youAreHere')}</span>}
         </span>

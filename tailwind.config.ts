@@ -23,6 +23,7 @@ const config: Config = {
       'board-2': v('board-2'),
       'board-ink': v('board-ink'),
       'board-muted': v('board-muted'),
+      brass: v('brass'),
       rung: v('rung'),
       'rung-soft': v('rung-soft'),
       good: v('good'),
@@ -37,7 +38,7 @@ const config: Config = {
       'hard-soft': v('hard-soft'),
     },
     fontFamily: {
-      display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+      display: ['var(--font-display)', 'Georgia', 'serif'],
       body: ['var(--font-body)', 'system-ui', 'sans-serif'],
       mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
     },
@@ -50,6 +51,7 @@ const config: Config = {
       small: ['var(--t-small)', { lineHeight: '1.5' }],
       label: ['var(--t-label)', { lineHeight: '1.3', letterSpacing: '0.1em' }],
       tab: ['var(--t-tab)', { lineHeight: '1.2' }],
+      card: ['var(--t-card)', { lineHeight: '1.15' }],
       wordmark: ['var(--t-wordmark)', { lineHeight: '1', letterSpacing: '-0.01em' }],
     },
     spacing: {
