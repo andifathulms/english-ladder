@@ -85,7 +85,7 @@ const Example = z
 
 /** One pronunciation point: a label, words to play, and a short tip. */
 const Sound = z
-  .object({ focus: z.string().min(1), words: z.array(z.string().min(1)).min(1).max(4), tip: Bilingual })
+  .object({ focus: z.string().min(1), words: z.array(z.string().min(1)).min(1).max(6), tip: Bilingual })
   .strict();
 
 /** A short exchange showing the structure in use. */
@@ -131,6 +131,8 @@ export const RungSchema = z
     cefr: z.string(),
     explain_lang: z.enum(['id', 'mixed', 'en']),
     status: z.enum(['live', 'soon']),
+    /** An optional rung (Starter) never becomes the learner's current rung on its own. */
+    optional: z.boolean().default(false),
     lessons: z.number().int(),
     description: Bilingual,
     topics: z.array(z.string()).min(1),
@@ -139,7 +141,7 @@ export const RungSchema = z
   })
   .strict();
 
-export const CurriculumSchema = z.object({ rungs: z.array(RungSchema).length(9) }).strict();
+export const CurriculumSchema = z.object({ rungs: z.array(RungSchema).min(1) }).strict();
 
 export const TestPoolSchema = z
   .object({
@@ -162,6 +164,9 @@ export const NounSchema = z
   .strict();
 export const NounsSchema = z.array(NounSchema).min(1);
 
-export const LexiconSchema = z.record(z.array(z.string()));
+/** Words per rung. An entry may be one word or a flow list of words, for compact groups. */
+export const LexiconSchema = z.record(
+  z.array(z.union([z.string(), z.array(z.string())])).transform((xs) => xs.flat().map(String)),
+);
 
 export const SECTION_HEADINGS = ['concept.id', 'concept.en', 'contrast.id', 'contrast.en'] as const;

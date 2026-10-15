@@ -1,5 +1,21 @@
-# Single source of truth for the ladder. Bottom (easy-1) to top (hard-3).
+# Single source of truth for the ladder. Bottom (starter) to top (hard-3).
 rungs:
+  # Optional floor for absolute beginners: sounds, letters, numbers, time and survival phrases.
+  - id: starter
+    name: Starter
+    tier: easy
+    cefr: Pre-A1
+    explain_lang: id
+    status: live
+    optional: true
+    lessons: 8
+    description:
+      id: "Sebelum Easy 1: bunyi bahasa Inggris, huruf, angka, harga, jam, dan kalimat penyelamat."
+      en: "Before Easy 1: English sounds, letters, numbers, prices, time, and phrases that rescue a conversation."
+    topics: [greetings, the alphabet, numbers to 100, prices and big numbers, time and days, consonant sounds, long and short vowels, survival phrases]
+    threads: [greetings, sounds, numbers, time, survival]
+    inventory: [greetings, alphabet, numbers, money, time, sounds-consonants, sounds-vowels, survival-chunks]
+
   - id: easy-1
     name: Easy 1
     tier: easy

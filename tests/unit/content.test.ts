@@ -53,10 +53,11 @@ describe('check item schema', () => {
 });
 
 describe('content loaders', () => {
-  it('loads nine rungs, Easy 1 live at the bottom', () => {
+  it('loads ten rungs: an optional Starter under Easy 1', () => {
     const rungs = getCurriculum();
-    expect(rungs).toHaveLength(9);
-    expect(rungs[0]).toMatchObject({ id: 'easy-1', status: 'live' });
+    expect(rungs).toHaveLength(10);
+    expect(rungs[0]).toMatchObject({ id: 'starter', status: 'live', optional: true });
+    expect(rungs[1]).toMatchObject({ id: 'easy-1', status: 'live', optional: false });
   });
   it('parses Easy 1 lessons and summarises them', () => {
     const lessons = getLessons('easy-1', { includeDrafts: true });
@@ -102,5 +103,20 @@ describe('Easy 1 content', () => {
     expect(nouns.length).toBeGreaterThanOrEqual(120);
     expect(nouns.find((n) => n.word === 'hour')?.initial_sound).toBe('vowel');
     expect(nouns.find((n) => n.word === 'university')?.initial_sound).toBe('consonant');
+  });
+});
+
+describe('Starter content', () => {
+  const lessons = getLessons('starter', { includeDrafts: true });
+  it('has eight draft lessons chained by next', () => {
+    expect(lessons.map((l) => l.order)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+    expect(lessons.every((l) => l.status === 'draft')).toBe(true);
+    lessons.slice(0, -1).forEach((l, i) => expect(l.next).toBe(lessons[i + 1].id));
+  });
+  it('draws a 12-item test with every lesson represented', () => {
+    const pool = getTestPool('starter')!;
+    const drawn = drawTest(pool.items, 7, pool.draw);
+    expect(drawn).toHaveLength(12);
+    expect(new Set(drawn.map((i) => i.from)).size).toBe(8);
   });
 });

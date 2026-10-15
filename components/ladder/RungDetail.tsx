@@ -17,10 +17,12 @@ type Props = {
   rungs: Rung[];
   lessons: LessonSummary[];
   progress: ProgressState;
-  hasTest: boolean;
+  test: TestInfo | null;
 };
 
-export function RungDetail({ rung, rungs, lessons, progress, hasTest }: Props) {
+export type TestInfo = { draw: number; pass: number };
+
+export function RungDetail({ rung, rungs, lessons, progress, test }: Props) {
   const { t, lang } = useT();
   const mine = lessons.filter((l) => l.rung === rung.id).sort((a, b) => a.order - b.order);
   const tests = progress.rungs[rung.id]?.tests ?? [];
@@ -100,7 +102,7 @@ export function RungDetail({ rung, rungs, lessons, progress, hasTest }: Props) {
               ))}
             </ol>
           )}
-          {hasTest && (
+          {test && (
             <Link
               href={testHref(rung.id)}
               className={`mt-3 flex min-h-[72px] items-center gap-4 rounded-lg p-4 text-ink no-underline transition-colors duration-quick ${
@@ -116,7 +118,8 @@ export function RungDetail({ rung, rungs, lessons, progress, hasTest }: Props) {
               <span className="flex min-w-0 flex-1 flex-col">
                 <span className="font-display text-card font-medium">{t('rung.test')}</span>
                 <span className="text-small text-muted tnum">
-                  {t('rung.testMeta')} · {best !== null ? t('rung.testBest', { n: best }) : t('rung.testAlways')}
+                  {t('rung.testMeta', { n: test.draw, pass: test.pass })} ·{' '}
+                  {best !== null ? t('rung.testBest', { n: best, total: test.draw }) : t('rung.testAlways')}
                 </span>
               </span>
               <IconChevron className="shrink-0 text-muted" />

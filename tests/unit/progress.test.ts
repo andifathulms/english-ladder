@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as store from '@/lib/progress/store';
 import { migrate, MigrationError } from '@/lib/progress/migrations';
 import { STORAGE_KEY, SCHEMA_VERSION } from '@/lib/progress/constants';
-import { continueTarget, lessonState, weekDays } from '@/lib/progress/derive';
+import { continueTarget, currentRung, lessonState, weekDays } from '@/lib/progress/derive';
 import { emptyState } from '@/lib/progress/defaults';
 import type { LessonSummary, Rung } from '@/lib/types';
 
@@ -82,7 +82,7 @@ describe('store', () => {
 });
 
 describe('derived state', () => {
-  const rung = { id: 'easy-1', name: 'Easy 1', status: 'live', lessons: 8, tier: 'easy', cefr: 'A1', explain_lang: 'id', description: { id: '', en: '' }, topics: ['x'], threads: [], inventory: [] } as Rung;
+  const rung = { id: 'easy-1', name: 'Easy 1', status: 'live', lessons: 8, tier: 'easy', cefr: 'A1', explain_lang: 'id', description: { id: '', en: '' }, topics: ['x'], threads: [], inventory: [], optional: false } as Rung;
   const mk = (n: number): LessonSummary => ({
     id: `L${n}`,
     slug: `0${n}-x`,
@@ -112,6 +112,26 @@ describe('derived state', () => {
     const p = emptyState();
     p.lessons.L1 = { step: 5, furthest: 5, completed: true, lastOpened: 5 };
     expect(continueTarget([rung], lessons, p)).toMatchObject({ kind: 'lesson', lesson: { id: 'L2' }, step: 0 });
+  });
+
+  describe('with an optional Starter rung', () => {
+    const starter = { ...rung, id: 'starter', name: 'Starter', optional: true } as Rung;
+    const st = (n: number): LessonSummary => ({ ...mk(n), id: `S${n}`, rung: 'starter' });
+    const all = [st(1), st(2), ...lessons];
+    it('is never the current rung by itself', () => {
+      expect(currentRung([starter, rung], emptyState()).id).toBe('easy-1');
+    });
+    it('keeps a learner in Starter after finishing a Starter lesson', () => {
+      const p = emptyState();
+      p.lessons.S1 = { step: 5, furthest: 5, completed: true, lastOpened: 5 };
+      expect(continueTarget([starter, rung], all, p)).toMatchObject({ kind: 'lesson', lesson: { id: 'S2' } });
+    });
+    it('moves on to Easy 1 once Starter is finished', () => {
+      const p = emptyState();
+      p.lessons.S1 = { step: 5, furthest: 5, completed: true, lastOpened: 5 };
+      p.lessons.S2 = { step: 5, furthest: 5, completed: true, lastOpened: 6 };
+      expect(continueTarget([starter, rung], all, p)).toMatchObject({ kind: 'lesson', lesson: { id: 'L1' } });
+    });
   });
 
   it('marks lessons with first-try misses as to review', () => {

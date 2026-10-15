@@ -26,8 +26,8 @@ export const id = {
   'rung.notStarted': 'belum mulai',
   'rung.lessons': 'Pelajaran',
   'rung.test': 'Tes anak tangga',
-  'rung.testMeta': '16 soal · lulus 12',
-  'rung.testBest': 'skor terbaik {n}/16',
+  'rung.testMeta': '{n} soal · lulus {pass}',
+  'rung.testBest': 'skor terbaik {n}/{total}',
   'rung.explainLang': 'Bahasa penjelasan',
   'rung.explain.id': 'Bahasa Indonesia, contoh dalam bahasa Inggris',
   'rung.explain.mixed': 'Campuran, bahasa Inggris dulu',
@@ -85,7 +85,7 @@ export const id = {
 
   'test.title': 'Tes {rung}',
   'test.intro':
-    '16 soal dari semua pelajaran. Tidak ada waktu, tidak ada nilai di tengah jalan. Lulus dengan 12 jawaban benar.',
+    '{n} soal dari semua pelajaran. Tidak ada waktu, tidak ada nilai di tengah jalan. Lulus dengan {pass} jawaban benar.',
   'test.start': 'Mulai tes',
   'test.finish': 'Lihat hasil',
   'test.pass': 'Lulus. Kamu sudah menaiki {rung}.',
@@ -213,6 +213,8 @@ export const id = {
   'check.listenPrompt': 'Dengarkan, lalu pilih kalimat yang kamu dengar.',
   'check.listenPlay': 'Putar kalimat',
   'check.listenNoAudio': 'Browser ini tidak punya suara bahasa Inggris. Baca kalimat ini, lalu pilih yang sama:',
+  'home.starterLink': 'Benar-benar baru? Mulai dari Starter: bunyi, huruf, angka dan sapaan.',
+  'rung.optional': 'pilihan',
 } as const;
 
 export type StringKey = keyof typeof id;

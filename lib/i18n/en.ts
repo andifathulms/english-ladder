@@ -27,8 +27,8 @@ export const en: Record<StringKey, string> = {
   'rung.notStarted': 'not started',
   'rung.lessons': 'Lessons',
   'rung.test': 'Rung test',
-  'rung.testMeta': '16 questions · pass 12',
-  'rung.testBest': 'best score {n}/16',
+  'rung.testMeta': '{n} questions · pass {pass}',
+  'rung.testBest': 'best score {n}/{total}',
   'rung.explainLang': 'Explanation language',
   'rung.explain.id': 'Indonesian, with English examples',
   'rung.explain.mixed': 'Mixed, English first',
@@ -86,7 +86,7 @@ export const en: Record<StringKey, string> = {
 
   'test.title': '{rung} test',
   'test.intro':
-    '16 questions from all the lessons. No timer and no marks along the way. Pass with 12 correct.',
+    '{n} questions from all the lessons. No timer and no marks along the way. Pass with {pass} correct.',
   'test.start': 'Start the test',
   'test.finish': 'See results',
   'test.pass': "Passed. You've climbed {rung}.",
@@ -214,4 +214,6 @@ export const en: Record<StringKey, string> = {
   'check.listenPrompt': 'Listen, then choose the sentence you hear.',
   'check.listenPlay': 'Play the sentence',
   'check.listenNoAudio': 'This browser has no English voice. Read this sentence, then choose the same one:',
+  'home.starterLink': 'Completely new? Begin with Starter: sounds, letters, numbers and greetings.',
+  'rung.optional': 'optional',
 };

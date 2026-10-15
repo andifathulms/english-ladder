@@ -9,7 +9,7 @@ const copy = {
   id: [
     {
       h: 'Apa ini',
-      p: 'English Ladder adalah kursus bahasa Inggris bertingkat untuk penutur bahasa Indonesia. Ada sembilan anak tangga, dari pemula sampai mahir. Tiap pelajaran pendek, menunjukkan tata bahasa lewat gambar yang bisa kamu sentuh, dan selalu bilang apa yang dilakukan bahasa Indonesia secara berbeda.',
+      p: 'English Ladder adalah kursus bahasa Inggris bertingkat untuk penutur bahasa Indonesia. Ada sembilan anak tangga dari pemula sampai mahir, ditambah Starter untuk yang benar-benar baru mulai. Tiap pelajaran pendek, menunjukkan tata bahasa lewat gambar yang bisa kamu sentuh, dan selalu bilang apa yang dilakukan bahasa Indonesia secara berbeda.',
     },
     {
       h: 'Tentang CEFR',
@@ -31,7 +31,7 @@ const copy = {
   en: [
     {
       h: 'What this is',
-      p: 'English Ladder is a levelled English course for Indonesian speakers. Nine rungs take you from beginner to advanced. Each lesson is short, shows grammar through visuals you can touch, and always says what Indonesian does differently.',
+      p: 'English Ladder is a levelled English course for Indonesian speakers. Nine rungs take you from beginner to advanced, plus an optional Starter for complete beginners. Each lesson is short, shows grammar through visuals you can touch, and always says what Indonesian does differently.',
     },
     {
       h: 'About CEFR',

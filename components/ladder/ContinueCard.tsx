@@ -49,7 +49,9 @@ function StepDots({ step }: { step: number }) {
 }
 
 /** The board: the single next thing to do, quoting the exact sentence where you stopped. */
-export function ContinueCard({ target, firstLessonHref, rungs }: { target: ContinueTarget; firstLessonHref: string | null; rungs: Rung[] }) {
+type CardProps = { target: ContinueTarget; firstLessonHref: string | null; starterHref?: string | null; rungs: Rung[] };
+
+export function ContinueCard({ target, firstLessonHref, starterHref, rungs }: CardProps) {
   const { t, lang } = useT();
   const shell = 'board flex flex-col gap-4 p-6 min-[900px]:gap-5 min-[900px]:p-9';
 
@@ -68,6 +70,11 @@ export function ContinueCard({ target, firstLessonHref, rungs }: { target: Conti
               {t('home.start')} <IconArrowRight />
             </Link>
           </div>
+        )}
+        {starterHref && (
+          <Link href={starterHref} className="self-start text-small text-board-muted underline underline-offset-4 hover:text-board-ink">
+            {t('home.starterLink')}
+          </Link>
         )}
       </section>
     );

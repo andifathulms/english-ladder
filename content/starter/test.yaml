@@ -1,0 +1,37 @@
+# Starter rung test pool. The test draws 12 with a seeded shuffle, at least one per lesson.
+# Ids are permanent: never rename them after release.
+rung: starter
+draw: 12
+pass: 9
+items:
+  # 1 · greetings
+  - { id: st-t-01, from: starter-01-hello, type: gap, cue: "Jam 3 sore, kamu bertemu guru.", prompt: "___, Bu Siti.", options: [Good afternoon, Good evening, Good night], answer: Good afternoon, why: { id: "Setelah jam 12 sampai sekitar jam 5: Good afternoon.", en: "From midday to about 5 pm: Good afternoon." } }
+  - { id: st-t-02, from: starter-01-hello, type: choice, cue: "Jam 10 malam, kamu pamit pulang.", prompt: "You leave. You say:", options: ["Good night.", "Good evening."], answer: "Good night.", why: { id: "Pamit malam: Good night.", en: "Leaving at night: Good night." } }
+
+  # 2 · alphabet
+  - { id: st-t-03, from: starter-02-alphabet, type: choice, cue: "Huruf mana yang bunyinya seperti day?", prompt: "It sounds like day:", options: [A, E, I], answer: A, why: { id: "A dibaca /eɪ/.", en: "A is /eɪ/." } }
+  - { id: st-t-04, from: starter-02-alphabet, type: gap, cue: "budi@mail.com", prompt: "budi at mail ___ com", options: [dot, point, at], answer: dot, why: { id: "Titik dalam alamat: dot.", en: "The full stop in an address: dot." } }
+
+  # 3 · numbers
+  - { id: st-t-05, from: starter-03-numbers, type: listen, audio: "fourteen", options: [fourteen, forty], answer: fourteen, why: { id: "Tekanan di akhir: four-TEEN.", en: "Stress at the end: four-TEEN." } }
+  - { id: st-t-06, from: starter-03-numbers, type: choice, cue: "90", prompt: "90 =", options: [ninety, nineteen, ninty], answer: ninety, why: { id: "Nine + ty: ninety, dengan e.", en: "Nine + ty: ninety, keeping the e." } }
+
+  # 4 · money
+  - { id: st-t-07, from: starter-04-money, type: gap, cue: "Rp200.000", prompt: "two hundred ___ rupiah", options: [thousand, thousands, million], answer: thousand, why: { id: "Setelah angka, thousand tanpa -s.", en: "After a number, thousand has no -s." } }
+  - { id: st-t-08, from: starter-04-money, type: listen, audio: "Two point five kilos.", options: ["2,5 kg", "25 kg", "2.500 kg"], answer: "2,5 kg", why: { id: "Point = koma desimal.", en: "Point = the decimal mark." } }
+
+  # 5 · time
+  - { id: st-t-09, from: starter-05-time, type: choice, cue: "Jam setengah sepuluh (9:30).", prompt: "9:30 =", options: [nine thirty, half nine, half past ten], answer: nine thirty, why: { id: "Paling aman: sebut angkanya. Di Inggris half nine juga 9:30, tapi mudah tertukar.", en: "Safest: say the numbers. In the UK half nine is also 9:30, but it is easy to confuse." } }
+  - { id: st-t-10, from: starter-05-time, type: gap, cue: "Sampai ketemu hari Jumat.", prompt: "See you ___ Friday.", options: [on, in, at], answer: on, why: { id: "Hari memakai on.", en: "Days take on." } }
+
+  # 6 · consonant sounds
+  - { id: st-t-11, from: starter-06-sounds, type: listen, audio: "think", options: [think, sink], answer: think, why: { id: "Think diawali /θ/.", en: "Think starts with /θ/." } }
+  - { id: st-t-12, from: starter-06-sounds, type: listen, audio: "video", options: [video, fideo], answer: video, why: { id: "V bersuara: video.", en: "A voiced v: video." } }
+
+  # 7 · vowels
+  - { id: st-t-13, from: starter-07-vowels, type: listen, audio: "seat", options: [sit, seat], answer: seat, why: { id: "Seat panjang: /iː/.", en: "Seat is long: /iː/." } }
+  - { id: st-t-14, from: starter-07-vowels, type: gap, cue: "Aku pergi jam lima.", prompt: "I ___ at five.", options: [leave, live], answer: leave, why: { id: "Pergi = leave, dengan vokal panjang.", en: "Pergi = leave, with a long vowel." } }
+
+  # 8 · survival
+  - { id: st-t-15, from: starter-08-survival, type: choice, cue: "Kamu tidak paham. Bilang apa?", prompt: "What do you say?", options: ["I don't understand.", "I don't know you.", "Repeat!"], answer: "I don't understand.", why: { id: "Tidak paham: I don't understand.", en: "Not following: I don't understand." } }
+  - { id: st-t-16, from: starter-08-survival, type: order, cue: "Artinya apa?", tiles: [it, What, mean?, does], answer: [What, does, it, mean?], why: { id: "Hafalkan sebagai satu kalimat: What does it mean?", en: "Learn it as one sentence: What does it mean?" } }

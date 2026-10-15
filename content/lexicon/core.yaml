@@ -1,5 +1,17 @@
 # Words allowed in English lesson text per rung, on top of the glossaries of this and earlier lessons.
 # content:check flags anything else (errors in reviewed lessons, warnings in drafts).
+starter:
+  # Fixed chunks, function words and numbers used in Starter lessons. Easy 1 inherits these.
+  - [a, an, the, and, at, in, on, for, with, so, too, like, it, "it's", is, am, are, "i'm", i, you, my, they, this, that, what, which, how, do, does, "don't", can]
+  - [hi, fine, ok, say, arrive, arriving, pm, sounds, starts, word, repeat, hear, know, comma, have, busy, hours]
+  - [one, two, three, four, five, six, seven, eight, nine, ten, fourteen, sixteen, seventeen, eighteen, sixty, seventy, eighty, ninety]
+  - [day, jeep, jay, why, see, mail, com, rp, kg, ferry, sue, sip, sink, th]
+  # Names, places and Indonesian words that appear inside English lines
+  - [rina, budi, dewi, andi, putu, siti, yohanes, mei, bu, pak, warung, bandung, kamis]
+  # Single letters, for spelling
+  - [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z]
+  # Deliberate errors shown in wrong sentences and distractors
+  - [fourty, ninty, fideo, tink, ge, wa]
 easy-1:
   # to be and contractions
   - am

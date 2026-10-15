@@ -7,7 +7,7 @@
 
 ## 1. Summary
 
-English Ladder is a levelled English course for Indonesian speakers. It runs from absolute beginner (CEFR A1) to advanced polish (C1) across nine rungs: **Easy 1–3, Medium 1–3, Hard 1–3**.
+English Ladder is a levelled English course for Indonesian speakers. It runs from absolute beginner (CEFR A1) to advanced polish (C1) across nine rungs: **Easy 1–3, Medium 1–3, Hard 1–3**, with an optional **Starter** rung below Easy 1 for complete beginners (sounds, letters, numbers, prices, time, survival phrases).
 
 What sets it apart from existing courses:
 
@@ -96,7 +96,7 @@ Each lesson also has a **glossary** of 6–12 words it introduces (word, Indones
 ## 5. Features
 
 ### 5.1 Home: the Ladder
-- Shows all nine rungs as a vertical ladder, Easy 1 at the bottom.
+- Shows every rung as a vertical ladder: the optional Starter at the bottom, then Easy 1. New learners start at Easy 1, with a link to Starter.
 - The learner's position is marked on the rung they are on.
 - Rung states: *not started*, *in progress (n/8)*, *climbed* (test passed), *coming soon*.
 - A primary **Continue** action resumes the exact lesson and step. If nothing has started: **Mulai dari Easy 1**.

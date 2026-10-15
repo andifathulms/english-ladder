@@ -40,9 +40,12 @@ export function rungState(r: Rung, lessons: LessonSummary[], p: ProgressState): 
   return touched ? { kind: 'progress', done } : { kind: 'new' };
 }
 
-/** The rung the learner is on: the first live rung not yet climbed, else the last live one. */
+/**
+ * The rung the learner is on: the first live rung not yet climbed, else the last live one.
+ * Optional rungs (Starter) are skipped; a learner working in one continues there via continueTarget.
+ */
 export function currentRung(rungs: Rung[], p: ProgressState): Rung {
-  const live = rungs.filter((r) => r.status === 'live');
+  const live = rungs.filter((r) => r.status === 'live' && !r.optional);
   return live.find((r) => !p.rungs[r.id]?.climbed) ?? live[live.length - 1] ?? rungs[0];
 }
 
@@ -70,9 +73,13 @@ export function continueTarget(
     return { kind: 'lesson', lesson: recent, step: lp.step, text };
   }
 
-  const rung = currentRung(rungs, p);
+  // Stay in the rung of the last lesson while it has unfinished lessons, else move to the current rung.
+  const recentRung = recent && rungs.find((r) => r.id === recent.rung);
+  const unfinished = (id: string) => lessons.some((l) => l.rung === id && !p.lessons[l.id]?.completed);
+  const rung =
+    recentRung && !p.rungs[recentRung.id]?.climbed && unfinished(recentRung.id) ? recentRung : currentRung(rungs, p);
   const inRung = lessons.filter((l) => l.rung === rung.id).sort((a, b) => a.order - b.order);
-  const after = recent ? inRung.filter((l) => l.order > recent.order) : inRung;
+  const after = recent && recent.rung === rung.id ? inRung.filter((l) => l.order > recent.order) : inRung;
   const next =
     after.find((l) => !p.lessons[l.id]?.completed) ?? inRung.find((l) => !p.lessons[l.id]?.completed);
   if (next) return { kind: 'lesson', lesson: next, step: 0, text: next.resume[0] };

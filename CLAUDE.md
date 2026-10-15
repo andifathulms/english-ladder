@@ -6,7 +6,7 @@ Guidance for Claude Code working in this repository. Read `PRD.md` for what to b
 
 ## 1. What this is
 
-A static, levelled English course for Indonesian speakers. Nine rungs (Easy 1 → Hard 3, CEFR A1 → C1). v1 ships the full app shell plus **Easy 1** content: 10 lessons, a rung test, two interactive visual components (place scene, noun builder), quick review, My words, settings, and offline support. Progress is stored only in the learner's browser. Deployed to GitHub Pages.
+A static, levelled English course for Indonesian speakers. Nine rungs (Easy 1 → Hard 3, CEFR A1 → C1) plus an optional **Starter** rung (pre-A1: sounds, letters, numbers, time, survival phrases) underneath. v1 ships the full app shell plus **Easy 1** content: 10 lessons, a rung test, two interactive visual components (place scene, noun builder), quick review, My words, settings, and offline support. Progress is stored only in the learner's browser. Deployed to GitHub Pages.
 
 ---
 
@@ -109,7 +109,7 @@ rungs:
     description: { id: "...", en: "..." }
     topics: [to be, he/she/it/they, a/an and plurals, this/that, have/has, possessives, prepositions of place, to be questions]
     inventory: [be-present, subject-pronouns, articles-a-an, plural-regular, plural-irregular-core, demonstratives, have-present, possessive-adj, possessive-s, prep-place-basic, be-questions-negatives]
-  # … all nine rungs, later ones with status: soon
+  # … all rungs, later ones with status: soon. `optional: true` (Starter) never becomes the current rung on its own.
 ```
 
 ### 5.2 Lesson file `content/<rung>/<nn>-<slug>.md`
@@ -144,7 +144,7 @@ glossary:
 # Optional strand cards (one each, 1–2 sentences):
 sound:                            # Examples step: one pronunciation point
   focus: "weak of, to"
-  words: ["in front of", "next to"]   # 1–4 things to play; not lexicon-linted
+  words: ["in front of", "next to"]   # 1–6 things to play; not lexicon-linted
   tip: { id: "Of dan to dibaca lemah …", en: "Of and to are weak …" }
 talk:                             # Examples step: 2–4 lines, lexicon-linted
   - { who: Andi, en: "Where's my phone?", id: "HP-ku di mana?" }

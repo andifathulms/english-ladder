@@ -64,6 +64,7 @@ function LadderRow({ rung, state, here }: { rung: Rung; state: RungState; here: 
         <span className="flex min-w-0 items-baseline gap-2">
           <span className={`font-display text-body ${soon ? 'text-muted' : 'font-semibold'}`}>{rung.name}</span>
           <span className="label text-muted">{rung.cefr}</span>
+          {rung.optional && <span className="label text-muted">· {t('rung.optional')}</span>}
           {here && <span className="sr-only">· {t('home.youAreHere')}</span>}
         </span>
         <span className="flex items-center justify-end gap-2">

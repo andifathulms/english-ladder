@@ -79,9 +79,9 @@ export function TestRunner({ rung, next, pool, lessons, nouns }: Props) {
         {header(null)}
         <main className="page flex max-w-lesson flex-1 flex-col gap-5 py-7">
           <h1 className="text-h1">{t('test.title', { rung: rung.name })}</h1>
-          <p className="max-w-measure">{t('test.intro')}</p>
+          <p className="max-w-measure">{t('test.intro', { n: pool.draw, pass: pool.pass })}</p>
           {tests.length > 0 && (
-            <p className="label tnum text-muted">{t('rung.testBest', { n: Math.max(...tests.map((x) => x.score)) })}</p>
+            <p className="label tnum text-muted">{t('rung.testBest', { n: Math.max(...tests.map((x) => x.score)), total: pool.draw })}</p>
           )}
         </main>
         <BottomActionBar>

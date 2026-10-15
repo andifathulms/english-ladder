@@ -25,9 +25,12 @@ export function HomeView({ rungs, lessons }: Props) {
   const progress = useProgress();
   const hydrated = useHydrated();
   const { t, lang } = useT();
-  const here = currentRung(rungs, progress);
   const target = continueTarget(rungs, lessons, progress);
-  const first = lessons.filter((l) => l.rung === rungs[0].id).sort((a, b) => a.order - b.order)[0];
+  // While a learner works in an optional rung (Starter), the board and strip follow that rung.
+  const here = (target.kind === 'lesson' && rungs.find((r) => r.id === target.lesson.rung)) || currentRung(rungs, progress);
+  const main = rungs.find((r) => r.status === 'live' && !r.optional) ?? rungs[0];
+  const first = lessons.filter((l) => l.rung === main.id).sort((a, b) => a.order - b.order)[0];
+  const starter = rungs.find((r) => r.optional && r.status === 'live');
   const showReview = completedCount(lessons, progress) >= 2;
   const mine = lessons.filter((l) => l.rung === here.id).sort((a, b) => a.order - b.order);
   const done = doneCount(here.id, lessons, progress);
@@ -58,7 +61,12 @@ export function HomeView({ rungs, lessons }: Props) {
             </h1>
           </header>
 
-          <ContinueCard target={target} firstLessonHref={first ? lessonHref(first) : null} rungs={rungs} />
+          <ContinueCard
+            target={target}
+            firstLessonHref={first ? lessonHref(first) : null}
+            starterHref={starter ? rungHref(starter.id) : null}
+            rungs={rungs}
+          />
 
           {mine.length > 0 && (
             <section aria-labelledby="rung-lessons" className="flex flex-col gap-3">

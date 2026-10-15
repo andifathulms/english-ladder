@@ -21,6 +21,13 @@ export const INVENTORY_DETECTORS: Record<string, RegExp> = {
 
 /** Untaught grammar per rung (structure lint). */
 const STRUCTURE_RULES: Record<string, { name: string; re: RegExp }[]> = {
+  // Starter teaches fixed chunks (Can you…? How do you…?), so only tense is checked.
+  starter: [
+    { name: 'past -ed form', re: /\b(?!(?:red|bed|need|tired|bored|married|hundred|speed|seed|shed)\b)[a-z]{2,}ed\b/i },
+    { name: 'will', re: /\b(will|won't|'ll)\b/i },
+    { name: 'going to', re: /\bgoing to\b/i },
+    { name: 'past of be', re: /\b(was|were|wasn't|weren't)\b/i },
+  ],
   'easy-1': [
     { name: 'past -ed form', re: /\b(?!(?:red|bed|need|tired|bored|married|hundred|speed|seed|shed)\b)[a-z]{2,}ed\b/i },
     { name: 'will', re: /\b(will|won't|'ll)\b/i },
