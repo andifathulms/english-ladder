@@ -74,6 +74,14 @@ glossary:
   - { en: new, id: "baru" }
   - { en: near, id: "dekat" }
   - { en: far, id: "jauh" }
+sound:
+  focus: "/ɪ/ vs /iː/"
+  words: [this, these, "This is a book.", "These are books."]
+  tip: { id: "This pendek dan diakhiri /s/. These panjang, /iː/, dan diakhiri /z/. Bahasa Indonesia tidak membedakan panjang vokal, jadi latih pasangan ini dengan suara keras.", en: "This is short and ends in /s/. These is long, /iː/, and ends in /z/. Indonesian has no long vowels, so practise this pair out loud." }
+talk:
+  - { who: Mei, en: "This one, please.", id: "Yang ini, ya." }
+  - { who: Pak Andi, en: "This one? OK.", id: "Yang ini? Oke." }
+words: { id: "*Yang ini* dan *yang itu* menjadi **this one** dan **that one**. Sangat berguna saat belanja.", en: "*Yang ini* and *yang itu* become **this one** and **that one**. Very useful when shopping." }
 next: easy1-06-adjective-noun
 ---
 

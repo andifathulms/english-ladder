@@ -76,6 +76,15 @@ glossary:
   - { en: cold, id: "dingin" }
   - { en: sad, id: "sedih" }
   - { en: sleepy, id: "ngantuk" }
+sound:
+  focus: "/ð/ they"
+  words: [they, day, "They are late."]
+  tip: { id: "They diawali /ð/: ujung lidah di antara gigi, lalu bersuara. Kalau diucapkan /d/, terdengar seperti day (hari).", en: "They starts with /ð/: the tip of your tongue between your teeth, with voice. Said as /d/, it sounds like day." }
+talk:
+  - { who: Dewi, en: "Andi? He's late.", id: "Andi? Dia telat." }
+  - { who: Putu, en: "And Rina and Siti?", id: "Kalau Rina dan Siti?" }
+  - { who: Dewi, en: "They're here.", id: "Mereka sudah di sini." }
+words: { id: "**Hot** juga berarti *pedas*: *The sambal is hot* bisa soal cabainya, bukan suhunya.", en: "**Hot** also means *pedas*: *The sambal is hot* can be about the chilli, not the temperature." }
 next: easy1-03-articles-plurals
 ---
 

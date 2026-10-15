@@ -74,6 +74,15 @@ glossary:
   - { en: question, id: "pertanyaan" }
   - { en: answer, id: "jawaban" }
   - { en: friend, id: "teman" }
+sound:
+  focus: "rise ↗"
+  words: ["Are you ready?", "Yes, I am."]
+  tip: { id: "Pertanyaan ya/tidak naik di akhir: Are you ready? ↗. Dalam jawaban pendek, kata kerjanya ditekan: Yes, I AM.", en: "Yes/no questions rise at the end: Are you ready? ↗. In a short answer, the verb is stressed: Yes, I AM." }
+talk:
+  - { who: Rina, en: "You aren't hungry?", id: "Kamu nggak lapar?" }
+  - { who: Budi, en: "No, I'm not.", id: "Iya, nggak.", note: { id: "Bahasa Inggris menjawab faktanya. Tidak lapar = No, I'm not, walaupun bahasa Indonesia bilang iya.", en: "English answers the fact. Not hungry = No, I'm not, even where Indonesian says iya." } }
+  - { who: Rina, en: "Not yet?", id: "Belum?" }
+words: { id: "*Belum* = **not yet**. *Bukan* dan *nggak* sama-sama **no** atau **not**.", en: "*Belum* = **not yet**. *Bukan* and *nggak* are both **no** or **not**." }
 next: null
 ---
 

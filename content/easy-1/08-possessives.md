@@ -82,6 +82,15 @@ glossary:
   - { en: phone, id: "HP" }
   - { en: house, id: "rumah" }
   - { en: blue, id: "biru" }
+sound:
+  focus: "'s: /z/ /s/ /ɪz/"
+  words: ["Rina's", "the cat's", "Yohanes's"]
+  tip: { id: "'s mengikuti bunyi jamak: Rina's /z/, the cat's /s/, Yohanes's /ɪz/. Their, there dan they're bunyinya sama persis.", en: "'s follows the plural sounds: Rina's /z/, the cat's /s/, Yohanes's /ɪz/. Their, there and they're sound exactly the same." }
+talk:
+  - { who: Budi, en: "What's your name?", id: "Namamu siapa?" }
+  - { who: Dewi, en: "I'm Dewi. And you?", id: "Aku Dewi. Kamu?", note: { id: "Saat bicara, I'm Dewi lebih umum daripada My name is Dewi.", en: "In conversation, I'm Dewi is more common than My name is Dewi." } }
+  - { who: Budi, en: "My name's Budi.", id: "Namaku Budi." }
+words: { id: "Peta *-nya*: *tasnya* = **his bag** atau **her bag**; *ekornya* (kucing) = **its tail**; *kuncinya* (yang kita maksud) = **the key**.", en: "The *-nya* map: *tasnya* = **his bag** or **her bag**; *ekornya* (a cat's) = **its tail**; *kuncinya* (the one we mean) = **the key**." }
 next: easy1-07-prepositions-place
 ---
 

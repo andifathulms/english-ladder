@@ -77,6 +77,14 @@ glossary:
   - { en: leg, id: "kaki" }
   - { en: three, id: "tiga" }
   - { en: four, id: "empat" }
+sound:
+  focus: "/v/ · /z/"
+  words: [have, has, "I have a question."]
+  tip: { id: "Have diakhiri /v/, bukan /f/: bibir bawah menyentuh gigi atas, lalu bersuara. Has diakhiri /z/.", en: "Have ends in /v/, not /f/: lower lip on your top teeth, with voice. Has ends in /z/." }
+talk:
+  - { who: Rina, en: "I have a question.", id: "Aku mau tanya." }
+  - { who: Bu Siti, en: "OK, Rina.", id: "Iya, Rina." }
+words: { id: "*Kaki* = **leg** dan **foot**; *tangan* = **arm** dan **hand**. Dan *kakak* atau *adik* menjadi **older** atau **younger sister** atau **brother**.", en: "*Kaki* = **leg** and **foot**; *tangan* = **arm** and **hand**. And *kakak* or *adik* become **older** or **younger sister** or **brother**." }
 next: easy1-06-possessives
 ---
 

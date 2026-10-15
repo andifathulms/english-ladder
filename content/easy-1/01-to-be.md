@@ -61,6 +61,12 @@ check:
     answer: [I, am, tired]
     accept: []
     why: { id: "Urutannya: siapa, am, lalu keadaan.", en: "The order is: who, am, then how." }
+  - id: e1-01-c6
+    type: listen
+    audio: "I'm tired."
+    options: ["I'm tired.", "I tired."]
+    answer: "I'm tired."
+    why: { id: "I'm terdengar pendek, tapi am-nya ada di sana.", en: "I'm sounds short, but the am is there." }
 glossary:
   - { en: happy, id: "senang" }
   - { en: tired, id: "capek" }
@@ -70,6 +76,15 @@ glossary:
   - { en: ready, id: "siap" }
   - { en: right, id: "benar" }
   - { en: sick, id: "sakit" }
+sound:
+  focus: "I'm · we're"
+  words: ["I'm ready.", "We're ready.", "You're right."]
+  tip: { id: "Saat bicara, am dan are biasanya dipendekkan. I'm cuma satu suku kata, begitu juga we're.", en: "In speech, am and are are usually shortened. I'm is just one syllable, and so is we're." }
+talk:
+  - { who: Rina, en: "Hi, Budi! How are you?", id: "Hai, Budi! Apa kabar?" }
+  - { who: Budi, en: "I'm fine, thanks. And you?", id: "Baik, makasih. Kamu?", note: { id: "How are you? itu sapaan, bukan pertanyaan soal kesehatan. Jawab singkat saja.", en: "How are you? is a greeting, not a health question. Keep the answer short." } }
+  - { who: Rina, en: "I'm tired!", id: "Capek!" }
+words: { id: "*Sakit* = **sick** (Amerika) atau **ill** (Inggris). Kalau maksudnya rasa sakit di badan, itu kata lain, **hurt**, yang datang di Easy 2.", en: "*Sakit* = **sick** (US) or **ill** (UK). For pain in your body, English uses another word, **hurt**, which comes in Easy 2." }
 next: easy1-02-pronouns
 ---
 

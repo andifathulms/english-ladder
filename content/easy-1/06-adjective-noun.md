@@ -59,6 +59,12 @@ check:
     options: [a, an]
     answer: an
     why: { id: "Kata sesudahnya old, diawali bunyi vokal: an.", en: "The next word is old, which starts with a vowel sound: an." }
+  - id: e1-adj-c6
+    type: listen
+    audio: "That is an old bus."
+    options: ["That is an old bus.", "That is a new bus."]
+    answer: "That is an old bus."
+    why: { id: "An menyambung ke old: an old.", en: "An joins onto old: an old." }
 glossary:
   - { en: big, id: "besar" }
   - { en: small, id: "kecil" }
@@ -67,6 +73,14 @@ glossary:
   - { en: red, id: "merah" }
   - { en: white, id: "putih" }
   - { en: day, id: "hari" }
+sound:
+  focus: "stress"
+  words: [a new book, a rice cooker]
+  tip: { id: "Dalam kata sifat + benda, tekanan jatuh di bendanya: a new BOOK. Dalam kata majemuk, tekanan di kata pertama: a RICE cooker.", en: "In describing word + thing, the stress falls on the thing: a new BOOK. In a compound, it falls on the first word: a RICE cooker." }
+talk:
+  - { who: Andi, en: "That's a big mosque!", id: "Masjidnya besar, ya!" }
+  - { who: Siti, en: "It's a new mosque.", id: "Itu masjid baru." }
+words: { id: "*Tua* dan *lama* sama-sama **old**: **an old man** (bapak tua) dan **an old phone** (HP lama).", en: "*Tua* and *lama* are both **old**: **an old man** and **an old phone**." }
 next: easy1-05-have-has
 ---
 

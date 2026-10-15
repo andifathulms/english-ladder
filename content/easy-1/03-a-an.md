@@ -75,6 +75,14 @@ glossary:
   - { en: egg, id: "telur" }
   - { en: hour, id: "jam (60 menit)" }
   - { en: university, id: "universitas" }
+sound:
+  focus: "a = /ə/"
+  words: [a book, a teacher, an umbrella]
+  tip: { id: "A dibaca pendek, /ə/, bukan \"ei\". An menyambung ke kata berikutnya: an umbrella terdengar seperti a-numbrella.", en: "A is a short /ə/, not \"ay\". An joins the next word: an umbrella sounds like a-numbrella." }
+talk:
+  - { who: Yohanes, en: "I'm a student. And you?", id: "Aku mahasiswa. Kamu?" }
+  - { who: Mei, en: "I'm an engineer.", id: "Aku insinyur." }
+words: { id: "*Jam* punya empat kata dalam bahasa Inggris: **hour** (60 menit), **clock** (jam dinding), **watch** (jam tangan) dan **o'clock** (pukul). *Jam tujuh* = **seven o'clock**.", en: "*Jam* has four English words: **hour** (60 minutes), **clock** (on the wall), **watch** (on your wrist) and **o'clock** (the time). *Jam tujuh* = **seven o'clock**." }
 next: easy1-04-plurals
 ---
 

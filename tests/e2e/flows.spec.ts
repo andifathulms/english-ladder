@@ -9,8 +9,9 @@ test('first visit → start Easy 1 → finish lesson 1 → continue card quotes 
   await expect(page.getByRole('heading', { name: 'I am, you are' })).toBeVisible();
 
   for (let s = 0; s < 4; s++) await next(page);
-  const items = Object.fromEntries(lessonItems('01-to-be.md').map((i) => [i.id, i]));
-  for (let i = 0; i < 5; i++) {
+  const list = lessonItems('01-to-be.md');
+  const items = Object.fromEntries(list.map((i) => [i.id, i]));
+  for (let i = 0; i < list.length; i++) {
     await answer(page, items);
     await next(page);
   }

@@ -43,6 +43,17 @@ easy-1:
   - siti
   - yohanes
   - mei
+  # fixed conversation chunks used in talk lines (taught as phrases, not grammar)
+  - hi
+  - how
+  - fine
+  - thanks
+  - please
+  - ok
+  - question
+  - "what's"
+  - "where's"
+  - yet
   # deliberate errors shown in wrong sentences
   - "amn't"
   - childrens

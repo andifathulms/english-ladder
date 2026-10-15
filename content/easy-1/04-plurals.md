@@ -56,6 +56,12 @@ check:
     tiles: [are, They, children]
     answer: [They, are, children]
     why: { id: "Child menjadi children, bukan childs.", en: "Child becomes children, not childs." }
+  - id: e1-pl-c3
+    type: listen
+    audio: "The doctors are busy."
+    options: ["The doctors are busy.", "The doctor is busy."]
+    answer: "The doctors are busy."
+    why: { id: "Dengarkan -s di doctors dan kata are: lebih dari satu.", en: "Listen for the -s in doctors and the word are: more than one." }
 glossary:
   - { en: book, id: "buku" }
   - { en: box, id: "kotak" }
@@ -64,6 +70,11 @@ glossary:
   - { en: child, id: "anak" }
   - { en: man, id: "laki-laki, bapak" }
   - { en: woman, id: "perempuan, ibu" }
+sound:
+  focus: "-s: /s/ /z/ /ɪz/"
+  words: [books, babies, boxes]
+  tip: { id: "Akhiran -s punya tiga bunyi: /s/ di books, /z/ di babies, /ɪz/ di boxes. Jangan dibuang, karena -s itulah yang bilang lebih dari satu.", en: "The -s ending has three sounds: /s/ in books, /z/ in babies, /ɪz/ in boxes. Don't drop it: the -s is what says more than one." }
+words: { id: "Beberapa kata benda tidak bisa dihitung: **rice** (nasi), **water** (air), **money** (uang). Jadi tidak ada *a rice* atau *two rices*. Ini dibahas lengkap di Easy 3.", en: "Some nouns can't be counted: **rice**, **water**, **money**. So there is no *a rice* or *two rices*. Easy 3 covers this fully." }
 next: easy1-04-demonstratives
 ---
 

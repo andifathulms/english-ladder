@@ -74,6 +74,14 @@ glossary:
   - { en: school, id: "sekolah" }
   - { en: shoe, id: "sepatu" }
   - { en: warung, id: "warung" }
+sound:
+  focus: "weak of, to"
+  words: [in front of, next to, "It's next to the school."]
+  tip: { id: "Of dan to dibaca lemah: in front of terdengar /ɪn frʌnt əv/, next to terdengar /neks tə/.", en: "Of and to are weak: in front of sounds like /ɪn frʌnt əv/, next to like /neks tə/." }
+talk:
+  - { who: Andi, en: "Where's my phone?", id: "HP-ku di mana?" }
+  - { who: Mei, en: "It's on the table.", id: "Di atas meja." }
+words: { id: "**At home**, **at school**, **at work**: tanpa *the*. Kamu akan sering mendengarnya. Dan *di atas* bisa juga berarti **above**, kalau tidak menempel.", en: "**At home**, **at school**, **at work**: no *the*. You will hear these a lot. And *di atas* can also mean **above**, when nothing touches." }
 next: easy1-08-to-be-questions
 ---
 
