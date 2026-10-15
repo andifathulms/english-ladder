@@ -157,7 +157,7 @@ export function TestRunner({ rung, next, pool, lessons, nouns }: Props) {
 
         {!passed && missedLessons.length > 0 && (
           <section className="flex flex-col gap-2">
-            <h2 className="label text-muted">{t('test.missedFrom')}</h2>
+            <h2 className="eyebrow">{t('test.missedFrom')}</h2>
             <ul className="flex flex-col gap-1">
               {missedLessons.sort((a, b) => a.order - b.order).map((l) => (
                 <li key={l.id}>
@@ -177,7 +177,7 @@ export function TestRunner({ rung, next, pool, lessons, nouns }: Props) {
             .sort(([a], [b]) => (lessonOf(a)?.order ?? 0) - (lessonOf(b)?.order ?? 0))
             .map(([lid, rs]) => (
               <div key={lid} className="flex flex-col gap-3">
-                <h3 className="label text-muted">
+                <h3 className="eyebrow">
                   {lessonOf(lid)?.order} · <span lang="en">{lessonOf(lid)?.title.en}</span>
                 </h3>
                 <ul className="flex flex-col gap-3">

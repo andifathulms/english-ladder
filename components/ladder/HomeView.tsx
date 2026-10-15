@@ -42,7 +42,7 @@ export function HomeView({ rungs, lessons, testRungs }: Props) {
 
         <div className="grid gap-7 min-[900px]:grid-cols-[320px_1fr]">
           <section aria-labelledby="ladder-title" className="flex flex-col gap-3">
-            <h2 id="ladder-title" className="label text-muted">{t('home.ladder')}</h2>
+            <h2 id="ladder-title" className="eyebrow">{t('home.ladder')}</h2>
             <LadderRail
               rungs={rungs}
               lessons={lessons}

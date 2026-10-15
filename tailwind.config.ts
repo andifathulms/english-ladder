@@ -19,6 +19,10 @@ const config: Config = {
       accent: v('accent'),
       'accent-ink': v('accent-ink'),
       'accent-soft': v('accent-soft'),
+      board: v('board'),
+      'board-2': v('board-2'),
+      'board-ink': v('board-ink'),
+      'board-muted': v('board-muted'),
       rung: v('rung'),
       'rung-soft': v('rung-soft'),
       good: v('good'),
@@ -28,6 +32,9 @@ const config: Config = {
       easy: v('easy'),
       medium: v('medium'),
       hard: v('hard'),
+      'easy-soft': v('easy-soft'),
+      'medium-soft': v('medium-soft'),
+      'hard-soft': v('hard-soft'),
     },
     fontFamily: {
       display: ['var(--font-display)', 'system-ui', 'sans-serif'],
@@ -63,6 +70,7 @@ const config: Config = {
       sm: 'var(--r-sm)',
       md: 'var(--r-md)',
       lg: 'var(--r-lg)',
+      xl: 'var(--r-xl)',
       full: '999px',
     },
     boxShadow: {
@@ -83,7 +91,7 @@ const config: Config = {
       moment: 'var(--ease-moment)',
     },
     extend: {
-      maxWidth: { lesson: '640px', home: '960px', measure: '65ch' },
+      maxWidth: { lesson: '640px', home: '1040px', measure: '65ch' },
       minHeight: { touch: '44px', pill: '48px' },
       minWidth: { touch: '44px' },
     },

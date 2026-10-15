@@ -33,31 +33,36 @@ The English you are learning is the hero of every screen. Explanations, chrome a
 
 All colour comes from these tokens. Components never use literal colours.
 
+Palette name: **Pagi** (morning). Revised 15 Oct 2026: a slightly deeper teal, a new board colour, and soft tier tints.
+
 | Token | Light | Dark | Role |
 |---|---|---|---|
-| `--paper` | `#F4F6F5` | `#111816` | App background |
-| `--paper-2` | `#EAEFEC` | `#16201D` | Stage behind visuals, inset areas |
-| `--surface` | `#FFFFFF` | `#1A2421` | Cards, lesson column, sheets |
-| `--ink` | `#16211E` | `#E4ECE9` | Primary text, English sentences |
-| `--muted` | `#56635F` | `#97A6A1` | Secondary text, Indonesian translations |
-| `--rule` | `#D6DEDA` | `#2A3632` | Borders, dividers |
-| `--accent` | `#1D6A5A` | `#6FC3AE` | Primary actions, grammar focus words, links |
-| `--accent-ink` | `#FFFFFF` | `#0E1513` | Text on accent |
-| `--accent-soft` | `#E0EEEA` | `#1B2E29` | Selected states, soft highlights |
-| `--rung` | `#E2AE30` | `#E9BE52` | Achievement only: climbed rungs, the climb moment |
-| `--rung-soft` | `#FBF1D6` | `#33291A` | Background behind achievement |
-| `--good` / `--good-bg` | `#2E6B3D` / `#E3F1E6` | `#8BCB98` / `#1B2B20` | Correct answers |
-| `--off` / `--off-bg` | `#A53F2B` / `#F7E5E0` | `#EC917C` / `#33201B` | Wrong answers, the "sounds off" side of a pair |
-| `--easy` | `#3C8D6E` | `#6FC3A0` | Easy tier marker |
-| `--medium` | `#2C6E9B` | `#7AB3DC` | Medium tier marker |
-| `--hard` | `#6B4C9A` | `#B49BDB` | Hard tier marker |
+| `--paper` | `#F3F5F0` | `#0E1513` | App background |
+| `--paper-2` | `#E7ECE4` | `#141D1A` | Stage behind visuals, inset areas |
+| `--surface` | `#FFFFFF` | `#18221F` | Cards, lesson column, sheets, tab bar |
+| `--ink` | `#132420` | `#E6EEEA` | Primary text, English sentences |
+| `--muted` | `#4F605A` | `#9AABA4` | Secondary text, Indonesian translations |
+| `--rule` | `#D5DDD6` | `#26332F` | Borders, dividers |
+| `--accent` | `#08715E` | `#5FD0B3` | Primary actions, grammar focus words, links |
+| `--accent-ink` | `#FFFFFF` | `#08201A` | Text on accent |
+| `--accent-soft` | `#DDEFE8` | `#17322B` | Selected states, soft highlights |
+| `--board` / `--board-2` | `#0D3B33` / `#145045` | `#10302A` / `#1A4239` | The board: the one "do this next" card per screen (home continue card, rung test intro, climb backdrop accents) |
+| `--board-ink` / `--board-muted` | `#F1F5EE` / `#A9C4BB` | `#EAF2EE` / `#94B5AA` | Text on the board |
+| `--rung` | `#E9A825` | `#F0C14E` | Achievement only: climbed rungs, the climb moment, the fresh notch. Also the blank in a quoted sentence on the board |
+| `--rung-soft` | `#FCF0D2` | `#2F2615` | Background behind achievement |
+| `--good` / `--good-bg` | `#1F6E3C` / `#E1F3E6` | `#8AD3A0` / `#16291D` | Correct answers |
+| `--off` / `--off-bg` | `#B2432C` / `#FBE6E0` | `#F0977F` / `#331E18` | Wrong answers, the "sounds off" side of a pair |
+| `--easy` / `--easy-soft` | `#2F8F6B` / `#E1F2EA` | `#66CFA4` / `#15291F` | Easy tier marker / tint |
+| `--medium` / `--medium-soft` | `#2B6CA3` / `#E2EDF8` | `#7DB8E8` / `#142231` | Medium tier marker / tint |
+| `--hard` / `--hard-soft` | `#6E4FA8` / `#EEE8F8` | `#BBA0E8` / `#221B33` | Hard tier marker / tint |
 
 Illustration tokens are in §10.
 
 ### 3.2 Rules
 - **Gold means earned.** `--rung` appears only for things the learner achieved: climbed rungs, the climb moment, the done-lesson notch. Never on buttons, never decorative.
 - **Red is gentle.** `--off` marks wrong answers and the wrong half of a pair, always with a reason next to it. There are no full-screen red states.
-- Tier colours appear as small markers (dots, the rung's left edge, the progress bar fill inside that tier). They never fill large areas.
+- Tier colours appear as small markers (dots, rings, the progress fill inside that tier). Tier **soft** tints may fill one area only: the header of that tier's rung page. Tier colours are never used for small text (Easy green fails AA as text in light mode); text next to them stays `--ink` or `--muted`.
+- **The board** is the one place with a dark surface in light mode. At most one per screen, always holding the single next action. Its blank or highlight uses `--rung` only as an underline.
 - Contrast: body text and controls meet WCAG AA in both themes. `--muted` on `--paper` must stay ≥ 4.5:1. Check it when tuning values.
 - Dark mode is a **night study**, not an inversion: same hues, lowered saturation on surfaces, lifted tier colours.
 
@@ -68,10 +73,12 @@ Illustration tokens are in §10.
 | Role | Face | Use |
 |---|---|---|
 | Display | **Bricolage Grotesque** 500/700 (opsz on) | Headings, rung names, and **English sentences in lessons** |
-| Body | **Atkinson Hyperlegible** 400/700, italic | Explanations, UI text, Indonesian translations |
-| Utility | **IBM Plex Mono** 400/500 | CEFR tags, step counters, small labels |
+| Body | **Atkinson Hyperlegible Next** 400/600/700, italic (variable) | Explanations, UI text, Indonesian translations, section headings |
+| Utility | **Atkinson Hyperlegible Mono** 600 | CEFR codes, counters, minutes: numbers and codes only |
 
-Atkinson Hyperlegible is chosen on purpose: it was designed for low-vision readers and keeps similar letters distinct (I/l/1, rn/m). For a language learner reading unfamiliar words, that matters.
+Atkinson Hyperlegible is chosen on purpose: it was designed for low-vision readers and keeps similar letters distinct (I/l/1, rn/m). For a language learner reading unfamiliar words, that matters. The Next and Mono versions (2025) keep that and add weights; they are self-hosted from `app/font-files` because Next 14's font list predates them.
+
+**Section headings** use the `.eyebrow` style (body 700, `--t-small`, `--muted`, sentence case), not uppercase mono. Uppercase mono (`.label`) is for counters, CEFR codes and step names only.
 
 ### 4.1 Scale (rem, base 16px; scaled by the text-size setting)
 
@@ -102,12 +109,12 @@ Atkinson Hyperlegible is chosen on purpose: it was designed for low-vision reade
 Side gutter `max(16px, env(safe-area-inset-left/right))`. Sibling spacing uses `gap`, never margins.
 
 ### 5.2 Shape
-- Radius: `--r-sm 6` (chips, inputs) · `--r-md 10` (cards) · `--r-lg 16` (visual stages, sheets) · `999` (pills).
+- Radius: `--r-sm 6` (chips, inputs) · `--r-md 10` (small cards) · `--r-lg 16` (cards, visual stages) · `--r-xl 22` (the board, bottom sheets) · `999` (pills).
 - Cards are used only for objects you act on (a lesson row, a check item, the continue card). Explanatory text sits directly on the surface.
 
 ### 5.3 Depth
 Two levels only:
-- `--e-1`: `0 1px 0 var(--rule)` for resting cards.
+- `--e-1`: `0 1px 0 var(--rule)` plus a 4% soft shadow, for resting cards. Cards have no outline border.
 - `--e-2`: `0 18px 40px -28px rgb(15 30 25 / .45)` for the lesson column on desktop and bottom sheets.
 No glassmorphism, no glows, no gradient fills on UI.
 

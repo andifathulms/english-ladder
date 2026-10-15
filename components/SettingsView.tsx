@@ -12,7 +12,7 @@ import { useCanSpeak } from './useSpeech';
 function Group({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="flex flex-col gap-5 border-t border-rule pt-5" aria-labelledby={`g-${title}`}>
-      <h2 id={`g-${title}`} className="label text-muted">{title}</h2>
+      <h2 id={`g-${title}`} className="eyebrow">{title}</h2>
       {children}
     </section>
   );

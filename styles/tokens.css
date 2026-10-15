@@ -1,24 +1,31 @@
 /* Every token from DESIGN.md. Components never use literal colours. */
 :root {
   color-scheme: light;
-  --paper: #F4F6F5;
-  --paper-2: #EAEFEC;
+  --paper: #F3F5F0;
+  --paper-2: #E7ECE4;
   --surface: #FFFFFF;
-  --ink: #16211E;
-  --muted: #56635F;
-  --rule: #D6DEDA;
-  --accent: #1D6A5A;
+  --ink: #132420;
+  --muted: #4F605A;
+  --rule: #D5DDD6;
+  --accent: #08715E;
   --accent-ink: #FFFFFF;
-  --accent-soft: #E0EEEA;
-  --rung: #E2AE30;
-  --rung-soft: #FBF1D6;
-  --good: #2E6B3D;
-  --good-bg: #E3F1E6;
-  --off: #A53F2B;
-  --off-bg: #F7E5E0;
-  --easy: #3C8D6E;
-  --medium: #2C6E9B;
-  --hard: #6B4C9A;
+  --accent-soft: #DDEFE8;
+  --board: #0D3B33;
+  --board-2: #145045;
+  --board-ink: #F1F5EE;
+  --board-muted: #A9C4BB;
+  --rung: #E9A825;
+  --rung-soft: #FCF0D2;
+  --good: #1F6E3C;
+  --good-bg: #E1F3E6;
+  --off: #B2432C;
+  --off-bg: #FBE6E0;
+  --easy: #2F8F6B;
+  --easy-soft: #E1F2EA;
+  --medium: #2B6CA3;
+  --medium-soft: #E2EDF8;
+  --hard: #6E4FA8;
+  --hard-soft: #EEE8F8;
   --wood: #B98A5A;
   --wood-dark: #8C6440;
   --card: #D9C3A0;
@@ -48,11 +55,16 @@
   --s-8: 64px;
   --gutter: max(16px, env(safe-area-inset-left), env(safe-area-inset-right));
 
+  /* Layout chrome */
+  --tabbar-h: 64px;
+  --sidebar-w: 232px;
+
   /* Shape and depth (DESIGN §5.2–5.3) */
   --r-sm: 6px;
   --r-md: 10px;
   --r-lg: 16px;
-  --e-1: 0 1px 0 var(--rule);
+  --r-xl: 22px;
+  --e-1: 0 1px 0 var(--rule), 0 1px 3px rgb(var(--shadow-rgb) / 0.04);
   --e-2: 0 18px 40px -28px rgb(var(--shadow-rgb) / 0.45);
 
   /* Motion (DESIGN §5.4) */
@@ -81,24 +93,31 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     color-scheme: dark;
-    --paper: #111816;
-    --paper-2: #16201D;
-    --surface: #1A2421;
-    --ink: #E4ECE9;
-    --muted: #97A6A1;
-    --rule: #2A3632;
-    --accent: #6FC3AE;
-    --accent-ink: #0E1513;
-    --accent-soft: #1B2E29;
-    --rung: #E9BE52;
-    --rung-soft: #33291A;
-    --good: #8BCB98;
-    --good-bg: #1B2B20;
-    --off: #EC917C;
-    --off-bg: #33201B;
-    --easy: #6FC3A0;
-    --medium: #7AB3DC;
-    --hard: #B49BDB;
+    --paper: #0E1513;
+    --paper-2: #141D1A;
+    --surface: #18221F;
+    --ink: #E6EEEA;
+    --muted: #9AABA4;
+    --rule: #26332F;
+    --accent: #5FD0B3;
+    --accent-ink: #08201A;
+    --accent-soft: #17322B;
+    --board: #10302A;
+    --board-2: #1A4239;
+    --board-ink: #EAF2EE;
+    --board-muted: #94B5AA;
+    --rung: #F0C14E;
+    --rung-soft: #2F2615;
+    --good: #8AD3A0;
+    --good-bg: #16291D;
+    --off: #F0977F;
+    --off-bg: #331E18;
+    --easy: #66CFA4;
+    --easy-soft: #15291F;
+    --medium: #7DB8E8;
+    --medium-soft: #142231;
+    --hard: #BBA0E8;
+    --hard-soft: #221B33;
     --wood: #9C7550;
     --wood-dark: #6E5236;
     --card: #B39C78;
@@ -111,24 +130,31 @@
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --paper: #111816;
-  --paper-2: #16201D;
-  --surface: #1A2421;
-  --ink: #E4ECE9;
-  --muted: #97A6A1;
-  --rule: #2A3632;
-  --accent: #6FC3AE;
-  --accent-ink: #0E1513;
-  --accent-soft: #1B2E29;
-  --rung: #E9BE52;
-  --rung-soft: #33291A;
-  --good: #8BCB98;
-  --good-bg: #1B2B20;
-  --off: #EC917C;
-  --off-bg: #33201B;
-  --easy: #6FC3A0;
-  --medium: #7AB3DC;
-  --hard: #B49BDB;
+  --paper: #0E1513;
+  --paper-2: #141D1A;
+  --surface: #18221F;
+  --ink: #E6EEEA;
+  --muted: #9AABA4;
+  --rule: #26332F;
+  --accent: #5FD0B3;
+  --accent-ink: #08201A;
+  --accent-soft: #17322B;
+  --board: #10302A;
+  --board-2: #1A4239;
+  --board-ink: #EAF2EE;
+  --board-muted: #94B5AA;
+  --rung: #F0C14E;
+  --rung-soft: #2F2615;
+  --good: #8AD3A0;
+  --good-bg: #16291D;
+  --off: #F0977F;
+  --off-bg: #331E18;
+  --easy: #66CFA4;
+  --easy-soft: #15291F;
+  --medium: #7DB8E8;
+  --medium-soft: #142231;
+  --hard: #BBA0E8;
+  --hard-soft: #221B33;
   --wood: #9C7550;
   --wood-dark: #6E5236;
   --card: #B39C78;

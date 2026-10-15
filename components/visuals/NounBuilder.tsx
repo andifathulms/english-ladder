@@ -87,7 +87,7 @@ export function NounBuilder({ nouns, state, interactive = true, onStateChange, l
       <div className="grid gap-3 sm:grid-cols-2" aria-hidden={!interactive || undefined}>
         {/* a / an by sound */}
         <section className="flex flex-col gap-2 rounded-md bg-surface p-4">
-          <h3 className="label text-muted">a / an</h3>
+          <h3 className="eyebrow">a / an</h3>
           <p className="font-mono text-small text-muted">
             <span lang="en">{noun.word}</span> → <span className="text-ink">{noun.ipa_hint}</span> · {L(SOUND_LABEL[noun.initial_sound])}
             {isTricky(noun) && <span className="ml-1 text-accent">*</span>}
@@ -110,7 +110,7 @@ export function NounBuilder({ nouns, state, interactive = true, onStateChange, l
 
         {/* plural, step by step */}
         <section className="flex flex-col gap-2 rounded-md bg-surface p-4">
-          <h3 className="label text-muted">{lang === 'en' ? 'more than one' : 'lebih dari satu'}</h3>
+          <h3 className="eyebrow">{lang === 'en' ? 'more than one' : 'lebih dari satu'}</h3>
           <p className="font-mono text-small">
             <span className="rounded-full bg-accent-soft px-2 py-px text-ink">{L(RULE_LABEL[noun.plural_rule])}</span>
           </p>

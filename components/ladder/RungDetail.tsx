@@ -61,7 +61,7 @@ export function RungDetail({ rung, rungs, lessons, progress, hasTest, headingLev
         </section>
       ) : (
         <section aria-labelledby={`lessons-${rung.id}`} className="flex flex-col gap-2">
-          <h2 id={`lessons-${rung.id}`} className="label text-muted">{t('rung.lessons')}</h2>
+          <h2 id={`lessons-${rung.id}`} className="eyebrow">{t('rung.lessons')}</h2>
           {mine.length === 0 ? (
             <p className="text-muted">{t('rung.noLessons')}</p>
           ) : (
@@ -91,7 +91,7 @@ export function RungDetail({ rung, rungs, lessons, progress, hasTest, headingLev
 
       {later.length > 0 && (
         <section aria-labelledby={`spiral-${rung.id}`} className="flex flex-col gap-2">
-          <h2 id={`spiral-${rung.id}`} className="label text-muted">{t('rung.spiralTitle')}</h2>
+          <h2 id={`spiral-${rung.id}`} className="eyebrow">{t('rung.spiralTitle')}</h2>
           <ul className="flex flex-col gap-1">
             {later.map(({ r, shared }) => (
               <li key={r.id} className="text-small">

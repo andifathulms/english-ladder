@@ -197,7 +197,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
             <VisualStage visual={lesson.visual} nouns={nouns} />
           ) : (
             <section className="flex flex-col gap-4 rounded-lg bg-paper-2 p-5">
-              <h3 className="label text-muted">{t('lesson.worked')}</h3>
+              <h3 className="eyebrow">{t('lesson.worked')}</h3>
               <ul className="flex flex-col gap-4">
                 {lesson.worked!.map((w) => (
                   <li key={w.en}>
@@ -263,7 +263,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
             <NotchBar total={rung.lessons} done={done} climbed={climbed} fresh={freshNotch} size="md" />
           </div>
           <section className="flex flex-col gap-2">
-            <h3 className="label text-muted">{t('lesson.newWords')}</h3>
+            <h3 className="eyebrow">{t('lesson.newWords')}</h3>
             <p lang="en" className="font-display text-h2 font-medium">
               {lesson.glossary.map((g) => g.en).join(' · ')}
             </p>
