@@ -51,7 +51,7 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
               <span className="font-display font-bold text-ink">{r?.name ?? ''}</span>
               {i === 1 && (
                 <span style={{ opacity: climbed ? 1 : 0, transition: `opacity var(--m-moment-d) var(--ease-moment)` }}>
-                  <NotchBar total={rung.lessons} done={rung.lessons} climbed size="md" />
+                  <NotchBar total={rung.lessons} done={rung.lessons} climbed />
                 </span>
               )}
               <span

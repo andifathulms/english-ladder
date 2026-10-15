@@ -1,77 +1,109 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
 import type { LessonSummary, Rung } from '@/lib/types';
-import { completedCount, continueTarget, currentRung } from '@/lib/progress/derive';
-import { lessonHref } from '@/lib/routes';
-import { useProgress, useT } from '../ProgressProvider';
+import { completedCount, continueTarget, currentRung, doneCount } from '@/lib/progress/derive';
+import { lessonHref, rungHref } from '@/lib/routes';
+import { useHydrated, useProgress, useT, type T } from '../ProgressProvider';
 import { AppShell } from '../ui/AppShell';
-import { IconArrowRight } from '../ui/Icon';
+import { IconChevron, IconReview } from '../ui/Icon';
 import { ContinueCard } from './ContinueCard';
 import { LadderRail } from './LadderRail';
-import { RungDetail } from './RungDetail';
+import { LessonStrip } from './LessonStrip';
 
 type Props = { rungs: Rung[]; lessons: LessonSummary[]; testRungs: string[] };
 
-export function HomeView({ rungs, lessons, testRungs }: Props) {
+function greeting(t: T, now: Date): string {
+  const h = now.getHours();
+  if (h < 11) return t('home.greet.morning');
+  if (h < 15) return t('home.greet.day');
+  if (h < 18) return t('home.greet.afternoon');
+  return t('home.greet.night');
+}
+
+export function HomeView({ rungs, lessons }: Props) {
   const progress = useProgress();
-  const { t } = useT();
+  const hydrated = useHydrated();
+  const { t, lang } = useT();
   const here = currentRung(rungs, progress);
-  const [selected, setSelected] = useState<string | null>(null);
-  const selRung = rungs.find((r) => r.id === (selected ?? here.id)) ?? here;
   const target = continueTarget(rungs, lessons, progress);
   const first = lessons.filter((l) => l.rung === rungs[0].id).sort((a, b) => a.order - b.order)[0];
   const showReview = completedCount(lessons, progress) >= 2;
+  const mine = lessons.filter((l) => l.rung === here.id).sort((a, b) => a.order - b.order);
+  const done = doneCount(here.id, lessons, progress);
+  const live = rungs.filter((r) => r.status === 'live').length;
 
-  const onSelect = (id: string, e: React.MouseEvent) => {
-    if (window.matchMedia('(min-width: 900px)').matches) {
-      e.preventDefault();
-      setSelected(id);
-    }
-  };
+  // The clock is the visitor's, so static HTML shows a neutral title until hydration.
+  const now = hydrated ? new Date() : null;
+  const date = now?.toLocaleDateString(lang === 'en' ? 'en-GB' : 'id-ID', { weekday: 'long', day: 'numeric', month: 'long' });
 
   return (
-    <AppShell>
-      <main className="page flex max-w-home flex-col gap-7 py-6">
-        <h1 className="sr-only">English Ladder</h1>
-        <ContinueCard target={target} firstLessonHref={first ? lessonHref(first) : null} rungs={rungs} />
+    <AppShell
+      headerAside={
+        <Link href={rungHref(here.id)} className="label flex min-h-touch items-center gap-2 rounded-full px-3 text-ink no-underline">
+          <span aria-hidden className="h-[8px] w-[8px] rounded-full" style={{ background: `var(--${here.tier})` }} />
+          {here.cefr}
+          <span className="sr-only">· {here.name}</span>
+        </Link>
+      }
+    >
+      <main className="page grid max-w-home grid-cols-1 gap-7 py-5 min-[900px]:grid-cols-[minmax(0,1fr)_320px] min-[900px]:py-8">
+        <div className="flex min-w-0 flex-col gap-6">
+          <header className="flex flex-col gap-1">
+            <p className="text-small font-bold text-muted" aria-hidden={!date}>
+              {date ?? ' '}
+            </p>
+            <h1 className="text-h1 tracking-[-0.02em] min-[900px]:text-hero">{now ? greeting(t, now) : 'English Ladder'}</h1>
+          </header>
 
-        <div className="grid gap-7 min-[900px]:grid-cols-[320px_1fr]">
-          <section aria-labelledby="ladder-title" className="flex flex-col gap-3">
-            <h2 id="ladder-title" className="eyebrow">{t('home.ladder')}</h2>
-            <LadderRail
-              rungs={rungs}
-              lessons={lessons}
-              progress={progress}
-              hereId={here.id}
-              selectedId={selected ?? undefined}
-              onSelect={onSelect}
-              label={t('home.ladder')}
-            />
-          </section>
-          <div className="hidden min-[900px]:block">
-            <div className="card p-6">
-              <RungDetail
-                rung={selRung}
-                rungs={rungs}
-                lessons={lessons}
+          <ContinueCard target={target} firstLessonHref={first ? lessonHref(first) : null} rungs={rungs} />
+
+          {mine.length > 0 && (
+            <section aria-labelledby="rung-lessons" className="flex flex-col gap-3">
+              <div className="flex items-baseline justify-between gap-3">
+                <h2 id="rung-lessons" className="font-display text-body font-bold tnum">
+                  {t('home.rungProgress', { rung: here.name, n: done, total: here.lessons })}
+                </h2>
+                <Link href={rungHref(here.id)} className="text-small font-bold no-underline">
+                  {t('home.allLessons')}
+                </Link>
+              </div>
+              <LessonStrip
+                lessons={mine}
                 progress={progress}
-                hasTest={testRungs.includes(selRung.id)}
-                headingLevel={2}
+                currentId={target.kind === 'lesson' ? target.lesson.id : undefined}
               />
-            </div>
-          </div>
+            </section>
+          )}
+
+          {showReview && (
+            <Link
+              href="/review/"
+              className="flex min-h-[64px] items-center gap-4 rounded-lg bg-accent-soft px-4 py-3 text-ink no-underline transition-transform duration-quick active:scale-[0.99]"
+            >
+              <span className="flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-md bg-surface text-accent">
+                <IconReview />
+              </span>
+              <span className="flex min-w-0 flex-1 flex-col">
+                <span className="font-display font-bold">{t('home.quickReview')}</span>
+                <span className="text-small text-muted">{t('home.quickReviewMeta')}</span>
+              </span>
+              <IconChevron className="shrink-0 text-muted" />
+            </Link>
+          )}
         </div>
 
-        {showReview && (
-          <Link
-            href="/review/"
-            className="card flex min-h-[56px] items-center justify-between gap-3 px-5 py-3 font-display font-bold text-ink no-underline hover:text-accent"
-          >
-            {t('home.quickReview')} <IconArrowRight />
-          </Link>
-        )}
+        <aside aria-labelledby="ladder-title" className="flex flex-col gap-3 min-[900px]:self-start">
+          <div className="flex items-baseline justify-between gap-3">
+            <h2 id="ladder-title" className="font-display text-body font-bold">
+              {t('home.ladder')}
+            </h2>
+            <span className="label tnum text-muted">{t('home.ladderMeta', { n: live, total: rungs.length })}</span>
+          </div>
+          <div className="card p-3">
+            <LadderRail rungs={rungs} lessons={lessons} progress={progress} hereId={here.id} label={t('home.ladder')} />
+          </div>
+        </aside>
       </main>
     </AppShell>
   );

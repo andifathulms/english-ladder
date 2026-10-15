@@ -6,8 +6,10 @@ import type { ProgressState } from '@/lib/progress/types';
 import { lessonState } from '@/lib/progress/derive';
 import { testHref, rungHref } from '@/lib/routes';
 import { LessonRow } from './LessonRow';
-import { TierDot } from '../ui/TierDot';
-import { IconArrowRight } from '../ui/Icon';
+import { IconChevron, IconFlag } from '../ui/Icon';
+import { BackLink } from '../ui/AppHeader';
+import { ProgressRing } from '../ui/ProgressRing';
+import { tierName, tierSoftBg } from '../ui/tier';
 import { useT } from '../ProgressProvider';
 
 type Props = {
@@ -16,15 +18,21 @@ type Props = {
   lessons: LessonSummary[];
   progress: ProgressState;
   hasTest: boolean;
-  headingLevel?: 1 | 2;
 };
 
-export function RungDetail({ rung, rungs, lessons, progress, hasTest, headingLevel = 1 }: Props) {
+export function RungDetail({ rung, rungs, lessons, progress, hasTest }: Props) {
   const { t, lang } = useT();
-  const H = headingLevel === 1 ? 'h1' : 'h2';
   const mine = lessons.filter((l) => l.rung === rung.id).sort((a, b) => a.order - b.order);
   const tests = progress.rungs[rung.id]?.tests ?? [];
   const best = tests.length ? Math.max(...tests.map((x) => x.score)) : null;
+  const climbed = !!progress.rungs[rung.id]?.climbed;
+  const states = mine.map((l) => lessonState(l, progress));
+  const done = states.filter((s) => s.kind === 'done' || s.kind === 'review').length;
+  // The lesson to open next: the one in progress, else the first not finished.
+  const currentIdx = (() => {
+    const p = states.findIndex((s) => s.kind === 'progress');
+    return p >= 0 ? p : states.findIndex((s) => s.kind === 'new');
+  })();
   const later = rungs
     .slice(rungs.findIndex((r) => r.id === rung.id) + 1)
     .map((r) => ({ r, shared: r.threads.filter((th) => rung.threads.includes(th)) }))
@@ -33,14 +41,25 @@ export function RungDetail({ rung, rungs, lessons, progress, hasTest, headingLev
 
   return (
     <div className="flex flex-col gap-6">
-      <header className="flex flex-col gap-2">
-        <p className="flex items-center gap-2">
-          <TierDot tier={rung.tier} />
-          <span className="label text-muted">{rung.cefr}</span>
-        </p>
-        <H className={headingLevel === 1 ? 'text-h1' : 'text-h2'}>
-          {headingLevel === 2 ? <Link href={rungHref(rung.id)} className="text-ink no-underline hover:text-accent">{rung.name}</Link> : rung.name}
-        </H>
+      <header className={`-mx-gutter flex flex-col gap-3 px-gutter pb-6 pt-2 min-[640px]:mx-0 min-[640px]:rounded-xl min-[640px]:px-6 min-[640px]:pt-4 ${tierSoftBg[rung.tier]}`}>
+        <BackLink href="/" label={t('nav.home')} />
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex min-w-0 flex-col gap-2">
+            <p className="label inline-flex items-center gap-2 self-start rounded-full bg-surface px-3 py-1 text-ink">
+              <span aria-hidden className="h-[8px] w-[8px] rounded-full" style={{ background: `var(--${rung.tier})` }} />
+              {tierName(rung.tier)} · {rung.cefr}
+            </p>
+            <h1 className="text-hero tracking-[-0.02em]">{rung.name}</h1>
+          </div>
+          {rung.status === 'live' && (
+            <ProgressRing
+              done={climbed ? rung.lessons : done}
+              total={rung.lessons}
+              color={climbed ? 'var(--rung)' : `var(--${rung.tier})`}
+              label={climbed ? t('rung.climbed') : t('rung.progressRing', { n: done, total: rung.lessons })}
+            />
+          )}
+        </div>
         <p className="max-w-measure">{lang === 'en' ? rung.description.en : rung.description.id}</p>
         <p className="text-small text-muted">
           {t('rung.explainLang')}: {t(`rung.explain.${rung.explain_lang}`)}
@@ -49,11 +68,11 @@ export function RungDetail({ rung, rungs, lessons, progress, hasTest, headingLev
 
       {rung.status === 'soon' ? (
         <section className="flex flex-col gap-3">
-          <p className="label text-muted">{t('rung.soonTitle', { rung: rung.name })}</p>
-          <p>{t('rung.soonBody')}</p>
+          <h2 className="font-display text-body font-bold">{t('rung.soonTitle', { rung: rung.name })}</h2>
+          <p className="text-muted">{t('rung.soonBody')}</p>
           <ul className="flex flex-wrap gap-2" lang="en">
             {rung.topics.map((topic) => (
-              <li key={topic} className="rounded-full border border-rule px-3 py-1 text-small">
+              <li key={topic} className="card px-3 py-1 text-small">
                 {topic}
               </li>
             ))}
@@ -61,29 +80,39 @@ export function RungDetail({ rung, rungs, lessons, progress, hasTest, headingLev
         </section>
       ) : (
         <section aria-labelledby={`lessons-${rung.id}`} className="flex flex-col gap-2">
-          <h2 id={`lessons-${rung.id}`} className="eyebrow">{t('rung.lessons')}</h2>
+          <h2 id={`lessons-${rung.id}`} className="eyebrow">
+            {t('rung.lessons')}
+          </h2>
           {mine.length === 0 ? (
             <p className="text-muted">{t('rung.noLessons')}</p>
           ) : (
-            <ol className="flex flex-col divide-y divide-rule">
-              {mine.map((l) => (
-                <LessonRow key={l.id} lesson={l} state={lessonState(l, progress)} />
+            <ol className="relative flex flex-col">
+              <span aria-hidden className="absolute bottom-6 left-[15px] top-6 w-[2px] bg-rule" />
+              {mine.map((l, i) => (
+                <LessonRow key={l.id} lesson={l} state={states[i]} current={i === currentIdx} />
               ))}
             </ol>
           )}
           {hasTest && (
             <Link
               href={testHref(rung.id)}
-              className="mt-2 grid min-h-[56px] grid-cols-[1fr_auto] items-center gap-3 border-t-2 border-rule px-2 pt-3 text-ink no-underline hover:text-accent"
+              className={`mt-3 flex min-h-[72px] items-center gap-4 rounded-lg p-4 text-ink no-underline transition-colors duration-quick ${
+                climbed ? 'bg-rung-soft' : 'border-2 border-dashed border-rule bg-surface hover:border-accent'
+              }`}
             >
-              <span className="flex flex-col">
+              <span
+                className={`flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-md ${climbed ? 'bg-surface' : 'bg-paper-2'}`}
+                style={climbed ? { color: 'var(--rung)' } : undefined}
+              >
+                <IconFlag />
+              </span>
+              <span className="flex min-w-0 flex-1 flex-col">
                 <span className="font-display font-bold">{t('rung.test')}</span>
-                <span className="label tnum text-muted">
-                  {t('rung.testMeta')}
-                  {best !== null && <> · {t('rung.testBest', { n: best })}</>}
+                <span className="text-small text-muted tnum">
+                  {t('rung.testMeta')} · {best !== null ? t('rung.testBest', { n: best }) : t('rung.testAlways')}
                 </span>
               </span>
-              <IconArrowRight />
+              <IconChevron className="shrink-0 text-muted" />
             </Link>
           )}
         </section>
@@ -91,12 +120,18 @@ export function RungDetail({ rung, rungs, lessons, progress, hasTest, headingLev
 
       {later.length > 0 && (
         <section aria-labelledby={`spiral-${rung.id}`} className="flex flex-col gap-2">
-          <h2 id={`spiral-${rung.id}`} className="eyebrow">{t('rung.spiralTitle')}</h2>
-          <ul className="flex flex-col gap-1">
+          <h2 id={`spiral-${rung.id}`} className="eyebrow">
+            {t('rung.spiralTitle')}
+          </h2>
+          <ul className="flex flex-wrap gap-2">
             {later.map(({ r, shared }) => (
-              <li key={r.id} className="text-small">
-                <Link href={rungHref(r.id)}>{r.name}</Link>{' '}
-                <span className="text-muted" lang="en">· {shared.join(', ')}</span>
+              <li key={r.id}>
+                <Link href={rungHref(r.id)} className="card flex flex-col px-3 py-2 text-small text-ink no-underline hover:bg-paper-2">
+                  <span className="font-display font-bold">{r.name}</span>
+                  <span className="text-muted" lang="en">
+                    {shared.join(', ')}
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>

@@ -8,29 +8,31 @@ type Props = {
   climbed?: boolean;
   /** Index (0-based) of a notch that just filled: it shows gold first, then settles to accent. */
   fresh?: number;
-  size?: 'sm' | 'md';
+  /** sm: inline on the ladder. lg: full-width bar on the lesson-done screen. */
+  size?: 'sm' | 'lg';
 };
 
 export function NotchBar({ total, done, climbed, fresh, size = 'sm' }: Props) {
   const { t } = useT();
-  const h = size === 'md' ? 'h-[10px] w-[18px]' : 'h-[8px] w-[10px]';
+  const lg = size === 'lg';
   return (
     <span
-      className="inline-flex items-center gap-[3px]"
+      className={`items-center ${lg ? 'flex w-full gap-[6px]' : 'inline-flex gap-[3px]'}`}
       role="img"
       aria-label={climbed ? t('rung.climbed') : t('rung.inProgress', { n: done }).replace('/8', `/${total}`)}
     >
       {Array.from({ length: total }, (_, i) => {
         const filled = climbed || i < done;
-        const bg = climbed ? 'var(--rung)' : filled ? 'var(--accent)' : 'transparent';
         return (
           <span
             key={i}
             aria-hidden
-            className={`${h} rounded-[2px] border ${i === fresh && !climbed ? 'notch-settle' : ''}`}
+            className={`${lg ? 'h-[12px] flex-1 rounded-[4px]' : 'h-[10px] w-[8px] rounded-[2px]'} ${
+              i === fresh && !climbed ? 'notch-settle' : ''
+            }`}
             style={{
-              background: bg,
-              borderColor: climbed ? 'var(--rung)' : filled ? 'var(--accent)' : 'var(--rule)',
+              background: climbed ? 'var(--rung)' : filled ? 'var(--accent)' : 'var(--paper-2)',
+              boxShadow: filled ? undefined : 'inset 0 0 0 1px var(--rule)',
             }}
           />
         );

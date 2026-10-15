@@ -156,47 +156,39 @@ Four places, each with a visible name. One `<nav>` landmark, two layouts:
 
 ```
 ┌──────────────────────────────────┐
-│ English Ladder              ⚙︎   │
-│                                  │
-│ ┌──────────────────────────────┐ │
-│ │ CONTINUE · Easy 1 · Lesson 7 │ │  ← continue card: shows the actual
-│ │ The ball is ___ the box.     │ │    sentence where they stopped
-│ │ [ Lanjutkan → ]              │ │
-│ └──────────────────────────────┘ │
-│                                  │
-│  ║ Hard 3      C1    · soon    ║ │
-│  ║ Hard 2      B2+   · soon    ║ │
-│  ...                             │
-│  ║ Easy 2      A1    · soon    ║ │
-│  ║▸Easy 1      A1   ●●●●●●○○   ║ │  ← you are here: marker + 8 notches
-│                                  │
-│ Quick review · 5 questions  →    │
-│ This week  M T W T F S S         │
-│            ● ● ○ ● ○ ○ ○         │
+│ English Ladder              ● A1 │
+│ Kamis, 15 Oktober                │
+│ Selamat pagi.                    │  ← time-of-day greeting (copy only)
+│ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ │
+│ ┃ LANJUT · EASY 1 · 3 · CONTOH ┃ │  ← the board (--board): quotes the exact
+│ ┃ It is ____ umbrella.         ┃ │    sentence where you stopped; blank is a
+│ ┃ ▬▬▬▭▭▭        [Lanjutkan →]  ┃ │    gold underline; 6-step bar
+│ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ │
+│ Easy 1 · 2 dari 8   Semua pelajaran│
+│ [✓ 1][✓ 2][③ 3][4]…  →  swipe    │  ← lessons of your rung, one tap each
+│ [⟳ Ulang cepat · 5 soal       ›] │  ← after two lessons
+│ Tangganya          1 dari 9 dibuka│
+│ ┌ HARD · B2–C1 ─────────────────┐│  ← compact, tier-grouped map
+│ │ ╫ Hard 3  C1          segera  ││
+│ │ …                             ││
+│ │ ╫ Easy 1  A1      ■■□□□□□□    ││  ← your rung: accent-soft row
+│ └───────────────────────────────┘│
+│ [Tangga][Ulang][Kata][Saya]      │
 └──────────────────────────────────┘
 ```
 
-- The ladder is drawn: two wooden rails (`--wood` from §10) with rungs as rows between them. Each rung row shows tier dot, name, CEFR and state. Bottom to top.
-- **You-are-here marker:** a small solid triangle in `--accent` on the left rail at the current rung.
-- **Notches:** 8 small segments per rung, filling with `--accent` per completed lesson; all 8 turn `--rung` gold when the test is passed.
-- Coming-soon rungs are full opacity names in `--muted` with "soon" in mono. They are not greyed into invisibility; seeing the whole climb is motivating.
-- Desktop: ladder on the left (320px), the selected rung's detail on the right.
-- First visit (no progress): the continue card becomes a welcome card: "Mulai dari anak tangga pertama" with one primary button. One sentence about how it works, nothing more.
+- **The board** is the focal point. First visit: "Mulai di sini", the welcome title, one sentence, "Mulai Easy 1". All lessons done: the rung test.
+- **Lesson strip:** horizontal scroll-snap on phones, a 4-column grid from 900px. Done = filled check, current = accent outline, new = number + minutes.
+- **The ladder** is drawn as a map grouped by tier (Hard → Medium → Easy), with two thin wooden rails and the rung bar in each row: `--wood-dark` by default, `--accent` for your rung, `--rung` gold when climbed. Coming-soon rungs are compact single lines in `--muted`, still fully visible.
+- **Notches:** 8 small filled bars per rung (`--paper-2` with a rule inset when empty, `--accent` when done, all `--rung` when climbed).
+- Desktop: main column (greeting, board, lesson grid, review) and a 320px ladder card on the right.
+- The home screen is complete on first frame; only the greeting and date wait for the visitor's clock.
 
 ### 6.2 Rung page
-Header with tier dot, rung name, CEFR, the one-sentence description, and explanation language. Then the lesson list:
-
-```
- 1  I am, you are            ✓  done          6 min
- 2  He, she, it, they        ✓  2 to review   7 min
- 3  A, an and more than one  ◐  step 3 of 6   9 min
- 4  This, that, these, those    new           8 min
- …
- ─────────────────────────────────────────────
- Rung test · 16 questions · pass 12          →
-```
-
-Rows are full-width tap targets. State uses icon + word, never colour alone.
+- **Header** in the tier's soft tint (`--easy-soft` etc.), full-bleed on phones: back link, tier chip ("Easy · A1"), the rung name at `--t-hero`, a progress ring "2/8" in the tier colour (gold once climbed), the description and explanation language.
+- **Lesson path:** numbered nodes on a vertical rule. Done nodes are filled teal with a check; the current lesson (in progress, else first new) is a raised card with its own step bar and a "Lanjut langkah 4" / "Mulai pelajaran" button; others are plain rows. Every row: English title, Indonesian title, minutes, and state as icon + word.
+- **The summit:** the rung test sits at the end in a dashed card with a flag ("16 soal · lulus 12 · bisa dicoba kapan saja", or the best score). Gold tint once climbed. Never locked.
+- Draft badges appear only in the lesson player's top bar, not in lists.
 
 ### 6.3 Lesson player
 

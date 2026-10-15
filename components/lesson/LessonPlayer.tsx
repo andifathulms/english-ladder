@@ -19,9 +19,7 @@ import { StepBar } from './StepBar';
 import { StepLabel } from './StepLabel';
 import { CheckStep } from '../check/CheckStep';
 import { VisualStage } from '../visuals/VisualStage';
-import type { StringKey } from '@/lib/i18n';
-
-const STEP_KEYS: StringKey[] = ['step.concept', 'step.see', 'step.examples', 'step.contrast', 'step.check', 'step.done'];
+import { STEP_KEYS } from './steps';
 
 type Props = {
   lesson: Lesson;
@@ -260,7 +258,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
           <p className="max-w-measure">{lang === 'en' ? lesson.summary.en : lesson.summary.id}</p>
           <div className="card inline-flex items-center gap-4 self-start px-4 py-3">
             <span className="font-display font-bold">{rung.name}</span>
-            <NotchBar total={rung.lessons} done={done} climbed={climbed} fresh={freshNotch} size="md" />
+            <NotchBar total={rung.lessons} done={done} climbed={climbed} fresh={freshNotch} size="lg" />
           </div>
           <section className="flex flex-col gap-2">
             <h3 className="eyebrow">{t('lesson.newWords')}</h3>
