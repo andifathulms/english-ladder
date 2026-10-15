@@ -59,6 +59,7 @@ function normalize(s: Raw): ProgressState {
       uiLang: pick('uiLang', ['id', 'en']),
       explain: pick('explain', ['rung', 'id', 'en']),
       accent: pick('accent', ['gb', 'us']),
+      voice: pick('voice', ['female', 'male']),
       rate: pick('rate', [0.75, 1]),
       sfx: pick('sfx', [true, false]),
       textSize: pick('textSize', [100, 115, 130]),

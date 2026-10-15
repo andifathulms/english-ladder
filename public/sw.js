@@ -1,5 +1,5 @@
 /* English Ladder service worker. Bump CACHE_VERSION on every release. */
-const CACHE_VERSION = 'v1.2.1';
+const CACHE_VERSION = 'v1.3.0';
 const CACHE = `english-ladder-${CACHE_VERSION}`;
 // Works under any base path: everything is relative to the registration scope.
 const SCOPE = self.registration.scope;

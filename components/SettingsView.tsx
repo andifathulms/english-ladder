@@ -7,7 +7,9 @@ import { useSettings, useT } from './ProgressProvider';
 import { PageShell } from './ui/PageShell';
 import { Segmented } from './ui/Segmented';
 import { Toggle } from './ui/Toggle';
-import { useCanSpeak } from './useSpeech';
+import { useCanSpeak, useSpeak } from './useSpeech';
+import { IconPlay } from './ui/Icon';
+import { chosenVoiceName } from '@/lib/speech/speak';
 
 function Group({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -32,6 +34,11 @@ export function SettingsView() {
   const s = useSettings();
   const set = (patch: Partial<Settings>) => store.setSettings(patch);
   const canSpeak = useCanSpeak();
+  const speakSample = useSpeak();
+  const [voiceName, setVoiceName] = useState<string | null>(null);
+  useEffect(() => {
+    if (canSpeak) setVoiceName(chosenVoiceName(s.accent, s.voice));
+  }, [canSpeak, s.accent, s.voice]);
   const [storageOk, setStorageOk] = useState(true);
   const [msg, setMsg] = useState<string | null>(null);
   const [confirming, setConfirming] = useState(false);
@@ -101,6 +108,25 @@ export function SettingsView() {
             ]}
           />
         </Row>
+        <Row label={t('settings.voice')}>
+          <Segmented
+            label={t('settings.voice')}
+            value={s.voice}
+            onChange={(v) => set({ voice: v })}
+            options={[
+              { value: 'female', label: t('settings.voice.female') },
+              { value: 'male', label: t('settings.voice.male') },
+            ]}
+          />
+        </Row>
+        {canSpeak && (
+          <div className="flex flex-col gap-1">
+            <button type="button" className="btn btn-ghost self-start" onClick={() => speakSample(t('settings.voiceSampleText'))}>
+              <IconPlay size={18} /> {t('settings.voiceSample')}
+            </button>
+            {voiceName && <p className="text-small text-muted">{t('settings.voiceUsing', { name: voiceName })}</p>}
+          </div>
+        )}
         <Row label={t('settings.speed')}>
           <Segmented
             label={t('settings.speed')}

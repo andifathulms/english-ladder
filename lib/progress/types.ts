@@ -2,6 +2,7 @@ export type Settings = {
   uiLang: 'id' | 'en';
   explain: 'rung' | 'id' | 'en';
   accent: 'gb' | 'us';
+  voice: 'female' | 'male';
   rate: 0.75 | 1;
   sfx: boolean;
   textSize: 100 | 115 | 130;

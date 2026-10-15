@@ -220,6 +220,12 @@ export const id = {
   'read.translation': 'Lihat terjemahan',
   'read.questions': 'Soal',
   'read.done': 'Selesai. Kamu baru saja membaca satu teks utuh dalam bahasa Inggris.',
+  'settings.voice': 'Suara',
+  'settings.voice.female': 'Perempuan',
+  'settings.voice.male': 'Laki-laki',
+  'settings.voiceSample': 'Coba suara',
+  'settings.voiceSampleText': 'Hello! This is your English Ladder voice. Is it clear?',
+  'settings.voiceUsing': 'Memakai suara: {name}',
 } as const;
 
 export type StringKey = keyof typeof id;

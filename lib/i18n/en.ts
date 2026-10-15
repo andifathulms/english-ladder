@@ -221,4 +221,10 @@ export const en: Record<StringKey, string> = {
   'read.translation': 'Show the translation',
   'read.questions': 'Questions',
   'read.done': 'Done. You just read a whole text in English.',
+  'settings.voice': 'Voice',
+  'settings.voice.female': 'Female',
+  'settings.voice.male': 'Male',
+  'settings.voiceSample': 'Try the voice',
+  'settings.voiceSampleText': 'Hello! This is your English Ladder voice. Is it clear?',
+  'settings.voiceUsing': 'Using: {name}',
 };

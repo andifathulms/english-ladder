@@ -18,9 +18,9 @@ export function useCanSpeak(): boolean {
 }
 
 export function useSpeak() {
-  const { accent, rate } = useSettings();
+  const { accent, voice, rate } = useSettings();
   return useCallback(
-    (text: string, onBoundary?: (i: number) => void) => speak(text, { accent, rate, onBoundary }),
-    [accent, rate],
+    (text: string, onBoundary?: (i: number) => void) => speak(text, { accent, gender: voice, rate, onBoundary }),
+    [accent, voice, rate],
   );
 }
