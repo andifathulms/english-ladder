@@ -90,6 +90,7 @@ export function ReviewRunner({ items, nouns }: Props) {
             mode="practice"
             item={item}
             nouns={nouns}
+            whyInSheet
             onSolved={(firstTry) => {
               store.recordAnswer(item.id, firstTry);
               setRun({ ...run, solved: true, first: [...run.first, firstTry] });
@@ -97,10 +98,10 @@ export function ReviewRunner({ items, nouns }: Props) {
           />
         </div>
       </main>
-      <BottomActionBar>
+      <BottomActionBar feedback={run.solved ? item.why : null}>
         <button
           type="button"
-          className="btn btn-primary w-full max-w-[360px]"
+          className={`btn w-full max-w-[360px] ${run.solved ? 'btn-good' : 'btn-primary'}`}
           disabled={!run.solved}
           onClick={() => {
             if (last) {

@@ -16,7 +16,7 @@ type Props = {
 
 const styles: Record<PillState, React.CSSProperties> = {
   idle: { background: 'var(--surface)', color: 'var(--ink)', borderColor: 'var(--rule)' },
-  selected: { background: 'var(--accent-soft)', color: 'var(--ink)', borderColor: 'var(--accent)' },
+  selected: { background: 'var(--ink)', color: 'var(--paper)', borderColor: 'var(--ink)' },
   correct: { background: 'var(--good-bg)', color: 'var(--good)', borderColor: 'var(--good)' },
   answer: { background: 'var(--good-bg)', color: 'var(--good)', borderColor: 'var(--good)' },
   wrong: { background: 'var(--off-bg)', color: 'var(--off)', borderColor: 'var(--off-bg)' },
@@ -40,7 +40,7 @@ export function OptionPill({ label, state, index, disabled, onClick, wide }: Pro
     >
       {(state === 'correct' || state === 'answer') && <IconCheck size={18} draw className="shrink-0" />}
       {state === 'wrong' && <IconClose size={16} className="shrink-0" />}
-      <span>{text}</span>
+      <span className={state === 'wrong' ? 'line-through decoration-[1.5px]' : undefined}>{text}</span>
     </button>
   );
 }

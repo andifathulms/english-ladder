@@ -19,18 +19,14 @@ export function CheckStep({ items, index, solved, onSolved, nouns }: Props) {
   const item = items[index];
   return (
     <div className="flex flex-col gap-4">
-      <p className="label tnum text-muted">
-        <span aria-hidden>
-          {index + 1} / {items.length}
-        </span>
-        <span className="sr-only">{t('check.counter', { n: index + 1, total: items.length })}</span>
-      </p>
+      <p className="text-small font-bold tnum text-muted">{t('check.counter', { n: index + 1, total: items.length })}</p>
       <CheckItemView
         key={item.id}
         mode="practice"
         item={item}
         nouns={nouns}
         solved={solved[index]}
+        whyInSheet
         onSolved={(firstTry) => {
           store.recordAnswer(item.id, firstTry);
           onSolved(index);

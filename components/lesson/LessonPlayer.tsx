@@ -17,6 +17,7 @@ import { Prose } from './Prose';
 import { Sentence } from './Sentence';
 import { StepBar } from './StepBar';
 import { StepLabel } from './StepLabel';
+import { ExplainToggle } from './ExplainToggle';
 import { CheckStep } from '../check/CheckStep';
 import { VisualStage } from '../visuals/VisualStage';
 import { STEP_KEYS } from './steps';
@@ -139,16 +140,6 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
   }, [step, canContinue, go, advance]);
 
   const effective = settings.explain === 'rung' ? rung.explain_lang : settings.explain;
-  const toggle = (
-    <button
-      type="button"
-      className="label self-start py-2 text-accent underline-offset-4 hover:underline"
-      onClick={() => store.setSettings({ explain: effective === 'id' ? 'en' : 'id' })}
-      lang={effective === 'id' ? 'en' : 'id'}
-    >
-      {effective === 'id' ? t('lesson.explainEn') : t('lesson.explainId')}
-    </button>
-  );
   const explain = (b: { id: string; en: string }) =>
     effective === 'id' ? (
       <Prose text={b.id} lang="id" />
@@ -183,7 +174,6 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
             </p>
           </div>
           {explain(lesson.concept)}
-          {toggle}
         </>
       );
       break;
@@ -229,7 +219,6 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
           <StepLabel>{t('step.contrast')}</StepLabel>
           {explain(lesson.contrast)}
           <PairCard off={lesson.pair.off} natural={lesson.pair.natural} />
-          {toggle}
         </>
       );
       break;
@@ -250,21 +239,42 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
     default:
       body = (
         <>
-          <StepLabel>{t('step.done')}</StepLabel>
-          <h1 className="flex items-start gap-2 text-h1">
-            <IconCheck size={32} draw className="mt-1 shrink-0 text-good" />
-            <span>{t('lesson.doneTitle', { title: lang === 'en' ? lesson.title.en : lesson.title.id })}</span>
-          </h1>
-          <p className="max-w-measure">{lang === 'en' ? lesson.summary.en : lesson.summary.id}</p>
-          <div className="card inline-flex items-center gap-4 self-start px-4 py-3">
-            <span className="font-display font-bold">{rung.name}</span>
+          <div className="flex flex-col items-center gap-3 pt-2 text-center">
+            <span
+              className="flex h-[76px] w-[76px] items-center justify-center rounded-full bg-accent text-accent-ink"
+              style={{ boxShadow: '0 0 0 10px var(--accent-soft)' }}
+            >
+              <IconCheck size={36} draw />
+            </span>
+            <StepLabel>{t('step.done')}</StepLabel>
+            <h1 className="text-h1 tracking-[-0.015em]">
+              {t('lesson.doneTitle', { title: lang === 'en' ? lesson.title.en : lesson.title.id })}
+            </h1>
+            <p className="max-w-measure text-muted">{lang === 'en' ? lesson.summary.en : lesson.summary.id}</p>
+          </div>
+          <div className="card flex flex-col gap-3 p-4">
+            <p className="flex items-baseline justify-between gap-3">
+              <span className="font-display font-bold">{rung.name}</span>
+              <span className="label tnum text-muted">
+                {climbed ? rung.lessons : done} / {rung.lessons}
+              </span>
+            </p>
             <NotchBar total={rung.lessons} done={done} climbed={climbed} fresh={freshNotch} size="lg" />
           </div>
           <section className="flex flex-col gap-2">
             <h3 className="eyebrow">{t('lesson.newWords')}</h3>
-            <p lang="en" className="font-display text-h2 font-medium">
-              {lesson.glossary.map((g) => g.en).join(' · ')}
-            </p>
+            <ul className="flex flex-wrap gap-2">
+              {lesson.glossary.map((g) => (
+                <li key={g.en} className="card flex items-baseline gap-2 px-3 py-1">
+                  <span lang="en" className="font-display font-bold">
+                    {g.en}
+                  </span>
+                  <span lang="id" className="id-text text-small">
+                    {g.id}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </section>
           <p className="text-muted">{missed ? t('lesson.toReview', { n: missed }) : checksDone ? t('lesson.allFirstTry') : null}</p>
           {spiralRung && <p className="text-small text-muted">{t('lesson.spiral', { rung: spiralRung })}</p>}
@@ -294,15 +304,25 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
               <IconArrowLeft />
             </Link>
           )}
-          <span className="label tnum shrink-0 text-muted">
-            {rung.name} · {lesson.order}
-          </span>
-          {lesson.status === 'draft' && (
-            <span className="hidden shrink-0 sm:inline">
-              <Badge>{t('lesson.draft')}</Badge>
-            </span>
-          )}
-          <StepBar step={step} />
+          <div className="flex min-w-0 flex-1 flex-col gap-[6px]">
+            <StepBar step={step} />
+            <div className="flex items-center justify-between gap-2">
+              <span className="label flex min-w-0 items-center gap-2 tnum text-muted">
+                <span className="truncate">
+                  {rung.name} · {lesson.order}
+                </span>
+                {lesson.status === 'draft' && (
+                  <span className="hidden sm:inline-flex">
+                    <Badge>{t('lesson.draft')}</Badge>
+                  </span>
+                )}
+              </span>
+              <span className="label shrink-0 tnum text-accent" aria-hidden>
+                {step + 1} / 6
+              </span>
+            </div>
+          </div>
+          <ExplainToggle effective={effective} />
           <Link
             href={rungHref(rung.id)}
             aria-label={t('lesson.close')}
@@ -326,11 +346,11 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
         </div>
       </main>
 
-      <BottomActionBar>
+      <BottomActionBar feedback={step === 4 && solved[checkIndex] ? lesson.check[checkIndex].why : null}>
         {step < 5 ? (
           <button
             type="button"
-            className="btn btn-primary w-full max-w-[360px]"
+            className={`btn w-full max-w-[360px] ${step === 4 && solved[checkIndex] ? 'btn-good' : 'btn-primary'}`}
             disabled={!canContinue}
             onClick={advance}
           >
@@ -347,7 +367,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
                 {t('lesson.takeTest', { rung: rung.name })} <IconArrowRight />
               </Link>
             ) : null}
-            <Link href={rungHref(rung.id)} className="btn btn-quiet no-underline">
+            <Link href={rungHref(rung.id)} className="btn btn-ghost no-underline">
               {t('lesson.backToRung', { rung: rung.name })}
             </Link>
           </div>

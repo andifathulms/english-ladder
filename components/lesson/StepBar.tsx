@@ -2,6 +2,7 @@
 
 import { useT } from '../ProgressProvider';
 
+/** Six segments: done steps filled, the current one half-strength, later ones empty. */
 export function StepBar({ step, total = 6 }: { step: number; total?: number }) {
   const { t } = useT();
   return (
@@ -18,7 +19,7 @@ export function StepBar({ step, total = 6 }: { step: number; total?: number }) {
           key={i}
           aria-hidden
           className="h-[6px] flex-1 rounded-full transition-colors duration-base"
-          style={{ background: i <= step ? 'var(--accent)' : 'var(--rule)' }}
+          style={{ background: i <= step ? 'var(--accent)' : 'var(--paper-2)', opacity: i === step ? 0.5 : 1 }}
         />
       ))}
     </div>

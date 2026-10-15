@@ -3,6 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { OptionPill } from '@/components/check/OptionPill';
 import { CheckItemView } from '@/components/check/CheckItemView';
 import { ProgressProvider } from '@/components/ProgressProvider';
+import { BottomActionBar } from '@/components/lesson/BottomActionBar';
 import type { CheckItem } from '@/lib/types';
 
 const wrap = (ui: React.ReactNode) => render(<ProgressProvider>{ui}</ProgressProvider>);
@@ -56,5 +57,30 @@ describe('CheckItemView (practice)', () => {
     wrap(<CheckItemView mode="practice" item={item} onSolved={onSolved} />);
     fireEvent.keyDown(window, { key: '2' });
     expect(onSolved).toHaveBeenCalledWith(true);
+  });
+});
+
+describe('feedback sheet', () => {
+  it('leaves the why line to the sheet when whyInSheet is set', () => {
+    wrap(<CheckItemView mode="practice" item={item} onSolved={() => {}} whyInSheet />);
+    fireEvent.click(screen.getByRole('button', { name: 'on' }));
+    expect(screen.queryByText(why.id)).toBeNull();
+  });
+
+  it('still shows the hint after two misses with whyInSheet', () => {
+    wrap(<CheckItemView mode="practice" item={item} onSolved={() => {}} whyInSheet />);
+    fireEvent.click(screen.getByRole('button', { name: 'in' }));
+    fireEvent.click(screen.getByRole('button', { name: 'at' }));
+    expect(screen.getByText(why.id)).toBeInTheDocument();
+  });
+
+  it('shows Tepat and the why line in the bottom bar', () => {
+    wrap(
+      <BottomActionBar feedback={why}>
+        <button type="button">Lanjut</button>
+      </BottomActionBar>,
+    );
+    expect(screen.getByText('Tepat')).toBeInTheDocument();
+    expect(screen.getByText(why.id)).toBeInTheDocument();
   });
 });

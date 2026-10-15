@@ -12,7 +12,7 @@ export function Prose({ text, lang }: { text: string; lang: 'id' | 'en' }) {
           {parseInline(para.replace(/\s*\n\s*/g, ' ')).map((tok, j) => {
             if (tok.t === 'strong')
               return (
-                <strong key={j} lang="en" className="font-bold text-ink">
+                <strong key={j} lang="en" className="font-bold text-accent">
                   {tok.v}
                 </strong>
               );

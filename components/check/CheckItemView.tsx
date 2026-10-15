@@ -18,6 +18,8 @@ type Practice = Common & {
   /** Already solved earlier (e.g. going back to a finished item). */
   solved?: boolean;
   onSolved: (firstTry: boolean) => void;
+  /** The parent shows the why line in its feedback sheet once solved. */
+  whyInSheet?: boolean;
 };
 type Test = Common & { mode: 'test'; value?: Response; onChange: (r: Response) => void };
 
@@ -121,7 +123,8 @@ export function CheckItemView(props: Practice | Test) {
   };
 
   const missed = wrong.length;
-  const showWhy = practice && (solved || missed >= 2);
+  const inSheet = practice && !!props.whyInSheet;
+  const showWhy = practice && (solved ? !inSheet : missed >= 2);
   const sentenceOptions = item.type === 'fix' || item.type === 'scene';
 
   return (
@@ -191,7 +194,7 @@ export function CheckItemView(props: Practice | Test) {
 
       <div aria-live="polite" ref={liveRef} className="flex min-h-[1.6em] flex-col gap-2">
         {practice && !solved && missed > 0 && <p className="text-off">{t('check.wrong')}</p>}
-        {practice && solved && <p className="sr-only">{t('check.correct')}</p>}
+        {practice && solved && !inSheet && <p className="sr-only">{t('check.correct')}</p>}
         {showWhy && <WhyLine why={item.why} hint={!solved} />}
       </div>
     </div>

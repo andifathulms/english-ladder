@@ -116,6 +116,10 @@
   .btn-ghost:hover {
     background: var(--paper-2);
   }
+  .btn-good {
+    background: var(--good);
+    color: var(--good-bg);
+  }
   .btn-quiet {
     color: var(--accent);
     background: transparent;
@@ -192,6 +196,12 @@
     transform: translateX(calc(var(--m-shift) * -1));
   }
 }
+@keyframes sheet-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--m-shift));
+  }
+}
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -219,6 +229,9 @@
 }
 .step-back {
   animation: step-in-back var(--m-base-d) var(--ease) both;
+}
+.sheet-up {
+  animation: sheet-up var(--m-base-d) var(--ease) both;
 }
 .fade-in {
   animation: fade-in var(--m-base-d) var(--ease) both;

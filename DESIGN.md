@@ -194,7 +194,8 @@ Four places, each with a visible name. One `<nav>` landmark, two layouts:
 
 ```
 ┌──────────────────────────────────┐
-│ ←  Easy 1 · 7        ▬▬▬▬▭▭   ✕  │  ← back, position, 6-segment progress, close
+│ ←  ▬▬▬▬▭▭       [ID|EN]       ✕  │  ← back, 6-segment progress, explain toggle, close
+│    EASY 1 · 7           4 / 6     │  ← position and step counter under the bar
 │                                  │
 │  LIHAT                           │  ← step label (mono, rung language)
 │ ┌──────────────────────────────┐ │
@@ -214,29 +215,37 @@ Four places, each with a visible name. One `<nav>` landmark, two layouts:
 - One step per screen on phones; the primary action sits in a sticky bottom bar with safe-area padding.
 - Desktop: the same column centred at 640px on `--surface` with `--e-2`, over `--paper`.
 - The top bar never scrolls away. Close (✕) returns to the rung page; position is saved silently, with no "are you sure".
-- The explanation-language toggle is a small text button under Concept and Contrast: "Explain in English" / "Jelaskan dalam Bahasa Indonesia".
+- The step bar fills done steps in `--accent`; the current segment is accent at 50%; later ones are `--paper-2`.
+- The explanation-language toggle is an **ID | EN** pill in the top bar, always visible. It writes the same setting as Settings.
+- In explanations, bold English terms render in `--accent` (not underlined: the underline belongs to the grammar focus).
+- The Draft badge shows in the top bar from 640px only.
 
 ### 6.4 Check step
 - One item visible at a time on phones, with a small counter "2 / 5".
 - Options are large pills (min 48px tall) in a wrapping row.
-- **On correct:** the chosen pill fills `--good-bg` with `--good` text, a check mark draws in (stroke animation, 250ms), the `why` line fades in below, a soft sound plays, and the Continue button activates.
-- **On wrong:** the chosen pill turns `--off-bg` and disables; a short "Belum tepat, coba lagi" line appears; the item stays open. After two misses the `why` line appears as a hint. No shaking, no buzzer.
+- **On correct:** the chosen pill fills `--good-bg` with `--good` text and a drawn check. The bottom action bar becomes a **feedback sheet**: `--good-bg`, `--r-xl` top corners, a check badge with "Tepat", the `why` line, and Continue in `--good`. It slides up 12px (`--m-base`). The sheet is an `aria-live` region. Quick review uses the same sheet.
+- **On wrong:** the chosen pill turns `--off-bg`, its word is struck through, and it disables; a short "Belum tepat, coba lagi" line appears; the item stays open.
+- A chosen-but-ungraded pill (rung test) is solid `--ink` with `--paper` text, so it reads as "chosen", never as "correct".
+- The item counter reads "Soal 2 dari 5" under the step label. After two misses the `why` line appears as a hint. No shaking, no buzzer.
 - `order` items: word tiles in a tray; tapping a tile flies it into the answer line (`--m-object`); tapping a placed tile sends it back.
 - `scene` items reuse the real visual component in a fixed state.
 
 ### 6.5 Lesson done
 
 ```
-  ✓  Selesai: Where things are
+            ( ✓ )                ← 76px accent badge with a 10px --accent-soft ring
+           SELESAI
+   Selesai: Di mana bendanya?
+ Kamu sekarang bisa bilang di mana benda berada.
+  ┌────────────────────────────┐
+  │ Easy 1                7 / 8│
+  │ ■■■■■■▣□                   │  ← full-width notches; this lesson's fills gold, settles to teal
+  └────────────────────────────┘
+  Kata baru
+  [in di dalam] [on di atas] [under di bawah] …
+  1 soal untuk diulang nanti
 
-  Kamu sekarang bisa bilang di mana benda berada.
-  ┌─────────────────────────┐
-  │ Easy 1   ●●●●●●●○       │  ← the notch for this lesson fills gold-then-accent
-  └─────────────────────────┘
-  Kata baru: in · on · under · next to · behind · in front of
-  1 item to review later
-
-  [ Lesson 8 → ]     Back to Easy 1
+  [ Pelajaran 8 → ]   [ Kembali ke Easy 1 ]
 ```
 
 The notch fill is the reward. No confetti.
