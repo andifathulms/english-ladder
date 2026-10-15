@@ -1,6 +1,6 @@
 # English Ladder
 
-A calm, levelled English course for Indonesian speakers. Nine rungs from Easy 1 (CEFR A1) to Hard 3 (C1); v1 ships the full app shell and the complete **Easy 1** rung: eight lessons, a rung test, the place scene and noun builder visuals, quick review, My words, settings and offline support. Progress stays in the learner's browser.
+A calm, levelled English course for Indonesian speakers. Nine rungs from Easy 1 (CEFR A1) to Hard 3 (C1); v1 ships the full app shell and the complete **Easy 1** rung: ten lessons, a rung test, the place scene and noun builder visuals, quick review, My words, settings and offline support. Progress stays in the learner's browser.
 
 Static Next.js 14 export, deployed to GitHub Pages.
 

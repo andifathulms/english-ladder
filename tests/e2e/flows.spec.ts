@@ -73,7 +73,7 @@ test('survives 130% text at 360px without horizontal scroll', async ({ page }) =
   await page.evaluate(() =>
     localStorage.setItem('english-ladder:v1', JSON.stringify({ schemaVersion: 1, settings: { textSize: 130 } })),
   );
-  for (const url of ['/', '/rung/easy-1/', '/rung/easy-1/07-prepositions-place/', '/settings/', '/rung/easy-1/test/']) {
+  for (const url of ['/', '/rung/easy-1/', '/rung/easy-1/09-prepositions-place/', '/settings/', '/rung/easy-1/test/']) {
     await page.goto(url);
     await expectNoHorizontalScroll(page);
   }

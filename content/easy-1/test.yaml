@@ -14,32 +14,44 @@ items:
   - { id: e1-t-05, from: easy1-02-pronouns, type: gap, cue: "Dingin.", prompt: "___ is cold.", options: [It, He, They], answer: It, why: { id: "Untuk cuaca, pakai it.", en: "For weather, use it." } }
   - { id: e1-t-06, from: easy1-02-pronouns, type: choice, cue: "Rina dan Siti? Mereka siap.", prompt: "Rina and Siti? ___ are ready.", options: [They, She, We], answer: They, why: { id: "Dua orang lain: they.", en: "Two other people: they." } }
 
-  # 3 · a, an and plurals
+  # 3 · a or an
   - { id: e1-t-07, from: easy1-03-articles-plurals, type: gap, cue: "Itu payung.", prompt: "It is ___ umbrella.", options: [a, an], answer: an, why: { id: "Bunyi vokal di depan: an.", en: "A vowel sound first: an." } }
   - { id: e1-t-08, from: easy1-03-articles-plurals, type: gap, cue: "satu jam", prompt: "___ hour", options: [a, an], answer: an, why: { id: "H di hour tidak dibunyikan, jadi bunyinya vokal: an.", en: "The h in hour is silent, so it starts with a vowel sound: an." } }
-  - { id: e1-t-09, from: easy1-03-articles-plurals, type: fix, cue: "Mereka anak-anak.", wrong: "They are childs.", options: ["They are children.", "They are a children.", "They are childrens."], answer: "They are children.", why: { id: "Child menjadi children.", en: "Child becomes children." } }
 
-  # 4 · this, that, these, those
+  # 4 · plurals
+  - { id: e1-t-09, from: easy1-04-plurals, type: fix, cue: "Mereka anak-anak.", wrong: "They are childs.", options: ["They are children.", "They are a children.", "They are childrens."], answer: "They are children.", why: { id: "Child menjadi children.", en: "Child becomes children." } }
+
+  # 5 · this, that, these, those
   - { id: e1-t-10, from: easy1-04-demonstratives, type: gap, cue: "Ini semua durian.", prompt: "___ are durians.", options: [These, This, That], answer: These, why: { id: "Dekat dan banyak: these.", en: "Near and many: these." } }
   - { id: e1-t-11, from: easy1-04-demonstratives, type: gap, cue: "Itu masjid.", prompt: "___ is a mosque.", options: [That, Those, These], answer: That, why: { id: "Jauh dan satu: that.", en: "Far and one: that." } }
   - { id: e1-t-12, from: easy1-04-demonstratives, type: scene, visual: { id: near-far, props: { state: this } }, options: ["This is a book.", "Those are motorbikes.", "That is a motorbike."], answer: "This is a book.", why: { id: "Satu buku yang dekat: this.", en: "One book, near: this." } }
 
-  # 5 · have and has
+  # 6 · adjective before noun
+  - { id: e1-t-25, from: easy1-06-adjective-noun, type: fix, cue: "Itu masjid besar.", wrong: "That is a mosque big.", options: ["That is a big mosque.", "That is big a mosque.", "That is a bigs mosque."], answer: "That is a big mosque.", why: { id: "Kata sifat datang sebelum bendanya.", en: "The describing word comes before the thing." } }
+  - { id: e1-t-26, from: easy1-06-adjective-noun, type: gap, cue: "Ini buku-buku baru.", prompt: "These are ___ books.", options: [new, news, a new], answer: new, why: { id: "Kata sifat tidak ditambah -s.", en: "A describing word takes no -s." } }
+
+  # 7 · have and has
   - { id: e1-t-13, from: easy1-05-have-has, type: gap, cue: "Dia punya kucing.", prompt: "She ___ a cat.", options: [has, have], answer: has, why: { id: "She memakai has.", en: "She takes has." } }
   - { id: e1-t-14, from: easy1-05-have-has, type: gap, cue: "Kami punya magic com.", prompt: "We ___ a rice cooker.", options: [have, has], answer: have, why: { id: "We memakai have.", en: "We takes have." } }
   - { id: e1-t-15, from: easy1-05-have-has, type: fix, cue: "Budi punya dua motor.", wrong: "Budi have two motorbikes.", options: ["Budi has two motorbikes.", "Budi has two motorbike.", "Budi is has two motorbikes."], answer: "Budi has two motorbikes.", why: { id: "Satu nama orang: has, dan dua motor: motorbikes.", en: "One person's name: has, and two of them: motorbikes." } }
 
-  # 6 · possessives
+  # 8 · possessives
   - { id: e1-t-16, from: easy1-06-possessives, type: gap, cue: "Andi? Tasnya baru.", prompt: "Andi? ___ bag is new.", options: [His, Her, Its], answer: His, why: { id: "Andi laki-laki, jadi his.", en: "Andi is a man, so his." } }
   - { id: e1-t-17, from: easy1-06-possessives, type: choice, cue: "Ini HP-nya Dewi.", prompt: "This is ___ phone.", options: ["Dewi's", Dewi, of Dewi], answer: "Dewi's", why: { id: "Nama ditambah 's.", en: "A name plus 's." } }
   - { id: e1-t-18, from: easy1-06-possessives, type: order, cue: "Rumah mereka kecil.", tiles: [house, Their, small, is], answer: [Their, house, is, small], why: { id: "Their dulu, lalu bendanya.", en: "Their first, then the thing." } }
 
-  # 7 · prepositions of place
+  # 9 · prepositions of place
   - { id: e1-t-19, from: easy1-07-prepositions-place, type: scene, visual: { id: place-scene, props: { state: under } }, options: ["The ball is under the table.", "The ball is on the table.", "The ball is behind the box."], answer: "The ball is under the table.", why: { id: "Bolanya di lantai, di bawah meja.", en: "The ball is on the floor, below the table." } }
   - { id: e1-t-20, from: easy1-07-prepositions-place, type: scene, visual: { id: place-scene, props: { state: next to } }, options: ["The ball is next to the box.", "The ball is in front of the box.", "The ball is in the box."], answer: "The ball is next to the box.", why: { id: "Bolanya di samping kotak: next to.", en: "The ball is beside the box: next to." } }
   - { id: e1-t-21, from: easy1-07-prepositions-place, type: gap, cue: "Kuncinya di dalam tas.", prompt: "The keys are ___ the bag.", options: [in, on, at], answer: in, why: { id: "Di dalam: in.", en: "Inside: in." } }
 
-  # 8 · questions and negatives
+  # 10 · questions and negatives
   - { id: e1-t-22, from: easy1-08-to-be-questions, type: gap, cue: "Dia perawat?", prompt: "___ she a nurse?", options: [Is, Are, Am], answer: Is, why: { id: "She memakai is, dan is pindah ke depan.", en: "She takes is, and is moves to the front." } }
   - { id: e1-t-23, from: easy1-08-to-be-questions, type: fix, cue: "Aku nggak lapar.", wrong: "I amn't hungry.", options: ["I'm not hungry.", "I not hungry.", "I isn't hungry."], answer: "I'm not hungry.", why: { id: "Pakai I'm not. Amn't tidak dipakai dalam bahasa Inggris standar.", en: "Use I'm not. Standard English doesn't use amn't." } }
   - { id: e1-t-24, from: easy1-08-to-be-questions, type: choice, cue: "Kamu sibuk? Bukan.", prompt: "Are you busy? No, I'm ___.", options: [not, no, "isn't"], answer: not, why: { id: "I'm not: not sesudah I'm.", en: "I'm not: not comes after I'm." } }
+
+  # Mixed: sentences that use several lessons at once. `from` is the latest lesson each one needs.
+  - { id: e1-t-27, from: easy1-08-to-be-questions, type: gap, cue: "HP-nya di dalam tas? Bukan, di atas meja.", prompt: "Is her phone in the bag? No, it ___. It's on the table.", options: ["isn't", "aren't", not], answer: "isn't", why: { id: "Phone itu satu benda, jadi is: No, it isn't.", en: "A phone is one thing, so is: No, it isn't." } }
+  - { id: e1-t-28, from: easy1-06-possessives, type: fix, cue: "Kucing Siti kecil.", wrong: "Siti cat is small.", options: ["Siti's cat is small.", "Cat Siti's is small.", "Siti's cat are small."], answer: "Siti's cat is small.", why: { id: "Pemiliknya dulu dengan 's, dan satu kucing memakai is.", en: "The owner first with 's, and one cat takes is." } }
+  - { id: e1-t-29, from: easy1-05-have-has, type: order, cue: "Budi punya motor baru.", tiles: [new, has, Budi, motorbike, a], answer: [Budi, has, a, new, motorbike], why: { id: "Budi has, lalu a, kata sifat, dan bendanya.", en: "Budi has, then a, the describing word and the thing." } }
+  - { id: e1-t-30, from: easy1-07-prepositions-place, type: gap, cue: "Sepatu-sepatu itu di bawah kasur.", prompt: "Those shoes are ___ the bed.", options: [under, in, on], answer: under, why: { id: "Di bawah: under. Those dan are karena sepatunya banyak.", en: "Below: under. Those and are because there are many shoes." } }

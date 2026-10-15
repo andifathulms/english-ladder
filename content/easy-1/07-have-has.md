@@ -1,7 +1,7 @@
 ---
 id: easy1-05-have-has
 rung: easy-1
-order: 5
+order: 7
 status: draft
 minutes: 7
 title: { en: "Have and has", id: "Punya" }

@@ -6,13 +6,13 @@ rungs:
     cefr: A1
     explain_lang: id
     status: live
-    lessons: 8
+    lessons: 10
     description:
       id: "Kalimat pertamamu: siapa, apa, punya siapa, dan di mana."
       en: "Your first sentences: who, what, whose and where."
-    topics: [to be, he/she/it/they, a/an and plurals, this/that, have/has, possessives, prepositions of place, to be questions]
-    threads: [be, pronouns, articles, demonstratives, have, possessives, prepositions, questions]
-    inventory: [be-present, subject-pronouns, articles-a-an, plural-regular, plural-irregular-core, demonstratives, have-present, possessive-adj, possessive-s, prep-place-basic, be-questions-negatives]
+    topics: [to be, he/she/it/they, a/an, plurals, this/that, adjective before noun, have/has, possessives, prepositions of place, to be questions]
+    threads: [be, pronouns, articles, demonstratives, word-order, have, possessives, prepositions, questions]
+    inventory: [be-present, subject-pronouns, articles-a-an, plural-regular, plural-irregular-core, demonstratives, adjective-before-noun, have-present, possessive-adj, possessive-s, prep-place-basic, be-questions-negatives]
 
   - id: easy-2
     name: Easy 2

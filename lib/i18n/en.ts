@@ -12,7 +12,7 @@ export const en: Record<StringKey, string> = {
   'home.continueBtn': 'Continue',
   'home.welcomeTitle': 'Start at the first rung',
   'home.welcomeBody':
-    'Eight short lessons per rung. Each takes about ten minutes, and your progress is saved in this browser.',
+    'Short lessons on every rung. Each takes about ten minutes, and your progress is saved in this browser.',
   'home.start': 'Start Easy 1',
   'home.ladder': 'The ladder',
   'home.quickReview': 'Quick review',
@@ -86,7 +86,7 @@ export const en: Record<StringKey, string> = {
 
   'test.title': '{rung} test',
   'test.intro':
-    '16 questions from all eight lessons. No timer and no marks along the way. Pass with 12 correct.',
+    '16 questions from all the lessons. No timer and no marks along the way. Pass with 12 correct.',
   'test.start': 'Start the test',
   'test.finish': 'See results',
   'test.pass': "Passed. You've climbed {rung}.",

@@ -17,7 +17,7 @@ What sets it apart from existing courses:
 
 It is a static site (GitHub Pages), like the other portfolio apps. Progress lives in the learner's browser.
 
-**v1 ships one rung, Easy 1, complete:** 8 lessons, a rung test, a quick-review mode, and the full app shell for all nine rungs (later rungs shown as "coming soon").
+**v1 ships one rung, Easy 1, complete:** 10 lessons, a rung test, a quick-review mode, and the full app shell for all nine rungs (later rungs shown as "coming soon").
 
 ---
 
@@ -87,7 +87,7 @@ Topics come back at higher rungs. Each lesson declares a `spiral` thread id (e.g
 | 6 | My, your, his, her, 's / *Punya siapa?* | possessive adjectives; 's; his vs her | — | *-nya* translated as "his" for everyone; "the bag of Rina" |
 | 7 | Where things are / *Di mana bendanya?* | in, on, under, next to, behind, in front of | **Place scene** | Using *at* for everything because *di* feels like *at* |
 | 8 | Questions and no / *Bertanya dan menjawab tidak* | Is she…? Are you…? short answers; isn't/aren't; I'm not | — | "You are teacher?" with rising tone only; "I amn't" |
-| T | Rung test | 16 items across all eight | uses both components | — |
+| T | Rung test | 16 items across all ten | uses both components | — |
 
 Each lesson also has a **glossary** of 6–12 words it introduces (word, Indonesian gloss, audio).
 
@@ -241,7 +241,7 @@ Export and import use the same JSON shape with a `schemaVersion` field. Migratio
 There are no analytics, so success is judged by testing with people:
 - 5 beginner testers each complete lessons 1–3 unaided; at least 4 of 5 say they'd continue.
 - Median lesson completion time between 7 and 12 minutes.
-- Testers score ≥ 75% on the rung test after the eight lessons.
+- Testers score ≥ 75% on the rung test after the ten lessons.
 - No tester hits an example sentence with grammar they haven't been taught (inventory check, §4.2).
 
 ---
@@ -250,7 +250,7 @@ There are no analytics, so success is judged by testing with people:
 
 | Release | Contents |
 |---|---|
-| **v1** | App shell, all nine rungs on the ladder, Easy 1 (8 lessons + test), place scene, noun builder, quick review, My words, settings, PWA |
+| **v1** | App shell, all nine rungs on the ladder, Easy 1 (10 lessons + test), place scene, noun builder, quick review, My words, settings, PWA |
 | v1.1 | Easy 2 + time zoom + word-order slots components |
 | v1.2 | Easy 3 + tense timeline; placement test (draws from Easy 1–3) |
 | later | Medium and Hard rungs, one per release; pre-generated audio |

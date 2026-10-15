@@ -1,7 +1,7 @@
 ---
 id: easy1-07-prepositions-place
 rung: easy-1
-order: 7
+order: 9
 status: draft
 minutes: 9
 title: { en: "Where things are", id: "Di mana bendanya?" }

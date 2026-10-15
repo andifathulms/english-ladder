@@ -1,7 +1,7 @@
 ---
 id: easy1-06-possessives
 rung: easy-1
-order: 6
+order: 8
 status: draft
 minutes: 8
 title: { en: "My, your, his, her, 's", id: "Punya siapa?" }
@@ -81,7 +81,6 @@ glossary:
   - { en: bag, id: "tas" }
   - { en: phone, id: "HP" }
   - { en: house, id: "rumah" }
-  - { en: small, id: "kecil" }
   - { en: blue, id: "biru" }
 next: easy1-07-prepositions-place
 ---

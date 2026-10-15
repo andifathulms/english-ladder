@@ -11,7 +11,7 @@ export const id = {
   'home.continueBtn': 'Lanjutkan',
   'home.welcomeTitle': 'Mulai dari anak tangga pertama',
   'home.welcomeBody':
-    'Delapan pelajaran pendek per anak tangga. Tiap pelajaran sekitar sepuluh menit, dan progresmu tersimpan di browser ini.',
+    'Tiap anak tangga berisi pelajaran pendek, masing-masing sekitar sepuluh menit, dan progresmu tersimpan di browser ini.',
   'home.start': 'Mulai Easy 1',
   'home.ladder': 'Tangganya',
   'home.quickReview': 'Ulang cepat',
@@ -85,7 +85,7 @@ export const id = {
 
   'test.title': 'Tes {rung}',
   'test.intro':
-    '16 soal dari kedelapan pelajaran. Tidak ada waktu, tidak ada nilai di tengah jalan. Lulus dengan 12 jawaban benar.',
+    '16 soal dari semua pelajaran. Tidak ada waktu, tidak ada nilai di tengah jalan. Lulus dengan 12 jawaban benar.',
   'test.start': 'Mulai tes',
   'test.finish': 'Lihat hasil',
   'test.pass': 'Lulus. Kamu sudah menaiki {rung}.',

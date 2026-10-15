@@ -6,7 +6,7 @@ Guidance for Claude Code working in this repository. Read `PRD.md` for what to b
 
 ## 1. What this is
 
-A static, levelled English course for Indonesian speakers. Nine rungs (Easy 1 → Hard 3, CEFR A1 → C1). v1 ships the full app shell plus **Easy 1** content: 8 lessons, a rung test, two interactive visual components (place scene, noun builder), quick review, My words, settings, and offline support. Progress is stored only in the learner's browser. Deployed to GitHub Pages.
+A static, levelled English course for Indonesian speakers. Nine rungs (Easy 1 → Hard 3, CEFR A1 → C1). v1 ships the full app shell plus **Easy 1** content: 10 lessons, a rung test, two interactive visual components (place scene, noun builder), quick review, My words, settings, and offline support. Progress is stored only in the learner's browser. Deployed to GitHub Pages.
 
 ---
 
@@ -77,7 +77,7 @@ lib/
 content/
   curriculum.yaml
   easy-1/
-    01-to-be.md … 08-to-be-questions.md
+    01-to-be.md … 10-to-be-questions.md
     test.yaml
   data/
     nouns.yaml
@@ -295,7 +295,7 @@ Work in this order. Finish each milestone (tests passing) before starting the ne
 5. **M4 Check engine and rung test** — all five item types, feedback states, sounds, test draw, results, climb moment.
 6. **M5 Visuals** — PlaceScene, NounBuilder, `scene` check items using them.
 7. **M6 Progress features** — quick review with Leitner, My words, Settings (all options), export/import/reset, migrations.
-8. **M7 Content** — draft all eight Easy 1 lessons, the test pool and `nouns.yaml` (~120 nouns); add inventory and lexicon lint; fix every warning.
+8. **M7 Content** — draft all ten Easy 1 lessons, the test pool and `nouns.yaml` (~120 nouns); add inventory and lexicon lint; fix every warning.
 9. **M8 Polish** — offline, PWA manifest and icon, delight list (DESIGN §8), reduced-motion pass, axe pass, Lighthouse ≥ 95 mobile, quality checklist (DESIGN §14).
 
 ---

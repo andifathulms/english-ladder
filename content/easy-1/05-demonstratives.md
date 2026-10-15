@@ -1,7 +1,7 @@
 ---
 id: easy1-04-demonstratives
 rung: easy-1
-order: 4
+order: 5
 status: draft
 minutes: 8
 title: { en: "This, that, these, those", id: "Ini dan itu" }
@@ -74,7 +74,7 @@ glossary:
   - { en: new, id: "baru" }
   - { en: near, id: "dekat" }
   - { en: far, id: "jauh" }
-next: easy1-05-have-has
+next: easy1-06-adjective-noun
 ---
 
 ## concept.id

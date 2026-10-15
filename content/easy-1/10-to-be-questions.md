@@ -1,7 +1,7 @@
 ---
 id: easy1-08-to-be-questions
 rung: easy-1
-order: 8
+order: 10
 status: draft
 minutes: 8
 title: { en: "Questions and no", id: "Bertanya dan menjawab tidak" }
