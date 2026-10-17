@@ -3,18 +3,10 @@
 import { useLayoutEffect, useRef } from 'react';
 import { useReducedMotion, useT } from '../ProgressProvider';
 import { useTextAttrs } from '../ui/TargetText';
-
-type Props = {
-  tiles: string[];
-  /** Indices into tiles, in answer-line order. */
-  placed: number[];
-  onChange: (placed: number[]) => void;
-  locked?: boolean;
-  tone?: 'idle' | 'good' | 'off';
-};
+import type { TileTrayProps } from '@ladder/core/course/types';
 
 /** Word tiles that fly between the tray and the answer line (FLIP, --m-object). */
-export function TileTray({ tiles, placed, onChange, locked, tone = 'idle' }: Props) {
+export function TileTray({ tiles, placed, onChange, locked, tone = 'idle', tileAttrs, tileClass, Label, AfterLine }: TileTrayProps) {
   const { t } = useT();
   const target = useTextAttrs();
   const reduced = useReducedMotion();
@@ -51,7 +43,9 @@ export function TileTray({ tiles, placed, onChange, locked, tone = 'idle' }: Pro
     onChange(placed.includes(i) ? placed.filter((x) => x !== i) : [...placed, i]);
   };
 
-  const tile = (i: number, inLine: boolean) => (
+  const tile = (i: number, inLine: boolean) => {
+    const attrs = tileAttrs ? tileAttrs(tiles[i]) : target;
+    return (
     <button
       key={i}
       ref={(el) => {
@@ -59,20 +53,22 @@ export function TileTray({ tiles, placed, onChange, locked, tone = 'idle' }: Pro
         else els.current.delete(i);
       }}
       type="button"
-      lang={target.lang}
-      dir={target.dir}
+      lang={attrs.lang}
+      dir={attrs.dir}
       onClick={() => move(i)}
       disabled={locked}
-      className="min-h-pill min-w-touch rounded-sm border-2 px-4 font-body text-body font-semibold"
+      data-tile={tiles[i]}
+      className={`min-h-pill min-w-touch rounded-sm border-2 px-4 font-body font-semibold ${tileClass ? tileClass(tiles[i]) : 'text-body'}`}
       style={{
         background: inLine && tone === 'good' ? 'var(--good-bg)' : 'var(--surface)',
         borderColor: inLine && tone === 'good' ? 'var(--good)' : inLine && tone === 'off' ? 'var(--off)' : 'var(--rule)',
         color: inLine && tone === 'good' ? 'var(--good)' : 'var(--ink)',
       }}
     >
-      {tiles[i]}
+      {Label ? <Label text={tiles[i]} /> : tiles[i]}
     </button>
-  );
+    );
+  };
 
   const tray = tiles.map((_, i) => i).filter((i) => !placed.includes(i));
   return (
@@ -85,6 +81,7 @@ export function TileTray({ tiles, placed, onChange, locked, tone = 'idle' }: Pro
       >
         {placed.map((i) => tile(i, true))}
       </div>
+      {AfterLine && <AfterLine placed={placed.map((i) => tiles[i])} />}
       <div aria-label={t('check.tray')} role="group" className="flex min-h-[52px] flex-wrap gap-2">
         {tray.map((i) => tile(i, false))}
       </div>

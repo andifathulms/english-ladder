@@ -6,7 +6,7 @@ import type { LessonSummary, Placement, Rung } from '@ladder/core/lib/types';
 import type { Response } from '@ladder/core/lib/check/grade';
 import { grade } from '@ladder/core/lib/check/grade';
 import { answerText } from '@ladder/core/lib/check/text';
-import { tilesNeeded } from '@ladder/core/lib/check/itemTypes';
+import { isAnswered } from '@ladder/core/lib/check/itemTypes';
 import { scorePlacement, type PlacementScore } from '@ladder/core/lib/check/placement';
 import { translate } from '@ladder/core/lib/i18n';
 import * as store from '@ladder/core/lib/progress/store';
@@ -107,8 +107,7 @@ export function PlacementRunner({ placement, rungs, lessons }: Props) {
     const item = items[i];
     const last = i === items.length - 1;
     const a = answers[item.id];
-    const need = tilesNeeded(item);
-    const answered = a !== undefined && (!Array.isArray(a) || a.length === need);
+    const answered = isAnswered(item, a, 'placement');
     return (
       <div className="flex min-h-[100dvh] flex-col">
         {header(i)}

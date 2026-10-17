@@ -114,3 +114,65 @@ describe('engine item text overrides', () => {
     expect(itemText(listen)).toBe('Dengarkan, lalu pilih.');
   });
 });
+
+import { isAnswered } from '@ladder/core/lib/check/itemTypes';
+
+type Typed = ExtraItem & { answer: string };
+registerItemTypes({
+  typed: {
+    grade: (item, r) => r === (item as Typed).answer,
+    itemText: () => 'typed',
+    answerText: (item) => (item as Typed).answer,
+    sentences: () => [],
+    answered: (_item, r, where) => where === 'placement' || r !== '',
+  },
+});
+const typed = { id: 't1', type: 'typed', answer: 'ma', why: { id: 'a', en: 'b' } } as unknown as CheckItem;
+const typedCourse: CourseConfig = {
+  ...course,
+  check: {
+    ...course.check,
+    rootAttrs: (item) => ({ 'data-type': item.type }),
+    types: {
+      ...course.check!.types,
+      typed: {
+        Prompt: () => null,
+        Answer: ({ submit, onChange, tone }) => (
+          <div data-tone={tone}>
+            <button type="button" onClick={() => submit('mo')}>wrong</button>
+            <button type="button" onClick={() => submit('ma', { misses: 0 })}>right-reset</button>
+            <button type="button" onClick={() => onChange('m')}>edit</button>
+          </div>
+        ),
+      },
+    },
+  },
+};
+
+describe('course answer areas', () => {
+  it('submit grades through the engine; misses can be replaced; onChange clears the off tone', () => {
+    const onSolved = vi.fn();
+    render(
+      <CourseProvider config={typedCourse}>
+        <ProgressProvider>
+          <CheckItemView item={typed} mode="practice" onSolved={onSolved} />
+        </ProgressProvider>
+      </CourseProvider>,
+    );
+    expect(document.querySelector('[data-item="t1"]')!.getAttribute('data-type')).toBe('typed');
+    fireEvent.click(screen.getByRole('button', { name: 'wrong' }));
+    expect(document.querySelector('[data-tone]')!.getAttribute('data-tone')).toBe('off');
+    fireEvent.click(screen.getByRole('button', { name: 'edit' }));
+    expect(document.querySelector('[data-tone]')!.getAttribute('data-tone')).toBe('idle');
+    fireEvent.click(screen.getByRole('button', { name: 'right-reset' }));
+    expect(onSolved).toHaveBeenCalledWith(true);
+  });
+
+  it('isAnswered uses the type rule, else needs every tile', () => {
+    expect(isAnswered(typed, '', 'test')).toBe(false);
+    expect(isAnswered(typed, '', 'placement')).toBe(true);
+    expect(isAnswered(spell, ['k'], 'test')).toBe(false);
+    expect(isAnswered(spell, ['k', 't', 'b'], 'test')).toBe(true);
+    expect(isAnswered(mark, undefined, 'test')).toBe(false);
+  });
+});

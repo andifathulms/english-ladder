@@ -63,26 +63,56 @@ export type TileTrayProps = {
   onChange: (placed: number[]) => void;
   locked?: boolean;
   tone?: 'idle' | 'good' | 'off';
+  /** Attributes per tile text. Default: the target language and direction. */
+  tileAttrs?: (text: string) => { lang?: string; dir?: 'ltr' | 'rtl' };
+  /** Classes per tile text. Default: `text-body`. */
+  tileClass?: (text: string) => string;
+  /** The tile's content. Default: the text. */
+  Label?: ComponentType<{ text: string }>;
+  /** Shown under the answer line (e.g. Mandarin's joined sentence). */
+  AfterLine?: ComponentType<{ placed: string[] }>;
+};
+
+/** A course item type's own answer area (in place of option pills), e.g. a text input. */
+export type AnswerProps = {
+  item: ExtraItem;
+  mode: 'practice' | 'test';
+  /** The test's current response. */
+  value?: import('@ladder/core/lib/check/grade').Response;
+  solved: boolean;
+  /** Good once solved, off after a wrong try (cleared by onChange). */
+  tone: 'idle' | 'good' | 'off';
+  /** The response changed (records it in a test; clears the off tone). */
+  onChange: (r: import('@ladder/core/lib/check/grade').Response) => void;
+  /** Practice: grade the response. `misses` replaces the miss count first (e.g. a trace's own). */
+  submit: (r: import('@ladder/core/lib/check/grade').Response, opts?: { misses?: number }) => void;
 };
 
 /** How a course renders check items. Every slot defaults to the engine's English-era rendering. */
 export type CheckSlots = {
   /** Learner-language text with markup: cues and short prompts. Default: the plain string. */
-  Inline?: ComponentType<{ text: string }>;
+  Inline?: ComponentType<{ text: string; item: CheckItem }>;
   /** Choice/gap/order prompt (`fill` is the solved answer for a gap). */
-  Prompt?: ComponentType<{ text: string; fill?: string }>;
+  Prompt?: ComponentType<{ text: string; fill?: string; item: CheckItem }>;
   /** The wrong sentence of a fix item. */
-  Wrong?: ComponentType<{ text: string }>;
+  Wrong?: ComponentType<{ text: string; item: CheckItem }>;
   /** A listen item's play control (and its no-audio fallback). */
-  Listen?: ComponentType<{ audio: string; prompt?: string; variety?: string }>;
+  Listen?: ComponentType<{ audio: string; prompt?: string; variety?: string; item: CheckItem }>;
+  /** Extra attributes on the item's root (e.g. `data-type`). */
+  rootAttrs?: (item: CheckItem) => Record<string, string>;
+  /** The solved pill is the one that grades correct, not the one equal to `answer`. */
+  correctPillByGrade?: boolean;
+  /** A wrong answer tried again counts once towards the why line. */
+  dedupeWrong?: boolean;
   /** The tray for tile items (order, and course types with tiles). */
   TileTray?: ComponentType<TileTrayProps & { item: CheckItem; slots: number }>;
   /** Option layout: full-width pills, and the 1–4 number badge. */
   optionLayout?: (item: CheckItem, options: string[]) => { wide: boolean; badge: boolean };
   /** Option pills: attributes and label per option text, and the gap between icon and label. */
   pill?: {
-    attrs?: (text: string) => { lang?: string; dir?: 'ltr' | 'rtl' };
-    Label?: ComponentType<{ text: string; wrong: boolean }>;
+    attrs?: (text: string) => { lang?: string; dir?: 'ltr' | 'rtl' } & { [data: `data-${string}`]: string };
+    /** `text` is the label without markup; `raw` as authored. */
+    Label?: ComponentType<{ text: string; wrong: boolean; raw: string; item?: CheckItem }>;
     gapClass?: string;
   };
   /** Course item types: the prompt above the answer area, and (optionally) a custom option. */
@@ -90,6 +120,8 @@ export type CheckSlots = {
     string,
     {
       Prompt: ComponentType<{ item: ExtraItem; solved: boolean }>;
+      /** The answer area, when the type is answered some other way than options or tiles. */
+      Answer?: ComponentType<AnswerProps>;
       Option?: ComponentType<{ value: string; index: number; state: import('@ladder/core/components/check/OptionPill').PillState; disabled?: boolean; onClick: () => void }>;
       /** UI string key for the option group's aria-label, when Option is set. */
       optionsLabelKey?: string;

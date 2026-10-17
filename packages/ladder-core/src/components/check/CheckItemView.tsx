@@ -122,7 +122,8 @@ export function CheckItemView(props: Practice | Test) {
   const missesRef = useRef(0);
   const liveRef = useRef<HTMLParagraphElement>(null);
 
-  const options: string[] = 'options' in item ? (item.options as string[]) : (logic?.options?.(item as ExtraItem) ?? []);
+  // A course type's own option list wins (e.g. Mandarin tone options are arrays in the item).
+  const options: string[] = logic?.options?.(item as ExtraItem) ?? ('options' in item ? (item.options as string[]) : []);
   const practice = props.mode === 'practice';
 
   const pick = (opt: string) => {
@@ -142,20 +143,27 @@ export function CheckItemView(props: Practice | Test) {
     }
   };
 
-  const checkOrder = () => {
-    if (!tileItem || !practice) return;
-    const resp = placed.map((i) => tiles[i]);
+  /** Grades a whole response (tiles, or a course type's answer area). */
+  const submit = (resp: Response, opts: { misses?: number } = {}) => {
+    if (!practice || solved) return;
+    if (opts.misses !== undefined) missesRef.current = opts.misses;
     if (grade(item, resp, text).correct) {
       setSolved(true);
       setOrderOff(false);
       sfx('correct');
       props.onSolved(missesRef.current === 0);
     } else {
+      const key = Array.isArray(resp) ? resp.join(' ') : resp;
       missesRef.current += 1;
       setOrderOff(true);
-      setWrong((w) => [...w, resp.join(' ')]);
+      setWrong((w) => (slots.dedupeWrong && w.includes(key) ? w : [...w, key]));
       sfx('wrong');
     }
+  };
+
+  const checkOrder = () => {
+    if (!tileItem) return;
+    submit(placed.map((i) => tiles[i]));
   };
 
   // 1–4 picks an answer.
@@ -179,7 +187,7 @@ export function CheckItemView(props: Practice | Test) {
   const pillState = (opt: string): PillState => {
     if (!practice) return props.value === opt ? 'selected' : 'idle';
     const answer = 'answer' in item && typeof item.answer === 'string' ? item.answer : '';
-    if (solved && stripMarkup(opt) === stripMarkup(answer)) return 'correct';
+    if (solved && (slots.correctPillByGrade ? grade(item, opt, text).correct : stripMarkup(opt) === stripMarkup(answer))) return 'correct';
     if (wrong.includes(opt)) return 'wrong';
     return 'idle';
   };
@@ -202,38 +210,38 @@ export function CheckItemView(props: Practice | Test) {
   const tone = solved ? 'good' : orderOff ? 'off' : 'idle';
 
   return (
-    <div className="flex flex-col gap-5" data-item={item.id}>
+    <div className="flex flex-col gap-5" data-item={item.id} {...slots.rootAttrs?.(item)}>
       {item.cue && (
         <p lang="id" className="id-text">
-          {Inline ? <Inline text={item.cue} /> : item.cue}
+          {Inline ? <Inline text={item.cue} item={item} /> : item.cue}
         </p>
       )}
 
       {(item.type === 'choice' || item.type === 'gap') && (
-        <PromptView text={item.prompt} fill={solved ? item.answer : undefined} />
+        <PromptView text={item.prompt} fill={solved ? item.answer : undefined} item={item} />
       )}
       {item.type === 'fix' && (
         <div className="flex flex-col gap-2">
           <p className="text-small text-muted">{t('check.fixPrompt')}</p>
-          {slots.Wrong ? <slots.Wrong text={item.wrong} /> : <Sentence en={item.wrong} off play={false} />}
+          {slots.Wrong ? <slots.Wrong text={item.wrong} item={item} /> : <Sentence en={item.wrong} off play={false} />}
         </div>
       )}
       {item.type === 'scene' && (
         <div className="flex flex-col gap-3">
           <VisualStage visual={item.visual} interactive={false} />
           <p className="text-small text-muted">
-            {Inline ? <Inline text={item.prompt ?? t('check.scenePrompt')} /> : (item.prompt ?? t('check.scenePrompt'))}
+            {Inline ? <Inline text={item.prompt ?? t('check.scenePrompt')} item={item} /> : (item.prompt ?? t('check.scenePrompt'))}
           </p>
         </div>
       )}
       {item.type === 'listen' &&
         (slots.Listen ? (
-          <slots.Listen audio={item.audio} prompt={item.prompt} variety={item.variety} />
+          <slots.Listen audio={item.audio} prompt={item.prompt} variety={item.variety} item={item} />
         ) : (
           <ListenPrompt audio={item.audio} prompt={item.prompt} />
         ))}
       {view && <view.Prompt item={item as ExtraItem} solved={solved} />}
-      {item.type === 'order' && item.prompt && <PromptView text={item.prompt} />}
+      {item.type === 'order' && item.prompt && <PromptView text={item.prompt} item={item} />}
 
       {tileItem ? (
         <div className="flex flex-col gap-3">
@@ -253,6 +261,19 @@ export function CheckItemView(props: Practice | Test) {
             </button>
           )}
         </div>
+      ) : view?.Answer ? (
+        <view.Answer
+          item={item as ExtraItem}
+          mode={props.mode}
+          value={props.mode === 'test' ? props.value : undefined}
+          solved={solved}
+          tone={tone}
+          onChange={(r) => {
+            setOrderOff(false);
+            if (!practice) props.onChange(r);
+          }}
+          submit={submit}
+        />
       ) : ExtraOption ? (
         <div className="flex flex-wrap gap-2" role="group" aria-label={view.optionsLabelKey ? t(view.optionsLabelKey as never) : undefined}>
           {options.map((opt, i) => (
@@ -275,6 +296,7 @@ export function CheckItemView(props: Practice | Test) {
               index={i}
               wide={layout.wide}
               badge={layout.badge}
+              item={item}
               state={pillState(opt)}
               disabled={practice && (solved || wrong.includes(opt))}
               onClick={() => pick(opt)}

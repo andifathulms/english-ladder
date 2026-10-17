@@ -20,6 +20,9 @@ export type ItemTypeLogic = {
   options?(item: ExtraItem): string[];
   /** Tile items: the tiles to show and the answer tiles in order. */
   tiles?(item: ExtraItem): { tiles: string[]; answer: string[] };
+  /** Whether a response is complete enough to move on, in a test or the placement check.
+   *  Default: tile items need every answer tile; anything else needs a response. */
+  answered?(item: ExtraItem, response: Response, where: 'test' | 'placement'): boolean;
 };
 
 const registry = new Map<string, ItemTypeLogic>();
@@ -47,6 +50,14 @@ export function extraType(item: { type: string; id?: string }): ItemTypeLogic {
   const def = registry.get(item.type);
   if (!def) throw new Error(`no item type "${item.type}" registered${item.id ? ` (item ${item.id})` : ''}`);
   return def;
+}
+
+/** Whether a test or placement response lets the learner move on. */
+export function isAnswered(item: CheckItem, r: Response | undefined, where: 'test' | 'placement'): boolean {
+  if (r === undefined) return false;
+  const custom = isCoreItem(item) ? undefined : itemType((item as ExtraItem).type)?.answered;
+  if (custom) return custom(item as ExtraItem, r, where);
+  return !Array.isArray(r) || r.length === tilesNeeded(item);
 }
 
 /** Tiles an item's answer needs before it counts as answered (order and tile types), else 0. */

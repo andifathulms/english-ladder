@@ -16,7 +16,7 @@ import { IconArrowLeft, IconArrowRight, IconCheck, IconClose } from '../ui/Icon'
 import { BottomActionBar } from '../lesson/BottomActionBar';
 import { StepBar } from '../lesson/StepBar';
 import { QuestionBar } from '../lesson/QuestionBar';
-import { tilesNeeded } from '@ladder/core/lib/check/itemTypes';
+import { isAnswered } from '@ladder/core/lib/check/itemTypes';
 import { CheckItemView } from './CheckItemView';
 import { ClimbMoment } from './ClimbMoment';
 import { WhyLine } from './WhyLine';
@@ -102,7 +102,7 @@ export function TestRunner({ rung, next, pool, lessons }: Props) {
     const i = phase.i;
     const item = items[i];
     const last = i === items.length - 1;
-    const answered = answers[item.id] !== undefined && (!Array.isArray(answers[item.id]) || (answers[item.id] as string[]).length === tilesNeeded(item));
+    const answered = isAnswered(item, answers[item.id], 'test');
     return (
       <div className="flex min-h-[100dvh] flex-col">
         {header(i)}
