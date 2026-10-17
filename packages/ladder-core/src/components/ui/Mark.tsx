@@ -12,7 +12,8 @@ export function Mark({ size = 28 }: { size?: number }) {
 
 /** The mark in a cream disc, the course name in the serif, its range on a mono line. */
 export function Wordmark({ onBoard = false }: { onBoard?: boolean }) {
-  const { name, rangeLabel } = useCourse();
+  const { name, rangeLabel, components } = useCourse();
+  const Extra = components?.WordmarkExtra;
   return (
     <span className="flex items-center gap-3">
       <span className="flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-full bg-board-ink shadow-e1">
@@ -20,7 +21,14 @@ export function Wordmark({ onBoard = false }: { onBoard?: boolean }) {
       </span>
       <span className="flex flex-col gap-[3px]">
         <span className={`font-display text-wordmark font-semibold leading-none ${onBoard ? 'text-board-ink' : 'text-ink'}`}>{name}</span>
-        <span className={`label leading-none ${onBoard ? 'text-board-muted' : 'text-muted'}`}>{rangeLabel}</span>
+        {Extra ? (
+          <span className={`flex items-baseline gap-2 leading-none ${onBoard ? 'text-board-muted' : 'text-muted'}`}>
+            <span className="label">{rangeLabel}</span>
+            <Extra />
+          </span>
+        ) : (
+          <span className={`label leading-none ${onBoard ? 'text-board-muted' : 'text-muted'}`}>{rangeLabel}</span>
+        )}
       </span>
     </span>
   );

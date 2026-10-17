@@ -308,6 +308,8 @@ export type CourseConfig = {
     Sentence?: ComponentType<SentenceSlotProps>;
     /** Target text outside sentences: titles, keywords, glossary words (Arabic: ArIsland). */
     TargetText?: ComponentType<TargetTextProps>;
+    /** A small mark after the wordmark's range line (Arabic: سُلَّم). */
+    WordmarkExtra?: ComponentType;
     /** A transliteration line (Arabic: upright Amiri Latin under the Arabic). */
     Translit?: ComponentType<{ text: string; className?: string; onBoard?: boolean }>;
     /** The quoted resume line on the board (continue card). Default: the display serif line. */
