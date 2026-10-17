@@ -19,7 +19,7 @@ export function NotchBar({ total, done, climbed, fresh, size = 'sm' }: Props) {
     <span
       className={`items-center ${lg ? 'flex w-full gap-[6px]' : 'inline-flex gap-[3px]'}`}
       role="img"
-      aria-label={climbed ? t('rung.climbed') : t('rung.inProgress', { n: done }).replace('/8', `/${total}`)}
+      aria-label={climbed ? t('rung.climbed') : t('rung.inProgress', { n: done, total })}
     >
       {Array.from({ length: total }, (_, i) => {
         const filled = climbed || i < done;

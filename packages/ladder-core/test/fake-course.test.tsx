@@ -70,3 +70,12 @@ describe('shell direction', () => {
     expect(shellDir({ ...fakeArabic, shell: { dir: 'ltr' } })).toBe('ltr');
   });
 });
+
+import { NotchBar } from '@ladder/core/components/ladder/NotchBar';
+
+describe('NotchBar', () => {
+  it('labels progress with the real lesson count', () => {
+    const { container } = wrap(<NotchBar total={12} done={3} climbed={false} />);
+    expect(container.querySelector('[aria-label]')?.getAttribute('aria-label')).toBe('3/12 pelajaran');
+  });
+});
