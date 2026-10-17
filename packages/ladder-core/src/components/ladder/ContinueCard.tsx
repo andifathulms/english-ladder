@@ -8,7 +8,6 @@ import { IconArrowRight } from '../ui/Icon';
 import { useT } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
 import { STEP_KEYS } from '../lesson/steps';
-import { Contours } from '../ui/Contours';
 
 /** Sets the last word in brass italic, the way the board marks what matters. */
 export function Accented({ text, tone = 'text-brass' }: { text: string; tone?: string }) {
@@ -58,13 +57,14 @@ function StepDots({ step }: { step: number }) {
 type CardProps = { target: ContinueTarget; firstLessonHref: string | null; starterHref?: string | null; rungs: Rung[] };
 
 export function ContinueCard({ target, firstLessonHref, starterHref, rungs }: CardProps) {
+  const Board = useCourse().boardPattern;
   const { t, lang } = useT();
   const shell = 'board flex flex-col gap-4 p-6 min-[900px]:gap-5 min-[900px]:p-9';
 
   if (target.kind === 'welcome') {
     return (
       <section className={shell} aria-labelledby="welcome-title">
-        <Contours />
+        <Board />
         <p className="label text-brass">{t('home.startHere')}</p>
         <h2 id="welcome-title" className="max-w-[16ch] text-hero leading-[1.02] tracking-[-0.02em] text-board-ink">
           <Accented text={t('home.welcomeTitle')} />
@@ -89,7 +89,7 @@ export function ContinueCard({ target, firstLessonHref, starterHref, rungs }: Ca
   if (target.kind === 'test') {
     return (
       <section className={shell} aria-labelledby="continue-title">
-        <Contours />
+        <Board />
         <p id="continue-title" className="label text-brass">
           {t('home.continue')} · {target.rung.name}
         </p>
@@ -110,7 +110,7 @@ export function ContinueCard({ target, firstLessonHref, starterHref, rungs }: Ca
   const rung = rungs.find((r) => r.id === lesson.rung);
   return (
     <section className={shell} aria-labelledby="continue-title">
-      <Contours />
+      <Board />
       <p id="continue-title" className="label tnum text-brass">
         {t('home.continue')} · {rung?.name} · {t('home.lessonN', { n: lesson.order })}
         <span aria-hidden> · {t(STEP_KEYS[step])}</span>

@@ -8,7 +8,6 @@ import { rungHref } from '@ladder/core/lib/routes';
 import { useReducedMotion, useT } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
 import { NotchBar } from '../ladder/NotchBar';
-import { Contours } from '../ui/Contours';
 
 type Props = { rung: Rung; next: Rung | null; onReview: () => void };
 
@@ -16,6 +15,7 @@ type Props = { rung: Rung; next: Rung | null; onReview: () => void };
 export function ClimbMoment({ rung, next, onReview }: Props) {
   const { t } = useT();
   const course = useCourse();
+  const Board = course.boardPattern;
   const reduced = useReducedMotion();
   const [climbed, setClimbed] = useState(false);
 
@@ -33,7 +33,7 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
       aria-modal="true"
       aria-labelledby="climb-title"
     >
-      <Contours />
+      <Board />
       <div className="page relative flex min-h-full max-w-lesson flex-col justify-center gap-7 py-8">
         {/* Ladder fragment: this rung and the next */}
         <div className="relative mx-auto w-full max-w-[340px] px-[18px]" style={{ height: ROW * 2 + 16 }} aria-hidden>

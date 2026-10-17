@@ -7,7 +7,6 @@ import { lessonState } from '@ladder/core/lib/progress/derive';
 import { readHref, testHref, rungHref } from '@ladder/core/lib/routes';
 import { LessonRow } from './LessonRow';
 import { IconArrowLeft, IconChevron, IconFlag, IconPlay } from '../ui/Icon';
-import { Contours } from '../ui/Contours';
 import { ProgressRing } from '../ui/ProgressRing';
 import { tierName } from '../ui/tier';
 import { useT } from '../ProgressProvider';
@@ -28,6 +27,7 @@ export type ReadingInfo = { title: Title; items: number };
 export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Props) {
   const { t, lang } = useT();
   const course = useCourse();
+  const Board = course.boardPattern;
   const mine = lessons.filter((l) => l.rung === rung.id).sort((a, b) => a.order - b.order);
   const tests = progress.rungs[rung.id]?.tests ?? [];
   const best = tests.length ? Math.max(...tests.map((x) => x.score)) : null;
@@ -48,7 +48,7 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Pr
   return (
     <div className="flex flex-col gap-6">
       <header className="board -mx-gutter flex flex-col gap-4 rounded-none px-gutter pb-8 pt-3 min-[640px]:mx-0 min-[640px]:rounded-xl min-[640px]:px-8 min-[640px]:pt-5">
-        <Contours />
+        <Board />
         <Link
           href="/"
           className="inline-flex min-h-touch items-center gap-1 self-start text-small font-bold text-board-muted no-underline hover:text-board-ink"
