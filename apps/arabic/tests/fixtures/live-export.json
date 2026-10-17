@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "lessons": {
+    "easy1-01-greetings": {
+      "step": 5,
+      "furthest": 5,
+      "completed": true,
+      "lastOpened": 1792241502004
+    },
+    "easy1-02-ana-anta": {
+      "step": 2,
+      "furthest": 2,
+      "completed": false,
+      "lastOpened": 1792241503357
+    }
+  },
+  "items": {
+    "e1-01-c1": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792241501629
+    },
+    "e1-01-c2": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792241501703
+    },
+    "e1-01-c3": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792241501769
+    },
+    "e1-01-c4": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792241501835
+    },
+    "e1-01-c5": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792241501970
+    },
+    "e1-01-c6": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792241502037
+    },
+    "h2-r-c1": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792241502854
+    },
+    "h2-r-c2": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792241502886
+    },
+    "h2-r-c3": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792241502920
+    },
+    "h2-r-c4": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792241502954
+    }
+  },
+  "rungs": {
+    "huruf-1": {
+      "tests": [],
+      "climbed": true,
+      "via": "placement"
+    },
+    "huruf-2": {
+      "tests": [],
+      "climbed": true,
+      "via": "placement"
+    }
+  },
+  "capstones": {
+    "huruf-2": {
+      "reading": "2026-10-17T12:51:42.956Z"
+    }
+  },
+  "placement": {
+    "score": 20,
+    "total": 20,
+    "result": "easy-1",
+    "missed": [],
+    "date": "2026-10-17T12:51:40.570Z"
+  },
+  "days": [
+    "2026-10-17"
+  ],
+  "opened": [
+    "easy1-01-greetings",
+    "easy1-02-ana-anta"
+  ],
+  "settings": {
+    "uiLang": "id",
+    "voice": "male",
+    "rate": 0.75,
+    "sfx": true,
+    "textSize": 100,
+    "arabicSize": 140,
+    "theme": "dark",
+    "motion": "system"
+  }
+}

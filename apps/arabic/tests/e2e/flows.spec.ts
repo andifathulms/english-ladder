@@ -111,3 +111,37 @@ test('survives 130% text and 140% Arabic at 360px without horizontal scroll', as
     await expectNoHorizontalScroll(page);
   }
 });
+
+test('imports a progress file exported from the live app and shows the same state', async ({ page }) => {
+  // tests/fixtures/live-export.json: exported from https://andifathulms.github.io/arabic-ladder/
+  // (the standalone app) by tests/fixtures/make-live-export.mjs.
+  await page.goto('/settings/');
+  await page.locator('input[type="file"]').setInputFiles('tests/fixtures/live-export.json');
+  await expect(page.getByText('Progres berhasil diimpor.')).toBeVisible();
+
+  // Settings carried over: dark, Arabic 140%, male voice, 0.75×.
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await expect(page.locator('html')).toHaveAttribute('data-ar-size', '140');
+  const checked = (group: string, name: string) =>
+    expect(page.getByRole('radiogroup', { name: group }).getByRole('radio', { name })).toHaveAttribute('aria-checked', 'true');
+  await checked('Tema', 'Gelap');
+  await checked('Ukuran teks Arab', '140%');
+  await checked('Suara', 'Laki-laki');
+  await checked('Kecepatan suara', '0,75×');
+
+  // Home: continue at Easy 1 lesson 2, Huruf 1 and 2 climbed via the check.
+  await page.goto('/');
+  await expect(page.getByRole('region', { name: /Lanjut · Easy 1 · Pelajaran 2/ })).toBeVisible();
+  await expect(page.getByText('· lewat cek')).toHaveCount(2);
+
+  // The Huruf 2 reading capstone keeps its done date; Easy 1 lesson 1 is done.
+  await page.goto('/rung/huruf-2/');
+  await expect(page.getByText(/selesai \d/)).toBeVisible();
+  await page.goto('/rung/easy-1/');
+  await expect(page.getByRole('link', { name: /Pelajaran 1/ }).getByText('Selesai')).toBeVisible();
+
+  // My words: the glossaries of the two opened lessons, grouped by rung.
+  await page.goto('/words/');
+  await expect(page.getByRole('heading', { name: /Easy 1 · Pelajaran 1/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Easy 1 · Pelajaran 2/ })).toBeVisible();
+});

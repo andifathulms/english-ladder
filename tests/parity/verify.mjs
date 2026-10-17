@@ -1,5 +1,5 @@
 // Parity gate: capture the built app and prove every route renders pixel-for-pixel identically
-// to the committed baseline. Self-contained: it serves apps/english/out itself (unless a server
+// to the committed baseline. Self-contained: it serves apps/<app>/out itself (unless a server
 // is already reachable), probes readiness, and tears the server down at the end — so it is safe
 // to run immediately after the e2e suite without a server race.
 //
@@ -9,7 +9,8 @@
 // the moment it matches the baseline exactly (0 differing pixels), and we re-capture only the
 // still-unmatched shots, up to a few attempts. The threshold stays maxDiffPixels: 0.
 //
-// Usage: node tests/parity/verify.mjs   (set PARITY_BASE_URL to use an existing server)
+// Usage: node tests/parity/verify.mjs [english|arabic]   (default english; set PARITY_BASE_URL to
+// use an existing server)
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -18,11 +19,25 @@ import { execFileSync, spawn } from 'node:child_process';
 import { chromium } from '@playwright/test';
 
 const ROOT = process.cwd();
-const baseDir = 'tests/parity/baseline';
-const afterDir = 'tests/parity/after';
-const MAX_ATTEMPTS = 4;
-const BASE = process.env.PARITY_BASE_URL || 'http://localhost:4173';
-const APP_DIR = path.join(ROOT, 'apps/english');
+// Each app's baseline, capture harness and port.
+const APPS = {
+  english: { dir: 'apps/english', parity: 'tests/parity', port: 4173 },
+  arabic: { dir: 'apps/arabic', parity: 'apps/arabic/tests/parity', port: 4174 },
+};
+const appName = process.argv[2] || 'english';
+const app = APPS[appName];
+if (!app) {
+  console.error(`unknown app "${appName}" (${Object.keys(APPS).join(', ')})`);
+  process.exit(1);
+}
+const baseDir = path.join(app.parity, 'baseline');
+const afterDir = path.join(app.parity, 'after');
+const captureScript = path.join(app.parity, 'capture.mjs');
+// Bistable antialiasing (two internally stable sub-pixel states per page) can take a few
+// re-captures to land on the baseline's state; a real change never does.
+const MAX_ATTEMPTS = 6;
+const BASE = process.env.PARITY_BASE_URL || `http://localhost:${app.port}`;
+const APP_DIR = path.join(ROOT, app.dir);
 const SERVE = path.join(ROOT, 'packages/ladder-core/scripts/serve.mjs');
 const OUT = path.join(APP_DIR, 'out');
 
@@ -110,7 +125,7 @@ async function diffPx(aPath, bPath) {
 
 function runCapture(only) {
   try {
-    execFileSync('node', ['tests/parity/capture.mjs', afterDir], {
+    execFileSync('node', [captureScript, afterDir], {
       cwd: ROOT,
       stdio: ['ignore', 'ignore', 'pipe'],
       env: { ...process.env, PARITY_BASE_URL: BASE, PARITY_ONLY: only.join(',') },

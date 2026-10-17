@@ -9,13 +9,15 @@
 //
 // The baseline was captured from the source repo (../arabic-ladder at aedfae7) built with
 // NEXT_PUBLIC_SHOW_DRAFTS=true and no base path; PARITY_CONTENT_DIR pointed at its content/.
+// The imported-* shots (a learner's exported progress) were captured from the live site:
+//   PARITY_BASE_URL=https://andifathulms.github.io/arabic-ladder PARITY_ONLY=<imported-* names> \
+//   node apps/arabic/tests/parity/capture.mjs apps/arabic/tests/parity/baseline
 //
 // Determinism: a fixed Date, a seeded Math.random (the test and review draws), reduced motion,
 // no transitions or animations, hidden caret, and a fresh context per shot.
 
 import fs from 'node:fs';
 import path from 'node:path';
-import http from 'node:http';
 import { chromium } from '@playwright/test';
 import matter from 'gray-matter';
 import yaml from 'js-yaml';
@@ -106,6 +108,19 @@ function progressedState(theme) {
     settings: { theme, motion: 'reduce' },
   };
 }
+// The progress file exported from the live standalone app (tests/fixtures/make-live-export.mjs):
+// the same state shown by the live site (baseline) and by this app (after). Theme is set per shot.
+const LIVE_EXPORT = JSON.parse(fs.readFileSync(path.join(path.dirname(CONTENT), 'tests/fixtures/live-export.json'), 'utf8'));
+const importedState = (theme) => ({ ...LIVE_EXPORT, settings: { ...LIVE_EXPORT.settings, theme, motion: 'reduce' } });
+const IMPORTED = [
+  { name: 'imported-home', url: '/' },
+  { name: 'imported-rung-easy-1', url: '/rung/easy-1/' },
+  { name: 'imported-rung-huruf-2', url: '/rung/huruf-2/' },
+  { name: 'imported-words', url: '/words/' },
+  { name: 'imported-me', url: '/me/' },
+  { name: 'imported-settings', url: '/settings/' },
+];
+
 const SEEDED = [
   { name: 'home-progress', url: '/' },
   { name: 'rung-huruf-1-progress', url: '/rung/huruf-1/' },
@@ -231,6 +246,14 @@ async function captureRoutes(browser) {
       await shot(page, f(r.name));
       await ctx.close();
     }
+    for (const r of IMPORTED) {
+      if (!want(f(r.name))) continue;
+      const { ctx, page } = await newPage(browser, vp, importedState(theme));
+      await page.goto(BASE + r.url, { waitUntil: 'domcontentloaded' });
+      await settle(page);
+      await shot(page, f(r.name));
+      await ctx.close();
+    }
     for (const r of SEEDED) {
       if (!want(f(r.name))) continue;
       const { ctx, page } = await newPage(browser, vp, progressedState(theme));
@@ -332,20 +355,14 @@ async function captureTest(browser) {
   });
 }
 
+// The base may be the local server (http) or the live site (https, for the imported-* baseline).
 const reachable = (url) =>
-  new Promise((resolve) => {
-    const req = http.get(url, (res) => {
-      res.resume();
-      resolve(true);
-    });
-    req.on('error', () => resolve(false));
-    req.setTimeout(1000, () => {
-      req.destroy();
-      resolve(false);
-    });
-  });
+  fetch(url, { signal: AbortSignal.timeout(5000) })
+    .then(() => true)
+    .catch(() => false);
 
-if (!(await reachable(BASE))) {
+// (A remote https base is checked by the browser itself.)
+if (!BASE.startsWith('https:') && !(await reachable(BASE))) {
   console.error(`no server at ${BASE}`);
   process.exit(1);
 }
