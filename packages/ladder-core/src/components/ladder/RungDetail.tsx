@@ -4,7 +4,8 @@ import Link from 'next/link';
 import type { LessonSummary, Rung, Title } from '@ladder/core/lib/types';
 import type { ProgressState } from '@ladder/core/lib/progress/types';
 import { lessonState } from '@ladder/core/lib/progress/derive';
-import { placementHref, readHref, testHref, rungHref } from '@ladder/core/lib/routes';
+import { placementHref, readHref, talkHref, testHref, rungHref } from '@ladder/core/lib/routes';
+import { CapstoneCard } from './CapstoneCard';
 import { LessonRow } from './LessonRow';
 import { IconArrowLeft, IconChevron, IconFlag, IconPlay, IconReview } from '../ui/Icon';
 import { ProgressRing } from '../ui/ProgressRing';
@@ -23,18 +24,23 @@ type Props = {
   reading?: ReadingInfo | null;
   /** The course has a placement check (its retake rung offers it again). */
   hasPlacement?: boolean;
+  dialogue?: DialogueInfo | null;
 };
 
 export type TestInfo = { draw: number; pass: number };
 export type ReadingInfo = { title: Title; items: number };
+export type DialogueInfo = { title: Title; lines: number; items: number };
 
-export function RungDetail({ rung, rungs, lessons, progress, test, reading, hasPlacement }: Props) {
+export function RungDetail({ rung, rungs, lessons, progress, test, reading, hasPlacement, dialogue }: Props) {
   const { t, lang } = useT();
   const course = useCourse();
   const Board = course.boardPattern;
   const textAttrs = useTextAttrs();
   // After placement into this rung, the lessons behind missed check items are marked.
   const missed = new Set(progress.placement?.result === rung.id ? progress.placement.missed : []);
+  // Capstone done dates (fixes.capstoneDone).
+  const caps = (course.fixes?.capstoneDone && progress.capstones?.[rung.id]) || {};
+  const dialogueTag = course.capstones?.dialogue?.tagKey;
   const retake = !!hasPlacement && course.placement?.retakeRung === rung.id;
   const cefr = useCefr();
   const subtitle = course.ladder?.rungSubtitle?.(rung, 'board') ?? null;
@@ -121,22 +127,48 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading, hasP
             </ol>
           )}
           {missed.size > 0 && <p className="text-small text-muted">{t('rung.missedHint')}</p>}
-          {reading && (
-            <Link
-              href={readHref(rung.id)}
-              className="mt-3 flex min-h-[72px] items-center gap-4 rounded-lg bg-accent-soft p-4 text-ink no-underline transition-colors duration-quick hover:bg-paper-2"
-            >
-              <span className="flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-md bg-surface text-accent">
-                <IconPlay />
-              </span>
-              <span className="flex min-w-0 flex-1 flex-col">
-                <span className="font-display text-card font-medium">
-                  {t('read.title')}: <span lang={course.target.lang} dir={course.target.dir}>{reading.title.target}</span>
+          {course.capstones ? (
+            (reading || dialogue) && (
+              <div className="mt-3 flex flex-col gap-2">
+                <h3 className="eyebrow">{t('rung.capstones')}</h3>
+                {reading && (
+                  <CapstoneCard
+                    href={readHref(rung.id)}
+                    kind="reading"
+                    title={`${t('read.title')}: ${lang === 'en' ? reading.title.en : reading.title.id}`}
+                    meta={t('read.meta', { n: reading.items })}
+                    done={caps.reading}
+                  />
+                )}
+                {dialogue && (
+                  <CapstoneCard
+                    href={talkHref(rung.id)}
+                    kind="dialogue"
+                    title={`${t('talk.title')}${dialogueTag ? ` · ${t(dialogueTag as never)}` : ''}: ${lang === 'en' ? dialogue.title.en : dialogue.title.id}`}
+                    meta={t('talk.meta', { n: dialogue.lines, k: dialogue.items })}
+                    done={caps.dialogue}
+                  />
+                )}
+              </div>
+            )
+          ) : (
+            reading && (
+              <Link
+                href={readHref(rung.id)}
+                className="mt-3 flex min-h-[72px] items-center gap-4 rounded-lg bg-accent-soft p-4 text-ink no-underline transition-colors duration-quick hover:bg-paper-2"
+              >
+                <span className="flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-md bg-surface text-accent">
+                  <IconPlay />
                 </span>
-                <span className="text-small text-muted tnum">{t('read.meta', { n: reading.items })}</span>
-              </span>
-              <IconChevron className="shrink-0 text-muted" />
-            </Link>
+                <span className="flex min-w-0 flex-1 flex-col">
+                  <span className="font-display text-card font-medium">
+                    {t('read.title')}: <span lang={course.target.lang} dir={course.target.dir}>{reading.title.target}</span>
+                  </span>
+                  <span className="text-small text-muted tnum">{t('read.meta', { n: reading.items })}</span>
+                </span>
+                <IconChevron className="shrink-0 text-muted" />
+              </Link>
+            )
           )}
           {test && (
             <Link

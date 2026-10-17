@@ -105,6 +105,8 @@ export type Line = {
   meaning?: { id: string; en?: string };
   /** Note revealed by tapping the focus word (true: the generic note). */
   note?: Bilingual | true;
+  /** Spoken variety (e.g. Arabic 'eg' for Egyptian), for audio and the island's lang. */
+  variety?: string;
   raw?: unknown;
 };
 
@@ -144,6 +146,9 @@ export type LessonSummary = {
 export type Reading = { rung: string; items: CheckItem[]; [field: string]: unknown };
 
 export type TestPool = { rung: string; draw: number; pass: number; items: CheckItem[] };
+
+/** A rung's dialogue capstone. Course fields are read through the adapter. */
+export type Dialogue = { rung: string; items: CheckItem[]; [field: string]: unknown };
 
 /** A placement check: items tagged by `section`, and score thresholds named by the course. */
 export type Placement = { items: CheckItem[]; thresholds: Record<string, number> };

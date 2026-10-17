@@ -248,4 +248,10 @@ export const en: Record<StringKey, string> = {
   'home.door1Sub': 'Start at the first rung',
   'home.door2': 'I already know some',
   'home.door2Sub': 'Placement check, a few minutes',
+  // Rung capstones (course.capstones); courses override these.
+  'rung.capstones': 'Rung capstones',
+  'rung.capstoneDone': 'done {date}',
+  'talk.title': 'Talk',
+  'talk.meta': 'Conversation · {n} lines · {k} questions',
+  'talk.done': 'Done. You just followed a whole conversation.',
 };

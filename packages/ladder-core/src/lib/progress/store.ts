@@ -177,6 +177,16 @@ export function recordTest(rungId: string, attempt: TestAttempt, passed: boolean
   markPracticedToday();
 }
 
+/** Marks a capstone (e.g. reading, dialogue) done, once; its date is kept. */
+export function completeCapstone(rungId: string, kind: string) {
+  const s = getState();
+  const all = s.capstones ?? {};
+  const prev = all[rungId] ?? {};
+  if (prev[kind]) return;
+  commit({ ...s, capstones: { ...all, [rungId]: { ...prev, [kind]: new Date().toISOString() } } });
+  markPracticedToday();
+}
+
 /**
  * Saves a placement result and marks `climbs` climbed via placement. Never un-climbs a rung, and
  * never overwrites a rung climbed by its test.

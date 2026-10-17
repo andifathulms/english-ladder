@@ -13,7 +13,7 @@ import { stripMarkup } from '../markup';
 import type { ContentAdapter } from './adapter';
 import type { ItemTypeLogic } from '../check/itemTypes';
 import { registerItemTypes } from '../check/itemTypes';
-import type { CheckItem, Lesson, LessonSummary, Line, Placement, Quote, Reading, Rung, TestPool } from '../types';
+import type { CheckItem, Dialogue, Lesson, LessonSummary, Line, Placement, Quote, Reading, Rung, TestPool } from '../types';
 
 // Schemas take the raw YAML; their output is the parsed object.
 type Schema<T> = ZodType<T, ZodTypeDef, unknown>;
@@ -38,6 +38,8 @@ export type ContentModel = {
     lesson: Schema<Omit<Lesson, 'slug' | 'concept' | 'contrast'>>;
     testPool: Schema<TestPool>;
     reading?: Schema<Reading>;
+    /** <rung>/dialogue.yaml, for courses with dialogue capstones. */
+    dialogue?: Schema<Dialogue>;
     /** content/placement.yaml, for courses with a placement check. */
     placement?: Schema<Placement>;
   };
@@ -180,6 +182,11 @@ export function createContent(model: ContentModel, contentDir = path.join(proces
     return model.schemas.reading.parse(readYaml(`${rungId}/reading.yaml`));
   }
 
+  function getDialogue(rungId: string): Dialogue | null {
+    if (!model.schemas.dialogue || !exists(`${rungId}/dialogue.yaml`)) return null;
+    return model.schemas.dialogue.parse(readYaml(`${rungId}/dialogue.yaml`));
+  }
+
   function getPlacement(): Placement | null {
     if (!model.schemas.placement || !exists('placement.yaml')) return null;
     return model.schemas.placement.parse(readYaml('placement.yaml'));
@@ -206,6 +213,7 @@ export function createContent(model: ContentModel, contentDir = path.join(proces
     getAllSummaries,
     getTestPool,
     getReading,
+    getDialogue,
     getPlacement,
     visualDataFor,
   };

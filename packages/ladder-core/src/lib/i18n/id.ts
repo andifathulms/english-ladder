@@ -247,6 +247,12 @@ export const id = {
   'home.door1Sub': 'Mulai dari anak tangga pertama',
   'home.door2': 'Saya sudah punya dasar',
   'home.door2Sub': 'Cek posisi, beberapa menit',
+  // Rung capstones (course.capstones); courses override these.
+  'rung.capstones': 'Penutup anak tangga',
+  'rung.capstoneDone': 'selesai {date}',
+  'talk.title': 'Ngobrol',
+  'talk.meta': 'Percakapan · {n} baris · {k} soal',
+  'talk.done': 'Selesai. Kamu baru saja mengikuti satu percakapan utuh.',
 } as const;
 
 export type StringKey = keyof typeof id;

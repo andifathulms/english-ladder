@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as store from '@ladder/core/lib/progress/store';
 import type { Reading, Rung } from '@ladder/core/lib/types';
 import { rungHref } from '@ladder/core/lib/routes';
 import { useT } from '../ProgressProvider';
@@ -21,6 +22,11 @@ export function ReadingView({ rung, reading }: { rung: Rung; reading: Reading })
   const uiTitles = course.titles === 'ui';
   const [solved, setSolved] = useState<string[]>([]);
   const allDone = solved.length === reading.items.length;
+  const saveDone = !!course.fixes?.capstoneDone;
+  // Capstone completion is saved, and answers feed review (fixes.capstoneDone).
+  useEffect(() => {
+    if (saveDone && allDone) store.completeCapstone(rung.id, 'reading');
+  }, [saveDone, allDone, rung.id]);
 
   return (
     <div className="flex min-h-[100dvh] flex-col">
@@ -102,7 +108,10 @@ export function ReadingView({ rung, reading }: { rung: Rung; reading: Reading })
                 mode="practice"
                 item={item}
                 numberKeys={false}
-                onSolved={() => setSolved((s) => (s.includes(item.id) ? s : [...s, item.id]))}
+                onSolved={(firstTry) => {
+                  if (saveDone) store.recordAnswer(item.id, firstTry);
+                  setSolved((s) => (s.includes(item.id) ? s : [...s, item.id]));
+                }}
               />
             </div>
           ))}

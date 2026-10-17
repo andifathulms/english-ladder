@@ -1,7 +1,7 @@
 // How the engine reads a course's lessons. Each course's schema names its fields its own way
 // (English `en`, Arabic `ar`/`tr`/`eg`, …); the adapter maps them to the engine's shapes, so core
 // never reads a course field by name. Pure functions: used at build time and in the client.
-import type { Gloss, Lesson, Line, Reading, Rung, Title } from '../types';
+import type { Bilingual, Dialogue, Gloss, Lesson, Line, Reading, Rung, Title } from '../types';
 
 export type ContentAdapter = {
   lesson: {
@@ -26,5 +26,13 @@ export type ContentAdapter = {
     /** The translation shown under "Translation". */
     translation(r: Reading, lang: 'id' | 'en'): { text: string; lang: string };
     glossary(r: Reading): Gloss[];
+  };
+  /** Dialogue capstones (courses with <rung>/dialogue.yaml). */
+  dialogue?: {
+    title(d: Dialogue): Title;
+    lines(d: Dialogue): { who: string; line: Line }[];
+    note(d: Dialogue): Bilingual | null;
+    /** Spoken variety of the whole dialogue (e.g. 'eg'). */
+    variety?(d: Dialogue): string | undefined;
   };
 };

@@ -126,12 +126,14 @@ export type PlacementConfig = {
 };
 
 export type CourseFixes = {
+  /** Capstone completion is saved and shown with its date; reading answers feed review (EL issue 4). */
+  capstoneDone?: boolean;
   /** CEFR labels in the UI language ("Pra-A1" in Indonesian for Pre-A1). */
   cefrLabelLocalised?: boolean;
 };
 
 /** Where a target line appears; the Sentence slot picks size, play button and note from it. */
-export type SentenceUse = 'example' | 'worked' | 'pairOff' | 'pairNatural' | 'reading';
+export type SentenceUse = 'example' | 'worked' | 'pairOff' | 'pairNatural' | 'reading' | 'dialogue';
 export type SentenceSlotProps = { line: Line; use: SentenceUse };
 
 /** A strand card on the Examples or Contrast step. Renders nothing when the lesson has none.
@@ -200,6 +202,19 @@ export type CourseConfig = {
   itemTypes?: Record<string, ItemTypeLogic>;
   /** Strand cards per lesson step, in order (e.g. English Talk + Sound, then Words). */
   strands?: { examples?: StrandCard[]; contrast?: StrandCard[] };
+  /** Rung capstones (reading, dialogue) shown as cards in their own section of the rung page. */
+  capstones?: {
+    dialogue?: {
+      /** String key appended to the dialogue's name (Arabic: 'lesson.mesir', "Mesir"). */
+      tagKey?: string;
+      /** Badge in the dialogue header and its card's icon (Arabic: the EG chip). */
+      Badge?: ComponentType;
+      /** Extra classes for the dialogue card and text section (Arabic: the --eg inline-start edge). */
+      edgeClass?: string;
+      /** Classes for the dialogue card's icon square. */
+      iconClass?: string;
+    };
+  };
   /** Home: the first-visit board. */
   home?: {
     /** 'start' (default): one button to the first lesson. 'twoDoor': start from the first rung, or

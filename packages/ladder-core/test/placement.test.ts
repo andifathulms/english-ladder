@@ -55,3 +55,19 @@ describe('placement', () => {
     expect(continueTarget([rung], [first], store.getState())).toMatchObject({ kind: 'lesson', step: 0, text: { text: 'q' } });
   });
 });
+
+describe('capstones', () => {
+  beforeEach(() => {
+    localStorage.clear();
+    store.configure({ storageKey: 'c:v1', schemaVersion: 1, defaults: CORE_DEFAULT_SETTINGS, features: { capstones: true } });
+  });
+  afterAll(() => store.configure(saved));
+
+  it('completeCapstone keeps the first done date per rung and kind', () => {
+    store.completeCapstone('easy-1', 'reading');
+    const first = store.getState().capstones!['easy-1'].reading;
+    store.completeCapstone('easy-1', 'reading');
+    store.completeCapstone('easy-1', 'dialogue');
+    expect(store.getState().capstones!['easy-1']).toEqual({ reading: first, dialogue: expect.any(String) });
+  });
+});

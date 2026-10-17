@@ -18,6 +18,8 @@ export function rungPage(content: Content) {
       if (!rung) notFound();
       const pool = content.getTestPool(rung.id);
       const reading = content.getReading(rung.id);
+      const dialogue = content.getDialogue(rung.id);
+      const talk = content.adapter.dialogue;
       return (
         <RungView
           rung={rung}
@@ -26,6 +28,11 @@ export function rungPage(content: Content) {
           test={pool ? { draw: pool.draw, pass: pool.pass } : null}
           reading={reading ? { title: content.adapter.reading.title(reading), items: reading.items.length } : null}
           hasPlacement={!!content.getPlacement()}
+          dialogue={
+            dialogue && talk
+              ? { title: talk.title(dialogue), lines: talk.lines(dialogue).length, items: dialogue.items.length }
+              : null
+          }
         />
       );
     },
