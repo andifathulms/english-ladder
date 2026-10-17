@@ -9,14 +9,18 @@ import { useReducedMotion, useT } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
 import { shellDir } from '@ladder/core/course/types';
 import { NotchBar } from '../ladder/NotchBar';
+import { Accented } from '../ladder/ContinueCard';
+import { TargetText } from '../ui/TargetText';
 
 type Props = { rung: Rung; next: Rung | null; onReview: () => void };
 
 /** The one celebratory moment in the app (DESIGN §6.7). */
 export function ClimbMoment({ rung, next, onReview }: Props) {
-  const { t } = useT();
+  const { t, lang } = useT();
   const course = useCourse();
   const Board = course.boardPattern;
+  const climb = course.climb;
+  const subtitle = course.ladder?.rungSubtitle?.(rung, 'board') ?? null;
   const reduced = useReducedMotion();
   const [climbed, setClimbed] = useState(false);
 
@@ -38,12 +42,12 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
       <div className="page relative flex min-h-full max-w-lesson flex-col justify-center gap-7 py-8">
         {/* Ladder fragment: this rung and the next */}
         <div className="relative mx-auto w-full max-w-[340px] px-[18px]" style={{ height: ROW * 2 + 16 }} aria-hidden>
-          <span className="absolute bottom-0 left-[4px] top-0 w-[6px] rounded-full" style={{ background: 'var(--wood)' }} />
-          <span className="absolute bottom-0 right-[4px] top-0 w-[6px] rounded-full" style={{ background: 'var(--wood)' }} />
+          <span className="absolute bottom-0 start-[4px] top-0 w-[6px] rounded-full" style={{ background: 'var(--wood)' }} />
+          <span className="absolute bottom-0 end-[4px] top-0 w-[6px] rounded-full" style={{ background: 'var(--wood)' }} />
           {[next, rung].map((r, i) => (
             <div
               key={r?.id ?? 'next'}
-              className="absolute left-[18px] right-[18px] flex items-center justify-between gap-3 rounded-sm px-3"
+              className="absolute start-[18px] end-[18px] flex items-center justify-between gap-3 rounded-sm px-3"
               style={{
                 top: 8 + i * ROW,
                 height: ROW - 16,
@@ -59,7 +63,7 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
                 </span>
               )}
               <span
-                className="absolute -bottom-[10px] -left-[14px] -right-[14px] h-[4px] rounded-full"
+                className="absolute -bottom-[10px] -start-[14px] -end-[14px] h-[4px] rounded-full"
                 style={{ background: i === 1 && climbed ? 'var(--rung)' : 'var(--wood-dark)', transition: 'background var(--m-moment-d) var(--ease-moment)' }}
               />
             </div>
@@ -77,11 +81,28 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
           />
         </div>
 
-        <div className="flex flex-col gap-3 text-center">
-          <h1 id="climb-title" className="text-hero text-board-ink" lang={course.target.lang} dir={course.target.dir}>
+        <div className={`flex flex-col ${climb ? 'items-center ' : ''}gap-3 text-center`}>
+          {climb && subtitle && (
+            <TargetText block as="p" size="title" face="display" className="text-center text-brass">
+              {subtitle}
+            </TargetText>
+          )}
+          <h1
+            id="climb-title"
+            className="text-hero text-board-ink"
+            lang={course.fixes?.climbTitleTranslated ? lang : course.target.lang}
+            dir={course.fixes?.climbTitleTranslated ? undefined : course.target.dir}
+          >
             {t('climb.title', { rung: rung.name })}
           </h1>
-          <p className="font-display text-h2 italic text-brass">{t('climb.line')}</p>
+          {climb ? (
+            <p className="font-display text-h2 text-board-ink">
+              <Accented text={t('climb.line')} />
+            </p>
+          ) : (
+            <p className="font-display text-h2 italic text-brass">{t('climb.line')}</p>
+          )}
+          {climb?.Extra && <climb.Extra />}
         </div>
 
         <div className="flex flex-col items-center gap-3">

@@ -136,6 +136,8 @@ export type LessonSession = {
 };
 
 export type CourseFixes = {
+  /** The climb moment's title is in the UI language, not marked as the target language (EL issue 13). */
+  climbTitleTranslated?: boolean;
   /** A close control while a quick review runs; answers already given stay recorded (EL issue 3). */
   reviewExit?: boolean;
   /** The rung test's progress bar counts questions ("Question 3 of 16"), not lesson steps (EL issue 6). */
@@ -243,6 +245,9 @@ export type CourseConfig = {
       iconClass?: string;
     };
   };
+  /** The climb moment: the rung's subtitle above the title, the line with its last word accented,
+   *  and an extra line below (Arabic: سُلَّمًا سُلَّمًا). Absent: English's layout. */
+  climb?: { Extra?: ComponentType };
   /** Home: the first-visit board. */
   home?: {
     /** 'start' (default): one button to the first lesson. 'twoDoor': start from the first rung, or
