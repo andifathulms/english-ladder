@@ -9,7 +9,7 @@ import { sfx } from '@ladder/core/lib/speech/sfx';
 import { lessonHref, rungHref, testHref } from '@ladder/core/lib/routes';
 import { useProgress, useSettings, useT } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
-import { shellDir } from '@ladder/core/course/types';
+import { shellDir, type LessonSession } from '@ladder/core/course/types';
 import { IconArrowLeft, IconArrowRight, IconCheck, IconClose } from '../ui/Icon';
 import { Badge } from '../ui/Badge';
 import { NotchBar } from '../ladder/NotchBar';
@@ -24,6 +24,10 @@ import { ExplainToggle } from './ExplainToggle';
 import { CheckStep } from '../check/CheckStep';
 import { VisualStage } from '../visuals/VisualStage';
 import { STEP_KEYS } from './steps';
+
+const NO_SESSION: LessonSession = {};
+const useNoSession = (): LessonSession => NO_SESSION;
+const noWrap = (children: React.ReactNode) => children;
 
 type Props = {
   lesson: Lesson;
@@ -47,6 +51,9 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
   const [checkIndex, setCheckIndex] = useState(0);
   const [solved, setSolved] = useState<boolean[]>(() => lesson.check.map(() => false));
   const [freshNotch, setFreshNotch] = useState<number | undefined>(undefined);
+  const [localExplain, setLocalExplain] = useState<'id' | 'en' | null>(null);
+  const useSession = course.lesson?.useSession ?? useNoSession;
+  const session = useSession(rung, step);
   const headingRef = useRef<HTMLDivElement>(null);
   const announceRef = useRef<HTMLParagraphElement>(null);
 
@@ -148,11 +155,17 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
 
   const read = course.adapter.lesson;
   const title = read.title(lesson);
-  const effective = (settings.explain === 'rung' ? rung.explain_lang : settings.explain) as 'id' | 'en' | 'mixed';
+  const explainUi = course.lesson?.explain === 'ui';
+  const fromSetting = (settings.explain === 'rung' ? rung.explain_lang : settings.explain) as 'id' | 'en' | 'mixed';
+  // fixes.lessonScopedToggles: the pill sets this lesson's language only.
+  const scopedPill = !!course.fixes?.lessonScopedToggles;
+  const effective = explainUi ? lang : (localExplain ?? fromSetting);
   // Short strand cards have no collapsed translation, so mixed shows English.
   const cardLang = effective === 'id' ? 'id' : 'en';
   const explain = (b: { id: string; en: string }) =>
-    effective === 'id' ? (
+    explainUi ? (
+      <Prose text={lang === 'en' ? b.en : b.id} lang={lang} />
+    ) : effective === 'id' ? (
       <Prose text={b.id} lang="id" />
     ) : effective === 'en' ? (
       <Prose text={b.en} lang="en" />
@@ -232,7 +245,8 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
         <>
           <StepLabel>{t('step.examples')}</StepLabel>
           <p className="text-small text-muted">{t('lesson.tapFocus')}</p>
-          <ul className="flex flex-col gap-5">
+          {session.examplesIntro}
+          <ul className={course.lesson?.exampleListClass ?? 'flex flex-col gap-5'}>
             {read.examples(lesson).map((ex) => (
               <li key={ex.text}>
                 <TargetSentence line={ex} use="example" />
@@ -352,7 +366,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
               </span>
             </div>
           </div>
-          <ExplainToggle effective={effective} />
+          {session.toggles ?? (!explainUi && <ExplainToggle effective={effective} onChange={scopedPill ? setLocalExplain : undefined} />)}
           <Link
             href={rungHref(rung.id)}
             aria-label={t('lesson.close')}
@@ -366,13 +380,15 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
       <main className="flex-1 bg-paper py-5 sm:py-7">
         <p ref={announceRef} className="sr-only" aria-live="polite" />
         <div className="page max-w-lesson sm:rounded-lg sm:bg-surface sm:px-7 sm:py-7 sm:shadow-e2">
-          <div
-            key={step}
-            ref={headingRef}
-            className={`flex flex-col gap-5 ${ready ? (dir === 'fwd' ? 'step-fwd' : 'step-back') : ''}`}
-          >
-            {body}
-          </div>
+          {(session.wrap ?? noWrap)(
+            <div
+              key={step}
+              ref={headingRef}
+              className={`flex flex-col gap-5 ${ready ? (dir === 'fwd' ? 'step-fwd' : 'step-back') : ''}`}
+            >
+              {body}
+            </div>,
+          )}
         </div>
       </main>
 

@@ -4,7 +4,7 @@ import * as store from '@ladder/core/lib/progress/store';
 import { useT } from '../ProgressProvider';
 
 /** ID / EN switch for explanations, always in the lesson's top bar. */
-export function ExplainToggle({ effective }: { effective: 'id' | 'en' | 'mixed' }) {
+export function ExplainToggle({ effective, onChange }: { effective: 'id' | 'en' | 'mixed'; onChange?: (v: 'id' | 'en') => void }) {
   const { t } = useT();
   const opts = [
     { v: 'id' as const, short: 'ID', name: 'Bahasa Indonesia', on: effective === 'id' },
@@ -20,7 +20,7 @@ export function ExplainToggle({ effective }: { effective: 'id' | 'en' | 'mixed' 
           aria-pressed={o.on}
           aria-label={o.name}
           title={o.name}
-          onClick={() => store.setSettings({ explain: o.v })}
+          onClick={() => (onChange ? onChange(o.v) : store.setSettings({ explain: o.v }))}
           className={`label min-h-[38px] min-w-[40px] rounded-full px-2 transition-colors duration-quick ${
             o.on ? 'bg-surface text-ink shadow-e1' : 'text-muted hover:text-ink'
           }`}

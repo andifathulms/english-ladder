@@ -125,7 +125,19 @@ export type PlacementConfig = {
   Wrap?: ComponentType<{ children: React.ReactNode }>;
 };
 
+/** What a lesson session adds to the player. */
+export type LessonSession = {
+  /** Controls in the top bar, in place of the explanation pill. */
+  toggles?: React.ReactNode;
+  /** Wraps the step body (e.g. a context provider for the session's state). */
+  wrap?: (children: React.ReactNode) => React.ReactNode;
+  /** Shown at the top of the Examples step (e.g. a one-time hint). */
+  examplesIntro?: React.ReactNode;
+};
+
 export type CourseFixes = {
+  /** The explanation pill changes the current lesson only, not the global setting (EL issue 5). */
+  lessonScopedToggles?: boolean;
   /** Capstone completion is saved and shown with its date; reading answers feed review (EL issue 4). */
   capstoneDone?: boolean;
   /** CEFR labels in the UI language ("Pra-A1" in Indonesian for Pre-A1). */
@@ -202,6 +214,16 @@ export type CourseConfig = {
   itemTypes?: Record<string, ItemTypeLogic>;
   /** Strand cards per lesson step, in order (e.g. English Talk + Sound, then Words). */
   strands?: { examples?: StrandCard[]; contrast?: StrandCard[] };
+  /** The lesson player. */
+  lesson?: {
+    /** 'setting' (default): explanations follow the learner's setting or the rung default, with the
+     *  ID/EN pill. 'ui': always the UI language, no pill. */
+    explain?: 'setting' | 'ui';
+    /** Lesson-scoped state, alive only while the lesson is open (Arabic: Latin and Harakat toggles). */
+    useSession?: (rung: Rung, step: number) => LessonSession;
+    /** Classes for the Examples step's list (default 'flex flex-col gap-5'). */
+    exampleListClass?: string;
+  };
   /** Rung capstones (reading, dialogue) shown as cards in their own section of the rung page. */
   capstones?: {
     dialogue?: {
