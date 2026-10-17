@@ -11,6 +11,7 @@ import { ProgressRing } from '../ui/ProgressRing';
 import { tierName } from '../ui/tier';
 import { useT } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
+import { useTextAttrs } from '../ui/TargetText';
 
 type Props = {
   rung: Rung;
@@ -28,6 +29,7 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Pr
   const { t, lang } = useT();
   const course = useCourse();
   const Board = course.boardPattern;
+  const textAttrs = useTextAttrs();
   const mine = lessons.filter((l) => l.rung === rung.id).sort((a, b) => a.order - b.order);
   const tests = progress.rungs[rung.id]?.tests ?? [];
   const best = tests.length ? Math.max(...tests.map((x) => x.score)) : null;
@@ -84,7 +86,7 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Pr
         <section className="flex flex-col gap-3">
           <h2 className="text-h2">{t('rung.soonTitle', { rung: rung.name })}</h2>
           <p className="text-muted">{t('rung.soonBody')}</p>
-          <ul className="flex flex-wrap gap-2" lang={course.target.lang} dir={course.target.dir}>
+          <ul className="flex flex-wrap gap-2" lang={textAttrs.lang} dir={textAttrs.dir}>
             {rung.topics.map((topic) => (
               <li key={topic} className="card px-3 py-1 text-small">
                 {topic}
@@ -159,7 +161,7 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Pr
               <li key={r.id}>
                 <Link href={rungHref(r.id)} className="card flex flex-col px-3 py-2 text-small text-ink no-underline hover:bg-paper-2">
                   <span className="font-display font-semibold">{r.name}</span>
-                  <span className="text-muted" lang={course.target.lang} dir={course.target.dir}>
+                  <span className="text-muted" lang={textAttrs.lang} dir={textAttrs.dir}>
                     {shared.join(', ')}
                   </span>
                 </Link>

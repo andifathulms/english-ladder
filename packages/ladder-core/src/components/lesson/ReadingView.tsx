@@ -9,14 +9,16 @@ import { useCourse } from '@ladder/core/course/context';
 import { IconArrowLeft } from '../ui/Icon';
 import { CheckItemView } from '../check/CheckItemView';
 import { TargetSentence } from './TargetSentence';
+import { TargetText } from '../ui/TargetText';
 
 /** The rung's Read & listen capstone: one short text read aloud, then a few questions. */
 export function ReadingView({ rung, reading }: { rung: Rung; reading: Reading }) {
-  const { t } = useT();
+  const { t, lang } = useT();
   const course = useCourse();
   const read = course.adapter.reading;
   const title = read.title(reading);
-  const translation = read.translation(reading, 'id');
+  const translation = read.translation(reading, lang);
+  const uiTitles = course.titles === 'ui';
   const [solved, setSolved] = useState<string[]>([]);
   const allDone = solved.length === reading.items.length;
 
@@ -40,15 +42,28 @@ export function ReadingView({ rung, reading }: { rung: Rung; reading: Reading })
       <main className="page flex max-w-lesson flex-1 flex-col gap-6 py-7">
         <div className="flex flex-col gap-1">
           <p className="eyebrow">{t('read.title')}</p>
-          <h1 className="text-h1" lang={course.target.lang} dir={course.target.dir}>
-            {title.target}
-          </h1>
-          <p className="id-text" lang="id">
-            {title.id}
-          </p>
+          {uiTitles ? (
+            <>
+              <h1 className="text-h1" lang={lang}>
+                {lang === 'en' ? title.en : title.id}
+              </h1>
+              <TargetText block as="p" size="title" face="display" className="text-muted">
+                {title.target}
+              </TargetText>
+            </>
+          ) : (
+            <>
+              <h1 className="text-h1" lang={course.target.lang} dir={course.target.dir}>
+                {title.target}
+              </h1>
+              <p className="id-text" lang="id">
+                {title.id}
+              </p>
+            </>
+          )}
         </div>
 
-        <section className="card flex flex-col gap-4 p-5" aria-label={title.target ?? title.id}>
+        <section className="card flex flex-col gap-4 p-5" aria-label={uiTitles ? title.id : (title.target ?? title.id)}>
           <TargetSentence line={read.text(reading, rung)} use="reading" />
           <details>
             <summary className="label cursor-pointer py-2 text-accent">{t('read.translation')}</summary>

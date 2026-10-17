@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
 import type { Settings } from '@ladder/core/lib/progress/types';
 import type { MigrationStep, ProgressConfig, ProgressFeatures } from '@ladder/core/lib/progress/config';
-import type { CheckItem, ExtraItem, Gloss, Lesson, Line, Rung } from '@ladder/core/lib/types';
+import type { CheckItem, ExtraItem, Gloss, Lesson, Line, Quote, Rung } from '@ladder/core/lib/types';
 import type { ContentAdapter } from '@ladder/core/lib/content/adapter';
 import type { ItemTypeLogic } from '@ladder/core/lib/check/itemTypes';
 import type { StringTables, UiLang } from '@ladder/core/lib/i18n';
@@ -93,6 +93,17 @@ export type CheckSlots = {
   >;
 };
 
+/** Props of the TargetText slot (the same shape as Arabic's ArIsland). */
+export type TargetTextProps = Omit<React.HTMLAttributes<HTMLElement>, 'dir' | 'lang'> & {
+  children: React.ReactNode;
+  /** A block element instead of an inline one. */
+  block?: boolean;
+  as?: 'div' | 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'li';
+  size?: 'sentence' | 'body' | 'small' | 'glyph' | 'title' | 'inherit';
+  face?: 'text' | 'display' | 'ui';
+  variety?: string;
+};
+
 /** Where a target line appears; the Sentence slot picks size, play button and note from it. */
 export type SentenceUse = 'example' | 'worked' | 'pairOff' | 'pairNatural' | 'reading';
 export type SentenceSlotProps = { line: Line; use: SentenceUse };
@@ -110,7 +121,26 @@ export type CourseConfig = {
   cachePrefix: string;
   exportFilePrefix: string;
   repoUrl: string;
-  target: { lang: string; dir: 'ltr' | 'rtl'; fontClass: string; sentenceClass: string };
+  target: {
+    lang: string;
+    dir: 'ltr' | 'rtl';
+    fontClass: string;
+    sentenceClass: string;
+    /** Attributes on plain spans of target/metadata text outside the TargetText slot (topics,
+     *  threads, test-result answers). Default: { lang, dir } above. */
+    textAttrs?: { lang?: string; dir?: 'ltr' | 'rtl' };
+  };
+  /**
+   * How titles read. 'target' (English): the target-language title leads, the Indonesian one
+   * below. 'ui': the title in the learner's UI language leads, the target title is a TargetText
+   * island beside it (Arabic: Indonesian title, then the Arabic one).
+   */
+  titles?: 'target' | 'ui';
+  /** Explanation prose: how **term** / [[focus]] tokens and plain text runs render. */
+  prose?: {
+    Term?: ComponentType<{ text: string; kind: 'strong' | 'focus' }>;
+    Text?: ComponentType<{ text: string }>;
+  };
   /**
    * The app shell's direction: lesson arrow keys and the climb marker follow it. Defaults to the
    * target's. A course whose page stays LTR with RTL target islands (Arabic) sets 'ltr'.
@@ -150,6 +180,10 @@ export type CourseConfig = {
   components?: {
     /** A target-language line (examples, worked, pair, reading, …). Default: core Sentence. */
     Sentence?: ComponentType<SentenceSlotProps>;
+    /** Target text outside sentences: titles, keywords, glossary words (Arabic: ArIsland). */
+    TargetText?: ComponentType<TargetTextProps>;
+    /** The quoted resume line on the board (continue card). Default: the display serif line. */
+    BoardQuote?: ComponentType<{ quote: Quote; rung: Rung | undefined }>;
   };
   /** Visual id → component (the lesson/scene registry). */
   visuals: Record<string, ComponentType<never>>;

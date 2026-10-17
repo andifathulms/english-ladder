@@ -57,7 +57,8 @@ function StepDots({ step }: { step: number }) {
 type CardProps = { target: ContinueTarget; firstLessonHref: string | null; starterHref?: string | null; rungs: Rung[] };
 
 export function ContinueCard({ target, firstLessonHref, starterHref, rungs }: CardProps) {
-  const Board = useCourse().boardPattern;
+  const { boardPattern: Board, components } = useCourse();
+  const BoardQuote = components?.BoardQuote;
   const { t, lang } = useT();
   const shell = 'board flex flex-col gap-4 p-6 min-[900px]:gap-5 min-[900px]:p-9';
 
@@ -116,7 +117,7 @@ export function ContinueCard({ target, firstLessonHref, starterHref, rungs }: Ca
         <span aria-hidden> · {t(STEP_KEYS[step])}</span>
         {step > 0 && <span className="sr-only"> · {t('home.step', { n: step + 1 })}</span>}
       </p>
-      <BoardSentence quote={text} />
+      {BoardQuote ? <BoardQuote quote={text} rung={rung} /> : <BoardSentence quote={text} />}
       <p className={`text-small text-board-muted ${lang === 'en' ? '' : 'italic'}`} lang={lang}>
         {lang === 'en' ? lesson.title.en : lesson.title.id}
       </p>

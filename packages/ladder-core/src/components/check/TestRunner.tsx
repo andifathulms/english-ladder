@@ -11,6 +11,7 @@ import * as store from '@ladder/core/lib/progress/store';
 import { lessonHref, rungHref } from '@ladder/core/lib/routes';
 import { useProgress, useT, type T } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
+import { useTextAttrs } from '../ui/TargetText';
 import { IconArrowLeft, IconArrowRight, IconCheck, IconClose } from '../ui/Icon';
 import { BottomActionBar } from '../lesson/BottomActionBar';
 import { StepBar } from '../lesson/StepBar';
@@ -164,7 +165,11 @@ export function TestRunner({ rung, next, pool, lessons }: Props) {
                 <li key={l.id}>
                   <Link href={lessonHref(l)} className="inline-flex min-h-touch items-center gap-2">
                     <span className="label tnum text-muted">{l.order}</span>
-                    <span lang={course.target.lang} dir={course.target.dir}>{l.title.target}</span>
+                    {course.titles === 'ui' ? (
+                      <span lang={lang}>{lang === 'en' ? l.title.en : l.title.id}</span>
+                    ) : (
+                      <span lang={course.target.lang} dir={course.target.dir}>{l.title.target}</span>
+                    )}
                   </Link>
                 </li>
               ))}
@@ -179,7 +184,12 @@ export function TestRunner({ rung, next, pool, lessons }: Props) {
             .map(([lid, rs]) => (
               <div key={lid} className="flex flex-col gap-3">
                 <h3 className="eyebrow">
-                  {lessonOf(lid)?.order} · <span lang={course.target.lang} dir={course.target.dir}>{lessonOf(lid)?.title.target}</span>
+                  {lessonOf(lid)?.order} ·{' '}
+                  {course.titles === 'ui' ? (
+                    <span lang={lang}>{lang === 'en' ? lessonOf(lid)?.title.en : lessonOf(lid)?.title.id}</span>
+                  ) : (
+                    <span lang={course.target.lang} dir={course.target.dir}>{lessonOf(lid)?.title.target}</span>
+                  )}
                 </h3>
                 <ul className="flex flex-col gap-3">
                   {rs.map(({ item, given, ok }) => (
@@ -209,7 +219,7 @@ export function TestRunner({ rung, next, pool, lessons }: Props) {
 }
 
 function ReviewRow({ item, given, ok, t }: { item: CheckItem; given: string; ok: boolean; lang: string; t: T }) {
-  const { target } = useCourse();
+  const target = useTextAttrs();
   return (
     <li className="card flex flex-col gap-2 p-4">
       <p className="flex items-start gap-2">

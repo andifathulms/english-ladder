@@ -6,14 +6,18 @@ import { useCourse } from '@ladder/core/course/context';
  * words and *italic* marks Indonesian phrases, matching the app's type conventions.
  */
 export function Prose({ text, lang }: { text: string; lang: 'id' | 'en' }) {
-  const { target } = useCourse();
+  const { target, prose } = useCourse();
+  const Term = prose?.Term;
+  const Text = prose?.Text;
   return (
     <div lang={lang} className="flex max-w-measure flex-col gap-3">
       {text.split(/\n\s*\n/).map((para, i) => (
         <p key={i}>
           {parseInline(para.replace(/\s*\n\s*/g, ' ')).map((tok, j) => {
             if (tok.t === 'strong')
-              return (
+              return Term ? (
+                <Term key={j} text={tok.v} kind="strong" />
+              ) : (
                 <strong key={j} lang={target.lang} dir={target.dir} className="font-bold text-accent">
                   {tok.v}
                 </strong>
@@ -21,16 +25,18 @@ export function Prose({ text, lang }: { text: string; lang: 'id' | 'en' }) {
             if (tok.t === 'em')
               return (
                 <em key={j} lang={lang === 'en' ? 'id' : undefined}>
-                  {tok.v}
+                  {Text ? <Text text={tok.v} /> : tok.v}
                 </em>
               );
             if (tok.t === 'focus')
-              return (
+              return Term ? (
+                <Term key={j} text={tok.v} kind="focus" />
+              ) : (
                 <span key={j} lang={target.lang} dir={target.dir} className="focus-word">
                   {tok.v}
                 </span>
               );
-            return <span key={j}>{tok.v}</span>;
+            return <span key={j}>{Text ? <Text text={tok.v} /> : tok.v}</span>;
           })}
         </p>
       ))}

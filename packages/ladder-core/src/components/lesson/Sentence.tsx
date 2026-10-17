@@ -35,9 +35,11 @@ type Props = {
   note?: Bilingual | true;
   off?: boolean;
   className?: string;
+  /** Overrides the course's target lang/dir (e.g. a Latin line in a non-Latin course). */
+  attrs?: { lang?: string; dir?: 'ltr' | 'rtl' };
 };
 
-export function Sentence({ en, id, play = true, size = 'sentence', note, off, className = '' }: Props) {
+export function Sentence({ en, id, play = true, size = 'sentence', note, off, className = '', attrs }: Props) {
   const { t, lang } = useT();
   const { target } = useCourse();
   const speak = useSpeak();
@@ -83,8 +85,8 @@ export function Sentence({ en, id, play = true, size = 'sentence', note, off, cl
     <div className={`flex flex-col gap-1 ${className}`}>
       <div className="flex items-start gap-2">
         <p
-          lang={target.lang}
-          dir={target.dir}
+          lang={attrs ? attrs.lang : target.lang}
+          dir={attrs ? attrs.dir : target.dir}
           className={`${size === 'sentence' ? 'font-display text-sentence font-medium' : 'text-body'} ${
             off ? 'off-text' : 'text-ink'
           } min-w-0 flex-1 text-start ${target.sentenceClass}`}

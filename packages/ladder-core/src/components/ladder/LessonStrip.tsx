@@ -7,6 +7,7 @@ import { lessonState, type LessonState } from '@ladder/core/lib/progress/derive'
 import { lessonHref } from '@ladder/core/lib/routes';
 import { useT, type T } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
+import { TargetText } from '../ui/TargetText';
 
 export function stateWord(s: LessonState, t: T, minutes: number): string {
   switch (s.kind) {
@@ -68,14 +69,31 @@ export function LessonStrip({ lessons, progress, currentId }: { lessons: LessonS
                     </StatusPill>
                   ) : null}
                 </span>
-                <span className="font-display text-card font-medium" lang={course.target.lang} dir={course.target.dir}>
-                  {l.title.target}
-                </span>
+                {course.titles === 'ui' ? (
+                  <>
+                    <span className="font-display text-card font-medium" lang={lang}>
+                      {lang === 'en' ? l.title.en : l.title.id}
+                    </span>
+                    <TargetText block size="small" className="text-muted">
+                      {l.title.target}
+                    </TargetText>
+                  </>
+                ) : (
+                  <span className="font-display text-card font-medium" lang={course.target.lang} dir={course.target.dir}>
+                    {l.title.target}
+                  </span>
+                )}
               </span>
               <span className="flex items-center justify-between gap-2 border-t border-rule px-4 py-3">
-                <span className={`min-w-0 truncate text-small text-muted ${lang === 'en' ? '' : 'italic'}`} lang={lang}>
-                  {lang === 'en' ? stateWord(s, t, l.minutes) : l.title.id}
-                </span>
+                {course.titles === 'ui' ? (
+                  <span className="min-w-0 truncate text-small text-muted" lang={lang}>
+                    {s.kind === 'new' ? t('lesson.state.new') : stateWord(s, t, l.minutes)}
+                  </span>
+                ) : (
+                  <span className={`min-w-0 truncate text-small text-muted ${lang === 'en' ? '' : 'italic'}`} lang={lang}>
+                    {lang === 'en' ? stateWord(s, t, l.minutes) : l.title.id}
+                  </span>
+                )}
                 <span className="label shrink-0 tnum text-muted">{t('lesson.minutes', { n: l.minutes })}</span>
               </span>
             </Link>

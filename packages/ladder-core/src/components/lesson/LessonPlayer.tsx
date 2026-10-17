@@ -17,6 +17,7 @@ import { BottomActionBar } from './BottomActionBar';
 import { PairCard } from './PairCard';
 import { Prose } from './Prose';
 import { TargetSentence } from './TargetSentence';
+import { TargetText } from '../ui/TargetText';
 import { StepBar } from './StepBar';
 import { StepLabel } from './StepLabel';
 import { ExplainToggle } from './ExplainToggle';
@@ -176,12 +177,30 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
         <>
           <StepLabel>{t('step.concept')}</StepLabel>
           <div className="flex flex-col gap-1">
-            <h1 className="text-h1" lang={course.target.lang} dir={course.target.dir}>
-              {title.target}
-            </h1>
-            <p className="id-text" lang="id">
-              {title.id}
-            </p>
+            {course.titles === 'ui' ? (
+              <>
+                <h1 className="text-h1" lang={lang}>
+                  {lang === 'en' ? title.en : title.id}
+                </h1>
+                {lang === 'en' && (
+                  <p className="id-text" lang="id">
+                    {title.id}
+                  </p>
+                )}
+                <TargetText block as="p" size="title" face="display" className="text-muted">
+                  {title.target}
+                </TargetText>
+              </>
+            ) : (
+              <>
+                <h1 className="text-h1" lang={course.target.lang} dir={course.target.dir}>
+                  {title.target}
+                </h1>
+                <p className="id-text" lang="id">
+                  {title.id}
+                </p>
+              </>
+            )}
           </div>
           {explain(lesson.concept)}
         </>

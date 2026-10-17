@@ -8,13 +8,18 @@ import { IconArrowRight } from '../ui/Icon';
 import { useT } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
 import { StatusPill } from './LessonStrip';
+import { TargetText } from '../ui/TargetText';
 
 /** One lesson in the rung's list: a big serif numeral, the title, state as dot + word. */
 export function LessonRow({ lesson, state, current }: { lesson: LessonSummary; state: LessonState; current?: boolean }) {
   const { t, lang } = useT();
   const course = useCourse();
   const done = state.kind === 'done' || state.kind === 'review';
-  const sub = lang === 'en' ? null : lesson.title.id;
+  const uiTitles = course.titles === 'ui';
+  // 'target' titles: the target title leads, Indonesian below (unless the UI is English).
+  // 'ui' titles: the UI-language title leads, Indonesian below only in the English UI.
+  const sub = uiTitles ? (lang === 'en' ? lesson.title.id : null) : lang === 'en' ? null : lesson.title.id;
+  const keywords = !!course.adapter.lesson.keyword;
 
   let pill: React.ReactNode;
   switch (state.kind) {
@@ -37,7 +42,7 @@ export function LessonRow({ lesson, state, current }: { lesson: LessonSummary; s
       <Link
         href={lessonHref(lesson)}
         aria-current={current ? 'step' : undefined}
-        className={`grid grid-cols-[44px_1fr] items-start gap-x-4 px-4 py-4 text-ink no-underline transition-colors duration-quick min-[640px]:px-6 ${
+        className={`grid ${keywords ? 'grid-cols-[44px_1fr_auto]' : 'grid-cols-[44px_1fr]'} items-start gap-x-4 px-4 py-4 text-ink no-underline transition-colors duration-quick min-[640px]:px-6 ${
           current ? 'bg-accent-soft' : 'hover:bg-paper'
         }`}
       >
@@ -49,9 +54,15 @@ export function LessonRow({ lesson, state, current }: { lesson: LessonSummary; s
         </span>
         <span className="flex min-w-0 flex-col gap-1">
           <span className="sr-only">{t('home.lessonN', { n: lesson.order })}: </span>
-          <span className="font-display text-card font-medium" lang={course.target.lang} dir={course.target.dir}>
-            {lesson.title.target}
-          </span>
+          {uiTitles ? (
+            <span className="font-display text-card font-medium" lang={lang}>
+              {lang === 'en' ? lesson.title.en : lesson.title.id}
+            </span>
+          ) : (
+            <span className="font-display text-card font-medium" lang={course.target.lang} dir={course.target.dir}>
+              {lesson.title.target}
+            </span>
+          )}
           {sub && (
             <span className="id-text text-small" lang="id">
               {sub}
@@ -67,6 +78,11 @@ export function LessonRow({ lesson, state, current }: { lesson: LessonSummary; s
             </span>
           )}
         </span>
+        {lesson.keyword && (
+          <TargetText aria-hidden size="small" className="mt-1 rounded-sm bg-paper-2 px-2 leading-[1.6] text-ink">
+            «{lesson.keyword}»
+          </TargetText>
+        )}
       </Link>
     </li>
   );
