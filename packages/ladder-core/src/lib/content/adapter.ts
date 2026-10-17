@@ -4,6 +4,11 @@
 import type { Bilingual, Dialogue, Gloss, Lesson, Line, Reading, Rung, Title } from '../types';
 
 export type ContentAdapter = {
+  /** Rung labels. Default: the CEFR level. */
+  rung?: {
+    /** The level label (e.g. "HSK 1"); empty when the rung has none. */
+    levelLabel(r: Rung): string;
+  };
   lesson: {
     title(l: Lesson): Title;
     examples(l: Lesson): Line[];

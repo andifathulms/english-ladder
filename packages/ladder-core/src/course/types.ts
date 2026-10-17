@@ -217,6 +217,8 @@ export type CourseConfig = {
     /** Attributes on plain spans of target/metadata text outside the TargetText slot (topics,
      *  threads, test-result answers). Default: { lang, dir } above. */
     textAttrs?: { lang?: string; dir?: 'ltr' | 'rtl' };
+    /** Attributes of a soon rung's topic list. Default: textAttrs. */
+    topicAttrs?: { lang?: string; dir?: 'ltr' | 'rtl' };
   };
   /**
    * How titles read. 'target' (English): the target-language title leads, the Indonesian one
@@ -339,6 +341,16 @@ export type CourseConfig = {
     tiers?: string[];
     /** A second name for a rung (Arabic: الحروف), on the rail (compact) and on boards. */
     rungSubtitle?: (rung: Rung, place: 'rail' | 'board') => string | null;
+    /** The second name drawn by the course, per place (in place of rungSubtitle's text). */
+    RungSubtitle?: ComponentType<{ rung: Rung; place: 'rail' | 'board' | 'climb' | 'placement' }>;
+    /** The level label as a chip on the rail and board (in place of the plain label). */
+    LevelChip?: ComponentType<{ rung: Rung; onBoard?: boolean }>;
+    /** A tier's level range; empty hides it (labels are then joined without a dangling dot). */
+    tierRange?: (rungs: Rung[], tier: string) => string;
+    /** Rungs with this many lessons or more show a thin line with the count on narrow screens. */
+    longRung?: { minLessons: number };
+    /** Shown on the rung page after the capstones (data: ContentModel.rungData). */
+    RungExtra?: ComponentType<{ rung: Rung; data: unknown }>;
     /** The small line under the rung board's description (English: the explanation language).
      *  Parts render as separate text nodes, exactly as `{a}: {b}` in JSX would. */
     rungMeta?: (rung: Rung, t: (key: string) => string) => string[] | null;
@@ -358,6 +370,8 @@ export type CourseConfig = {
     TargetText?: ComponentType<TargetTextProps>;
     /** A small mark after the wordmark's range line (Arabic: سُلَّم). */
     WordmarkExtra?: ComponentType;
+    /** How the range line and WordmarkExtra align. Default: baseline. */
+    wordmarkAlign?: 'baseline' | 'end';
     /** A transliteration line (Arabic: upright Amiri Latin under the Arabic). */
     Translit?: ComponentType<{ text: string; className?: string; onBoard?: boolean }>;
     /** The quoted resume line on the board (continue card). Default: the display serif line. */

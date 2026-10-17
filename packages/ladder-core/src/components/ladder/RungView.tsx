@@ -13,9 +13,11 @@ type Props = {
   reading: ReadingInfo | null;
   hasPlacement?: boolean;
   dialogue?: DialogueInfo | null;
+  /** ContentModel.rungData, for ladder.RungExtra. */
+  extra?: unknown;
 };
 
-export function RungView({ rung, rungs, lessons, test, reading, hasPlacement, dialogue }: Props) {
+export function RungView({ rung, rungs, lessons, test, reading, hasPlacement, dialogue, extra }: Props) {
   const progress = useProgress();
   return (
     <AppShell>
@@ -23,6 +25,7 @@ export function RungView({ rung, rungs, lessons, test, reading, hasPlacement, di
         <RungDetail rung={rung} rungs={rungs} lessons={lessons} progress={progress} test={test} reading={reading}
           hasPlacement={hasPlacement}
           dialogue={dialogue}
+          extra={extra}
         />
       </main>
     </AppShell>

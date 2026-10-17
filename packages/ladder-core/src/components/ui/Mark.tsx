@@ -22,7 +22,7 @@ export function Wordmark({ onBoard = false }: { onBoard?: boolean }) {
       <span className="flex flex-col gap-[3px]">
         <span className={`font-display text-wordmark font-semibold leading-none ${onBoard ? 'text-board-ink' : 'text-ink'}`}>{name}</span>
         {Extra ? (
-          <span className={`flex items-baseline gap-2 leading-none ${onBoard ? 'text-board-muted' : 'text-muted'}`}>
+          <span className={`flex ${components?.wordmarkAlign === 'end' ? 'items-end' : 'items-baseline'} gap-2 leading-none ${onBoard ? 'text-board-muted' : 'text-muted'}`}>
             <span className="label">{rangeLabel}</span>
             <Extra />
           </span>

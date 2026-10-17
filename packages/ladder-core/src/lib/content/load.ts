@@ -56,6 +56,8 @@ export type ContentModel = {
    * page can show; return undefined when none needs data.
    */
   visualData?: (visualIds: Set<string>) => unknown;
+  /** Data for a rung page's ladder.RungExtra (e.g. Mandarin's deck size), at build time. */
+  rungData?: (rung: Rung) => unknown;
   /** Data for My words (e.g. English nouns for the a/an badge), given the glossaries shown. */
   wordData?: (summaries: LessonSummary[]) => unknown;
   meta?: {

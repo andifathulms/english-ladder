@@ -11,7 +11,7 @@ export function rungPage(content: Content) {
     generateStaticParams: () => content.getCurriculum().map((r) => ({ rung: r.id })),
     generateMetadata({ params }: Params): Metadata {
       const r = content.getRung(params.rung);
-      return { title: r ? `${r.name} · ${r.cefr}` : undefined };
+      return { title: r ? [r.name, content.adapter.rung?.levelLabel(r) ?? r.cefr].filter(Boolean).join(' · ') : undefined };
     },
     Page({ params }: Params) {
       const rung = content.getRung(params.rung);
@@ -28,6 +28,7 @@ export function rungPage(content: Content) {
           test={pool ? { draw: pool.draw, pass: pool.pass } : null}
           reading={reading ? { title: content.adapter.reading.title(reading), items: reading.items.length } : null}
           hasPlacement={!!content.getPlacement()}
+          extra={content.model.rungData?.(rung)}
           dialogue={
             dialogue && talk
               ? { title: talk.title(dialogue), lines: talk.lines(dialogue).length, items: dialogue.items.length }

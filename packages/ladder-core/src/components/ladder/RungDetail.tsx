@@ -13,7 +13,7 @@ import { tierName } from '../ui/tier';
 import { useT } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
 import { TargetText, useTextAttrs } from '../ui/TargetText';
-import { useCefr } from '../ui/useCefr';
+import { useLevel } from '../ui/useCefr';
 
 type Props = {
   rung: Rung;
@@ -25,13 +25,15 @@ type Props = {
   /** The course has a placement check (its retake rung offers it again). */
   hasPlacement?: boolean;
   dialogue?: DialogueInfo | null;
+  /** ContentModel.rungData, for ladder.RungExtra. */
+  extra?: unknown;
 };
 
 export type TestInfo = { draw: number; pass: number };
 export type ReadingInfo = { title: Title; items: number };
 export type DialogueInfo = { title: Title; lines: number; items: number };
 
-export function RungDetail({ rung, rungs, lessons, progress, test, reading, hasPlacement, dialogue }: Props) {
+export function RungDetail({ rung, rungs, lessons, progress, test, reading, hasPlacement, dialogue, extra }: Props) {
   const { t, lang } = useT();
   const course = useCourse();
   const Board = course.boardPattern;
@@ -42,8 +44,10 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading, hasP
   const caps = (course.fixes?.capstoneDone && progress.capstones?.[rung.id]) || {};
   const dialogueTag = course.capstones?.dialogue?.tagKey;
   const retake = !!hasPlacement && course.placement?.retakeRung === rung.id;
-  const cefr = useCefr();
+  const level = useLevel();
   const subtitle = course.ladder?.rungSubtitle?.(rung, 'board') ?? null;
+  const { RungSubtitle, LevelChip, RungExtra } = course.ladder ?? {};
+  const topicAttrs = course.target.topicAttrs ?? textAttrs;
   const meta = course.ladder?.rungMeta?.(rung, t as (key: string) => string) ?? null;
   const mine = lessons.filter((l) => l.rung === rung.id).sort((a, b) => a.order - b.order);
   const tests = progress.rungs[rung.id]?.tests ?? [];
@@ -76,9 +80,19 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading, hasP
           <div className="flex min-w-0 flex-col gap-3">
             <p className="label flex items-center gap-2 text-brass">
               <span aria-hidden className="h-[7px] w-[7px] rounded-full" style={{ background: `var(--${rung.tier})` }} />
-              {tierName(rung.tier)} · {cefr(rung.cefr)}
+              {LevelChip ? (
+                <>
+                  {tierName(rung.tier)}
+                  <LevelChip rung={rung} onBoard />
+                </>
+              ) : (
+                <>
+                  {tierName(rung.tier)} · {level(rung)}
+                </>
+              )}
             </p>
             <h1 className="text-hero leading-none tracking-[-0.02em] text-board-ink">{rung.name}</h1>
+            {RungSubtitle && <RungSubtitle rung={rung} place="board" />}
             {subtitle && (
               <TargetText block as="p" size="title" face="display" className="text-board-muted">
                 {subtitle}
@@ -104,7 +118,7 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading, hasP
         <section className="flex flex-col gap-3">
           <h2 className="text-h2">{t('rung.soonTitle', { rung: rung.name })}</h2>
           <p className="text-muted">{t('rung.soonBody')}</p>
-          <ul className="flex flex-wrap gap-2" lang={textAttrs.lang} dir={textAttrs.dir}>
+          <ul className="flex flex-wrap gap-2" lang={topicAttrs.lang} dir={topicAttrs.dir}>
             {rung.topics.map((topic) => (
               <li key={topic} className="card px-3 py-1 text-small">
                 {topic}
@@ -170,6 +184,7 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading, hasP
               </Link>
             )
           )}
+          {RungExtra && <RungExtra rung={rung} data={extra} />}
           {test && (
             <Link
               href={testHref(rung.id)}

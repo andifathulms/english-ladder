@@ -172,6 +172,7 @@ export function PlacementRunner({ placement, rungs, lessons }: Props) {
               >
                 <span className="flex items-baseline gap-2">
                   <span className="font-display font-semibold">{r.name}</span>
+                  {course.ladder?.RungSubtitle && <course.ladder.RungSubtitle rung={r} place="placement" />}
                   {subtitle && (
                     <TargetText face="ui" size="small" className="leading-none text-muted">
                       {subtitle}
