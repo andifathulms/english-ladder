@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useT } from '../ProgressProvider';
+import { useCourse } from '@ladder/core/course/context';
 import type { StringKey } from '@ladder/core/lib/i18n';
 import { IconBook, IconLadder, IconReview, IconUser } from './Icon';
 import { Wordmark } from './Mark';
@@ -35,6 +36,7 @@ const TABS: Tab[] = [
  */
 export function AppNav() {
   const { t } = useT();
+  const { name } = useCourse();
   const path = usePathname() || '/';
   return (
     <nav
@@ -44,7 +46,7 @@ export function AppNav() {
       <Link
         href="/"
         className="hidden border-b border-board-2 px-2 pb-5 no-underline min-[900px]:flex"
-        aria-label="English Ladder"
+        aria-label={name}
       >
         <Wordmark onBoard />
       </Link>

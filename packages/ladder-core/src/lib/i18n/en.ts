@@ -1,7 +1,7 @@
 import type { StringKey } from './id';
 
 export const en: Record<StringKey, string> = {
-  'app.name': 'English Ladder',
+  'app.name': 'Ladder',
   'nav.home': 'Ladder',
   'nav.settings': 'Settings',
   'nav.words': 'My words',
@@ -23,7 +23,7 @@ export const en: Record<StringKey, string> = {
 
   'rung.soon': 'soon',
   'rung.climbed': 'climbed',
-  'rung.inProgress': '{n}/8 lessons',
+  'rung.inProgress': '{n}/{total} lessons',
   'rung.notStarted': 'not started',
   'rung.lessons': 'Lessons',
   'rung.test': 'Rung test',
@@ -98,7 +98,7 @@ export const en: Record<StringKey, string> = {
   'test.missedFrom': 'Lessons to revisit',
   'test.seeClimb': 'Continue',
 
-  'climb.title': '{rung} · climbed',
+  'climb.title': '{rung}',
   'climb.line': 'One more rung. Slowly, but upward.',
   'climb.viewLadder': 'See the ladder',
   'climb.next': 'Start {rung}',
@@ -149,7 +149,7 @@ export const en: Record<StringKey, string> = {
   'settings.export': 'Export progress',
   'settings.import': 'Import progress',
   'settings.importOk': 'Progress imported.',
-  'settings.importFail': "This file can't be read as English Ladder progress.",
+  'settings.importFail': "This file can't be read as progress.",
   'settings.reset': 'Delete all progress',
   'settings.resetConfirm': 'Yes, delete all progress in this browser',
   'settings.resetCancel': 'Cancel',
@@ -184,7 +184,7 @@ export const en: Record<StringKey, string> = {
   'me.weekHint': 'Filled dots mark the days you studied.',
   'me.more': 'More',
   'me.settingsHint': 'Language, sound, display and progress backup',
-  'me.aboutHint': 'How English Ladder works and what A1 to C1 mean',
+  'me.aboutHint': 'How this app works and what the CEFR levels mean',
   'review.emptyTitle': 'Nothing to review yet',
   'review.readyTitle': 'Five questions, about two minutes',
   'home.greet.morning': 'Good morning.',
@@ -225,6 +225,6 @@ export const en: Record<StringKey, string> = {
   'settings.voice.female': 'Female',
   'settings.voice.male': 'Male',
   'settings.voiceSample': 'Try the voice',
-  'settings.voiceSampleText': 'Hello! This is your English Ladder voice. Is it clear?',
+  'settings.voiceSampleText': 'Hello! Is this voice clear?',
   'settings.voiceUsing': 'Using: {name}',
 };

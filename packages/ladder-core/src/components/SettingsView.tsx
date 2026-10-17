@@ -33,7 +33,7 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 export function SettingsView() {
   const { t } = useT();
   const s = useSettings();
-  const { speech } = useCourse();
+  const { speech, exportFilePrefix } = useCourse();
   const set = (patch: Partial<Settings>) => store.setSettings(patch);
   const canSpeak = useCanSpeak();
   const speakSample = useSpeak();
@@ -53,7 +53,7 @@ export function SettingsView() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `english-ladder-progress-${store.todayKey()}.json`;
+    a.download = `${exportFilePrefix}-${store.todayKey()}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };

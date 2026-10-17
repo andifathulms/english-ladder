@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
 import type { Settings } from '@ladder/core/lib/progress/types';
 import type { Noun } from '@ladder/core/lib/types';
-import type { UiLang } from '@ladder/core/lib/i18n';
+import type { StringTables, UiLang } from '@ladder/core/lib/i18n';
 
 /** Per-word annotation shown in My words (English: the a/an badge and irregular-plural suffix). */
 export type WordAnnotation = { badge?: string; pluralSuffix?: string };
@@ -71,6 +71,8 @@ export type CourseConfig = {
   repoUrl: string;
   target: { lang: string; dir: 'ltr' | 'rtl'; fontClass: string; sentenceClass: string };
   ui: { defaultLang: UiLang };
+  /** UI strings: core base tables extended with this course's overrides. */
+  strings: StringTables;
   explainLangs: ExplainLang[];
   settings: { defaults: Settings; options: SettingsOptions };
   speech: SpeechRules;

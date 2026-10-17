@@ -5,6 +5,7 @@ import type { LessonSummary, Rung } from '@ladder/core/lib/types';
 import { completedCount, continueTarget, currentRung, doneCount } from '@ladder/core/lib/progress/derive';
 import { lessonHref, rungHref } from '@ladder/core/lib/routes';
 import { useHydrated, useProgress, useT, type T } from '../ProgressProvider';
+import { useCourse } from '@ladder/core/course/context';
 import { AppShell } from '../ui/AppShell';
 import { IconChevron, IconReview } from '../ui/Icon';
 import { Accented, ContinueCard } from './ContinueCard';
@@ -25,6 +26,7 @@ export function HomeView({ rungs, lessons }: Props) {
   const progress = useProgress();
   const hydrated = useHydrated();
   const { t, lang } = useT();
+  const { name } = useCourse();
   const target = continueTarget(rungs, lessons, progress);
   // While a learner works in an optional rung (Starter), the board and strip follow that rung.
   const here = (target.kind === 'lesson' && rungs.find((r) => r.id === target.lesson.rung)) || currentRung(rungs, progress);
@@ -57,7 +59,7 @@ export function HomeView({ rungs, lessons }: Props) {
               {date ?? ' '}
             </p>
             <h1 className="text-hero tracking-[-0.02em]">
-              {now ? <Accented text={greeting(t, now)} tone="text-accent" /> : 'English Ladder'}
+              {now ? <Accented text={greeting(t, now)} tone="text-accent" /> : name}
             </h1>
           </header>
 

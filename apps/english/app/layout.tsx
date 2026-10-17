@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import '@/styles/theme.css';
 import '@ladder/core/styles/globals.css';
 import { body, display, mono } from './fonts';
 import { themeScript } from './themeScript';

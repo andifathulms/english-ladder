@@ -3,6 +3,8 @@
 import type { CourseConfig } from '@ladder/core/course/types';
 import { Contours } from '@ladder/core/components/ui/Contours';
 import { DEFAULT_SETTINGS } from '@ladder/core/lib/progress/defaults';
+import { baseStrings, extendStrings } from '@ladder/core/lib/i18n';
+import { idOverrides, enOverrides } from '@/i18n/overrides';
 import { registry } from '@/visuals/registry';
 import { VISUAL_IDS } from '@/visuals/visualIds';
 import { text } from '@/course/text';
@@ -21,6 +23,11 @@ export const course: CourseConfig = {
 
   target: { lang: 'en', dir: 'ltr', fontClass: '', sentenceClass: '' },
   ui: { defaultLang: 'id' },
+
+  strings: {
+    id: extendStrings(baseStrings.id, idOverrides),
+    en: extendStrings(baseStrings.en, enOverrides),
+  },
 
   explainLangs: [
     { value: 'id', label: { id: 'ID', en: 'ID' } },

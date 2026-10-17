@@ -1,6 +1,6 @@
 // UI strings, Bahasa Indonesia (default). Informal-standard: kamu, not Anda.
 export const id = {
-  'app.name': 'English Ladder',
+  'app.name': 'Ladder',
   'nav.home': 'Tangga',
   'nav.settings': 'Pengaturan',
   'nav.words': 'Kata-kataku',
@@ -22,7 +22,7 @@ export const id = {
 
   'rung.soon': 'segera',
   'rung.climbed': 'sudah dinaiki',
-  'rung.inProgress': '{n}/8 pelajaran',
+  'rung.inProgress': '{n}/{total} pelajaran',
   'rung.notStarted': 'belum mulai',
   'rung.lessons': 'Pelajaran',
   'rung.test': 'Tes anak tangga',
@@ -97,7 +97,7 @@ export const id = {
   'test.missedFrom': 'Pelajaran yang perlu diulang',
   'test.seeClimb': 'Lanjut',
 
-  'climb.title': '{rung} · climbed',
+  'climb.title': '{rung}',
   'climb.line': 'Satu anak tangga lagi. Pelan-pelan, tapi naik.',
   'climb.viewLadder': 'Lihat tangga',
   'climb.next': 'Mulai {rung}',
@@ -148,7 +148,7 @@ export const id = {
   'settings.export': 'Ekspor progres',
   'settings.import': 'Impor progres',
   'settings.importOk': 'Progres berhasil diimpor.',
-  'settings.importFail': 'File ini tidak bisa dibaca sebagai progres English Ladder.',
+  'settings.importFail': 'File ini tidak bisa dibaca sebagai progres.',
   'settings.reset': 'Hapus semua progres',
   'settings.resetConfirm': 'Ya, hapus semua progres di browser ini',
   'settings.resetCancel': 'Batal',
@@ -183,7 +183,7 @@ export const id = {
   'me.weekHint': 'Titik terisi menandai hari kamu belajar.',
   'me.more': 'Lainnya',
   'me.settingsHint': 'Bahasa, suara, tampilan dan cadangan progres',
-  'me.aboutHint': 'Cara kerja English Ladder dan arti A1 sampai C1',
+  'me.aboutHint': 'Cara kerja aplikasi ini dan arti tingkat CEFR',
   'review.emptyTitle': 'Belum ada soal untuk diulang',
   'review.readyTitle': 'Lima soal, sekitar dua menit',
   'home.greet.morning': 'Selamat pagi.',
@@ -224,7 +224,7 @@ export const id = {
   'settings.voice.female': 'Perempuan',
   'settings.voice.male': 'Laki-laki',
   'settings.voiceSample': 'Coba suara',
-  'settings.voiceSampleText': 'Hello! This is your English Ladder voice. Is it clear?',
+  'settings.voiceSampleText': 'Hello! Is this voice clear?',
   'settings.voiceUsing': 'Memakai suara: {name}',
 } as const;
 

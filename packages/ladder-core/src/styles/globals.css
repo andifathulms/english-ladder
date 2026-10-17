@@ -1,4 +1,4 @@
-@import './tokens.css';
+/* Token values come from the app's styles/theme.css (which defaults to core tokens.css). */
 
 @tailwind base;
 @tailwind components;

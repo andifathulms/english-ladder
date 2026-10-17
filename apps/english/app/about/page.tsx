@@ -1,4 +1,4 @@
-import { AboutView } from '@ladder/core/components/AboutView';
+import { AboutView } from '@/components/AboutView';
 
 export const metadata = { title: 'Tentang' };
 

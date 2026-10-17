@@ -1,3 +1,5 @@
+import { useCourse } from '@ladder/core/course/context';
+
 /** Two rails and three rungs drawn as one shape; the top rung in --rung gold. */
 export function Mark({ size = 28 }: { size?: number }) {
   return (
@@ -8,16 +10,17 @@ export function Mark({ size = 28 }: { size?: number }) {
   );
 }
 
-/** The mark in a cream disc, the name in the serif, a mono line underneath. */
+/** The mark in a cream disc, the course name in the serif, its range on a mono line. */
 export function Wordmark({ onBoard = false }: { onBoard?: boolean }) {
+  const { name, rangeLabel } = useCourse();
   return (
     <span className="flex items-center gap-3">
       <span className="flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-full bg-board-ink shadow-e1">
         <Mark size={22} />
       </span>
       <span className="flex flex-col gap-[3px]">
-        <span className={`font-display text-wordmark font-semibold leading-none ${onBoard ? 'text-board-ink' : 'text-ink'}`}>English Ladder</span>
-        <span className={`label leading-none ${onBoard ? 'text-board-muted' : 'text-muted'}`}>A1 → C1</span>
+        <span className={`font-display text-wordmark font-semibold leading-none ${onBoard ? 'text-board-ink' : 'text-ink'}`}>{name}</span>
+        <span className={`label leading-none ${onBoard ? 'text-board-muted' : 'text-muted'}`}>{rangeLabel}</span>
       </span>
     </span>
   );

@@ -1,7 +1,7 @@
 'use client';
 
-import { useT } from './ProgressProvider';
-import { PageShell } from './ui/PageShell';
+import { useT } from '@ladder/core/components/ProgressProvider';
+import { PageShell } from '@ladder/core/components/ui/PageShell';
 
 const REPO = 'https://github.com/andifathulms/english-ladder';
 

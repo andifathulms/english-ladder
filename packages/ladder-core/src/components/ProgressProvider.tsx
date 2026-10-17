@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useSyncExternalStore
 import * as store from '@ladder/core/lib/progress/store';
 import type { ProgressState, Settings } from '@ladder/core/lib/progress/types';
 import { translate, type StringKey, type UiLang } from '@ladder/core/lib/i18n';
+import { useCourse } from '@ladder/core/course/context';
 import { registerServiceWorker } from '@ladder/core/lib/sw';
 import { setSfxEnabled } from '@ladder/core/lib/speech/sfx';
 
@@ -42,7 +43,8 @@ export type T = (key: StringKey, vars?: Record<string, string | number>) => stri
 
 export function useT(): { t: T; lang: UiLang } {
   const lang = useSettings().uiLang;
-  const t = useCallback<T>((key, vars) => translate(lang, key, vars), [lang]);
+  const { strings } = useCourse();
+  const t = useCallback<T>((key, vars) => translate(strings, lang, key, vars), [strings, lang]);
   return { t, lang };
 }
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { translate } from '@ladder/core/lib/i18n';
+import { translate, baseStrings } from '@ladder/core/lib/i18n';
 import { id } from '@ladder/core/lib/i18n/id';
 import { en } from '@ladder/core/lib/i18n/en';
 
@@ -8,7 +8,7 @@ describe('i18n', () => {
     expect(Object.keys(en).sort()).toEqual(Object.keys(id).sort());
   });
   it('interpolates variables', () => {
-    expect(translate('id', 'lesson.stepAnnounce', { n: 3, name: 'Contoh' })).toBe(
+    expect(translate(baseStrings, 'id', 'lesson.stepAnnounce', { n: 3, name: 'Contoh' })).toBe(
       'Langkah 3 dari 6: Contoh',
     );
   });

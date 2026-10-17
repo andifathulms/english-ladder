@@ -1,0 +1,3 @@
+/* English Ladder token values. English delegates to the core defaults; another course
+   replaces this file with its own palette (and any type/scale overrides) — nothing else. */
+@import '@ladder/core/styles/tokens.css';
