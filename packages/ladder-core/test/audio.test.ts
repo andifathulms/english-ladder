@@ -1,7 +1,7 @@
 // Recorded audio is per course: off (speech only) unless the course configures it; keys are
 // sha1(normalise(text)|variety)[0:12] so recordings survive markup and normalisation.
 import { afterEach, describe, expect, it } from 'vitest';
-import { __setManifest, audioFor, audioKey, configureAudio, loadManifest } from '@ladder/core/lib/speech/audio';
+import { __setManifest, audioFor, audioKey, configureAudio, loadManifest, speechAllowed } from '@ladder/core/lib/speech/audio';
 import { sha1 } from '@ladder/core/lib/speech/sha1';
 
 afterEach(() => {
@@ -24,5 +24,16 @@ describe('recorded audio', () => {
     configureAudio(null);
     expect(audioFor('salam')).toBeNull();
     expect(await loadManifest()).toBeTruthy();
+  });
+});
+
+describe('course audio keys and speech fallback', () => {
+  it('uses the course key scheme and never speaks strings it excludes', () => {
+    configureAudio({ normalise: (s) => s, key: (t) => (t.startsWith('syl-') ? t : `k-${t}`), speechFallback: (t) => !t.startsWith('syl-') });
+    __setManifest({ 'syl-ma3': { file: 'ma3.mp3', dur: 400 }, 'k-你好': { file: 'nh.mp3', dur: 700 } });
+    expect(audioFor('syl-ma3')?.file).toBe('ma3.mp3');
+    expect(audioFor('你好')?.file).toBe('nh.mp3');
+    expect(speechAllowed('syl-ma2')).toBe(false);
+    expect(speechAllowed('谢谢')).toBe(true);
   });
 });

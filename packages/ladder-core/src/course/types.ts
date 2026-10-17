@@ -42,6 +42,10 @@ export type SpeechRules = {
   sampleText: string;
   /** Multiplies the learner's rate for browser speech (default 0.95). */
   rateScale?: number;
+  /** Longest chunk read in one utterance (default 160 characters). */
+  chunkMax?: number;
+  /** Speaking time of a line without a recording, for the Tirukan pause (default 75 ms a character). */
+  estimateMs?: (text: string, rate: number) => number;
 };
 
 /** Option lists that course-specific Settings controls render. */
@@ -228,7 +232,15 @@ export type CourseConfig = {
   };
   speech: SpeechRules;
   /** Recorded audio (public/audio/manifest.json) before browser speech. Absent: speech only. */
-  audio?: { defaultVariety: string };
+  audio?: {
+    defaultVariety?: string;
+    /** The course's key scheme (default sha1(normalise(text)|variety), 12 hex digits). */
+    key?: (text: string, variety?: string) => string;
+    /** False for strings that never fall back to browser speech (e.g. Mandarin syllables). */
+    speechFallback?: (text: string) => boolean;
+    /** The text browser speech reads (default: the text without markup). */
+    spoken?: (plain: string) => string;
+  };
   text: TextRules;
   /** How the engine reads this course's lessons and readings (lib/content/adapter.ts). */
   adapter: ContentAdapter;

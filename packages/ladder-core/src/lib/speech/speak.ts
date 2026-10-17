@@ -8,6 +8,8 @@ export type SpeakOpts = {
   rate?: number;
   /** Multiplies the rate (engines speak learner text a little slowly). Default 0.95. */
   rateScale?: number;
+  /** Longest chunk read in one utterance (default 160 characters). */
+  chunkMax?: number;
   onBoundary?: (charIndex: number) => void;
 };
 
@@ -98,7 +100,7 @@ export function speak(text: string, opts: SpeakOpts): Promise<void> {
   if (!voice) return Promise.resolve();
   s.cancel();
   const mine = ++generation;
-  const parts = chunks(text, opts.sentenceSplit);
+  const parts = chunks(text, opts.sentenceSplit, opts.chunkMax);
   const say = (i: number): Promise<void> =>
     new Promise((resolve) => {
       const part = parts[i];

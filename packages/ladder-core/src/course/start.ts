@@ -13,5 +13,5 @@ export function startCourse(course: CourseConfig) {
   store.configure(progressConfigOf(course));
   if (course.itemTypes) registerItemTypes(course.itemTypes);
   for (const [type, fn] of Object.entries(course.itemText ?? {})) overrideItemText(type, fn);
-  configureAudio(course.audio ? { normalise: course.text.normalise, defaultVariety: course.audio.defaultVariety } : null);
+  configureAudio(course.audio ? { normalise: course.text.normalise, ...course.audio } : null);
 }

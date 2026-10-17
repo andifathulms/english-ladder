@@ -8,6 +8,7 @@ import { IconPlay } from '../ui/Icon';
 import { useReducedMotion, useSettings, useT } from '../ProgressProvider';
 import { useCanPlay, usePlay } from '../useSpeech';
 import { TargetSentence } from './TargetSentence';
+import { useCourse } from '@ladder/core/course/context';
 
 type Phase = 'idle' | 'first' | 'turn' | 'second';
 
@@ -23,6 +24,7 @@ export function TirukanCard({ line }: { line: Line }) {
   const { rate } = useSettings();
   const reduced = useReducedMotion();
   const play = usePlay();
+  const { speech } = useCourse();
   const can = useCanPlay(line.text, line.variety);
   const [phase, setPhase] = useState<Phase>('idle');
   const [pause, setPause] = useState(0);
@@ -38,7 +40,7 @@ export function TirukanCard({ line }: { line: Line }) {
     if (phase !== 'idle') return;
     await loadManifest();
     const rec = audioFor(stripMarkup(line.text), line.variety);
-    const ms = (rec ? rec.dur / rate : estimate(line.text, rate)) + 1000;
+    const ms = (rec ? rec.dur / rate : (speech.estimateMs ?? estimate)(line.text, rate)) + 1000;
     setPhase('first');
     await play(line.text, line.variety);
     if (!alive.current) return;
