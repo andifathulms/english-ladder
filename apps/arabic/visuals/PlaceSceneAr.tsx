@@ -1,7 +1,7 @@
 'use client';
 
-import { PLACE_SPEC, PLACES, isPlace, type Place } from '@/visuals/placeLogic';
-import { PlaceDrawing, usePlace } from '@/visuals/PlaceScene';
+import { PLACE_SPEC, PLACES, isPlace, type Place } from '@ladder/core/components/visuals/place/geometry';
+import { PlaceDrawing, usePlace } from '@ladder/core/components/visuals/place/PlaceDrawing';
 import { useRoving } from '@ladder/core/components/visuals/useRoving';
 import { ArSentence } from '@/components/ar/ArSentence';
 import { ArIsland } from '@/components/ar/ArIsland';
