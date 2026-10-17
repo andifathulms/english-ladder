@@ -18,6 +18,20 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # To add a course later, turn this into a matrix and give each app its own base path.
+    # The output of each app lives in apps/<app>/out. See docs/DEPLOY.md for the two hosting
+    # options (one Pages site with sub-paths, or one repo's Pages per app).
+    #
+    # strategy:
+    #   matrix:
+    #     include:
+    #       - app: english   # base path defaults to the repo name below
+    #       - app: arabic
+    #         basePath: /arabic-ladder
+    #       - app: mandarin
+    #         basePath: /mandarin-ladder
+    #       - app: japanese
+    #         basePath: /japanese-ladder
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,15 +41,16 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run test
-      - name: Build static site
+      - run: npm run content:check
+      - name: Build static site (apps/english)
         run: npm run build
         env:
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
           NEXT_PUBLIC_SHOW_DRAFTS: 'true'
-      - run: touch out/.nojekyll
+      - run: touch apps/english/out/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: out
+          path: apps/english/out
 
   e2e:
     runs-on: ubuntu-latest

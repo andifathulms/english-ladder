@@ -1,28 +1,79 @@
-# English Ladder
+# Ladder
 
-A calm, levelled English course for Indonesian speakers. Nine rungs from Easy 1 (CEFR A1) to Hard 3 (C1); v1 ships the full app shell and the complete **Easy 1** rung: ten lessons, a rung test, the place scene and noun builder visuals, quick review, My words, settings and offline support. Progress stays in the learner's browser.
+A calm, levelled language-course engine and the courses built on it. The engine
+(`@ladder/core`) is shared; each course is a thin app that supplies its content, visuals,
+theme and configuration. The first course is **English Ladder** (for Indonesian speakers).
 
-Static Next.js 14 export, deployed to GitHub Pages.
+Read `PRD.md` for what to build, `DESIGN.md` for how it must look, `CLAUDE.md` for how to
+build it, and `RECON.md` for a full map of the engine as it stands.
 
-- `PRD.md`: what to build
-- `DESIGN.md`: how it looks and feels
-- `CLAUDE.md`: how it is built
+## Layout
+
+```
+package.json                 # npm workspaces: packages/*, apps/*; root scripts proxy to apps/english
+packages/ladder-core/        # the engine — no course content, no brand
+  src/lib/{check,content,progress,speech,i18n}/  markup.ts routes.ts basePath.ts sw.ts
+  src/components/{ui,ladder,lesson,check,visuals}/  ProgressProvider MeView SettingsView WordsView
+  src/course/                # CourseConfig type + context + useCourse()
+  src/styles/                # tokens.css (names + default values), globals.css (structure, logical)
+  tailwind-preset.ts         # the shared Tailwind theme
+  sw/sw.template.js          # service-worker template (cache prefix / shell parameterised)
+  scripts/                   # serve.mjs, content-check.ts, make-icons.mjs
+  test/                      # engine-level tests (e.g. the RTL seam test)
+apps/english/                # English Ladder
+  app/                       # thin Next routes + providers, fonts, layout, themeScript
+  content/                   # curriculum.yaml, <rung>/*.md, test.yaml, reading.yaml, lexicon, data
+  course.config.ts           # the course seam (see below)
+  course/                    # English text/speech/lint/words logic
+  visuals/                   # PlaceScene, NounBuilder, NearFar (+ logic) + registry + visualIds
+  components/                # app-specific views (AboutView)
+  i18n/overrides.ts          # brand/English string overrides merged onto the core tables
+  styles/theme.css           # token values (English delegates to core defaults)
+  public/                    # manifest, icons, sw.js
+  next.config.mjs tailwind.config.ts tsconfig.json vitest.config.ts playwright.config.ts
+tests/parity/                # pixel-parity harness (capture.mjs, compare.mjs, verify.mjs) + baseline/
+```
+
+The engine is consumed **as source** (`transpilePackages: ['@ladder/core']` + a tsconfig path
+alias), not published to npm.
 
 ## Commands
 
+Run from the repo root (they proxy into `apps/english`) or inside `apps/english`:
+
 ```bash
 npm install
-npm run dev            # local dev, shows draft lessons with a Draft badge
-npm run build          # content:check, then static export to ./out
-npm run preview        # serve ./out on http://localhost:4173
-npm run content:check  # schema + inventory + lexicon + structure lint
-npm run test           # vitest (unit + component)
-npm run test:e2e       # playwright + axe, against the built site
+npm run dev            # local dev (drafts shown)
+npm run build          # static export to apps/english/out (runs content:check first)
+npm run preview        # serve apps/english/out
+npm run content:check  # validate content against the course config
+npm run test           # vitest (engine + app unit/component tests)
+npm run test:e2e       # playwright, against the built site
 npm run lint
 ```
 
 `NEXT_PUBLIC_BASE_PATH` sets the GitHub Pages base path (e.g. `/english-ladder`).
+`NEXT_PUBLIC_SHOW_DRAFTS=true` ships draft lessons (the deploy and e2e use it).
 
-## Draft lessons
+## The course seam
 
-All Easy 1 lessons are `status: draft` until the owner reviews them. Production builds hide drafts unless `NEXT_PUBLIC_SHOW_DRAFTS=true`; the GitHub Pages workflow sets it so the course can be tested before review, and every draft carries a visible Draft badge. Remove that variable from `.github/workflows/deploy.yml` once lessons are marked `reviewed`.
+`packages/ladder-core/src/course/types.ts` defines `CourseConfig`: everything that differs
+between courses (brand/storage keys, target `{lang, dir, fontClass, sentenceClass}`, UI-string
+overrides, settings options, a voice scorer + sentence splitter, text rules for grading/search,
+lint detectors/rules/morphology, the visual registry, the board pattern, and a My-words
+annotator). `apps/english/course.config.ts` supplies English Ladder's exact values. The engine
+reads it through `useCourse()` (client) and, at build time, the content checker imports the
+invoking app's config from its working directory.
+
+## Adding a new course
+
+1. Copy `apps/english` to `apps/<new>`.
+2. Replace `content/`, `course.config.ts`, `course/`, `visuals/`, `styles/theme.css`,
+   `i18n/overrides.ts`, `components/AboutView.tsx` and `public/` (manifest, icons, `sw.js`).
+   For `sw.js`, copy `packages/ladder-core/sw/sw.template.js` and fill its two placeholders.
+3. In `course.config.ts`, set `target.dir`/`lang`, the fonts (`app/fonts.ts` for a non-Latin
+   script), the voice scorer and text/lint rules for the language, and the visual registry.
+4. Add the app to the deploy workflow (see `docs/DEPLOY.md`).
+
+The engine is direction-aware (logical CSS, `dir`-aware roving/arrows, mirrored transitions),
+so a `dir: 'rtl'` course lays out correctly without touching core.
