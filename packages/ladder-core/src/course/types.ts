@@ -136,6 +136,8 @@ export type LessonSession = {
 };
 
 export type CourseFixes = {
+  /** My words groups are ordered by rung, then lesson, and labelled "Rung · Lesson n" (EL issue 11). */
+  wordsGroupLabel?: boolean;
   /** The browser's theme-color follows the in-app theme, not the OS (EL issue 14). Needs themeColor. */
   themeColorFollowsTheme?: boolean;
   /** The climb moment's title is in the UI language, not marked as the target language (EL issue 13). */
@@ -262,6 +264,13 @@ export type CourseConfig = {
   climb?: { Extra?: ComponentType };
   /** --paper of each theme, for the browser chrome's theme-color (fixes.themeColorFollowsTheme). */
   themeColor?: { light: string; dark: string };
+  /** My words: search and the word row. */
+  words?: {
+    /** Whether a word matches the search (default: word or Indonesian meaning contains it). */
+    match?: (word: Gloss, query: string) => boolean;
+    /** The whole <li> for one word (default: word, meaning, annotation badge, play button). */
+    Row?: ComponentType<{ word: Gloss; rungs: Rung[]; lessons: import('@ladder/core/lib/types').LessonSummary[] }>;
+  };
   /** Home: the first-visit board. */
   home?: {
     /** 'start' (default): one button to the first lesson. 'twoDoor': start from the first rung, or

@@ -261,6 +261,8 @@ export const id = {
   // Quick review exit (fixes.reviewExit).
   'review.close': 'Tutup ulang cepat',
   'review.closeConfirm': 'Berhenti di sini? Jawaban yang sudah masuk tetap tersimpan.',
+  // My words groups by rung (fixes.wordsGroupLabel).
+  'words.group': '{rung} · Pelajaran {n}',
 } as const;
 
 export type StringKey = keyof typeof id;

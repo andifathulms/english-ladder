@@ -190,8 +190,7 @@ export function TestRunner({ rung, next, pool, lessons }: Props) {
             .map(([lid, rs]) => (
               <div key={lid} className="flex flex-col gap-3">
                 <h3 className="eyebrow">
-                  {lessonOf(lid)?.order} ·{' '}
-                  {course.titles === 'ui' ? (
+                  {lessonOf(lid)?.order} · {course.titles === 'ui' ? (
                     <span lang={lang}>{lang === 'en' ? lessonOf(lid)?.title.en : lessonOf(lid)?.title.id}</span>
                   ) : (
                     <span lang={course.target.lang} dir={course.target.dir}>{lessonOf(lid)?.title.target}</span>

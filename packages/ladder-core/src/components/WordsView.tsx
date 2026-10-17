@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
-import type { LessonSummary } from '@ladder/core/lib/types';
+import type { LessonSummary, Rung } from '@ladder/core/lib/types';
 import { missedCount } from '@ladder/core/lib/progress/derive';
 import { lessonHref } from '@ladder/core/lib/routes';
 import { useProgress, useT } from './ProgressProvider';
@@ -10,18 +10,29 @@ import { useCourse } from '@ladder/core/course/context';
 import { PageShell } from './ui/PageShell';
 import { PlayButton } from './lesson/PlayButton';
 import { IconBook, IconSearch } from './ui/Icon';
-import { useSpeak } from './useSpeech';
+import { usePlay, useSpeak } from './useSpeech';
 
-export function WordsView({ lessons, wordData }: { lessons: LessonSummary[]; wordData?: unknown }) {
-  const { t } = useT();
+type Props = { lessons: LessonSummary[]; rungs?: Rung[]; wordData?: unknown };
+
+export function WordsView({ lessons, rungs = [], wordData }: Props) {
+  const { t, lang } = useT();
   const course = useCourse();
+  const play = usePlay();
+  // fixes.wordsGroupLabel: groups across rungs, in rung order, labelled with the rung.
+  const byRung = !!course.fixes?.wordsGroupLabel;
+  const rungIndex = (id: string) => rungs.findIndex((r) => r.id === id);
+  const rungName = (id: string) => rungs.find((r) => r.id === id)?.name ?? id;
+  const Row = course.words?.Row;
+  const matches = course.words?.match;
   const progress = useProgress();
   const speak = useSpeak();
   const [q, setQ] = useState('');
   const [only, setOnly] = useState<string | null>(null);
   const [mistakes, setMistakes] = useState(false);
 
-  const opened = lessons.filter((l) => progress.opened.includes(l.id)).sort((a, b) => a.order - b.order);
+  const opened = lessons
+    .filter((l) => progress.opened.includes(l.id))
+    .sort((a, b) => (byRung ? rungIndex(a.rung) - rungIndex(b.rung) : 0) || a.order - b.order);
   const total = opened.reduce((n, l) => n + l.glossary.length, 0);
   const groups = useMemo(() => {
     const needle = q.trim().toLowerCase();
@@ -29,7 +40,9 @@ export function WordsView({ lessons, wordData }: { lessons: LessonSummary[]; wor
       .filter((l) => (!only || l.id === only) && (!mistakes || missedCount(l, progress) > 0))
       .map((l) => ({
         l,
-        words: l.glossary.filter((g) => !needle || g.text.toLowerCase().includes(needle) || g.meaning.id.toLowerCase().includes(needle)),
+        words: l.glossary.filter((g) =>
+          matches ? matches(g, q) : !needle || g.text.toLowerCase().includes(needle) || g.meaning.id.toLowerCase().includes(needle),
+        ),
       }))
       .filter((g) => g.words.length);
   }, [opened, q, only, mistakes, progress]);
@@ -62,6 +75,7 @@ export function WordsView({ lessons, wordData }: { lessons: LessonSummary[]; wor
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder={t('words.searchPlaceholder')}
+                dir={matches ? 'auto' : undefined}
                 className="min-h-touch min-w-0 flex-1 bg-transparent text-ink outline-none placeholder:text-muted"
               />
             </label>
@@ -71,7 +85,15 @@ export function WordsView({ lessons, wordData }: { lessons: LessonSummary[]; wor
               </button>
               {opened.map((l) => (
                 <button key={l.id} type="button" aria-pressed={only === l.id} className={chip(only === l.id)} onClick={() => setOnly(l.id)}>
-                  <span className="tnum">{l.order}</span> · <span lang={course.target.lang} dir={course.target.dir}>{l.title.target}</span>
+                  {byRung ? (
+                    <>
+                      {rungName(l.rung)} · <span className="tnum">{l.order}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="tnum">{l.order}</span> · <span lang={course.target.lang} dir={course.target.dir}>{l.title.target}</span>
+                    </>
+                  )}
                 </button>
               ))}
             </div>
@@ -93,11 +115,16 @@ export function WordsView({ lessons, wordData }: { lessons: LessonSummary[]; wor
               <section key={l.id} className="flex flex-col gap-2">
                 <h2 className="eyebrow">
                   <Link href={lessonHref(l)} className="text-muted no-underline hover:text-accent">
-                    {t('home.lessonN', { n: l.order })} · <span lang={course.target.lang} dir={course.target.dir}>{l.title.target}</span>
+                    {byRung ? t('words.group', { rung: rungName(l.rung), n: l.order }) : t('home.lessonN', { n: l.order })} · {course.titles === 'ui' ? (
+                      lang === 'en' ? l.title.en : l.title.id
+                    ) : (
+                      <span lang={course.target.lang} dir={course.target.dir}>{l.title.target}</span>
+                    )}
                   </Link>
                 </h2>
                 <ul className="card flex flex-col divide-y divide-rule overflow-hidden">
                   {words.map((w) => {
+                    if (Row) return <Row key={w.key} word={w} rungs={rungs} lessons={lessons} />;
                     const ann = course.extraData?.wordAnnotator?.(w, wordData) ?? {};
                     return (
                       <li key={w.key} className="flex min-h-[60px] items-center gap-3 px-4 py-2">
@@ -117,7 +144,7 @@ export function WordsView({ lessons, wordData }: { lessons: LessonSummary[]; wor
                             {ann.badge}
                           </span>
                         )}
-                        <PlayButton text={w.text} onPlay={() => void speak(w.text)} small />
+                        <PlayButton text={w.text} onPlay={() => void (course.audio ? play(w.text) : speak(w.text))} small />
                       </li>
                     );
                   })}

@@ -262,4 +262,6 @@ export const en: Record<StringKey, string> = {
   // Quick review exit (fixes.reviewExit).
   'review.close': 'Close quick review',
   'review.closeConfirm': 'Stop here? Answers you gave are kept.',
+  // My words groups by rung (fixes.wordsGroupLabel).
+  'words.group': '{rung} · Lesson {n}',
 };
