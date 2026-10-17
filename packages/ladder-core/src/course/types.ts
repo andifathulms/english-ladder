@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
 import type { Settings } from '@ladder/core/lib/progress/types';
 import type { MigrationStep, ProgressConfig, ProgressFeatures } from '@ladder/core/lib/progress/config';
-import type { Gloss, Lesson, Line, Rung } from '@ladder/core/lib/types';
+import type { CheckItem, ExtraItem, Gloss, Lesson, Line, Rung } from '@ladder/core/lib/types';
 import type { ContentAdapter } from '@ladder/core/lib/content/adapter';
 import type { ItemTypeLogic } from '@ladder/core/lib/check/itemTypes';
 import type { StringTables, UiLang } from '@ladder/core/lib/i18n';
@@ -25,6 +25,9 @@ export type TextRules = {
   trimPunct: RegExp;
   /** Splits a sentence into words with offsets, for speech-boundary highlighting. */
   tokenise: (s: string) => Token[];
+  /** Answer equality for one item (e.g. Arabic exact vs loose matching). Default: equal after
+   *  stripping markup and `normalise`. Also used per token for ordered answers when set. */
+  equals?: (given: string, expected: string, item: CheckItem) => boolean;
 };
 
 /** How the course finds and reads voices for its target language. */
@@ -46,6 +49,46 @@ export type SettingsOptions = {
 
 /** One option for the lesson explanation-language toggle; `[]` hides the toggle. */
 export type ExplainLang = { value: string; label: Record<UiLang, string> };
+
+export type TileTrayProps = {
+  tiles: string[];
+  placed: number[];
+  onChange: (placed: number[]) => void;
+  locked?: boolean;
+  tone?: 'idle' | 'good' | 'off';
+};
+
+/** How a course renders check items. Every slot defaults to the engine's English-era rendering. */
+export type CheckSlots = {
+  /** Learner-language text with markup: cues and short prompts. Default: the plain string. */
+  Inline?: ComponentType<{ text: string }>;
+  /** Choice/gap/order prompt (`fill` is the solved answer for a gap). */
+  Prompt?: ComponentType<{ text: string; fill?: string }>;
+  /** The wrong sentence of a fix item. */
+  Wrong?: ComponentType<{ text: string }>;
+  /** A listen item's play control (and its no-audio fallback). */
+  Listen?: ComponentType<{ audio: string; prompt?: string; variety?: string }>;
+  /** The tray for tile items (order, and course types with tiles). */
+  TileTray?: ComponentType<TileTrayProps & { item: CheckItem; slots: number }>;
+  /** Option layout: full-width pills, and the 1–4 number badge. */
+  optionLayout?: (item: CheckItem, options: string[]) => { wide: boolean; badge: boolean };
+  /** Option pills: attributes and label per option text, and the gap between icon and label. */
+  pill?: {
+    attrs?: (text: string) => { lang?: string; dir?: 'ltr' | 'rtl' };
+    Label?: ComponentType<{ text: string; wrong: boolean }>;
+    gapClass?: string;
+  };
+  /** Course item types: the prompt above the answer area, and (optionally) a custom option. */
+  types?: Record<
+    string,
+    {
+      Prompt: ComponentType<{ item: ExtraItem; solved: boolean }>;
+      Option?: ComponentType<{ value: string; index: number; state: import('@ladder/core/components/check/OptionPill').PillState; disabled?: boolean; onClick: () => void }>;
+      /** aria-label for the option group, when Option is set. */
+      optionsLabel?: string;
+    }
+  >;
+};
 
 /** Where a target line appears; the Sentence slot picks size, play button and note from it. */
 export type SentenceUse = 'example' | 'worked' | 'pairOff' | 'pairNatural' | 'reading';
@@ -91,6 +134,8 @@ export type CourseConfig = {
   itemTypes?: Record<string, ItemTypeLogic>;
   /** Strand cards per lesson step, in order (e.g. English Talk + Sound, then Words). */
   strands?: { examples?: StrandCard[]; contrast?: StrandCard[] };
+  /** Check-item rendering (see CheckSlots). */
+  check?: CheckSlots;
   /** Rendering slots; each defaults to the engine's own component. */
   components?: {
     /** A target-language line (examples, worked, pair, reading, …). Default: core Sentence. */

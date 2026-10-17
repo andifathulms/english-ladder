@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import type { CheckItem } from '@ladder/core/lib/types';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { isCoreItem, type CheckItem, type ExtraItem } from '@ladder/core/lib/types';
 import { grade, type Response } from '@ladder/core/lib/check/grade';
 import { sfx } from '@ladder/core/lib/speech/sfx';
 import { stripMarkup } from '@ladder/core/lib/markup';
+import { itemType } from '@ladder/core/lib/check/itemTypes';
 import { OptionPill, type PillState } from './OptionPill';
 import { TileTray } from './TileTray';
 import { WhyLine } from './WhyLine';
@@ -89,16 +90,28 @@ function ListenPrompt({ audio, prompt }: { audio: string; prompt?: string }) {
 export function CheckItemView(props: Practice | Test) {
   const { item } = props;
   const { t } = useT();
-  const { text } = useCourse();
+  const { text, check: slots = {} } = useCourse();
+  // Course item types (anything but the engine's own) carry their logic and rendering.
+  const extraTypeName = isCoreItem(item) ? null : (item as { type: string }).type;
+  const logic = extraTypeName ? itemType(extraTypeName) : undefined;
+  const view = extraTypeName ? slots.types?.[extraTypeName] : undefined;
+  const ExtraOption = view?.Option;
+  // Tiles: order items, and course types that have them (e.g. Arabic spell).
+  const { tiles, answerTiles } = useMemo(() => {
+    if (item.type === 'order') return { tiles: item.tiles, answerTiles: item.answer };
+    const tl = logic?.tiles?.(item as ExtraItem);
+    return tl ? { tiles: tl.tiles, answerTiles: tl.answer } : { tiles: [] as string[], answerTiles: [] as string[] };
+  }, [item, logic]);
+  const tileItem = item.type === 'order' || !!logic?.tiles;
   const [wrong, setWrong] = useState<string[]>([]);
   const [solved, setSolved] = useState(props.mode === 'practice' && !!props.solved);
   const [placed, setPlaced] = useState<number[]>(() => {
-    if (item.type !== 'order') return [];
-    if (props.mode === 'practice' && props.solved) return item.answer.map((w) => item.tiles.indexOf(w));
+    if (!tileItem) return [];
+    if (props.mode === 'practice' && props.solved) return answerTiles.map((w) => tiles.indexOf(w));
     if (props.mode === 'test' && Array.isArray(props.value)) {
       const used = new Set<number>();
       return props.value.map((w) => {
-        const i = item.tiles.findIndex((x, j) => x === w && !used.has(j));
+        const i = tiles.findIndex((x, j) => x === w && !used.has(j));
         used.add(i);
         return i;
       });
@@ -109,7 +122,7 @@ export function CheckItemView(props: Practice | Test) {
   const missesRef = useRef(0);
   const liveRef = useRef<HTMLParagraphElement>(null);
 
-  const options = 'options' in item ? item.options : [];
+  const options: string[] = 'options' in item ? (item.options as string[]) : (logic?.options?.(item as ExtraItem) ?? []);
   const practice = props.mode === 'practice';
 
   const pick = (opt: string) => {
@@ -130,8 +143,8 @@ export function CheckItemView(props: Practice | Test) {
   };
 
   const checkOrder = () => {
-    if (item.type !== 'order' || !practice) return;
-    const resp = placed.map((i) => item.tiles[i]);
+    if (!tileItem || !practice) return;
+    const resp = placed.map((i) => tiles[i]);
     if (grade(item, resp, text).correct) {
       setSolved(true);
       setOrderOff(false);
@@ -165,7 +178,8 @@ export function CheckItemView(props: Practice | Test) {
 
   const pillState = (opt: string): PillState => {
     if (!practice) return props.value === opt ? 'selected' : 'idle';
-    if (solved && stripMarkup(opt) === stripMarkup(item.type === 'order' ? '' : item.answer)) return 'correct';
+    const answer = 'answer' in item && typeof item.answer === 'string' ? item.answer : '';
+    if (solved && stripMarkup(opt) === stripMarkup(answer)) return 'correct';
     if (wrong.includes(opt)) return 'wrong';
     return 'idle';
   };
@@ -173,66 +187,94 @@ export function CheckItemView(props: Practice | Test) {
   const missed = wrong.length;
   const inSheet = practice && !!props.whyInSheet;
   const showWhy = practice && (solved ? !inSheet : missed >= 2);
-  const sentenceOptions = item.type === 'fix' || item.type === 'scene' || item.type === 'listen';
+  const layout = slots.optionLayout?.(item, options) ?? {
+    wide: item.type === 'fix' || item.type === 'scene' || item.type === 'listen',
+    badge: false,
+  };
+  const Inline = slots.Inline;
+  const PromptView = slots.Prompt ?? Prompt;
+  const Tray = slots.TileTray;
+  const onTiles = (p: number[]) => {
+    setPlaced(p);
+    setOrderOff(false);
+    if (!practice) props.onChange(p.map((i) => tiles[i]));
+  };
+  const tone = solved ? 'good' : orderOff ? 'off' : 'idle';
 
   return (
     <div className="flex flex-col gap-5" data-item={item.id}>
       {item.cue && (
         <p lang="id" className="id-text">
-          {item.cue}
+          {Inline ? <Inline text={item.cue} /> : item.cue}
         </p>
       )}
 
       {(item.type === 'choice' || item.type === 'gap') && (
-        <Prompt text={item.prompt} fill={solved ? item.answer : undefined} />
+        <PromptView text={item.prompt} fill={solved ? item.answer : undefined} />
       )}
       {item.type === 'fix' && (
         <div className="flex flex-col gap-2">
           <p className="text-small text-muted">{t('check.fixPrompt')}</p>
-          <Sentence en={item.wrong} off play={false} />
+          {slots.Wrong ? <slots.Wrong text={item.wrong} /> : <Sentence en={item.wrong} off play={false} />}
         </div>
       )}
       {item.type === 'scene' && (
         <div className="flex flex-col gap-3">
           <VisualStage visual={item.visual} interactive={false} />
-          <p className="text-small text-muted">{item.prompt ?? t('check.scenePrompt')}</p>
+          <p className="text-small text-muted">
+            {Inline ? <Inline text={item.prompt ?? t('check.scenePrompt')} /> : (item.prompt ?? t('check.scenePrompt'))}
+          </p>
         </div>
       )}
-      {item.type === 'listen' && <ListenPrompt audio={item.audio} prompt={item.prompt} />}
-      {item.type === 'order' && item.prompt && <Prompt text={item.prompt} />}
+      {item.type === 'listen' &&
+        (slots.Listen ? (
+          <slots.Listen audio={item.audio} prompt={item.prompt} variety={item.variety} />
+        ) : (
+          <ListenPrompt audio={item.audio} prompt={item.prompt} />
+        ))}
+      {view && <view.Prompt item={item as ExtraItem} solved={solved} />}
+      {item.type === 'order' && item.prompt && <PromptView text={item.prompt} />}
 
-      {item.type === 'order' ? (
+      {tileItem ? (
         <div className="flex flex-col gap-3">
-          <TileTray
-            tiles={item.tiles}
-            placed={placed}
-            onChange={(p) => {
-              setPlaced(p);
-              setOrderOff(false);
-              if (!practice) props.onChange(p.map((i) => item.tiles[i]));
-            }}
-            locked={solved}
-            tone={solved ? 'good' : orderOff ? 'off' : 'idle'}
-          />
+          {Tray ? (
+            <Tray tiles={tiles} placed={placed} onChange={onTiles} locked={solved} tone={tone} item={item} slots={answerTiles.length} />
+          ) : (
+            <TileTray tiles={tiles} placed={placed} onChange={onTiles} locked={solved} tone={tone} />
+          )}
           {practice && !solved && (
             <button
               type="button"
               className="btn btn-primary self-start"
-              disabled={placed.length !== item.tiles.length}
+              disabled={placed.length !== answerTiles.length}
               onClick={checkOrder}
             >
               {t('check.checkOrder')}
             </button>
           )}
         </div>
+      ) : ExtraOption ? (
+        <div className="flex flex-wrap gap-2" role="group" aria-label={view.optionsLabel}>
+          {options.map((opt, i) => (
+            <ExtraOption
+              key={opt}
+              value={opt}
+              index={i}
+              state={pillState(opt)}
+              disabled={practice && (solved || wrong.includes(opt))}
+              onClick={() => pick(opt)}
+            />
+          ))}
+        </div>
       ) : (
-        <div className={sentenceOptions ? 'flex flex-col gap-2' : 'flex flex-wrap gap-2'} role="group">
+        <div className={layout.wide ? 'flex flex-col gap-2' : 'flex flex-wrap gap-2'} role="group">
           {options.map((opt, i) => (
             <OptionPill
               key={opt}
               label={opt}
               index={i}
-              wide={sentenceOptions}
+              wide={layout.wide}
+              badge={layout.badge}
               state={pillState(opt)}
               disabled={practice && (solved || wrong.includes(opt))}
               onClick={() => pick(opt)}

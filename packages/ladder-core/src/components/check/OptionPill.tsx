@@ -13,6 +13,8 @@ type Props = {
   disabled?: boolean;
   onClick: () => void;
   wide?: boolean;
+  /** Show the 1–4 number-key badge. */
+  badge?: boolean;
 };
 
 const styles: Record<PillState, React.CSSProperties> = {
@@ -23,9 +25,12 @@ const styles: Record<PillState, React.CSSProperties> = {
   wrong: { background: 'var(--off-bg)', color: 'var(--off)', borderColor: 'var(--off-bg)' },
 };
 
-export function OptionPill({ label, state, index, disabled, onClick, wide }: Props) {
-  const { target } = useCourse();
+export function OptionPill({ label, state, index, disabled, onClick, wide, badge }: Props) {
+  const { target, check } = useCourse();
+  const pill = check?.pill;
   const text = parseInline(label).map((t) => t.v).join('');
+  const attrs = pill?.attrs ? pill.attrs(text) : { lang: target.lang, dir: target.dir };
+  const Label = pill?.Label;
   return (
     <button
       type="button"
@@ -34,16 +39,25 @@ export function OptionPill({ label, state, index, disabled, onClick, wide }: Pro
       aria-pressed={state === 'selected' || state === 'correct' ? true : undefined}
       aria-keyshortcuts={index < 4 ? String(index + 1) : undefined}
       data-state={state}
-      lang={target.lang}
-      dir={target.dir}
-      className={`inline-flex min-h-pill items-center gap-2 border-2 px-5 py-2 text-start font-body text-body font-semibold transition-colors duration-quick ${
+      lang={attrs.lang}
+      dir={attrs.dir}
+      className={`inline-flex min-h-pill items-center ${pill?.gapClass ?? 'gap-2'} border-2 px-5 py-2 text-start font-body text-body font-semibold transition-colors duration-quick ${
         wide ? 'w-full rounded-md' : 'rounded-full'
       } ${state === 'idle' && !disabled ? 'hover:border-accent' : ''}`}
       style={styles[state]}
     >
+      {badge && index < 4 && (
+        <span aria-hidden className="label flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-sm bg-paper-2 text-muted">
+          {index + 1}
+        </span>
+      )}
       {(state === 'correct' || state === 'answer') && <IconCheck size={18} draw className="shrink-0" />}
       {state === 'wrong' && <IconClose size={16} className="shrink-0" />}
-      <span className={state === 'wrong' ? 'line-through decoration-[1.5px]' : undefined}>{text}</span>
+      {Label ? (
+        <Label text={text} wrong={state === 'wrong'} />
+      ) : (
+        <span className={state === 'wrong' ? 'line-through decoration-[1.5px]' : undefined}>{text}</span>
+      )}
     </button>
   );
 }
