@@ -13,7 +13,7 @@ import { stripMarkup } from '../markup';
 import type { ContentAdapter } from './adapter';
 import type { ItemTypeLogic } from '../check/itemTypes';
 import { registerItemTypes } from '../check/itemTypes';
-import type { CheckItem, Lesson, LessonSummary, Line, Quote, Reading, Rung, TestPool } from '../types';
+import type { CheckItem, Lesson, LessonSummary, Line, Placement, Quote, Reading, Rung, TestPool } from '../types';
 
 // Schemas take the raw YAML; their output is the parsed object.
 type Schema<T> = ZodType<T, ZodTypeDef, unknown>;
@@ -38,6 +38,8 @@ export type ContentModel = {
     lesson: Schema<Omit<Lesson, 'slug' | 'concept' | 'contrast'>>;
     testPool: Schema<TestPool>;
     reading?: Schema<Reading>;
+    /** content/placement.yaml, for courses with a placement check. */
+    placement?: Schema<Placement>;
   };
   adapter: ContentAdapter;
   /** Course item types' grading/text logic (see lib/check/itemTypes.ts). */
@@ -178,6 +180,11 @@ export function createContent(model: ContentModel, contentDir = path.join(proces
     return model.schemas.reading.parse(readYaml(`${rungId}/reading.yaml`));
   }
 
+  function getPlacement(): Placement | null {
+    if (!model.schemas.placement || !exists('placement.yaml')) return null;
+    return model.schemas.placement.parse(readYaml('placement.yaml'));
+  }
+
   /** Visual data for a page that can show these visual ids (lesson visual, scene items). */
   function visualDataFor(ids: Iterable<string>): unknown {
     return model.visualData?.(new Set(ids));
@@ -199,6 +206,7 @@ export function createContent(model: ContentModel, contentDir = path.join(proces
     getAllSummaries,
     getTestPool,
     getReading,
+    getPlacement,
     visualDataFor,
   };
 }

@@ -2,7 +2,7 @@ import { configureProgress, progressConfig, type ProgressConfig } from './config
 import { emptyState } from './defaults';
 import { migrate } from './migrations';
 import { nextBox } from '../check/leitner';
-import type { ProgressState, Settings, TestAttempt } from './types';
+import type { PlacementRecord, ProgressState, Settings, TestAttempt } from './types';
 
 // Single owner of localStorage. Everything else calls this API.
 
@@ -166,10 +166,29 @@ export function recordTest(rungId: string, attempt: TestAttempt, passed: boolean
     ...s,
     rungs: {
       ...s.rungs,
-      [rungId]: { tests: [...prev.tests, attempt].slice(-20), climbed: prev.climbed || passed },
+      [rungId]: {
+        tests: [...prev.tests, attempt].slice(-20),
+        climbed: prev.climbed || passed,
+        // Courses with a placement check record how a rung was climbed.
+        ...(progressConfig().features.placement ? { via: prev.climbed ? prev.via : passed ? ('test' as const) : undefined } : {}),
+      },
     },
   });
   markPracticedToday();
+}
+
+/**
+ * Saves a placement result and marks `climbs` climbed via placement. Never un-climbs a rung, and
+ * never overwrites a rung climbed by its test.
+ */
+export function applyPlacement(record: Omit<PlacementRecord, 'date'> & { date?: string }, climbs: string[]) {
+  const s = getState();
+  const rungs = { ...s.rungs };
+  for (const id of climbs) {
+    const prev = rungs[id] ?? { tests: [], climbed: false };
+    if (!prev.climbed) rungs[id] = { ...prev, climbed: true, via: 'placement' };
+  }
+  commit({ ...s, rungs, placement: { ...record, date: record.date ?? new Date().toISOString() } });
 }
 
 export function getSettings(): Settings {

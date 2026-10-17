@@ -11,7 +11,15 @@ import { StatusPill } from './LessonStrip';
 import { TargetText } from '../ui/TargetText';
 
 /** One lesson in the rung's list: a big serif numeral, the title, state as dot + word. */
-export function LessonRow({ lesson, state, current }: { lesson: LessonSummary; state: LessonState; current?: boolean }) {
+type RowProps = {
+  lesson: LessonSummary;
+  state: LessonState;
+  current?: boolean;
+  /** Marked after placement: a lesson behind a missed placement item. */
+  flagged?: boolean;
+};
+
+export function LessonRow({ lesson, state, current, flagged }: RowProps) {
   const { t, lang } = useT();
   const course = useCourse();
   const done = state.kind === 'done' || state.kind === 'review';
@@ -71,6 +79,7 @@ export function LessonRow({ lesson, state, current }: { lesson: LessonSummary; s
           <span className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-1">
             {pill}
             <span className="label tnum text-muted">{t('lesson.minutes', { n: lesson.minutes })}</span>
+            {flagged && <StatusPill tone="off">{t('rung.missedBadge')}</StatusPill>}
           </span>
           {current && (
             <span aria-hidden className="mt-1 inline-flex items-center gap-1 text-small font-bold text-accent">

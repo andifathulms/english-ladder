@@ -226,6 +226,21 @@ export const id = {
   'settings.voiceSample': 'Coba suara',
   'settings.voiceSampleText': 'Hello! Is this voice clear?',
   'settings.voiceUsing': 'Memakai suara: {name}',
+  // Placement check (courses with placement.yaml); courses override these.
+  'placement.title': 'Cek posisi',
+  'placement.eyebrow': 'Sudah punya dasar?',
+  'placement.intro': 'Cek singkat, tanpa waktu. Hasilnya menentukan dari mana kamu mulai. Kamu bisa mengulang kapan saja.',
+  'placement.start': 'Mulai cek',
+  'placement.last': 'Hasil terakhir {n}/{total}',
+  'placement.result': 'Mulai dari {rung}.',
+  'placement.startRung': 'Mulai {rung}',
+  'placement.seeAnswers': 'Lihat jawaban',
+  'rung.viaPlacement': 'lewat cek',
+  'rung.placementRetake': 'Ulangi cek posisi',
+  'rung.placementRetakeMeta': 'Tidak pernah menurunkan anak tangga',
+  'rung.missedHint': 'Ditandai: pelajaran di balik soal cek yang terlewat.',
+  'rung.missedBadge': 'ulang',
+  'test.progress': 'Soal {n} dari {total}',
 } as const;
 
 export type StringKey = keyof typeof id;

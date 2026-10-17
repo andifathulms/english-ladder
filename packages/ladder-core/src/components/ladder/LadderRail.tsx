@@ -37,7 +37,13 @@ export function LadderRail({ rungs, lessons, progress, hereId, label }: Props) {
             </p>
             <ol className="flex flex-col">
               {inTier.map((r) => (
-                <LadderRow key={r.id} rung={r} state={rungState(r, lessons, progress)} here={r.id === hereId} />
+                <LadderRow
+                  key={r.id}
+                  rung={r}
+                  state={rungState(r, lessons, progress)}
+                  here={r.id === hereId}
+                  viaPlacement={progress.rungs[r.id]?.via === 'placement'}
+                />
               ))}
             </ol>
           </section>
@@ -47,7 +53,7 @@ export function LadderRail({ rungs, lessons, progress, hereId, label }: Props) {
   );
 }
 
-function LadderRow({ rung, state, here }: { rung: Rung; state: RungState; here: boolean }) {
+function LadderRow({ rung, state, here, viaPlacement }: { rung: Rung; state: RungState; here: boolean; viaPlacement?: boolean }) {
   const { t } = useT();
   const { ladder } = useCourse();
   const cefr = useCefr();
@@ -79,6 +85,7 @@ function LadderRow({ rung, state, here }: { rung: Rung; state: RungState; here: 
           )}
           <span className="label text-muted">{cefr(rung.cefr)}</span>
           {rung.optional && <span className="label text-muted">· {t('rung.optional')}</span>}
+          {climbed && viaPlacement && <span className="label text-muted">· {t('rung.viaPlacement')}</span>}
           {here && <span className="sr-only">· {t('home.youAreHere')}</span>}
         </span>
         <span className="flex items-center justify-end gap-2">

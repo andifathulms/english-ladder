@@ -4,9 +4,9 @@ import Link from 'next/link';
 import type { LessonSummary, Rung, Title } from '@ladder/core/lib/types';
 import type { ProgressState } from '@ladder/core/lib/progress/types';
 import { lessonState } from '@ladder/core/lib/progress/derive';
-import { readHref, testHref, rungHref } from '@ladder/core/lib/routes';
+import { placementHref, readHref, testHref, rungHref } from '@ladder/core/lib/routes';
 import { LessonRow } from './LessonRow';
-import { IconArrowLeft, IconChevron, IconFlag, IconPlay } from '../ui/Icon';
+import { IconArrowLeft, IconChevron, IconFlag, IconPlay, IconReview } from '../ui/Icon';
 import { ProgressRing } from '../ui/ProgressRing';
 import { tierName } from '../ui/tier';
 import { useT } from '../ProgressProvider';
@@ -21,16 +21,21 @@ type Props = {
   progress: ProgressState;
   test: TestInfo | null;
   reading?: ReadingInfo | null;
+  /** The course has a placement check (its retake rung offers it again). */
+  hasPlacement?: boolean;
 };
 
 export type TestInfo = { draw: number; pass: number };
 export type ReadingInfo = { title: Title; items: number };
 
-export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Props) {
+export function RungDetail({ rung, rungs, lessons, progress, test, reading, hasPlacement }: Props) {
   const { t, lang } = useT();
   const course = useCourse();
   const Board = course.boardPattern;
   const textAttrs = useTextAttrs();
+  // After placement into this rung, the lessons behind missed check items are marked.
+  const missed = new Set(progress.placement?.result === rung.id ? progress.placement.missed : []);
+  const retake = !!hasPlacement && course.placement?.retakeRung === rung.id;
   const cefr = useCefr();
   const subtitle = course.ladder?.rungSubtitle?.(rung, 'board') ?? null;
   const meta = course.ladder?.rungMeta?.(rung, t as (key: string) => string) ?? null;
@@ -111,10 +116,11 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Pr
           ) : (
             <ol className="card flex flex-col divide-y divide-rule overflow-hidden">
               {mine.map((l, i) => (
-                <LessonRow key={l.id} lesson={l} state={states[i]} current={i === currentIdx} />
+                <LessonRow key={l.id} lesson={l} state={states[i]} current={i === currentIdx} flagged={missed.has(l.id)} />
               ))}
             </ol>
           )}
+          {missed.size > 0 && <p className="text-small text-muted">{t('rung.missedHint')}</p>}
           {reading && (
             <Link
               href={readHref(rung.id)}
@@ -151,6 +157,21 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Pr
                   {t('rung.testMeta', { n: test.draw, pass: test.pass })} ·{' '}
                   {best !== null ? t('rung.testBest', { n: best, total: test.draw }) : t('rung.testAlways')}
                 </span>
+              </span>
+              <IconChevron className="shrink-0 text-muted" />
+            </Link>
+          )}
+          {retake && (
+            <Link
+              href={placementHref}
+              className="mt-3 flex min-h-[64px] items-center gap-4 rounded-lg bg-paper-2 p-4 text-ink no-underline transition-colors duration-quick hover:bg-accent-soft"
+            >
+              <span className="flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-md bg-surface text-accent">
+                <IconReview />
+              </span>
+              <span className="flex min-w-0 flex-1 flex-col">
+                <span className="font-body font-bold">{t('rung.placementRetake')}</span>
+                <span className="text-small text-muted">{t('rung.placementRetakeMeta')}</span>
               </span>
               <IconChevron className="shrink-0 text-muted" />
             </Link>

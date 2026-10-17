@@ -25,6 +25,7 @@ export function rungPage(content: Content) {
           lessons={content.getAllSummaries().filter((l) => l.rung === rung.id)}
           test={pool ? { draw: pool.draw, pass: pool.pass } : null}
           reading={reading ? { title: content.adapter.reading.title(reading), items: reading.items.length } : null}
+          hasPlacement={!!content.getPlacement()}
         />
       );
     },

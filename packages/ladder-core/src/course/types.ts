@@ -104,6 +104,27 @@ export type TargetTextProps = Omit<React.HTMLAttributes<HTMLElement>, 'dir' | 'l
   variety?: string;
 };
 
+/** Where a placement score lands: the first outcome whose threshold the score reaches. */
+export type PlacementOutcome = {
+  /** The rung the learner is placed in. */
+  result: string;
+  /** Key into placement.yaml `thresholds`; omit on the last (fallback) outcome. */
+  threshold?: string;
+  /** Rungs marked climbed (via placement) by this outcome. */
+  climbs: string[];
+};
+
+export type PlacementConfig = {
+  /** Item sections, in display order (strings: placement.section.<s>, placement.sectionShort.<s>). */
+  sections: string[];
+  /** Highest first; also the ladder fragment shown on the result screen. */
+  outcomes: PlacementOutcome[];
+  /** The rung page that offers a retake. */
+  retakeRung?: string;
+  /** Wraps each item while it is shown (e.g. Arabic: full harakat, no transliteration). */
+  Wrap?: ComponentType<{ children: React.ReactNode }>;
+};
+
 export type CourseFixes = {
   /** CEFR labels in the UI language ("Pra-A1" in Indonesian for Pre-A1). */
   cefrLabelLocalised?: boolean;
@@ -179,6 +200,8 @@ export type CourseConfig = {
   itemTypes?: Record<string, ItemTypeLogic>;
   /** Strand cards per lesson step, in order (e.g. English Talk + Sound, then Words). */
   strands?: { examples?: StrandCard[]; contrast?: StrandCard[] };
+  /** A placement check (placement.yaml) for learners who already know some of the course. */
+  placement?: PlacementConfig;
   /** The ladder: tier order and per-rung extras. */
   ladder?: {
     /** Tier sections, top to bottom (default: hard, medium, easy). */

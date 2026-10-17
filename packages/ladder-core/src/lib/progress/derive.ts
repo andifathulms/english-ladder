@@ -60,7 +60,13 @@ export function continueTarget(
   p: ProgressState,
 ): ContinueTarget {
   const started = Object.keys(p.lessons).length > 0;
-  if (!started) return { kind: 'welcome' };
+  if (!started) {
+    // After a placement check, start at the placed rung's first lesson.
+    const placed = p.placement && rungs.find((r) => r.id === p.placement!.result);
+    const first = placed && lessons.filter((l) => l.rung === placed.id).sort((a, b) => a.order - b.order)[0];
+    if (first) return { kind: 'lesson', lesson: first, step: 0, text: first.resume[0] };
+    return { kind: 'welcome' };
+  }
 
   const known = lessons.filter((l) => p.lessons[l.id]);
   const recent = known.sort((a, b) => p.lessons[b.id].lastOpened - p.lessons[a.id].lastOpened)[0];

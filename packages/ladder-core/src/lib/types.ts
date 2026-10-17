@@ -144,3 +144,6 @@ export type LessonSummary = {
 export type Reading = { rung: string; items: CheckItem[]; [field: string]: unknown };
 
 export type TestPool = { rung: string; draw: number; pass: number; items: CheckItem[] };
+
+/** A placement check: items tagged by `section`, and score thresholds named by the course. */
+export type Placement = { items: CheckItem[]; thresholds: Record<string, number> };
