@@ -17,6 +17,7 @@ import { BottomActionBar } from './BottomActionBar';
 import { PairCard } from './PairCard';
 import { Prose } from './Prose';
 import { TargetSentence } from './TargetSentence';
+import { GlossaryChips } from './GlossaryChips';
 import { TargetText } from '../ui/TargetText';
 import { StepBar } from './StepBar';
 import { StepLabel } from './StepLabel';
@@ -307,18 +308,22 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
           </div>
           <section className="flex flex-col gap-2">
             <h3 className="eyebrow">{t('lesson.newWords')}</h3>
-            <ul className="flex flex-wrap gap-2">
-              {read.glossary(lesson).map((g) => (
-                <li key={g.key} className="card flex items-baseline gap-2 px-3 py-1">
-                  <span lang={course.target.lang} dir={course.target.dir} className="font-display font-semibold">
-                    {g.text}
-                  </span>
-                  <span lang="id" className="id-text text-small">
-                    {g.meaning.id}
-                  </span>
-                </li>
-              ))}
-            </ul>
+            {course.fixes?.glossaryAudio ? (
+              <GlossaryChips words={read.glossary(lesson)} />
+            ) : (
+              <ul className="flex flex-wrap gap-2">
+                {read.glossary(lesson).map((g) => (
+                  <li key={g.key} className="card flex items-baseline gap-2 px-3 py-1">
+                    <span lang={course.target.lang} dir={course.target.dir} className="font-display font-semibold">
+                      {g.text}
+                    </span>
+                    <span lang="id" className="id-text text-small">
+                      {g.meaning.id}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </section>
           <p className="text-muted">{missed ? t('lesson.toReview', { n: missed }) : checksDone ? t('lesson.allFirstTry') : null}</p>
           {spiralRung && <p className="text-small text-muted">{t('lesson.spiral', { rung: spiralRung })}</p>}

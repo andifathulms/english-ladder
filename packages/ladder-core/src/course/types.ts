@@ -136,6 +136,8 @@ export type LessonSession = {
 };
 
 export type CourseFixes = {
+  /** New-word chips (lesson Done step, reading) have audio and a transliteration (EL issue 15). */
+  glossaryAudio?: boolean;
   /** The explanation pill changes the current lesson only, not the global setting (EL issue 5). */
   lessonScopedToggles?: boolean;
   /** Capstone completion is saved and shown with its date; reading answers feed review (EL issue 4). */
@@ -272,6 +274,8 @@ export type CourseConfig = {
     Sentence?: ComponentType<SentenceSlotProps>;
     /** Target text outside sentences: titles, keywords, glossary words (Arabic: ArIsland). */
     TargetText?: ComponentType<TargetTextProps>;
+    /** A transliteration line (Arabic: upright Amiri Latin under the Arabic). */
+    Translit?: ComponentType<{ text: string; className?: string; onBoard?: boolean }>;
     /** The quoted resume line on the board (continue card). Default: the display serif line. */
     BoardQuote?: ComponentType<{ quote: Quote; rung: Rung | undefined }>;
   };

@@ -10,6 +10,7 @@ import { useCourse } from '@ladder/core/course/context';
 import { IconArrowLeft } from '../ui/Icon';
 import { CheckItemView } from '../check/CheckItemView';
 import { TargetSentence } from './TargetSentence';
+import { GlossaryChips } from './GlossaryChips';
 import { TargetText } from '../ui/TargetText';
 
 /** The rung's Read & listen capstone: one short text read aloud, then a few questions. */
@@ -82,18 +83,22 @@ export function ReadingView({ rung, reading }: { rung: Rung; reading: Reading })
         {read.glossary(reading).length > 0 && (
           <section className="flex flex-col gap-2">
             <h2 className="eyebrow">{t('lesson.newWords')}</h2>
-            <ul className="flex flex-wrap gap-2">
-              {read.glossary(reading).map((g) => (
-                <li key={g.key} className="card flex items-baseline gap-2 px-3 py-1">
-                  <span lang={course.target.lang} dir={course.target.dir} className="font-display font-semibold">
-                    {g.text}
-                  </span>
-                  <span lang="id" className="id-text text-small">
-                    {g.meaning.id}
-                  </span>
-                </li>
-              ))}
-            </ul>
+            {course.fixes?.glossaryAudio ? (
+              <GlossaryChips words={read.glossary(reading)} />
+            ) : (
+              <ul className="flex flex-wrap gap-2">
+                {read.glossary(reading).map((g) => (
+                  <li key={g.key} className="card flex items-baseline gap-2 px-3 py-1">
+                    <span lang={course.target.lang} dir={course.target.dir} className="font-display font-semibold">
+                      {g.text}
+                    </span>
+                    <span lang="id" className="id-text text-small">
+                      {g.meaning.id}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </section>
         )}
 
