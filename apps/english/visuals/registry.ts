@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import type { VisualId } from '@ladder/core/lib/visualIds';
+import type { VisualId } from './visualIds';
 import { PlaceScene } from './PlaceScene';
 import { NounBuilder } from './NounBuilder';
 import { NearFar } from './NearFar';

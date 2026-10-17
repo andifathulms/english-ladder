@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { grade, sameOrder } from '@ladder/core/lib/check/grade';
+import { text } from '@/course/text';
 import { drawReview, drawTest } from '@ladder/core/lib/check/draw';
 import { nextBox } from '@ladder/core/lib/check/leitner';
 import { emptyState } from '@ladder/core/lib/progress/defaults';
@@ -10,17 +11,17 @@ const why = { id: 'x', en: 'y' };
 describe('grade', () => {
   it('grades choice, gap, scene and fix by exact option', () => {
     const c: CheckItem = { id: 'a', type: 'choice', prompt: 'p', options: ['in', 'on'], answer: 'on', why };
-    expect(grade(c, 'on').correct).toBe(true);
-    expect(grade(c, 'in').correct).toBe(false);
-    expect(grade(c, ['on']).correct).toBe(false);
+    expect(grade(c, 'on', text).correct).toBe(true);
+    expect(grade(c, 'in', text).correct).toBe(false);
+    expect(grade(c, ['on'], text).correct).toBe(false);
     const f: CheckItem = { id: 'b', type: 'fix', wrong: 'She have', options: ['She [[has]] two cats.', 'x'], answer: 'She [[has]] two cats.', why };
-    expect(grade(f, 'She has two cats.').correct).toBe(true);
+    expect(grade(f, 'She has two cats.', text).correct).toBe(true);
   });
 
   it('grades listen items by the option chosen, not the audio text', () => {
     const l: CheckItem = { id: 'l', type: 'listen', audio: 'The doctors are busy.', options: ['The doctors are busy.', 'The doctor is busy.'], answer: 'The doctors are busy.', why };
-    expect(grade(l, 'The doctors are busy.').correct).toBe(true);
-    expect(grade(l, 'The doctor is busy.').correct).toBe(false);
+    expect(grade(l, 'The doctors are busy.', text).correct).toBe(true);
+    expect(grade(l, 'The doctor is busy.', text).correct).toBe(false);
   });
 
   it('grades order against answer and accept alternatives', () => {
@@ -32,15 +33,15 @@ describe('grade', () => {
       accept: [["I'm", 'tired']],
       why,
     };
-    expect(grade(o, ['I', 'am', 'tired']).correct).toBe(true);
-    expect(grade(o, ["I'm", 'tired.']).correct).toBe(true);
-    expect(grade(o, ['am', 'I', 'tired']).correct).toBe(false);
+    expect(grade(o, ['I', 'am', 'tired'], text).correct).toBe(true);
+    expect(grade(o, ["I'm", 'tired.'], text).correct).toBe(true);
+    expect(grade(o, ['am', 'I', 'tired'], text).correct).toBe(false);
   });
 
   it('order comparison is case-sensitive for the first word only', () => {
-    expect(sameOrder(['The', 'Ball'], ['The', 'ball'])).toBe(true);
-    expect(sameOrder(['the', 'ball'], ['The', 'ball'])).toBe(false);
-    expect(sameOrder(['The', 'ball?'], ['The', 'ball'])).toBe(true);
+    expect(sameOrder(['The', 'Ball'], ['The', 'ball'], text)).toBe(true);
+    expect(sameOrder(['the', 'ball'], ['The', 'ball'], text)).toBe(false);
+    expect(sameOrder(['The', 'ball?'], ['The', 'ball'], text)).toBe(true);
   });
 });
 

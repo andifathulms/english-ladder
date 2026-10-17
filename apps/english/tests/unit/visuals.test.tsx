@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { AllProviders } from '../providers';
-import { PlaceScene } from '@ladder/core/components/visuals/PlaceScene';
-import { NounBuilder } from '@ladder/core/components/visuals/NounBuilder';
-import { PLACE_SPEC, PLACES, placeSentence } from '@ladder/core/components/visuals/placeLogic';
-import { article, pluralParts } from '@ladder/core/components/visuals/nounLogic';
+import { PlaceScene } from '@/visuals/PlaceScene';
+import { NounBuilder } from '@/visuals/NounBuilder';
+import { PLACE_SPEC, PLACES, placeSentence } from '@/visuals/placeLogic';
+import { article, pluralParts } from '@/visuals/nounLogic';
 import type { Noun } from '@ladder/core/lib/types';
 
 const wrap = (ui: React.ReactNode) => render(<AllProviders>{ui}</AllProviders>);

@@ -1,26 +1,14 @@
 // English Ladder's course configuration. Reproduces the engine's historical English
 // behaviour exactly, so the app looks and behaves identically after the extraction.
-import type { CourseConfig, Token } from '@ladder/core/course/types';
-import { scoreVoice, pickVoice } from '@ladder/core/lib/speech/speak';
-import {
-  INVENTORY_DETECTORS,
-  STRUCTURE_RULES,
-  WORD_REGEX,
-  knownWord as enKnownWord,
-} from '@ladder/core/lib/content/lint-rules';
-import { registry } from '@ladder/core/components/visuals/registry';
-import { VISUAL_IDS } from '@ladder/core/lib/visualIds';
+import type { CourseConfig } from '@ladder/core/course/types';
 import { Contours } from '@ladder/core/components/ui/Contours';
 import { DEFAULT_SETTINGS } from '@ladder/core/lib/progress/defaults';
-
-/** Whitespace word tokeniser with character offsets (for speech-boundary highlighting). */
-function tokenise(s: string): Token[] {
-  const out: Token[] = [];
-  const re = /\S+/g;
-  let m: RegExpExecArray | null;
-  while ((m = re.exec(s))) out.push({ text: m[0], start: m.index, end: m.index + m[0].length });
-  return out;
-}
+import { registry } from '@/visuals/registry';
+import { VISUAL_IDS } from '@/visuals/visualIds';
+import { text } from '@/course/text';
+import { voiceScorer, canSpeak, sentenceSplit, sampleText } from '@/course/speech';
+import { INVENTORY_DETECTORS, STRUCTURE_RULES, WORD_REGEX, knownWord } from '@/course/lint';
+import { wordAnnotator } from '@/course/words';
 
 export const course: CourseConfig = {
   id: 'english-ladder',
@@ -53,23 +41,13 @@ export const course: CourseConfig = {
     },
   },
 
-  speech: {
-    voiceScorer: (voice, settings) => scoreVoice(voice, settings.accent, settings.voice),
-    sentenceSplit: /[^.!?]+[.!?]+["')\]]*\s*|[^.!?]+$/g,
-    canSpeak: (voices) => pickVoice(voices) !== null,
-    sampleText: 'Hello! This is your English Ladder voice. Is it clear?',
-  },
+  speech: { voiceScorer, sentenceSplit, canSpeak, sampleText },
 
-  text: {
-    normalise: (s) => s,
-    tokenEquals: (a, b, i) => (i === 0 ? a === b : a.toLowerCase() === b.toLowerCase()),
-    trimPunct: /[.,!?;:]+$/u,
-    tokenise,
-  },
+  text,
 
   lint: {
     wordRegex: WORD_REGEX,
-    knownWord: (word, { lex }) => enKnownWord(word, lex),
+    knownWord,
     detectors: Object.entries(INVENTORY_DETECTORS).map(([id, re]) => ({ id, re })),
     structureRules: STRUCTURE_RULES,
   },
@@ -78,5 +56,5 @@ export const course: CourseConfig = {
   visualIds: VISUAL_IDS,
   boardPattern: Contours,
 
-  extraData: { nounsFile: 'data/nouns.yaml' },
+  extraData: { nounsFile: 'data/nouns.yaml', wordAnnotator },
 };

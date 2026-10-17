@@ -1,8 +1,8 @@
-// Web Speech API wrapper. Resolves silently when speech is unavailable.
+// Web Speech API wrapper. Language-neutral: the course supplies a voice scorer and a
+// sentence-splitting regex. Resolves silently when speech is unavailable.
 
-export type Accent = 'gb' | 'us';
-export type VoiceGender = 'female' | 'male';
-type Opts = { accent?: Accent; gender?: VoiceGender; rate?: number; onBoundary?: (charIndex: number) => void };
+export type VoiceScore = (voice: SpeechSynthesisVoice) => number;
+type Opts = { score: VoiceScore; sentenceSplit: RegExp; rate?: number; onBoundary?: (charIndex: number) => void };
 
 let voices: SpeechSynthesisVoice[] = [];
 let listening = false;
@@ -32,43 +32,18 @@ export function onVoicesChanged(l: () => void) {
   return () => changeListeners.delete(l);
 }
 
-// Novelty and very old synthesis voices (macOS extras, eSpeak, Eloquence) sound robotic or blurry.
-const NOVELTY = /\b(albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|junior|ralph|fred|kathy|grandma|grandpa|rocko|shelley|eddy|flo|reed|sandy|espeak|compact)\b/i;
-// Markers of the clearer neural or network voices.
-const CLEAR = /\b(natural|neural|online|enhanced|premium|siri)\b|^google\b/i;
-const FEMALE = /\b(female|woman|samantha|serena|kate|stephanie|martha|karen|moira|tessa|fiona|victoria|allison|ava|susan|zoe|libby|sonia|mia|hazel|aria|jenny|michelle|zira|emma|amy|joanna|salli|kimberly|ivy|nicky|catherine|sara|olivia)\b/i;
-const MALE = /\b(male|man|daniel|arthur|oliver|alex|tom|aaron|evan|nathan|george|ryan|thomas|guy|david|mark|christopher|eric|james|brian|matthew|joey|justin|rishi|lee)\b/i;
-
-const norm = (v: SpeechSynthesisVoice) => v.lang.replace('_', '-').toLowerCase();
-
-/** Higher is better: accent first, then a clear voice, then the preferred gender. */
-export function scoreVoice(v: SpeechSynthesisVoice, accent: Accent = 'gb', gender: VoiceGender = 'female'): number {
-  const lang = norm(v);
-  if (!lang.startsWith('en')) return -Infinity;
-  const want = accent === 'gb' ? 'en-gb' : 'en-us';
-  const other = accent === 'gb' ? 'en-us' : 'en-gb';
-  let score = lang === want ? 300 : lang === other ? 200 : 100;
-  const name = v.name;
-  if (NOVELTY.test(name)) score -= 1000;
-  if (CLEAR.test(name)) score += 60;
-  // "Female" names win over "male" substrings (e.g. "Google UK English Female").
-  const isFemale = FEMALE.test(name);
-  const isMale = !isFemale && MALE.test(name);
-  if (gender === 'female' ? isFemale : isMale) score += 40;
-  if (gender === 'female' ? isMale : isFemale) score -= 20;
-  if (v.default) score += 5;
-  return score;
+/** The voices currently known to the browser (empty until they load). */
+export function getVoices(): SpeechSynthesisVoice[] {
+  refreshVoices();
+  return voices;
 }
 
-export function pickVoice(
-  list: SpeechSynthesisVoice[],
-  accent: Accent = 'gb',
-  gender: VoiceGender = 'female',
-): SpeechSynthesisVoice | null {
+/** The highest-scoring voice, or null when none scores above -Infinity. */
+export function pickVoice(list: SpeechSynthesisVoice[], score: VoiceScore): SpeechSynthesisVoice | null {
   let best: SpeechSynthesisVoice | null = null;
   let bestScore = -Infinity;
   for (const v of list) {
-    const s = scoreVoice(v, accent, gender);
+    const s = score(v);
     if (s > bestScore) {
       best = v;
       bestScore = s;
@@ -78,10 +53,10 @@ export function pickVoice(
 }
 
 /** Splits long text at sentence ends: some engines cut off or slur long utterances. */
-export function chunks(text: string, max = 160): { text: string; start: number }[] {
+export function chunks(text: string, sentenceSplit: RegExp, max = 160): { text: string; start: number }[] {
   if (text.length <= max) return [{ text, start: 0 }];
   const out: { text: string; start: number }[] = [];
-  const re = /[^.!?]+[.!?]+["')\]]*\s*|[^.!?]+$/g;
+  const re = new RegExp(sentenceSplit.source, sentenceSplit.flags.includes('g') ? sentenceSplit.flags : sentenceSplit.flags + 'g');
   let m: RegExpExecArray | null;
   while ((m = re.exec(text))) {
     const last = out[out.length - 1];
@@ -92,19 +67,10 @@ export function chunks(text: string, max = 160): { text: string; start: number }
 }
 
 /** The voice speak() would use now, for showing in Settings. */
-export function chosenVoiceName(accent: Accent = 'gb', gender: VoiceGender = 'female'): string | null {
+export function chosenVoiceName(score: VoiceScore): string | null {
   if (!synth()) return null;
   refreshVoices();
-  return pickVoice(voices, accent, gender)?.name ?? null;
-}
-
-/** True when the browser can speak English. Play buttons render only when true. */
-export function canSpeak(): boolean {
-  if (!synth()) return false;
-  refreshVoices();
-  // Some browsers report no voices until voiceschanged; treat "has speechSynthesis" as enough
-  // only once voices have loaded and include English.
-  return pickVoice(voices) !== null;
+  return pickVoice(voices, score)?.name ?? null;
 }
 
 let current: SpeechSynthesisUtterance | null = null;
@@ -117,15 +83,15 @@ export function stopSpeaking() {
   current = null;
 }
 
-export function speak(text: string, opts: Opts = {}): Promise<void> {
+export function speak(text: string, opts: Opts): Promise<void> {
   const s = synth();
   if (!s) return Promise.resolve();
   refreshVoices();
-  const voice = pickVoice(voices, opts.accent, opts.gender);
+  const voice = pickVoice(voices, opts.score);
   if (!voice) return Promise.resolve();
   s.cancel();
   const mine = ++generation;
-  const parts = chunks(text);
+  const parts = chunks(text, opts.sentenceSplit);
   const say = (i: number): Promise<void> =>
     new Promise((resolve) => {
       const part = parts[i];

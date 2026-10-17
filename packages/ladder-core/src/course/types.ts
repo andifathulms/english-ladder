@@ -1,6 +1,10 @@
-import type { ComponentType, ReactNode } from 'react';
+import type { ComponentType } from 'react';
 import type { Settings } from '@ladder/core/lib/progress/types';
+import type { Noun } from '@ladder/core/lib/types';
 import type { UiLang } from '@ladder/core/lib/i18n';
+
+/** Per-word annotation shown in My words (English: the a/an badge and irregular-plural suffix). */
+export type WordAnnotation = { badge?: string; pluralSuffix?: string };
 
 /** Scores a browser voice for a course's target language; higher is better, -Infinity to exclude. */
 export type VoiceScorer = (voice: SpeechSynthesisVoice, settings: Settings) => number;
@@ -40,8 +44,9 @@ export type Rule = { name: string; re: RegExp };
 export type LintRules = {
   /** Matches target-language words in a string. */
   wordRegex: RegExp;
-  /** True when a word is covered by the lexicon (handles the language's morphology). */
-  knownWord: (word: string, ctx: { lex: Set<string> }) => boolean;
+  /** True when a word is covered by the lexicon (handles the language's morphology).
+   *  `irregular` maps an irregular inflected form to its lemma (e.g. children → child). */
+  knownWord: (word: string, ctx: { lex: Set<string>; irregular: Map<string, string> }) => boolean;
   detectors: Detector[];
   structureRules: Record<string, Rule[]>;
 };
@@ -79,6 +84,6 @@ export type CourseConfig = {
   extraData?: {
     nounsFile?: string;
     /** Extra annotation for a word in My words (e.g. the English a/an article badge). */
-    wordAnnotator?: (word: string) => ReactNode;
+    wordAnnotator?: (word: string, noun: Noun | undefined) => WordAnnotation;
   };
 };

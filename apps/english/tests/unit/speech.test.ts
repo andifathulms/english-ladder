@@ -1,8 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { chunks, pickVoice } from '@ladder/core/lib/speech/speak';
+import { scoreVoice, sentenceSplit, type Accent, type VoiceGender } from '@/course/speech';
 
 const v = (name: string, lang: string, extra: Partial<SpeechSynthesisVoice> = {}) =>
   ({ name, lang, localService: true, default: false, voiceURI: name, ...extra }) as SpeechSynthesisVoice;
+
+/** The English voice scorer bound to an accent/gender, as a VoiceScore for pickVoice. */
+const score = (accent?: Accent, gender?: VoiceGender) => (voice: SpeechSynthesisVoice) =>
+  scoreVoice(voice, accent, gender);
 
 // Roughly what Chrome on macOS reports, novelty voices first.
 const mac = [
@@ -18,14 +23,14 @@ const mac = [
 
 describe('pickVoice', () => {
   it('prefers a clear British female voice by default', () => {
-    expect(pickVoice(mac)?.name).toBe('Google UK English Female');
+    expect(pickVoice(mac, score())?.name).toBe('Google UK English Female');
   });
   it('honours a male preference within the accent', () => {
-    expect(pickVoice(mac, 'gb', 'male')?.name).toBe('Google UK English Male');
+    expect(pickVoice(mac, score('gb', 'male'))?.name).toBe('Google UK English Male');
   });
   it('never picks a novelty voice when a real one exists', () => {
     const list = [v('Albert', 'en-US'), v('Zarvox', 'en-US'), v('Samantha', 'en-US')];
-    expect(pickVoice(list, 'us')?.name).toBe('Samantha');
+    expect(pickVoice(list, score('us'))?.name).toBe('Samantha');
   });
   it('prefers Microsoft neural voices on Windows', () => {
     const win = [
@@ -33,20 +38,20 @@ describe('pickVoice', () => {
       v('Microsoft Zira - English (United States)', 'en-US'),
       v('Microsoft Libby Online (Natural) - English (United Kingdom)', 'en-GB', { localService: false }),
     ];
-    expect(pickVoice(win)?.name).toMatch(/Libby/);
+    expect(pickVoice(win, score())?.name).toMatch(/Libby/);
   });
   it('returns null without English voices', () => {
-    expect(pickVoice([v('Damayanti', 'id-ID')])).toBeNull();
+    expect(pickVoice([v('Damayanti', 'id-ID')], score())).toBeNull();
   });
 });
 
 describe('chunks', () => {
   it('keeps short text whole', () => {
-    expect(chunks('I am ready.')).toEqual([{ text: 'I am ready.', start: 0 }]);
+    expect(chunks('I am ready.', sentenceSplit)).toEqual([{ text: 'I am ready.', start: 0 }]);
   });
   it('splits long text at sentence ends and keeps offsets', () => {
     const text = 'This is Rina. She is a nurse. Her hospital is next to a big mosque.';
-    const parts = chunks(text, 30);
+    const parts = chunks(text, sentenceSplit, 30);
     expect(parts.map((p) => p.text)).toEqual(['This is Rina. She is a nurse.', 'Her hospital is next to a big mosque.']);
     for (const p of parts) expect(text.slice(p.start, p.start + p.text.length)).toBe(p.text);
   });

@@ -1,11 +1,9 @@
 import type { CheckItem, Lesson, Rung } from '../types';
+import type { LintRules } from '@ladder/core/course/types';
 import { stripMarkup } from '../markup';
 import { getLexicon, getNouns, getReading, getTestPool } from './load';
-import { INVENTORY_DETECTORS, STRUCTURE_RULES, knownWord, words } from './lint-rules';
 
 export type Finding = { level: 'error' | 'warn'; message: string };
-
-export { INVENTORY_DETECTORS, STRUCTURE_RULES, knownWord, words };
 
 function itemTexts(item: CheckItem): string[] {
   switch (item.type) {
@@ -35,10 +33,16 @@ export function englishTexts(l: Lesson): { where: string; text: string }[] {
   return out.map((x) => ({ ...x, text: stripMarkup(x.text) })).filter((x) => x.text.trim());
 }
 
-export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>): Finding[] {
+/** Lints content against a course's inventory detectors, structure rules and lexicon.
+ *  All language-specific logic (word regex, morphology, detectors, structure rules) comes
+ *  from `lint`; the orchestration here is course-agnostic. */
+export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>, lint: LintRules): Finding[] {
   const findings: Finding[] = [];
   const lexicon = getLexicon();
   const irregular = new Map(getNouns().map((n) => [n.plural.toLowerCase(), n.word.toLowerCase()]));
+  const words = (text: string): string[] =>
+    (text.match(lint.wordRegex) ?? []).map((w) => w.toLowerCase());
+  const known = (w: string, lex: Set<string>) => lint.knownWord(w, { lex, irregular });
   const earlierInventory: string[] = [];
   const earlierWords: string[] = [];
 
@@ -47,7 +51,7 @@ export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>): Findi
     const allowedSoFar = [...earlierInventory];
     const rungLex = [...earlierWords, ...(lexicon[rung.id] ?? [])].map((w) => w.toLowerCase());
     const glossSoFar: string[] = [];
-    const rules = STRUCTURE_RULES[rung.id] ?? [];
+    const rules = lint.structureRules[rung.id] ?? [];
 
     for (const l of lessons) {
       const level: Finding['level'] = l.status === 'reviewed' ? 'error' : 'warn';
@@ -58,7 +62,7 @@ export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>): Findi
       const texts = englishTexts(l);
 
       // 1. Inventory: no structure before the lesson that teaches it.
-      for (const [inv, re] of Object.entries(INVENTORY_DETECTORS)) {
+      for (const { id: inv, re } of lint.detectors) {
         const taughtHere = rung.inventory.includes(inv) || earlierInventory.includes(inv);
         if (!taughtHere || allowedSoFar.includes(inv)) continue;
         for (const t of texts) {
@@ -80,7 +84,7 @@ export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>): Findi
       const unknown = new Set<string>();
       for (const t of texts) {
         for (const w of words(t.text)) {
-          if (!knownWord(w, lex) && !(irregular.has(w) && lex.has(irregular.get(w)!))) unknown.add(w);
+          if (!known(w, lex)) unknown.add(w);
         }
       }
       if (unknown.size) findings.push({ level, message: `${where}: words not in the ${rung.name} lexicon or earlier glossaries: ${[...unknown].join(', ')}` });
@@ -97,7 +101,7 @@ export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>): Findi
             if (rule.re.test(text)) findings.push({ level: 'error', message: `${rung.id}/test.yaml: ${item.id}: ${rule.name} is not taught in ${rung.name}: "${text}"` });
           }
           for (const w of words(text)) {
-            if (!knownWord(w, lex) && !(irregular.has(w) && lex.has(irregular.get(w)!))) unknown.add(w);
+            if (!known(w, lex)) unknown.add(w);
           }
         }
       }
@@ -120,7 +124,7 @@ export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>): Findi
           if (rule.re.test(text)) findings.push({ level: 'error', message: `${rung.id}/reading.yaml: ${rule.name} is not taught in ${rung.name}: "${text}"` });
         }
         for (const w of words(text)) {
-          if (!knownWord(w, lex) && !(irregular.has(w) && lex.has(irregular.get(w)!))) unknown.add(w);
+          if (!known(w, lex)) unknown.add(w);
         }
       }
       if (unknown.size) findings.push({ level: 'warn', message: `${rung.id}/reading.yaml: words not in the ${rung.name} lexicon or glossaries: ${[...unknown].join(', ')}` });

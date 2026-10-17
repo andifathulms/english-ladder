@@ -14,6 +14,13 @@ import {
 import { focusCount } from '../src/lib/markup';
 import type { CheckItem, Lesson } from '../src/lib/types';
 import { lintLessons } from '../src/lib/content/lint';
+import type { LintRules } from '../src/course/types';
+
+// The runner is course-agnostic: it loads the config of whichever app invokes it (cwd).
+const { course } = (await import(path.resolve(process.cwd(), 'course.config.ts'))) as {
+  course: { lint: LintRules; visualIds: readonly string[] };
+};
+const visualIds = new Set(course.visualIds);
 
 const errors: string[] = [];
 const warnings: string[] = [];
@@ -70,9 +77,11 @@ for (const rung of rungs) {
       for (const inv of l.introduces) {
         if (!rung.inventory.includes(inv)) err(`${where}: introduces "${inv}" not in rung inventory`);
       }
+      if (l.visual && !visualIds.has(l.visual.id)) err(`${where}: unknown visual "${l.visual.id}"`);
       for (const c of l.check) {
         if (itemIds.has(c.id)) err(`${where}: check id ${c.id} already used in ${itemIds.get(c.id)}`);
         itemIds.set(c.id, where);
+        if (c.type === 'scene' && !visualIds.has(c.visual.id)) err(`${where}: ${c.id}: unknown visual "${c.visual.id}"`);
         for (const s of sentencesOf(c)) {
           if (focusCount(s) > 1) err(`${where}: ${c.id}: more than one [[focus]] in "${s}"`);
         }
@@ -150,7 +159,7 @@ try {
 }
 
 // 5. Inventory, lexicon and structure lint
-const lint = lintLessons(rungs, lessonsByRung);
+const lint = lintLessons(rungs, lessonsByRung, course.lint);
 for (const f of lint) (f.level === 'error' ? errors : warnings).push(f.message);
 
 for (const w of warnings) console.warn(`warn  ${w}`);

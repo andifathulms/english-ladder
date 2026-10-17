@@ -10,7 +10,6 @@ import { useCourse } from '@ladder/core/course/context';
 import { PageShell } from './ui/PageShell';
 import { PlayButton } from './lesson/PlayButton';
 import { IconBook, IconSearch } from './ui/Icon';
-import { article } from './visuals/nounLogic';
 import { useSpeak } from './useSpeech';
 
 export function WordsView({ lessons, nouns = [] }: { lessons: LessonSummary[]; nouns?: Noun[] }) {
@@ -101,22 +100,23 @@ export function WordsView({ lessons, nouns = [] }: { lessons: LessonSummary[]; n
                 <ul className="card flex flex-col divide-y divide-rule overflow-hidden">
                   {words.map((w) => {
                     const noun = byWord.get(w.en.toLowerCase());
+                    const ann = course.extraData?.wordAnnotator?.(w.en, noun) ?? {};
                     return (
                       <li key={w.en} className="flex min-h-[60px] items-center gap-3 px-4 py-2">
                         <span className="flex min-w-0 flex-1 flex-col">
                           <span lang={course.target.lang} dir={course.target.dir} className="font-display text-body font-semibold">
                             {w.en}
-                            {noun && noun.plural_rule === 'irregular' && (
-                              <span className="font-medium text-muted"> → {noun.plural}</span>
+                            {ann.pluralSuffix && (
+                              <span className="font-medium text-muted"> → {ann.pluralSuffix}</span>
                             )}
                           </span>
                           <span lang="id" className="id-text text-small">
                             {w.id}
                           </span>
                         </span>
-                        {noun && (
+                        {ann.badge && (
                           <span lang={course.target.lang} dir={course.target.dir} className="label rounded-sm bg-accent-soft px-2 py-[2px] normal-case tracking-normal text-accent">
-                            {article(noun)}
+                            {ann.badge}
                           </span>
                         )}
                         <PlayButton text={w.en} onPlay={() => void speak(w.en)} small />

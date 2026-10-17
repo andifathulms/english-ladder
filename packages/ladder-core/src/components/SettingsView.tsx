@@ -10,6 +10,7 @@ import { Toggle } from './ui/Toggle';
 import { useCanSpeak, useSpeak } from './useSpeech';
 import { IconPlay } from './ui/Icon';
 import { chosenVoiceName } from '@ladder/core/lib/speech/speak';
+import { useCourse } from '@ladder/core/course/context';
 
 function Group({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -32,13 +33,14 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 export function SettingsView() {
   const { t } = useT();
   const s = useSettings();
+  const { speech } = useCourse();
   const set = (patch: Partial<Settings>) => store.setSettings(patch);
   const canSpeak = useCanSpeak();
   const speakSample = useSpeak();
   const [voiceName, setVoiceName] = useState<string | null>(null);
   useEffect(() => {
-    if (canSpeak) setVoiceName(chosenVoiceName(s.accent, s.voice));
-  }, [canSpeak, s.accent, s.voice]);
+    if (canSpeak) setVoiceName(chosenVoiceName((v) => speech.voiceScorer(v, s)));
+  }, [canSpeak, s, speech]);
   const [storageOk, setStorageOk] = useState(true);
   const [msg, setMsg] = useState<string | null>(null);
   const [confirming, setConfirming] = useState(false);

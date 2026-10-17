@@ -41,7 +41,7 @@ export function TestRunner({ rung, next, pool, lessons, nouns }: Props) {
     window.scrollTo({ top: 0 });
   };
 
-  const results = items.map((item) => ({ item, given: answers[item.id], ok: answers[item.id] !== undefined && grade(item, answers[item.id]).correct }));
+  const results = items.map((item) => ({ item, given: answers[item.id], ok: answers[item.id] !== undefined && grade(item, answers[item.id], course.text).correct }));
   const score = results.filter((r) => r.ok).length;
   const passed = score >= pool.pass;
 

@@ -1,10 +1,12 @@
 import { z } from 'zod';
-import { VISUAL_IDS } from '../visualIds';
 
+// Bilingual.en is the UI/explanation translation; in lesson content fields the `en` key holds
+// the target-language text. TODO(ladder-core): target field — make this key name configurable.
 const Bilingual = z.object({ id: z.string().min(1), en: z.string().min(1) }).strict();
 
+// Visual ids are course-specific; content-check validates them against course.visualIds.
 const Visual = z
-  .object({ id: z.enum(VISUAL_IDS), props: z.record(z.unknown()).default({}) })
+  .object({ id: z.string().min(1), props: z.record(z.unknown()).default({}) })
   .strict();
 
 const itemBase = {

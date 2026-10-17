@@ -1,21 +1,21 @@
 'use client';
 
 import type { Noun } from '@ladder/core/lib/types';
-import type { VisualId } from '@ladder/core/lib/visualIds';
-import { registry } from './registry';
+import { useCourse } from '@ladder/core/course/context';
 import { useT } from '../ProgressProvider';
 
 type Props = {
-  visual: { id: VisualId | string; props: Record<string, unknown> };
+  visual: { id: string; props: Record<string, unknown> };
   nouns?: Noun[];
   /** False in scene check items: fixed state, no controls. */
   interactive?: boolean;
 };
 
-/** The --paper-2 stage behind a visual, plus the registry lookup. */
+/** The --paper-2 stage behind a visual, plus the course's registry lookup. */
 export function VisualStage({ visual, nouns, interactive = true }: Props) {
   const { lang } = useT();
-  const C = registry[visual.id as VisualId] as React.ComponentType<Record<string, unknown>> | undefined;
+  const { visuals } = useCourse();
+  const C = visuals[visual.id] as React.ComponentType<Record<string, unknown>> | undefined;
   if (!C) return null;
   const { state, ...rest } = visual.props as { state?: unknown };
   return (

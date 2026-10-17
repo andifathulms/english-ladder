@@ -2,10 +2,10 @@
 
 import { useLayoutEffect, useRef, useState } from 'react';
 import { BALL_R, PLACE_SPEC, PLACES, isPlace, placeAlt, placeSentence, type Place, type Slot } from './placeLogic';
-import { useRoving } from './useRoving';
-import { Sentence } from '../lesson/Sentence';
-import { useReducedMotion } from '../ProgressProvider';
-import type { VisualProps } from './types';
+import { useRoving } from '@ladder/core/components/visuals/useRoving';
+import { Sentence } from '@ladder/core/components/lesson/Sentence';
+import { useReducedMotion } from '@ladder/core/components/ProgressProvider';
+import type { VisualProps } from '@ladder/core/components/visuals/types';
 
 // Illustration tones (DESIGN §10). Light from the top-left: top lightest, front base, side darkest.
 const WOOD_TOP = 'color-mix(in srgb, var(--wood) 70%, var(--card-top))';

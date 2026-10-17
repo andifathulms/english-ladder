@@ -68,7 +68,8 @@ describe('content loaders', () => {
   });
 });
 
-import { INVENTORY_DETECTORS, englishTexts } from '@ladder/core/lib/content/lint';
+import { englishTexts } from '@ladder/core/lib/content/lint';
+import { INVENTORY_DETECTORS } from '@/course/lint';
 import { getTestPool, getNouns } from '@ladder/core/lib/content/load';
 import { drawTest } from '@ladder/core/lib/check/draw';
 

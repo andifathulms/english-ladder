@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { useRoving } from './useRoving';
-import { Sentence } from '../lesson/Sentence';
-import type { VisualProps } from './types';
+import { useRoving } from '@ladder/core/components/visuals/useRoving';
+import { Sentence } from '@ladder/core/components/lesson/Sentence';
+import type { VisualProps } from '@ladder/core/components/visuals/types';
 
 export const DEMONSTRATIVES = ['this', 'these', 'that', 'those'] as const;
 export type Dem = (typeof DEMONSTRATIVES)[number];

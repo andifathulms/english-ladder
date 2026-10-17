@@ -1,7 +1,6 @@
-// Pure English content-lint rule data. No filesystem imports, so it is safe to pull into
-// a course config that the client bundle references. The runner lives in lint.ts.
-// TODO(ladder-core): in the hooks step these move into apps/english/course and the runner
-// takes them from CourseConfig.lint.
+// English content-lint rules for CourseConfig.lint. The generic runner (lintLessons in
+// @ladder/core) orchestrates these. No filesystem imports, so course.config.ts can reference
+// it from both the client bundle and the build-time content-check.
 
 /** Matches target-language words (English: letters with an optional apostrophe group). */
 export const WORD_REGEX = /[A-Za-z]+(?:'[A-Za-z]+)?/g;
@@ -49,11 +48,14 @@ export function words(text: string): string[] {
   return (text.match(WORD_REGEX) ?? []).map((w) => w.toLowerCase());
 }
 
-export function knownWord(w: string, lex: Set<string>): boolean {
+/** English morphology: lexicon membership, regular suffix stripping, and authored irregulars. */
+export function knownWord(w: string, ctx: { lex: Set<string>; irregular: Map<string, string> }): boolean {
+  const { lex, irregular } = ctx;
   if (lex.has(w)) return true;
   if (w.endsWith("'s") && lex.has(w.slice(0, -2))) return true;
   if (w.endsWith('s') && lex.has(w.slice(0, -1))) return true;
   if (w.endsWith('es') && lex.has(w.slice(0, -2))) return true;
   if (w.endsWith('ies') && lex.has(`${w.slice(0, -3)}y`)) return true;
+  if (irregular.has(w) && lex.has(irregular.get(w)!)) return true;
   return false;
 }

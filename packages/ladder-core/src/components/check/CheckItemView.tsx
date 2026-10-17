@@ -90,6 +90,7 @@ function ListenPrompt({ audio, prompt }: { audio: string; prompt?: string }) {
 export function CheckItemView(props: Practice | Test) {
   const { item, nouns } = props;
   const { t } = useT();
+  const { text } = useCourse();
   const [wrong, setWrong] = useState<string[]>([]);
   const [solved, setSolved] = useState(props.mode === 'practice' && !!props.solved);
   const [placed, setPlaced] = useState<number[]>(() => {
@@ -118,7 +119,7 @@ export function CheckItemView(props: Practice | Test) {
       return;
     }
     if (solved || wrong.includes(opt)) return;
-    if (grade(item, opt).correct) {
+    if (grade(item, opt, text).correct) {
       setSolved(true);
       sfx('correct');
       props.onSolved(missesRef.current === 0);
@@ -132,7 +133,7 @@ export function CheckItemView(props: Practice | Test) {
   const checkOrder = () => {
     if (item.type !== 'order' || !practice) return;
     const resp = placed.map((i) => item.tiles[i]);
-    if (grade(item, resp).correct) {
+    if (grade(item, resp, text).correct) {
       setSolved(true);
       setOrderOff(false);
       sfx('correct');

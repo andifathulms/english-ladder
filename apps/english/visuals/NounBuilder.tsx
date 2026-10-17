@@ -3,8 +3,8 @@
 import { useMemo, useState } from 'react';
 import type { Noun } from '@ladder/core/lib/types';
 import { SOUND_LABEL, RULE_LABEL, article, isTricky, pluralParts } from './nounLogic';
-import { Sentence } from '../lesson/Sentence';
-import type { VisualProps } from './types';
+import { Sentence } from '@ladder/core/components/lesson/Sentence';
+import type { VisualProps } from '@ladder/core/components/visuals/types';
 
 type Props = VisualProps<string> & { nouns: Noun[]; initial?: string; featured?: string[] };
 
