@@ -4,8 +4,8 @@ Branch: `migrate/arabic`. Source: `../arabic-ladder` at `aedfae7` (= `origin/mai
 <https://andifathulms.github.io/arabic-ladder/>, last deploy 2026-10-15). Upstream copy point:
 English Ladder `58eab3c` (named in the source `UPSTREAM.md` / `README.md`; present in this repo's history).
 
-Status: **Step 1 (recon) only. Nothing has been moved.** Sections 1–5 are the recon; section 6 is the
-plan; section 7 lists the decisions I need from you before Step 2.
+Status: **done, on branch `migrate/arabic` (not merged).** Sections 1–5 are the recon, 6 the plan,
+7 your decisions, 8 the English Ladder fix flags, and 9 the final report.
 
 ---
 
@@ -302,21 +302,140 @@ Prose/PairCard (via slots).
   listed here for your approval.
 - **Joining snapshot** (`joining-sheet-chromium-darwin.png`) is platform-specific; it moves as-is.
 
-## 7. Decisions I need before Step 2
+## 7. Decisions (answered)
 
-- **D1. Fixes for English.** Several engine items are English Ladder bug fixes (issues 3, 6, 11, 13,
-  14, 15, and Pra-A1). The brief requires English parity, so I plan to ship them **off for English**
-  and turn them on for Arabic only. Turning them on for English would be a separate, later change.
-  The one exception is the NotchBar aria-label fix, which changes no pixels. OK?
-- **D2. Content model approach.** I recommend F2: core loaders and types take the course's schemas, so
-  Arabic content stays byte-identical. The alternative, a shared target-field schema with `en`
-  renamed, would mean editing every English and Arabic content file. OK with F2?
-- **D3. Live export.** OK for me to drive the live site with Playwright to make the fixture? It only
-  writes to a throwaway browser profile. Or would you rather export from your own browser and give
-  me the file?
-- **D4. Source repo workflow.** After the switch, arabic-ladder's own `deploy.yml` would still build
-  and deploy on any push to its `main`, overwriting the monorepo deploy. Should the README branch
-  there also remove that workflow (or limit it to `workflow_dispatch`)? Or do you want to handle that
-  yourself?
-- **D5. Mandarin repo path.** The brief says `../mandarin-ladder`; the repo is `../chinese-ladder`. I'll
-  note it for the next run. No action needed now.
+- **D1. Fixes for English**: each fix is a `CourseConfig.fixes.*` flag, on for Arabic, off for English,
+  so English parity stays at 0 diff. They go on for English in a separate branch with a fresh baseline.
+  The NotchBar aria-label fix was applied for everyone (no pixel change; see §9.6).
+- **D2. Content model**: per-course schemas, no content file changes. Core reads lessons only through
+  a course adapter (`ContentAdapter`: titles, target lines, translit, meaning, focus texts, glossary,
+  readings, dialogues), so Mandarin and Japanese plug in the same way.
+- **D3. Live export**: made with Playwright on the live site in a throwaway profile
+  (`apps/arabic/tests/fixtures/make-live-export.mjs`).
+- **D4. Source repo**: README note and the Pages workflow set to `workflow_dispatch` only, on branch
+  `docs/moved-to-monorepo` in `../arabic-ladder` (one local commit, not pushed).
+- **D5. Mandarin path**: the sibling is `../mandarin-ladder` (it was `../chinese-ladder` at recon time).
+
+## 8. English Ladder fix flags (`CourseConfig.fixes`)
+
+Every flag defaults to off. Arabic Ladder turns them all on (it shipped with these fixes, PRD §5.9).
+
+| Flag | What it does | EL recon issue |
+|---|---|---|
+| `fixes.reviewExit` | A close control while a quick review runs; answers given stay recorded | 3 |
+| `fixes.capstoneDone` | Capstone completion saved with its date, shown on the cards; reading answers feed review | 4 |
+| `fixes.lessonScopedToggles` | The ID/EN explanation pill changes only the current lesson, not the global setting | 5 |
+| `fixes.testProgressLabel` | Rung test progress bar labelled by question ("Soal 3 dari 16"), not lesson steps | 6 |
+| `fixes.climbTitleTranslated` | The climb title is marked in the UI language (the wording itself is a string override, e.g. `'{rung} · naik'`) | 13 |
+| `fixes.themeColorFollowsTheme` | The browser's theme-color follows the in-app theme (needs `themeColor`; pre-paint via `buildThemeScript`) | 14 |
+| `fixes.glossaryAudio` | New-word chips (Done step, reading) with audio and transliteration | 15 |
+| `fixes.wordsGroupLabel` | My words grouped by rung, then lesson, labelled "Rung · Pelajaran n" | 11 |
+| `fixes.cefrLabelLocalised` | "Pra-A1" for Pre-A1 in the Indonesian UI | — |
+
+Issue 7 (notch counts from data) is fixed for everyone (§9.6). Turning a flag on for English will
+change English pixels on purpose; recapture `tests/parity/baseline` in that branch.
+
+## 9. Report
+
+### 9.1 What went into core
+
+All behind optional `CourseConfig` fields or registries; absent = English's behaviour.
+
+| Commit | Into core |
+|---|---|
+| `f0f6615` | **Progress per course**: `store.configure(progressConfigOf(course))` — storage key (was hard-coded to English's), schema version, the course's own migrations (English's 1→2 step moved into `apps/english`), the course's own settings; `buildThemeScript()` |
+| `fa1e0c7` | **Content model + adapter** (D2): `createContent(model)` loaders, `ContentAdapter`, `Line`/`Title`/`Gloss`/`Quote`; the Sentence slot; strand registry; core page factories (`@ladder/core/pages/*`); visual data via `VisualDataProvider` (F7); `content:check` as a runner with hooks. English's schema, word lint and strand cards moved into `apps/english` |
+| `f99b2e4` | `--m-settle-d`, `tirukan-fill`, `talkHref`/`placementHref` |
+| `afce4c7` | **Course item types** (`registerItemTypes`: grade, text, tiles, options) and **check slots** (Inline, Prompt, Wrong, Listen, TileTray, option layout/badge/label, type renderers); `TextRules.equals` (exact/loose) |
+| `195da17` | **Recorded audio first** (`course.audio`): manifest, `audioKey`, `play()`, `useCanPlay`/`usePlay`, variety-aware voice scoring, `speech.rateScale`, SW audio route, `audio:ingest` script, `startCourse()` |
+| `6711d32` | Extensible UI strings (`extendStrings<K>`, `useT<K>`) |
+| `9cfe575`, `5a4bd43`, `48253de` | `boardPattern` wired; `shell.dir` separate from `target.dir`; NotchBar label |
+| `2d02f72` | `titles: 'ui'`, `components.TargetText`, `BoardQuote`, `prose.Term/Text`, `target.textAttrs`, keyword chip |
+| `97fce59` | Ladder: tiers, rung subtitle, rung meta line; `fixes.cefrLabelLocalised` |
+| `23199da` | **Placement check**, data-driven outcomes (both siblings hard-coded rung ids; core takes them from config) |
+| `f3bad17` | **Two-door welcome** |
+| `c37b613` | **Capstones**: dialogue capstone route and view, capstone cards, `fixes.capstoneDone` |
+| `41faa1c` | **Lesson sessions** (lesson-scoped toggles/provider) and UI-language explanations; `fixes.lessonScopedToggles` |
+| `7fc3bfb` | **Tirukan** repeat-after card |
+| `17cc321`, `0b3f96f`, `e8b9197`, `89cb867`, `659d7cf` | `fixes.glossaryAudio`, `fixes.testProgressLabel`, `fixes.reviewExit`, climb config + `fixes.climbTitleTranslated`, `fixes.themeColorFollowsTheme` |
+| `c957bcf`, `8f20020` | Target-text size setting; settings rows follow the course's settings; recorded voice sample |
+| `1fcdcbc` | My words `match`/`Row` slots; `fixes.wordsGroupLabel` |
+| `4802539` | Physical-CSS lint (dirs as a parameter); logical climb marker |
+| `bff55f7`, `65e663a`, `b4f9ef4`, `b78c5ce`, `ae8c7d2` | Engine-item text overrides; wordmark extra; TileTray attrs; checker registers item types; generic draws |
+| `daa1327` | **Shared place-scene drawing** (PlaceDrawing, usePlace, geometry) used by English and Arabic |
+| `307eab2` | `make-sw.mjs`; `make-icons.mjs` takes the board colour |
+
+When Mandarin migrates, it should reuse: placement, two doors, capstones, lesson sessions, Tirukan,
+recorded audio, item types, check slots, UI-first titles, the target-size setting and the fixes. It
+adds its own deck, TracePad and ruby rendering.
+
+### 9.2 What stayed in the app (`apps/arabic`)
+
+- `content/`: byte-identical to the source (`diff -r` clean); same lesson, check and word ids.
+- `lib/arabic/`: the Arabic text library (unchanged apart from one import).
+- `course/`: schema, types, adapter, text rules (exact/loose `compare`, `matchOf`), item types (read, spell, mark), speech (voice scorer, split, 0.9), Arabic lint, `arabicTexts`, progress (key `arabic-ladder:v1`, schema 1), content model and check hooks.
+- `components/`: ArIsland, ArSentence, Translit, HoldReveal, LessonText, EgChip, JoiningSheet, ArTileTray, MarkOption, Arabic strand cards (Bunyi, Mesir, Kata, Ngobrol), Latin/Harakat toggles, Lattice, About, plus `slots.tsx`, `check/slots.tsx` and `WordsRow.tsx` (the Arabic rendering the engine's slots call).
+- `visuals/`: LetterForms, WordJoiner, HarakatBuilder, Makhraj, SunMoon, PlaceSceneAr (on the core drawing), Agreement.
+- `styles/theme.css` (palette and Arabic type tokens over core tokens), `styles/arabic.css` (mark keyframes), and the `.ar` classes as a Tailwind plugin.
+- Fonts, `public/` (manifest, icons, empty audio manifest, generated `sw.js`), `i18n/overrides.ts` (40 own keys + its wording of engine keys), `scripts/` (audio:list, translit:check), and tests.
+
+### 9.3 Drift removed
+
+Arabic's modified copies of these engine files were **not carried over**, because core now does
+what they did through config: LessonPlayer, PairCard, Prose, Sentence, ReadingView, StrandCards
+(engine part), CheckItemView, CheckStep, OptionPill, TileTray, WhyLine, ClimbMoment, ReviewRunner,
+TestRunner, ContinueCard, HomeView, LadderRail, LessonRow, LessonStrip, NotchBar, RungDetail,
+RungView, AppNav, Mark, tier.ts, ProgressProvider, SettingsView, WordsView, MeView, useSpeech,
+PlayButton, VisualStage, useRoving, the `lib/progress/*`, `lib/check/*`, `lib/speech/speak.ts`,
+`lib/content/load.ts`, `lib/i18n/*`, `lib/routes.ts`, `lib/basePath.ts`, `lib/markup.ts`,
+`lib/sw.ts`, tokens/globals CSS, the routes' logic (now core page factories), `serve.mjs`,
+`make-icons.mjs`, `lint-physical.ts` and `content-check.ts`. Also dropped: `upstream.mjs` and
+`UPSTREAM.md` (the copy-and-port model is over).
+
+Removed after the move (`9946b42`): the app's copy of English Ladder's place-scene drawing and
+geometry (now core's `PlaceDrawing`, used by both apps), and duplicate copies of core tests
+(`Sentence.test.tsx`, `markup.test.ts`; these run once, with English).
+
+### 9.4 Couldn't be made (fully) generic
+
+- **Course-specific types at the boundary.** Core types course items, rungs and lessons as opaque (`[field]: unknown`); app code casts to its own types where it reads its own fields (adapter, slots, tests). Making core components generic over item types would have made every core narrowing harder; the boundary casts are explicit and few.
+- **Placement content rules** (6/6/4/4 items per section, `match: exact`, threshold order) stay in Arabic's check hook; they are course policy, not engine.
+- **`target.textAttrs: { lang: 'en' }`**: Arabic marked topics, threads and test-result answers `lang="en"`, even where the answer is Arabic. This is kept so behaviour and pixels are unchanged; worth fixing in Arabic later (the answer text should be an island).
+- **`content:check` module instances**: an app's content model can load core through its alias, a separate module instance from the checker's relative imports, so the checker registers the course's item types itself (`b78c5ce`). It works, but it's a quirk of consuming core as source.
+- **Joining-sheet snapshot** (`joining-sheet-chromium-darwin.png`) is platform-specific, as it was in the source repo.
+
+### 9.5 Behaviour differences from the live app (please approve)
+
+1. **Spell items in rung tests can now be answered** (`0b3f96f`). In the live app, once a learner places letters on a `spell` item in a rung test, *Next* stays disabled: TestRunner only counted `order` tiles. Huruf 1's pool has 5 spell items and Huruf 2's has 2, so some test draws can't be finished. Core now counts tiles for any tile item type. No pixel change in the baseline (its seeded draw has no spell item).
+2. **The service worker file changes once.** `sw.js` is generated from the core template, with the same cache name (`arabic-ladder-v0.1.0`), the same precache list and the same audio route. The only difference is how the prefix is written. Browsers install it as an update; nothing cached is lost.
+
+There are no visual differences.
+
+### 9.6 English changes (all pixel-identical)
+
+- NotchBar aria-label: "3/{total} pelajaran" → "3/10 pelajaran" (it was broken since the refactor).
+- The store reads the course's key: still `english-ladder:v1`, still schema 2 with its 1→2 step; theme script byte-identical.
+- Everything else behind config defaults. English parity was verified (60/60, 0 px) after every core commit.
+
+### 9.7 Parity results
+
+| Gate | Result |
+|---|---|
+| English parity (`node tests/parity/verify.mjs english`) | **60/60, 0 differing pixels**, after every engine commit and at the end |
+| Arabic parity vs source build (`aedfae7`) | **200/200, 0 differing pixels**: every route, all six lesson steps + feedback sheet for Huruf 1, Huruf 2 and Easy 1, placement item and result, test item, climb moment, test results, review running, filled My words, 360/1280 × light/dark |
+| Arabic parity vs **live site** with a learner's imported progress | **24/24, 0 differing pixels** (home, rung Easy 1 and Huruf 2, My words, Saya, Settings × 2 widths × 2 themes) |
+| Live export import | `live-export.json` (from the live app) imports and exports back byte for byte (unit); the e2e imports it through Settings and shows the same continue card, "lewat cek" climbs, capstone date, My words and settings |
+| Unit tests (root `npm run test`) | English + core 106 ✓, Arabic 347 ✓ (the source had 352; 4 duplicate core `Sentence` tests and 4 `markup` tests now run once with English, and 3 new live-import tests were added) |
+| `content:check` | English 0/0; Arabic 11 rungs, 34 lessons, 314 items, 0 errors, 1 accepted audio warning: identical to the source |
+| e2e (root `npm run test:e2e`) | English 35 ✓, Arabic 55 ✓ (the source's 54 + the live-import test) |
+| Lint | both clean |
+| `audio:list` / `translit:check` | identical output to the source (769-row CSV byte-identical; 0 differences) |
+
+Parity notes: the 3/255 per-channel tolerance and re-capture loop from the English harness are unchanged; `MAX_ATTEMPTS` went from 4 to 6. Two shots are bistable in antialiasing: `/words` (already known) and `imported-me__light__1280`. For the latter, two captures of the **live site itself** differ by 27 px, and the local build matches one of them exactly. The baseline keeps that live capture.
+
+### 9.8 What you need to do
+
+1. Review `migrate/arabic` and merge when happy.
+2. Deploy setup (`docs/DEPLOY.md`): create the deploy key, add it to `arabic-ladder` (write), add `ARABIC_PAGES_DEPLOY_KEY` here, run the workflow on `main`, then switch `arabic-ladder` Pages to the `gh-pages` branch.
+3. Push and merge `docs/moved-to-monorepo` in `../arabic-ladder` (README note, workflow on `workflow_dispatch` only).
+4. Approve or reject the two behaviour differences in §9.5.

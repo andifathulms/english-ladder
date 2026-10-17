@@ -2,7 +2,9 @@
 
 A calm, levelled language-course engine and the courses built on it. The engine
 (`@ladder/core`) is shared; each course is a thin app that supplies its content, visuals,
-theme and configuration. The first course is **English Ladder** (for Indonesian speakers).
+theme and configuration. Courses: **English Ladder** (`apps/english`) and **Arabic Ladder**
+(`apps/arabic`, migrated from its own repo: see `docs/migrate-arabic.md`), both for Indonesian
+speakers.
 
 Read `PRD.md` for what to build, `DESIGN.md` for how it must look, `CLAUDE.md` for how to
 build it, and `RECON.md` for a full map of the engine as it stands.
@@ -31,7 +33,9 @@ apps/english/                # English Ladder
   styles/theme.css           # token values (English delegates to core defaults)
   public/                    # manifest, icons, sw.js
   next.config.mjs tailwind.config.ts tsconfig.json vitest.config.ts playwright.config.ts
-tests/parity/                # pixel-parity harness (capture.mjs, compare.mjs, verify.mjs) + baseline/
+apps/arabic/                 # Arabic Ladder: same shape, plus lib/arabic (text library), course/ (content
+                             # model, adapter, item types), components/ (ArIsland, slots), tests/parity
+tests/parity/                # pixel-parity harness (verify.mjs <app>) + English baseline/
 ```
 
 The engine is consumed **as source** (`transpilePackages: ['@ladder/core']` + a tsconfig path
@@ -39,7 +43,8 @@ alias), not published to npm.
 
 ## Commands
 
-Run from the repo root (they proxy into `apps/english`) or inside `apps/english`:
+Run from the repo root (lint, test, content:check and test:e2e cover every app; build/dev/preview
+default to English, with `:arabic` variants) or inside an app:
 
 ```bash
 npm install
@@ -50,6 +55,7 @@ npm run content:check  # validate content against the course config
 npm run test           # vitest (engine + app unit/component tests)
 npm run test:e2e       # playwright, against the built site
 npm run lint
+npm run test:parity    # English 60 + Arabic 224 screenshots, 0 differing pixels
 ```
 
 `NEXT_PUBLIC_BASE_PATH` sets the GitHub Pages base path (e.g. `/english-ladder`).
