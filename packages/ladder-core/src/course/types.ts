@@ -286,6 +286,8 @@ export type CourseConfig = {
   itemTypes?: Record<string, ItemTypeLogic>;
   /** Text of engine item types where the course words it differently (see ContentModel.itemText). */
   itemText?: Record<string, (item: ExtraItem) => string>;
+  /** Answer text of engine item types where the course words it differently. */
+  answerText?: Record<string, (item: ExtraItem) => string>;
   /** Strand cards per lesson step, in order (e.g. English Talk + Sound, then Words). */
   strands?: { examples?: StrandCard[]; contrast?: StrandCard[] };
   /** The lesson player. */

@@ -1,7 +1,7 @@
 import type { CourseConfig } from './types';
 import { progressConfigOf } from './types';
 import * as store from '@ladder/core/lib/progress/store';
-import { overrideItemText, registerItemTypes } from '@ladder/core/lib/check/itemTypes';
+import { overrideAnswerText, overrideItemText, registerItemTypes } from '@ladder/core/lib/check/itemTypes';
 import { configureAudio } from '@ladder/core/lib/speech/audio';
 
 /**
@@ -13,5 +13,6 @@ export function startCourse(course: CourseConfig) {
   store.configure(progressConfigOf(course));
   if (course.itemTypes) registerItemTypes(course.itemTypes);
   for (const [type, fn] of Object.entries(course.itemText ?? {})) overrideItemText(type, fn);
+  for (const [type, fn] of Object.entries(course.answerText ?? {})) overrideAnswerText(type, fn);
   configureAudio(course.audio ? { normalise: course.text.normalise, ...course.audio } : null);
 }

@@ -176,3 +176,16 @@ describe('course answer areas', () => {
     expect(isAnswered(mark, undefined, 'test')).toBe(false);
   });
 });
+
+import { overrideAnswerText } from '@ladder/core/lib/check/itemTypes';
+
+describe('engine answer text overrides', () => {
+  it('a course can word a core type’s answer its own way, keeping its item text override', () => {
+    const fix = { id: 'f', type: 'fix', wrong: 'a b', options: ['x y', 'z'], answer: 'x y', why: { id: '', en: '' } } as CheckItem;
+    expect(answerText(fix)).toBe('x y');
+    overrideItemText('fix', () => 'fix it');
+    overrideAnswerText('fix', (i) => String((i as unknown as { answer: string }).answer).replace(/\s+/g, ''));
+    expect(answerText(fix)).toBe('xy');
+    expect(itemText(fix)).toBe('fix it');
+  });
+});

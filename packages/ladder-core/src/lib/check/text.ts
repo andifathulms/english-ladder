@@ -1,6 +1,6 @@
 import { isCoreItem, type CheckItem, type ExtraItem } from '../types';
 import { stripMarkup } from '../markup';
-import { extraType, itemTextOverride } from './itemTypes';
+import { answerTextOverride, extraType, itemTextOverride } from './itemTypes';
 
 /** A one-line text representation of an item, for the continue card and review lists. */
 export function itemText(item: CheckItem): string {
@@ -25,6 +25,8 @@ export function itemText(item: CheckItem): string {
 /** The correct answer as a sentence-ish string. */
 export function answerText(item: CheckItem): string {
   if (!isCoreItem(item)) return extraType(item).answerText(item as ExtraItem);
+  const over = answerTextOverride(item.type);
+  if (over) return over(item as unknown as ExtraItem);
   if (item.type === 'order') return item.answer.join(' ');
   if ((item.type === 'gap' || item.type === 'choice') && item.prompt.includes('___')) {
     return stripMarkup(item.prompt.replace('___', item.answer));
