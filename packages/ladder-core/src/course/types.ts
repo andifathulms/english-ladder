@@ -136,6 +136,8 @@ export type LessonSession = {
 };
 
 export type CourseFixes = {
+  /** The rung test's progress bar counts questions ("Question 3 of 16"), not lesson steps (EL issue 6). */
+  testProgressLabel?: boolean;
   /** New-word chips (lesson Done step, reading) have audio and a transliteration (EL issue 15). */
   glossaryAudio?: boolean;
   /** The explanation pill changes the current lesson only, not the global setting (EL issue 5). */

@@ -94,3 +94,12 @@ describe('course item types', () => {
     expect(grade(item, 'Ya', text).correct).toBe(true);
   });
 });
+
+import { tilesNeeded } from '@ladder/core/lib/check/itemTypes';
+
+describe('tile items in tests', () => {
+  it('counts the answer tiles of course tile types (a spell item is answered once all letters are placed)', () => {
+    expect(tilesNeeded(spell)).toBe(3);
+    expect(tilesNeeded(mark)).toBe(0);
+  });
+});

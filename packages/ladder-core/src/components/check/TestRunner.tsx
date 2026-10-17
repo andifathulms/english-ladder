@@ -15,6 +15,8 @@ import { useTextAttrs } from '../ui/TargetText';
 import { IconArrowLeft, IconArrowRight, IconCheck, IconClose } from '../ui/Icon';
 import { BottomActionBar } from '../lesson/BottomActionBar';
 import { StepBar } from '../lesson/StepBar';
+import { QuestionBar } from '../lesson/QuestionBar';
+import { tilesNeeded } from '@ladder/core/lib/check/itemTypes';
 import { CheckItemView } from './CheckItemView';
 import { ClimbMoment } from './ClimbMoment';
 import { WhyLine } from './WhyLine';
@@ -100,14 +102,18 @@ export function TestRunner({ rung, next, pool, lessons }: Props) {
     const i = phase.i;
     const item = items[i];
     const last = i === items.length - 1;
-    const answered = answers[item.id] !== undefined && (!Array.isArray(answers[item.id]) || (answers[item.id] as string[]).length === (item.type === 'order' ? item.tiles.length : 0));
+    const answered = answers[item.id] !== undefined && (!Array.isArray(answers[item.id]) || (answers[item.id] as string[]).length === tilesNeeded(item));
     return (
       <div className="flex min-h-[100dvh] flex-col">
         {header(i)}
         <main className="flex-1 py-5 sm:py-7">
           <div className="page max-w-lesson sm:rounded-lg sm:bg-surface sm:px-7 sm:py-7 sm:shadow-e2">
             <div className="mb-5">
-              <StepBar step={Math.floor((i / items.length) * 6)} />
+              {course.fixes?.testProgressLabel ? (
+                <QuestionBar n={i + 1} total={items.length} />
+              ) : (
+                <StepBar step={Math.floor((i / items.length) * 6)} />
+              )}
             </div>
             <p className="sr-only" aria-live="polite">
               {t('check.counter', { n: i + 1, total: items.length })}

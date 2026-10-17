@@ -2,11 +2,11 @@
 
 import Link from 'next/link';
 import { Fragment, useRef, useState } from 'react';
-import { isCoreItem, type CheckItem, type ExtraItem, type LessonSummary, type Placement, type Rung } from '@ladder/core/lib/types';
+import type { LessonSummary, Placement, Rung } from '@ladder/core/lib/types';
 import type { Response } from '@ladder/core/lib/check/grade';
 import { grade } from '@ladder/core/lib/check/grade';
 import { answerText } from '@ladder/core/lib/check/text';
-import { itemType } from '@ladder/core/lib/check/itemTypes';
+import { tilesNeeded } from '@ladder/core/lib/check/itemTypes';
 import { scorePlacement, type PlacementScore } from '@ladder/core/lib/check/placement';
 import { translate } from '@ladder/core/lib/i18n';
 import * as store from '@ladder/core/lib/progress/store';
@@ -24,13 +24,6 @@ type Props = { placement: Placement; rungs: Rung[]; lessons: LessonSummary[] };
 type Phase = { kind: 'intro' } | { kind: 'run'; i: number } | { kind: 'result'; score: PlacementScore; review: boolean };
 
 const show = (r: Response | undefined) => (r === undefined ? '—' : Array.isArray(r) ? r.join(' ') : r);
-
-/** Answer tiles an item needs before it counts as answered (tile items), else 0. */
-function tilesNeeded(item: CheckItem): number {
-  if (item.type === 'order') return item.tiles.length;
-  if (isCoreItem(item)) return 0;
-  return itemType((item as ExtraItem).type)?.tiles?.(item as ExtraItem).answer.length ?? 0;
-}
 
 /**
  * The placement check: a test-like frame with no feedback until the end, then a placement into a

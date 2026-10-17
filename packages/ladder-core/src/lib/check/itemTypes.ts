@@ -3,7 +3,7 @@
 // so grade(), itemText() and content:check handle them. Rendering is registered separately in
 // CourseConfig.check (client only).
 import type { TextRules } from '@ladder/core/course/types';
-import type { ExtraItem } from '../types';
+import { isCoreItem, type CheckItem, type ExtraItem } from '../types';
 
 export type Response = string | string[];
 
@@ -37,4 +37,11 @@ export function extraType(item: { type: string; id?: string }): ItemTypeLogic {
   const def = registry.get(item.type);
   if (!def) throw new Error(`no item type "${item.type}" registered${item.id ? ` (item ${item.id})` : ''}`);
   return def;
+}
+
+/** Tiles an item's answer needs before it counts as answered (order and tile types), else 0. */
+export function tilesNeeded(item: CheckItem): number {
+  if (item.type === 'order') return item.tiles.length;
+  if (isCoreItem(item)) return 0;
+  return itemType((item as ExtraItem).type)?.tiles?.(item as ExtraItem).answer.length ?? 0;
 }
