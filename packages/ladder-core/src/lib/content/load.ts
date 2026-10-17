@@ -72,6 +72,8 @@ export type ContentModel = {
   };
   /** Data for a rung page's ladder.RungExtra (e.g. Mandarin's deck size), at build time. */
   rungData?: (rung: Rung) => unknown;
+  /** Data for the My words page's second tab (words.tab), at build time. */
+  wordsPageData?: () => unknown;
   /** Data for My words (e.g. English nouns for the a/an badge), given the glossaries shown. */
   wordData?: (summaries: LessonSummary[]) => unknown;
   meta?: {

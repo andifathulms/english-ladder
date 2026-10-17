@@ -47,6 +47,7 @@ self.addEventListener('fetch', (event) => {
     );
     return;
   }
+__CACHE_FIRST__
 
   // Hashed build assets and fonts never change: cache first.
   if (url.pathname.includes('/_next/static/')) {

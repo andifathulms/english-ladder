@@ -1,20 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { LessonSummary, Rung } from '@ladder/core/lib/types';
 import { missedCount } from '@ladder/core/lib/progress/derive';
 import { lessonHref } from '@ladder/core/lib/routes';
 import { useProgress, useT } from './ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
 import { PageShell } from './ui/PageShell';
+import { Segmented } from './ui/Segmented';
 import { PlayButton } from './lesson/PlayButton';
 import { IconBook, IconSearch } from './ui/Icon';
 import { usePlay, useSpeak } from './useSpeech';
 
-type Props = { lessons: LessonSummary[]; rungs?: Rung[]; wordData?: unknown };
+type Props = { lessons: LessonSummary[]; rungs?: Rung[]; wordData?: unknown; tabData?: unknown };
 
-export function WordsView({ lessons, rungs = [], wordData }: Props) {
+export function WordsView({ lessons, rungs = [], wordData, tabData }: Props) {
   const { t, lang } = useT();
   const course = useCourse();
   const play = usePlay();
@@ -29,6 +30,16 @@ export function WordsView({ lessons, rungs = [], wordData }: Props) {
   const [q, setQ] = useState('');
   const [only, setOnly] = useState<string | null>(null);
   const [mistakes, setMistakes] = useState(false);
+  // words.tab: a second tab (e.g. Mandarin's word deck), opened by its #hash.
+  const tab = course.words?.tab;
+  const [onTab, setOnTab] = useState(false);
+  useEffect(() => {
+    if (!tab) return;
+    const sync = () => setOnTab(window.location.hash === `#${tab.hash}`);
+    sync();
+    window.addEventListener('hashchange', sync);
+    return () => window.removeEventListener('hashchange', sync);
+  }, [tab]);
 
   const opened = lessons
     .filter((l) => progress.opened.includes(l.id))
@@ -52,11 +63,8 @@ export function WordsView({ lessons, rungs = [], wordData }: Props) {
       on ? 'bg-ink text-paper' : 'bg-surface text-ink shadow-e1 hover:bg-paper-2'
     }`;
 
-  return (
-    <PageShell
-      title={t('words.title')}
-      subtitle={total > 0 ? t('words.subtitle', { n: total, l: opened.length }) : undefined}
-    >
+  const list = (
+    <>
       {total === 0 ? (
         <div className="card flex flex-col items-start gap-3 p-5">
           <span className="flex h-[48px] w-[48px] items-center justify-center rounded-md bg-paper-2 text-muted">
@@ -75,7 +83,7 @@ export function WordsView({ lessons, rungs = [], wordData }: Props) {
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder={t('words.searchPlaceholder')}
-                dir={matches ? 'auto' : undefined}
+                dir={matches && course.target.dir === 'rtl' ? 'auto' : undefined}
                 className="min-h-touch min-w-0 flex-1 bg-transparent text-ink outline-none placeholder:text-muted"
               />
             </label>
@@ -124,7 +132,7 @@ export function WordsView({ lessons, rungs = [], wordData }: Props) {
                 </h2>
                 <ul className="card flex flex-col divide-y divide-rule overflow-hidden">
                   {words.map((w) => {
-                    if (Row) return <Row key={w.key} word={w} rungs={rungs} lessons={lessons} />;
+                    if (Row) return <Row key={w.key} word={w} rungs={rungs} lessons={lessons} data={wordData} />;
                     const ann = course.extraData?.wordAnnotator?.(w, wordData) ?? {};
                     return (
                       <li key={w.key} className="flex min-h-[60px] items-center gap-3 px-4 py-2">
@@ -154,6 +162,43 @@ export function WordsView({ lessons, rungs = [], wordData }: Props) {
           )}
         </>
       )}
+    </>
+  );
+
+  if (tab) {
+    const choose = (deck: boolean) => {
+      setOnTab(deck);
+      history.replaceState(null, '', deck ? `#${tab.hash}` : window.location.pathname);
+    };
+    return (
+      <PageShell title={t(tab.titleKey as never)}>
+        <Segmented<boolean>
+          label={t(tab.titleKey as never)}
+          value={onTab}
+          onChange={choose}
+          options={[
+            { value: false, label: t('words.title') },
+            { value: true, label: t(tab.labelKey as never) },
+          ]}
+        />
+        {onTab ? (
+          <tab.Panel data={tabData} />
+        ) : (
+          <>
+            {total > 0 && <p className="text-body text-muted">{t('words.subtitle', { n: total, l: opened.length })}</p>}
+            {list}
+          </>
+        )}
+      </PageShell>
+    );
+  }
+
+  return (
+    <PageShell
+      title={t('words.title')}
+      subtitle={total > 0 ? t('words.subtitle', { n: total, l: opened.length }) : undefined}
+    >
+      {list}
     </PageShell>
   );
 }

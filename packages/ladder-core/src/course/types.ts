@@ -328,7 +328,10 @@ export type CourseConfig = {
     /** Whether a word matches the search (default: word or Indonesian meaning contains it). */
     match?: (word: Gloss, query: string) => boolean;
     /** The whole <li> for one word (default: word, meaning, annotation badge, play button). */
-    Row?: ComponentType<{ word: Gloss; rungs: Rung[]; lessons: import('@ladder/core/lib/types').LessonSummary[] }>;
+    Row?: ComponentType<{ word: Gloss; rungs: Rung[]; lessons: import('@ladder/core/lib/types').LessonSummary[]; data?: unknown }>;
+    /** A second tab beside My words (e.g. Mandarin's word deck), opened by `#hash`. The page title and
+     *  segmented control use `titleKey`; `data` is ContentModel.wordsPageData. */
+    tab?: { hash: string; titleKey: string; labelKey: string; Panel: ComponentType<{ data: unknown }> };
   };
   /** Home: the first-visit board. */
   home?: {

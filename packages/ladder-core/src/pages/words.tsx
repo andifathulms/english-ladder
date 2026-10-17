@@ -5,6 +5,6 @@ import { WordsView } from '@ladder/core/components/WordsView';
 export function wordsPage(content: Content) {
   return function WordsPage() {
     const lessons = content.getAllSummaries();
-    return <WordsView lessons={lessons} rungs={content.getCurriculum()} wordData={content.model.wordData?.(lessons)} />;
+    return <WordsView lessons={lessons} rungs={content.getCurriculum()} wordData={content.model.wordData?.(lessons)} tabData={content.model.wordsPageData?.()} />;
   };
 }

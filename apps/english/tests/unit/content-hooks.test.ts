@@ -9,7 +9,7 @@ const hooked = createContent({
     lesson: (l, where) => ({ ...l, check: l.check.map((c) => ({ ...c, cue: `${where}:${c.id}` })) }),
     testPool: (p, rungId) => ({ ...p, items: p.items.slice(0, 1), rungId }) as typeof p,
   },
-  summaryExtra: (l) => ({ wordCount: l.glossary.length }),
+  summaryExtra: (l) => ({ wordCount: (l.glossary as unknown[]).length }),
   lessonData: (l) => ({ id: l.id }),
   visualData: (ids, ctx) => ({ ids: [...ids], lesson: ctx.lesson?.id ?? null }),
   adapter: { ...model.adapter, lesson: { ...model.adapter.lesson, quote: (line) => ({ text: 'Q', raw: line.text }) } },
@@ -26,7 +26,7 @@ describe('content hooks', () => {
 
   it('summaries carry summaryExtra and the course quote', () => {
     const s = hooked.summarize(lessons[0]);
-    expect(s.wordCount).toBe(lessons[0].glossary.length);
+    expect(s.wordCount).toBe((lessons[0].glossary as unknown[]).length);
     expect(s.resume[0]).toMatchObject({ text: 'Q' });
   });
 
