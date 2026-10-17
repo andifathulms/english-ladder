@@ -3,7 +3,7 @@ import '@ladder/core/styles/globals.css';
 import { body, display, mono } from './fonts';
 import { themeScript } from './themeScript';
 import { withBase } from '@ladder/core/lib/basePath';
-import { ProgressProvider } from '@ladder/core/components/ProgressProvider';
+import { Providers } from './providers';
 
 export const metadata: Metadata = {
   title: { default: 'English Ladder', template: '%s · English Ladder' },
@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
-        <ProgressProvider>{children}</ProgressProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

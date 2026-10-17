@@ -37,6 +37,14 @@ const VIEWPORTS = [
 ];
 const THEMES = ['light', 'dark'];
 
+// Optional filter (comma-separated shot basenames without .png) so verify.mjs can re-capture
+// only the shots it still needs to settle. Empty = capture everything.
+const ONLY = (process.env.PARITY_ONLY || '')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+const want = (file) => ONLY.length === 0 || ONLY.includes(file.replace(/\.png$/, ''));
+
 const ROUTES = [
   { name: 'home', url: '/' },
   { name: 'rung-easy-1', url: '/rung/easy-1/' },
@@ -95,12 +103,13 @@ async function settle(page) {
   await page.waitForTimeout(400);
 }
 
-// Capture until two consecutive frames are byte-identical, so a rare font/paint race
-// under full-suite load never leaks a half-settled frame into the parity set.
+// Capture until two consecutive frames are byte-identical, so a rare paint/settle race
+// under full-suite load never leaks a half-rendered frame. compare.mjs then diffs by pixel,
+// so benign PNG-encoding noise between two settled frames is ignored.
 async function shot(page, file) {
   let prev = null;
   let buf = null;
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 8; i++) {
     buf = await page.screenshot({ fullPage: true, animations: 'disabled' });
     if (prev && prev.equals(buf)) break;
     prev = buf;
@@ -141,10 +150,12 @@ async function captureRoutes(browser) {
   for (const vp of VIEWPORTS) {
     for (const theme of THEMES) {
       for (const route of ROUTES) {
+        const file = `${route.name}__${theme}__${vp.tag}.png`;
+        if (!want(file)) continue;
         const { ctx, page } = await newPage(browser, vp, theme);
         await page.goto(BASE + route.url, { waitUntil: 'domcontentloaded' });
         await settle(page);
-        await shot(page, `${route.name}__${theme}__${vp.tag}.png`);
+        await shot(page, file);
         await ctx.close();
       }
     }
@@ -154,23 +165,28 @@ async function captureRoutes(browser) {
 async function captureLessonSteps(browser) {
   for (const vp of VIEWPORTS) {
     for (const theme of THEMES) {
+      const files = [0, 1, 2, 3, 4, 5].map((n) => `lesson-step${n}__${theme}__${vp.tag}.png`);
+      if (!files.some(want)) continue;
+      const maybeShot = async (page, file) => {
+        if (want(file)) await shot(page, file);
+      };
       const { ctx, page } = await newPage(browser, vp, theme);
       await page.goto(BASE + LESSON, { waitUntil: 'domcontentloaded' });
       await settle(page);
       // step 0 Concept, 1 See, 2 Examples, 3 Contrast
-      await shot(page, `lesson-step0__${theme}__${vp.tag}.png`);
+      await maybeShot(page, files[0]);
       await lanjut(page); // -> See
       await settle(page);
-      await shot(page, `lesson-step1__${theme}__${vp.tag}.png`);
+      await maybeShot(page, files[1]);
       await lanjut(page); // -> Examples
       await settle(page);
-      await shot(page, `lesson-step2__${theme}__${vp.tag}.png`);
+      await maybeShot(page, files[2]);
       await lanjut(page); // -> Contrast
       await settle(page);
-      await shot(page, `lesson-step3__${theme}__${vp.tag}.png`);
+      await maybeShot(page, files[3]);
       await lanjut(page); // -> Check (first item)
       await settle(page);
-      await shot(page, `lesson-step4__${theme}__${vp.tag}.png`);
+      await maybeShot(page, files[4]);
       // Answer all items to reach Done.
       const n = lessonMd.data.check.length;
       for (let i = 0; i < n; i++) {
@@ -178,7 +194,7 @@ async function captureLessonSteps(browser) {
         await lanjut(page);
       }
       await settle(page);
-      await shot(page, `lesson-step5__${theme}__${vp.tag}.png`);
+      await maybeShot(page, files[5]);
       await ctx.close();
     }
   }
