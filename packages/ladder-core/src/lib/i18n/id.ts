@@ -258,6 +258,9 @@ export const id = {
   'lesson.tirukanPlay': 'Putar, lalu tirukan',
   'lesson.yourTurn': 'Giliranmu',
   'lesson.tirukanHint': 'Ucapkan keras-keras. Tidak ada yang merekam.',
+  // Quick review exit (fixes.reviewExit).
+  'review.close': 'Tutup ulang cepat',
+  'review.closeConfirm': 'Berhenti di sini? Jawaban yang sudah masuk tetap tersimpan.',
 } as const;
 
 export type StringKey = keyof typeof id;

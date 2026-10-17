@@ -136,6 +136,8 @@ export type LessonSession = {
 };
 
 export type CourseFixes = {
+  /** A close control while a quick review runs; answers already given stay recorded (EL issue 3). */
+  reviewExit?: boolean;
   /** The rung test's progress bar counts questions ("Question 3 of 16"), not lesson steps (EL issue 6). */
   testProgressLabel?: boolean;
   /** New-word chips (lesson Done step, reading) have audio and a transliteration (EL issue 15). */

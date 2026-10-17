@@ -259,4 +259,7 @@ export const en: Record<StringKey, string> = {
   'lesson.tirukanPlay': 'Play, then repeat',
   'lesson.yourTurn': 'Your turn',
   'lesson.tirukanHint': 'Say it out loud. Nothing is recorded.',
+  // Quick review exit (fixes.reviewExit).
+  'review.close': 'Close quick review',
+  'review.closeConfirm': 'Stop here? Answers you gave are kept.',
 };
