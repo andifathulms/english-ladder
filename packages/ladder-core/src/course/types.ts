@@ -111,6 +111,11 @@ export type CourseConfig = {
   exportFilePrefix: string;
   repoUrl: string;
   target: { lang: string; dir: 'ltr' | 'rtl'; fontClass: string; sentenceClass: string };
+  /**
+   * The app shell's direction: lesson arrow keys and the climb marker follow it. Defaults to the
+   * target's. A course whose page stays LTR with RTL target islands (Arabic) sets 'ltr'.
+   */
+  shell?: { dir: 'ltr' | 'rtl' };
   ui: { defaultLang: UiLang };
   /** UI strings: core base tables extended with this course's overrides. */
   strings: StringTables;
@@ -157,6 +162,9 @@ export type CourseConfig = {
     wordAnnotator?: (word: Gloss, data: unknown) => WordAnnotation;
   };
 };
+
+/** Direction of the app shell (arrows, mirrored markers). */
+export const shellDir = (c: Pick<CourseConfig, 'shell' | 'target'>): 'ltr' | 'rtl' => c.shell?.dir ?? c.target.dir;
 
 /** The store configuration for a course (pass to store.configure at app start). */
 export function progressConfigOf(c: CourseConfig): ProgressConfig {

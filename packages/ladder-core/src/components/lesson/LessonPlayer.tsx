@@ -9,6 +9,7 @@ import { sfx } from '@ladder/core/lib/speech/sfx';
 import { lessonHref, rungHref, testHref } from '@ladder/core/lib/routes';
 import { useProgress, useSettings, useT } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
+import { shellDir } from '@ladder/core/course/types';
 import { IconArrowLeft, IconArrowRight, IconCheck, IconClose } from '../ui/Icon';
 import { Badge } from '../ui/Badge';
 import { NotchBar } from '../ladder/NotchBar';
@@ -35,6 +36,7 @@ type Props = {
 export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralRung }: Props) {
   const { t, lang } = useT();
   const course = useCourse();
+  const dirOfShell = shellDir(course);
   const settings = useSettings();
   const progress = useProgress();
   const router = useRouter();
@@ -113,9 +115,9 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
       const typing = el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
       if (typing) return;
       const onControl = el && el !== document.body && el.matches('button, a, [role="radio"], summary');
-      // Forward/back follow the target direction: in RTL the arrows mirror.
-      const forwardKey = course.target.dir === 'rtl' ? 'ArrowLeft' : 'ArrowRight';
-      const backKey = course.target.dir === 'rtl' ? 'ArrowRight' : 'ArrowLeft';
+      // Forward/back follow the shell direction: in an RTL shell the arrows mirror.
+      const forwardKey = dirOfShell === 'rtl' ? 'ArrowLeft' : 'ArrowRight';
+      const backKey = dirOfShell === 'rtl' ? 'ArrowRight' : 'ArrowLeft';
       if (e.key === forwardKey && !el?.closest('[data-visual]')) {
         if (canContinue && step < 5) {
           e.preventDefault();
@@ -141,7 +143,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [step, canContinue, go, advance, course.target.dir]);
+  }, [step, canContinue, go, advance, dirOfShell]);
 
   const read = course.adapter.lesson;
   const title = read.title(lesson);

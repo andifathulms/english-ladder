@@ -7,6 +7,7 @@ import { sfx } from '@ladder/core/lib/speech/sfx';
 import { rungHref } from '@ladder/core/lib/routes';
 import { useReducedMotion, useT } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
+import { shellDir } from '@ladder/core/course/types';
 import { NotchBar } from '../ladder/NotchBar';
 
 type Props = { rung: Rung; next: Rung | null; onReview: () => void };
@@ -67,7 +68,7 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
             className="absolute h-0 w-0 border-y-[8px] border-y-transparent"
             style={{
               // Points toward the ladder; mirrors for RTL.
-              ...(course.target.dir === 'rtl'
+              ...(shellDir(course) === 'rtl'
                 ? { right: -15, borderRightWidth: 12, borderRightColor: 'var(--brass)' }
                 : { left: -15, borderLeftWidth: 12, borderLeftColor: 'var(--brass)' }),
               top: 8 + (ROW - 16) / 2 - 8 + (climbed ? 0 : ROW),

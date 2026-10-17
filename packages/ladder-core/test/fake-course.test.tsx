@@ -61,3 +61,12 @@ describe('CourseConfig seam (fake RTL course)', () => {
     expect(opt?.getAttribute('dir')).toBe('rtl');
   });
 });
+
+import { shellDir } from '@ladder/core/course/types';
+
+describe('shell direction', () => {
+  it('follows the target unless the course pins the shell (Arabic: LTR page, RTL islands)', () => {
+    expect(shellDir(fakeArabic)).toBe('rtl');
+    expect(shellDir({ ...fakeArabic, shell: { dir: 'ltr' } })).toBe('ltr');
+  });
+});
