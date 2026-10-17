@@ -125,16 +125,19 @@ export function setLessonStep(lessonId: string, step: number, checkIndex?: numbe
   });
 }
 
-export function completeLesson(lessonId: string) {
+/** Completes a lesson. `data` is the page's lesson data, for the course's onCompleteLesson. */
+export function completeLesson(lessonId: string, data?: unknown) {
   const s = getState();
   const prev = s.lessons[lessonId];
-  commit({
+  const next: ProgressState = {
     ...s,
     lessons: {
       ...s.lessons,
       [lessonId]: { step: 5, furthest: 5, completed: true, lastOpened: prev?.lastOpened ?? Date.now() },
     },
-  });
+  };
+  const hook = progressConfig().onCompleteLesson;
+  commit(hook ? hook(next, lessonId, data) : next);
   markPracticedToday();
 }
 
@@ -199,6 +202,18 @@ export function applyPlacement(record: Omit<PlacementRecord, 'date'> & { date?: 
     if (!prev.climbed) rungs[id] = { ...prev, climbed: true, via: 'placement' };
   }
   commit({ ...s, rungs, placement: { ...record, date: record.date ?? new Date().toISOString() } });
+}
+
+/** A course extension's value (ProgressConfig.extensions). */
+export function getExt<T>(key: string): T {
+  return getState()[key] as T;
+}
+
+/** Updates a course extension; `practiced` also marks today as practised. */
+export function updateExt<T>(key: string, fn: (prev: T) => T, opts: { practiced?: boolean } = {}) {
+  const s = getState();
+  commit({ ...s, [key]: fn(s[key] as T) });
+  if (opts.practiced) markPracticedToday();
 }
 
 export function getSettings(): Settings {

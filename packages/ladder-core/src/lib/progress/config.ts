@@ -1,4 +1,4 @@
-import type { Settings } from './types';
+import type { ProgressState, Settings } from './types';
 
 /** Raw stored state, before migration. */
 export type RawState = Record<string, unknown> & { schemaVersion?: unknown };
@@ -14,6 +14,14 @@ export type ProgressFeatures = {
   placement?: boolean;
 };
 
+/** A course's own part of the progress state (e.g. Mandarin's word deck), stored by name. */
+export type ProgressExtension = {
+  /** The value for a fresh learner. */
+  empty: () => unknown;
+  /** Reads a stored value (any shape) into a valid one, dropping anything malformed. */
+  validate: (raw: unknown) => unknown;
+};
+
 /** Everything the store needs from the course: where it lives and how its shape evolves. */
 export type ProgressConfig = {
   storageKey: string;
@@ -25,6 +33,10 @@ export type ProgressConfig = {
   /** Allowed values per setting; values outside the list fall back to the default. */
   allowed: Record<string, readonly unknown[]>;
   features: ProgressFeatures;
+  /** The course's own state parts, stored after `opened`, in this order. */
+  extensions?: Record<string, ProgressExtension>;
+  /** Applied in the same commit as completeLesson (e.g. a lesson's words join the deck). */
+  onCompleteLesson?: (state: ProgressState, lessonId: string, data: unknown) => ProgressState;
 };
 
 /** Allowed values for the settings every course has. */

@@ -229,6 +229,10 @@ export type CourseConfig = {
     /** Steps keyed by the version they upgrade from (0 → 1 is built in). */
     migrations?: Record<number, MigrationStep>;
     features?: ProgressFeatures;
+    /** The course's own state parts (e.g. Mandarin's deck, traces), stored after `opened`. */
+    extensions?: ProgressConfig['extensions'];
+    /** Applied in the same commit as completeLesson, with the page's lesson data. */
+    onCompleteLesson?: ProgressConfig['onCompleteLesson'];
   };
   speech: SpeechRules;
   /** Recorded audio (public/audio/manifest.json) before browser speech. Absent: speech only. */
@@ -351,5 +355,7 @@ export function progressConfigOf(c: CourseConfig): ProgressConfig {
     defaults: c.settings.defaults,
     allowed: c.settings.allowed ?? {},
     features: c.progress.features ?? {},
+    extensions: c.progress.extensions,
+    onCompleteLesson: c.progress.onCompleteLesson,
   };
 }

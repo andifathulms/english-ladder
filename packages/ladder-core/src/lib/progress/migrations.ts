@@ -32,7 +32,7 @@ export function migrate(input: unknown): ProgressState {
 /** Fills missing fields with defaults and drops anything with the wrong type. */
 function normalize(s: RawState): ProgressState {
   const base = emptyState();
-  const { defaults, allowed, features } = progressConfig();
+  const { defaults, allowed, features, extensions } = progressConfig();
   const raw = isObj(s.settings) ? s.settings : {};
   const settings = {} as Settings;
   for (const k of Object.keys(defaults)) {
@@ -48,6 +48,7 @@ function normalize(s: RawState): ProgressState {
     ...(features.placement ? { placement: validPlacement(s.placement) } : {}),
     days: Array.isArray(s.days) ? s.days.filter((d): d is string => typeof d === 'string').slice(-60) : [],
     opened: Array.isArray(s.opened) ? s.opened.filter((d): d is string => typeof d === 'string') : [],
+    ...Object.fromEntries(Object.entries(extensions ?? {}).map(([k, e]) => [k, e.validate(s[k])])),
     settings,
   };
 }

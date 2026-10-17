@@ -67,4 +67,6 @@ export type ProgressState = {
   /** Lessons whose glossary has been seen (for My words). */
   opened: string[];
   settings: Settings;
+  /** Course extensions (ProgressConfig.extensions), e.g. Mandarin's deck and traces. */
+  [extension: string]: unknown;
 };
