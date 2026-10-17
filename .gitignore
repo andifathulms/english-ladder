@@ -8,3 +8,6 @@ next-env.d.ts
 *.tsbuildinfo
 .DS_Store
 .env*.local
+
+# parity: after-tree is regenerated on demand; only the baseline is tracked
+tests/parity/after/

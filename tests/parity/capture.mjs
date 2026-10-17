@@ -49,8 +49,9 @@ const ROUTES = [
   { name: 'read', url: '/rung/easy-1/read/' },
 ];
 
-// Answer map for the prepositions lesson, read from content.
-const lessonMd = matter(fs.readFileSync('content/easy-1/09-prepositions-place.md', 'utf8'));
+// Answer map for the prepositions lesson, read from the English course content.
+const CONTENT = process.env.PARITY_CONTENT_DIR || 'apps/english/content';
+const lessonMd = matter(fs.readFileSync(path.join(CONTENT, 'easy-1/09-prepositions-place.md'), 'utf8'));
 const items = Object.fromEntries(lessonMd.data.check.map((i) => [i.id, i]));
 
 const NO_MOTION_CSS = `*,*::before,*::after{transition:none!important;animation:none!important;animation-duration:0s!important;caret-color:transparent!important;scroll-behavior:auto!important}`;
@@ -94,8 +95,18 @@ async function settle(page) {
   await page.waitForTimeout(400);
 }
 
+// Capture until two consecutive frames are byte-identical, so a rare font/paint race
+// under full-suite load never leaks a half-settled frame into the parity set.
 async function shot(page, file) {
-  await page.screenshot({ path: path.join(outDir, file), fullPage: true, animations: 'disabled' });
+  let prev = null;
+  let buf = null;
+  for (let i = 0; i < 6; i++) {
+    buf = await page.screenshot({ fullPage: true, animations: 'disabled' });
+    if (prev && prev.equals(buf)) break;
+    prev = buf;
+    await page.waitForTimeout(150);
+  }
+  fs.writeFileSync(path.join(outDir, file), buf);
 }
 
 async function lanjut(page) {

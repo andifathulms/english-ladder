@@ -8,21 +8,15 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "next dev",
-    "prebuild": "npm run content:check",
-    "build": "next build",
-    "preview": "node scripts/serve.mjs",
-    "content:check": "tsx scripts/content-check.ts",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:e2e": "playwright test",
-    "lint": "next lint",
+    "dev": "npm run dev -w english-ladder",
+    "build": "npm run build -w english-ladder",
+    "preview": "npm run preview -w english-ladder",
+    "content:check": "npm run content:check -w english-ladder",
+    "test": "npm run test -w english-ladder",
+    "test:watch": "npm run test:watch -w english-ladder",
+    "test:e2e": "npm run test:e2e -w english-ladder",
+    "lint": "npm run lint -w english-ladder",
     "format": "prettier --write ."
-  },
-  "dependencies": {
-    "next": "14.2.33",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.10.2",

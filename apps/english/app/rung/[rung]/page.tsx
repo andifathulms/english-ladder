@@ -1,0 +1,31 @@
+import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import { getAllSummaries, getCurriculum, getReading, getRung, getTestPool } from '@ladder/core/lib/content/load';
+import { RungView } from '@ladder/core/components/ladder/RungView';
+
+type Params = { params: { rung: string } };
+
+export function generateStaticParams() {
+  return getCurriculum().map((r) => ({ rung: r.id }));
+}
+
+export function generateMetadata({ params }: Params): Metadata {
+  const r = getRung(params.rung);
+  return { title: r ? `${r.name} · ${r.cefr}` : undefined };
+}
+
+export default function RungPage({ params }: Params) {
+  const rung = getRung(params.rung);
+  if (!rung) notFound();
+  const pool = getTestPool(rung.id);
+  const reading = getReading(rung.id);
+  return (
+    <RungView
+      rung={rung}
+      rungs={getCurriculum()}
+      lessons={getAllSummaries().filter((l) => l.rung === rung.id)}
+      test={pool ? { draw: pool.draw, pass: pool.pass } : null}
+      reading={reading ? { title: reading.title, items: reading.items.length } : null}
+    />
+  );
+}
