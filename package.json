@@ -1,8 +1,12 @@
 {
-  "name": "english-ladder",
+  "name": "ladder-monorepo",
   "version": "1.0.0",
   "private": true,
-  "description": "A calm, levelled English course for Indonesian speakers.",
+  "description": "A calm, levelled language course engine (ladder-core) and its courses.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
     "dev": "next dev",
     "prebuild": "npm run content:check",

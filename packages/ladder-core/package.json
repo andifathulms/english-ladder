@@ -1,0 +1,12 @@
+{
+  "name": "@ladder/core",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared engine for Ladder language courses. Consumed as source; no build step.",
+  "type": "module",
+  "peerDependencies": {
+    "next": "14.2.33",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}
