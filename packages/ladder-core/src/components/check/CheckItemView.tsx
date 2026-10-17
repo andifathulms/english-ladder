@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import type { CheckItem, Noun } from '@ladder/core/lib/types';
+import type { CheckItem } from '@ladder/core/lib/types';
 import { grade, type Response } from '@ladder/core/lib/check/grade';
 import { sfx } from '@ladder/core/lib/speech/sfx';
 import { stripMarkup } from '@ladder/core/lib/markup';
@@ -17,7 +17,6 @@ import { useCourse } from '@ladder/core/course/context';
 
 type Common = {
   item: CheckItem;
-  nouns?: Noun[];
   /** 1–4 picks an answer. Turn off when several items share a page. */
   numberKeys?: boolean;
 };
@@ -88,7 +87,7 @@ function ListenPrompt({ audio, prompt }: { audio: string; prompt?: string }) {
 }
 
 export function CheckItemView(props: Practice | Test) {
-  const { item, nouns } = props;
+  const { item } = props;
   const { t } = useT();
   const { text } = useCourse();
   const [wrong, setWrong] = useState<string[]>([]);
@@ -195,7 +194,7 @@ export function CheckItemView(props: Practice | Test) {
       )}
       {item.type === 'scene' && (
         <div className="flex flex-col gap-3">
-          <VisualStage visual={item.visual} nouns={nouns} interactive={false} />
+          <VisualStage visual={item.visual} interactive={false} />
           <p className="text-small text-muted">{item.prompt ?? t('check.scenePrompt')}</p>
         </div>
       )}

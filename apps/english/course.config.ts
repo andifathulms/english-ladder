@@ -9,7 +9,8 @@ import { registry } from '@/visuals/registry';
 import { VISUAL_IDS } from '@/visuals/visualIds';
 import { text } from '@/course/text';
 import { voiceScorer, canSpeak, sentenceSplit, sampleText } from '@/course/speech';
-import { INVENTORY_DETECTORS, STRUCTURE_RULES, WORD_REGEX, knownWord } from '@/course/lint';
+import { adapter } from '@/course/adapter';
+import { SoundStrand, TalkStrand, WordsStrand } from '@/components/StrandCards';
 import { wordAnnotator } from '@/course/words';
 
 export const course: CourseConfig = {
@@ -55,16 +56,12 @@ export const course: CourseConfig = {
 
   text,
 
-  lint: {
-    wordRegex: WORD_REGEX,
-    knownWord,
-    detectors: Object.entries(INVENTORY_DETECTORS).map(([id, re]) => ({ id, re })),
-    structureRules: STRUCTURE_RULES,
-  },
+  adapter,
+  strands: { examples: [TalkStrand, SoundStrand], contrast: [WordsStrand] },
 
   visuals: registry,
   visualIds: VISUAL_IDS,
   boardPattern: Contours,
 
-  extraData: { nounsFile: 'data/nouns.yaml', wordAnnotator },
+  extraData: { wordAnnotator },
 };

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { Lesson, LessonSummary, Noun, Rung } from '@ladder/core/lib/types';
+import type { Lesson, LessonSummary, Rung } from '@ladder/core/lib/types';
 import * as store from '@ladder/core/lib/progress/store';
 import { sfx } from '@ladder/core/lib/speech/sfx';
 import { lessonHref, rungHref, testHref } from '@ladder/core/lib/routes';
@@ -15,11 +15,10 @@ import { NotchBar } from '../ladder/NotchBar';
 import { BottomActionBar } from './BottomActionBar';
 import { PairCard } from './PairCard';
 import { Prose } from './Prose';
-import { Sentence } from './Sentence';
+import { TargetSentence } from './TargetSentence';
 import { StepBar } from './StepBar';
 import { StepLabel } from './StepLabel';
 import { ExplainToggle } from './ExplainToggle';
-import { SoundCard, TalkCard, WordsCard } from './StrandCards';
 import { CheckStep } from '../check/CheckStep';
 import { VisualStage } from '../visuals/VisualStage';
 import { STEP_KEYS } from './steps';
@@ -31,10 +30,9 @@ type Props = {
   next: LessonSummary | null;
   hasTest: boolean;
   spiralRung: string | null;
-  nouns?: Noun[];
 };
 
-export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralRung, nouns }: Props) {
+export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralRung }: Props) {
   const { t, lang } = useT();
   const course = useCourse();
   const settings = useSettings();
@@ -145,6 +143,8 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
     return () => window.removeEventListener('keydown', onKey);
   }, [step, canContinue, go, advance, course.target.dir]);
 
+  const read = course.adapter.lesson;
+  const title = read.title(lesson);
   const effective = (settings.explain === 'rung' ? rung.explain_lang : settings.explain) as 'id' | 'en' | 'mixed';
   // Short strand cards have no collapsed translation, so mixed shows English.
   const cardLang = effective === 'id' ? 'id' : 'en';
@@ -175,10 +175,10 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
           <StepLabel>{t('step.concept')}</StepLabel>
           <div className="flex flex-col gap-1">
             <h1 className="text-h1" lang={course.target.lang} dir={course.target.dir}>
-              {lesson.title.en}
+              {title.target}
             </h1>
             <p className="id-text" lang="id">
-              {lesson.title.id}
+              {title.id}
             </p>
           </div>
           {explain(lesson.concept)}
@@ -190,14 +190,14 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
         <>
           <StepLabel>{t('step.see')}</StepLabel>
           {lesson.visual ? (
-            <VisualStage visual={lesson.visual} nouns={nouns} />
+            <VisualStage visual={lesson.visual} />
           ) : (
             <section className="flex flex-col gap-4 rounded-lg bg-paper-2 p-5">
               <h3 className="eyebrow">{t('lesson.worked')}</h3>
               <ul className="flex flex-col gap-4">
-                {lesson.worked!.map((w) => (
-                  <li key={w.en}>
-                    <Sentence en={w.en} id={w.id} />
+                {read.worked(lesson)!.map((w) => (
+                  <li key={w.text}>
+                    <TargetSentence line={w} use="worked" />
                   </li>
                 ))}
               </ul>
@@ -212,14 +212,13 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
           <StepLabel>{t('step.examples')}</StepLabel>
           <p className="text-small text-muted">{t('lesson.tapFocus')}</p>
           <ul className="flex flex-col gap-5">
-            {lesson.examples.map((ex) => (
-              <li key={ex.en}>
-                <Sentence en={ex.en} id={ex.id} note={ex.note ?? true} />
+            {read.examples(lesson).map((ex) => (
+              <li key={ex.text}>
+                <TargetSentence line={ex} use="example" />
               </li>
             ))}
           </ul>
-          {lesson.talk && <TalkCard talk={lesson.talk} />}
-          {lesson.sound && <SoundCard sound={lesson.sound} explain={cardLang} />}
+          {course.strands?.examples?.map((Card, i) => <Card key={i} lesson={lesson} rung={rung} cardLang={cardLang} />)}
         </>
       );
       break;
@@ -228,8 +227,8 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
         <>
           <StepLabel>{t('step.contrast')}</StepLabel>
           {explain(lesson.contrast)}
-          <PairCard off={lesson.pair.off} natural={lesson.pair.natural} />
-          {lesson.words && <WordsCard words={lesson.words} explain={cardLang} />}
+          <PairCard {...read.pair(lesson)} />
+          {course.strands?.contrast?.map((Card, i) => <Card key={i} lesson={lesson} rung={rung} cardLang={cardLang} />)}
         </>
       );
       break;
@@ -242,7 +241,6 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
             index={checkIndex}
             solved={solved}
             onSolved={(i) => setSolved((s) => s.map((v, j) => (j === i ? true : v)))}
-            nouns={nouns}
           />
         </>
       );
@@ -259,7 +257,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
             </span>
             <StepLabel>{t('step.done')}</StepLabel>
             <h1 className="text-h1 tracking-[-0.015em]">
-              {t('lesson.doneTitle', { title: lang === 'en' ? lesson.title.en : lesson.title.id })}
+              {t('lesson.doneTitle', { title: lang === 'en' ? title.en : title.id })}
             </h1>
             <p className="max-w-measure text-muted">{lang === 'en' ? lesson.summary.en : lesson.summary.id}</p>
           </div>
@@ -275,13 +273,13 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
           <section className="flex flex-col gap-2">
             <h3 className="eyebrow">{t('lesson.newWords')}</h3>
             <ul className="flex flex-wrap gap-2">
-              {lesson.glossary.map((g) => (
-                <li key={g.en} className="card flex items-baseline gap-2 px-3 py-1">
+              {read.glossary(lesson).map((g) => (
+                <li key={g.key} className="card flex items-baseline gap-2 px-3 py-1">
                   <span lang={course.target.lang} dir={course.target.dir} className="font-display font-semibold">
-                    {g.en}
+                    {g.text}
                   </span>
                   <span lang="id" className="id-text text-small">
-                    {g.id}
+                    {g.meaning.id}
                   </span>
                 </li>
               ))}

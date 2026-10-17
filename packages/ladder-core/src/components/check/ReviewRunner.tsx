@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import type { CheckItem, Noun } from '@ladder/core/lib/types';
+import type { CheckItem } from '@ladder/core/lib/types';
 import { drawReview } from '@ladder/core/lib/check/draw';
 import * as store from '@ladder/core/lib/progress/store';
 import { useProgress, useT } from '../ProgressProvider';
@@ -11,9 +11,9 @@ import { BottomActionBar } from '../lesson/BottomActionBar';
 import { IconArrowRight, IconReview } from '../ui/Icon';
 import { CheckItemView } from './CheckItemView';
 
-type Props = { items: { item: CheckItem; lessonId: string }[]; nouns?: Noun[] };
+type Props = { items: { item: CheckItem; lessonId: string }[] };
 
-export function ReviewRunner({ items, nouns }: Props) {
+export function ReviewRunner({ items }: Props) {
   const { t } = useT();
   const progress = useProgress();
   const [run, setRun] = useState<{ items: CheckItem[]; i: number; solved: boolean; first: boolean[] } | null>(null);
@@ -89,7 +89,6 @@ export function ReviewRunner({ items, nouns }: Props) {
             key={item.id}
             mode="practice"
             item={item}
-            nouns={nouns}
             whyInSheet
             onSolved={(firstTry) => {
               store.recordAnswer(item.id, firstTry);

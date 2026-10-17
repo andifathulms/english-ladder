@@ -1,18 +1,20 @@
 'use client';
 
 import { useState } from 'react';
-import type { Bilingual, Lesson } from '@ladder/core/lib/types';
-import { Prose } from './Prose';
-import { PlayButton } from './PlayButton';
-import { Sentence } from './Sentence';
-import { useSpeak } from '../useSpeech';
-import { useT } from '../ProgressProvider';
+import type { Bilingual } from '@ladder/core/lib/types';
+import type { StrandCard } from '@ladder/core/course/types';
+import { Prose } from '@ladder/core/components/lesson/Prose';
+import { PlayButton } from '@ladder/core/components/lesson/PlayButton';
+import { Sentence } from '@ladder/core/components/lesson/Sentence';
+import { useSpeak } from '@ladder/core/components/useSpeech';
+import { useT } from '@ladder/core/components/ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
+import type { EnLesson } from '@/course/schema';
 
 type Lang = 'id' | 'en';
 
 /** A short exchange using the lesson's structure. Shown on the Examples step. */
-export function TalkCard({ talk }: { talk: NonNullable<Lesson['talk']> }) {
+export function TalkCard({ talk }: { talk: NonNullable<EnLesson['talk']> }) {
   const { t, lang } = useT();
   return (
     <section className="flex flex-col gap-4 rounded-lg bg-paper-2 p-5" aria-labelledby="talk-title">
@@ -37,7 +39,7 @@ export function TalkCard({ talk }: { talk: NonNullable<Lesson['talk']> }) {
 }
 
 /** One pronunciation point with words to play. Shown on the Examples step. */
-export function SoundCard({ sound, explain }: { sound: NonNullable<Lesson['sound']>; explain: Lang }) {
+export function SoundCard({ sound, explain }: { sound: NonNullable<EnLesson['sound']>; explain: Lang }) {
   const { t } = useT();
   const { target } = useCourse();
   const speak = useSpeak();
@@ -79,3 +81,11 @@ export function WordsCard({ words, explain }: { words: Bilingual; explain: Lang 
     </section>
   );
 }
+
+// English Ladder's strand registry (CourseConfig.strands): Talk then Sound on Examples, Words on Contrast.
+const en = (l: unknown) => l as EnLesson;
+export const TalkStrand: StrandCard = ({ lesson }) => (en(lesson).talk ? <TalkCard talk={en(lesson).talk!} /> : null);
+export const SoundStrand: StrandCard = ({ lesson, cardLang }) =>
+  en(lesson).sound ? <SoundCard sound={en(lesson).sound!} explain={cardLang} /> : null;
+export const WordsStrand: StrandCard = ({ lesson, cardLang }) =>
+  en(lesson).words ? <WordsCard words={en(lesson).words!} explain={cardLang} /> : null;

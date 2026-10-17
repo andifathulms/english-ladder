@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import type { ContinueTarget } from '@ladder/core/lib/progress/derive';
-import type { Rung } from '@ladder/core/lib/types';
+import type { Quote, Rung } from '@ladder/core/lib/types';
 import { lessonHref, testHref } from '@ladder/core/lib/routes';
 import { IconArrowRight } from '../ui/Icon';
 import { useT } from '../ProgressProvider';
@@ -23,7 +23,8 @@ export function Accented({ text, tone = 'text-brass' }: { text: string; tone?: s
 }
 
 /** A quoted sentence; a ___ blank becomes a gold underline on the board. */
-function BoardSentence({ text }: { text: string }) {
+function BoardSentence({ quote }: { quote: Quote }) {
+  const text = quote.text;
   const { target } = useCourse();
   const parts = text.split('___');
   return (
@@ -115,7 +116,7 @@ export function ContinueCard({ target, firstLessonHref, starterHref, rungs }: Ca
         <span aria-hidden> · {t(STEP_KEYS[step])}</span>
         {step > 0 && <span className="sr-only"> · {t('home.step', { n: step + 1 })}</span>}
       </p>
-      <BoardSentence text={text} />
+      <BoardSentence quote={text} />
       <p className={`text-small text-board-muted ${lang === 'en' ? '' : 'italic'}`} lang={lang}>
         {lang === 'en' ? lesson.title.en : lesson.title.id}
       </p>

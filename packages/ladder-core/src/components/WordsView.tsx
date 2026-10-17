@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
-import type { LessonSummary, Noun } from '@ladder/core/lib/types';
+import type { LessonSummary } from '@ladder/core/lib/types';
 import { missedCount } from '@ladder/core/lib/progress/derive';
 import { lessonHref } from '@ladder/core/lib/routes';
 import { useProgress, useT } from './ProgressProvider';
@@ -12,7 +12,7 @@ import { PlayButton } from './lesson/PlayButton';
 import { IconBook, IconSearch } from './ui/Icon';
 import { useSpeak } from './useSpeech';
 
-export function WordsView({ lessons, nouns = [] }: { lessons: LessonSummary[]; nouns?: Noun[] }) {
+export function WordsView({ lessons, wordData }: { lessons: LessonSummary[]; wordData?: unknown }) {
   const { t } = useT();
   const course = useCourse();
   const progress = useProgress();
@@ -21,7 +21,6 @@ export function WordsView({ lessons, nouns = [] }: { lessons: LessonSummary[]; n
   const [only, setOnly] = useState<string | null>(null);
   const [mistakes, setMistakes] = useState(false);
 
-  const byWord = useMemo(() => new Map(nouns.map((n) => [n.word.toLowerCase(), n])), [nouns]);
   const opened = lessons.filter((l) => progress.opened.includes(l.id)).sort((a, b) => a.order - b.order);
   const total = opened.reduce((n, l) => n + l.glossary.length, 0);
   const groups = useMemo(() => {
@@ -30,7 +29,7 @@ export function WordsView({ lessons, nouns = [] }: { lessons: LessonSummary[]; n
       .filter((l) => (!only || l.id === only) && (!mistakes || missedCount(l, progress) > 0))
       .map((l) => ({
         l,
-        words: l.glossary.filter((g) => !needle || g.en.toLowerCase().includes(needle) || g.id.toLowerCase().includes(needle)),
+        words: l.glossary.filter((g) => !needle || g.text.toLowerCase().includes(needle) || g.meaning.id.toLowerCase().includes(needle)),
       }))
       .filter((g) => g.words.length);
   }, [opened, q, only, mistakes, progress]);
@@ -72,7 +71,7 @@ export function WordsView({ lessons, nouns = [] }: { lessons: LessonSummary[]; n
               </button>
               {opened.map((l) => (
                 <button key={l.id} type="button" aria-pressed={only === l.id} className={chip(only === l.id)} onClick={() => setOnly(l.id)}>
-                  <span className="tnum">{l.order}</span> · <span lang={course.target.lang} dir={course.target.dir}>{l.title.en}</span>
+                  <span className="tnum">{l.order}</span> · <span lang={course.target.lang} dir={course.target.dir}>{l.title.target}</span>
                 </button>
               ))}
             </div>
@@ -94,24 +93,23 @@ export function WordsView({ lessons, nouns = [] }: { lessons: LessonSummary[]; n
               <section key={l.id} className="flex flex-col gap-2">
                 <h2 className="eyebrow">
                   <Link href={lessonHref(l)} className="text-muted no-underline hover:text-accent">
-                    {t('home.lessonN', { n: l.order })} · <span lang={course.target.lang} dir={course.target.dir}>{l.title.en}</span>
+                    {t('home.lessonN', { n: l.order })} · <span lang={course.target.lang} dir={course.target.dir}>{l.title.target}</span>
                   </Link>
                 </h2>
                 <ul className="card flex flex-col divide-y divide-rule overflow-hidden">
                   {words.map((w) => {
-                    const noun = byWord.get(w.en.toLowerCase());
-                    const ann = course.extraData?.wordAnnotator?.(w.en, noun) ?? {};
+                    const ann = course.extraData?.wordAnnotator?.(w, wordData) ?? {};
                     return (
-                      <li key={w.en} className="flex min-h-[60px] items-center gap-3 px-4 py-2">
+                      <li key={w.key} className="flex min-h-[60px] items-center gap-3 px-4 py-2">
                         <span className="flex min-w-0 flex-1 flex-col">
                           <span lang={course.target.lang} dir={course.target.dir} className="font-display text-body font-semibold">
-                            {w.en}
+                            {w.text}
                             {ann.pluralSuffix && (
                               <span className="font-medium text-muted"> → {ann.pluralSuffix}</span>
                             )}
                           </span>
                           <span lang="id" className="id-text text-small">
-                            {w.id}
+                            {w.meaning.id}
                           </span>
                         </span>
                         {ann.badge && (
@@ -119,7 +117,7 @@ export function WordsView({ lessons, nouns = [] }: { lessons: LessonSummary[]; n
                             {ann.badge}
                           </span>
                         )}
-                        <PlayButton text={w.en} onPlay={() => void speak(w.en)} small />
+                        <PlayButton text={w.text} onPlay={() => void speak(w.text)} small />
                       </li>
                     );
                   })}

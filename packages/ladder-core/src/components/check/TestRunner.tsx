@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useMemo, useRef, useState } from 'react';
-import type { CheckItem, LessonSummary, Noun, Rung, TestPool } from '@ladder/core/lib/types';
+import type { CheckItem, LessonSummary, Rung, TestPool } from '@ladder/core/lib/types';
 import { drawTest } from '@ladder/core/lib/check/draw';
 import { grade, type Response } from '@ladder/core/lib/check/grade';
 import { newSeed } from '@ladder/core/lib/check/random';
@@ -18,13 +18,13 @@ import { CheckItemView } from './CheckItemView';
 import { ClimbMoment } from './ClimbMoment';
 import { WhyLine } from './WhyLine';
 
-type Props = { rung: Rung; next: Rung | null; pool: TestPool; lessons: LessonSummary[]; nouns?: Noun[] };
+type Props = { rung: Rung; next: Rung | null; pool: TestPool; lessons: LessonSummary[] };
 
 type Phase = { kind: 'intro' } | { kind: 'run'; i: number } | { kind: 'result'; climb: boolean };
 
 const show = (r: Response | undefined) => (r === undefined ? '—' : Array.isArray(r) ? r.join(' ') : r);
 
-export function TestRunner({ rung, next, pool, lessons, nouns }: Props) {
+export function TestRunner({ rung, next, pool, lessons }: Props) {
   const { t, lang } = useT();
   const course = useCourse();
   const progress = useProgress();
@@ -115,7 +115,6 @@ export function TestRunner({ rung, next, pool, lessons, nouns }: Props) {
               key={`${seed}-${item.id}`}
               mode="test"
               item={item}
-              nouns={nouns}
               value={answers[item.id]}
               onChange={(r) => setAnswers((a) => ({ ...a, [item.id]: r }))}
             />
@@ -165,7 +164,7 @@ export function TestRunner({ rung, next, pool, lessons, nouns }: Props) {
                 <li key={l.id}>
                   <Link href={lessonHref(l)} className="inline-flex min-h-touch items-center gap-2">
                     <span className="label tnum text-muted">{l.order}</span>
-                    <span lang={course.target.lang} dir={course.target.dir}>{l.title.en}</span>
+                    <span lang={course.target.lang} dir={course.target.dir}>{l.title.target}</span>
                   </Link>
                 </li>
               ))}
@@ -180,7 +179,7 @@ export function TestRunner({ rung, next, pool, lessons, nouns }: Props) {
             .map(([lid, rs]) => (
               <div key={lid} className="flex flex-col gap-3">
                 <h3 className="eyebrow">
-                  {lessonOf(lid)?.order} · <span lang={course.target.lang} dir={course.target.dir}>{lessonOf(lid)?.title.en}</span>
+                  {lessonOf(lid)?.order} · <span lang={course.target.lang} dir={course.target.dir}>{lessonOf(lid)?.title.target}</span>
                 </h3>
                 <ul className="flex flex-col gap-3">
                   {rs.map(({ item, given, ok }) => (

@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { parseSections } from '@ladder/core/lib/content/sections';
-import { getCurriculum, getLessons, summarize } from '@ladder/core/lib/content/load';
-import { CheckItemSchema } from '@ladder/core/lib/content/schema';
+import { content, getNouns } from '@/course/content';
+import { CheckItemSchema } from '@/course/schema';
+import type { EnLesson, EnReading } from '@/course/schema';
+
+const { getCurriculum, summarize, getTestPool } = content;
+const getLessons = (rung: string, o?: { includeDrafts?: boolean }) => content.getLessons(rung, o) as unknown as EnLesson[];
 
 const body = (extra = '') => `
 ## concept.id
@@ -62,15 +66,14 @@ describe('content loaders', () => {
   it('parses Easy 1 lessons and summarises them', () => {
     const lessons = getLessons('easy-1', { includeDrafts: true });
     expect(lessons.length).toBeGreaterThan(0);
-    const s = summarize(lessons[0]);
+    const s = summarize(lessons[0] as never);
     expect(s.resume).toHaveLength(6);
     expect(s.checkTexts.length).toBe(lessons[0].check.length);
   });
 });
 
-import { englishTexts } from '@ladder/core/lib/content/lint';
+import { englishTexts } from '@/course/wordLint';
 import { INVENTORY_DETECTORS } from '@/course/lint';
-import { getTestPool, getNouns } from '@ladder/core/lib/content/load';
 import { drawTest } from '@ladder/core/lib/check/draw';
 
 describe('Easy 1 content', () => {
@@ -84,10 +87,10 @@ describe('Easy 1 content', () => {
 
   it('does not use a/an before lesson 3 or prepositions before lesson 9', () => {
     for (const l of lessons.filter((x) => x.order < 3)) {
-      for (const t of englishTexts(l).filter((x) => x.where !== 'pair.off')) expect(INVENTORY_DETECTORS['articles-a-an'].test(t.text)).toBe(false);
+      for (const t of englishTexts(l as never).filter((x) => x.where !== 'pair.off')) expect(INVENTORY_DETECTORS['articles-a-an'].test(t.text)).toBe(false);
     }
     for (const l of lessons.filter((x) => x.order < 9)) {
-      for (const t of englishTexts(l).filter((x) => x.where !== 'pair.off')) expect(INVENTORY_DETECTORS['prep-place-basic'].test(t.text)).toBe(false);
+      for (const t of englishTexts(l as never).filter((x) => x.where !== 'pair.off')) expect(INVENTORY_DETECTORS['prep-place-basic'].test(t.text)).toBe(false);
     }
   });
 
@@ -124,8 +127,7 @@ describe('Starter content', () => {
 
 describe('readings', () => {
   it('loads the Easy 1 capstone with questions', async () => {
-    const { getReading } = await import('@ladder/core/lib/content/load');
-    const r = getReading('easy-1')!;
+    const r = content.getReading('easy-1') as EnReading;
     expect(r.items.length).toBeGreaterThanOrEqual(2);
     expect(r.text).toContain('Rina');
   });

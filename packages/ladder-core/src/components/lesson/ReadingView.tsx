@@ -8,12 +8,15 @@ import { useT } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
 import { IconArrowLeft } from '../ui/Icon';
 import { CheckItemView } from '../check/CheckItemView';
-import { Sentence } from './Sentence';
+import { TargetSentence } from './TargetSentence';
 
 /** The rung's Read & listen capstone: one short text read aloud, then a few questions. */
 export function ReadingView({ rung, reading }: { rung: Rung; reading: Reading }) {
   const { t } = useT();
   const course = useCourse();
+  const read = course.adapter.reading;
+  const title = read.title(reading);
+  const translation = read.translation(reading, 'id');
   const [solved, setSolved] = useState<string[]>([]);
   const allDone = solved.length === reading.items.length;
 
@@ -38,34 +41,34 @@ export function ReadingView({ rung, reading }: { rung: Rung; reading: Reading })
         <div className="flex flex-col gap-1">
           <p className="eyebrow">{t('read.title')}</p>
           <h1 className="text-h1" lang={course.target.lang} dir={course.target.dir}>
-            {reading.title.en}
+            {title.target}
           </h1>
           <p className="id-text" lang="id">
-            {reading.title.id}
+            {title.id}
           </p>
         </div>
 
-        <section className="card flex flex-col gap-4 p-5" aria-label={reading.title.en}>
-          <Sentence en={reading.text} size="body" />
+        <section className="card flex flex-col gap-4 p-5" aria-label={title.target ?? title.id}>
+          <TargetSentence line={read.text(reading, rung)} use="reading" />
           <details>
             <summary className="label cursor-pointer py-2 text-accent">{t('read.translation')}</summary>
-            <p lang="id" className="id-text">
-              {reading.translation}
+            <p lang={translation.lang} className="id-text">
+              {translation.text}
             </p>
           </details>
         </section>
 
-        {reading.glossary.length > 0 && (
+        {read.glossary(reading).length > 0 && (
           <section className="flex flex-col gap-2">
             <h2 className="eyebrow">{t('lesson.newWords')}</h2>
             <ul className="flex flex-wrap gap-2">
-              {reading.glossary.map((g) => (
-                <li key={g.en} className="card flex items-baseline gap-2 px-3 py-1">
+              {read.glossary(reading).map((g) => (
+                <li key={g.key} className="card flex items-baseline gap-2 px-3 py-1">
                   <span lang={course.target.lang} dir={course.target.dir} className="font-display font-semibold">
-                    {g.en}
+                    {g.text}
                   </span>
                   <span lang="id" className="id-text text-small">
-                    {g.id}
+                    {g.meaning.id}
                   </span>
                 </li>
               ))}

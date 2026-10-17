@@ -1,7 +1,31 @@
-import type { CheckItem, Lesson, Rung } from '../types';
-import type { LintRules } from '@ladder/core/course/types';
-import { stripMarkup } from '../markup';
-import { getLexicon, getNouns, getReading, getTestPool } from './load';
+// English Ladder's word lint: grammar inventory, structure rules and lexicon (CLAUDE.md §6),
+// driven by the rules in course/lint.ts. Build time only.
+import type { CheckItem, Lesson, Rung } from '@ladder/core/lib/types';
+import { stripMarkup } from '@ladder/core/lib/markup';
+import { content, getLexicon, getNouns } from './content';
+import { INVENTORY_DETECTORS, STRUCTURE_RULES, WORD_REGEX, knownWord } from './lint';
+import type { EnLesson, EnReading } from './schema';
+
+/** A grammar-inventory detector: `id` is the inventory id, `re` matches text that uses it. */
+export type Detector = { id: string; re: RegExp };
+/** A structure-lint rule: `name` is shown in findings, `re` matches untaught grammar. */
+export type Rule = { name: string; re: RegExp };
+
+export type LintRules = {
+  /** Matches target-language words in a string. */
+  wordRegex: RegExp;
+  /** True when a word is covered by the lexicon. `irregular` maps an irregular form to its lemma. */
+  knownWord: (word: string, ctx: { lex: Set<string>; irregular: Map<string, string> }) => boolean;
+  detectors: Detector[];
+  structureRules: Record<string, Rule[]>;
+};
+
+const RULES: LintRules = {
+  wordRegex: WORD_REGEX,
+  knownWord,
+  detectors: Object.entries(INVENTORY_DETECTORS).map(([id, re]) => ({ id, re })),
+  structureRules: STRUCTURE_RULES,
+};
 
 export type Finding = { level: 'error' | 'warn'; message: string };
 
@@ -22,7 +46,8 @@ function itemTexts(item: CheckItem): string[] {
 }
 
 /** Every English string a learner sees in a lesson, except explanations. */
-export function englishTexts(l: Lesson): { where: string; text: string }[] {
+export function englishTexts(lesson: Lesson): { where: string; text: string }[] {
+  const l = lesson as unknown as EnLesson;
   const out: { where: string; text: string }[] = [];
   l.examples.forEach((e, i) => out.push({ where: `examples[${i}]`, text: e.en }));
   l.worked?.forEach((e, i) => out.push({ where: `worked[${i}]`, text: e.en }));
@@ -33,10 +58,8 @@ export function englishTexts(l: Lesson): { where: string; text: string }[] {
   return out.map((x) => ({ ...x, text: stripMarkup(x.text) })).filter((x) => x.text.trim());
 }
 
-/** Lints content against a course's inventory detectors, structure rules and lexicon.
- *  All language-specific logic (word regex, morphology, detectors, structure rules) comes
- *  from `lint`; the orchestration here is course-agnostic. */
-export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>, lint: LintRules): Finding[] {
+/** Lints content against the inventory detectors, structure rules and lexicon. */
+export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>, lint: LintRules = RULES): Finding[] {
   const findings: Finding[] = [];
   const lexicon = getLexicon();
   const irregular = new Map(getNouns().map((n) => [n.plural.toLowerCase(), n.word.toLowerCase()]));
@@ -57,7 +80,7 @@ export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>, lint: 
       const level: Finding['level'] = l.status === 'reviewed' ? 'error' : 'warn';
       const where = `${rung.id}/${l.slug}`;
       allowedSoFar.push(...l.introduces);
-      l.glossary.forEach((g) => glossSoFar.push(...words(g.en)));
+      (l as unknown as EnLesson).glossary.forEach((g) => glossSoFar.push(...words(g.en)));
       const lex = new Set([...rungLex, ...glossSoFar]);
       const texts = englishTexts(l);
 
@@ -91,7 +114,7 @@ export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>, lint: 
     }
 
     // 4. Test pool: whole-rung lexicon and structure rules.
-    const pool = getTestPool(rung.id);
+    const pool = content.getTestPool(rung.id);
     if (pool) {
       const lex = new Set([...rungLex, ...glossSoFar]);
       const unknown = new Set<string>();
@@ -109,9 +132,9 @@ export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>, lint: 
     }
 
     // 5. Reading: the rung's whole lexicon plus its own glossary, and the structure rules.
-    let reading = null;
+    let reading: EnReading | null = null;
     try {
-      reading = getReading(rung.id);
+      reading = content.getReading(rung.id) as EnReading | null;
     } catch {
       reading = null; // schema errors are reported by content-check
     }

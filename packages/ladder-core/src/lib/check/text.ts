@@ -1,8 +1,10 @@
-import type { CheckItem } from '../types';
+import { isCoreItem, type CheckItem, type ExtraItem } from '../types';
 import { stripMarkup } from '../markup';
+import { extraType } from './itemTypes';
 
 /** A one-line text representation of an item, for the continue card and review lists. */
 export function itemText(item: CheckItem): string {
+  if (!isCoreItem(item)) return extraType(item).itemText(item as ExtraItem);
   switch (item.type) {
     case 'choice':
     case 'gap':
@@ -20,6 +22,7 @@ export function itemText(item: CheckItem): string {
 
 /** The correct answer as a sentence-ish string. */
 export function answerText(item: CheckItem): string {
+  if (!isCoreItem(item)) return extraType(item).answerText(item as ExtraItem);
   if (item.type === 'order') return item.answer.join(' ');
   if ((item.type === 'gap' || item.type === 'choice') && item.prompt.includes('___')) {
     return stripMarkup(item.prompt.replace('___', item.answer));

@@ -1,16 +1,20 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import type { Noun } from '@ladder/core/lib/types';
+import type { Noun } from '@/course/schema';
+import { useVisualData } from '@ladder/core/components/visuals/VisualData';
 import { SOUND_LABEL, RULE_LABEL, article, isTricky, pluralParts } from './nounLogic';
 import { Sentence } from '@ladder/core/components/lesson/Sentence';
 import type { VisualProps } from '@ladder/core/components/visuals/types';
 
-type Props = VisualProps<string> & { nouns: Noun[]; initial?: string; featured?: string[] };
+type Props = VisualProps<string> & { nouns?: Noun[]; initial?: string; featured?: string[] };
 
 const DEFAULT_FEATURED = ['hour', 'university', 'umbrella', 'motorbike', 'durian', 'box', 'city', 'knife', 'child', 'fish'];
 
-export function NounBuilder({ nouns, state, interactive = true, onStateChange, lang, initial, featured }: Props) {
+export function NounBuilder({ nouns: nounsProp, state, interactive = true, onStateChange, lang, initial, featured }: Props) {
+  // The authored noun list comes from the page (VisualDataProvider); tests may pass it directly.
+  const fromPage = useVisualData<Noun[]>();
+  const nouns = useMemo(() => nounsProp ?? fromPage ?? [], [nounsProp, fromPage]);
   const byWord = useMemo(() => new Map(nouns.map((n) => [n.word, n])), [nouns]);
   const chips = (featured ?? DEFAULT_FEATURED).filter((w) => byWord.has(w));
   const [own, setOwn] = useState<string>(initial && byWord.has(initial) ? initial : chips[0] ?? nouns[0]?.word);

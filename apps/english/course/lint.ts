@@ -1,6 +1,5 @@
-// English content-lint rules for CourseConfig.lint. The generic runner (lintLessons in
-// @ladder/core) orchestrates these. No filesystem imports, so course.config.ts can reference
-// it from both the client bundle and the build-time content-check.
+// English content-lint rules, run by course/wordLint.ts from content:check. No filesystem
+// imports, so tests can use them directly.
 
 /** Matches target-language words (English: letters with an optional apostrophe group). */
 export const WORD_REGEX = /[A-Za-z]+(?:'[A-Za-z]+)?/g;

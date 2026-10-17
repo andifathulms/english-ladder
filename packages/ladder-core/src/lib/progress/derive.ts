@@ -1,4 +1,4 @@
-import type { LessonSummary, Rung } from '../types';
+import type { LessonSummary, Quote, Rung } from '../types';
 import type { ProgressState } from './types';
 import { todayKey } from './store';
 
@@ -51,7 +51,7 @@ export function currentRung(rungs: Rung[], p: ProgressState): Rung {
 
 export type ContinueTarget =
   | { kind: 'welcome' }
-  | { kind: 'lesson'; lesson: LessonSummary; step: number; text: string }
+  | { kind: 'lesson'; lesson: LessonSummary; step: number; text: Quote }
   | { kind: 'test'; rung: Rung };
 
 export function continueTarget(

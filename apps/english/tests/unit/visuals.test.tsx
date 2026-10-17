@@ -5,7 +5,7 @@ import { PlaceScene } from '@/visuals/PlaceScene';
 import { NounBuilder } from '@/visuals/NounBuilder';
 import { PLACE_SPEC, PLACES, placeSentence } from '@/visuals/placeLogic';
 import { article, pluralParts } from '@/visuals/nounLogic';
-import type { Noun } from '@ladder/core/lib/types';
+import type { Noun } from '@/course/schema';
 
 const wrap = (ui: React.ReactNode) => render(<AllProviders>{ui}</AllProviders>);
 

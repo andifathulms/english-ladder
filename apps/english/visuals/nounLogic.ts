@@ -1,4 +1,4 @@
-import type { Noun } from '@ladder/core/lib/types';
+import type { Noun } from '@/course/schema';
 
 export type PluralParts = { stem: string; removed: string; added: string };
 

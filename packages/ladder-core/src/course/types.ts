@@ -1,7 +1,9 @@
 import type { ComponentType } from 'react';
 import type { Settings } from '@ladder/core/lib/progress/types';
 import type { MigrationStep, ProgressConfig, ProgressFeatures } from '@ladder/core/lib/progress/config';
-import type { Noun } from '@ladder/core/lib/types';
+import type { Gloss, Lesson, Line, Rung } from '@ladder/core/lib/types';
+import type { ContentAdapter } from '@ladder/core/lib/content/adapter';
+import type { ItemTypeLogic } from '@ladder/core/lib/check/itemTypes';
 import type { StringTables, UiLang } from '@ladder/core/lib/i18n';
 
 /** Per-word annotation shown in My words (English: the a/an badge and irregular-plural suffix). */
@@ -36,22 +38,6 @@ export type SpeechRules = {
   sampleText: string;
 };
 
-/** A grammar-inventory detector: `id` is the inventory id, `re` matches text that uses it. */
-export type Detector = { id: string; re: RegExp };
-/** A structure-lint rule: `name` is shown in findings, `re` matches untaught grammar. */
-export type Rule = { name: string; re: RegExp };
-
-/** Per-course content lint. The runner (core) orchestrates these pieces. */
-export type LintRules = {
-  /** Matches target-language words in a string. */
-  wordRegex: RegExp;
-  /** True when a word is covered by the lexicon (handles the language's morphology).
-   *  `irregular` maps an irregular inflected form to its lemma (e.g. children → child). */
-  knownWord: (word: string, ctx: { lex: Set<string>; irregular: Map<string, string> }) => boolean;
-  detectors: Detector[];
-  structureRules: Record<string, Rule[]>;
-};
-
 /** Option lists that course-specific Settings controls render. */
 export type SettingsOptions = {
   accents: { value: string; label: Record<UiLang, string> }[];
@@ -60,6 +46,14 @@ export type SettingsOptions = {
 
 /** One option for the lesson explanation-language toggle; `[]` hides the toggle. */
 export type ExplainLang = { value: string; label: Record<UiLang, string> };
+
+/** Where a target line appears; the Sentence slot picks size, play button and note from it. */
+export type SentenceUse = 'example' | 'worked' | 'pairOff' | 'pairNatural' | 'reading';
+export type SentenceSlotProps = { line: Line; use: SentenceUse };
+
+/** A strand card on the Examples or Contrast step. Renders nothing when the lesson has none.
+ *  `cardLang` is the language short cards explain in (the lesson's explanation language). */
+export type StrandCard = ComponentType<{ lesson: Lesson; rung: Rung; cardLang: 'id' | 'en' }>;
 
 /** Everything that differs between language courses, injected into the shared engine. */
 export type CourseConfig = {
@@ -91,16 +85,26 @@ export type CourseConfig = {
   };
   speech: SpeechRules;
   text: TextRules;
-  lint: LintRules;
+  /** How the engine reads this course's lessons and readings (lib/content/adapter.ts). */
+  adapter: ContentAdapter;
+  /** Course item types' grading/text logic, registered at app start with registerItemTypes(). */
+  itemTypes?: Record<string, ItemTypeLogic>;
+  /** Strand cards per lesson step, in order (e.g. English Talk + Sound, then Words). */
+  strands?: { examples?: StrandCard[]; contrast?: StrandCard[] };
+  /** Rendering slots; each defaults to the engine's own component. */
+  components?: {
+    /** A target-language line (examples, worked, pair, reading, …). Default: core Sentence. */
+    Sentence?: ComponentType<SentenceSlotProps>;
+  };
   /** Visual id → component (the lesson/scene registry). */
   visuals: Record<string, ComponentType<never>>;
   visualIds: readonly string[];
   /** Decorative board background (Contours for English). */
   boardPattern: ComponentType;
   extraData?: {
-    nounsFile?: string;
-    /** Extra annotation for a word in My words (e.g. the English a/an article badge). */
-    wordAnnotator?: (word: string, noun: Noun | undefined) => WordAnnotation;
+    /** Extra annotation for a word in My words (e.g. the English a/an article badge).
+     *  `data` is the build-time word data from the content model (ContentModel.wordData). */
+    wordAnnotator?: (word: Gloss, data: unknown) => WordAnnotation;
   };
 };
 

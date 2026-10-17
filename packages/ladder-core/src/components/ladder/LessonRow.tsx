@@ -50,7 +50,7 @@ export function LessonRow({ lesson, state, current }: { lesson: LessonSummary; s
         <span className="flex min-w-0 flex-col gap-1">
           <span className="sr-only">{t('home.lessonN', { n: lesson.order })}: </span>
           <span className="font-display text-card font-medium" lang={course.target.lang} dir={course.target.dir}>
-            {lesson.title.en}
+            {lesson.title.target}
           </span>
           {sub && (
             <span className="id-text text-small" lang="id">

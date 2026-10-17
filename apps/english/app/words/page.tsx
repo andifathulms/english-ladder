@@ -1,12 +1,6 @@
-import { getAllSummaries, getNouns } from '@ladder/core/lib/content/load';
-import { WordsView } from '@ladder/core/components/WordsView';
+import { wordsPage } from '@ladder/core/pages/words';
+import { content } from '@/course/content';
 
 export const metadata = { title: 'Kata-kataku' };
 
-export default function WordsPage() {
-  const lessons = getAllSummaries();
-  // Only nouns that appear in a glossary, so the client gets a small, authored lookup.
-  const glossed = new Set(lessons.flatMap((l) => l.glossary.map((g) => g.en.toLowerCase())));
-  const nouns = getNouns().filter((n) => glossed.has(n.word.toLowerCase()));
-  return <WordsView lessons={lessons} nouns={nouns} />;
-}
+export default wordsPage(content);

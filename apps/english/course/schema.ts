@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
-// Bilingual.en is the UI/explanation translation; in lesson content fields the `en` key holds
-// the target-language text. TODO(ladder-core): target field — make this key name configurable.
+// English Ladder's content model. In lesson content fields `en` holds the target-language text;
+// in Bilingual UI fields (why, summary, …) it is the English explanation. The engine reads lessons
+// through course/adapter.ts, never by these field names.
 const Bilingual = z.object({ id: z.string().min(1), en: z.string().min(1) }).strict();
 
 // Visual ids are course-specific; content-check validates them against course.visualIds.
@@ -183,4 +184,9 @@ export const LexiconSchema = z.record(
   z.array(z.union([z.string(), z.array(z.string())])).transform((xs) => xs.flat().map(String)),
 );
 
-export const SECTION_HEADINGS = ['concept.id', 'concept.en', 'contrast.id', 'contrast.en'] as const;
+export type EnCheckItem = z.infer<typeof CheckItemSchema>;
+export type EnRung = z.infer<typeof RungSchema>;
+export type EnLessonFrontmatter = z.infer<typeof LessonFrontmatterSchema>;
+export type EnLesson = EnLessonFrontmatter & { slug: string; concept: { id: string; en: string }; contrast: { id: string; en: string } };
+export type EnReading = z.infer<typeof ReadingSchema>;
+export type Noun = z.infer<typeof NounSchema>;

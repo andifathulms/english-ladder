@@ -1,30 +1,26 @@
-/* Validates all content. Exits non-zero on any error. Run by `npm run build`. */
-import fs from 'node:fs';
+/* Validates all content. Exits non-zero on any error. Run by `npm run build`.
+ *
+ * Course-agnostic: it loads the content model of whichever app invokes it (cwd/course/content.ts)
+ * and the visual ids from its course.config.ts. Generic checks run here; the course's own rules
+ * (language lint, data files, capstones, placement) run through ContentModel.check hooks. */
 import path from 'node:path';
 import { ZodError } from 'zod';
-import {
-  CONTENT_DIR,
-  getCurriculum,
-  getNouns,
-  getReading,
-  getTestPool,
-  lessonFiles,
-  parseLessonFile,
-} from '../src/lib/content/load';
 import { focusCount } from '../src/lib/markup';
-import type { CheckItem, Lesson } from '../src/lib/types';
-import { lintLessons } from '../src/lib/content/lint';
-import type { LintRules } from '../src/course/types';
+import { isCoreItem, type CheckItem, type ExtraItem, type Lesson } from '../src/lib/types';
+import { extraType } from '../src/lib/check/itemTypes';
+import type { CheckContext, Content } from '../src/lib/content/load';
 
-// The runner is course-agnostic: it loads the config of whichever app invokes it (cwd).
+const { content } = (await import(path.resolve(process.cwd(), 'course/content.ts'))) as { content: Content };
 const { course } = (await import(path.resolve(process.cwd(), 'course.config.ts'))) as {
-  course: { lint: LintRules; visualIds: readonly string[] };
+  course: { visualIds: readonly string[] };
 };
 const visualIds = new Set(course.visualIds);
+const hooks = content.model.check ?? {};
 
 const errors: string[] = [];
 const warnings: string[] = [];
 const err = (m: string) => errors.push(m);
+const warn = (m: string) => warnings.push(m);
 
 function fmtZod(file: string, e: unknown): string {
   if (e instanceof ZodError) {
@@ -34,6 +30,7 @@ function fmtZod(file: string, e: unknown): string {
 }
 
 function sentencesOf(item: CheckItem): string[] {
+  if (!isCoreItem(item)) return extraType(item).sentences(item as ExtraItem);
   switch (item.type) {
     case 'choice':
     case 'gap':
@@ -49,10 +46,16 @@ function sentencesOf(item: CheckItem): string[] {
   }
 }
 
+const itemIds = new Map<string, string>();
+const claim = (id: string, where: string) => {
+  if (itemIds.has(id)) err(`${where}: ${id} already used in ${itemIds.get(id)}`);
+  itemIds.set(id, where);
+};
+
 // 1. Curriculum
-let rungs: ReturnType<typeof getCurriculum> = [];
+let rungs: ReturnType<typeof content.getCurriculum> = [];
 try {
-  rungs = getCurriculum();
+  rungs = content.getCurriculum();
 } catch (e) {
   err(fmtZod('curriculum.yaml', e));
 }
@@ -60,16 +63,16 @@ const rungIds = new Set(rungs.map((r) => r.id));
 if (rungIds.size !== rungs.length) err('curriculum.yaml: duplicate rung ids');
 
 // 2. Lessons
-const itemIds = new Map<string, string>();
 const lessonsByRung = new Map<string, Lesson[]>();
 const allLessonIds = new Set<string>();
+const ctx: CheckContext = { rungs, lessonsByRung, allLessonIds, err, warn, claim, sentencesOf, content };
 
 for (const rung of rungs) {
   const lessons: Lesson[] = [];
-  for (const file of lessonFiles(rung.id)) {
+  for (const file of content.lessonFiles(rung.id)) {
     const where = `${rung.id}/${file}`;
     try {
-      const l = parseLessonFile(rung.id, file);
+      const l = content.parseLessonFile(rung.id, file);
       if (l.rung !== rung.id) err(`${where}: rung "${l.rung}" does not match folder`);
       if (Number(file.slice(0, 2)) !== l.order) err(`${where}: order ${l.order} does not match file name`);
       if (allLessonIds.has(l.id)) err(`${where}: duplicate lesson id ${l.id}`);
@@ -79,16 +82,16 @@ for (const rung of rungs) {
       }
       if (l.visual && !visualIds.has(l.visual.id)) err(`${where}: unknown visual "${l.visual.id}"`);
       for (const c of l.check) {
-        if (itemIds.has(c.id)) err(`${where}: check id ${c.id} already used in ${itemIds.get(c.id)}`);
-        itemIds.set(c.id, where);
+        claim(c.id, where);
         if (c.type === 'scene' && !visualIds.has(c.visual.id)) err(`${where}: ${c.id}: unknown visual "${c.visual.id}"`);
         for (const s of sentencesOf(c)) {
           if (focusCount(s) > 1) err(`${where}: ${c.id}: more than one [[focus]] in "${s}"`);
         }
       }
-      for (const s of [...l.examples.map((e) => e.en), ...(l.talk ?? []).map((t) => t.en), l.pair.natural, l.pair.off]) {
+      for (const s of content.adapter.lesson.focusTexts(l)) {
         if (focusCount(s) > 1) err(`${where}: more than one [[focus]] in "${s}"`);
       }
+      hooks.lesson?.(l, where, ctx, file);
       lessons.push(l);
     } catch (e) {
       err(fmtZod(where, e));
@@ -96,7 +99,13 @@ for (const rung of rungs) {
   }
   lessons.sort((a, b) => a.order - b.order);
   lessonsByRung.set(rung.id, lessons);
-  if (rung.status === 'live' && lessons.length === 0) err(`${rung.id}: live rung has no lessons`);
+  if (rung.status === 'live') {
+    if (lessons.length === 0) err(`${rung.id}: live rung has no lessons`);
+    // Notch counts come from data.
+    if (hooks.lessonCountMatchesCurriculum && lessons.length !== rung.lessons) {
+      err(`${rung.id}: curriculum says ${rung.lessons} lessons, found ${lessons.length}`);
+    }
+  }
 }
 
 for (const lessons of lessonsByRung.values()) {
@@ -107,21 +116,19 @@ for (const lessons of lessonsByRung.values()) {
 
 // 3. Test pools
 for (const rung of rungs) {
-  const file = path.join(CONTENT_DIR, rung.id, 'test.yaml');
-  if (!fs.existsSync(file)) {
-    if (rung.status === 'live' && (lessonsByRung.get(rung.id)?.length ?? 0) >= 8) {
-      err(`${rung.id}: live rung with 8 lessons has no test.yaml`);
-    }
+  const lessons = lessonsByRung.get(rung.id) ?? [];
+  if (!content.exists(`${rung.id}/test.yaml`)) {
+    const required = hooks.requiresTestPool ? hooks.requiresTestPool(rung, lessons.length) : true;
+    if (rung.status === 'live' && required) err(`${rung.id}: live rung with ${lessons.length} lessons has no test.yaml`);
     continue;
   }
   try {
-    const pool = getTestPool(rung.id)!;
-    const lessons = lessonsByRung.get(rung.id) ?? [];
+    const pool = content.getTestPool(rung.id)!;
+    if (pool.rung !== rung.id) err(`${rung.id}/test.yaml: rung "${pool.rung}" does not match folder`);
     const ids = new Set(lessons.map((l) => l.id));
     for (const item of pool.items) {
       if (!item.from || !ids.has(item.from)) err(`${rung.id}/test.yaml: ${item.id}: from "${item.from}" is not a lesson`);
-      if (itemIds.has(item.id)) err(`${rung.id}/test.yaml: ${item.id} already used in ${itemIds.get(item.id)}`);
-      itemIds.set(item.id, `${rung.id}/test.yaml`);
+      claim(item.id, `${rung.id}/test.yaml`);
     }
     for (const l of lessons) {
       if (!pool.items.some((i) => i.from === l.id)) err(`${rung.id}/test.yaml: no item from ${l.id}`);
@@ -133,34 +140,22 @@ for (const rung of rungs) {
 
 // 3b. Readings
 for (const rung of rungs) {
-  if (!fs.existsSync(path.join(CONTENT_DIR, rung.id, 'reading.yaml'))) continue;
+  if (!content.exists(`${rung.id}/reading.yaml`)) continue;
   try {
-    const reading = getReading(rung.id)!;
+    const reading = content.getReading(rung.id)!;
     if (reading.rung !== rung.id) err(`${rung.id}/reading.yaml: rung "${reading.rung}" does not match folder`);
-    for (const item of reading.items) {
-      if (itemIds.has(item.id)) err(`${rung.id}/reading.yaml: ${item.id} already used in ${itemIds.get(item.id)}`);
-      itemIds.set(item.id, `${rung.id}/reading.yaml`);
-    }
+    for (const item of reading.items) claim(item.id, `${rung.id}/reading.yaml`);
   } catch (e) {
     err(fmtZod(`${rung.id}/reading.yaml`, e));
   }
 }
 
-// 4. Nouns
+// 4. The course's own checks: data files, capstones, placement, language lint.
 try {
-  const nouns = getNouns();
-  const seen = new Set<string>();
-  for (const n of nouns) {
-    if (seen.has(n.word)) err(`data/nouns.yaml: duplicate noun "${n.word}"`);
-    seen.add(n.word);
-  }
+  hooks.extra?.(ctx);
 } catch (e) {
-  err(fmtZod('data/nouns.yaml', e));
+  err(fmtZod('content', e));
 }
-
-// 5. Inventory, lexicon and structure lint
-const lint = lintLessons(rungs, lessonsByRung, course.lint);
-for (const f of lint) (f.level === 'error' ? errors : warnings).push(f.message);
 
 for (const w of warnings) console.warn(`warn  ${w}`);
 for (const e of errors) console.error(`error ${e}`);

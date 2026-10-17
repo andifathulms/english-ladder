@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import type { LessonSummary, Rung } from '@ladder/core/lib/types';
+import type { LessonSummary, Rung, Title } from '@ladder/core/lib/types';
 import type { ProgressState } from '@ladder/core/lib/progress/types';
 import { lessonState } from '@ladder/core/lib/progress/derive';
 import { readHref, testHref, rungHref } from '@ladder/core/lib/routes';
@@ -23,7 +23,7 @@ type Props = {
 };
 
 export type TestInfo = { draw: number; pass: number };
-export type ReadingInfo = { title: { en: string; id: string }; items: number };
+export type ReadingInfo = { title: Title; items: number };
 
 export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Props) {
   const { t, lang } = useT();
@@ -76,7 +76,7 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Pr
         </div>
         <p className="max-w-measure text-body text-board-ink">{lang === 'en' ? rung.description.en : rung.description.id}</p>
         <p className="text-small text-board-muted">
-          {t('rung.explainLang')}: {t(`rung.explain.${rung.explain_lang}`)}
+          {t('rung.explainLang')}: {t(`rung.explain.${rung.explain_lang as 'id' | 'mixed' | 'en'}`)}
         </p>
       </header>
 
@@ -116,7 +116,7 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Pr
               </span>
               <span className="flex min-w-0 flex-1 flex-col">
                 <span className="font-display text-card font-medium">
-                  {t('read.title')}: <span lang={course.target.lang} dir={course.target.dir}>{reading.title.en}</span>
+                  {t('read.title')}: <span lang={course.target.lang} dir={course.target.dir}>{reading.title.target}</span>
                 </span>
                 <span className="text-small text-muted tnum">{t('read.meta', { n: reading.items })}</span>
               </span>

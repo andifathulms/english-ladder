@@ -1,4 +1,5 @@
-import type { CheckItem } from '../types';
+import { isCoreItem, type CheckItem, type ExtraItem } from '../types';
+import { extraType } from './itemTypes';
 import type { TextRules } from '@ladder/core/course/types';
 import { stripMarkup } from '../markup';
 
@@ -15,6 +16,7 @@ export function sameOrder(given: string[], expected: string[], text: TextRules):
 }
 
 export function grade(item: CheckItem, response: Response, text: TextRules): { correct: boolean } {
+  if (!isCoreItem(item)) return { correct: extraType(item).grade(item as ExtraItem, response, text) };
   if (item.type === 'order') {
     if (!Array.isArray(response)) return { correct: false };
     return { correct: [item.answer, ...(item.accept ?? [])].some((a) => sameOrder(response, a, text)) };

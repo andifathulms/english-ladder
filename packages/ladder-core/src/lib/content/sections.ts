@@ -1,4 +1,5 @@
-import { SECTION_HEADINGS } from './schema';
+/** The prose sections a lesson body has, by heading. */
+export const SECTION_HEADINGS = ['concept.id', 'concept.en', 'contrast.id', 'contrast.en'] as const;
 import type { LessonSections } from '../types';
 
 type Heading = (typeof SECTION_HEADINGS)[number];

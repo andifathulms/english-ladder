@@ -1,6 +1,6 @@
 'use client';
 
-import type { CheckItem, Noun } from '@ladder/core/lib/types';
+import type { CheckItem } from '@ladder/core/lib/types';
 import * as store from '@ladder/core/lib/progress/store';
 import { CheckItemView } from './CheckItemView';
 import { useT } from '../ProgressProvider';
@@ -10,11 +10,10 @@ type Props = {
   index: number;
   solved: boolean[];
   onSolved: (index: number) => void;
-  nouns?: Noun[];
 };
 
 /** One check item at a time with a small counter. */
-export function CheckStep({ items, index, solved, onSolved, nouns }: Props) {
+export function CheckStep({ items, index, solved, onSolved }: Props) {
   const { t } = useT();
   const item = items[index];
   return (
@@ -24,7 +23,6 @@ export function CheckStep({ items, index, solved, onSolved, nouns }: Props) {
         key={item.id}
         mode="practice"
         item={item}
-        nouns={nouns}
         solved={solved[index]}
         whyInSheet
         onSolved={(firstTry) => {

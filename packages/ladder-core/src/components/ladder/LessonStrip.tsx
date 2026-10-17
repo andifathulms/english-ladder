@@ -69,7 +69,7 @@ export function LessonStrip({ lessons, progress, currentId }: { lessons: LessonS
                   ) : null}
                 </span>
                 <span className="font-display text-card font-medium" lang={course.target.lang} dir={course.target.dir}>
-                  {l.title.en}
+                  {l.title.target}
                 </span>
               </span>
               <span className="flex items-center justify-between gap-2 border-t border-rule px-4 py-3">
