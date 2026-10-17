@@ -55,7 +55,21 @@ export type ContentModel = {
    * time and handed to the client through VisualDataProvider. `visualIds` are the visuals the
    * page can show; return undefined when none needs data.
    */
-  visualData?: (visualIds: Set<string>) => unknown;
+  visualData?: (visualIds: Set<string>, ctx: { lesson?: Lesson }) => unknown;
+  /** Per-lesson data for the player, its slots and strand cards (useLessonData), at build time.
+   *  Also handed to progress.onCompleteLesson. */
+  lessonData?: (lesson: Lesson) => unknown;
+  /** Extra fields on each lesson summary (e.g. Mandarin's deck word ids). */
+  summaryExtra?: (lesson: Lesson) => Record<string, unknown>;
+  /** Fills in parsed content at build time (e.g. Mandarin's item pinyin from the rung glossary).
+   *  `where` names the source file. */
+  postParse?: {
+    lesson?: (l: Lesson, where: string, content: Content) => Lesson;
+    testPool?: (p: TestPool, rungId: string, content: Content) => TestPool;
+    reading?: (r: Reading, rungId: string, content: Content) => Reading;
+    dialogue?: (d: Dialogue, rungId: string, content: Content) => Dialogue;
+    placement?: (p: Placement, content: Content) => Placement;
+  };
   /** Data for a rung page's ladder.RungExtra (e.g. Mandarin's deck size), at build time. */
   rungData?: (rung: Rung) => unknown;
   /** Data for My words (e.g. English nouns for the a/an badge), given the glossaries shown. */
@@ -96,6 +110,7 @@ export function createContent(model: ContentModel, contentDir = path.join(proces
   const readYaml = (file: string): unknown => yaml.load(fs.readFileSync(path.join(contentDir, file), 'utf8'), yamlOpts);
   const exists = (file: string) => fs.existsSync(path.join(contentDir, file));
   const { adapter } = model;
+  const post = model.postParse;
 
   let curriculumCache: Rung[] | null = null;
   function getCurriculum(): Rung[] {
@@ -123,7 +138,8 @@ export function createContent(model: ContentModel, contentDir = path.join(proces
     });
     const fm = model.schemas.lesson.parse(data);
     const sections = parseSections(content, `${rungId}/${file}`);
-    return { ...fm, ...sections, slug: file.replace(/\.md$/, '') } as Lesson;
+    const l = { ...fm, ...sections, slug: file.replace(/\.md$/, '') } as Lesson;
+    return post?.lesson ? post.lesson(l, `${rungId}/${file}`, api) : l;
   }
 
   const lessonCache = new Map<string, Lesson[]>();
@@ -147,6 +163,7 @@ export function createContent(model: ContentModel, contentDir = path.join(proces
 
   function summarize(l: Lesson): LessonSummary {
     const a = adapter.lesson;
+    const quote = a.quote ?? quoteOf;
     const first = a.lead?.(l) ?? a.examples(l)[0];
     const worked = a.worked(l)?.[0] ?? first;
     return {
@@ -160,15 +177,16 @@ export function createContent(model: ContentModel, contentDir = path.join(proces
       keyword: a.keyword?.(l) ?? null,
       checkIds: l.check.map((c) => c.id),
       resume: [
-        quoteOf(first),
-        quoteOf(worked),
-        quoteOf(first),
-        quoteOf(a.pair(l).natural),
+        quote(first),
+        quote(worked),
+        quote(first),
+        quote(a.pair(l).natural),
         { text: stripMarkup(itemText(l.check[0])) },
-        { text: stripMarkup(a.closing(l)) },
+        a.closingQuote?.(l) ?? { text: stripMarkup(a.closing(l)) },
       ],
       checkTexts: l.check.map((c) => ({ text: stripMarkup(itemText(c)) })),
       glossary: a.glossary(l),
+      ...model.summaryExtra?.(l),
     };
   }
 
@@ -179,30 +197,34 @@ export function createContent(model: ContentModel, contentDir = path.join(proces
 
   function getTestPool(rungId: string): TestPool | null {
     if (!exists(`${rungId}/test.yaml`)) return null;
-    return model.schemas.testPool.parse(readYaml(`${rungId}/test.yaml`));
+    const p = model.schemas.testPool.parse(readYaml(`${rungId}/test.yaml`));
+    return post?.testPool ? post.testPool(p, rungId, api) : p;
   }
 
   function getReading(rungId: string): Reading | null {
     if (!model.schemas.reading || !exists(`${rungId}/reading.yaml`)) return null;
-    return model.schemas.reading.parse(readYaml(`${rungId}/reading.yaml`));
+    const r = model.schemas.reading.parse(readYaml(`${rungId}/reading.yaml`));
+    return post?.reading ? post.reading(r, rungId, api) : r;
   }
 
   function getDialogue(rungId: string): Dialogue | null {
     if (!model.schemas.dialogue || !exists(`${rungId}/dialogue.yaml`)) return null;
-    return model.schemas.dialogue.parse(readYaml(`${rungId}/dialogue.yaml`));
+    const d = model.schemas.dialogue.parse(readYaml(`${rungId}/dialogue.yaml`));
+    return post?.dialogue ? post.dialogue(d, rungId, api) : d;
   }
 
   function getPlacement(): Placement | null {
     if (!model.schemas.placement || !exists('placement.yaml')) return null;
-    return model.schemas.placement.parse(readYaml('placement.yaml'));
+    const p = model.schemas.placement.parse(readYaml('placement.yaml'));
+    return post?.placement ? post.placement(p, api) : p;
   }
 
   /** Visual data for a page that can show these visual ids (lesson visual, scene items). */
-  function visualDataFor(ids: Iterable<string>): unknown {
-    return model.visualData?.(new Set(ids));
+  function visualDataFor(ids: Iterable<string>, ctx: { lesson?: Lesson } = {}): unknown {
+    return model.visualData?.(new Set(ids), ctx);
   }
 
-  return {
+  const api = {
     model,
     adapter,
     contentDir,
@@ -222,6 +244,7 @@ export function createContent(model: ContentModel, contentDir = path.join(proces
     getPlacement,
     visualDataFor,
   };
+  return api;
 }
 
 /** Visual ids a set of items can show (scene items). */

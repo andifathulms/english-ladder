@@ -18,6 +18,7 @@ import { PairCard } from './PairCard';
 import { Prose } from './Prose';
 import { TargetSentence } from './TargetSentence';
 import { GlossaryChips } from './GlossaryChips';
+import { useLessonData } from './LessonData';
 import { TargetText } from '../ui/TargetText';
 import { StepBar } from './StepBar';
 import { StepLabel } from './StepLabel';
@@ -55,6 +56,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
   const [localExplain, setLocalExplain] = useState<'id' | 'en' | null>(null);
   const useSession = course.lesson?.useSession ?? useNoSession;
   const session = useSession(rung, step);
+  const lessonData = useLessonData<unknown>();
   const headingRef = useRef<HTMLDivElement>(null);
   const announceRef = useRef<HTMLParagraphElement>(null);
 
@@ -89,13 +91,13 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
       setStep(to);
       if (to === 5) {
         const wasDone = store.getState().lessons[lesson.id]?.completed;
-        store.completeLesson(lesson.id);
+        store.completeLesson(lesson.id, lessonData);
         if (!wasDone) setFreshNotch(lesson.order - 1);
         sfx('lessonDone');
       }
       window.scrollTo({ top: 0 });
     },
-    [step, lesson.id, lesson.order],
+    [step, lesson.id, lesson.order, lessonData],
   );
 
   // Announce and move focus to the new step.
@@ -201,9 +203,13 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
                     {title.id}
                   </p>
                 )}
-                <TargetText block as="p" size="title" face="display" className="text-muted">
-                  {title.target}
-                </TargetText>
+                {course.components?.TitleTarget ? (
+                  <course.components.TitleTarget title={title} place="lesson" />
+                ) : (
+                  <TargetText block as="p" size="title" face="display" className="text-muted">
+                    {title.target}
+                  </TargetText>
+                )}
               </>
             ) : (
               <>

@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { sceneVisualIds, type Content } from '@ladder/core/lib/content/load';
 import { LessonPlayer } from '@ladder/core/components/lesson/LessonPlayer';
 import { VisualDataProvider } from '@ladder/core/components/visuals/VisualData';
+import { LessonDataProvider } from '@ladder/core/components/lesson/LessonData';
 import { titleText } from './meta';
 
 type Params = { params: { rung: string; lesson: string } };
@@ -36,7 +37,8 @@ export function lessonPage(content: Content) {
       const visualIds = [...(lesson.visual ? [lesson.visual.id] : []), ...sceneVisualIds(lesson.check)];
 
       return (
-        <VisualDataProvider value={content.visualDataFor(visualIds)}>
+        <VisualDataProvider value={content.visualDataFor(visualIds, { lesson })}>
+          <LessonDataProvider value={content.model.lessonData?.(lesson)}>
           <LessonPlayer
             lesson={lesson}
             rung={rung}
@@ -45,6 +47,7 @@ export function lessonPage(content: Content) {
             hasTest={!!content.getTestPool(rung.id)}
             spiralRung={spiral?.name ?? null}
           />
+          </LessonDataProvider>
         </VisualDataProvider>
       );
     },

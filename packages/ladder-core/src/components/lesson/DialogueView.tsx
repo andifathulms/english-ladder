@@ -20,6 +20,8 @@ export function DialogueView({ rung, dialogue }: { rung: Rung; dialogue: Dialogu
   const read = course.adapter.dialogue!;
   const cfg = course.capstones?.dialogue;
   const Badge = cfg?.Badge;
+  const TitleTarget = course.components?.TitleTarget;
+  const CapWrap = course.capstones?.Wrap ?? NoWrap;
   const title = read.title(dialogue);
   const note = read.note(dialogue);
   const variety = read.variety?.(dialogue);
@@ -47,6 +49,7 @@ export function DialogueView({ rung, dialogue }: { rung: Rung; dialogue: Dialogu
         </div>
       </header>
 
+      <CapWrap rung={rung}>
       <main className="page flex max-w-lesson flex-1 flex-col gap-6 py-7">
         <div className="flex flex-col gap-1">
           <p className="eyebrow">
@@ -56,9 +59,13 @@ export function DialogueView({ rung, dialogue }: { rung: Rung; dialogue: Dialogu
           <h1 className="text-h1" lang={lang}>
             {lang === 'en' ? title.en : title.id}
           </h1>
-          <TargetText block as="p" size="title" face="display" variety={variety} className="text-muted">
-            {title.target}
-          </TargetText>
+          {TitleTarget ? (
+            <TitleTarget title={title} place="dialogue" />
+          ) : (
+            <TargetText block as="p" size="title" face="display" variety={variety} className="text-muted">
+              {title.target}
+            </TargetText>
+          )}
         </div>
 
         <section className={`card flex flex-col gap-5 p-5 ${cfg?.edgeClass ?? ''}`} aria-label={title.id}>
@@ -104,6 +111,11 @@ export function DialogueView({ rung, dialogue }: { rung: Rung; dialogue: Dialogu
           {t('lesson.backToRung', { rung: rung.name })}
         </Link>
       </main>
+      </CapWrap>
     </div>
   );
+}
+
+function NoWrap({ children }: { rung: Rung; children: React.ReactNode }) {
+  return <>{children}</>;
 }

@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
 import type { Settings } from '@ladder/core/lib/progress/types';
 import type { MigrationStep, ProgressConfig, ProgressFeatures } from '@ladder/core/lib/progress/config';
-import type { CheckItem, ExtraItem, Gloss, Lesson, Line, Quote, Rung } from '@ladder/core/lib/types';
+import type { CheckItem, ExtraItem, Gloss, Lesson, Line, Quote, Rung, Title } from '@ladder/core/lib/types';
 import type { ContentAdapter } from '@ladder/core/lib/content/adapter';
 import type { ItemTypeLogic } from '@ladder/core/lib/check/itemTypes';
 import type { StringTables, UiLang } from '@ladder/core/lib/i18n';
@@ -299,7 +299,14 @@ export type CourseConfig = {
     exampleListClass?: string;
   };
   /** Rung capstones (reading, dialogue) shown as cards in their own section of the rung page. */
+  /** Glossary chips (fixes.glossaryAudio): the word, and anything after its meaning. */
+  glossary?: {
+    Word?: ComponentType<{ gloss: Gloss }>;
+    Extra?: ComponentType<{ gloss: Gloss }>;
+  };
   capstones?: {
+    /** Wraps a capstone page's main column (e.g. a provider for the rung's text settings). */
+    Wrap?: ComponentType<{ rung: Rung; children: React.ReactNode }>;
     dialogue?: {
       /** String key appended to the dialogue's name (Arabic: 'lesson.mesir', "Mesir"). */
       tagKey?: string;
@@ -374,6 +381,8 @@ export type CourseConfig = {
     wordmarkAlign?: 'baseline' | 'end';
     /** A transliteration line (Arabic: upright Amiri Latin under the Arabic). */
     Translit?: ComponentType<{ text: string; className?: string; onBoard?: boolean }>;
+    /** A title's target-language line under the UI-language heading (titles: 'ui'). Default: TargetText. */
+    TitleTarget?: ComponentType<{ title: Title; place: 'lesson' | 'reading' | 'dialogue' | 'strip' }>;
     /** The quoted resume line on the board (continue card). Default: the display serif line. */
     BoardQuote?: ComponentType<{ quote: Quote; rung: Rung | undefined }>;
   };

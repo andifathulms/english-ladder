@@ -95,7 +95,8 @@ export type Lesson = {
 export type LessonSections = { concept: Bilingual; contrast: Bilingual };
 
 /** A lesson or reading title: the target-language title (if any) and the learner-language ones. */
-export type Title = { target: string | null; id: string; en: string };
+/** `raw` is the course's own title object (e.g. Mandarin's { zh, py }), for components.TitleTarget. */
+export type Title = { target: string | null; id: string; en: string; raw?: unknown };
 
 /** A line in the target language, as the engine sees it. `raw` is the course's own object. */
 export type Line = {
@@ -121,7 +122,8 @@ export type Gloss = {
 };
 
 /** A line to quote on the continue card: target text (with transliteration) or learner text. */
-export type Quote = { text: string; tr?: string };
+/** `raw` is the course's own data for its BoardQuote slot (e.g. Mandarin's hanzi and pinyin). */
+export type Quote = { text: string; tr?: string; raw?: unknown };
 
 /** Lightweight lesson info for lists, the ladder and the continue card (plain JSON). */
 export type LessonSummary = {
@@ -140,6 +142,8 @@ export type LessonSummary = {
   /** One line per check item, for resuming mid-check. */
   checkTexts: Quote[];
   glossary: Gloss[];
+  /** Course additions (ContentModel.summaryExtra), e.g. Mandarin's deck word ids. */
+  [extra: string]: unknown;
 };
 
 /** A rung's reading capstone. Course fields are read through the adapter. */

@@ -74,9 +74,13 @@ export function LessonStrip({ lessons, progress, currentId }: { lessons: LessonS
                     <span className="font-display text-card font-medium" lang={lang}>
                       {lang === 'en' ? l.title.en : l.title.id}
                     </span>
-                    <TargetText block size="small" className="text-muted">
-                      {l.title.target}
-                    </TargetText>
+                    {course.components?.TitleTarget ? (
+                      <course.components.TitleTarget title={l.title} place="strip" />
+                    ) : (
+                      <TargetText block size="small" className="text-muted">
+                        {l.title.target}
+                      </TargetText>
+                    )}
                   </>
                 ) : (
                   <span className="font-display text-card font-medium" lang={course.target.lang} dir={course.target.dir}>

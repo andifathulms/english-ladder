@@ -18,6 +18,8 @@ export function ReadingView({ rung, reading }: { rung: Rung; reading: Reading })
   const { t, lang } = useT();
   const course = useCourse();
   const read = course.adapter.reading;
+  const TitleTarget = course.components?.TitleTarget;
+  const CapWrap = course.capstones?.Wrap ?? NoWrap;
   const title = read.title(reading);
   const translation = read.translation(reading, lang);
   const uiTitles = course.titles === 'ui';
@@ -46,6 +48,7 @@ export function ReadingView({ rung, reading }: { rung: Rung; reading: Reading })
         </div>
       </header>
 
+      <CapWrap rung={rung}>
       <main className="page flex max-w-lesson flex-1 flex-col gap-6 py-7">
         <div className="flex flex-col gap-1">
           <p className="eyebrow">{t('read.title')}</p>
@@ -54,9 +57,13 @@ export function ReadingView({ rung, reading }: { rung: Rung; reading: Reading })
               <h1 className="text-h1" lang={lang}>
                 {lang === 'en' ? title.en : title.id}
               </h1>
-              <TargetText block as="p" size="title" face="display" className="text-muted">
-                {title.target}
-              </TargetText>
+              {TitleTarget ? (
+                <TitleTarget title={title} place="reading" />
+              ) : (
+                <TargetText block as="p" size="title" face="display" className="text-muted">
+                  {title.target}
+                </TargetText>
+              )}
             </>
           ) : (
             <>
@@ -129,6 +136,11 @@ export function ReadingView({ rung, reading }: { rung: Rung; reading: Reading })
           {t('lesson.backToRung', { rung: rung.name })}
         </Link>
       </main>
+      </CapWrap>
     </div>
   );
+}
+
+function NoWrap({ children }: { rung: Rung; children: React.ReactNode }) {
+  return <>{children}</>;
 }
