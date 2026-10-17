@@ -274,5 +274,11 @@
   animation: draw var(--m-check-d) var(--ease) both;
 }
 .notch-settle {
-  animation: notch-settle 1400ms var(--ease) both;
+  animation: notch-settle var(--m-settle-d) var(--ease) both;
+}
+/* Repeat-after (Tirukan) pause bar: fills over the learner's turn. */
+@keyframes tirukan-fill {
+  from {
+    transform: scaleX(0);
+  }
 }

@@ -80,6 +80,7 @@
   --m-object-d: 380ms;
   --m-moment-d: 900ms;
   --m-check-d: 250ms;
+  --m-settle-d: 1400ms;
   --m-shift: 12px;
 
   /* Illustration (DESIGN §10) */
