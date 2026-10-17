@@ -57,6 +57,10 @@ export const course: CourseConfig = {
   text,
 
   adapter,
+  ladder: {
+    // The rung board names the explanation language the rung's lessons default to.
+    rungMeta: (rung, t) => [t('rung.explainLang'), ': ', t(`rung.explain.${rung.explain_lang as string}`)],
+  },
   strands: { examples: [TalkStrand, SoundStrand], contrast: [WordsStrand] },
 
   visuals: registry,

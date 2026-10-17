@@ -7,6 +7,7 @@ import { lessonHref, rungHref } from '@ladder/core/lib/routes';
 import { useHydrated, useProgress, useT, type T } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
 import { AppShell } from '../ui/AppShell';
+import { useCefr } from '../ui/useCefr';
 import { IconChevron, IconReview } from '../ui/Icon';
 import { Accented, ContinueCard } from './ContinueCard';
 import { LadderRail } from './LadderRail';
@@ -27,6 +28,7 @@ export function HomeView({ rungs, lessons }: Props) {
   const hydrated = useHydrated();
   const { t, lang } = useT();
   const { name } = useCourse();
+  const cefr = useCefr();
   const target = continueTarget(rungs, lessons, progress);
   // While a learner works in an optional rung (Starter), the board and strip follow that rung.
   const here = (target.kind === 'lesson' && rungs.find((r) => r.id === target.lesson.rung)) || currentRung(rungs, progress);
@@ -47,7 +49,7 @@ export function HomeView({ rungs, lessons }: Props) {
       headerAside={
         <Link href={rungHref(here.id)} className="label flex min-h-touch items-center gap-2 rounded-full px-3 text-ink no-underline">
           <span aria-hidden className="h-[8px] w-[8px] rounded-full" style={{ background: `var(--${here.tier})` }} />
-          {here.cefr}
+          {cefr(here.cefr)}
           <span className="sr-only">· {here.name}</span>
         </Link>
       }

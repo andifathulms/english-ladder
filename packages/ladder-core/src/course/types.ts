@@ -104,6 +104,11 @@ export type TargetTextProps = Omit<React.HTMLAttributes<HTMLElement>, 'dir' | 'l
   variety?: string;
 };
 
+export type CourseFixes = {
+  /** CEFR labels in the UI language ("Pra-A1" in Indonesian for Pre-A1). */
+  cefrLabelLocalised?: boolean;
+};
+
 /** Where a target line appears; the Sentence slot picks size, play button and note from it. */
 export type SentenceUse = 'example' | 'worked' | 'pairOff' | 'pairNatural' | 'reading';
 export type SentenceSlotProps = { line: Line; use: SentenceUse };
@@ -174,6 +179,21 @@ export type CourseConfig = {
   itemTypes?: Record<string, ItemTypeLogic>;
   /** Strand cards per lesson step, in order (e.g. English Talk + Sound, then Words). */
   strands?: { examples?: StrandCard[]; contrast?: StrandCard[] };
+  /** The ladder: tier order and per-rung extras. */
+  ladder?: {
+    /** Tier sections, top to bottom (default: hard, medium, easy). */
+    tiers?: string[];
+    /** A second name for a rung (Arabic: الحروف), on the rail (compact) and on boards. */
+    rungSubtitle?: (rung: Rung, place: 'rail' | 'board') => string | null;
+    /** The small line under the rung board's description (English: the explanation language).
+     *  Parts render as separate text nodes, exactly as `{a}: {b}` in JSX would. */
+    rungMeta?: (rung: Rung, t: (key: string) => string) => string[] | null;
+  };
+  /**
+   * English Ladder bug fixes (recon §13) that sibling courses ship with. Each is off by default so
+   * English stays pixel-identical until its own fix branch turns them on with a fresh baseline.
+   */
+  fixes?: CourseFixes;
   /** Check-item rendering (see CheckSlots). */
   check?: CheckSlots;
   /** Rendering slots; each defaults to the engine's own component. */

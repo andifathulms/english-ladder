@@ -11,7 +11,8 @@ import { ProgressRing } from '../ui/ProgressRing';
 import { tierName } from '../ui/tier';
 import { useT } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
-import { useTextAttrs } from '../ui/TargetText';
+import { TargetText, useTextAttrs } from '../ui/TargetText';
+import { useCefr } from '../ui/useCefr';
 
 type Props = {
   rung: Rung;
@@ -30,6 +31,9 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Pr
   const course = useCourse();
   const Board = course.boardPattern;
   const textAttrs = useTextAttrs();
+  const cefr = useCefr();
+  const subtitle = course.ladder?.rungSubtitle?.(rung, 'board') ?? null;
+  const meta = course.ladder?.rungMeta?.(rung, t as (key: string) => string) ?? null;
   const mine = lessons.filter((l) => l.rung === rung.id).sort((a, b) => a.order - b.order);
   const tests = progress.rungs[rung.id]?.tests ?? [];
   const best = tests.length ? Math.max(...tests.map((x) => x.score)) : null;
@@ -61,9 +65,14 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Pr
           <div className="flex min-w-0 flex-col gap-3">
             <p className="label flex items-center gap-2 text-brass">
               <span aria-hidden className="h-[7px] w-[7px] rounded-full" style={{ background: `var(--${rung.tier})` }} />
-              {tierName(rung.tier)} · {rung.cefr}
+              {tierName(rung.tier)} · {cefr(rung.cefr)}
             </p>
             <h1 className="text-hero leading-none tracking-[-0.02em] text-board-ink">{rung.name}</h1>
+            {subtitle && (
+              <TargetText block as="p" size="title" face="display" className="text-board-muted">
+                {subtitle}
+              </TargetText>
+            )}
           </div>
           {rung.status === 'live' && (
             <ProgressRing
@@ -77,9 +86,7 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Pr
           )}
         </div>
         <p className="max-w-measure text-body text-board-ink">{lang === 'en' ? rung.description.en : rung.description.id}</p>
-        <p className="text-small text-board-muted">
-          {t('rung.explainLang')}: {t(`rung.explain.${rung.explain_lang as 'id' | 'mixed' | 'en'}`)}
-        </p>
+        {meta && <p className="text-small text-board-muted">{meta}</p>}
       </header>
 
       {rung.status === 'soon' ? (

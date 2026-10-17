@@ -7,6 +7,9 @@ import type { ProgressState } from '@ladder/core/lib/progress/types';
 import { rungHref } from '@ladder/core/lib/routes';
 import { useT } from '../ProgressProvider';
 import { tierName, tierRange } from '../ui/tier';
+import { useCefr } from '../ui/useCefr';
+import { TargetText } from '../ui/TargetText';
+import { useCourse } from '@ladder/core/course/context';
 import { NotchBar } from './NotchBar';
 
 type Props = { rungs: Rung[]; lessons: LessonSummary[]; progress: ProgressState; hereId: string; label: string };
@@ -18,16 +21,19 @@ const TIERS: Rung['tier'][] = ['hard', 'medium', 'easy'];
  * two wooden rails. Future rungs stay fully visible but compact; your rung is the big row.
  */
 export function LadderRail({ rungs, lessons, progress, hereId, label }: Props) {
+  const { ladder } = useCourse();
+  const cefr = useCefr();
+  const range = (tier: string) => tierRange(rungs, tier, cefr);
   return (
     <nav aria-label={label} className="flex flex-col gap-4">
-      {TIERS.map((tier) => {
+      {(ladder?.tiers ?? TIERS).map((tier) => {
         const inTier = rungs.filter((r) => r.tier === tier).reverse();
         if (!inTier.length) return null;
         return (
-          <section key={tier} aria-label={`${tierName(tier)} · ${tierRange(rungs, tier)}`} className="flex flex-col gap-1">
+          <section key={tier} aria-label={`${tierName(tier)} · ${range(tier)}`} className="flex flex-col gap-1">
             <p aria-hidden className="eyebrow flex items-center gap-2 px-2">
               <span className="h-[8px] w-[8px] rounded-full" style={{ background: `var(--${tier})` }} />
-              {tierName(tier)} · {tierRange(rungs, tier)}
+              {tierName(tier)} · {range(tier)}
             </p>
             <ol className="flex flex-col">
               {inTier.map((r) => (
@@ -43,6 +49,9 @@ export function LadderRail({ rungs, lessons, progress, hereId, label }: Props) {
 
 function LadderRow({ rung, state, here }: { rung: Rung; state: RungState; here: boolean }) {
   const { t } = useT();
+  const { ladder } = useCourse();
+  const cefr = useCefr();
+  const subtitle = ladder?.rungSubtitle?.(rung, 'rail') ?? null;
   const soon = state.kind === 'soon';
   const climbed = state.kind === 'climbed';
   const bar = climbed ? 'var(--rung)' : here ? 'var(--accent)' : 'var(--wood-dark)';
@@ -57,13 +66,18 @@ function LadderRow({ rung, state, here }: { rung: Rung; state: RungState; here: 
       >
         {/* Rails and this rung */}
         <span aria-hidden className="relative h-full self-stretch">
-          <span className="absolute -bottom-px -top-px left-[2px] w-[3px] rounded-full" style={{ background: 'var(--wood)' }} />
-          <span className="absolute -bottom-px -top-px right-[2px] w-[3px] rounded-full" style={{ background: 'var(--wood)' }} />
-          <span className="absolute left-[2px] right-[2px] top-1/2 h-[3px] -translate-y-1/2 rounded-full" style={{ background: bar }} />
+          <span className="absolute -bottom-px -top-px start-[2px] w-[3px] rounded-full" style={{ background: 'var(--wood)' }} />
+          <span className="absolute -bottom-px -top-px end-[2px] w-[3px] rounded-full" style={{ background: 'var(--wood)' }} />
+          <span className="absolute start-[2px] end-[2px] top-1/2 h-[3px] -translate-y-1/2 rounded-full" style={{ background: bar }} />
         </span>
-        <span className="flex min-w-0 items-baseline gap-2">
+        <span className={`flex min-w-0 items-baseline ${ladder?.rungSubtitle ? 'flex-wrap gap-x-2' : 'gap-2'}`}>
           <span className={`font-display text-body ${soon ? 'text-muted' : 'font-semibold'}`}>{rung.name}</span>
-          <span className="label text-muted">{rung.cefr}</span>
+          {subtitle && (
+            <TargetText face="ui" className="hidden text-[1.05rem] leading-none text-muted min-[380px]:inline">
+              {subtitle}
+            </TargetText>
+          )}
+          <span className="label text-muted">{cefr(rung.cefr)}</span>
           {rung.optional && <span className="label text-muted">· {t('rung.optional')}</span>}
           {here && <span className="sr-only">· {t('home.youAreHere')}</span>}
         </span>
