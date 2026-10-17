@@ -1,10 +1,12 @@
 import { isCoreItem, type CheckItem, type ExtraItem } from '../types';
 import { stripMarkup } from '../markup';
-import { extraType } from './itemTypes';
+import { extraType, itemTextOverride } from './itemTypes';
 
 /** A one-line text representation of an item, for the continue card and review lists. */
 export function itemText(item: CheckItem): string {
   if (!isCoreItem(item)) return extraType(item).itemText(item as ExtraItem);
+  const over = itemTextOverride(item.type);
+  if (over) return over(item as unknown as ExtraItem);
   switch (item.type) {
     case 'choice':
     case 'gap':

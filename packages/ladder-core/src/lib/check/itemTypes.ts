@@ -23,9 +23,19 @@ export type ItemTypeLogic = {
 };
 
 const registry = new Map<string, ItemTypeLogic>();
+const overrides = new Map<string, Partial<Pick<ItemTypeLogic, 'itemText'>>>();
 
 export function registerItemTypes(types: Record<string, ItemTypeLogic>) {
   for (const [k, v] of Object.entries(types)) registry.set(k, v);
+}
+
+/** Overrides the text of an engine item type (e.g. the line quoted for a listen item without prompt). */
+export function overrideItemText(type: string, itemText: (item: ExtraItem) => string) {
+  overrides.set(type, { itemText });
+}
+
+export function itemTextOverride(type: string): ((item: ExtraItem) => string) | undefined {
+  return overrides.get(type)?.itemText;
 }
 
 export function itemType(type: string): ItemTypeLogic | undefined {

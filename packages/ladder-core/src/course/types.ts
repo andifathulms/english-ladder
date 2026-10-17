@@ -234,6 +234,8 @@ export type CourseConfig = {
   adapter: ContentAdapter;
   /** Course item types' grading/text logic, registered at app start with registerItemTypes(). */
   itemTypes?: Record<string, ItemTypeLogic>;
+  /** Text of engine item types where the course words it differently (see ContentModel.itemText). */
+  itemText?: Record<string, (item: ExtraItem) => string>;
   /** Strand cards per lesson step, in order (e.g. English Talk + Sound, then Words). */
   strands?: { examples?: StrandCard[]; contrast?: StrandCard[] };
   /** The lesson player. */

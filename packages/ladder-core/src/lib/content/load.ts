@@ -12,8 +12,8 @@ import { itemText } from '../check/text';
 import { stripMarkup } from '../markup';
 import type { ContentAdapter } from './adapter';
 import type { ItemTypeLogic } from '../check/itemTypes';
-import { registerItemTypes } from '../check/itemTypes';
-import type { CheckItem, Dialogue, Lesson, LessonSummary, Line, Placement, Quote, Reading, Rung, TestPool } from '../types';
+import { overrideItemText, registerItemTypes } from '../check/itemTypes';
+import type { CheckItem, Dialogue, ExtraItem, Lesson, LessonSummary, Line, Placement, Quote, Reading, Rung, TestPool } from '../types';
 
 // Schemas take the raw YAML; their output is the parsed object.
 type Schema<T> = ZodType<T, ZodTypeDef, unknown>;
@@ -46,6 +46,8 @@ export type ContentModel = {
   adapter: ContentAdapter;
   /** Course item types' grading/text logic (see lib/check/itemTypes.ts). */
   itemTypes?: Record<string, ItemTypeLogic>;
+  /** Text of engine item types, where the course words it differently (summaries are built here). */
+  itemText?: Record<string, (item: ExtraItem) => string>;
   /** YAML data files: 'default' js-yaml schema, or 'json' (no implicit dates/booleans). */
   yaml?: 'default' | 'json';
   /**
@@ -87,6 +89,7 @@ const quoteOf = (line: Line): Quote =>
 
 export function createContent(model: ContentModel, contentDir = path.join(process.cwd(), 'content')) {
   if (model.itemTypes) registerItemTypes(model.itemTypes);
+  for (const [type, fn] of Object.entries(model.itemText ?? {})) overrideItemText(type, fn);
   const yamlOpts = model.yaml === 'json' ? { schema: yaml.JSON_SCHEMA } : undefined;
   const readYaml = (file: string): unknown => yaml.load(fs.readFileSync(path.join(contentDir, file), 'utf8'), yamlOpts);
   const exists = (file: string) => fs.existsSync(path.join(contentDir, file));

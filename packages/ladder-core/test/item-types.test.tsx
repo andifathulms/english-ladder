@@ -103,3 +103,14 @@ describe('tile items in tests', () => {
     expect(tilesNeeded(mark)).toBe(0);
   });
 });
+
+import { overrideItemText } from '@ladder/core/lib/check/itemTypes';
+
+describe('engine item text overrides', () => {
+  it('a course can word a core type its own way', () => {
+    const listen = { id: 'l', type: 'listen', audio: 'x', options: ['a', 'b'], answer: 'a', why: { id: '', en: '' } } as CheckItem;
+    expect(itemText(listen)).toBe('Listen and choose.');
+    overrideItemText('listen', () => 'Dengarkan, lalu pilih.');
+    expect(itemText(listen)).toBe('Dengarkan, lalu pilih.');
+  });
+});
