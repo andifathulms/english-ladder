@@ -7,7 +7,6 @@ import { sfx } from '@ladder/core/lib/speech/sfx';
 import { rungHref } from '@ladder/core/lib/routes';
 import { useReducedMotion, useT } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
-import { shellDir } from '@ladder/core/course/types';
 import { NotchBar } from '../ladder/NotchBar';
 import { Accented } from '../ladder/ContinueCard';
 import { TargetText } from '../ui/TargetText';
@@ -69,12 +68,10 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
             </div>
           ))}
           <span
-            className="absolute h-0 w-0 border-y-[8px] border-y-transparent"
+            className="absolute -start-[15px] h-0 w-0 border-y-[8px] border-s-[12px] border-y-transparent"
             style={{
-              // Points toward the ladder; mirrors for RTL.
-              ...(shellDir(course) === 'rtl'
-                ? { right: -15, borderRightWidth: 12, borderRightColor: 'var(--brass)' }
-                : { left: -15, borderLeftWidth: 12, borderLeftColor: 'var(--brass)' }),
+              // Points toward the ladder from the inline start; mirrors with the shell (document) direction.
+              borderInlineStartColor: 'var(--brass)',
               top: 8 + (ROW - 16) / 2 - 8 + (climbed ? 0 : ROW),
               transition: reduced ? 'none' : 'top var(--m-moment-d) var(--ease-moment)',
             }}
