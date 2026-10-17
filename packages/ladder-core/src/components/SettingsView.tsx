@@ -7,7 +7,7 @@ import { useSettings, useT } from './ProgressProvider';
 import { PageShell } from './ui/PageShell';
 import { Segmented } from './ui/Segmented';
 import { Toggle } from './ui/Toggle';
-import { useCanSpeak, useSpeak } from './useSpeech';
+import { useCanSpeak, usePlay, useSpeak } from './useSpeech';
 import { IconPlay } from './ui/Icon';
 import { chosenVoiceName } from '@ladder/core/lib/speech/speak';
 import { useCourse } from '@ladder/core/course/context';
@@ -33,7 +33,9 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 export function SettingsView() {
   const { t } = useT();
   const s = useSettings();
-  const { speech, exportFilePrefix, settings: courseSettings } = useCourse();
+  const course = useCourse();
+  const { speech, exportFilePrefix, settings: courseSettings } = course;
+  const playSample = usePlay();
   const targetSize = courseSettings.targetSize;
   const set = (patch: Partial<Settings>) => store.setSettings(patch);
   const canSpeak = useCanSpeak();
@@ -84,33 +86,37 @@ export function SettingsView() {
             ]}
           />
         </Row>
-        <Row label={t('settings.explain')}>
-          <Segmented
-            label={t('settings.explain')}
-            value={s.explain}
-            onChange={(v) => set({ explain: v })}
-            options={[
-              { value: 'rung', label: t('settings.explain.rung') },
-              { value: 'id', label: t('settings.explain.id') },
-              { value: 'en', label: t('settings.explain.en') },
-            ]}
-          />
-        </Row>
+        {'explain' in s && (
+          <Row label={t('settings.explain')}>
+            <Segmented
+              label={t('settings.explain')}
+              value={s.explain}
+              onChange={(v) => set({ explain: v })}
+              options={[
+                { value: 'rung', label: t('settings.explain.rung') },
+                { value: 'id', label: t('settings.explain.id') },
+                { value: 'en', label: t('settings.explain.en') },
+              ]}
+            />
+          </Row>
+        )}
       </Group>
 
       <Group title={t('settings.group.sound')}>
         {!canSpeak && <p className="text-small text-muted">{t('settings.speechOff')}</p>}
-        <Row label={t('settings.accent')}>
-          <Segmented
-            label={t('settings.accent')}
-            value={s.accent}
-            onChange={(v) => set({ accent: v })}
-            options={[
-              { value: 'gb', label: t('settings.accent.gb') },
-              { value: 'us', label: t('settings.accent.us') },
-            ]}
-          />
-        </Row>
+        {'accent' in s && (
+          <Row label={t('settings.accent')}>
+            <Segmented
+              label={t('settings.accent')}
+              value={s.accent}
+              onChange={(v) => set({ accent: v })}
+              options={[
+                { value: 'gb', label: t('settings.accent.gb') },
+                { value: 'us', label: t('settings.accent.us') },
+              ]}
+            />
+          </Row>
+        )}
         <Row label={t('settings.voice')}>
           <Segmented
             label={t('settings.voice')}
@@ -122,13 +128,23 @@ export function SettingsView() {
             ]}
           />
         </Row>
-        {canSpeak && (
+        {course.audio ? (
           <div className="flex flex-col gap-1">
-            <button type="button" className="btn btn-ghost self-start" onClick={() => speakSample(t('settings.voiceSampleText'))}>
+            {/* Plays the recorded sample when there is one, else the browser voice. */}
+            <button type="button" className="btn btn-ghost self-start" onClick={() => void playSample(speech.sampleText)}>
               <IconPlay size={18} /> {t('settings.voiceSample')}
             </button>
-            {voiceName && <p className="text-small text-muted">{t('settings.voiceUsing', { name: voiceName })}</p>}
+            {canSpeak && voiceName && <p className="text-small text-muted">{t('settings.voiceUsing', { name: voiceName })}</p>}
           </div>
+        ) : (
+          canSpeak && (
+            <div className="flex flex-col gap-1">
+              <button type="button" className="btn btn-ghost self-start" onClick={() => speakSample(t('settings.voiceSampleText'))}>
+                <IconPlay size={18} /> {t('settings.voiceSample')}
+              </button>
+              {voiceName && <p className="text-small text-muted">{t('settings.voiceUsing', { name: voiceName })}</p>}
+            </div>
+          )
         )}
         <Row label={t('settings.speed')}>
           <Segmented
