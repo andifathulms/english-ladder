@@ -4,12 +4,52 @@ Each app builds to `apps/<app>/out` with `output: 'export'` (fully static). Ever
 link and asset already works with and without a base path, so a course can live at a domain
 root or under a sub-path.
 
-Today only **English Ladder** ships. The workflow (`.github/workflows/deploy.yml`) builds
-`apps/english` with `NEXT_PUBLIC_BASE_PATH=/<repo-name>` and uploads `apps/english/out` to
-GitHub Pages — identical to before the monorepo split. A commented matrix stub shows where the
-other apps slot in.
+Two courses ship from this repo (`.github/workflows/deploy.yml`):
 
-When a second course is ready, pick one of these.
+| Course | Built with | Published to | Job |
+|---|---|---|---|
+| English Ladder | `NEXT_PUBLIC_BASE_PATH=/<this repo>` | this repo's Pages (Actions artifact) | `build` → `deploy` |
+| Arabic Ladder | `NEXT_PUBLIC_BASE_PATH=/arabic-ladder` | `gh-pages` branch of `andifathulms/arabic-ladder` | `deploy-arabic` (option B) |
+
+Arabic keeps its live URL, <https://andifathulms.github.io/arabic-ladder/>, so learners' bookmarks
+and their saved progress (`localStorage` is per origin + path) carry over. The `arabic-ladder`
+repo is now only the deploy target; development happens here.
+
+CI (`build`, `e2e`) checks both apps on every push and pull request: lint, unit tests (English's
+run includes the engine's), `content:check`, and the Playwright suites. `deploy-arabic` runs on
+`main` after both pass.
+
+## One-time setup for Arabic Ladder (option B)
+
+1. **Make a deploy key** (an SSH key pair used only for this):
+   ```bash
+   ssh-keygen -t ed25519 -C "ladder monorepo → arabic-ladder gh-pages" -f arabic_pages_key -N ""
+   ```
+2. **Give the public key write access to the target repo**: `andifathulms/arabic-ladder` →
+   Settings → Deploy keys → *Add deploy key*. Title `ladder monorepo`, paste
+   `arabic_pages_key.pub`, tick **Allow write access**.
+3. **Store the private key here as a secret**: this repo → Settings → Secrets and variables →
+   Actions → *New repository secret*. Name `ARABIC_PAGES_DEPLOY_KEY`, value: the whole of
+   `arabic_pages_key` (including the BEGIN/END lines). Then delete both key files locally.
+4. **First publish**: run the workflow on `main` (push, or *Run workflow*). `deploy-arabic`
+   creates the `gh-pages` branch in `arabic-ladder` with the built site.
+5. **Switch Pages to the branch**: `arabic-ladder` → Settings → Pages → Source *Deploy from a
+   branch*, branch `gh-pages`, folder `/ (root)`. The URL stays the same. Do this after step 4,
+   so the site is never empty.
+6. **Stop the old workflow**: `arabic-ladder`'s own `deploy.yml` now runs only by hand
+   (`workflow_dispatch`), so a stray push there can't overwrite the monorepo's deploy. That
+   change is on the `docs/moved-to-monorepo` branch of `arabic-ladder`; merge it.
+
+To check a deploy: open the URL, then DevTools → Application → Service workers should show
+`arabic-ladder-v0.1.0`, and Local storage should still hold `arabic-ladder:v1`.
+
+A fine-grained personal access token (contents: read/write on `arabic-ladder` only) works too:
+store it as `ARABIC_PAGES_TOKEN` and replace `deploy_key:` with `personal_token:` in the job.
+The deploy key is preferred: it is scoped to one repo and isn't tied to a person.
+
+## Adding another course
+
+Pick one of these.
 
 ## Option A — one Pages site, each app under its own sub-path (recommended)
 
@@ -18,7 +58,7 @@ Build every app with its own base path and lay the outputs side by side into one
 ```
 public-root/
   english/   -> apps/english/out   built with NEXT_PUBLIC_BASE_PATH=/<repo>/english
-  arabic/    -> apps/arabic/out    built with NEXT_PUBLIC_BASE_PATH=/<repo>/arabic
+  japanese/  -> apps/japanese/out  built with NEXT_PUBLIC_BASE_PATH=/<repo>/japanese
   ...
 ```
 
@@ -31,7 +71,7 @@ strategy:
   matrix:
     include:
       - { app: english,  path: /ENGREPO/english }
-      - { app: arabic,   path: /ENGREPO/arabic }
+      - { app: japanese, path: /ENGREPO/japanese }
 # build step: NEXT_PUBLIC_BASE_PATH=${{ matrix.path }} npm run build -w ${{ matrix.app }}-ladder
 # then rsync each apps/<app>/out into public-root/<app> and upload public-root once.
 ```
@@ -49,6 +89,9 @@ control. It costs an extra repo and a token per course and splits operational su
 
 ## Recommendation
 
-Start with **Option A**. It needs no cross-repo tokens, keeps one source of truth, and a new
+For a brand-new course with no existing URL, start with **Option A**. Arabic Ladder uses option B
+only because it already had its own live URL and learners with saved progress.
+
+Option A: It needs no cross-repo tokens, keeps one source of truth, and a new
 course is a few matrix lines plus a base path. Move a course to Option B only if it genuinely
 needs its own domain or release schedule.

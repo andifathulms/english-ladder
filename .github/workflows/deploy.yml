@@ -18,20 +18,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # To add a course later, turn this into a matrix and give each app its own base path.
-    # The output of each app lives in apps/<app>/out. See docs/DEPLOY.md for the two hosting
-    # options (one Pages site with sub-paths, or one repo's Pages per app).
-    #
-    # strategy:
-    #   matrix:
-    #     include:
-    #       - app: english   # base path defaults to the repo name below
-    #       - app: arabic
-    #         basePath: /arabic-ladder
-    #       - app: mandarin
-    #         basePath: /mandarin-ladder
-    #       - app: japanese
-    #         basePath: /japanese-ladder
+    # English Ladder deploys to this repo's Pages (below). Arabic Ladder deploys to its own repo's
+    # Pages (deploy-arabic). See docs/DEPLOY.md.
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -39,6 +27,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Root scripts run every app: English (with the engine's tests) and Arabic.
       - run: npm run lint
       - run: npm run test
       - run: npm run content:check
@@ -63,7 +52,7 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - name: Build without base path for e2e
-        run: npm run build
+        run: npm run build && npm run build:arabic
         env:
           NEXT_PUBLIC_SHOW_DRAFTS: 'true'
       - run: npm run test:e2e
@@ -80,3 +69,38 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Arabic Ladder stays at https://andifathulms.github.io/arabic-ladder/: build apps/arabic with
+  # that base path and push apps/arabic/out to the gh-pages branch of andifathulms/arabic-ladder.
+  # Needs the ARABIC_PAGES_DEPLOY_KEY secret (docs/DEPLOY.md).
+  deploy-arabic:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: [build, e2e]
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages-arabic
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build static site (apps/arabic)
+        run: npm run build:arabic
+        env:
+          NEXT_PUBLIC_BASE_PATH: /arabic-ladder
+          NEXT_PUBLIC_SHOW_DRAFTS: 'true'
+      - run: touch apps/arabic/out/.nojekyll
+      - name: Push to arabic-ladder gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.ARABIC_PAGES_DEPLOY_KEY }}
+          external_repository: andifathulms/arabic-ladder
+          publish_branch: gh-pages
+          publish_dir: apps/arabic/out
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'deploy: Arabic Ladder from ${{ github.repository }}@${{ github.sha }}'

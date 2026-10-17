@@ -9,13 +9,17 @@
   ],
   "scripts": {
     "dev": "npm run dev -w english-ladder",
+    "dev:arabic": "npm run dev -w arabic-ladder",
     "build": "npm run build -w english-ladder",
+    "build:arabic": "npm run build -w arabic-ladder",
     "preview": "npm run preview -w english-ladder",
-    "content:check": "npm run content:check -w english-ladder",
-    "test": "npm run test -w english-ladder",
+    "preview:arabic": "npm run preview -w arabic-ladder",
+    "content:check": "npm run content:check -w english-ladder && npm run content:check -w arabic-ladder",
+    "test": "npm run test -w english-ladder && npm run test -w arabic-ladder",
     "test:watch": "npm run test:watch -w english-ladder",
-    "test:e2e": "npm run test:e2e -w english-ladder",
-    "lint": "npm run lint -w english-ladder",
+    "test:e2e": "npm run test:e2e -w english-ladder && npm run test:e2e -w arabic-ladder",
+    "test:parity": "node tests/parity/verify.mjs english && node tests/parity/verify.mjs arabic",
+    "lint": "npm run lint -w english-ladder && npm run lint -w arabic-ladder",
     "format": "prettier --write ."
   },
   "devDependencies": {
