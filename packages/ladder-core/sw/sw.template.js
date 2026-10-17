@@ -33,6 +33,21 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(req.url);
   if (url.origin !== self.location.origin || !req.url.startsWith(SCOPE)) return;
 
+  // Recorded audio is cache-first, stored on first play. File names carry a content hash.
+  if (url.pathname.includes('/audio/') && url.pathname.endsWith('.mp3')) {
+    event.respondWith(
+      caches.match(req).then(
+        (hit) =>
+          hit ||
+          fetch(req).then((res) => {
+            if (res.ok) caches.open(CACHE).then((c) => c.put(req, res.clone()));
+            return res;
+          }),
+      ),
+    );
+    return;
+  }
+
   // Hashed build assets and fonts never change: cache first.
   if (url.pathname.includes('/_next/static/')) {
     event.respondWith(

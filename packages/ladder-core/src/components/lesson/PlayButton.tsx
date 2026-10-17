@@ -2,21 +2,21 @@
 
 import { IconPlay } from '../ui/Icon';
 import { useT } from '../ProgressProvider';
-import { useCanSpeak } from '../useSpeech';
+import { useCanPlay } from '../useSpeech';
 
-type Props = { text: string; onPlay: () => void; playing?: boolean; small?: boolean };
+type Props = { text: string; variety?: string; onPlay: () => void; playing?: boolean; small?: boolean; label?: string };
 
-/** 40px icon-only play button. Renders nothing when the browser can't speak English. */
-export function PlayButton({ text, onPlay, playing, small }: Props) {
+/** Icon-only play button. Renders nothing when there is no recording and no target voice. */
+export function PlayButton({ text, variety, onPlay, playing, small, label }: Props) {
   const { t } = useT();
-  const ok = useCanSpeak();
+  const ok = useCanPlay(text, variety);
   if (!ok) return null;
   return (
     <button
       type="button"
       onClick={onPlay}
       data-play
-      aria-label={t('audio.playText', { text })}
+      aria-label={label ?? t('audio.playText', { text })}
       aria-pressed={playing || undefined}
       className={`inline-flex shrink-0 items-center justify-center rounded-full text-accent transition-colors duration-quick hover:bg-accent-soft ${
         small ? 'h-[40px] w-[40px]' : 'h-[44px] w-[44px]'

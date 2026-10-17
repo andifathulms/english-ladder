@@ -9,8 +9,9 @@ import type { StringTables, UiLang } from '@ladder/core/lib/i18n';
 /** Per-word annotation shown in My words (English: the a/an badge and irregular-plural suffix). */
 export type WordAnnotation = { badge?: string; pluralSuffix?: string };
 
-/** Scores a browser voice for a course's target language; higher is better, -Infinity to exclude. */
-export type VoiceScorer = (voice: SpeechSynthesisVoice, settings: Settings) => number;
+/** Scores a browser voice for a course's target language; higher is better, -Infinity to exclude.
+ *  `variety` is the spoken variety a line asks for (e.g. Arabic 'eg'), when the course has them. */
+export type VoiceScorer = (voice: SpeechSynthesisVoice, settings: Settings, variety?: string) => number;
 
 /** One token with its character offsets in the plain (markup-stripped) string. */
 export type Token = { text: string; start: number; end: number };
@@ -39,6 +40,8 @@ export type SpeechRules = {
   canSpeak: (voices: SpeechSynthesisVoice[]) => boolean;
   /** Spoken by the "try voice" button in Settings. */
   sampleText: string;
+  /** Multiplies the learner's rate for browser speech (default 0.95). */
+  rateScale?: number;
 };
 
 /** Option lists that course-specific Settings controls render. */
@@ -127,6 +130,8 @@ export type CourseConfig = {
     features?: ProgressFeatures;
   };
   speech: SpeechRules;
+  /** Recorded audio (public/audio/manifest.json) before browser speech. Absent: speech only. */
+  audio?: { defaultVariety: string };
   text: TextRules;
   /** How the engine reads this course's lessons and readings (lib/content/adapter.ts). */
   adapter: ContentAdapter;

@@ -2,7 +2,14 @@
 // sentence-splitting regex. Resolves silently when speech is unavailable.
 
 export type VoiceScore = (voice: SpeechSynthesisVoice) => number;
-type Opts = { score: VoiceScore; sentenceSplit: RegExp; rate?: number; onBoundary?: (charIndex: number) => void };
+export type SpeakOpts = {
+  score: VoiceScore;
+  sentenceSplit: RegExp;
+  rate?: number;
+  /** Multiplies the rate (engines speak learner text a little slowly). Default 0.95. */
+  rateScale?: number;
+  onBoundary?: (charIndex: number) => void;
+};
 
 let voices: SpeechSynthesisVoice[] = [];
 let listening = false;
@@ -83,7 +90,7 @@ export function stopSpeaking() {
   current = null;
 }
 
-export function speak(text: string, opts: Opts): Promise<void> {
+export function speak(text: string, opts: SpeakOpts): Promise<void> {
   const s = synth();
   if (!s) return Promise.resolve();
   refreshVoices();
@@ -98,7 +105,7 @@ export function speak(text: string, opts: Opts): Promise<void> {
       const u = new SpeechSynthesisUtterance(part.text);
       u.voice = voice;
       u.lang = voice.lang;
-      u.rate = (opts.rate ?? 1) * 0.95;
+      u.rate = (opts.rate ?? 1) * (opts.rateScale ?? 0.95);
       u.pitch = 1;
       u.volume = 1;
       if (opts.onBoundary) {
