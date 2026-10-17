@@ -42,7 +42,7 @@ const course: CourseConfig = {
             {value}
           </button>
         ),
-        optionsLabel: 'marks',
+        optionsLabelKey: 'marks',
       },
       spell: { Prompt: () => <p data-testid="spell-prompt">spell it</p> },
     },

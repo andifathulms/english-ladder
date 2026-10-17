@@ -87,8 +87,8 @@ export type CheckSlots = {
     {
       Prompt: ComponentType<{ item: ExtraItem; solved: boolean }>;
       Option?: ComponentType<{ value: string; index: number; state: import('@ladder/core/components/check/OptionPill').PillState; disabled?: boolean; onClick: () => void }>;
-      /** aria-label for the option group, when Option is set. */
-      optionsLabel?: string;
+      /** UI string key for the option group's aria-label, when Option is set. */
+      optionsLabelKey?: string;
     }
   >;
 };

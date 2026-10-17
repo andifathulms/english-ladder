@@ -254,7 +254,7 @@ export function CheckItemView(props: Practice | Test) {
           )}
         </div>
       ) : ExtraOption ? (
-        <div className="flex flex-wrap gap-2" role="group" aria-label={view.optionsLabel}>
+        <div className="flex flex-wrap gap-2" role="group" aria-label={view.optionsLabelKey ? t(view.optionsLabelKey as never) : undefined}>
           {options.map((opt, i) => (
             <ExtraOption
               key={opt}

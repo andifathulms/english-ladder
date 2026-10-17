@@ -2,7 +2,7 @@
 
 import { useLayoutEffect, useRef } from 'react';
 import { useReducedMotion, useT } from '../ProgressProvider';
-import { useCourse } from '@ladder/core/course/context';
+import { useTextAttrs } from '../ui/TargetText';
 
 type Props = {
   tiles: string[];
@@ -16,7 +16,7 @@ type Props = {
 /** Word tiles that fly between the tray and the answer line (FLIP, --m-object). */
 export function TileTray({ tiles, placed, onChange, locked, tone = 'idle' }: Props) {
   const { t } = useT();
-  const { target } = useCourse();
+  const target = useTextAttrs();
   const reduced = useReducedMotion();
   const els = useRef(new Map<number, HTMLButtonElement>());
   const before = useRef(new Map<number, DOMRect>());
