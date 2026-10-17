@@ -136,6 +136,8 @@ export type LessonSession = {
 };
 
 export type CourseFixes = {
+  /** The browser's theme-color follows the in-app theme, not the OS (EL issue 14). Needs themeColor. */
+  themeColorFollowsTheme?: boolean;
   /** The climb moment's title is in the UI language, not marked as the target language (EL issue 13). */
   climbTitleTranslated?: boolean;
   /** A close control while a quick review runs; answers already given stay recorded (EL issue 3). */
@@ -248,6 +250,8 @@ export type CourseConfig = {
   /** The climb moment: the rung's subtitle above the title, the line with its last word accented,
    *  and an extra line below (Arabic: سُلَّمًا سُلَّمًا). Absent: English's layout. */
   climb?: { Extra?: ComponentType };
+  /** --paper of each theme, for the browser chrome's theme-color (fixes.themeColorFollowsTheme). */
+  themeColor?: { light: string; dark: string };
   /** Home: the first-visit board. */
   home?: {
     /** 'start' (default): one button to the first lesson. 'twoDoor': start from the first rung, or

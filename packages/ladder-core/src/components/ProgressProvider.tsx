@@ -10,7 +10,7 @@ import { setSfxEnabled } from '@ladder/core/lib/speech/sfx';
 
 const Ctx = createContext<ProgressState | null>(null);
 
-function applySettings(s: Settings) {
+function applySettings(s: Settings, themeColor: { light: string; dark: string } | null) {
   const d = document.documentElement;
   if (s.theme === 'system') d.removeAttribute('data-theme');
   else d.setAttribute('data-theme', s.theme);
@@ -19,11 +19,19 @@ function applySettings(s: Settings) {
   if (s.motion === 'reduce') d.setAttribute('data-motion', 'reduce');
   else d.removeAttribute('data-motion');
   d.setAttribute('lang', s.uiLang);
+  if (themeColor) {
+    // theme-color follows the in-app theme, not the OS (fixes.themeColorFollowsTheme).
+    const dark =
+      s.theme === 'dark' || (s.theme === 'system' && typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? themeColor.dark : themeColor.light);
+  }
 }
 
 export function ProgressProvider({ children }: { children: React.ReactNode }) {
   const state = useSyncExternalStore(store.subscribe, store.getState, store.getServerState);
-  useEffect(() => applySettings(state.settings), [state.settings]);
+  const course = useCourse();
+  const themeColor = (course.fixes?.themeColorFollowsTheme && course.themeColor) || null;
+  useEffect(() => applySettings(state.settings, themeColor), [state.settings, themeColor]);
   useEffect(() => setSfxEnabled(state.settings.sfx), [state.settings.sfx]);
   useEffect(() => registerServiceWorker(), []);
   return <Ctx.Provider value={state}>{children}</Ctx.Provider>;
