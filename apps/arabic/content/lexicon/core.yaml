@@ -1,0 +1,48 @@
+# Core lexicon (CLAUDE.md §5.4, §8.4): words a rung may use without a glossary entry.
+# Every Arabic word in a lesson (after clitics و ف ب ل ك ال and possessive endings are stripped)
+# must be here for its rung or earlier, or in a glossary so far. Fully vowelled.
+# pos: noun | adj | verb | particle | pron | chunk | num | name. No verbs before Easy 2.
+
+# ---- Easy 1: pronouns
+- { ar: "أَنَا", pos: pron, rung: easy-1 }
+- { ar: "أَنْتَ", pos: pron, rung: easy-1 }
+- { ar: "أَنْتِ", pos: pron, rung: easy-1 }
+- { ar: "هُوَ", pos: pron, rung: easy-1 }
+- { ar: "هِيَ", pos: pron, rung: easy-1 }
+- { ar: "هٰذَا", pos: pron, rung: easy-1 }
+- { ar: "هٰذِهِ", pos: pron, rung: easy-1 }
+- { ar: "ذٰلِكَ", pos: pron, rung: easy-1 }
+- { ar: "تِلْكَ", pos: pron, rung: easy-1 }
+
+# ---- Easy 1: particles and question words
+- { ar: "وَ", pos: particle, rung: easy-1 }
+- { ar: "يَا", pos: particle, rung: easy-1 }
+- { ar: "مَا", pos: particle, rung: easy-1 }
+- { ar: "مَنْ", pos: particle, rung: easy-1 }
+- { ar: "أَيْنَ", pos: particle, rung: easy-1 }
+- { ar: "هَلْ", pos: particle, rung: easy-1 }
+- { ar: "نَعَمْ", pos: particle, rung: easy-1 }
+- { ar: "لَا", pos: particle, rung: easy-1 }
+- { ar: "مِنْ", pos: particle, rung: easy-1 }
+- { ar: "فِي", pos: particle, rung: easy-1 }
+- { ar: "عَلَى", pos: particle, rung: easy-1 }
+- { ar: "جِدًّا", pos: particle, rung: easy-1 }
+- { ar: "أَيْضًا", pos: particle, rung: easy-1 }
+- { ar: "كَيْفَ", pos: particle, rung: easy-1 }
+
+# ---- Easy 1: names used in examples (CLAUDE.md §8.9)
+- { ar: "أَحْمَدُ", pos: name, rung: easy-1 }
+- { ar: "فَاطِمَةُ", pos: name, rung: easy-1 }
+- { ar: "عُمَرُ", pos: name, rung: easy-1 }
+- { ar: "مُنَى", pos: name, rung: easy-1 }
+- { ar: "كَرِيمٌ", pos: name, rung: easy-1 }
+- { ar: "هُدَى", pos: name, rung: easy-1 }
+- { ar: "رِينَا", pos: name, rung: easy-1 }
+- { ar: "بُودِي", pos: name, rung: easy-1 }
+- { ar: "أَنْدِي", pos: name, rung: easy-1 }
+- { ar: "سِيتِي", pos: name, rung: easy-1 }
+- { ar: "دِيوِي", pos: name, rung: easy-1 }
+- { ar: "إِنْدُونِيسِيَا", pos: name, rung: easy-1 }
+- { ar: "مِصْرُ", pos: name, rung: easy-1 }
+- { ar: "القَاهِرَةُ", pos: name, rung: easy-1 }
+- { ar: "جَاكَرْتَا", pos: name, rung: easy-1 }

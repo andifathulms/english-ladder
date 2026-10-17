@@ -1,0 +1,192 @@
+# Single source of truth for the ladder, bottom (Huruf 1) to top (Hard 3). PRD §4.2–§4.3.
+# The sequence follows Iqra'/Qiraati for script, Durus al-Lughah and Al-'Arabiyyah li an-Nasyi'in for
+# early grammar, and Al-Kitaab for Fusha + dialect side by side. Don't reorder without the owner.
+rungs:
+  - id: huruf-1
+    name: Huruf 1
+    name_ar: "الحُرُوفُ"
+    tier: huruf
+    cefr: Pre-A1
+    status: live
+    optional: true
+    lessons: 12
+    harakat: full
+    translit: always
+    words_target: 40
+    description:
+      id: "Huruf dan vokal pendek. Tiap huruf langsung dibaca dengan fathah, kasrah dan dhammah, seperti Iqra'."
+      en: "Letters and short vowels. Every letter is read with fathah, kasrah and dhammah from the start, as in Iqra'."
+    topics: [kanan ke kiri dan tiga vokal pendek, ب ت ث, ن ي, ج ح خ, huruf yang tidak menyambung, س ش ص ض, ط ظ ع غ, ف ق, ك ل dan لا, م ه, hamzah ة ى, empat bentuk huruf]
+    threads: [script, sounds]
+    inventory: [script-direction-vowels, letters-ba-family, letters-nun-ya, letters-jim-family, non-joiners, letters-sin-family, letters-tha-family, letters-fa-qaf, letters-kaf-lam, letters-mim-ha, hamza-ta-marbuta, joining-forms]
+
+  - id: huruf-2
+    name: Huruf 2
+    name_ar: "المَدُّ وَالسُّكُونُ"
+    tier: huruf
+    cefr: Pre-A1
+    status: live
+    optional: true
+    lessons: 10
+    harakat: full
+    translit: always
+    words_target: 40
+    description:
+      id: "Mad, sukun, syaddah dan tanwin, lalu bunyi-bunyi yang sering tertukar oleh penutur bahasa Indonesia."
+      en: "Long vowels, sukun, shaddah and tanwin, then the sounds Indonesian speakers tend to merge."
+    topics: [mad (vokal panjang), sukun, syaddah, tanwin, al- syamsiyah dan qamariyah, hamzah washal, ع/ء ح/ه خ/ك, ق/ك ث/س/ص ذ/ز/ظ ض/د, imla' (dikte), membaca tanpa transliterasi]
+    threads: [script, sounds, definiteness]
+    inventory: [mad, sukun, syaddah, tanwin, al-sun-moon, hamzat-wasl, sounds-throat, sounds-merged, imla, reading-passage]
+
+  - id: easy-1
+    name: Easy 1
+    name_ar: "جُمَلٌ بِلَا أَفْعَالٍ"
+    tier: easy
+    cefr: A1−
+    status: live
+    lessons: 12
+    harakat: full
+    translit: always
+    words_target: 150
+    description:
+      id: "Kalimat tanpa kata kerja: menyapa, memperkenalkan diri, menunjuk benda, bertanya, dan bilang di mana sesuatu berada. Dalam Fusha dan bahasa Mesir."
+      en: "Sentences without verbs: greeting, introducing yourself, pointing at things, asking, and saying where things are. In Fusha and Egyptian."
+    topics: [salam, أنا أنتَ أنتِ, هو هي dan jenis kata, هٰذا ذٰلك, al- dan tanwin, kata sifat, nisba, pertanyaan, angka 1–10, idhafah, kata ganti milik, kata depan tempat]
+    threads: [greetings, pronouns, gender, demonstratives, definiteness, endings, questions, numbers, possession, prepositions, egyptian]
+    inventory: [greetings, pron-i-you, pron-he-she-gender, demonstratives, definite-al, adjective-agreement, nisba, questions-yes-no, numbers-1-10, idafah, possessive-suffixes, prep-place]
+
+  - id: easy-2
+    name: Easy 2
+    name_ar: "الأَفْعَالُ الأُولَى"
+    tier: easy
+    cefr: A1
+    status: soon
+    lessons: 12
+    harakat: full
+    translit: on-request
+    words_target: 200
+    description:
+      id: "Kata kerja pertama: bentuk lampau dulu, lalu akar kata dan bentuk sekarang."
+      en: "First verbs: the past tense first, then the root and the present tense."
+    topics: [past tense (كَتَبَ), the root idea (k-t-b), past tense for all persons, present tense (يَكْتُبُ), negation with ما and لا, plural pronouns, يوجد / هناك, عندي, sound plurals]
+    threads: [verbs, roots, negation, pronouns, plurals, egyptian]
+    inventory: [past-tense, roots, past-all-persons, present-tense, negation-ma-la, plural-pronouns, there-is, indi, sound-plurals]
+
+  - id: easy-3
+    name: Easy 3
+    name_ar: "أَيَّامِي"
+    tier: easy
+    cefr: A2−
+    status: soon
+    lessons: 12
+    harakat: full
+    translit: 'off'
+    words_target: 200
+    description:
+      id: "Hari-hariku: rutinitas, waktu, angka sampai 100, keinginan dan kemampuan, masa depan."
+      en: "My days: routine, time, numbers to 100, wanting and being able, the future."
+    topics: [daily routine, days and time, numbers 11–100, ليس, أريد / أستطيع + أن, future (سـ، سوف), imperative, كان, first broken plurals, verbs with prepositions, -u and -a endings named]
+    threads: [verbs, numbers, negation, plurals, endings, egyptian]
+    inventory: [routine, time, numbers-11-100, laysa, want-can, future, imperative, kana, broken-plurals-1, verb-prepositions, endings-u-a]
+
+  - id: medium-1
+    name: Medium 1
+    name_ar: "الأَوْزَانُ"
+    tier: medium
+    cefr: A2
+    status: soon
+    lessons: 12
+    harakat: full
+    translit: 'off'
+    words_target: 250
+    description:
+      id: "Pola kata: akar dan wazan, jamak taksir, mutsanna, perbandingan, bentuk kata kerja II–IV."
+      en: "Word patterns: root and pattern, broken plurals, the dual, comparison, verb forms II–IV."
+    topics: [root and pattern, broken plural patterns, the dual, comparative and superlative, verb forms II–IV, object pronouns, relative clauses]
+    threads: [roots, plurals, verbs, pronouns]
+    inventory: [patterns, broken-plurals, dual, elative, forms-2-4, object-pronouns, relative-clauses]
+
+  - id: medium-2
+    name: Medium 2
+    name_ar: "أَوْزَانُ الأَفْعَالِ"
+    tier: medium
+    cefr: B1−
+    status: soon
+    lessons: 12
+    harakat: partial
+    translit: 'off'
+    words_target: 250
+    description:
+      id: "Bentuk kata kerja V–X, kata kerja lemah, subjunctive dan jussive, masdar."
+      en: "Verb forms V–X, weak verbs, subjunctive and jussive, the verbal noun."
+    topics: [verb forms V–X, weak verbs, أن لن لم, masdar, numbers with nouns]
+    threads: [verbs, roots, negation, numbers]
+    inventory: [forms-5-10, weak-verbs, moods, masdar, number-noun]
+
+  - id: medium-3
+    name: Medium 3
+    name_ar: "الجُمَلُ المُتَّصِلَةُ"
+    tier: medium
+    cefr: B1
+    status: soon
+    lessons: 12
+    harakat: partial
+    translit: 'off'
+    words_target: 250
+    description:
+      id: "Kalimat bersambung: sistem kasus, kana dan inna beserta saudaranya, pasif, partisip."
+      en: "Connected sentences: the case system, kana and inna with their sisters, passive, participles."
+    topics: [the case system, kana and sisters, inna and sisters, passive, participles, reported speech, hal clauses]
+    threads: [cases, verbs, register]
+    inventory: [cases, kana-sisters, inna-sisters, passive, participles, reported-speech, hal]
+
+  - id: hard-1
+    name: Hard 1
+    name_ar: "الإِعْرَابُ"
+    tier: hard
+    cefr: B1+
+    status: soon
+    lessons: 10
+    harakat: partial
+    translit: 'off'
+    words_target: 300
+    description:
+      id: "I'rab lengkap: kasus dan modus, diptot, istitsna', membaca teks tanpa harakat lewat tata bahasa."
+      en: "Full i'rab: cases and moods, diptotes, exception, reading unvowelled text through grammar."
+    topics: [full case and mood system, diptotes, exception with إلا, reading unvowelled text]
+    threads: [cases, register]
+    inventory: [irab-full, diptotes, istithna, unvowelled-reading]
+
+  - id: hard-2
+    name: Hard 2
+    name_ar: "لُغَةُ الإِعْلَامِ وَالعَمَلِ"
+    tier: hard
+    cefr: B2
+    status: soon
+    lessons: 10
+    harakat: none
+    translit: 'off'
+    words_target: 300
+    description:
+      id: "Bahasa media dan kerja: berita, lowongan, CV, email resmi, dan register."
+      en: "Media and work Arabic: news, job ads, CVs, formal emails, and register."
+    topics: [news Arabic, job ads and CVs, formal emails, register (Fusha, Egyptian, Gulf for recognition)]
+    threads: [register, egyptian]
+    inventory: [news, work-writing, register]
+
+  - id: hard-3
+    name: Hard 3
+    name_ar: "نُصُوصٌ أَصْلِيَّةٌ"
+    tier: hard
+    cefr: B2+
+    status: soon
+    lessons: 10
+    harakat: none
+    translit: 'off'
+    words_target: 300
+    description:
+      id: "Teks asli: idiom dan peribahasa, jembatan ke bahasa Arab Al-Qur'an dan klasik, balaghah."
+      en: "Authentic texts: idioms and proverbs, a bridge to Qur'anic and classical Arabic, rhetoric."
+    topics: [idioms and proverbs, Qur'anic and classical Arabic for recognition, rhetoric, long authentic texts]
+    threads: [register]
+    inventory: [idioms, classical-bridge, rhetoric, long-texts]

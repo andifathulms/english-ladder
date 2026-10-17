@@ -1,0 +1,315 @@
+# Easy 1 rung test pool (PRD §5.5): draw 16 of 36, pass 12. Three items per lesson.
+# Draft by Claude; the reviewer checks every item, and the Egyptian listen items with the eg reviewer.
+rung: easy-1
+draw: 16
+pass: 12
+items:
+  # ---- 01 greetings
+  - id: e1-t-01
+    from: easy1-01-greetings
+    type: choice
+    cue: "Malam hari, temanmu bilang مَسَاءُ الخَيْرِ."
+    prompt: "Kamu jawab:"
+    options: ["مَسَاءُ النُّورِ.", "صَبَاحُ النُّورِ.", "شُكْرًا."]
+    answer: "مَسَاءُ النُّورِ."
+    why: { id: "مَسَاءُ الخَيْرِ dijawab مَسَاءُ النُّورِ.", en: "مَسَاءُ الخَيْرِ is answered with مَسَاءُ النُّورِ." }
+  - id: e1-t-02
+    from: easy1-01-greetings
+    type: listen
+    variety: eg
+    audio: "إزَّيَّك؟"
+    options: ["Apa kabar?", "Sampai jumpa.", "Terima kasih."]
+    answer: "Apa kabar?"
+    why: { id: "إزَّيَّك (*izzayyak*) adalah *apa kabar?* dalam bahasa Mesir.", en: "إزَّيَّك (*izzayyak*) is Egyptian for *how are you?*" }
+  - id: e1-t-03
+    from: easy1-01-greetings
+    type: gap
+    cue: "Temanmu bilang شُكْرًا."
+    prompt: "Kamu menjawab: ___"
+    options: ["عَفْوًا", "مَعَ السَّلَامَةِ", "صَبَاحُ الخَيْرِ"]
+    answer: "عَفْوًا"
+    why: { id: "شُكْرًا dijawab عَفْوًا, *sama-sama*.", en: "شُكْرًا is answered with عَفْوًا, *you're welcome*." }
+
+  # ---- 02 I and you
+  - id: e1-t-04
+    from: easy1-02-ana-anta
+    type: gap
+    match: exact
+    cue: "Ke Ahmad: kamu guru."
+    prompt: "___ مُدَرِّسٌ."
+    options: ["أَنْتَ", "أَنْتِ", "أَنَا"]
+    answer: "أَنْتَ"
+    why: { id: "Ke laki-laki: أَنْتَ, dengan *-ta*.", en: "To a man: أَنْتَ, with *-ta*." }
+  - id: e1-t-05
+    from: easy1-02-ana-anta
+    type: read
+    ar: "أَنَا مُتْعَبٌ."
+    options: ["Aku capek.", "Aku haus.", "Aku lapar."]
+    answer: "Aku capek."
+    why: { id: "مُتْعَبٌ artinya *capek*.", en: "مُتْعَبٌ means *tired*." }
+  - id: e1-t-06
+    from: easy1-02-ana-anta
+    type: order
+    cue: "Kamu (perempuan) sakit."
+    tiles: ["مَرِيضَةٌ", "أَنْتِ"]
+    answer: ["أَنْتِ", "مَرِيضَةٌ"]
+    why: { id: "أَنْتِ lalu keadaannya, tanpa *adalah*.", en: "أَنْتِ then how she is, with no *are*." }
+
+  # ---- 03 he, she and gender
+  - id: e1-t-07
+    from: easy1-03-huwa-hiya
+    type: fix
+    match: exact
+    cue: "Fatimah tinggi."
+    wrong: "فَاطِمَةُ طَوِيلٌ."
+    options: ["فَاطِمَةُ طَوِيلَةٌ.", "فَاطِمَةُ قَصِيرٌ."]
+    answer: "فَاطِمَةُ طَوِيلَةٌ."
+    why: { id: "Fatimah perempuan, jadi طَوِيلَةٌ dengan ة.", en: "Fatimah is a woman, so طَوِيلَةٌ with ة." }
+  - id: e1-t-08
+    from: easy1-03-huwa-hiya
+    type: choice
+    prompt: "Mana kata perempuan?"
+    options: ["صَدِيقَةٌ", "صَدِيقٌ", "رَجُلٌ"]
+    answer: "صَدِيقَةٌ"
+    why: { id: "ة di akhir kata menandai kata perempuan.", en: "ة at the end marks a feminine word." }
+  - id: e1-t-09
+    from: easy1-03-huwa-hiya
+    type: gap
+    cue: "Dia (laki-laki) tetangga."
+    prompt: "___ جَارٌ."
+    options: ["هُوَ", "هِيَ"]
+    answer: "هُوَ"
+    why: { id: "Untuk laki-laki: هُوَ.", en: "For a man: هُوَ." }
+
+  # ---- 04 this and that
+  - id: e1-t-10
+    from: easy1-04-demonstratives
+    type: gap
+    cue: "Itu jendela (jauh)."
+    prompt: "___ نَافِذَةٌ."
+    options: ["تِلْكَ", "ذٰلِكَ", "هٰذَا"]
+    answer: "تِلْكَ"
+    why: { id: "Jauh dan berakhiran ة: تِلْكَ.", en: "Far away and ending in ة: تِلْكَ." }
+  - id: e1-t-11
+    from: easy1-04-demonstratives
+    type: read
+    ar: "مَا هٰذَا؟"
+    options: ["Ini apa?", "Ini siapa?", "Itu di mana?"]
+    answer: "Ini apa?"
+    why: { id: "مَا artinya *apa*, هٰذَا artinya *ini*.", en: "مَا means *what*, هٰذَا means *this*." }
+  - id: e1-t-12
+    from: easy1-04-demonstratives
+    type: choice
+    cue: "Kamu menunjuk HP di tanganmu."
+    prompt: "Kamu bilang:"
+    options: ["هٰذَا هَاتِفٌ.", "ذٰلِكَ هَاتِفٌ.", "هٰذِهِ هَاتِفٌ."]
+    answer: "هٰذَا هَاتِفٌ."
+    why: { id: "Dekat dan tanpa ة: هٰذَا.", en: "Near and without ة: هٰذَا." }
+
+  # ---- 05 al- and tanwin
+  - id: e1-t-13
+    from: easy1-05-al
+    type: gap
+    match: exact
+    cue: "Ini sebuah kamar."
+    prompt: "هٰذِهِ ___."
+    options: ["غُرْفَةٌ", "الغُرْفَةُ", "الغُرْفَةٌ"]
+    answer: "غُرْفَةٌ"
+    why: { id: "*Sebuah* kamar: tanwin, tanpa al-.", en: "*A* room: tanwin, no al-." }
+  - id: e1-t-14
+    from: easy1-05-al
+    type: fix
+    match: exact
+    cue: "Rumahnya baru."
+    wrong: "البَيْتٌ جَدِيدٌ."
+    options: ["البَيْتُ جَدِيدٌ.", "بَيْتُ جَدِيدٌ."]
+    answer: "البَيْتُ جَدِيدٌ."
+    why: { id: "Dengan al-, akhirannya -u tanpa tanwin.", en: "With al-, the ending is -u with no tanwin." }
+  - id: e1-t-15
+    from: easy1-05-al
+    type: read
+    match: exact
+    ar: "الشَّمْسُ"
+    options: ["asy-syamsu", "al-syamsu", "syamsun"]
+    answer: "asy-syamsu"
+    why: { id: "ش huruf syamsiyah: lam melebur, dibaca asy-syamsu.", en: "ش is a sun letter: the lam merges, read asy-syamsu." }
+
+  # ---- 06 adjectives
+  - id: e1-t-16
+    from: easy1-06-adjectives
+    type: gap
+    match: exact
+    cue: "Kopi yang panas itu enak."
+    prompt: "القَهْوَةُ ___ لَذِيذَةٌ."
+    options: ["الحَارَّةُ", "حَارَّةٌ", "الحَارُّ"]
+    answer: "الحَارَّةُ"
+    why: { id: "Kata benda pakai al- dan ة, jadi kata sifatnya juga.", en: "The noun has al- and ة, so the adjective does too." }
+  - id: e1-t-17
+    from: easy1-06-adjectives
+    type: choice
+    prompt: "Mana yang berarti *kota yang besar*?"
+    options: ["المَدِينَةُ الكَبِيرَةُ", "المَدِينَةُ كَبِيرَةٌ", "مَدِينَةٌ الكَبِيرَةُ"]
+    answer: "المَدِينَةُ الكَبِيرَةُ"
+    why: { id: "Al- di kedua kata: satu frasa, *kota yang besar*.", en: "Al- on both words: one phrase, *the big city*." }
+  - id: e1-t-18
+    from: easy1-06-adjectives
+    type: order
+    cue: "Ini kemeja murah."
+    tiles: ["رَخِيصٌ", "قَمِيصٌ", "هٰذَا"]
+    answer: ["هٰذَا", "قَمِيصٌ", "رَخِيصٌ"]
+    why: { id: "هٰذَا, kata benda, lalu kata sifatnya di belakang.", en: "هٰذَا, the noun, then its adjective after it." }
+
+  # ---- 07 nisba
+  - id: e1-t-19
+    from: easy1-07-nisba
+    type: gap
+    cue: "Mona orang Mesir."
+    prompt: "مُنَى ___."
+    options: ["مِصْرِيَّةٌ", "مِصْرِيٌّ", "مِصْرُ"]
+    answer: "مِصْرِيَّةٌ"
+    why: { id: "Mona perempuan: *-iyyatun*.", en: "Mona is a woman: *-iyyatun*." }
+  - id: e1-t-20
+    from: easy1-07-nisba
+    type: read
+    ar: "مُهَنْدِسٌ"
+    options: ["insinyur", "pegawai", "sopir"]
+    answer: "insinyur"
+    why: { id: "مُهَنْدِسٌ artinya insinyur.", en: "مُهَنْدِسٌ means engineer." }
+  - id: e1-t-21
+    from: easy1-07-nisba
+    type: listen
+    audio: "أَنَا مُمَرِّضَةٌ إِنْدُونِيسِيَّةٌ."
+    options: ["Aku perawat dari Indonesia.", "Aku dokter dari Indonesia."]
+    answer: "Aku perawat dari Indonesia."
+    why: { id: "Kamu mendengar *mumarriḍatun*: perawat.", en: "You heard *mumarriḍatun*: nurse." }
+
+  # ---- 08 questions
+  - id: e1-t-22
+    from: easy1-08-questions
+    type: gap
+    cue: "Bandaranya di mana?"
+    prompt: "___ المَطَارُ؟"
+    options: ["أَيْنَ", "مَنْ", "هَلْ"]
+    answer: "أَيْنَ"
+    why: { id: "Menanyakan tempat: أَيْنَ.", en: "Asking about a place: أَيْنَ." }
+  - id: e1-t-23
+    from: easy1-08-questions
+    type: choice
+    cue: "Seseorang bertanya: هَلْ أَنْتَ طَالِبٌ؟"
+    prompt: "Jawaban yang cocok:"
+    options: ["نَعَمْ، أَنَا طَالِبٌ.", "أَنَا مِنْ إِنْدُونِيسِيَا.", "الجَامِعَةُ هُنَاكَ."]
+    answer: "نَعَمْ، أَنَا طَالِبٌ."
+    why: { id: "Pertanyaan هَلْ dijawab نَعَمْ atau لَا.", en: "A هَلْ question is answered نَعَمْ or لَا." }
+  - id: e1-t-24
+    from: easy1-08-questions
+    type: listen
+    variety: eg
+    audio: "فِين الحَمَّام؟"
+    options: ["Kamar mandinya di mana?", "Ini kamar mandi?"]
+    answer: "Kamar mandinya di mana?"
+    why: { id: "فِين (*fēn*) adalah أَيْنَ dalam bahasa Mesir.", en: "فِين (*fēn*) is Egyptian for أَيْنَ." }
+
+  # ---- 09 numbers
+  - id: e1-t-25
+    from: easy1-09-numbers
+    type: read
+    ar: "١٠"
+    options: ["10", "1", "0"]
+    answer: "10"
+    why: { id: "١٠ dibaca dari kiri: ١ lalu ٠, jadi 10.", en: "١٠ reads from the left: ١ then ٠, so 10." }
+  - id: e1-t-26
+    from: easy1-09-numbers
+    type: choice
+    prompt: "٣ + ٤ = ?"
+    options: ["سَبْعَةٌ", "سِتَّةٌ", "ثَمَانِيَةٌ"]
+    answer: "سَبْعَةٌ"
+    why: { id: "Tiga tambah empat sama dengan tujuh: سَبْعَةٌ.", en: "Three plus four is seven: سَبْعَةٌ." }
+  - id: e1-t-27
+    from: easy1-09-numbers
+    type: listen
+    audio: "أَرْبَعَةٌ"
+    options: ["٤", "٣", "٥"]
+    answer: "٤"
+    why: { id: "Kamu mendengar *arbaʿatun*: empat, ٤.", en: "You heard *arbaʿatun*: four, ٤." }
+
+  # ---- 10 iḍāfah
+  - id: e1-t-28
+    from: easy1-10-idafa
+    type: gap
+    match: exact
+    cue: "Pintu mobil itu."
+    prompt: "بَابُ ___."
+    options: ["السَّيَّارَةِ", "السَّيَّارَةُ", "سَيَّارَةٌ"]
+    answer: "السَّيَّارَةِ"
+    why: { id: "Kata kedua iḍāfah berakhiran *-i*.", en: "The second word of an iḍāfah ends in *-i*." }
+  - id: e1-t-29
+    from: easy1-10-idafa
+    type: fix
+    match: exact
+    cue: "Warna rumah itu indah."
+    wrong: "اللَّوْنُ البَيْتِ جَمِيلٌ."
+    options: ["لَوْنُ البَيْتِ جَمِيلٌ.", "لَوْنٌ البَيْتِ جَمِيلٌ."]
+    answer: "لَوْنُ البَيْتِ جَمِيلٌ."
+    why: { id: "Kata pertama iḍāfah tanpa al- dan tanpa tanwin.", en: "The first word of an iḍāfah has no al- and no tanwin." }
+  - id: e1-t-30
+    from: easy1-10-idafa
+    type: read
+    ar: "كُوبُ مَاءٍ"
+    options: ["segelas air", "gelas yang besar", "air dingin"]
+    answer: "segelas air"
+    why: { id: "كُوبُ + مَاءٍ: gelas berisi air.", en: "كُوبُ + مَاءٍ: a glass of water." }
+
+  # ---- 11 possessive endings
+  - id: e1-t-31
+    from: easy1-11-possessive
+    type: gap
+    match: exact
+    cue: "Ke Budi: ini kuncimu."
+    prompt: "هٰذَا ___."
+    options: ["مِفْتَاحُكَ", "مِفْتَاحُكِ", "مِفْتَاحِي"]
+    answer: "مِفْتَاحُكَ"
+    why: { id: "Ke laki-laki, *milikmu* adalah ـكَ.", en: "To a man, *your* is ـكَ." }
+  - id: e1-t-32
+    from: easy1-11-possessive
+    type: choice
+    prompt: "Mana yang berarti *suaminya* (suami dia, perempuan)?"
+    options: ["زَوْجُهَا", "زَوْجُهُ", "زَوْجِي"]
+    answer: "زَوْجُهَا"
+    why: { id: "Milik dia perempuan: ـهَا.", en: "Hers: ـهَا." }
+  - id: e1-t-33
+    from: easy1-11-possessive
+    type: spell
+    match: exact
+    prompt: "Eja: kucingku"
+    letters: ["قِ", "طَّ", "تِ", "ي"]
+    distractors: ["ة"]
+    answer: "قِطَّتِي"
+    why: { id: "ة berubah jadi ت sebelum akhiran ـِي.", en: "ة turns into ت before the ending ـِي." }
+
+  # ---- 12 where things are
+  - id: e1-t-34
+    from: easy1-12-prepositions
+    type: scene
+    match: exact
+    prompt: "Bolanya di mana?"
+    visual: { id: place-scene-ar, props: { state: in } }
+    options: ["الكُرَةُ فِي الصُّنْدُوقِ.", "الكُرَةُ عَلَى الصُّنْدُوقِ.", "الكُرَةُ تَحْتَ الطَّاوِلَةِ."]
+    answer: "الكُرَةُ فِي الصُّنْدُوقِ."
+    why: { id: "Bolanya di dalam kotak: فِي الصُّنْدُوقِ.", en: "The ball is in the box: فِي الصُّنْدُوقِ." }
+  - id: e1-t-35
+    from: easy1-12-prepositions
+    type: scene
+    prompt: "Bolanya di mana?"
+    visual: { id: place-scene-ar, props: { state: "in front of" } }
+    options: ["الكُرَةُ أَمَامَ الصُّنْدُوقِ.", "الكُرَةُ خَلْفَ الصُّنْدُوقِ.", "الكُرَةُ بِجَانِبِ الصُّنْدُوقِ."]
+    answer: "الكُرَةُ أَمَامَ الصُّنْدُوقِ."
+    why: { id: "Bolanya di depan kotak: أَمَامَ.", en: "The ball is in front of the box: أَمَامَ." }
+  - id: e1-t-36
+    from: easy1-12-prepositions
+    type: gap
+    match: exact
+    cue: "Kucingnya di taman."
+    prompt: "القِطَّةُ فِي ___."
+    options: ["الحَدِيقَةِ", "الحَدِيقَةُ", "حَدِيقَةٌ"]
+    answer: "الحَدِيقَةِ"
+    why: { id: "Setelah فِي, akhirannya *-i*.", en: "After فِي, the ending is *-i*." }

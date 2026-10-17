@@ -11,3 +11,5 @@ next-env.d.ts
 
 # parity: after-tree is regenerated on demand; only the baseline is tracked
 tests/parity/after/
+apps/*/tests/parity/after/
+recordings/

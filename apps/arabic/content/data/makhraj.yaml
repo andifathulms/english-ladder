@@ -1,0 +1,16 @@
+# Places of articulation (makharij al-huruf) for the Makhraj visual: a stylised side section,
+# lips on the left, throat on the right, in a 240×180 viewBox. Labels are Indonesian first.
+- { id: syafatain, label_id: "dua bibir", label_en: "both lips", x: 30, y: 96 }
+- { id: syafah-asnan, label_id: "bibir bawah dan gigi atas", label_en: "lower lip and upper teeth", x: 40, y: 104 }
+- { id: lithawiyyah, label_id: "ujung lidah dan ujung gigi atas", label_en: "tongue tip and upper teeth edge", x: 50, y: 92 }
+- { id: asaliyyah, label_id: "ujung lidah dekat gigi seri (desis)", label_en: "tongue tip near the front teeth (hiss)", x: 56, y: 102 }
+- { id: nithiyyah, label_id: "ujung lidah dan gusi atas", label_en: "tongue tip and upper gum", x: 62, y: 84 }
+- { id: tharf-lisan, label_id: "ujung lidah, sedikit ke belakang", label_en: "tongue tip, a little further back", x: 70, y: 82 }
+- { id: hafah-lisan, label_id: "tepi lidah", label_en: "side of the tongue", x: 86, y: 90 }
+- { id: wasat-lisan, label_id: "tengah lidah dan langit-langit keras", label_en: "middle of the tongue and hard palate", x: 100, y: 74 }
+- { id: aqsa-lisan-k, label_id: "pangkal lidah, agak ke depan", label_en: "back of the tongue, a little forward", x: 118, y: 74 }
+- { id: aqsa-lisan-q, label_id: "pangkal lidah dan langit-langit lunak", label_en: "back of the tongue and soft palate", x: 132, y: 82 }
+- { id: halq-adna, label_id: "ujung tenggorokan", label_en: "top of the throat", x: 146, y: 100 }
+- { id: halq-wasat, label_id: "tengah tenggorokan", label_en: "middle of the throat", x: 152, y: 120 }
+- { id: halq-aqsa, label_id: "pangkal tenggorokan", label_en: "bottom of the throat", x: 156, y: 142 }
+- { id: jauf, label_id: "rongga mulut (vokal panjang)", label_en: "the mouth cavity (long vowels)", x: 96, y: 100 }

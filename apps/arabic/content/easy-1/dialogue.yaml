@@ -1,0 +1,45 @@
+# Ngobrol, Easy 1 (PRD §4.6, §5.5): a Cairo taxi ride in Egyptian Arabic.
+# Draft by Claude. Every line needs the Egyptian reviewer (review.eg_by).
+rung: easy-1
+variety: eg
+title: { id: "Naik taksi di Kairo", en: "A taxi in Cairo", ar: "فِي التَّاكْسِي" }
+lines:
+  - { who: Budi, ar: "السَّلَامُ عَلَيْكُم.", tr: "is-salāmu ʿalēkum.", id: "Assalamualaikum.", en: "Hello." }
+  - { who: Karim, ar: "وَعَلَيْكُم السَّلَام. أَهْلًا.", tr: "wi ʿalēkum is-salām. ahlan.", id: "Waalaikumsalam. Halo.", en: "Hello to you. Welcome." }
+  - { who: Budi, ar: "الزَّمَالِك، لَوْ سَمَحْت. فُنْدُق النِّيل.", tr: "iz-Zamālik, law samaḥt. funduʾ in-Nīl.", id: "Ke Zamalek, ya. Hotel Nil.", en: "Zamalek, please. The Nile Hotel." }
+  - { who: Karim, ar: "حَاضِر. إنْتَ مِنِين؟", tr: "ḥāḍir. inta minēn?", id: "Siap. Kamu dari mana?", en: "Sure. Where are you from?" }
+  - { who: Budi, ar: "أنا مِن إنْدُونِيسِيَا. وِإنْتَ مَصْرِي؟", tr: "ana min indonisya. w-inta maṣri?", id: "Aku dari Indonesia. Kamu orang Mesir?", en: "I'm from Indonesia. Are you Egyptian?" }
+  - { who: Karim, ar: "أَيْوَه، أنا مِن القَاهِرَة. أَهْلًا بِيك فِي مَصْر.", tr: "aywa, ana min il-ʾāhira. ahlan bīk fi Maṣr.", id: "Iya, aku dari Kairo. Selamat datang di Mesir.", en: "Yes, I'm from Cairo. Welcome to Egypt." }
+  - { who: Karim, ar: "دَه الفُنْدُق، جَنْب البَنْك.", tr: "da l-funduʾ, gamb il-bank.", id: "Ini hotelnya, di sebelah bank.", en: "Here's the hotel, next to the bank." }
+  - { who: Budi, ar: "شُكْرًا.", tr: "syukran.", id: "Terima kasih.", en: "Thank you." }
+  - { who: Karim, ar: "العَفْو. مَعَ السَّلَامَة.", tr: "il-ʿafw. maʿa s-salāma.", id: "Sama-sama. Sampai jumpa.", en: "You're welcome. Goodbye." }
+note:
+  id: "لَوْ سَمَحْت (*law samaḥt*) adalah *tolong* atau *permisi*. حَاضِر (*ḥāḍir*) artinya *siap, baik*, jawaban sopan saat diminta sesuatu. Dan أَهْلًا بِيك (*ahlan bīk*) adalah *selamat datang* ke satu orang laki-laki."
+  en: "لَوْ سَمَحْت (*law samaḥt*) means *please* or *excuse me*. حَاضِر (*ḥāḍir*) means *sure, right away*, the polite answer to a request. And أَهْلًا بِيك (*ahlan bīk*) is *welcome* to one man."
+items:
+  - id: e1-d-c1
+    type: listen
+    variety: eg
+    audio: "إنْتَ مِنِين؟"
+    options: ["Kamu dari mana?", "Kamu di mana?", "Kamu siapa?"]
+    answer: "Kamu dari mana?"
+    why: { id: "مِنِين (*minēn*) adalah مِنْ أَيْنَ dalam bahasa Mesir.", en: "مِنِين (*minēn*) is Egyptian for مِنْ أَيْنَ." }
+  - id: e1-d-c2
+    type: choice
+    prompt: "Di mana hotelnya?"
+    options: ["di sebelah bank", "di depan bank", "di belakang bank"]
+    answer: "di sebelah bank"
+    why: { id: "جَنْب (*gamb*) artinya *di sebelah*, seperti بِجَانِبِ.", en: "جَنْب (*gamb*) means *next to*, like بِجَانِبِ." }
+  - id: e1-d-c3
+    type: choice
+    prompt: "Karim bilang أَيْوَه. Artinya:"
+    options: ["ya", "tidak", "terima kasih"]
+    answer: "ya"
+    why: { id: "أَيْوَه (*aywa*) adalah *ya* dalam bahasa Mesir, seperti نَعَمْ.", en: "أَيْوَه (*aywa*) is Egyptian for *yes*, like نَعَمْ." }
+  - id: e1-d-c4
+    type: listen
+    variety: eg
+    audio: "العَفْو. مَعَ السَّلَامَة."
+    options: ["Sama-sama. Sampai jumpa.", "Terima kasih. Selamat pagi."]
+    answer: "Sama-sama. Sampai jumpa."
+    why: { id: "العَفْو (*il-ʿafw*) artinya *sama-sama*, dan مَعَ السَّلَامَة berarti *sampai jumpa*.", en: "العَفْو (*il-ʿafw*) means *you're welcome*, and مَعَ السَّلَامَة means *goodbye*." }

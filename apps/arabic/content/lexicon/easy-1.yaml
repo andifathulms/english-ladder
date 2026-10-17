@@ -1,0 +1,23 @@
+# Easy 1 lexicon (CLAUDE.md §5.4, §8.4): words Easy 1 uses that are not in core.yaml or a glossary.
+# The greeting chunks are glossed whole in lesson 1; the single words inside them are listed here
+# so the lexicon lint can find each word. Fully vowelled. No verbs (greetings are chunks).
+
+# ---- greeting chunks and the words inside them
+- { ar: "سَلَامٌ", pos: noun, gender: m, rung: easy-1, root: "س-ل-م" }
+- { ar: "سَلَامَةٌ", pos: noun, gender: f, rung: easy-1, root: "س-ل-م" }
+- { ar: "صَبَاحٌ", pos: noun, gender: m, rung: easy-1 }
+- { ar: "مَسَاءٌ", pos: noun, gender: m, rung: easy-1 }
+- { ar: "خَيْرٌ", pos: noun, gender: m, rung: easy-1 }
+- { ar: "نُورٌ", pos: noun, gender: m, rung: easy-1 }
+- { ar: "حَالٌ", pos: noun, gender: m, rung: easy-1 }
+- { ar: "حَمْدٌ", pos: noun, gender: m, rung: easy-1 }
+- { ar: "لِلّٰهِ", pos: chunk, rung: easy-1 }
+- { ar: "أَهْلًا", pos: chunk, rung: easy-1 }
+- { ar: "سَهْلًا", pos: chunk, rung: easy-1 }
+
+# ---- particles
+- { ar: "مَعَ", pos: particle, rung: easy-1 }
+- { ar: "هَا", pos: particle, rung: easy-1 }
+
+# ---- feminine forms used with a possessive ending (صَدِيقَتِي), where the lint cannot reach the masculine
+- { ar: "صَدِيقَةٌ", pos: noun, gender: f, rung: easy-1 }

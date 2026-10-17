@@ -1,0 +1,213 @@
+# Huruf 2 test pool: draw 12 of 24, pass 9 (PRD §5.5). Every item match: exact.
+rung: huruf-2
+draw: 12
+pass: 9
+items:
+  - id: h2-t-01
+    from: huruf2-01-mad
+    type: read
+    match: exact
+    ar: "صَابُون"
+    options: ["ṣābūn", "ṣabun", "sābūn"]
+    answer: "ṣābūn"
+    why: { id: "Alif dan waw memanjangkan dua vokalnya: *ṣā-būn*, dengan ص tebal.", en: "Alif and waw stretch both vowels: *ṣā-būn*, with a heavy ص." }
+  - id: h2-t-02
+    from: huruf2-01-mad
+    type: mark
+    match: exact
+    prompt: "Vokal apa di huruf kedua?"
+    ar: "كِتَاب"
+    target: 1
+    options: [fatha, kasra, damma]
+    answer: fatha
+    why: { id: "Alif panjang selalu didahului fathah: *tā*.", en: "A long alif always follows a fathah: *tā*." }
+  - id: h2-t-03
+    from: huruf2-02-sukun
+    type: read
+    match: exact
+    ar: "مِلْح"
+    options: ["miliḥ", "milḥ", "mīlḥ"]
+    answer: "milḥ"
+    why: { id: "لْ bersukun: tidak ada vokal di antara *l* dan *ḥ*.", en: "لْ has sukun: no vowel between *l* and *ḥ*." }
+  - id: h2-t-04
+    from: huruf2-02-sukun
+    type: mark
+    match: exact
+    prompt: "Tanda apa di huruf kedua?"
+    ar: "بَحْر"
+    target: 1
+    options: [sukun, fatha, kasra]
+    answer: sukun
+    why: { id: "*Baḥr*: ح ditutup tanpa vokal.", en: "*Baḥr*: ح is closed with no vowel." }
+  - id: h2-t-05
+    from: huruf2-03-syaddah
+    type: read
+    match: exact
+    ar: "حَمَّام"
+    options: ["ḥamām", "ḥammām", "hammām"]
+    answer: "ḥammām"
+    why: { id: "Syaddah di م: *ḥam-mām*, kamar mandi.", en: "Shaddah on م: *ḥam-mām*, bathroom." }
+  - id: h2-t-06
+    from: huruf2-03-syaddah
+    type: mark
+    match: exact
+    prompt: "Tanda apa di huruf kedua?"
+    ar: "سُكَّر"
+    target: 1
+    options: [shadda, sukun, fatha]
+    answer: shadda
+    why: { id: "*Suk-kar*: ك dobel.", en: "*Suk-kar*: ك is doubled." }
+  - id: h2-t-07
+    from: huruf2-04-tanwin
+    type: read
+    match: exact
+    ar: "وَلَدٌ"
+    options: ["waladan", "waladin", "waladun"]
+    answer: "waladun"
+    why: { id: "Dua dhammah: *-un*.", en: "Two dhammahs: *-un*." }
+  - id: h2-t-08
+    from: huruf2-04-tanwin
+    type: mark
+    match: exact
+    prompt: "Tanda apa di ر?"
+    ar: "شُكْرًا"
+    target: 2
+    options: [tanwin-fath, fatha, tanwin-damm]
+    answer: tanwin-fath
+    why: { id: "*Syukran*: dua fathah memberi *-an*.", en: "*Syukran*: two fathahs give *-an*." }
+  - id: h2-t-09
+    from: huruf2-04-tanwin
+    type: listen
+    match: exact
+    audio: "قَلَمٍ"
+    options: ["قَلَمٌ", "قَلَمًا", "قَلَمٍ"]
+    answer: "قَلَمٍ"
+    why: { id: "Kamu mendengar *qalamin*, akhiran *-in*.", en: "You heard *qalamin*, the *-in* ending." }
+  - id: h2-t-10
+    from: huruf2-05-syamsiyah-qamariyah
+    type: read
+    match: exact
+    ar: "السَّمَكُ"
+    options: ["al-samaku", "as-samaku", "as-samakun"]
+    answer: "as-samaku"
+    why: { id: "س huruf syamsiyah: lam melebur, *as-samaku*.", en: "س is a sun letter: the lam merges, *as-samaku*." }
+  - id: h2-t-11
+    from: huruf2-05-syamsiyah-qamariyah
+    type: read
+    match: exact
+    ar: "الْقَلَمُ"
+    options: ["al-qalamu", "aq-qalamu", "al-qalamun"]
+    answer: "al-qalamu"
+    why: { id: "ق huruf qamariyah: lam dibaca, dan tanpa tanwin.", en: "ق is a moon letter: the lam is said, and there's no tanwin." }
+  - id: h2-t-12
+    from: huruf2-05-syamsiyah-qamariyah
+    type: choice
+    match: exact
+    prompt: "Mana yang huruf qamariyah (lam-nya tetap dibaca)?"
+    options: ["ش", "ن", "ب", "د"]
+    answer: "ب"
+    why: { id: "ب huruf qamariyah: *al-bābu*. ش ن د huruf syamsiyah.", en: "ب is a moon letter: *al-bābu*. ش ن د are sun letters." }
+  - id: h2-t-13
+    from: huruf2-06-hamzah-washal
+    type: read
+    match: exact
+    ar: "بَابُ البَيْتِ"
+    options: ["bābu al-bayti", "bābu l-bayti", "bāb al-baytu"]
+    answer: "bābu l-bayti"
+    why: { id: "*Bābu* berakhir vokal, jadi alif ال dilewati: *bābu l-bayti*.", en: "*Bābu* ends in a vowel, so the alif of ال is skipped: *bābu l-bayti*." }
+  - id: h2-t-14
+    from: huruf2-06-hamzah-washal
+    type: mark
+    match: exact
+    prompt: "Kata ini dibaca sendiri. Vokal apa di alif?"
+    ar: "اِبْنٌ"
+    target: 0
+    options: [kasra, fatha, damma]
+    answer: kasra
+    why: { id: "Di awal bacaan, hamzah washal ini dibaca *i*: *ibnun*.", en: "At the start of reading, this hamzat wasl is read *i*: *ibnun*." }
+  - id: h2-t-15
+    from: huruf2-07-ain-ha-kha
+    type: listen
+    match: exact
+    audio: "أَلَمٌ"
+    options: ["عَلَمٌ", "أَلَمٌ"]
+    answer: "أَلَمٌ"
+    why: { id: "Hanya putus sebentar, tanpa tekanan tenggorokan: ء, *alamun*, rasa sakit.", en: "Just a short catch, no pressed throat: ء, *alamun*, pain." }
+  - id: h2-t-16
+    from: huruf2-07-ain-ha-kha
+    type: read
+    match: exact
+    ar: "عِلْمٌ"
+    options: ["ilmun", "ʿilmun", "ḥilmun"]
+    answer: "ʿilmun"
+    why: { id: "Dimulai ع, ditulis *ʿ*: *ʿilmun*, ilmu.", en: "It starts with ع, written *ʿ*: *ʿilmun*, knowledge." }
+  - id: h2-t-17
+    from: huruf2-07-ain-ha-kha
+    type: choice
+    match: exact
+    prompt: "Mana yang berarti *berita*?"
+    options: ["حَبْرٌ", "خَبَرٌ", "كَبِيرٌ"]
+    answer: "خَبَرٌ"
+    why: { id: "خَبَرٌ dengan خ adalah berita. حَبْرٌ adalah tinta, كَبِيرٌ adalah besar.", en: "خَبَرٌ with خ is news. حَبْرٌ is ink, كَبِيرٌ is big." }
+  - id: h2-t-18
+    from: huruf2-08-qaf-tsa-dzal-dad
+    type: listen
+    match: exact
+    audio: "كَلْبٌ"
+    options: ["قَلْبٌ", "كَلْبٌ"]
+    answer: "كَلْبٌ"
+    why: { id: "Bunyinya meletup di depan, bukan dalam: ك, *kalbun*, anjing.", en: "The sound popped further forward, not deep: ك, *kalbun*, dog." }
+  - id: h2-t-19
+    from: huruf2-08-qaf-tsa-dzal-dad
+    type: listen
+    match: exact
+    audio: "سَيْفٌ"
+    options: ["صَيْفٌ", "سَيْفٌ"]
+    answer: "سَيْفٌ"
+    why: { id: "*S* tipis dan *a* terang: س, *sayfun*, pedang.", en: "A thin *s* and a bright *a*: س, *sayfun*, sword." }
+  - id: h2-t-20
+    from: huruf2-08-qaf-tsa-dzal-dad
+    type: read
+    match: exact
+    ar: "ضَيْفٌ"
+    options: ["dayfun", "ṣayfun", "ḍayfun"]
+    answer: "ḍayfun"
+    why: { id: "ض ditulis *ḍ*: *ḍayfun*, tamu.", en: "ض is written *ḍ*: *ḍayfun*, guest." }
+  - id: h2-t-21
+    from: huruf2-08-qaf-tsa-dzal-dad
+    type: read
+    match: exact
+    ar: "ظَهْرٌ"
+    options: ["ẓahrun", "zahrun", "dzahrun"]
+    answer: "ẓahrun"
+    why: { id: "ظ ditulis *ẓ*: *ẓahrun*, punggung.", en: "ظ is written *ẓ*: *ẓahrun*, back." }
+  - id: h2-t-22
+    from: huruf2-09-imla
+    type: spell
+    match: exact
+    prompt: "Dengarkan, lalu tulis."
+    audio: "خُبْزٌ"
+    dictation: true
+    letters: ["خُ", "بْ", "زٌ"]
+    distractors: ["حُ", "ذٌ"]
+    answer: "خُبْزٌ"
+    why: { id: "*Khubzun*: خ bergesek, ب bersukun, dan ز dengan tanwin.", en: "*Khubzun*: a rasping خ, ب with sukun, and ز with tanwin." }
+  - id: h2-t-23
+    from: huruf2-09-imla
+    type: spell
+    match: exact
+    prompt: "Dengarkan, lalu tulis."
+    audio: "مَطْبَخٌ"
+    dictation: true
+    letters: ["مَ", "طْ", "بَ", "خٌ"]
+    distractors: ["تْ", "حٌ"]
+    answer: "مَطْبَخٌ"
+    why: { id: "*Maṭbakhun*: ط tebal bersukun, dan خ di ujung.", en: "*Maṭbakhun*: a heavy ط with sukun, and خ at the end." }
+  - id: h2-t-24
+    from: huruf2-10-membaca
+    type: read
+    match: exact
+    ar: "الشَّايُ بَارِدٌ."
+    options: ["Tehnya panas.", "Tehnya dingin.", "Airnya dingin."]
+    answer: "Tehnya dingin."
+    why: { id: "الشَّايُ adalah teh, بَارِدٌ adalah dingin.", en: "الشَّايُ is the tea, بَارِدٌ is cold." }

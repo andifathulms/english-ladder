@@ -1,0 +1,21 @@
+/* Arabic-only animations (DESIGN §5): marks drop from 10px above; below-marks rise from 10px below.
+   The .ar / .ar-focus / .tr-* component classes are a Tailwind plugin in tailwind.config.ts, so
+   they sit in the components layer like the rest of the shared component classes. */
+@keyframes mark-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+@keyframes mark-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+.mark-drop {
+  animation: mark-drop var(--m-base-d) var(--ease-object) both;
+}
+.mark-rise {
+  animation: mark-rise var(--m-base-d) var(--ease-object) both;
+}

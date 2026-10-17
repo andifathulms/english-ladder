@@ -1,0 +1,237 @@
+# Huruf 1 rung test pool (PRD §5.5): draw 14 of 28, pass 11. Every item match: exact.
+# Draft by Claude: short vowels only, no mad, sukun, syaddah or tanwin in reading items.
+rung: huruf-1
+draw: 14
+pass: 11
+items:
+  - id: h1-t-01
+    from: huruf1-01-kamu-sudah-tahu
+    type: choice
+    match: exact
+    prompt: "Kata pertama di satu baris tulisan Arab ada di sebelah mana?"
+    options: ["kanan", "kiri"]
+    answer: "kanan"
+    why: { id: "Arab dibaca dari kanan ke kiri, jadi kata pertama ada di kanan.", en: "Arabic is read right to left, so the first word is on the right." }
+  - id: h1-t-02
+    from: huruf1-01-kamu-sudah-tahu
+    type: choice
+    match: exact
+    prompt: "Vokal pendek yang ditulis di bawah huruf namanya apa?"
+    options: ["kasrah", "fathah", "dhammah"]
+    answer: "kasrah"
+    why: { id: "Kasrah ada di bawah huruf dan dibaca *i*.", en: "Kasrah sits below the letter and is read *i*." }
+  - id: h1-t-03
+    from: huruf1-02-ba-ta-tsa
+    type: read
+    match: exact
+    ar: "بُ"
+    options: ["ba", "bi", "bu"]
+    answer: "bu"
+    why: { id: "Dhammah dibaca *u*: *bu*.", en: "Dhammah is read *u*: *bu*." }
+  - id: h1-t-04
+    from: huruf1-02-ba-ta-tsa
+    type: choice
+    match: exact
+    prompt: "Mana yang dibaca *ti*?"
+    options: ["تِ", "ثِ", "تَ"]
+    answer: "تِ"
+    why: { id: "Dua titik di atas adalah ت, dan kasrah dibaca *i*.", en: "Two dots above is ت, and kasrah is read *i*." }
+  - id: h1-t-05
+    from: huruf1-02-ba-ta-tsa
+    type: listen
+    match: exact
+    audio: "ثَ"
+    options: ["ثَ", "تَ", "بَ"]
+    answer: "ثَ"
+    why: { id: "Ujung lidah di antara gigi: *tsa*, huruf ث.", en: "Tongue tip between the teeth: *tha*, the letter ث." }
+  - id: h1-t-06
+    from: huruf1-03-nun-ya
+    type: read
+    match: exact
+    ar: "يَثِبُ"
+    options: ["yatsibu", "natsibu", "batsibu"]
+    answer: "yatsibu"
+    why: { id: "Dua titik di bawah gigi pertama: ي, dibaca *ya*.", en: "Two dots under the first tooth: ي, read *ya*." }
+  - id: h1-t-07
+    from: huruf1-03-nun-ya
+    type: spell
+    match: exact
+    prompt: "Susun suku katanya: *na-ba-ta*."
+    letters: ["نَ", "بَ", "تَ"]
+    distractors: ["يَ", "ثَ"]
+    answer: "نَبَتَ"
+    why: { id: "Titik di atas (na), di bawah (ba), dua di atas (ta).", en: "Dot above (na), below (ba), two above (ta)." }
+  - id: h1-t-08
+    from: huruf1-04-jim-ha-kha
+    type: choice
+    match: exact
+    prompt: "Huruf mana yang tidak bertitik?"
+    options: ["ح", "ج", "خ"]
+    answer: "ح"
+    why: { id: "ح tanpa titik. ج titiknya di bawah, خ di atas.", en: "ح has no dot. ج has its dot below, خ above." }
+  - id: h1-t-09
+    from: huruf1-04-jim-ha-kha
+    type: read
+    match: exact
+    ar: "نَجَحَ"
+    options: ["najaḥa", "najakha", "nakhaja"]
+    answer: "najaḥa"
+    why: { id: "Titik di bawah lalu tanpa titik: ج lalu ح.", en: "A dot below, then no dot: ج then ح." }
+  - id: h1-t-10
+    from: huruf1-04-jim-ha-kha
+    type: listen
+    match: exact
+    audio: "خُ"
+    options: ["خُ", "حُ", "جُ"]
+    answer: "خُ"
+    why: { id: "Bunyinya serak, seperti *kh* di *akhir*: خ.", en: "It rasped, like *kh* in *akhir*: خ." }
+  - id: h1-t-11
+    from: huruf1-05-tidak-menyambung
+    type: choice
+    match: exact
+    prompt: "Mana yang termasuk enam huruf yang tidak menyambung ke kiri?"
+    options: ["ر", "ج", "ب"]
+    answer: "ر"
+    why: { id: "ر termasuk ا د ذ ر ز و, yang tidak pernah menyambung ke huruf sesudahnya.", en: "ر is one of ا د ذ ر ز و, which never join to the next letter." }
+  - id: h1-t-12
+    from: huruf1-05-tidak-menyambung
+    type: read
+    match: exact
+    ar: "بَدَنُ"
+    options: ["badanu", "badzanu", "bidanu"]
+    answer: "badanu"
+    why: { id: "د tanpa titik dibaca *d*, dan semua vokalnya fathah kecuali yang terakhir.", en: "Dotless د is read *d*, and every vowel is fathah except the last." }
+  - id: h1-t-13
+    from: huruf1-05-tidak-menyambung
+    type: mark
+    match: exact
+    ar: "أُذُنُ"
+    target: 0
+    options: [fatha, kasra, damma]
+    answer: damma
+    why: { id: "Dibaca *udzunu*: alif membawa dhammah.", en: "It is read *udzunu*: the alif carries dhammah." }
+  - id: h1-t-14
+    from: huruf1-06-sin-syin-shad-dhad
+    type: read
+    match: exact
+    ar: "بَصَرُ"
+    options: ["baṣaru", "basaru", "basyaru"]
+    answer: "baṣaru"
+    why: { id: "Lingkaran pipih tanpa titik adalah ص, *s* yang tebal.", en: "The flat loop with no dot is ص, a heavy *s*." }
+  - id: h1-t-15
+    from: huruf1-06-sin-syin-shad-dhad
+    type: spell
+    match: exact
+    prompt: "Susun suku katanya: *sa-ba-bu*."
+    letters: ["سَ", "بَ", "بُ"]
+    distractors: ["شَ", "صَ"]
+    answer: "سَبَبُ"
+    why: { id: "Sebab itu *sababu*, dengan س tanpa titik.", en: "Reason is *sababu*, with dotless س." }
+  - id: h1-t-16
+    from: huruf1-07-tha-zha-ain-ghain
+    type: read
+    match: exact
+    ar: "عَرَبُ"
+    options: ["ʿarabu", "gharabu", "ʿaraba"]
+    answer: "ʿarabu"
+    why: { id: "ع tanpa titik, dan huruf terakhir berdhammah.", en: "ع without a dot, and the last letter has dhammah." }
+  - id: h1-t-17
+    from: huruf1-07-tha-zha-ain-ghain
+    type: choice
+    match: exact
+    prompt: "Mana yang dibaca *ẓa*?"
+    options: ["ظَ", "طَ", "ضَ"]
+    answer: "ظَ"
+    why: { id: "ظ adalah ط dengan satu titik.", en: "ظ is ط with one dot." }
+  - id: h1-t-18
+    from: huruf1-07-tha-zha-ain-ghain
+    type: mark
+    match: exact
+    ar: "عِنَبُ"
+    target: 0
+    options: [fatha, kasra, damma]
+    answer: kasra
+    why: { id: "Dibaca *ʿinabu*: ع berharakat kasrah.", en: "It is read *ʿinabu*: ع has kasrah." }
+  - id: h1-t-19
+    from: huruf1-08-fa-qaf
+    type: read
+    match: exact
+    ar: "وَرَقُ"
+    options: ["waraqu", "waraku", "warafu"]
+    answer: "waraqu"
+    why: { id: "Dua titik di atas: ق, dibaca *q*.", en: "Two dots above: ق, read *q*." }
+  - id: h1-t-20
+    from: huruf1-08-fa-qaf
+    type: listen
+    match: exact
+    audio: "قَ"
+    options: ["قَ", "فَ"]
+    answer: "قَ"
+    why: { id: "Bunyinya dalam dari pangkal lidah: ق.", en: "A deep sound from the back of the tongue: ق." }
+  - id: h1-t-21
+    from: huruf1-09-kaf-lam
+    type: spell
+    match: exact
+    prompt: "Susun suku katanya: *la-ba-nu*."
+    letters: ["لَ", "بَ", "نُ"]
+    distractors: ["كَ", "يُ"]
+    answer: "لَبَنُ"
+    why: { id: "Susu itu *labanu*: لَ, بَ, نُ.", en: "Milk is *labanu*: لَ, بَ, نُ." }
+  - id: h1-t-22
+    from: huruf1-09-kaf-lam
+    type: read
+    match: exact
+    ar: "عَسَلُ"
+    options: ["ʿasalu", "asalu", "ʿasala"]
+    answer: "ʿasalu"
+    why: { id: "Madu dimulai dengan ع, bukan alif.", en: "Honey starts with ع, not alif." }
+  - id: h1-t-23
+    from: huruf1-10-mim-ha
+    type: read
+    match: exact
+    ar: "ذَهَبُ"
+    options: ["dzahabu", "zahabu", "dzaḥabu"]
+    answer: "dzahabu"
+    why: { id: "ذ dibaca *dz*, dan ه adalah *h* ringan.", en: "ذ is read *dz*, and ه is a light *h*." }
+  - id: h1-t-24
+    from: huruf1-10-mim-ha
+    type: spell
+    match: exact
+    prompt: "Susun suku katanya: *qa-la-mu*."
+    letters: ["قَ", "لَ", "مُ"]
+    distractors: ["كَ", "مِ"]
+    answer: "قَلَمُ"
+    why: { id: "Pena itu *qalamu*: ق, bukan ك, dan م berdhammah.", en: "Pen is *qalamu*: ق, not ك, and م with dhammah." }
+  - id: h1-t-25
+    from: huruf1-11-hamzah-ta-marbuthah
+    type: choice
+    match: exact
+    prompt: "Huruf terakhir di kata ثَمَرَةُ namanya apa?"
+    options: ["ta marbuthah", "ha", "ta"]
+    answer: "ta marbuthah"
+    why: { id: "Bentuk ه dengan dua titik di akhir kata adalah ta marbuthah.", en: "The ه shape with two dots at the end of a word is ta marbuta." }
+  - id: h1-t-26
+    from: huruf1-11-hamzah-ta-marbuthah
+    type: read
+    match: exact
+    ar: "رِئَةُ"
+    options: ["riʾatu", "riyatu", "riʿatu"]
+    answer: "riʾatu"
+    why: { id: "ئ adalah hamzah di atas gigi ya: hentakan kecil, *ʾ*.", en: "ئ is hamza on a ya tooth: a small catch, *ʾ*." }
+  - id: h1-t-27
+    from: huruf1-12-empat-bentuk
+    type: spell
+    match: exact
+    prompt: "Susun suku katanya: *sya-ja-ra-tu*."
+    letters: ["شَ", "جَ", "رَ", "ةُ"]
+    distractors: ["سَ", "هُ"]
+    answer: "شَجَرَةُ"
+    why: { id: "ش ج ر menyambung, lalu ة berdiri sendiri setelah ر.", en: "ش ج ر join, then ة stands alone after ر." }
+  - id: h1-t-28
+    from: huruf1-12-empat-bentuk
+    type: choice
+    match: exact
+    prompt: "Di kata رَجُلُ, bentuk apa yang dipakai huruf ج?"
+    options: ["bentuk awal", "bentuk tengah", "bentuk akhir"]
+    answer: "bentuk awal"
+    why: { id: "ر tidak menyambung ke kiri, jadi ج mulai dengan bentuk awal.", en: "ر doesn't join to the left, so ج starts in its initial form." }

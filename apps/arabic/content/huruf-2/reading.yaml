@@ -1,0 +1,44 @@
+# Baca dan dengar, Huruf 2: a short, fully vowelled Fusha passage with no verbs.
+rung: huruf-2
+title: { id: "Sekolah Budi", en: "Budi's school", ar: "مَدْرَسَةُ بُودِي" }
+ar: "هٰذِهِ مَدْرَسَةُ بُودِي. المَدْرَسَةُ كَبِيرَةٌ وَجَمِيلَةٌ. فِي الفَصْلِ طَاوِلَةٌ وَكُرْسِيٌّ. الحَقِيبَةُ عَلَى الطَّاوِلَةِ. الكِتَابُ فِي الحَقِيبَةِ، وَالقَلَمُ جَدِيدٌ."
+tr: "hādzihi madrasatu būdī. al-madrasatu kabīratun wa jamīlatun. fī l-faṣli ṭāwilatun wa kursiyyun. al-ḥaqībatu ʿalā ṭ-ṭāwilati. al-kitābu fī l-ḥaqībati, wa l-qalamu jadīdun."
+id: "Ini sekolah Budi. Sekolahnya besar dan indah. Di kelas ada meja dan kursi. Tasnya di atas meja. Bukunya di dalam tas, dan pulpennya baru."
+en: "This is Budi's school. The school is big and beautiful. In the classroom there is a table and a chair. The bag is on the table. The book is in the bag, and the pen is new."
+glossary:
+  - { ar: "فَصْلٌ", tr: "faṣlun", id: "ruang kelas", en: "classroom", gender: m, pos: noun }
+  - { ar: "كَبِيرٌ", tr: "kabīrun", id: "besar", en: "big", pos: adj }
+  - { ar: "جَمِيلٌ", tr: "jamīlun", id: "indah, bagus", en: "beautiful, nice", pos: adj }
+  - { ar: "جَدِيدٌ", tr: "jadīdun", id: "baru", en: "new", pos: adj }
+  - { ar: "كِتَابٌ", tr: "kitābun", id: "buku", en: "book", gender: m, pos: noun, root: "ك-ت-ب" }
+  - { ar: "عَلَى", tr: "ʿalā", id: "di atas", en: "on", pos: particle }
+  - { ar: "فِي", tr: "fī", id: "di, di dalam", en: "in", pos: particle }
+items:
+  - id: h2-r-c1
+    type: choice
+    match: exact
+    prompt: "Di mana bukunya?"
+    options: ["Di dalam tas.", "Di atas meja.", "Di bawah kursi."]
+    answer: "Di dalam tas."
+    why: { id: "الكِتَابُ فِي الحَقِيبَةِ: bukunya di dalam tas.", en: "الكِتَابُ فِي الحَقِيبَةِ: the book is in the bag." }
+  - id: h2-r-c2
+    type: choice
+    match: exact
+    prompt: "Sekolah Budi seperti apa?"
+    options: ["Kecil dan baru.", "Besar dan indah.", "Besar dan baru."]
+    answer: "Besar dan indah."
+    why: { id: "كَبِيرَةٌ وَجَمِيلَةٌ: besar dan indah.", en: "كَبِيرَةٌ وَجَمِيلَةٌ: big and beautiful." }
+  - id: h2-r-c3
+    type: read
+    match: exact
+    ar: "الحَقِيبَةُ عَلَى الطَّاوِلَةِ."
+    options: ["Tasnya di atas meja.", "Tasnya di bawah meja.", "Mejanya di dalam tas."]
+    answer: "Tasnya di atas meja."
+    why: { id: "عَلَى artinya di atas.", en: "عَلَى means on." }
+  - id: h2-r-c4
+    type: read
+    match: exact
+    ar: "الطَّاوِلَةِ"
+    options: ["al-ṭāwilati", "aṭ-ṭāwilati", "aṭ-ṭawilati"]
+    answer: "aṭ-ṭāwilati"
+    why: { id: "ط huruf syamsiyah, jadi lam melebur: *aṭ-ṭāwilati*, dengan *ṭā* panjang.", en: "ط is a sun letter, so the lam merges: *aṭ-ṭāwilati*, with a long *ṭā*." }

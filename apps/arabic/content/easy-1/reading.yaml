@@ -1,0 +1,37 @@
+# Baca dan dengar, Easy 1 (PRD §4.6, §5.5). Fusha, fully vowelled, Easy 1 structures only.
+# Draft by Claude; the reviewer checks the text and the items.
+rung: easy-1
+title: { id: "Apartemen Rina", en: "Rina's flat", ar: "شَقَّةُ رِينَا" }
+ar: "السَّلَامُ عَلَيْكُمْ. أَنَا رِينَا، وَأَنَا طَالِبَةٌ إِنْدُونِيسِيَّةٌ فِي القَاهِرَةِ. هٰذِهِ شَقَّتِي. الشَّقَّةُ صَغِيرَةٌ وَجَمِيلَةٌ. غُرْفَتِي بِجَانِبِ المَطْبَخِ. كِتَابِي عَلَى الطَّاوِلَةِ، وَحَقِيبَتِي تَحْتَ السَّرِيرِ. صَدِيقَتِي مُنَى مِصْرِيَّةٌ، وَشَقَّتُهَا أَمَامَ شَقَّتِي."
+tr: "as-salāmu ʿalaykum. anā rīnā, wa ʾanā ṭālibatun indūnīsiyyatun fī l-qāhirati. hādzihi syaqqatī. asy-syaqqatu ṣaghīratun wa jamīlatun. ghurfatī bijānibi l-maṭbakhi. kitābī ʿalā ṭ-ṭāwilati, wa ḥaqībatī taḥta s-sarīri. ṣadīqatī munā miṣriyyatun, wa syaqqatuhā amāma syaqqatī."
+id: "Assalamualaikum. Aku Rina, mahasiswi Indonesia di Kairo. Ini apartemenku. Apartemennya kecil dan cantik. Kamarku di sebelah dapur. Bukuku di atas meja, dan tasku di bawah tempat tidur. Temanku Mona orang Mesir, dan apartemennya di depan apartemenku."
+en: "Hello. I'm Rina, an Indonesian student in Cairo. This is my flat. The flat is small and pretty. My room is next to the kitchen. My book is on the table, and my bag is under the bed. My friend Mona is Egyptian, and her flat is opposite mine."
+glossary:
+  - { ar: "شَقَّةٌ", tr: "syaqqatun", id: "apartemen, flat", en: "flat, apartment", gender: f, pos: noun, eg: "شَقَّة", eg_tr: "syaʾʾa" }
+  - { ar: "مَطْبَخٌ", tr: "maṭbakhun", id: "dapur", en: "kitchen", gender: m, pos: noun, eg: "مَطْبَخ", eg_tr: "maṭbakh" }
+items:
+  - id: e1-r-c1
+    type: choice
+    prompt: "Rina orang mana?"
+    options: ["Indonesia", "Mesir", "Jepang"]
+    answer: "Indonesia"
+    why: { id: "Rina bilang: أَنَا طَالِبَةٌ إِنْدُونِيسِيَّةٌ.", en: "Rina says: أَنَا طَالِبَةٌ إِنْدُونِيسِيَّةٌ." }
+  - id: e1-r-c2
+    type: choice
+    prompt: "Di mana tas Rina?"
+    options: ["di bawah tempat tidur", "di atas meja", "di sebelah dapur"]
+    answer: "di bawah tempat tidur"
+    why: { id: "حَقِيبَتِي تَحْتَ السَّرِيرِ: tasku di bawah tempat tidur.", en: "حَقِيبَتِي تَحْتَ السَّرِيرِ: my bag is under the bed." }
+  - id: e1-r-c3
+    type: gap
+    match: exact
+    prompt: "كِتَابِي عَلَى ___."
+    options: ["الطَّاوِلَةِ", "الطَّاوِلَةُ"]
+    answer: "الطَّاوِلَةِ"
+    why: { id: "Setelah عَلَى, akhirannya *-i*.", en: "After عَلَى, the ending is *-i*." }
+  - id: e1-r-c4
+    type: read
+    ar: "شَقَّتُهَا"
+    options: ["apartemennya (milik Mona)", "apartemenku", "apartemenmu"]
+    answer: "apartemennya (milik Mona)"
+    why: { id: "Akhiran ـهَا berarti milik dia, perempuan: Mona.", en: "The ending ـهَا means hers: Mona's." }

@@ -1,0 +1,200 @@
+# Cek huruf (PRD §5.2, DESIGN §6.9): 20 items, no feedback during the check.
+# 18+ → Easy 1 (Huruf 1 and 2 climbed); 14–17 → Huruf 2 (Huruf 1 climbed); under 14 → Huruf 1.
+# Letter forms use tatweel (بـ ـبـ ـب), never presentation-form code points.
+thresholds: { easy1: 18, huruf2: 14 }
+items:
+  # ---- forms (6): one letter in each of the four positions, plus two look-alikes
+  - id: pl-01
+    section: forms
+    from: huruf1-05-tidak-menyambung
+    type: choice
+    match: exact
+    prompt: "Huruf ini namanya apa? ذ"
+    options: ["dal", "dzal", "zai", "ra"]
+    answer: "dzal"
+    why: { id: "ذ adalah dzal: bentuk dal dengan satu titik di atas.", en: "ذ is dzal: the dal shape with one dot above." }
+  - id: pl-02
+    section: forms
+    from: huruf1-07-tha-zha-ain-ghain
+    type: choice
+    match: exact
+    prompt: "Bentuk awal ini huruf apa? غـ"
+    options: ["ع", "غ", "ف", "خ"]
+    answer: "غ"
+    why: { id: "غـ adalah ghain di awal kata: kepala ain dengan satu titik.", en: "غـ is ghain at the start of a word: the ain head with one dot." }
+  - id: pl-03
+    section: forms
+    from: huruf1-10-mim-ha
+    type: choice
+    match: exact
+    prompt: "Bentuk tengah ini huruf apa? ـهـ"
+    options: ["م", "ح", "ه", "ع"]
+    answer: "ه"
+    why: { id: "ـهـ adalah ha (ه) di tengah kata, seperti di أَهْلٌ.", en: "ـهـ is ha (ه) in the middle of a word, as in أَهْلٌ." }
+  - id: pl-04
+    section: forms
+    from: huruf1-07-tha-zha-ain-ghain
+    type: choice
+    match: exact
+    prompt: "Bentuk akhir ini huruf apa? ـع"
+    options: ["ع", "غ", "ح", "ج"]
+    answer: "ع"
+    why: { id: "ـع adalah ain di akhir kata, tanpa titik.", en: "ـع is ain at the end of a word, with no dot." }
+  - id: pl-05
+    section: forms
+    from: huruf1-03-nun-ya
+    type: choice
+    match: exact
+    prompt: "Bentuk tengah ini huruf apa? ـيـ"
+    options: ["ب", "ن", "ث", "ي"]
+    answer: "ي"
+    why: { id: "Gigi dengan dua titik di bawah adalah ya.", en: "A tooth with two dots below is ya." }
+  - id: pl-06
+    section: forms
+    from: huruf1-11-hamzah-ta-marbuthah
+    type: choice
+    match: exact
+    prompt: "Bentuk akhir ini huruf apa? ـة"
+    options: ["ه", "ة", "ت", "ى"]
+    answer: "ة"
+    why: { id: "Bentuk ha dengan dua titik di atas adalah ta marbuta.", en: "The ha shape with two dots above is ta marbuta." }
+
+  # ---- reading (6): vowelled words → choose the transliteration
+  - id: pl-07
+    section: reading
+    from: huruf2-01-mad
+    type: read
+    match: exact
+    ar: "كِتَابٌ"
+    options: ["katabun", "kitābun", "kutubun"]
+    answer: "kitābun"
+    why: { id: "Kasrah di ك, lalu *tā* panjang karena alif: *kitābun*.", en: "Kasrah on ك, then a long *tā* from the alif: *kitābun*." }
+  - id: pl-08
+    section: reading
+    from: huruf2-02-sukun
+    type: read
+    match: exact
+    ar: "مَدْرَسَةٌ"
+    options: ["madrasatun", "madarasatun", "mudarrisatun"]
+    answer: "madrasatun"
+    why: { id: "د bersukun: *mad-ra-sa-tun*.", en: "د has sukun: *mad-ra-sa-tun*." }
+  - id: pl-09
+    section: reading
+    from: huruf2-03-syaddah
+    type: read
+    match: exact
+    ar: "سُكَّرٌ"
+    options: ["sukarun", "sakkārun", "sukkarun"]
+    answer: "sukkarun"
+    why: { id: "Syaddah di ك: *suk-ka-run*.", en: "Shaddah on ك: *suk-ka-run*." }
+  - id: pl-10
+    section: reading
+    from: huruf2-04-tanwin
+    type: read
+    match: exact
+    ar: "قَلَمًا"
+    options: ["qalaman", "qalamun", "qalamā"]
+    answer: "qalaman"
+    why: { id: "Dua fathah: *-an*. Alifnya tidak dibaca panjang.", en: "Two fathahs: *-an*. The alif is not read long." }
+  - id: pl-11
+    section: reading
+    from: huruf2-05-syamsiyah-qamariyah
+    type: read
+    match: exact
+    ar: "الشَّمْسُ"
+    options: ["al-syamsu", "asy-syamsun", "asy-syamsu"]
+    answer: "asy-syamsu"
+    why: { id: "ش huruf syamsiyah: lam melebur, *asy-syamsu*.", en: "ش is a sun letter: the lam merges, *asy-syamsu*." }
+  - id: pl-12
+    section: reading
+    from: huruf2-06-hamzah-washal
+    type: read
+    match: exact
+    ar: "فِي البَيْتِ"
+    options: ["fī l-bayti", "fī al-bayti", "fī l-baytun"]
+    answer: "fī l-bayti"
+    why: { id: "Setelah *fī*, alif ال dilewati: *fī l-bayti*.", en: "After *fī*, the alif of ال is skipped: *fī l-bayti*." }
+
+  # ---- harakat (4): pick the mark on the hidden letter
+  - id: pl-13
+    section: harakat
+    from: huruf2-01-mad
+    type: mark
+    match: exact
+    prompt: "Vokal apa di huruf kedua?"
+    ar: "طَبِيبٌ"
+    target: 1
+    options: [fatha, kasra, damma]
+    answer: kasra
+    why: { id: "*Ṭabībun*: ya panjang didahului kasrah.", en: "*Ṭabībun*: a long ya follows a kasrah." }
+  - id: pl-14
+    section: harakat
+    from: huruf2-02-sukun
+    type: mark
+    match: exact
+    prompt: "Tanda apa di huruf kedua?"
+    ar: "قَلْبٌ"
+    target: 1
+    options: [fatha, sukun, kasra, damma]
+    answer: sukun
+    why: { id: "*Qalbun*: ل ditutup tanpa vokal.", en: "*Qalbun*: ل is closed with no vowel." }
+  - id: pl-15
+    section: harakat
+    from: huruf2-03-syaddah
+    type: mark
+    match: exact
+    prompt: "Tanda apa di huruf kedua?"
+    ar: "حَمَّامٌ"
+    target: 1
+    options: [sukun, fatha, shadda]
+    answer: shadda
+    why: { id: "*Ḥammāmun*: م dobel.", en: "*Ḥammāmun*: م is doubled." }
+  - id: pl-16
+    section: harakat
+    from: huruf2-04-tanwin
+    type: mark
+    match: exact
+    prompt: "Tanda apa di huruf terakhir?"
+    ar: "وَلَدٌ"
+    target: 2
+    options: [tanwin-fath, tanwin-damm, tanwin-kasr, damma]
+    answer: tanwin-damm
+    why: { id: "*Waladun*: akhiran *-un*, dua dhammah.", en: "*Waladun*: the *-un* ending, two dhammahs." }
+
+  # ---- sounds (4): listen and pick what you heard
+  - id: pl-17
+    section: sounds
+    from: huruf2-07-ain-ha-kha
+    type: listen
+    match: exact
+    audio: "عَلِيمٌ"
+    options: ["أَلِيمٌ", "عَلِيمٌ"]
+    answer: "عَلِيمٌ"
+    why: { id: "Kamu mendengar ع yang tertekan: *ʿalīmun*, yang tahu. أَلِيمٌ artinya menyakitkan.", en: "You heard a pressed ع: *ʿalīmun*, knowing. أَلِيمٌ means painful." }
+  - id: pl-18
+    section: sounds
+    from: huruf2-07-ain-ha-kha
+    type: listen
+    match: exact
+    audio: "حَالٌ"
+    options: ["حَالٌ", "هَالٌ"]
+    answer: "حَالٌ"
+    why: { id: "Desah tajam dari tengah tenggorokan: ح, *ḥālun*, keadaan.", en: "A sharp breath from the middle of the throat: ح, *ḥālun*, state." }
+  - id: pl-19
+    section: sounds
+    from: huruf2-08-qaf-tsa-dzal-dad
+    type: listen
+    match: exact
+    audio: "قَلْبٌ"
+    options: ["كَلْبٌ", "قَلْبٌ"]
+    answer: "قَلْبٌ"
+    why: { id: "Bunyi dalam dari pangkal lidah: ق, *qalbun*, hati.", en: "A deep sound from the back of the tongue: ق, *qalbun*, heart." }
+  - id: pl-20
+    section: sounds
+    from: huruf2-08-qaf-tsa-dzal-dad
+    type: listen
+    match: exact
+    audio: "صَيْفٌ"
+    options: ["سَيْفٌ", "صَيْفٌ"]
+    answer: "صَيْفٌ"
+    why: { id: "*S* yang tebal dan *a* yang gelap: ص, *ṣayfun*, musim panas.", en: "A heavy *s* and a dark *a*: ص, *ṣayfun*, summer." }

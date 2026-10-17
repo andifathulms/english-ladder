@@ -1,0 +1,29 @@
+{
+  "name": "arabic-ladder",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A calm, levelled Arabic course for Indonesian speakers, from the first letter.",
+  "scripts": {
+    "dev": "next dev",
+    "prebuild": "npm run content:check",
+    "build": "next build",
+    "preview": "node ../../packages/ladder-core/scripts/serve.mjs",
+    "content:check": "tsx ../../packages/ladder-core/scripts/content-check.ts",
+    "audio:list": "tsx scripts/audio-list.ts",
+    "audio:ingest": "tsx ../../packages/ladder-core/scripts/audio-ingest.ts",
+    "translit:check": "tsx scripts/translit-check.ts",
+    "icons": "node ../../packages/ladder-core/scripts/make-icons.mjs '#0F3B2E'",
+    "sw": "node ../../packages/ladder-core/scripts/make-sw.mjs arabic-ladder- v0.1.0 '' rung/huruf-1/ rung/huruf-2/ rung/easy-1/ placement/ review/ words/ me/ settings/ about/ manifest.webmanifest icons/icon.svg audio/manifest.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "lint": "next lint",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@ladder/core": "*",
+    "next": "14.2.33",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}
