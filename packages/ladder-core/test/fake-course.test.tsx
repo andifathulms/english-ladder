@@ -10,7 +10,7 @@ import { Sentence } from '@ladder/core/components/lesson/Sentence';
 import { OptionPill } from '@ladder/core/components/check/OptionPill';
 import { CheckItemView } from '@ladder/core/components/check/CheckItemView';
 import { baseStrings } from '@ladder/core/lib/i18n';
-import { DEFAULT_SETTINGS } from '@ladder/core/lib/progress/defaults';
+import { CORE_DEFAULT_SETTINGS } from '@ladder/core/lib/progress/config';
 import type { CheckItem } from '@ladder/core/lib/types';
 
 const fakeArabic: CourseConfig = {
@@ -25,7 +25,8 @@ const fakeArabic: CourseConfig = {
   ui: { defaultLang: 'id' },
   strings: baseStrings,
   explainLangs: [],
-  settings: { defaults: DEFAULT_SETTINGS, options: { accents: [], voices: [] } },
+  settings: { defaults: CORE_DEFAULT_SETTINGS, options: { accents: [], voices: [] } },
+  progress: { schemaVersion: 1 },
   speech: { voiceScorer: () => -Infinity, sentenceSplit: /[^.!?]+[.!?]*/g, canSpeak: () => false, sampleText: '' },
   text: { normalise: (s) => s, tokenEquals: (a, b) => a === b, trimPunct: /$/u, tokenise: () => [] },
   lint: { wordRegex: /\S+/g, knownWord: () => true, detectors: [], structureRules: {} },

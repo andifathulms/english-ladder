@@ -145,7 +145,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
     return () => window.removeEventListener('keydown', onKey);
   }, [step, canContinue, go, advance, course.target.dir]);
 
-  const effective = settings.explain === 'rung' ? rung.explain_lang : settings.explain;
+  const effective = (settings.explain === 'rung' ? rung.explain_lang : settings.explain) as 'id' | 'en' | 'mixed';
   // Short strand cards have no collapsed translation, so mixed shows English.
   const cardLang = effective === 'id' ? 'id' : 'en';
   const explain = (b: { id: string; en: string }) =>

@@ -1,4 +1,4 @@
-import { STORAGE_KEY } from './constants';
+import { configureProgress, progressConfig, type ProgressConfig } from './config';
 import { emptyState } from './defaults';
 import { migrate } from './migrations';
 import { nextBox } from '../check/leitner';
@@ -19,10 +19,11 @@ function load() {
   if (loaded || typeof window === 'undefined') return;
   loaded = true;
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const key = progressConfig().storageKey;
+    const raw = window.localStorage.getItem(key);
     if (raw) state = migrate(JSON.parse(raw));
     // Probe that writes work too (Safari private mode, blocked site data).
-    const probe = `${STORAGE_KEY}:probe`;
+    const probe = `${key}:probe`;
     window.localStorage.setItem(probe, '1');
     window.localStorage.removeItem(probe);
   } catch {
@@ -43,7 +44,7 @@ export function flush() {
   timer = null;
   if (!storageOk || !dirty) return;
   try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    window.localStorage.setItem(progressConfig().storageKey, JSON.stringify(state));
     dirty = false;
   } catch {
     storageOk = false;
@@ -74,8 +75,18 @@ export function getState(): ProgressState {
   return state;
 }
 
-const SERVER_STATE = emptyState();
-export const getServerState = () => SERVER_STATE;
+let serverState = emptyState();
+export const getServerState = () => serverState;
+
+/**
+ * Points the store at a course (storage key, schema version, migrations, settings). Call before the
+ * first read; the app's providers do it at module load. Resets anything read so far.
+ */
+export function configure(c: Partial<ProgressConfig> & Pick<ProgressConfig, 'storageKey'>) {
+  configureProgress(c);
+  serverState = emptyState();
+  __resetForTests();
+}
 
 export function isStorageAvailable() {
   load();
@@ -167,7 +178,7 @@ export function getSettings(): Settings {
 
 export function setSettings(patch: Partial<Settings>) {
   const s = getState();
-  commit({ ...s, settings: { ...s.settings, ...patch } });
+  commit({ ...s, settings: { ...s.settings, ...patch } as Settings });
   flush();
 }
 

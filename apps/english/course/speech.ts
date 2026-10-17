@@ -35,7 +35,7 @@ export function scoreVoice(v: SpeechSynthesisVoice, accent: Accent = 'gb', gende
 
 /** Scorer bound to the learner's accent and gender settings. */
 export const voiceScorer = (v: SpeechSynthesisVoice, settings: Settings) =>
-  scoreVoice(v, settings.accent, settings.voice);
+  scoreVoice(v, settings.accent as Accent, settings.voice);
 
 /** True when any usable English voice exists. */
 export const canSpeak = (voices: SpeechSynthesisVoice[]) => voices.some((v) => scoreVoice(v) > -Infinity);

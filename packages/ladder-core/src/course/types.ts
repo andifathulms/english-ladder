@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react';
 import type { Settings } from '@ladder/core/lib/progress/types';
+import type { MigrationStep, ProgressConfig, ProgressFeatures } from '@ladder/core/lib/progress/config';
 import type { Noun } from '@ladder/core/lib/types';
 import type { StringTables, UiLang } from '@ladder/core/lib/i18n';
 
@@ -74,7 +75,20 @@ export type CourseConfig = {
   /** UI strings: core base tables extended with this course's overrides. */
   strings: StringTables;
   explainLangs: ExplainLang[];
-  settings: { defaults: Settings; options: SettingsOptions };
+  settings: {
+    /** Default settings, in stored key order (core settings plus the course's own). */
+    defaults: Settings;
+    /** Allowed values for the course's own settings (core settings are built in). */
+    allowed?: Record<string, readonly unknown[]>;
+    options: SettingsOptions;
+  };
+  /** The stored progress shape. `storageKey` above is where it lives. */
+  progress: {
+    schemaVersion: number;
+    /** Steps keyed by the version they upgrade from (0 → 1 is built in). */
+    migrations?: Record<number, MigrationStep>;
+    features?: ProgressFeatures;
+  };
   speech: SpeechRules;
   text: TextRules;
   lint: LintRules;
@@ -89,3 +103,15 @@ export type CourseConfig = {
     wordAnnotator?: (word: string, noun: Noun | undefined) => WordAnnotation;
   };
 };
+
+/** The store configuration for a course (pass to store.configure at app start). */
+export function progressConfigOf(c: CourseConfig): ProgressConfig {
+  return {
+    storageKey: c.storageKey,
+    schemaVersion: c.progress.schemaVersion,
+    migrations: c.progress.migrations ?? {},
+    defaults: c.settings.defaults,
+    allowed: c.settings.allowed ?? {},
+    features: c.progress.features ?? {},
+  };
+}

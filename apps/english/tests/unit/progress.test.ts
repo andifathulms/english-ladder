@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as store from '@ladder/core/lib/progress/store';
 import { migrate, MigrationError } from '@ladder/core/lib/progress/migrations';
-import { STORAGE_KEY, SCHEMA_VERSION } from '@ladder/core/lib/progress/constants';
+import { STORAGE_KEY, SCHEMA_VERSION } from '@/course/progress';
 import { continueTarget, currentRung, lessonState, weekDays } from '@ladder/core/lib/progress/derive';
 import { emptyState } from '@ladder/core/lib/progress/defaults';
 import type { LessonSummary, Rung } from '@ladder/core/lib/types';

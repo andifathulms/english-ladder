@@ -2,7 +2,7 @@
 // behaviour exactly, so the app looks and behaves identically after the extraction.
 import type { CourseConfig } from '@ladder/core/course/types';
 import { Contours } from '@ladder/core/components/ui/Contours';
-import { DEFAULT_SETTINGS } from '@ladder/core/lib/progress/defaults';
+import { ALLOWED_SETTINGS, DEFAULT_SETTINGS, SCHEMA_VERSION, STORAGE_KEY, migrations } from '@/course/progress';
 import { baseStrings, extendStrings } from '@ladder/core/lib/i18n';
 import { idOverrides, enOverrides } from '@/i18n/overrides';
 import { registry } from '@/visuals/registry';
@@ -16,7 +16,7 @@ export const course: CourseConfig = {
   id: 'english-ladder',
   name: 'English Ladder',
   rangeLabel: 'A1 → C1',
-  storageKey: 'english-ladder:v1',
+  storageKey: STORAGE_KEY,
   cachePrefix: 'english-ladder-',
   exportFilePrefix: 'english-ladder-progress',
   repoUrl: 'https://github.com/andifathulms/english-ladder',
@@ -36,6 +36,7 @@ export const course: CourseConfig = {
 
   settings: {
     defaults: DEFAULT_SETTINGS,
+    allowed: ALLOWED_SETTINGS,
     options: {
       accents: [
         { value: 'gb', label: { id: 'Britania', en: 'British' } },
@@ -47,6 +48,8 @@ export const course: CourseConfig = {
       ],
     },
   },
+
+  progress: { schemaVersion: SCHEMA_VERSION, migrations },
 
   speech: { voiceScorer, sentenceSplit, canSpeak, sampleText },
 

@@ -27,3 +27,9 @@ import '@testing-library/jest-dom/vitest';
   }
   Object.defineProperty(globalThis, 'localStorage', { value: new MemoryStorage(), configurable: true });
 }
+
+// The app configures the store in app/providers.tsx; tests do it here.
+import { progressConfigOf } from '@ladder/core/course/types';
+import * as store from '@ladder/core/lib/progress/store';
+import { course } from '@/course.config';
+store.configure(progressConfigOf(course));
