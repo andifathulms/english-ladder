@@ -9,7 +9,7 @@ import { newSeed } from '@ladder/core/lib/check/random';
 import { answerText } from '@ladder/core/lib/check/text';
 import * as store from '@ladder/core/lib/progress/store';
 import { lessonHref, rungHref } from '@ladder/core/lib/routes';
-import { useProgress, useT } from '../ProgressProvider';
+import { useProgress, useT, type T } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
 import { IconArrowLeft, IconArrowRight, IconCheck, IconClose } from '../ui/Icon';
 import { BottomActionBar } from '../lesson/BottomActionBar';
@@ -208,7 +208,7 @@ export function TestRunner({ rung, next, pool, lessons }: Props) {
   );
 }
 
-function ReviewRow({ item, given, ok, t }: { item: CheckItem; given: string; ok: boolean; lang: string; t: ReturnType<typeof useT>['t'] }) {
+function ReviewRow({ item, given, ok, t }: { item: CheckItem; given: string; ok: boolean; lang: string; t: T }) {
   const { target } = useCourse();
   return (
     <li className="card flex flex-col gap-2 p-4">

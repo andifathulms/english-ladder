@@ -39,12 +39,13 @@ export function useSettings(): Settings {
   return useProgress().settings;
 }
 
-export type T = (key: StringKey, vars?: Record<string, string | number>) => string;
+export type T<K extends string = never> = (key: StringKey | K, vars?: Record<string, string | number>) => string;
 
-export function useT(): { t: T; lang: UiLang } {
+/** UI strings in the learner's language. Courses pass their own key union: useT<'my.key'>(). */
+export function useT<K extends string = never>(): { t: T<K>; lang: UiLang } {
   const lang = useSettings().uiLang;
   const { strings } = useCourse();
-  const t = useCallback<T>((key, vars) => translate(strings, lang, key, vars), [strings, lang]);
+  const t = useCallback<T<K>>((key, vars) => translate(strings, lang, key, vars), [strings, lang]);
   return { t, lang };
 }
 

@@ -10,18 +10,26 @@ export type StringTables = Record<UiLang, StringTable>;
 export const baseStrings: StringTables = { id, en };
 export { id, en };
 
-/** Merge per-app overrides onto a base table. Keys stay in sync (checked by a unit test). */
-export function extendStrings(base: StringTable, overrides: Partial<StringTable>): StringTable {
+/**
+ * Merges a course's strings onto a base table: overrides of engine keys, plus keys of its own
+ * (`K`, used by the course's components through useT<K>()). Both languages must define the same
+ * keys (checked by each app's unit test).
+ */
+export function extendStrings<K extends string = never>(
+  base: StringTable,
+  overrides: Partial<StringTable> & Partial<Record<K, string>>,
+): StringTable {
   return { ...base, ...overrides };
 }
 
 export function translate(
   tables: StringTables,
   lang: UiLang,
-  key: StringKey,
+  key: StringKey | (string & {}),
   vars?: Record<string, string | number>,
 ): string {
-  let s = tables[lang][key] ?? tables.id[key] ?? key;
+  const table = tables[lang] as Record<string, string>;
+  let s = table[key] ?? (tables.id as Record<string, string>)[key] ?? key;
   if (vars) for (const [k, v] of Object.entries(vars)) s = s.split(`{${k}}`).join(String(v));
   return s;
 }
