@@ -10,6 +10,7 @@ export function homePage(content: Content) {
         rungs={rungs}
         lessons={content.getAllSummaries()}
         testRungs={rungs.filter((r) => content.getTestPool(r.id)).map((r) => r.id)}
+        hasPlacement={!!content.getPlacement()}
       />
     );
   };

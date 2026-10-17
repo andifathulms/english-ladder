@@ -241,6 +241,12 @@ export const id = {
   'rung.missedHint': 'Ditandai: pelajaran di balik soal cek yang terlewat.',
   'rung.missedBadge': 'ulang',
   'test.progress': 'Soal {n} dari {total}',
+  // Two-door welcome (home.welcome: twoDoor); courses override these.
+  'home.doorsBody': 'Baru mulai? Mulai dari anak tangga pertama. Sudah punya dasar? Ikut cek posisi dulu.',
+  'home.door1': 'Saya baru mulai',
+  'home.door1Sub': 'Mulai dari anak tangga pertama',
+  'home.door2': 'Saya sudah punya dasar',
+  'home.door2Sub': 'Cek posisi, beberapa menit',
 } as const;
 
 export type StringKey = keyof typeof id;

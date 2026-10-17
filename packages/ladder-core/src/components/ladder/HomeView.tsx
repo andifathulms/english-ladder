@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import type { LessonSummary, Rung } from '@ladder/core/lib/types';
 import { completedCount, continueTarget, currentRung, doneCount } from '@ladder/core/lib/progress/derive';
-import { lessonHref, rungHref } from '@ladder/core/lib/routes';
+import { lessonHref, placementHref, rungHref } from '@ladder/core/lib/routes';
 import { useHydrated, useProgress, useT, type T } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
 import { AppShell } from '../ui/AppShell';
@@ -13,7 +13,7 @@ import { Accented, ContinueCard } from './ContinueCard';
 import { LadderRail } from './LadderRail';
 import { LessonStrip } from './LessonStrip';
 
-type Props = { rungs: Rung[]; lessons: LessonSummary[]; testRungs: string[] };
+type Props = { rungs: Rung[]; lessons: LessonSummary[]; testRungs: string[]; hasPlacement?: boolean };
 
 function greeting(t: T, now: Date): string {
   const h = now.getHours();
@@ -23,16 +23,16 @@ function greeting(t: T, now: Date): string {
   return t('home.greet.night');
 }
 
-export function HomeView({ rungs, lessons }: Props) {
+export function HomeView({ rungs, lessons, hasPlacement }: Props) {
   const progress = useProgress();
   const hydrated = useHydrated();
   const { t, lang } = useT();
-  const { name } = useCourse();
+  const { name, home } = useCourse();
   const cefr = useCefr();
   const target = continueTarget(rungs, lessons, progress);
   // While a learner works in an optional rung (Starter), the board and strip follow that rung.
   const here = (target.kind === 'lesson' && rungs.find((r) => r.id === target.lesson.rung)) || currentRung(rungs, progress);
-  const main = rungs.find((r) => r.status === 'live' && !r.optional) ?? rungs[0];
+  const main = (home?.firstRung ? home.firstRung(rungs) : rungs.find((r) => r.status === 'live' && !r.optional)) ?? rungs[0];
   const first = lessons.filter((l) => l.rung === main.id).sort((a, b) => a.order - b.order)[0];
   const starter = rungs.find((r) => r.optional && r.status === 'live');
   const showReview = completedCount(lessons, progress) >= 2;
@@ -69,6 +69,7 @@ export function HomeView({ rungs, lessons }: Props) {
             target={target}
             firstLessonHref={first ? lessonHref(first) : null}
             starterHref={starter ? rungHref(starter.id) : null}
+            placementHref={hasPlacement ? placementHref : null}
             rungs={rungs}
           />
 

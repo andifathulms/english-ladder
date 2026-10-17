@@ -242,4 +242,10 @@ export const en: Record<StringKey, string> = {
   'rung.missedHint': 'Marked: lessons behind the check questions you missed.',
   'rung.missedBadge': 'revisit',
   'test.progress': 'Question {n} of {total}',
+  // Two-door welcome (home.welcome: twoDoor); courses override these.
+  'home.doorsBody': 'New to this? Start at the first rung. Know some already? Take the placement check first.',
+  'home.door1': "I'm just starting",
+  'home.door1Sub': 'Start at the first rung',
+  'home.door2': 'I already know some',
+  'home.door2Sub': 'Placement check, a few minutes',
 };

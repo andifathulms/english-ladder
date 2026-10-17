@@ -200,6 +200,16 @@ export type CourseConfig = {
   itemTypes?: Record<string, ItemTypeLogic>;
   /** Strand cards per lesson step, in order (e.g. English Talk + Sound, then Words). */
   strands?: { examples?: StrandCard[]; contrast?: StrandCard[] };
+  /** Home: the first-visit board. */
+  home?: {
+    /** 'start' (default): one button to the first lesson. 'twoDoor': start from the first rung, or
+     *  take the placement check (needs placement.yaml). */
+    welcome?: 'start' | 'twoDoor';
+    /** The rung the first door (or start button) opens. Default: the first live, non-optional rung. */
+    firstRung?: (rungs: Rung[]) => Rung | undefined;
+    /** A small mark at the top inline-end of the two-door board (Arabic: سُلَّم). */
+    Ornament?: ComponentType;
+  };
   /** A placement check (placement.yaml) for learners who already know some of the course. */
   placement?: PlacementConfig;
   /** The ladder: tier order and per-rung extras. */

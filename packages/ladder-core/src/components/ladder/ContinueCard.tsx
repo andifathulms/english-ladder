@@ -8,6 +8,7 @@ import { IconArrowRight } from '../ui/Icon';
 import { useT } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
 import { STEP_KEYS } from '../lesson/steps';
+import { TwoDoorWelcome } from './TwoDoorWelcome';
 
 /** Sets the last word in brass italic, the way the board marks what matters. */
 export function Accented({ text, tone = 'text-brass' }: { text: string; tone?: string }) {
@@ -54,15 +55,23 @@ function StepDots({ step }: { step: number }) {
 }
 
 /** The board: the single next thing to do, quoting the exact sentence where you stopped. */
-type CardProps = { target: ContinueTarget; firstLessonHref: string | null; starterHref?: string | null; rungs: Rung[] };
+type CardProps = {
+  target: ContinueTarget;
+  firstLessonHref: string | null;
+  starterHref?: string | null;
+  /** Two-door welcome only: the placement check, when the course has one. */
+  placementHref?: string | null;
+  rungs: Rung[];
+};
 
-export function ContinueCard({ target, firstLessonHref, starterHref, rungs }: CardProps) {
-  const { boardPattern: Board, components } = useCourse();
+export function ContinueCard({ target, firstLessonHref, starterHref, placementHref = null, rungs }: CardProps) {
+  const { boardPattern: Board, components, home } = useCourse();
   const BoardQuote = components?.BoardQuote;
   const { t, lang } = useT();
   const shell = 'board flex flex-col gap-4 p-6 min-[900px]:gap-5 min-[900px]:p-9';
 
   if (target.kind === 'welcome') {
+    if (home?.welcome === 'twoDoor') return <TwoDoorWelcome firstHref={firstLessonHref} placementHref={placementHref} />;
     return (
       <section className={shell} aria-labelledby="welcome-title">
         <Board />
