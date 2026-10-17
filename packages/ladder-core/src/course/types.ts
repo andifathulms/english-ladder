@@ -205,6 +205,16 @@ export type CourseConfig = {
     defaults: Settings;
     /** Allowed values for the course's own settings (core settings are built in). */
     allowed?: Record<string, readonly unknown[]>;
+    /** A second size setting for target-language type only (Arabic: Ukuran teks Arab). The value is
+     *  mirrored to <html attr="…"> (omitted at 100) and shown under Display with a preview. */
+    targetSize?: {
+      key: string;
+      attr: string;
+      options: number[];
+      /** UI string key for the row label. */
+      labelKey: string;
+      Preview?: ComponentType;
+    };
     options: SettingsOptions;
   };
   /** The stored progress shape. `storageKey` above is where it lives. */

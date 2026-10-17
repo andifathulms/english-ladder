@@ -10,12 +10,17 @@ import { setSfxEnabled } from '@ladder/core/lib/speech/sfx';
 
 const Ctx = createContext<ProgressState | null>(null);
 
-function applySettings(s: Settings, themeColor: { light: string; dark: string } | null) {
+function applySettings(s: Settings, themeColor: { light: string; dark: string } | null, targetSize: { key: string; attr: string } | null) {
   const d = document.documentElement;
   if (s.theme === 'system') d.removeAttribute('data-theme');
   else d.setAttribute('data-theme', s.theme);
   if (s.textSize === 100) d.removeAttribute('data-text-size');
   else d.setAttribute('data-text-size', String(s.textSize));
+  if (targetSize) {
+    const v = s[targetSize.key];
+    if (v === 100 || v === undefined) d.removeAttribute(targetSize.attr);
+    else d.setAttribute(targetSize.attr, String(v));
+  }
   if (s.motion === 'reduce') d.setAttribute('data-motion', 'reduce');
   else d.removeAttribute('data-motion');
   d.setAttribute('lang', s.uiLang);
@@ -31,7 +36,8 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   const state = useSyncExternalStore(store.subscribe, store.getState, store.getServerState);
   const course = useCourse();
   const themeColor = (course.fixes?.themeColorFollowsTheme && course.themeColor) || null;
-  useEffect(() => applySettings(state.settings, themeColor), [state.settings, themeColor]);
+  const targetSize = course.settings.targetSize ?? null;
+  useEffect(() => applySettings(state.settings, themeColor, targetSize), [state.settings, themeColor, targetSize]);
   useEffect(() => setSfxEnabled(state.settings.sfx), [state.settings.sfx]);
   useEffect(() => registerServiceWorker(), []);
   return <Ctx.Provider value={state}>{children}</Ctx.Provider>;

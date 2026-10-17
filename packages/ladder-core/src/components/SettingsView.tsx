@@ -33,7 +33,8 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 export function SettingsView() {
   const { t } = useT();
   const s = useSettings();
-  const { speech, exportFilePrefix } = useCourse();
+  const { speech, exportFilePrefix, settings: courseSettings } = useCourse();
+  const targetSize = courseSettings.targetSize;
   const set = (patch: Partial<Settings>) => store.setSettings(patch);
   const canSpeak = useCanSpeak();
   const speakSample = useSpeak();
@@ -163,6 +164,17 @@ export function SettingsView() {
             ]}
           />
         </Row>
+        {targetSize && (
+          <Row label={t(targetSize.labelKey as never)}>
+            <Segmented
+              label={t(targetSize.labelKey as never)}
+              value={s[targetSize.key] as number}
+              onChange={(v) => set({ [targetSize.key]: v })}
+              options={targetSize.options.map((n) => ({ value: n, label: `${n}%` }))}
+            />
+            {targetSize.Preview && <targetSize.Preview />}
+          </Row>
+        )}
         <Row label={t('settings.theme')}>
           <Segmented
             label={t('settings.theme')}
