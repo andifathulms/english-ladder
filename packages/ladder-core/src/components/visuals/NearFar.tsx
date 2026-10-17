@@ -91,7 +91,7 @@ export function NearFar({ state, interactive = true, onStateChange, lang }: Visu
                 key={v}
                 type="button"
                 {...roving.itemProps(v, i)}
-                className="flex min-h-pill flex-col items-start justify-center rounded-md border-2 px-4 py-1 text-left transition-colors duration-quick"
+                className="flex min-h-pill flex-col items-start justify-center rounded-md border-2 px-4 py-1 text-start transition-colors duration-quick"
                 style={
                   v === d
                     ? { background: 'var(--accent-soft)', borderColor: 'var(--accent)' }

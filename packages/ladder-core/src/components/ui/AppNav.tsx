@@ -39,7 +39,7 @@ export function AppNav() {
   return (
     <nav
       aria-label={t('nav.main')}
-      className="fixed inset-x-0 bottom-0 z-20 border-t border-rule bg-surface pb-[max(var(--s-2),env(safe-area-inset-bottom))] min-[900px]:inset-y-0 min-[900px]:right-auto min-[900px]:flex min-[900px]:w-[var(--sidebar-w)] min-[900px]:flex-col min-[900px]:gap-6 min-[900px]:border-t-0 min-[900px]:bg-board min-[900px]:px-3 min-[900px]:py-5"
+      className="fixed inset-x-0 bottom-0 z-20 border-t border-rule bg-surface pb-[max(var(--s-2),env(safe-area-inset-bottom))] min-[900px]:inset-y-0 min-[900px]:end-auto min-[900px]:flex min-[900px]:w-[var(--sidebar-w)] min-[900px]:flex-col min-[900px]:gap-6 min-[900px]:border-t-0 min-[900px]:bg-board min-[900px]:px-3 min-[900px]:py-5"
     >
       <Link
         href="/"
@@ -58,7 +58,7 @@ export function AppNav() {
                 aria-current={on ? 'page' : undefined}
                 className={`flex min-h-[56px] flex-col items-center justify-center gap-1 rounded-full text-tab font-bold no-underline transition-colors duration-quick min-[900px]:min-h-[46px] min-[900px]:flex-row min-[900px]:justify-start min-[900px]:gap-3 min-[900px]:px-4 min-[900px]:text-body min-[900px]:font-medium ${
                   on
-                    ? 'text-accent min-[900px]:bg-board-2 min-[900px]:text-board-ink min-[900px]:shadow-[inset_3px_0_0_var(--brass)]'
+                    ? 'text-accent min-[900px]:bg-board-2 min-[900px]:text-board-ink min-[900px]:shadow-[inset_3px_0_0_var(--brass)] min-[900px]:rtl:shadow-[inset_-3px_0_0_var(--brass)]'
                     : 'text-muted hover:text-ink min-[900px]:text-board-muted min-[900px]:hover:bg-board-2 min-[900px]:hover:text-board-ink'
                 }`}
               >

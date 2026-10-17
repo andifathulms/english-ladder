@@ -27,7 +27,7 @@ export function MeView({ lessons }: { lessons: LessonSummary[] }) {
 
   return (
     <PageShell title={t('me.title')}>
-      <ul className="card grid grid-cols-3 divide-x divide-rule overflow-hidden">
+      <ul className="card grid grid-cols-3 divide-x divide-rule rtl:divide-x-reverse overflow-hidden">
         {stats.map((s) => (
           <li key={s.label} className="flex flex-col gap-2 px-4 py-5 min-[640px]:px-6">
             <span className="font-display text-hero font-normal leading-none tnum">{s.n}</span>

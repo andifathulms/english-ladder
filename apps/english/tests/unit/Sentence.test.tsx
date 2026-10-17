@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Sentence, segments } from '@ladder/core/components/lesson/Sentence';
-import { ProgressProvider } from '@ladder/core/components/ProgressProvider';
+import { AllProviders } from '../providers';
 
-const wrap = (ui: React.ReactNode) => render(<ProgressProvider>{ui}</ProgressProvider>);
+const wrap = (ui: React.ReactNode) => render(<AllProviders>{ui}</AllProviders>);
 
 describe('Sentence', () => {
   it('renders the focus word with the focus style and lang attributes', () => {

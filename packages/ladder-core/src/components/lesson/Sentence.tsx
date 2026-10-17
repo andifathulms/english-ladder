@@ -6,6 +6,7 @@ import type { Bilingual } from '@ladder/core/lib/types';
 import { PlayButton } from './PlayButton';
 import { useSpeak } from '../useSpeech';
 import { useT } from '../ProgressProvider';
+import { useCourse } from '@ladder/core/course/context';
 
 type Seg = { text: string; start: number; kind: 'text' | 'focus' | 'strong' | 'em'; group: number };
 
@@ -38,6 +39,7 @@ type Props = {
 
 export function Sentence({ en, id, play = true, size = 'sentence', note, off, className = '' }: Props) {
   const { t, lang } = useT();
+  const { target } = useCourse();
   const speak = useSpeak();
   const plain = useMemo(() => stripMarkup(en), [en]);
   const segs = useMemo(() => segments(en), [en]);
@@ -81,10 +83,11 @@ export function Sentence({ en, id, play = true, size = 'sentence', note, off, cl
     <div className={`flex flex-col gap-1 ${className}`}>
       <div className="flex items-start gap-2">
         <p
-          lang="en"
+          lang={target.lang}
+          dir={target.dir}
           className={`${size === 'sentence' ? 'font-display text-sentence font-medium' : 'text-body'} ${
             off ? 'off-text' : 'text-ink'
-          } min-w-0 flex-1`}
+          } min-w-0 flex-1 text-start ${target.sentenceClass}`}
         >
           {groups.map((g, gi) => {
             const kind = g[0].kind;

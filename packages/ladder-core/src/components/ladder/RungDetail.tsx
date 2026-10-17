@@ -11,6 +11,7 @@ import { Contours } from '../ui/Contours';
 import { ProgressRing } from '../ui/ProgressRing';
 import { tierName } from '../ui/tier';
 import { useT } from '../ProgressProvider';
+import { useCourse } from '@ladder/core/course/context';
 
 type Props = {
   rung: Rung;
@@ -26,6 +27,7 @@ export type ReadingInfo = { title: { en: string; id: string }; items: number };
 
 export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Props) {
   const { t, lang } = useT();
+  const course = useCourse();
   const mine = lessons.filter((l) => l.rung === rung.id).sort((a, b) => a.order - b.order);
   const tests = progress.rungs[rung.id]?.tests ?? [];
   const best = tests.length ? Math.max(...tests.map((x) => x.score)) : null;
@@ -82,7 +84,7 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Pr
         <section className="flex flex-col gap-3">
           <h2 className="text-h2">{t('rung.soonTitle', { rung: rung.name })}</h2>
           <p className="text-muted">{t('rung.soonBody')}</p>
-          <ul className="flex flex-wrap gap-2" lang="en">
+          <ul className="flex flex-wrap gap-2" lang={course.target.lang} dir={course.target.dir}>
             {rung.topics.map((topic) => (
               <li key={topic} className="card px-3 py-1 text-small">
                 {topic}
@@ -114,7 +116,7 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Pr
               </span>
               <span className="flex min-w-0 flex-1 flex-col">
                 <span className="font-display text-card font-medium">
-                  {t('read.title')}: <span lang="en">{reading.title.en}</span>
+                  {t('read.title')}: <span lang={course.target.lang} dir={course.target.dir}>{reading.title.en}</span>
                 </span>
                 <span className="text-small text-muted tnum">{t('read.meta', { n: reading.items })}</span>
               </span>
@@ -157,7 +159,7 @@ export function RungDetail({ rung, rungs, lessons, progress, test, reading }: Pr
               <li key={r.id}>
                 <Link href={rungHref(r.id)} className="card flex flex-col px-3 py-2 text-small text-ink no-underline hover:bg-paper-2">
                   <span className="font-display font-semibold">{r.name}</span>
-                  <span className="text-muted" lang="en">
+                  <span className="text-muted" lang={course.target.lang} dir={course.target.dir}>
                     {shared.join(', ')}
                   </span>
                 </Link>

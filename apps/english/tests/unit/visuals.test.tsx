@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { ProgressProvider } from '@ladder/core/components/ProgressProvider';
+import { AllProviders } from '../providers';
 import { PlaceScene } from '@ladder/core/components/visuals/PlaceScene';
 import { NounBuilder } from '@ladder/core/components/visuals/NounBuilder';
 import { PLACE_SPEC, PLACES, placeSentence } from '@ladder/core/components/visuals/placeLogic';
 import { article, pluralParts } from '@ladder/core/components/visuals/nounLogic';
 import type { Noun } from '@ladder/core/lib/types';
 
-const wrap = (ui: React.ReactNode) => render(<ProgressProvider>{ui}</ProgressProvider>);
+const wrap = (ui: React.ReactNode) => render(<AllProviders>{ui}</AllProviders>);
 
 describe('place scene logic', () => {
   it('uses the table as reference only for under', () => {
@@ -74,9 +74,9 @@ describe('NounBuilder', () => {
     const { container, rerender } = wrap(<NounBuilder lang="en" nouns={nouns} state="hour" interactive={false} />);
     expect(container.querySelector('.focus-word')!.textContent).toBe('an');
     rerender(
-      <ProgressProvider>
+      <AllProviders>
         <NounBuilder lang="en" nouns={nouns} state="university" interactive={false} />
-      </ProgressProvider>,
+      </AllProviders>,
     );
     expect(container.querySelector('.focus-word')!.textContent).toBe('a');
   });

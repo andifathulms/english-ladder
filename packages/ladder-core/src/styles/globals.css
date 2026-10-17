@@ -173,7 +173,7 @@
   }
   @media (min-width: 900px) {
     .shell {
-      padding-left: var(--sidebar-w);
+      padding-inline-start: var(--sidebar-w);
       padding-bottom: var(--s-7);
     }
   }
@@ -236,6 +236,32 @@
 }
 .step-back {
   animation: step-in-back var(--m-base-d) var(--ease) both;
+}
+/* In RTL, forward slides in from the opposite side. */
+@keyframes step-in-fwd-rtl {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--m-shift) * -1));
+  }
+}
+@keyframes step-in-back-rtl {
+  from {
+    opacity: 0;
+    transform: translateX(var(--m-shift));
+  }
+}
+[dir='rtl'] .step-fwd {
+  animation-name: step-in-fwd-rtl;
+}
+[dir='rtl'] .step-back {
+  animation-name: step-in-back-rtl;
+}
+/* Toggle knob slides toward the inline-end edge; mirrors for RTL. */
+.toggle-knob {
+  transform: translateX(var(--knob-x, 0px));
+}
+[dir='rtl'] .toggle-knob {
+  transform: translateX(calc(var(--knob-x, 0px) * -1));
 }
 .sheet-up {
   animation: sheet-up var(--m-base-d) var(--ease) both;

@@ -7,6 +7,7 @@ import { PlayButton } from './PlayButton';
 import { Sentence } from './Sentence';
 import { useSpeak } from '../useSpeech';
 import { useT } from '../ProgressProvider';
+import { useCourse } from '@ladder/core/course/context';
 
 type Lang = 'id' | 'en';
 
@@ -38,6 +39,7 @@ export function TalkCard({ talk }: { talk: NonNullable<Lesson['talk']> }) {
 /** One pronunciation point with words to play. Shown on the Examples step. */
 export function SoundCard({ sound, explain }: { sound: NonNullable<Lesson['sound']>; explain: Lang }) {
   const { t } = useT();
+  const { target } = useCourse();
   const speak = useSpeak();
   const [playing, setPlaying] = useState<string | null>(null);
   const play = async (w: string) => {
@@ -52,8 +54,8 @@ export function SoundCard({ sound, explain }: { sound: NonNullable<Lesson['sound
       </h3>
       <ul className="flex flex-wrap gap-2">
         {sound.words.map((w) => (
-          <li key={w} className="card flex items-center gap-1 py-1 pl-3 pr-1">
-            <span lang="en" className="font-display font-semibold">
+          <li key={w} className="card flex items-center gap-1 py-1 ps-3 pe-1">
+            <span lang={target.lang} dir={target.dir} className="font-display font-semibold">
               {w}
             </span>
             <PlayButton text={w} onPlay={() => play(w)} playing={playing === w} small />

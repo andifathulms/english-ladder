@@ -6,6 +6,7 @@ import type { Rung } from '@ladder/core/lib/types';
 import { sfx } from '@ladder/core/lib/speech/sfx';
 import { rungHref } from '@ladder/core/lib/routes';
 import { useReducedMotion, useT } from '../ProgressProvider';
+import { useCourse } from '@ladder/core/course/context';
 import { NotchBar } from '../ladder/NotchBar';
 import { Contours } from '../ui/Contours';
 
@@ -14,6 +15,7 @@ type Props = { rung: Rung; next: Rung | null; onReview: () => void };
 /** The one celebratory moment in the app (DESIGN §6.7). */
 export function ClimbMoment({ rung, next, onReview }: Props) {
   const { t } = useT();
+  const course = useCourse();
   const reduced = useReducedMotion();
   const [climbed, setClimbed] = useState(false);
 
@@ -62,9 +64,12 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
             </div>
           ))}
           <span
-            className="absolute left-[-15px] h-0 w-0 border-y-[8px] border-l-[12px] border-y-transparent"
+            className="absolute h-0 w-0 border-y-[8px] border-y-transparent"
             style={{
-              borderLeftColor: 'var(--brass)',
+              // Points toward the ladder; mirrors for RTL.
+              ...(course.target.dir === 'rtl'
+                ? { right: -15, borderRightWidth: 12, borderRightColor: 'var(--brass)' }
+                : { left: -15, borderLeftWidth: 12, borderLeftColor: 'var(--brass)' }),
               top: 8 + (ROW - 16) / 2 - 8 + (climbed ? 0 : ROW),
               transition: reduced ? 'none' : 'top var(--m-moment-d) var(--ease-moment)',
             }}
@@ -72,7 +77,7 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
         </div>
 
         <div className="flex flex-col gap-3 text-center">
-          <h1 id="climb-title" className="text-hero text-board-ink" lang="en">
+          <h1 id="climb-title" className="text-hero text-board-ink" lang={course.target.lang} dir={course.target.dir}>
             {t('climb.title', { rung: rung.name })}
           </h1>
           <p className="font-display text-h2 italic text-brass">{t('climb.line')}</p>

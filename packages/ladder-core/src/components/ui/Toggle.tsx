@@ -23,8 +23,14 @@ export function Toggle({ label, hint, checked, onChange, onLabel, offLabel }: Pr
           style={{ background: checked ? 'var(--accent)' : 'var(--rule)' }}
         >
           <span
-            className="absolute top-[3px] h-[22px] w-[22px] rounded-full transition-transform duration-quick"
-            style={{ left: 3, background: 'var(--surface)', transform: checked ? 'translateX(20px)' : 'none' }}
+            className="toggle-knob absolute top-[3px] h-[22px] w-[22px] rounded-full transition-transform duration-quick"
+            style={
+              {
+                insetInlineStart: 3,
+                background: 'var(--surface)',
+                '--knob-x': checked ? '20px' : '0px',
+              } as React.CSSProperties
+            }
           />
         </span>
         <span className="label text-muted">{checked ? onLabel : offLabel}</span>

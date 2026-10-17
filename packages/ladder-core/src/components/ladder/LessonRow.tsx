@@ -6,11 +6,13 @@ import type { LessonState } from '@ladder/core/lib/progress/derive';
 import { lessonHref } from '@ladder/core/lib/routes';
 import { IconArrowRight } from '../ui/Icon';
 import { useT } from '../ProgressProvider';
+import { useCourse } from '@ladder/core/course/context';
 import { StatusPill } from './LessonStrip';
 
 /** One lesson in the rung's list: a big serif numeral, the title, state as dot + word. */
 export function LessonRow({ lesson, state, current }: { lesson: LessonSummary; state: LessonState; current?: boolean }) {
   const { t, lang } = useT();
+  const course = useCourse();
   const done = state.kind === 'done' || state.kind === 'review';
   const sub = lang === 'en' ? null : lesson.title.id;
 
@@ -47,7 +49,7 @@ export function LessonRow({ lesson, state, current }: { lesson: LessonSummary; s
         </span>
         <span className="flex min-w-0 flex-col gap-1">
           <span className="sr-only">{t('home.lessonN', { n: lesson.order })}: </span>
-          <span className="font-display text-card font-medium" lang="en">
+          <span className="font-display text-card font-medium" lang={course.target.lang} dir={course.target.dir}>
             {lesson.title.en}
           </span>
           {sub && (

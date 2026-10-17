@@ -6,6 +6,7 @@ import type { LessonSummary, Noun } from '@ladder/core/lib/types';
 import { missedCount } from '@ladder/core/lib/progress/derive';
 import { lessonHref } from '@ladder/core/lib/routes';
 import { useProgress, useT } from './ProgressProvider';
+import { useCourse } from '@ladder/core/course/context';
 import { PageShell } from './ui/PageShell';
 import { PlayButton } from './lesson/PlayButton';
 import { IconBook, IconSearch } from './ui/Icon';
@@ -14,6 +15,7 @@ import { useSpeak } from './useSpeech';
 
 export function WordsView({ lessons, nouns = [] }: { lessons: LessonSummary[]; nouns?: Noun[] }) {
   const { t } = useT();
+  const course = useCourse();
   const progress = useProgress();
   const speak = useSpeak();
   const [q, setQ] = useState('');
@@ -71,7 +73,7 @@ export function WordsView({ lessons, nouns = [] }: { lessons: LessonSummary[]; n
               </button>
               {opened.map((l) => (
                 <button key={l.id} type="button" aria-pressed={only === l.id} className={chip(only === l.id)} onClick={() => setOnly(l.id)}>
-                  <span className="tnum">{l.order}</span> · <span lang="en">{l.title.en}</span>
+                  <span className="tnum">{l.order}</span> · <span lang={course.target.lang} dir={course.target.dir}>{l.title.en}</span>
                 </button>
               ))}
             </div>
@@ -93,7 +95,7 @@ export function WordsView({ lessons, nouns = [] }: { lessons: LessonSummary[]; n
               <section key={l.id} className="flex flex-col gap-2">
                 <h2 className="eyebrow">
                   <Link href={lessonHref(l)} className="text-muted no-underline hover:text-accent">
-                    {t('home.lessonN', { n: l.order })} · <span lang="en">{l.title.en}</span>
+                    {t('home.lessonN', { n: l.order })} · <span lang={course.target.lang} dir={course.target.dir}>{l.title.en}</span>
                   </Link>
                 </h2>
                 <ul className="card flex flex-col divide-y divide-rule overflow-hidden">
@@ -102,7 +104,7 @@ export function WordsView({ lessons, nouns = [] }: { lessons: LessonSummary[]; n
                     return (
                       <li key={w.en} className="flex min-h-[60px] items-center gap-3 px-4 py-2">
                         <span className="flex min-w-0 flex-1 flex-col">
-                          <span lang="en" className="font-display text-body font-semibold">
+                          <span lang={course.target.lang} dir={course.target.dir} className="font-display text-body font-semibold">
                             {w.en}
                             {noun && noun.plural_rule === 'irregular' && (
                               <span className="font-medium text-muted"> → {noun.plural}</span>
@@ -113,7 +115,7 @@ export function WordsView({ lessons, nouns = [] }: { lessons: LessonSummary[]; n
                           </span>
                         </span>
                         {noun && (
-                          <span lang="en" className="label rounded-sm bg-accent-soft px-2 py-[2px] normal-case tracking-normal text-accent">
+                          <span lang={course.target.lang} dir={course.target.dir} className="label rounded-sm bg-accent-soft px-2 py-[2px] normal-case tracking-normal text-accent">
                             {article(noun)}
                           </span>
                         )}

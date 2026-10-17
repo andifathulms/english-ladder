@@ -6,6 +6,7 @@ import type { ProgressState } from '@ladder/core/lib/progress/types';
 import { lessonState, type LessonState } from '@ladder/core/lib/progress/derive';
 import { lessonHref } from '@ladder/core/lib/routes';
 import { useT, type T } from '../ProgressProvider';
+import { useCourse } from '@ladder/core/course/context';
 
 export function stateWord(s: LessonState, t: T, minutes: number): string {
   switch (s.kind) {
@@ -33,6 +34,7 @@ export function StatusPill({ tone, children }: { tone: 'good' | 'accent' | 'off'
 /** The lessons of your rung as workbook pages: one swipe away on phones, a grid on wide screens. */
 export function LessonStrip({ lessons, progress, currentId }: { lessons: LessonSummary[]; progress: ProgressState; currentId?: string }) {
   const { t, lang } = useT();
+  const course = useCourse();
   return (
     <ol className="relative -mx-gutter flex snap-x snap-mandatory scroll-px-gutter gap-4 overflow-x-auto px-gutter pb-2 min-[900px]:mx-0 min-[900px]:grid min-[900px]:grid-cols-3 min-[900px]:overflow-visible min-[900px]:px-0">
       {lessons.map((l) => {
@@ -48,8 +50,8 @@ export function LessonStrip({ lessons, progress, currentId }: { lessons: LessonS
                 now ? 'outline outline-2 outline-offset-2 outline-accent' : ''
               }`}
             >
-              <span className="doc-grid relative flex min-h-[132px] flex-col gap-2 py-4 pl-6 pr-4">
-                <span aria-hidden className="absolute inset-y-0 left-0 w-[6px]" style={{ background: done ? 'var(--accent)' : now ? 'var(--brass)' : 'var(--rule)' }} />
+              <span className="doc-grid relative flex min-h-[132px] flex-col gap-2 py-4 ps-6 pe-4">
+                <span aria-hidden className="absolute inset-y-0 start-0 w-[6px]" style={{ background: done ? 'var(--accent)' : now ? 'var(--brass)' : 'var(--rule)' }} />
                 <span className="flex items-start justify-between gap-2">
                   <span className="label min-w-0 truncate pt-1 tnum text-muted">
                     <span aria-hidden>№ {String(l.order).padStart(2, '0')}</span>
@@ -66,7 +68,7 @@ export function LessonStrip({ lessons, progress, currentId }: { lessons: LessonS
                     </StatusPill>
                   ) : null}
                 </span>
-                <span className="font-display text-card font-medium" lang="en">
+                <span className="font-display text-card font-medium" lang={course.target.lang} dir={course.target.dir}>
                   {l.title.en}
                 </span>
               </span>

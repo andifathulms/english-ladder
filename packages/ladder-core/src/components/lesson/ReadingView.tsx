@@ -5,6 +5,7 @@ import { useState } from 'react';
 import type { Reading, Rung } from '@ladder/core/lib/types';
 import { rungHref } from '@ladder/core/lib/routes';
 import { useT } from '../ProgressProvider';
+import { useCourse } from '@ladder/core/course/context';
 import { IconArrowLeft } from '../ui/Icon';
 import { CheckItemView } from '../check/CheckItemView';
 import { Sentence } from './Sentence';
@@ -12,6 +13,7 @@ import { Sentence } from './Sentence';
 /** The rung's Read & listen capstone: one short text read aloud, then a few questions. */
 export function ReadingView({ rung, reading }: { rung: Rung; reading: Reading }) {
   const { t } = useT();
+  const course = useCourse();
   const [solved, setSolved] = useState<string[]>([]);
   const allDone = solved.length === reading.items.length;
 
@@ -35,7 +37,7 @@ export function ReadingView({ rung, reading }: { rung: Rung; reading: Reading })
       <main className="page flex max-w-lesson flex-1 flex-col gap-6 py-7">
         <div className="flex flex-col gap-1">
           <p className="eyebrow">{t('read.title')}</p>
-          <h1 className="text-h1" lang="en">
+          <h1 className="text-h1" lang={course.target.lang} dir={course.target.dir}>
             {reading.title.en}
           </h1>
           <p className="id-text" lang="id">
@@ -59,7 +61,7 @@ export function ReadingView({ rung, reading }: { rung: Rung; reading: Reading })
             <ul className="flex flex-wrap gap-2">
               {reading.glossary.map((g) => (
                 <li key={g.en} className="card flex items-baseline gap-2 px-3 py-1">
-                  <span lang="en" className="font-display font-semibold">
+                  <span lang={course.target.lang} dir={course.target.dir} className="font-display font-semibold">
                     {g.en}
                   </span>
                   <span lang="id" className="id-text text-small">

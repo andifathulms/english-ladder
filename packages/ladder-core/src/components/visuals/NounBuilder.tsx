@@ -90,7 +90,7 @@ export function NounBuilder({ nouns, state, interactive = true, onStateChange, l
           <h3 className="eyebrow">a / an</h3>
           <p className="font-mono text-small text-muted">
             <span lang="en">{noun.word}</span> → <span className="text-ink">{noun.ipa_hint}</span> · {L(SOUND_LABEL[noun.initial_sound])}
-            {isTricky(noun) && <span className="ml-1 text-accent">*</span>}
+            {isTricky(noun) && <span className="ms-1 text-accent">*</span>}
           </p>
           <p lang="en" className="font-display text-sentence font-medium">
             <span className="focus-word">{art}</span> {noun.word}

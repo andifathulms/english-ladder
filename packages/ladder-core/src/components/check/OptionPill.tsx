@@ -2,6 +2,7 @@
 
 import { parseInline } from '@ladder/core/lib/markup';
 import { IconCheck, IconClose } from '../ui/Icon';
+import { useCourse } from '@ladder/core/course/context';
 
 export type PillState = 'idle' | 'correct' | 'wrong' | 'selected' | 'answer';
 
@@ -23,6 +24,7 @@ const styles: Record<PillState, React.CSSProperties> = {
 };
 
 export function OptionPill({ label, state, index, disabled, onClick, wide }: Props) {
+  const { target } = useCourse();
   const text = parseInline(label).map((t) => t.v).join('');
   return (
     <button
@@ -32,8 +34,9 @@ export function OptionPill({ label, state, index, disabled, onClick, wide }: Pro
       aria-pressed={state === 'selected' || state === 'correct' ? true : undefined}
       aria-keyshortcuts={index < 4 ? String(index + 1) : undefined}
       data-state={state}
-      lang="en"
-      className={`inline-flex min-h-pill items-center gap-2 border-2 px-5 py-2 text-left font-body text-body font-semibold transition-colors duration-quick ${
+      lang={target.lang}
+      dir={target.dir}
+      className={`inline-flex min-h-pill items-center gap-2 border-2 px-5 py-2 text-start font-body text-body font-semibold transition-colors duration-quick ${
         wide ? 'w-full rounded-md' : 'rounded-full'
       } ${state === 'idle' && !disabled ? 'hover:border-accent' : ''}`}
       style={styles[state]}

@@ -13,6 +13,7 @@ import { VisualStage } from '../visuals/VisualStage';
 import { IconPlay } from '../ui/Icon';
 import { useT } from '../ProgressProvider';
 import { useCanSpeak, useSpeak } from '../useSpeech';
+import { useCourse } from '@ladder/core/course/context';
 
 type Common = {
   item: CheckItem;
@@ -31,10 +32,11 @@ type Practice = Common & {
 type Test = Common & { mode: 'test'; value?: Response; onChange: (r: Response) => void };
 
 function Prompt({ text, fill }: { text: string; fill?: string }) {
+  const { target } = useCourse();
   const [a, b] = text.split('___');
   if (b === undefined) return <Sentence en={text} play={false} />;
   return (
-    <p lang="en" className="font-display text-sentence font-medium text-ink">
+    <p lang={target.lang} dir={target.dir} className="font-display text-sentence font-medium text-ink text-start">
       {stripMarkup(a)}
       {fill ? (
         <span className="focus-word">{fill}</span>

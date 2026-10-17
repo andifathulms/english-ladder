@@ -10,6 +10,7 @@ import { answerText } from '@ladder/core/lib/check/text';
 import * as store from '@ladder/core/lib/progress/store';
 import { lessonHref, rungHref } from '@ladder/core/lib/routes';
 import { useProgress, useT } from '../ProgressProvider';
+import { useCourse } from '@ladder/core/course/context';
 import { IconArrowLeft, IconArrowRight, IconCheck, IconClose } from '../ui/Icon';
 import { BottomActionBar } from '../lesson/BottomActionBar';
 import { StepBar } from '../lesson/StepBar';
@@ -25,6 +26,7 @@ const show = (r: Response | undefined) => (r === undefined ? '—' : Array.isArr
 
 export function TestRunner({ rung, next, pool, lessons, nouns }: Props) {
   const { t, lang } = useT();
+  const course = useCourse();
   const progress = useProgress();
   const [phase, setPhase] = useState<Phase>({ kind: 'intro' });
   const [seed, setSeed] = useState(0);
@@ -163,7 +165,7 @@ export function TestRunner({ rung, next, pool, lessons, nouns }: Props) {
                 <li key={l.id}>
                   <Link href={lessonHref(l)} className="inline-flex min-h-touch items-center gap-2">
                     <span className="label tnum text-muted">{l.order}</span>
-                    <span lang="en">{l.title.en}</span>
+                    <span lang={course.target.lang} dir={course.target.dir}>{l.title.en}</span>
                   </Link>
                 </li>
               ))}
@@ -178,7 +180,7 @@ export function TestRunner({ rung, next, pool, lessons, nouns }: Props) {
             .map(([lid, rs]) => (
               <div key={lid} className="flex flex-col gap-3">
                 <h3 className="eyebrow">
-                  {lessonOf(lid)?.order} · <span lang="en">{lessonOf(lid)?.title.en}</span>
+                  {lessonOf(lid)?.order} · <span lang={course.target.lang} dir={course.target.dir}>{lessonOf(lid)?.title.en}</span>
                 </h3>
                 <ul className="flex flex-col gap-3">
                   {rs.map(({ item, given, ok }) => (
@@ -208,19 +210,20 @@ export function TestRunner({ rung, next, pool, lessons, nouns }: Props) {
 }
 
 function ReviewRow({ item, given, ok, t }: { item: CheckItem; given: string; ok: boolean; lang: string; t: ReturnType<typeof useT>['t'] }) {
+  const { target } = useCourse();
   return (
     <li className="card flex flex-col gap-2 p-4">
       <p className="flex items-start gap-2">
         {ok ? <IconCheck className="mt-1 shrink-0 text-good" /> : <IconClose className="mt-1 shrink-0 text-off" />}
         <span className="sr-only">{ok ? t('check.correct') : t('check.wrong')}</span>
-        <span lang="en" className="font-display font-medium">
+        <span lang={target.lang} dir={target.dir} className="font-display font-medium">
           {answerText(item)}
         </span>
       </p>
       {!ok && (
         <p className="text-small">
           <span className="text-muted">{t('test.yourAnswer')}: </span>
-          <span lang="en" className="off-text">
+          <span lang={target.lang} dir={target.dir} className="off-text">
             {given}
           </span>
         </p>

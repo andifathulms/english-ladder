@@ -2,11 +2,11 @@ import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { OptionPill } from '@ladder/core/components/check/OptionPill';
 import { CheckItemView } from '@ladder/core/components/check/CheckItemView';
-import { ProgressProvider } from '@ladder/core/components/ProgressProvider';
+import { AllProviders } from '../providers';
 import { BottomActionBar } from '@ladder/core/components/lesson/BottomActionBar';
 import type { CheckItem } from '@ladder/core/lib/types';
 
-const wrap = (ui: React.ReactNode) => render(<ProgressProvider>{ui}</ProgressProvider>);
+const wrap = (ui: React.ReactNode) => render(<AllProviders>{ui}</AllProviders>);
 const why = { id: 'On: di atas permukaan.', en: 'On: on top of a surface.' };
 const item: CheckItem = {
   id: 'x1',

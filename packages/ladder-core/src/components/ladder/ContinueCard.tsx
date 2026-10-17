@@ -6,6 +6,7 @@ import type { Rung } from '@ladder/core/lib/types';
 import { lessonHref, testHref } from '@ladder/core/lib/routes';
 import { IconArrowRight } from '../ui/Icon';
 import { useT } from '../ProgressProvider';
+import { useCourse } from '@ladder/core/course/context';
 import { STEP_KEYS } from '../lesson/steps';
 import { Contours } from '../ui/Contours';
 
@@ -23,9 +24,10 @@ export function Accented({ text, tone = 'text-brass' }: { text: string; tone?: s
 
 /** A quoted sentence; a ___ blank becomes a gold underline on the board. */
 function BoardSentence({ text }: { text: string }) {
+  const { target } = useCourse();
   const parts = text.split('___');
   return (
-    <p className="font-display text-h1 font-medium leading-tight tracking-[-0.01em] text-board-ink" lang="en">
+    <p className="font-display text-h1 font-medium leading-tight tracking-[-0.01em] text-board-ink" lang={target.lang} dir={target.dir}>
       {parts.map((p, i) => (
         <span key={i}>
           {p}

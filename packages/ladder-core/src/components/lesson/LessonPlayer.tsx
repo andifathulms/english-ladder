@@ -8,6 +8,7 @@ import * as store from '@ladder/core/lib/progress/store';
 import { sfx } from '@ladder/core/lib/speech/sfx';
 import { lessonHref, rungHref, testHref } from '@ladder/core/lib/routes';
 import { useProgress, useSettings, useT } from '../ProgressProvider';
+import { useCourse } from '@ladder/core/course/context';
 import { IconArrowLeft, IconArrowRight, IconCheck, IconClose } from '../ui/Icon';
 import { Badge } from '../ui/Badge';
 import { NotchBar } from '../ladder/NotchBar';
@@ -35,6 +36,7 @@ type Props = {
 
 export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralRung, nouns }: Props) {
   const { t, lang } = useT();
+  const course = useCourse();
   const settings = useSettings();
   const progress = useProgress();
   const router = useRouter();
@@ -113,12 +115,15 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
       const typing = el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable);
       if (typing) return;
       const onControl = el && el !== document.body && el.matches('button, a, [role="radio"], summary');
-      if (e.key === 'ArrowRight' && !el?.closest('[data-visual]')) {
+      // Forward/back follow the target direction: in RTL the arrows mirror.
+      const forwardKey = course.target.dir === 'rtl' ? 'ArrowLeft' : 'ArrowRight';
+      const backKey = course.target.dir === 'rtl' ? 'ArrowRight' : 'ArrowLeft';
+      if (e.key === forwardKey && !el?.closest('[data-visual]')) {
         if (canContinue && step < 5) {
           e.preventDefault();
           advance();
         }
-      } else if (e.key === 'ArrowLeft' && !el?.closest('[data-visual]')) {
+      } else if (e.key === backKey && !el?.closest('[data-visual]')) {
         if (step > 0) {
           e.preventDefault();
           go(step - 1);
@@ -138,7 +143,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [step, canContinue, go, advance]);
+  }, [step, canContinue, go, advance, course.target.dir]);
 
   const effective = settings.explain === 'rung' ? rung.explain_lang : settings.explain;
   // Short strand cards have no collapsed translation, so mixed shows English.
@@ -169,7 +174,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
         <>
           <StepLabel>{t('step.concept')}</StepLabel>
           <div className="flex flex-col gap-1">
-            <h1 className="text-h1" lang="en">
+            <h1 className="text-h1" lang={course.target.lang} dir={course.target.dir}>
               {lesson.title.en}
             </h1>
             <p className="id-text" lang="id">
@@ -272,7 +277,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
             <ul className="flex flex-wrap gap-2">
               {lesson.glossary.map((g) => (
                 <li key={g.en} className="card flex items-baseline gap-2 px-3 py-1">
-                  <span lang="en" className="font-display font-semibold">
+                  <span lang={course.target.lang} dir={course.target.dir} className="font-display font-semibold">
                     {g.en}
                   </span>
                   <span lang="id" className="id-text text-small">
