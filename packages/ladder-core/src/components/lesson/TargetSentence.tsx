@@ -16,7 +16,10 @@ function DefaultSentence({ line, use }: SentenceSlotProps) {
     case 'pairNatural':
       return <Sentence en={line.text} />;
     case 'reading':
-      return <Sentence en={line.text} size="body" />;
+    case 'dialogue':
+      return <Sentence en={line.text} id={line.meaning?.id} size="body" />;
+    case 'tirukan':
+      return <Sentence en={line.text} id={line.meaning?.id} play={false} />;
   }
 }
 

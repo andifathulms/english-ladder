@@ -254,4 +254,9 @@ export const en: Record<StringKey, string> = {
   'talk.title': 'Talk',
   'talk.meta': 'Conversation · {n} lines · {k} questions',
   'talk.done': 'Done. You just followed a whole conversation.',
+  // Repeat-after card (TirukanCard).
+  'lesson.tirukan': 'Repeat after',
+  'lesson.tirukanPlay': 'Play, then repeat',
+  'lesson.yourTurn': 'Your turn',
+  'lesson.tirukanHint': 'Say it out loud. Nothing is recorded.',
 };

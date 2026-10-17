@@ -145,7 +145,7 @@ export type CourseFixes = {
 };
 
 /** Where a target line appears; the Sentence slot picks size, play button and note from it. */
-export type SentenceUse = 'example' | 'worked' | 'pairOff' | 'pairNatural' | 'reading' | 'dialogue';
+export type SentenceUse = 'example' | 'worked' | 'pairOff' | 'pairNatural' | 'reading' | 'dialogue' | 'tirukan';
 export type SentenceSlotProps = { line: Line; use: SentenceUse };
 
 /** A strand card on the Examples or Contrast step. Renders nothing when the lesson has none.

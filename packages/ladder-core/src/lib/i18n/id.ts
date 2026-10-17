@@ -253,6 +253,11 @@ export const id = {
   'talk.title': 'Ngobrol',
   'talk.meta': 'Percakapan · {n} baris · {k} soal',
   'talk.done': 'Selesai. Kamu baru saja mengikuti satu percakapan utuh.',
+  // Repeat-after card (TirukanCard).
+  'lesson.tirukan': 'Tirukan',
+  'lesson.tirukanPlay': 'Putar, lalu tirukan',
+  'lesson.yourTurn': 'Giliranmu',
+  'lesson.tirukanHint': 'Ucapkan keras-keras. Tidak ada yang merekam.',
 } as const;
 
 export type StringKey = keyof typeof id;
