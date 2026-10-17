@@ -1,5 +1,7 @@
-// Parity gate: capture the refactored build and prove every route renders pixel-for-pixel
-// identically to the committed baseline.
+// Parity gate: capture the built app and prove every route renders pixel-for-pixel identically
+// to the committed baseline. Self-contained: it serves apps/english/out itself (unless a server
+// is already reachable), probes readiness, and tears the server down at the end — so it is safe
+// to run immediately after the e2e suite without a server race.
 //
 // Why retries: the /words empty state antialiases its short text into one of two internally
 // stable sub-pixel states per run (confirmed visually identical). A genuine change never
@@ -7,22 +9,78 @@
 // the moment it matches the baseline exactly (0 differing pixels), and we re-capture only the
 // still-unmatched shots, up to a few attempts. The threshold stays maxDiffPixels: 0.
 //
-// Requires the app's ./out served at PARITY_BASE_URL (default http://localhost:4173).
-// Usage: node tests/parity/verify.mjs
+// Usage: node tests/parity/verify.mjs   (set PARITY_BASE_URL to use an existing server)
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
+import http from 'node:http';
+import { execFileSync, spawn } from 'node:child_process';
 import { chromium } from '@playwright/test';
 
+const ROOT = process.cwd();
 const baseDir = 'tests/parity/baseline';
 const afterDir = 'tests/parity/after';
 const MAX_ATTEMPTS = 4;
+const BASE = process.env.PARITY_BASE_URL || 'http://localhost:4173';
+const APP_DIR = path.join(ROOT, 'apps/english');
+const SERVE = path.join(ROOT, 'packages/ladder-core/scripts/serve.mjs');
+const OUT = path.join(APP_DIR, 'out');
 
 const baseFiles = fs.readdirSync(baseDir).filter((f) => f.endsWith('.png')).sort();
 if (baseFiles.length === 0) {
   console.error(`no baseline screenshots in ${baseDir}`);
   process.exit(1);
+}
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const reachable = (url) =>
+  new Promise((resolve) => {
+    const req = http.get(url, (res) => {
+      res.resume();
+      resolve(res.statusCode !== undefined);
+    });
+    req.on('error', () => resolve(false));
+    req.setTimeout(1000, () => {
+      req.destroy();
+      resolve(false);
+    });
+  });
+
+async function waitUntilReachable(url, tries = 40) {
+  for (let i = 0; i < tries; i++) {
+    if (await reachable(url)) return true;
+    await sleep(250);
+  }
+  return false;
+}
+
+// Start our own server only if nothing answers at BASE already.
+let server = null;
+async function ensureServer() {
+  if (await reachable(BASE)) return;
+  if (!fs.existsSync(OUT)) {
+    console.error(`no build at ${OUT}. Run: NEXT_PUBLIC_SHOW_DRAFTS=true NEXT_PUBLIC_BASE_PATH='' npm run build`);
+    process.exit(1);
+  }
+  const port = new URL(BASE).port || '4173';
+  server = spawn('node', [SERVE], {
+    cwd: APP_DIR,
+    env: { ...process.env, PORT: port, NEXT_PUBLIC_BASE_PATH: '' },
+    stdio: 'ignore',
+  });
+  server.on('error', (e) => {
+    console.error('failed to start parity server:', e.message);
+    process.exit(1);
+  });
+  if (!(await waitUntilReachable(BASE))) {
+    console.error(`parity server never became reachable at ${BASE}`);
+    stopServer();
+    process.exit(1);
+  }
+}
+function stopServer() {
+  if (server && !server.killed) server.kill('SIGTERM');
+  server = null;
 }
 
 const browser = await chromium.launch();
@@ -50,31 +108,55 @@ async function diffPx(aPath, bPath) {
   }, [a, b]);
 }
 
-let pending = baseFiles.map((f) => f.replace(/\.png$/, ''));
-const persistent = new Map(); // name -> last px count
-
-for (let attempt = 1; attempt <= MAX_ATTEMPTS && pending.length; attempt++) {
-  execFileSync('node', ['tests/parity/capture.mjs', afterDir], {
-    stdio: 'ignore',
-    env: { ...process.env, PARITY_ONLY: pending.join(',') },
-  });
-  const still = [];
-  for (const name of pending) {
-    const after = path.join(afterDir, `${name}.png`);
-    if (!fs.existsSync(after)) { still.push(name); persistent.set(name, 'missing'); continue; }
-    const n = await diffPx(path.join(baseDir, `${name}.png`), after);
-    if (n === 0) persistent.delete(name);
-    else { still.push(name); persistent.set(name, n === -1 ? 'dimensions' : `${n} px`); }
+function runCapture(only) {
+  try {
+    execFileSync('node', ['tests/parity/capture.mjs', afterDir], {
+      cwd: ROOT,
+      stdio: ['ignore', 'ignore', 'pipe'],
+      env: { ...process.env, PARITY_BASE_URL: BASE, PARITY_ONLY: only.join(',') },
+    });
+  } catch (e) {
+    const stderr = e.stderr ? e.stderr.toString() : e.message;
+    console.error('capture subprocess failed:\n' + stderr.trim());
+    throw e;
   }
-  console.log(`attempt ${attempt}: ${pending.length - still.length}/${pending.length} settled, ${still.length} left${still.length ? ' (' + still.join(', ') + ')' : ''}`);
-  pending = still;
 }
 
-await browser.close();
+async function main() {
+  await ensureServer();
+  let pending = baseFiles.map((f) => f.replace(/\.png$/, ''));
+  const persistent = new Map(); // name -> last px count
 
-if (pending.length) {
-  console.error(`\nPARITY FAIL: ${pending.length} shot(s) never matched after ${MAX_ATTEMPTS} attempts:`);
-  for (const name of pending) console.error(`  ${name}: ${persistent.get(name)}`);
-  process.exit(1);
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS && pending.length; attempt++) {
+    runCapture(pending);
+    const still = [];
+    for (const name of pending) {
+      const after = path.join(afterDir, `${name}.png`);
+      if (!fs.existsSync(after)) { still.push(name); persistent.set(name, 'missing'); continue; }
+      const n = await diffPx(path.join(baseDir, `${name}.png`), after);
+      if (n === 0) persistent.delete(name);
+      else { still.push(name); persistent.set(name, n === -1 ? 'dimensions' : `${n} px`); }
+    }
+    console.log(`attempt ${attempt}: ${pending.length - still.length}/${pending.length} settled, ${still.length} left${still.length ? ' (' + still.join(', ') + ')' : ''}`);
+    pending = still;
+  }
+
+  if (pending.length) {
+    console.error(`\nPARITY FAIL: ${pending.length} shot(s) never matched after ${MAX_ATTEMPTS} attempts:`);
+    for (const name of pending) console.error(`  ${name}: ${persistent.get(name)}`);
+    return 1;
+  }
+  console.log(`\nPARITY OK: all ${baseFiles.length} routes match the baseline pixel-for-pixel (0 differing pixels)`);
+  return 0;
 }
-console.log(`\nPARITY OK: all ${baseFiles.length} routes match the baseline pixel-for-pixel (0 differing pixels)`);
+
+let code = 1;
+try {
+  code = await main();
+} catch {
+  code = 1;
+} finally {
+  await browser.close();
+  stopServer();
+}
+process.exit(code);

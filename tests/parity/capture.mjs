@@ -13,13 +13,10 @@
 // animations, hidden caret, and a fresh context per shot so progress never leaks
 // between captures. The build under ./out must be made with NEXT_PUBLIC_SHOW_DRAFTS=true.
 
-import { createRequire } from 'node:module';
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from '@playwright/test';
-
-const require = createRequire(import.meta.url);
-const matter = require('gray-matter');
+import matter from 'gray-matter';
 
 const outDir = process.argv[2];
 if (!outDir) {
@@ -198,6 +195,26 @@ async function captureLessonSteps(browser) {
       await ctx.close();
     }
   }
+}
+
+async function reachable(url) {
+  const http = await import('node:http');
+  return new Promise((resolve) => {
+    const req = http.get(url, (res) => {
+      res.resume();
+      resolve(true);
+    });
+    req.on('error', () => resolve(false));
+    req.setTimeout(1000, () => {
+      req.destroy();
+      resolve(false);
+    });
+  });
+}
+
+if (!(await reachable(BASE))) {
+  console.error(`no server at ${BASE}. Serve apps/english/out first, or run tests/parity/verify.mjs.`);
+  process.exit(1);
 }
 
 const browser = await chromium.launch();
