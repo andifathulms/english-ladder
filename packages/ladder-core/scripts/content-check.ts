@@ -7,7 +7,7 @@ import path from 'node:path';
 import { ZodError } from 'zod';
 import { focusCount } from '../src/lib/markup';
 import { isCoreItem, type CheckItem, type ExtraItem, type Lesson } from '../src/lib/types';
-import { extraType } from '../src/lib/check/itemTypes';
+import { extraType, overrideItemText, registerItemTypes } from '../src/lib/check/itemTypes';
 import type { CheckContext, Content } from '../src/lib/content/load';
 
 const { content } = (await import(path.resolve(process.cwd(), 'course/content.ts'))) as { content: Content };
@@ -15,6 +15,10 @@ const { course } = (await import(path.resolve(process.cwd(), 'course.config.ts')
   course: { visualIds: readonly string[] };
 };
 const visualIds = new Set(course.visualIds);
+// The app's modules may load core through its path alias (a separate module instance), so
+// register the course's item types with this instance as well.
+if (content.model.itemTypes) registerItemTypes(content.model.itemTypes);
+for (const [type, fn] of Object.entries(content.model.itemText ?? {})) overrideItemText(type, fn);
 const hooks = content.model.check ?? {};
 
 const errors: string[] = [];
