@@ -123,6 +123,7 @@ export const id = {
   'settings.group.lang': 'Bahasa',
   'settings.group.sound': 'Suara',
   'settings.group.display': 'Tampilan',
+  'settings.group.study': 'Belajar',
   'settings.group.progress': 'Progres',
   'settings.uiLang': 'Bahasa tampilan',
   'settings.explain': 'Bahasa penjelasan',

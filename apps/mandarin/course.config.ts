@@ -151,7 +151,7 @@ export const course: CourseConfig = {
   },
   capstones: { Wrap: CapstoneWrap, dialogue: { Icon: IconChat } },
   climb: { Extra: ClimbExtra },
-  words: { match: matchesWord, Row: WordsRow, tab: { hash: 'deck', titleKey: 'words.tab', labelKey: 'deck.tab', Panel: DeckPanel } },
+  words: { match: matchesWord, Row: WordsRow, tabs: { titleKey: 'words.tab', list: [{ hash: 'deck', labelKey: 'deck.tab', Panel: DeckPanel }] } },
   themeColor: THEME_COLOR,
   // The English Ladder fixes Mandarin Ladder shipped with (PRD §5.9).
   fixes: {

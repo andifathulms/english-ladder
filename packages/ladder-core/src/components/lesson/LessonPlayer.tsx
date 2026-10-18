@@ -291,12 +291,16 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
       body = (
         <>
           <div className="flex flex-col items-center gap-3 pt-2 text-center">
-            <span
-              className="flex h-[76px] w-[76px] items-center justify-center rounded-full bg-accent text-accent-ink"
-              style={{ boxShadow: '0 0 0 10px var(--accent-soft)' }}
-            >
-              <IconCheck size={36} draw />
-            </span>
+            {course.lesson?.DoneBadge ? (
+              <course.lesson.DoneBadge />
+            ) : (
+              <span
+                className="flex h-[76px] w-[76px] items-center justify-center rounded-full bg-accent text-accent-ink"
+                style={{ boxShadow: '0 0 0 10px var(--accent-soft)' }}
+              >
+                <IconCheck size={36} draw />
+              </span>
+            )}
             <StepLabel>{t('step.done')}</StepLabel>
             <h1 className="text-h1 tracking-[-0.015em]">
               {t('lesson.doneTitle', { title: lang === 'en' ? title.en : title.id })}

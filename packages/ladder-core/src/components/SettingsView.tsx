@@ -11,6 +11,7 @@ import { useCanSpeak, usePlay, useSpeak } from './useSpeech';
 import { IconPlay } from './ui/Icon';
 import { chosenVoiceName } from '@ladder/core/lib/speech/speak';
 import { useCourse } from '@ladder/core/course/context';
+import type { SettingsRow } from '@ladder/core/course/types';
 
 function Group({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -30,6 +31,35 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
   );
 }
 
+/** A course's own setting row (CourseConfig.settings.rows): a toggle, or a segmented choice. */
+function CourseRow({ row }: { row: SettingsRow }) {
+  const { t } = useT();
+  const s = useSettings();
+  const tx = (k: string) => t(k as never);
+  if (!row.options) {
+    return (
+      <Toggle
+        label={tx(row.labelKey)}
+        hint={row.hintKey ? tx(row.hintKey) : undefined}
+        checked={!!s[row.key]}
+        onChange={(v) => store.setSettings({ [row.key]: v })}
+        onLabel={t('settings.on')}
+        offLabel={t('settings.off')}
+      />
+    );
+  }
+  return (
+    <Row label={tx(row.labelKey)}>
+      <Segmented
+        label={tx(row.labelKey)}
+        value={s[row.key] as string | number}
+        onChange={(v) => store.setSettings({ [row.key]: v })}
+        options={row.options.map((o) => ({ value: o.value, label: o.label ?? tx(o.labelKey!) }))}
+      />
+    </Row>
+  );
+}
+
 export function SettingsView() {
   const { t } = useT();
   const s = useSettings();
@@ -37,6 +67,7 @@ export function SettingsView() {
   const { speech, exportFilePrefix, settings: courseSettings } = course;
   const playSample = usePlay();
   const targetSize = courseSettings.targetSize;
+  const rows = (group: SettingsRow['group']) => (courseSettings.rows ?? []).filter((r) => r.group === group).map((r) => <CourseRow key={r.key} row={r} />);
   const set = (patch: Partial<Settings>) => store.setSettings(patch);
   const canSpeak = useCanSpeak();
   const speakSample = useSpeak();
@@ -165,6 +196,7 @@ export function SettingsView() {
           onLabel={t('settings.on')}
           offLabel={t('settings.off')}
         />
+        {rows('sound')}
       </Group>
 
       <Group title={t('settings.group.display')}>
@@ -214,7 +246,10 @@ export function SettingsView() {
             ]}
           />
         </Row>
+        {rows('display')}
       </Group>
+
+      {(courseSettings.rows ?? []).some((r) => r.group === 'study') && <Group title={t('settings.group.study')}>{rows('study')}</Group>}
 
       <Group title={t('settings.group.progress')}>
         <div className="flex flex-wrap gap-2">

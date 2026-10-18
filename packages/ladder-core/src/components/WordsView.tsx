@@ -30,16 +30,19 @@ export function WordsView({ lessons, rungs = [], wordData, tabData }: Props) {
   const [q, setQ] = useState('');
   const [only, setOnly] = useState<string | null>(null);
   const [mistakes, setMistakes] = useState(false);
-  // words.tab: a second tab (e.g. Mandarin's word deck), opened by its #hash.
-  const tab = course.words?.tab;
-  const [onTab, setOnTab] = useState(false);
+  // words.tabs: more tabs (e.g. word decks), each opened by its #hash; '' is My words.
+  const tabs = course.words?.tabs;
+  const [onTab, setOnTab] = useState('');
   useEffect(() => {
-    if (!tab) return;
-    const sync = () => setOnTab(window.location.hash === `#${tab.hash}`);
+    if (!tabs) return;
+    const sync = () => {
+      const h = window.location.hash.slice(1);
+      setOnTab(tabs.list.some((x) => x.hash === h) ? h : '');
+    };
     sync();
     window.addEventListener('hashchange', sync);
     return () => window.removeEventListener('hashchange', sync);
-  }, [tab]);
+  }, [tabs]);
 
   const opened = lessons
     .filter((l) => progress.opened.includes(l.id))
@@ -165,24 +168,22 @@ export function WordsView({ lessons, rungs = [], wordData, tabData }: Props) {
     </>
   );
 
-  if (tab) {
-    const choose = (deck: boolean) => {
-      setOnTab(deck);
-      history.replaceState(null, '', deck ? `#${tab.hash}` : window.location.pathname);
+  if (tabs) {
+    const choose = (hash: string) => {
+      setOnTab(hash);
+      history.replaceState(null, '', hash ? `#${hash}` : window.location.pathname);
     };
+    const Panel = tabs.list.find((x) => x.hash === onTab)?.Panel;
     return (
-      <PageShell title={t(tab.titleKey as never)}>
-        <Segmented<boolean>
-          label={t(tab.titleKey as never)}
+      <PageShell title={t(tabs.titleKey as never)}>
+        <Segmented<string>
+          label={t(tabs.titleKey as never)}
           value={onTab}
           onChange={choose}
-          options={[
-            { value: false, label: t('words.title') },
-            { value: true, label: t(tab.labelKey as never) },
-          ]}
+          options={[{ value: '', label: t('words.title') }, ...tabs.list.map((x) => ({ value: x.hash, label: t(x.labelKey as never) }))]}
         />
-        {onTab ? (
-          <tab.Panel data={tabData} />
+        {Panel ? (
+          <Panel data={tabData} />
         ) : (
           <>
             {total > 0 && <p className="text-body text-muted">{t('words.subtitle', { n: total, l: opened.length })}</p>}

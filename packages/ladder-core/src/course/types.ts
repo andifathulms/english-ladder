@@ -48,6 +48,17 @@ export type SpeechRules = {
   estimateMs?: (text: string, rate: number) => number;
 };
 
+/** A course setting shown in Settings (CourseConfig.settings.rows). */
+export type SettingsRow = {
+  group: 'sound' | 'display' | 'study';
+  key: string;
+  /** UI string keys. */
+  labelKey: string;
+  hintKey?: string;
+  /** Segmented choices; omit for an on/off toggle. Labels are string keys, or literal text. */
+  options?: { value: string | number; labelKey?: string; label?: string }[];
+};
+
 /** Option lists that course-specific Settings controls render. */
 export type SettingsOptions = {
   accents: { value: string; label: Record<UiLang, string> }[];
@@ -257,6 +268,9 @@ export type CourseConfig = {
       labelKey: string;
       Preview?: ComponentType;
     };
+    /** The course's own settings rows, at the end of a group ('study' is a group of its own, before
+     *  Progress). A toggle for booleans, a segmented choice otherwise. */
+    rows?: SettingsRow[];
     options: SettingsOptions;
   };
   /** The stored progress shape. `storageKey` above is where it lives. */
@@ -301,6 +315,8 @@ export type CourseConfig = {
     useSession?: (rung: Rung, step: number) => LessonSession;
     /** Classes for the Examples step's list (default 'flex flex-col gap-5'). */
     exampleListClass?: string;
+    /** The badge at the top of the lesson-done screen, in place of the check disc (Japanese: 済). */
+    DoneBadge?: ComponentType;
   };
   /** Rung capstones (reading, dialogue) shown as cards in their own section of the rung page. */
   /** Glossary chips (fixes.glossaryAudio): the word, and anything after its meaning. */
@@ -326,7 +342,11 @@ export type CourseConfig = {
   };
   /** The climb moment: the rung's subtitle above the title, the line with its last word accented,
    *  and an extra line below (Arabic: سُلَّمًا سُلَّمًا). Absent: English's layout. */
-  climb?: { Extra?: ComponentType };
+  climb?: {
+    Extra?: ComponentType;
+    /** A mark above the rung's name on the climb moment (Japanese: a large 済 seal). */
+    Badge?: ComponentType;
+  };
   /** --paper of each theme, for the browser chrome's theme-color (fixes.themeColorFollowsTheme). */
   themeColor?: { light: string; dark: string };
   /** My words: search and the word row. */
@@ -335,9 +355,10 @@ export type CourseConfig = {
     match?: (word: Gloss, query: string) => boolean;
     /** The whole <li> for one word (default: word, meaning, annotation badge, play button). */
     Row?: ComponentType<{ word: Gloss; rungs: Rung[]; lessons: import('@ladder/core/lib/types').LessonSummary[]; data?: unknown }>;
-    /** A second tab beside My words (e.g. Mandarin's word deck), opened by `#hash`. The page title and
-     *  segmented control use `titleKey`; `data` is ContentModel.wordsPageData. */
-    tab?: { hash: string; titleKey: string; labelKey: string; Panel: ComponentType<{ data: unknown }> };
+    /** More tabs beside My words (Mandarin's word deck; Japanese's word and kanji decks), each opened
+     *  by its `#hash`. The page title and segmented control use `titleKey`; each Panel gets
+     *  ContentModel.wordsPageData. */
+    tabs?: { titleKey: string; list: { hash: string; labelKey: string; Panel: ComponentType<{ data: unknown }> }[] };
   };
   /** Home: the first-visit board. */
   home?: {

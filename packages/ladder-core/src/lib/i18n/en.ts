@@ -124,6 +124,7 @@ export const en: Record<StringKey, string> = {
   'settings.group.lang': 'Language',
   'settings.group.sound': 'Sound',
   'settings.group.display': 'Display',
+  'settings.group.study': 'Study',
   'settings.group.progress': 'Progress',
   'settings.uiLang': 'Interface language',
   'settings.explain': 'Explanation language',
