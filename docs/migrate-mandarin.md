@@ -239,7 +239,7 @@ markup, tokens and globals CSS, the routes' logic, `serve.mjs`, `content-check.t
   voice sample in `course/speech.ts`), since the UI moved out of `lib/i18n` and `components/visuals`.
   The subset files are byte-identical to the source build's.
 
-### 8.5 Behaviour differences from the live app
+### 8.5 Behaviour differences from the live app (approved 2026-10-18)
 
 1. **The service worker file changes once**: generated from the core template with the same cache
    name (`mandarin-ladder-v1.0.0`), precache list, audio route and stroke route. Only the comments
@@ -279,7 +279,7 @@ Mandarin baseline is updated for the 16 shots that show such a line: `lesson-das
 `imported-me__{light,dark}__1280`: three fresh captures of the **live site** differ among
 themselves (one by 6 px), and the local build lands on a fourth antialiasing state on the same
 two circle edges; text, layout and colours are identical. I kept the live captures as the
-baseline. **Please approve** this as a sub-pixel rendering difference, as with Arabic's
+baseline. **Approved (2026-10-18)** as a sub-pixel rendering difference, as with Arabic's
 `imported-me`. `not-found__dark__360` (1 px) and `rung-hard-3__dark__1280` are the known bistable
 shots; both matched at 0 px in the previous full run.
 
