@@ -169,6 +169,13 @@ export const model: ContentModel = {
           ctx.err(`placement.yaml: ${(e as Error).message}`);
         }
       }
+      // Every character a learner traces or opens stroke order for has a KanjiVG stroke file (npm run strokes:extract).
+      const strokeFile = (ch: string) => fs.existsSync(path.join(process.cwd(), 'public', 'strokes', `${ch.codePointAt(0)!.toString(16)}.json`));
+      for (const lessons of ctx.lessonsByRung.values())
+        for (const l of lessons as unknown as Lesson[]) {
+          const chars = [...(l.kanji ?? []), ...l.check.filter((c) => c.type === 'trace').map((c) => (c as { char: string }).char)];
+          for (const ch of chars) if (!strokeFile(ch)) ctx.err(`${l.id}: no stroke file for ${ch} (run npm run strokes:extract)`);
+        }
       // Japanese lint: readings, inventory, kanji, register, the Kana 1 script rule, reviewers, sizes.
       for (const f of lintLessons(ctx.rungs as unknown as Rung[], ctx.lessonsByRung as unknown as Map<string, Lesson[]>, lintData())) (f.level === 'error' ? ctx.err : ctx.warn)(f.message);
     },

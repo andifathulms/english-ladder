@@ -42,7 +42,7 @@ export function StrokeOrder({ char, size = 240, controls = true, mizi = false, a
   const [animating, setAnimating] = useState<number | null>(null);
   const uid = useId().replace(/:/g, '');
   const pathRef = useRef<SVGPathElement>(null);
-  const names = strokes.useNames(char, data?.medians as [number, number][][] | undefined);
+  const names = strokes.useNames(char, data);
   const centre = data?.kind === 'centreline';
   const n = data?.medians.length ?? 0;
 

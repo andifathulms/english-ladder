@@ -12,6 +12,8 @@ import type { JapaneseKey } from '@/i18n/overrides';
 import { toPlain } from '@/lib/ja/text';
 import { JaSentence } from './ja/JaSentence';
 import { JaText } from './ja/JaText';
+import { StrokeOrder } from '@ladder/core/components/strokes/StrokeOrder';
+import { IconPlay } from '@ladder/core/components/ui/Icon';
 import { MoraBeatsMini } from '@/visuals/MoraBeatsMini';
 import { PitchLineMini } from '@/visuals/PitchLineMini';
 
@@ -53,9 +55,9 @@ export function SoundCard({ sound, pitch }: { sound: NonNullable<Lesson['sound']
   );
 }
 
-/** Kanji: each new kanji on the practice grid with its stroke count, meaning, readings and words. */
+/** Kanji: each new kanji on the practice grid with its stroke count, meaning, readings and words; "▶ goresan" opens its stroke order. */
 export function KanjiCard({ cards }: { cards: JaKanjiCard[] }) {
-  const { t, lang } = useT<JapaneseKey>();
+  const { t } = useT<JapaneseKey>();
   if (!cards.length) return null;
   return (
     <section className="card flex flex-col gap-4 p-5" aria-labelledby="kanji-title">
@@ -64,51 +66,77 @@ export function KanjiCard({ cards }: { cards: JaKanjiCard[] }) {
       </h3>
       <ul className="flex flex-col gap-4">
         {cards.map((c) => (
-          <li key={c.char} className="flex items-start gap-4">
-            <JaText className="practice-grid flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-md bg-paper-2 text-[3rem] font-semibold leading-none">
-              {c.char}
-            </JaText>
-            <div className="flex min-w-0 flex-col gap-1">
-              <p className="flex flex-wrap items-baseline gap-x-2">
-                <span className="font-bold" lang={c.meaning.lang}>
-                  {lang === 'en' && c.meaning.en ? c.meaning.en : c.meaning.text}
-                </span>
-                <span className="label tnum text-muted">
-                  {c.strokes} {t('lesson.strokes')}
-                </span>
-              </p>
-              <dl className="grid grid-cols-[auto_1fr] gap-x-2 text-small">
-                {c.on.length > 0 && (
-                  <>
-                    <dt className="label text-muted">{t('lesson.onyomi')}</dt>
-                    <dd>
-                      <JaText face="ui">{c.on.join('・')}</JaText>
-                    </dd>
-                  </>
-                )}
-                {c.kun.length > 0 && (
-                  <>
-                    <dt className="label text-muted">{t('lesson.kunyomi')}</dt>
-                    <dd>
-                      <JaText face="ui">{c.kun.join('・')}</JaText>
-                    </dd>
-                  </>
-                )}
-              </dl>
-              {c.words.length > 0 && (
-                <p className="flex flex-wrap gap-x-3 text-small">
-                  {c.words.map((w) => (
-                    <JaText key={w} face="ui">
-                      {w}
-                    </JaText>
-                  ))}
-                </p>
-              )}
-            </div>
-          </li>
+          <KanjiRow key={c.char} c={c} />
         ))}
       </ul>
     </section>
+  );
+}
+
+function KanjiRow({ c }: { c: JaKanjiCard }) {
+  const { t, lang } = useT<JapaneseKey>();
+  const [open, setOpen] = useState(false);
+  const panel = `kanji-strokes-${c.char.codePointAt(0)!.toString(16)}`;
+  return (
+    <li className="flex flex-col gap-3">
+      <div className="flex items-start gap-4">
+        <JaText className="practice-grid flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-md bg-paper-2 text-[3rem] font-semibold leading-none">
+          {c.char}
+        </JaText>
+        <div className="flex min-w-0 flex-col gap-1">
+          <p className="flex flex-wrap items-baseline gap-x-2">
+            <span className="font-bold" lang={c.meaning.lang}>
+              {lang === 'en' && c.meaning.en ? c.meaning.en : c.meaning.text}
+            </span>
+            <span className="label tnum text-muted">
+              {c.strokes} {t('lesson.strokes')}
+            </span>
+          </p>
+          <dl className="grid grid-cols-[auto_1fr] gap-x-2 text-small">
+            {c.on.length > 0 && (
+              <>
+                <dt className="label text-muted">{t('lesson.onyomi')}</dt>
+                <dd>
+                  <JaText face="ui">{c.on.join('・')}</JaText>
+                </dd>
+              </>
+            )}
+            {c.kun.length > 0 && (
+              <>
+                <dt className="label text-muted">{t('lesson.kunyomi')}</dt>
+                <dd>
+                  <JaText face="ui">{c.kun.join('・')}</JaText>
+                </dd>
+              </>
+            )}
+          </dl>
+          {c.words.length > 0 && (
+            <p className="flex flex-wrap gap-x-3 text-small">
+              {c.words.map((w) => (
+                <JaText key={w} face="ui">
+                  {w}
+                </JaText>
+              ))}
+            </p>
+          )}
+          <button
+            type="button"
+            className="btn btn-quiet min-h-0 self-start px-0 py-1 text-small"
+            aria-expanded={open}
+            aria-controls={panel}
+            aria-label={t('strokes.see', { ch: c.char })}
+            onClick={() => setOpen((o) => !o)}
+          >
+            <IconPlay size={14} /> {t('lesson.strokes')}
+          </button>
+        </div>
+      </div>
+      {open && (
+        <div id={panel}>
+          <StrokeOrder char={c.char} size={180} autoplay lang={lang} />
+        </div>
+      )}
+    </li>
   );
 }
 

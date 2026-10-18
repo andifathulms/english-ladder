@@ -5,7 +5,7 @@
 import { useMemo } from 'react';
 import type { StrokesConfig } from '@ladder/core/course/types';
 import { useT } from '@ladder/core/components/ProgressProvider';
-import { classifyStroke, STROKE_NAMES, type Point, type StrokeName } from '@/lib/zh/trace';
+import { classifyStroke, STROKE_NAMES, type Point, type StrokeData, type StrokeName } from '@/lib/zh/trace';
 import { useVisualData } from '@/visuals/data';
 import { ZhText } from './ZhText';
 
@@ -33,10 +33,13 @@ function StrokeNameView({ name, place }: { name: string; place: 'list' | 'quiz' 
   );
 }
 
+/** Core passes the stroke file; Mandarin names strokes from its medians. */
+const useNames = (ch: string, data: StrokeData | null | undefined) => useStrokeNames(ch, data?.medians);
+
 const TraceChar = ({ char }: { char: string }) => <ZhText className="text-zh-body text-ink">{char}</ZhText>;
 
 export const strokes: StrokesConfig = {
-  useNames: useStrokeNames,
+  useNames,
   allNames: ['heng', 'shu', 'pie', 'dian', 'na', 'ti', 'zhe', 'gou'],
   Name: StrokeNameView,
   announce: (name, lang) => {

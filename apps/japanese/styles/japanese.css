@@ -25,3 +25,28 @@
 .seal-stamp {
   animation: seal-stamp var(--m-stamp-d) var(--ease-stamp) both;
 }
+
+/* Tracing (core TracePad, as Mandarin Ladder): a missed stroke fades out; the hint path pulses. */
+@keyframes trace-miss {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.trace-miss {
+  animation: trace-miss 300ms var(--ease) both;
+}
+@keyframes hint-pulse {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+.hint-pulse {
+  animation: hint-pulse 1200ms ease-in-out infinite;
+}

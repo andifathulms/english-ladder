@@ -12,6 +12,8 @@ export type StrokeData = {
    *  (KanjiVG). Default 'outline'. */
   kind?: 'outline' | 'centreline';
   size?: number;
+  /** The source's stroke types, one per stroke (KanjiVG kvg:type), for naming strokes. */
+  types?: string[];
 };
 
 export const GRID = 1024;

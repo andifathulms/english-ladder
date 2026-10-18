@@ -18,6 +18,8 @@ import { JaInline } from '../ja/JaInline';
 import { KanaInput } from '../ja/KanaInput';
 import { MoraBeatsMini } from '@/visuals/MoraBeatsMini';
 import { PitchLineMini } from '@/visuals/PitchLineMini';
+import { TraceCheck } from '@ladder/core/components/strokes/TraceCheck';
+import { recordTrace } from '@/course/progress';
 
 type Fu = { furigana?: boolean };
 const fu = (item: CoreItem | undefined) => (item as unknown as Fu | undefined)?.furigana;
@@ -260,6 +262,33 @@ function FormPrompt({ item }: { item: ExtraItem }) {
   );
 }
 
+/** A trace item's own line, when it has one (the TraceCheck shows "Tulis …" with the character). */
+function TracePrompt({ item }: { item: ExtraItem }) {
+  if (!item.prompt) return null;
+  return (
+    <p className="text-small text-muted">
+      <JaInline text={item.prompt as string} />
+    </p>
+  );
+}
+
+/** Write the kana or kanji; the best trace is kept (Saya), and up to two misses pass first try. */
+function TraceAnswer({ item, mode, solved, onChange, submit }: AnswerProps) {
+  const it = item as unknown as { char: string; guide?: 'on' | 'off' };
+  return (
+    <TraceCheck
+      item={it}
+      solved={solved}
+      onDone={(misses) => {
+        const resp = `misses:${misses}`;
+        recordTrace(it.char, misses);
+        if (mode === 'test') onChange(resp);
+        else submit(resp, { misses: misses > 2 ? 1 : 0 });
+      }}
+    />
+  );
+}
+
 export const checkSlots: CheckSlots = {
   Inline,
   Prompt,
@@ -283,5 +312,6 @@ export const checkSlots: CheckSlots = {
     mora: { Prompt: MoraPrompt, Option: MoraOption },
     pitch: { Prompt: PitchPrompt, Option: PitchOption },
     form: { Prompt: FormPrompt, Answer: KanaAnswer },
+    trace: { Prompt: TracePrompt, Answer: TraceAnswer },
   },
 };

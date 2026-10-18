@@ -52,8 +52,8 @@ export type SpeechRules = {
 export type StrokesConfig = {
   /** Matching thresholds over the defaults (lib/strokes/trace.ts). */
   config?: Partial<import('@ladder/core/lib/strokes/trace').TraceConfig>;
-  /** A character's stroke names in order (authored where known, else a heuristic). */
-  useNames: (ch: string, medians: import('@ladder/core/lib/strokes/trace').Point[][] | undefined) => string[];
+  /** A character's stroke names in order, from its stroke file (still loading: undefined; none: null). */
+  useNames: (ch: string, data: import('@ladder/core/lib/strokes/trace').StrokeData | null | undefined) => string[];
   /** Every stroke name, in display order (the keyboard alternative's options). */
   allNames: readonly string[];
   /** A stroke name as shown: in StrokeOrder's list, and in the keyboard alternative's options. */

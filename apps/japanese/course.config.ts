@@ -15,6 +15,7 @@ import { voiceScorer, canSpeak, chunkMax, estimateMs, sentenceSplit, sampleText,
 import { ALLOWED_SETTINGS, DEFAULT_SETTINGS, EXTENSIONS, SCHEMA_VERSION, STORAGE_KEY, THEME_COLOR } from '@/course/progress';
 import type { Rung } from '@/course/types';
 import { Seigaiha } from '@/components/Seigaiha';
+import { strokes } from '@/components/strokes';
 import { checkSlots } from '@/components/check/slots';
 import { DeckSoon } from '@/components/DeckPanels';
 import { WordsRow, matchesWord } from '@/components/WordsRow';
@@ -185,6 +186,7 @@ export const course: CourseConfig = {
     cefrLabelLocalised: true,
   },
 
+  strokes,
   visuals: registry,
   visualIds: VISUAL_IDS,
   boardPattern: Seigaiha,

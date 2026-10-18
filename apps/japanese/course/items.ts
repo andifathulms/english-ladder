@@ -3,6 +3,7 @@
 import type { ItemTypeLogic } from '@ladder/core/lib/check/itemTypes';
 import type { ExtraItem } from '@ladder/core/lib/types';
 import { stripMarkup } from '@ladder/core/lib/markup';
+import { traceItemType } from '@ladder/core/lib/strokes/item';
 import { normJa, toKana } from '@/lib/ja/text';
 import { toHiragana } from '@/lib/ja/kana';
 
@@ -76,6 +77,7 @@ export const itemTypes: Record<string, ItemTypeLogic> = {
     options: (i) => (i as Form).options ?? [],
     answered: (_i, r, where) => where === 'placement' || str(r).trim() !== '',
   },
+  trace: traceItemType((i) => prompted(i, `Tulis ${i.char}.`)),
 };
 
 type Core = ExtraItem & { prompt?: string; wrong?: string; answer?: string | string[] };

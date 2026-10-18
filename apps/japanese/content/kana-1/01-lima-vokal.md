@@ -52,6 +52,11 @@ check:
     tiles: [え, う]
     answer: [う, え]
     why: { id: "うえ: u dulu, lalu e.", en: "うえ: u first, then e." }
+  - id: k1-01-c5
+    type: trace
+    char: あ
+    guide: on
+    why: { id: "あ ditulis tiga goresan: mendatar, tarik ke bawah, lalu lengkung besar.", en: "あ takes three strokes: across, down, then the big curve." }
 glossary:
   - { ja: "いえ", kana: "いえ", id: "rumah", en: "house", type: noun, jlpt: N5 }
   - { ja: "うえ", kana: "うえ", id: "atas", en: "above", type: noun, jlpt: N5 }
