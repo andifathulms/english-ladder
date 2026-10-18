@@ -1,0 +1,153 @@
+/* Mandarin Ladder token values (DESIGN §3: lacquer red, gold and cream) and Mandarin-only tokens,
+   over the core defaults. Generated from the source app's tokens.css: only what differs from core. */
+@import '@ladder/core/styles/tokens.css';
+
+:root {
+  --ink: #241514;
+  --muted: #67585A;
+  --accent: #A3271C;
+  --accent-soft: #F6E3DD;
+  --board: #6B1A16;
+  --board-2: #84261F;
+  --board-muted: #DDBFB8;
+  --brass: #D9B26A;
+  --off: #9B3254;
+  --off-bg: #F6E2E8;
+  --easy: #2D7480;
+  --easy-soft: #E1EEF0;
+  --subject: #2E7D6B;
+  --shadow-rgb: 60 20 18;
+  --dasar: #865A22;
+  --dasar-soft: #F3E8D6;
+  --tone-1: #2B5FA8;
+  --tone-2: #2B733C;
+  --tone-3: #8D5C0E;
+  --tone-4: #B03A2E;
+  --tone-0: var(--muted);
+  --grid-line: color-mix(in srgb, var(--accent) 22%, transparent);
+  --harakat: #A3271C;
+  --eg: #2A4A7F;
+  --eg-soft: #E4E9F2;
+  --ar-scale: 1;
+  --t-ar-sentence-base: 2.125rem;
+  --t-ar-glyph-base: 5rem;
+  --t-ar-sentence: calc(var(--t-ar-sentence-base) * var(--ar-scale));
+  --t-ar-body: calc(1.5rem * var(--ar-scale));
+  --t-ar-small: calc(1.25rem * var(--ar-scale));
+  --t-ar-glyph: calc(var(--t-ar-glyph-base) * var(--ar-scale));
+  --t-ar-title: calc(1.75rem * var(--ar-scale));
+  --zh-scale: 1;
+  --font-zh: 'Ladder WenKai';
+  --font-zh-ui: 'Ladder Noto SC';
+  --t-zh-sentence-base: 2rem;
+  --t-zh-glyph-base: 6rem;
+  --t-py-ruby: 0.42em;
+  --t-zh-sentence: calc(var(--t-zh-sentence-base) * var(--zh-scale));
+  --t-zh-body: calc(1.5rem * var(--zh-scale));
+  --t-zh-small: calc(1.2rem * var(--zh-scale));
+  --t-zh-glyph: calc(var(--t-zh-glyph-base) * var(--zh-scale));
+  --t-tr: calc(var(--t-small) * 1.12);
+  --m-stroke-d: 450ms;
+  --m-contour-d: 600ms;
+}
+
+@media (max-width: 480px) {
+  :root {
+    --t-ar-sentence-base: 1.875rem;
+    --t-ar-glyph-base: 4rem;
+    --t-zh-sentence-base: 1.75rem;
+    --t-zh-glyph-base: 4.5rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #170F0E;
+    --paper-2: #201514;
+    --surface: #281A18;
+    --ink: #F0E6DE;
+    --muted: #B9A7A2;
+    --rule: #3A2723;
+    --accent: #F08A74;
+    --accent-ink: #170F0E;
+    --accent-soft: #3A1E19;
+    --board: #4A1411;
+    --board-2: #5E1D18;
+    --board-muted: #D3B5AD;
+    --off: #F08FB0;
+    --off-bg: #3A1B26;
+    --easy: #7CC4CF;
+    --easy-soft: #13282B;
+    --subject: #5FBFA7;
+    --dasar: #D9AE6E;
+    --dasar-soft: #2A2216;
+    --tone-1: #8DB4EE;
+    --tone-2: #8FD09B;
+    --tone-3: #E6B45C;
+    --tone-4: #F2907F;
+    --tone-0: var(--muted);
+    --grid-line: color-mix(in srgb, var(--accent) 22%, transparent);
+    --harakat: #F08A74;
+    --eg: #9DB8E6;
+    --eg-soft: #1E2C4B;
+  }
+}
+
+:root[data-theme='dark'] {
+  --paper: #170F0E;
+  --paper-2: #201514;
+  --surface: #281A18;
+  --ink: #F0E6DE;
+  --muted: #B9A7A2;
+  --rule: #3A2723;
+  --accent: #F08A74;
+  --accent-ink: #170F0E;
+  --accent-soft: #3A1E19;
+  --board: #4A1411;
+  --board-2: #5E1D18;
+  --board-muted: #D3B5AD;
+  --off: #F08FB0;
+  --off-bg: #3A1B26;
+  --easy: #7CC4CF;
+  --easy-soft: #13282B;
+  --subject: #5FBFA7;
+  --dasar: #D9AE6E;
+  --dasar-soft: #2A2216;
+  --tone-1: #8DB4EE;
+  --tone-2: #8FD09B;
+  --tone-3: #E6B45C;
+  --tone-4: #F2907F;
+  --tone-0: var(--muted);
+  --grid-line: color-mix(in srgb, var(--accent) 22%, transparent);
+  --harakat: #F08A74;
+  --eg: #9DB8E6;
+  --eg-soft: #1E2C4B;
+}
+
+:root[data-ar-size='120'] {
+  --ar-scale: 1.2;
+}
+
+:root[data-ar-size='140'] {
+  --ar-scale: 1.4;
+}
+
+:root[data-zh-size='120'] {
+  --zh-scale: 1.2;
+}
+
+:root[data-zh-size='140'] {
+  --zh-scale: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion='full']) {
+    --m-stroke-d: 0ms;
+    --m-contour-d: 0ms;
+  }
+}
+
+:root[data-motion='reduce'] {
+  --m-stroke-d: 0ms;
+  --m-contour-d: 0ms;
+}

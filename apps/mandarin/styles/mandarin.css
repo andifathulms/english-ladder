@@ -1,0 +1,79 @@
+/* Mandarin Ladder's unlayered CSS: the subset hanzi faces, tone colours and Mandarin animations.
+   The .zh-* / .py / .tianzige component classes are a Tailwind plugin in tailwind.config.ts. */
+@import './fonts-zh.css';
+
+/* Hanzi: never italic, letter-spaced, uppercased or synthesised bold (DESIGN §4.4). After the
+   component classes (.label), so a hanzi chip keeps normal spacing and case. */
+.zh {
+  letter-spacing: normal;
+  text-transform: none;
+  font-style: normal;
+  font-synthesis: none;
+}
+
+/* Outside @layer: built dynamically (tone-${n}), so Tailwind must not purge them. */
+/* Tone colours, on the hanzi and its pinyin together (DESIGN §4.4). */
+.tone-1,
+.zh-ruby rt.tone-1 {
+  color: var(--tone-1);
+}
+.tone-2,
+.zh-ruby rt.tone-2 {
+  color: var(--tone-2);
+}
+.tone-3,
+.zh-ruby rt.tone-3 {
+  color: var(--tone-3);
+}
+.tone-4,
+.zh-ruby rt.tone-4 {
+  color: var(--tone-4);
+}
+.tone-0,
+.zh-ruby rt.tone-0 {
+  color: var(--tone-0);
+}
+
+/* Tracing (DESIGN §6.7): a wrong stroke flashes and fades; the expected stroke pulses after two misses. */
+@keyframes trace-miss {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.trace-miss {
+  animation: trace-miss 300ms var(--ease) both;
+}
+@keyframes hint-pulse {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+.hint-pulse {
+  animation: hint-pulse 1200ms ease-in-out infinite;
+}
+
+/* sandhi (DESIGN §5): a changing tone mark lifts, swaps and settles. */
+@keyframes sandhi-swap {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(2px);
+    opacity: 1;
+  }
+  100% {
+    transform: none;
+  }
+}
+.sandhi-swap {
+  animation: sandhi-swap var(--m-object-d) var(--ease-object) both;
+  display: inline-block;
+}

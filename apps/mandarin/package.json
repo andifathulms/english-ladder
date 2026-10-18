@@ -1,0 +1,39 @@
+{
+  "name": "mandarin-ladder",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A calm, levelled Mandarin course for Indonesian speakers, from zero to HSK 9.",
+  "scripts": {
+    "predev": "npm run fonts:subset",
+    "dev": "next dev",
+    "prebuild": "npm run data:check && npm run content:check && npm run fonts:subset",
+    "build": "next build",
+    "preview": "node ../../packages/ladder-core/scripts/serve.mjs",
+    "data:fetch": "tsx scripts/data-fetch.ts",
+    "data:import": "tsx scripts/data-import.ts",
+    "data:check": "tsx scripts/data-check.ts",
+    "content:check": "tsx ../../packages/ladder-core/scripts/content-check.ts",
+    "fonts:fetch": "tsx scripts/fonts-fetch.ts",
+    "fonts:subset": "tsx scripts/fonts-subset.ts",
+    "strokes:extract": "tsx scripts/strokes-extract.ts",
+    "audio:list": "tsx scripts/audio-list.ts",
+    "audio:ingest": "tsx ../../packages/ladder-core/scripts/audio-ingest.ts",
+    "audio:syllables": "tsx scripts/audio-syllables.ts",
+    "icons": "node ../../packages/ladder-core/scripts/make-icons.mjs '#6B1A16'",
+    "sw": "node ../../packages/ladder-core/scripts/make-sw.mjs --cache-first strokes:.json mandarin-ladder- v1.0.0 '' rung/dasar-1/ rung/dasar-2/ rung/easy-1/ placement/ review/ words/ me/ settings/ about/ manifest.webmanifest icons/icon.svg audio/manifest.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "lint": "next lint",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@ladder/core": "*",
+    "next": "14.2.33",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "subset-font": "2.4.0"
+  }
+}

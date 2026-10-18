@@ -9,7 +9,7 @@
 // the moment it matches the baseline exactly (0 differing pixels), and we re-capture only the
 // still-unmatched shots, up to a few attempts. The threshold stays maxDiffPixels: 0.
 //
-// Usage: node tests/parity/verify.mjs [english|arabic]   (default english; set PARITY_BASE_URL to
+// Usage: node tests/parity/verify.mjs [english|arabic|mandarin]   (default english; set PARITY_BASE_URL to
 // use an existing server)
 
 import fs from 'node:fs';
@@ -23,6 +23,7 @@ const ROOT = process.cwd();
 const APPS = {
   english: { dir: 'apps/english', parity: 'tests/parity', port: 4173 },
   arabic: { dir: 'apps/arabic', parity: 'apps/arabic/tests/parity', port: 4174 },
+  mandarin: { dir: 'apps/mandarin', parity: 'apps/mandarin/tests/parity', port: 4177 },
 };
 const appName = process.argv[2] || 'english';
 const app = APPS[appName];
