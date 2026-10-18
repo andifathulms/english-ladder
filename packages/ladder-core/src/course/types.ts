@@ -314,6 +314,8 @@ export type CourseConfig = {
       tagKey?: string;
       /** Badge in the dialogue header and its card's icon (Arabic: the EG chip). */
       Badge?: ComponentType;
+      /** The dialogue card's icon when it differs from Badge (Mandarin: a speech bubble). */
+      Icon?: ComponentType;
       /** Extra classes for the dialogue card and text section (Arabic: the --eg inline-start edge). */
       edgeClass?: string;
       /** Classes for the dialogue card's icon square. */

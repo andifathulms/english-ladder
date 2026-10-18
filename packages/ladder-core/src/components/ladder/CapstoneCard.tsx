@@ -18,7 +18,7 @@ type Props = {
 export function CapstoneCard({ href, kind, title, meta, done }: Props) {
   const { t, lang } = useT();
   const dialogue = useCourse().capstones?.dialogue;
-  const Badge = dialogue?.Badge;
+  const Badge = dialogue?.Icon ?? dialogue?.Badge;
   const isDialogue = kind === 'dialogue';
   const date = done ? new Date(done).toLocaleDateString(lang === 'en' ? 'en-GB' : 'id-ID', { day: 'numeric', month: 'short' }) : null;
   return (
