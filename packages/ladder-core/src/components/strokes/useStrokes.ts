@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { withBase } from '@ladder/core/lib/basePath';
-import type { StrokeData } from '@/lib/zh/trace';
+import type { StrokeData } from '@ladder/core/lib/strokes/trace';
 
 const cache = new Map<string, Promise<StrokeData | null>>();
 

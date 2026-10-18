@@ -9,7 +9,7 @@ import { IconClose } from '@ladder/core/components/ui/Icon';
 import { PlayButton } from '@ladder/core/components/lesson/PlayButton';
 import { usePlay } from '@ladder/core/components/useSpeech';
 import { useSettings, useT } from '@ladder/core/components/ProgressProvider';
-import { StrokeOrder } from '@/visuals/StrokeOrder';
+import { StrokeOrder } from '@ladder/core/components/strokes/StrokeOrder';
 import type { MandarinKey } from '@/i18n/overrides';
 
 const defaultStrokes = (ch: string) => <StrokeOrder char={ch} size={180} autoplay />;

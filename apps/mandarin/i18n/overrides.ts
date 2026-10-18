@@ -66,29 +66,6 @@ export type MandarinKey =
   | "hanzi.strokes"
   | "hanzi.radical"
   | "hanzi.playStrokes"
-  | "strokes.label"
-  | "strokes.none"
-  | "strokes.loading"
-  | "strokes.controls"
-  | "strokes.back"
-  | "strokes.forward"
-  | "strokes.play"
-  | "strokes.pause"
-  | "strokes.speed"
-  | "strokes.names"
-  | "strokes.announce"
-  | "strokes.see"
-  | "trace.prompt"
-  | "trace.pad"
-  | "trace.good"
-  | "trace.miss"
-  | "trace.order"
-  | "trace.done"
-  | "trace.again"
-  | "trace.useKeys"
-  | "trace.useDraw"
-  | "trace.quizAsk"
-  | "trace.quizSoFar"
   | "tone.n"
   | "tone.pick"
   | "tone.syllable"
@@ -256,29 +233,6 @@ export const idOverrides: Overrides = {
   "hanzi.strokes": "{n} goresan",
   "hanzi.radical": "radikal",
   "hanzi.playStrokes": "goresan",
-  "strokes.label": "{ch}: {n} goresan",
-  "strokes.none": "Data goresan untuk karakter ini belum ada.",
-  "strokes.loading": "Memuat goresan…",
-  "strokes.controls": "Kontrol urutan goresan",
-  "strokes.back": "Goresan sebelumnya",
-  "strokes.forward": "Goresan berikutnya",
-  "strokes.play": "Putar urutan goresan",
-  "strokes.pause": "Jeda",
-  "strokes.speed": "Kecepatan",
-  "strokes.names": "Nama goresan",
-  "strokes.announce": "Goresan {n} dari {total}: {name}",
-  "strokes.see": "Lihat goresan {ch}",
-  "trace.prompt": "Tulis karakter ini, goresan demi goresan:",
-  "trace.pad": "Kotak latihan untuk menulis, {n} goresan",
-  "trace.good": "Tepat. Goresan {n} dari {total}.",
-  "trace.miss": "Coba lagi. Perhatikan arah goresannya.",
-  "trace.order": "Itu goresan yang nanti. Ikuti urutannya.",
-  "trace.done": "Selesai.",
-  "trace.again": "Tulis lagi",
-  "trace.useKeys": "Pakai keyboard",
-  "trace.useDraw": "Tulis dengan jari",
-  "trace.quizAsk": "Goresan {n} dari {total}: goresan apa berikutnya?",
-  "trace.quizSoFar": "{ch}, {n} dari {total} goresan sudah ditulis",
   "tone.n": "nada {n}",
   "tone.pick": "Pilih nada",
   "tone.syllable": "Pilih suku kata",
@@ -446,29 +400,6 @@ export const enOverrides: Overrides = {
   "hanzi.strokes": "{n} strokes",
   "hanzi.radical": "radical",
   "hanzi.playStrokes": "strokes",
-  "strokes.label": "{ch}: {n} strokes",
-  "strokes.none": "No stroke data for this character yet.",
-  "strokes.loading": "Loading strokes…",
-  "strokes.controls": "Stroke order controls",
-  "strokes.back": "Previous stroke",
-  "strokes.forward": "Next stroke",
-  "strokes.play": "Play the stroke order",
-  "strokes.pause": "Pause",
-  "strokes.speed": "Speed",
-  "strokes.names": "Stroke names",
-  "strokes.announce": "Stroke {n} of {total}: {name}",
-  "strokes.see": "See the strokes of {ch}",
-  "trace.prompt": "Write this character, stroke by stroke:",
-  "trace.pad": "Practice grid for writing, {n} strokes",
-  "trace.good": "Right. Stroke {n} of {total}.",
-  "trace.miss": "Try again. Watch the stroke's direction.",
-  "trace.order": "That's a later stroke. Follow the order.",
-  "trace.done": "Done.",
-  "trace.again": "Write it again",
-  "trace.useKeys": "Use the keyboard",
-  "trace.useDraw": "Write with a finger",
-  "trace.quizAsk": "Stroke {n} of {total}: which stroke comes next?",
-  "trace.quizSoFar": "{ch}, {n} of {total} strokes written",
   "tone.n": "tone {n}",
   "tone.pick": "Choose a tone",
   "tone.syllable": "Choose a syllable",

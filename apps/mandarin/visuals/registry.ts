@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
 import type { VisualId } from '@/visuals/visualIds';
-import { StrokeOrder } from '@/visuals/StrokeOrder';
+import { StrokeOrder } from '@ladder/core/components/strokes/StrokeOrder';
 import { ToneContour } from '@/visuals/ToneContour';
 import { SyllableBuilder } from '@/visuals/SyllableBuilder';
 import { MouthPlaces } from '@/visuals/MouthPlaces';

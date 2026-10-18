@@ -48,6 +48,22 @@ export type SpeechRules = {
   estimateMs?: (text: string, rate: number) => number;
 };
 
+/** Handwriting (CourseConfig.strokes): stroke naming and matching for StrokeOrder, TracePad and trace items. */
+export type StrokesConfig = {
+  /** Matching thresholds over the defaults (lib/strokes/trace.ts). */
+  config?: Partial<import('@ladder/core/lib/strokes/trace').TraceConfig>;
+  /** A character's stroke names in order (authored where known, else a heuristic). */
+  useNames: (ch: string, medians: import('@ladder/core/lib/strokes/trace').Point[][] | undefined) => string[];
+  /** Every stroke name, in display order (the keyboard alternative's options). */
+  allNames: readonly string[];
+  /** A stroke name as shown: in StrokeOrder's list, and in the keyboard alternative's options. */
+  Name: ComponentType<{ name: string; place: 'list' | 'quiz' }>;
+  /** A stroke name for the live announcement. */
+  announce: (name: string, lang: UiLang) => string;
+  /** The character beside the trace prompt. */
+  Char: ComponentType<{ char: string }>;
+};
+
 /** A course setting shown in Settings (CourseConfig.settings.rows). */
 export type SettingsRow = {
   group: 'sound' | 'display' | 'study';
@@ -417,6 +433,8 @@ export type CourseConfig = {
     /** The quoted resume line on the board (continue card). Default: the display serif line. */
     BoardQuote?: ComponentType<{ quote: Quote; rung: Rung | undefined }>;
   };
+  /** Handwriting: stroke naming and matching (see StrokesConfig). */
+  strokes?: StrokesConfig;
   /** Visual id → component (the lesson/scene registry). */
   visuals: Record<string, ComponentType<never>>;
   visualIds: readonly string[];

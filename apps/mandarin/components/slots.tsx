@@ -23,7 +23,7 @@ import { ZhTextOverride, ZhTextProvider, useRungTones, useZhText } from './zh/Zh
 import { LessonTopToggles } from './LessonTopToggles';
 import { HanziCard, NadaCard, TalkCard, WordsCard } from './StrandCards';
 import { HskChip } from './HskChip';
-import { StrokeOrder } from '@/visuals/StrokeOrder';
+import { StrokeOrder } from '@ladder/core/components/strokes/StrokeOrder';
 import { ToneContourMini } from '@/visuals/ToneContourMini';
 
 type ZhPy = { zh: string; py: string; id?: string; en?: string; note?: { id: string; en: string } };

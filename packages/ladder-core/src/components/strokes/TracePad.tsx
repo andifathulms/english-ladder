@@ -1,10 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { showHint, startTrace, totalMisses, traceStep, type Point, type StrokeData, type TraceState } from '@/lib/zh/trace';
-import { PracticeGrid } from '@/visuals/StrokeOrder';
-import { useReducedMotion, useT } from '@ladder/core/components/ProgressProvider';
-import type { MandarinKey } from '@/i18n/overrides';
+import { showHint, startTrace, totalMisses, traceStep, type Point, type StrokeData, type TraceState } from '@ladder/core/lib/strokes/trace';
+import { useReducedMotion, useT } from '../ProgressProvider';
+import { PracticeGrid, strokeStyle, strokeTransform, useTraceConfig } from './StrokePaths';
 
 type Props = {
   data: StrokeData;
@@ -24,13 +23,14 @@ function gridPoint(svg: SVGSVGElement, e: { clientX: number; clientY: number }):
 }
 
 /**
- * The tracing surface (DESIGN §6.7): a 田字格 grid on --surface, 280px on phones and 320px wider, with
+ * The tracing surface (Mandarin and Japanese DESIGN §6.7): a practice grid on --surface, 280px on phones and 320px wider, with
  * the character as a faint guide. Each stroke is judged as it ends: a correct one snaps to its true
  * shape in --ink; a wrong one flashes --off and fades; after two misses the expected stroke pulses in
  * --accent. Pointer events with touch-action: none; pen pressure ignored; coalesced events used.
  */
 export function TracePad({ data, guide = true, onDone, onStroke, disabled }: Props) {
-  const { t } = useT<MandarinKey>();
+  const { t } = useT();
+  const cfg = useTraceConfig();
   const reduced = useReducedMotion();
   const svgRef = useRef<SVGSVGElement>(null);
   const [state, setState] = useState<TraceState>(() => startTrace(data.medians.length));
@@ -54,7 +54,7 @@ export function TracePad({ data, guide = true, onDone, onStroke, disabled }: Pro
 
   const finish = (pts: Point[]) => {
     if (pts.length < 2) return;
-    const { state: next, judgement } = traceStep(state, pts, data.medians as Point[][]);
+    const { state: next, judgement } = traceStep(state, pts, data.medians as Point[][], cfg);
     setState(next);
     onStroke?.(next, judgement.result === 'pass');
     if (judgement.result === 'pass') {
@@ -93,7 +93,7 @@ export function TracePad({ data, guide = true, onDone, onStroke, disabled }: Pro
     finish(pts);
   };
 
-  const hint = showHint(state);
+  const hint = showHint(state, cfg);
   const poly = (pts: Point[]) => pts.map(([x, y]) => `${x.toFixed(0)},${y.toFixed(0)}`).join(' ');
 
   return (
@@ -115,13 +115,13 @@ export function TracePad({ data, guide = true, onDone, onStroke, disabled }: Pro
         data-trace-pad
       >
         <PracticeGrid />
-        <g transform="translate(0 900) scale(1 -1)">
-          {guide && data.strokes.map((d, i) => <path key={i} d={d} style={{ fill: 'var(--rule)' }} />)}
+        <g transform={strokeTransform(data)}>
+          {guide && data.strokes.map((d, i) => <path key={i} d={d} style={strokeStyle(data, 'var(--rule)')} />)}
           {data.strokes.slice(0, state.k).map((d, i) => (
-            <path key={`d${i}`} d={d} className={i === state.k - 1 && !reduced ? 'fade-in' : undefined} style={{ fill: 'var(--ink)' }} />
+            <path key={`d${i}`} d={d} className={i === state.k - 1 && !reduced ? 'fade-in' : undefined} style={strokeStyle(data, 'var(--ink)')} />
           ))}
           {hint && (
-            <path d={data.strokes[state.k]} className={reduced ? undefined : 'hint-pulse'} style={{ fill: 'var(--accent)', opacity: 0.4 }} data-hint />
+            <path d={data.strokes[state.k]} className={reduced ? undefined : 'hint-pulse'} style={strokeStyle(data, 'var(--accent)', { opacity: 0.4 })} data-hint />
           )}
         </g>
         {line.length > 1 && <polyline points={poly(line)} style={{ fill: 'none', stroke: 'var(--ink)', strokeWidth: 36, strokeLinecap: 'round', strokeLinejoin: 'round', opacity: 0.7 }} />}

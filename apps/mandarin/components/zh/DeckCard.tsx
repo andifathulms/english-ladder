@@ -6,7 +6,7 @@ import { Pinyin } from './Pinyin';
 import { ZhSentence } from './ZhSentence';
 import { ZhTextOverride } from './ZhContext';
 import { PlayButton } from '@ladder/core/components/lesson/PlayButton';
-import { StrokeOrder } from '@/visuals/StrokeOrder';
+import { StrokeOrder } from '@ladder/core/components/strokes/StrokeOrder';
 import { IconPlay } from '@ladder/core/components/ui/Icon';
 import { usePlay } from '@ladder/core/components/useSpeech';
 import { useSettings, useT } from '@ladder/core/components/ProgressProvider';

@@ -15,6 +15,7 @@ import { voiceScorer, canSpeak, chunkMax, estimateMs, sentenceSplit, sampleText,
 import { ALLOWED_SETTINGS, DEFAULT_SETTINGS, EXTENSIONS, SCHEMA_VERSION, STORAGE_KEY, THEME_COLOR, onCompleteLesson } from '@/course/progress';
 import type { Rung } from '@/course/types';
 import { Grid } from '@/components/Grid';
+import { strokes } from '@/components/zh/strokes';
 import { checkSlots } from '@/components/check/slots';
 import { WordsRow, matchesWord } from '@/components/WordsRow';
 import { DeckHome, type Deck } from '@/components/zh/DeckHome';
@@ -166,6 +167,7 @@ export const course: CourseConfig = {
     cefrLabelLocalised: true,
   },
 
+  strokes,
   visuals: registry,
   visualIds: VISUAL_IDS,
   boardPattern: Grid,

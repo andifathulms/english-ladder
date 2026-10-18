@@ -1,30 +1,29 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import type { CheckItem } from '@/course/types';
-import { STROKE_NAMES, type StrokeName } from '@/lib/zh/trace';
-import { TracePad } from '@/components/zh/TracePad';
-import { useStrokes } from '@/components/zh/useStrokes';
-import { PracticeGrid, useStrokeNames } from '@/visuals/StrokeOrder';
-import { ZhText } from '@/components/zh/ZhText';
-import { useT } from '@ladder/core/components/ProgressProvider';
-import type { MandarinKey } from '@/i18n/overrides';
+import { useCourse } from '@ladder/core/course/context';
+import { useT } from '../ProgressProvider';
+import { TracePad } from './TracePad';
+import { useStrokes } from './useStrokes';
+import { PracticeGrid, strokeStyle, strokeTransform } from './StrokePaths';
 
-type Props = { item: Extract<CheckItem, { type: 'trace' }>; solved?: boolean; onDone: (misses: number) => void };
-
-const ALL: StrokeName[] = ['heng', 'shu', 'pie', 'dian', 'na', 'ti', 'zhe', 'gou'];
+/** A trace item: the character to write, and whether its faint guide shows. */
+type Props = { item: { char: string; guide?: 'on' | 'off' }; solved?: boolean; onDone: (misses: number) => void };
 
 /**
  * The keyboard and screen-reader alternative to tracing (PRD §9, DESIGN §12): the strokes drawn so far,
  * and "which stroke comes next?" with stroke names. A wrong pick is a miss for that stroke.
  */
 function StrokeQuiz({ char, onDone }: { char: string; onDone: (misses: number) => void }) {
-  const { t, lang } = useT<MandarinKey>();
+  const { t } = useT();
+  const strokes = useCourse().strokes!;
+  const ALL = strokes.allNames;
+  const { Name } = strokes;
   const data = useStrokes(char);
-  const names = useStrokeNames(char, data?.medians);
+  const names = strokes.useNames(char, data?.medians as [number, number][][] | undefined);
   const [k, setK] = useState(0);
   const [misses, setMisses] = useState(0);
-  const [wrong, setWrong] = useState<StrokeName[]>([]);
+  const [wrong, setWrong] = useState<string[]>([]);
   const n = names.length;
   // Four options: the right name and three others, in a fixed order per stroke.
   const options = useMemo(() => {
@@ -33,9 +32,9 @@ function StrokeQuiz({ char, onDone }: { char: string; onDone: (misses: number) =
     const pick = [0, 1, 2].map((i) => others[(k * 3 + i * 2) % others.length]);
     const set = [names[k], ...pick.filter((x, i, a) => a.indexOf(x) === i)].slice(0, 4);
     return ALL.filter((x) => set.includes(x));
-  }, [names, k]);
+  }, [names, k, ALL]);
   if (!data) return null;
-  const choose = (s: StrokeName) => {
+  const choose = (s: string) => {
     if (s === names[k]) {
       setWrong([]);
       if (k + 1 >= n) onDone(misses);
@@ -49,9 +48,9 @@ function StrokeQuiz({ char, onDone }: { char: string; onDone: (misses: number) =
     <div className="flex flex-col items-center gap-3">
       <svg viewBox="0 0 1024 1024" className="h-[160px] w-[160px] rounded-md bg-surface" role="img" aria-label={t('trace.quizSoFar', { ch: char, n: k, total: n })}>
         <PracticeGrid />
-        <g transform="translate(0 900) scale(1 -1)">
+        <g transform={strokeTransform(data)}>
           {data.strokes.map((d, i) => (
-            <path key={i} d={d} style={{ fill: i < k ? 'var(--ink)' : 'var(--rule)' }} />
+            <path key={i} d={d} style={strokeStyle(data, i < k ? 'var(--ink)' : 'var(--rule)')} />
           ))}
         </g>
       </svg>
@@ -68,9 +67,7 @@ function StrokeQuiz({ char, onDone }: { char: string; onDone: (misses: number) =
                 className={`flex min-h-pill items-center gap-2 rounded-full border-2 px-4 ${wrong.includes(s) ? 'border-off-bg bg-off-bg text-off line-through' : 'border-rule bg-surface text-ink hover:border-accent'}`}
                 data-stroke-option={s}
               >
-                <ZhText face="ui">{STROKE_NAMES[s].zh}</ZhText>
-                <span lang="zh-Latn-pinyin">{STROKE_NAMES[s].py.normalize('NFD')}</span>
-                <span className="text-small text-muted">{STROKE_NAMES[s][lang]}</span>
+                <Name name={s} place="quiz" />
               </button>
             ))}
           </div>
@@ -88,7 +85,8 @@ function StrokeQuiz({ char, onDone }: { char: string; onDone: (misses: number) =
  * alternative names the next stroke instead.
  */
 export function TraceCheck({ item, solved, onDone }: Props) {
-  const { t } = useT<MandarinKey>();
+  const { t } = useT();
+  const { Char } = useCourse().strokes!;
   const data = useStrokes(item.char);
   const [mode, setMode] = useState<'draw' | 'keys'>('draw');
   const [key, setKey] = useState(0);
@@ -105,7 +103,7 @@ export function TraceCheck({ item, solved, onDone }: Props) {
   return (
     <div className="flex flex-col items-center gap-3" data-trace>
       <p className="flex items-center gap-2 text-small text-muted">
-        {t('trace.prompt')} <ZhText className="text-zh-body text-ink">{item.char}</ZhText>
+        {t('trace.prompt')} <Char char={item.char} />
       </p>
       {mode === 'draw' ? (
         <TracePad key={key} data={data} guide={item.guide === 'on'} onDone={done} disabled={solved} />

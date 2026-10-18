@@ -1,9 +1,9 @@
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { TracePad } from '@/components/zh/TracePad';
-import { StrokeOrder } from '@/visuals/StrokeOrder';
-import { TraceCheck } from '@/components/check/TraceCheck';
-import { __setStrokes } from '@/components/zh/useStrokes';
+import { TracePad } from '@ladder/core/components/strokes/TracePad';
+import { StrokeOrder } from '@ladder/core/components/strokes/StrokeOrder';
+import { TraceCheck } from '@ladder/core/components/strokes/TraceCheck';
+import { __setStrokes } from '@ladder/core/components/strokes/useStrokes';
 import { AllProviders } from '../providers';
 import type { StrokeData } from '@/lib/zh/trace';
 
@@ -98,7 +98,7 @@ describe('TracePad', () => {
 describe('TraceCheck keyboard alternative', () => {
   it('asks for the next stroke by name and finishes with the misses', async () => {
     const onDone = vi.fn();
-    const { container } = wrap(<TraceCheck item={{ id: 't', type: 'trace', char: '十', guide: 'on', why: { id: 'x', en: 'x' } }} onDone={onDone} />);
+    const { container } = wrap(<TraceCheck item={{ char: '十', guide: 'on' }} onDone={onDone} />);
     await act(async () => {});
     fireEvent.click(screen.getByRole('button', { name: 'Pakai keyboard' }));
     await act(async () => {});

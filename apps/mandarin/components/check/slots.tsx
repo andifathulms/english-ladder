@@ -20,7 +20,7 @@ import { ToneOption } from '../zh/ToneOption';
 import { PinyinInput } from '../zh/PinyinInput';
 import { ComponentTiles } from '../zh/ComponentTiles';
 import { Pinyin } from '../zh/Pinyin';
-import { TraceCheck } from './TraceCheck';
+import { TraceCheck } from '@ladder/core/components/strokes/TraceCheck';
 import { ProseTerm } from '../slots';
 import { parseInline } from '@ladder/core/lib/markup';
 

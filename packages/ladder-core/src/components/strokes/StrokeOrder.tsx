@@ -1,38 +1,15 @@
 'use client';
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
-import { classifyStroke, length, medianPath, STROKE_NAMES, toScreen, type StrokeName } from '@/lib/zh/trace';
-import { useStrokes } from '@/components/zh/useStrokes';
-import { useVisualData } from '@/visuals/data';
-import { useReducedMotion, useSettings, useT } from '@ladder/core/components/ProgressProvider';
-import { IconPlay } from '@ladder/core/components/ui/Icon';
-import type { VisualProps } from '@ladder/core/components/visuals/types';
-import type { MandarinKey } from '@/i18n/overrides';
+import { useEffect, useId, useRef, useState } from 'react';
+import { length, medianPath, toScreen } from '@ladder/core/lib/strokes/trace';
+import { useCourse } from '@ladder/core/course/context';
+import { useReducedMotion, useSettings, useT } from '../ProgressProvider';
+import { IconPlay } from '../ui/Icon';
+import type { VisualProps } from '../visuals/types';
+import { useStrokes } from './useStrokes';
+import { PracticeGrid, strokeStyle, strokeTransform } from './StrokePaths';
 
-/** The 田字格 (and optionally 米字格) behind a character, in the 1024 grid. */
-export function PracticeGrid({ mizi = false }: { mizi?: boolean }) {
-  const s = { stroke: 'var(--grid-line)', strokeWidth: 6 };
-  const d = { ...s, strokeDasharray: '24 20' };
-  return (
-    <g aria-hidden>
-      <rect x="3" y="3" width="1018" height="1018" fill="none" style={s} />
-      <line x1="0" y1="512" x2="1024" y2="512" style={d} />
-      <line x1="512" y1="0" x2="512" y2="1024" style={d} />
-      {mizi && (
-        <>
-          <line x1="0" y1="0" x2="1024" y2="1024" style={d} />
-          <line x1="1024" y1="0" x2="0" y2="1024" style={d} />
-        </>
-      )}
-    </g>
-  );
-}
-
-/** Stroke names for a character: authored ones win, else the heuristic. */
-export function useStrokeNames(ch: string, medians: number[][][] | undefined): StrokeName[] {
-  const { strokeNames } = useVisualData();
-  return useMemo(() => strokeNames[ch] ?? (medians ?? []).map((m) => classifyStroke(m as [number, number][])), [ch, medians, strokeNames]);
-}
+export { PracticeGrid };
 
 type Props = Partial<VisualProps<number>> & {
   char: string;
@@ -45,13 +22,16 @@ type Props = Partial<VisualProps<number>> & {
 };
 
 /**
- * StrokeOrder (DESIGN §8.5): the character in the practice grid, drawn stroke by stroke along its
- * medians (a thick median path masked by the stroke outline). Drawn strokes are --ink, the current one
+ * StrokeOrder (Mandarin and Japanese DESIGN §8.5): the character in the practice grid, drawn stroke by
+ * stroke: along its medians (a thick median path masked by the stroke outline), or along its own pen
+ * path for centreline strokes (KanjiVG). Drawn strokes are --ink, the current one
  * --accent, the guide --rule; numbers sit at each stroke's start. Play/pause, step, speed, and the
  * stroke names beneath with the current one highlighted. With reduced motion strokes appear whole.
  */
 export function StrokeOrder({ char, size = 240, controls = true, mizi = false, autoplay = false, lang }: Props) {
-  const { t, lang: uiLang } = useT<MandarinKey>();
+  const { t, lang: uiLang } = useT();
+  const strokes = useCourse().strokes!;
+  const { Name } = strokes;
   const L = lang ?? uiLang;
   const data = useStrokes(char);
   const reduced = useReducedMotion();
@@ -62,7 +42,8 @@ export function StrokeOrder({ char, size = 240, controls = true, mizi = false, a
   const [animating, setAnimating] = useState<number | null>(null);
   const uid = useId().replace(/:/g, '');
   const pathRef = useRef<SVGPathElement>(null);
-  const names = useStrokeNames(char, data?.medians);
+  const names = strokes.useNames(char, data?.medians as [number, number][][] | undefined);
+  const centre = data?.kind === 'centreline';
   const n = data?.medians.length ?? 0;
 
   // Drive playback: animate the next stroke, then count it as shown.
@@ -86,14 +67,14 @@ export function StrokeOrder({ char, size = 240, controls = true, mizi = false, a
       }, reduced ? 350 / speed : 0);
       return () => clearTimeout(id);
     }
-    const len = length(data.medians[animating].map((p) => toScreen(p as [number, number]))) + 120;
+    const len = centre ? (el.getTotalLength?.() ?? 120) + 2 : length(data.medians[animating].map((p) => toScreen(p as [number, number]))) + 120;
     const anim = el.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], { duration: dur, easing: 'cubic-bezier(0.2, 0.7, 0.2, 1)', fill: 'forwards' });
     anim.onfinish = () => {
       setShown((s) => Math.max(s, animating + 1));
       setAnimating(null);
     };
     return () => anim.cancel();
-  }, [animating, data, reduced, speed]);
+  }, [animating, data, reduced, speed, centre]);
 
   const play = () => {
     if (shown >= n) setShown(0);
@@ -114,23 +95,34 @@ export function StrokeOrder({ char, size = 240, controls = true, mizi = false, a
         <PracticeGrid mizi={mizi} />
         {data && (
           <g>
-            <defs>
-              {data.strokes.map((d, i) => (
-                <clipPath key={i} id={`so-${uid}-${i}`}>
-                  <path d={d} transform="translate(0 900) scale(1 -1)" />
-                </clipPath>
-              ))}
-            </defs>
+            {!centre && (
+              <defs>
+                {data.strokes.map((d, i) => (
+                  <clipPath key={i} id={`so-${uid}-${i}`}>
+                    <path d={d} transform="translate(0 900) scale(1 -1)" />
+                  </clipPath>
+                ))}
+              </defs>
+            )}
             {/* Guide */}
-            <g transform="translate(0 900) scale(1 -1)">
+            <g transform={strokeTransform(data)}>
               {data.strokes.map((d, i) => (
-                <path key={i} d={d} style={{ fill: 'var(--rule)' }} />
+                <path key={i} d={d} style={strokeStyle(data, 'var(--rule)')} />
               ))}
               {data.strokes.slice(0, shown).map((d, i) => (
-                <path key={`s${i}`} d={d} style={{ fill: i === shown - 1 && animating === null && playing ? 'var(--accent)' : 'var(--ink)' }} />
+                <path key={`s${i}`} d={d} style={strokeStyle(data, i === shown - 1 && animating === null && playing ? 'var(--accent)' : 'var(--ink)')} />
               ))}
+              {/* Centreline strokes animate along their own pen path. */}
+              {centre && animating !== null && (
+                <path
+                  ref={pathRef}
+                  key={`a${animating}`}
+                  d={data.strokes[animating]}
+                  style={strokeStyle(data, 'var(--accent)', { strokeDasharray: 1000, strokeDashoffset: reduced ? 0 : 1000 })}
+                />
+              )}
             </g>
-            {animating !== null && (
+            {!centre && animating !== null && (
               <path
                 ref={pathRef}
                 key={`a${animating}`}
@@ -184,7 +176,6 @@ export function StrokeOrder({ char, size = 240, controls = true, mizi = false, a
           </div>
           <ol className="flex flex-wrap justify-center gap-1" aria-label={t('strokes.names')}>
             {names.map((nm, i) => {
-              const s = STROKE_NAMES[nm];
               const on = current === i;
               return (
                 <li
@@ -193,15 +184,13 @@ export function StrokeOrder({ char, size = 240, controls = true, mizi = false, a
                   className={`flex flex-col items-center rounded-sm px-2 py-1 ${on ? 'bg-accent-soft text-accent' : i < shown ? 'text-ink' : 'text-muted'}`}
                 >
                   <span className="label tnum">{i + 1}</span>
-                  <span lang="zh-Hans" className="zh font-zh-ui text-small">
-                    {s.zh}
-                  </span>
+                  <Name name={nm} place="list" />
                 </li>
               );
             })}
           </ol>
           <p className="sr-only" aria-live="polite">
-            {current !== null && names[current] ? t('strokes.announce', { n: current + 1, total: n, name: `${STROKE_NAMES[names[current]].zh} ${STROKE_NAMES[names[current]].py}, ${STROKE_NAMES[names[current]][L]}` }) : ''}
+            {current !== null && names[current] ? t('strokes.announce', { n: current + 1, total: n, name: strokes.announce(names[current], L) }) : ''}
           </p>
         </>
       )}
