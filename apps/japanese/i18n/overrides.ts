@@ -58,7 +58,13 @@ export type JapaneseKey =
   | 'placement.result.easy-1'
   | 'placement.result.kana-2'
   | 'placement.result.kana-1'
-  | 'about.dataTitle';
+  | 'about.dataTitle'
+  | 'deck.soon'
+  | 'settings.deckDaily'
+  | 'settings.deckFace'
+  | 'settings.deckFace.kanji'
+  | 'settings.deckFace.meaning'
+  | 'settings.deckFace.audio';
 
 type Overrides = Partial<StringTable> & Partial<Record<JapaneseKey, string>>;
 
@@ -145,6 +151,12 @@ export const idOverrides: Overrides = {
   'words.kanjiTab': 'Kartu kanji',
   'words.estimate': 'Daftar JLPT perkiraan: JLPT tidak menerbitkan daftar resmi sejak 2010.',
   'about.dataTitle': 'Data dan lisensi',
+  'deck.soon': 'Kartu ini terbuka bersama Easy 1.',
+  'settings.deckDaily': 'Kartu baru per hari',
+  'settings.deckFace': 'Sisi depan kartu',
+  'settings.deckFace.kanji': 'Kanji',
+  'settings.deckFace.meaning': 'Arti',
+  'settings.deckFace.audio': 'Suara',
 };
 
 export const enOverrides: Overrides = {
@@ -230,4 +242,10 @@ export const enOverrides: Overrides = {
   'words.kanjiTab': 'Kanji cards',
   'words.estimate': 'JLPT lists are estimates: JLPT has published no official list since 2010.',
   'about.dataTitle': 'Data and licences',
+  'deck.soon': 'These cards open with Easy 1.',
+  'settings.deckDaily': 'New cards a day',
+  'settings.deckFace': 'Card front',
+  'settings.deckFace.kanji': 'Kanji',
+  'settings.deckFace.meaning': 'Meaning',
+  'settings.deckFace.audio': 'Sound',
 };

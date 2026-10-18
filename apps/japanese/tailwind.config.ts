@@ -77,6 +77,7 @@ const config: Config = {
         pitch: v('pitch'),
         beat: v('beat'),
         seal: v('seal'),
+        'seal-ink': v('seal-ink'),
         'grid-line': v('grid-line'),
       },
       // Japanese faces (DESIGN §4.1): Klee One for teaching text, Noto Sans JP for small UI Japanese.

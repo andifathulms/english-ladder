@@ -127,7 +127,7 @@ export function JaSentence({ ja, id, en, size = 'sentence', play = true, note, o
         const body = anyRomaji && !w.isPunct ? (
           <span className="inline-flex flex-col items-center align-top">
             <span>{text}</span>
-            <span lang="ja-Latn" className={`romaji leading-tight ${romaji ? '' : 'invisible'}`} aria-hidden={romaji ? undefined : true}>
+            <span lang="ja-Latn" className={`romaji font-normal leading-tight ${romaji ? '' : 'invisible'}`} aria-hidden={romaji ? undefined : true}>
               {romaji ?? '·'}
             </span>
           </span>

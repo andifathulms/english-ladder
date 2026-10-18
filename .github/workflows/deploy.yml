@@ -33,8 +33,15 @@ jobs:
           path: apps/mandarin/fonts-src
           key: fonts-src-${{ hashFiles('apps/mandarin/fonts.config.ts') }}
       - run: npm run fonts:fetch -w mandarin-ladder
+      - name: Cache Japanese source fonts
+        uses: actions/cache@v4
+        with:
+          path: apps/japanese/fonts-src
+          key: fonts-src-ja-${{ hashFiles('apps/japanese/fonts.config.ts') }}
+      - run: npm run fonts:fetch -w japanese-ladder
       - run: npm run fonts:subset -w mandarin-ladder
-      # Root scripts run every app: English (with the engine's tests), Arabic and Mandarin.
+      - run: npm run fonts:subset -w japanese-ladder
+      # Root scripts run every app: English (with the engine's tests), Arabic, Mandarin and Japanese.
       - run: npm run lint
       - run: npm run test
       - run: npm run content:check
@@ -63,9 +70,15 @@ jobs:
           path: apps/mandarin/fonts-src
           key: fonts-src-${{ hashFiles('apps/mandarin/fonts.config.ts') }}
       - run: npm run fonts:fetch -w mandarin-ladder
+      - name: Cache Japanese source fonts
+        uses: actions/cache@v4
+        with:
+          path: apps/japanese/fonts-src
+          key: fonts-src-ja-${{ hashFiles('apps/japanese/fonts.config.ts') }}
+      - run: npm run fonts:fetch -w japanese-ladder
       - run: npx playwright install --with-deps chromium
       - name: Build without base path for e2e
-        run: npm run build && npm run build:arabic && npm run build:mandarin
+        run: npm run build && npm run build:arabic && npm run build:mandarin && npm run build:japanese
         env:
           NEXT_PUBLIC_SHOW_DRAFTS: 'true'
       - run: npm run test:e2e

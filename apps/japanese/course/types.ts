@@ -26,4 +26,21 @@ export type JaLessonData = {
   recentKanji: string[];
   /** Deck word ids of the glossary, which join the word deck when the lesson is done. */
   wordIds: string[];
+  /** The Kanji card: this lesson's new kanji. */
+  kanjiCards: JaKanjiCard[];
+  /** Tokyo accent numbers for the lesson's Bunyi words (plain spelling → accent), where known. */
+  pitch: Record<string, number>;
+};
+
+/** A kanji as the Kanji card shows it (KANJIDIC2 readings; meaning from content/data/kanji-id.yaml). */
+export type JaKanjiCard = {
+  char: string;
+  strokes: number;
+  /** On readings in katakana, kun in hiragana with okurigana after a dot (た.べる). */
+  on: string[];
+  kun: string[];
+  /** Indonesian where authored, else KANJIDIC2's English (marked lang="en"). */
+  meaning: { text: string; lang: 'id' | 'en'; en?: string };
+  /** The lesson's words that use it. */
+  words: string[];
 };

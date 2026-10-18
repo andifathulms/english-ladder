@@ -8,12 +8,13 @@ import { normJa } from '@/lib/ja/text';
 import { isKanaKey, jaAudioKey, spokenJa } from '@/lib/ja/audio';
 import { adapter } from './adapter';
 import { answerText, itemText, itemTypes } from './items';
+import { wordFacts } from './words';
 import { CurriculumSchema, DialogueSchema, LessonFrontmatterSchema, NamesSchema, PlacementSchema, ReadingSchema, TestPoolSchema } from './schema';
 import { lintLessons, type LintData } from './lint';
 import { toHiragana } from '@/lib/ja/kana';
-import { parseRuby, toKana } from '@/lib/ja/text';
+import { parseRuby, toKana, toPlain } from '@/lib/ja/text';
 import type { Counter } from '@/lib/ja/counters';
-import type { Dialogue, JaLessonData, Lesson, Placement, Reading, Rung, TestPool } from './types';
+import type { Dialogue, JaKanjiCard, JaLessonData, Lesson, Placement, Reading, Rung, TestPool } from './types';
 
 // Audio keys (audio:list, the manifest check) use the same scheme as the app.
 configureAudio({ normalise: normJa, key: jaAudioKey, spoken: spokenJa, speechFallback: (t) => !isKanaKey(t) });
@@ -26,6 +27,29 @@ const vendor = <T>(f: string): T => JSON.parse(fs.readFileSync(path.join(content
 export const getNames = () => (content.exists('data/names.yaml') ? NamesSchema.parse(content.readYaml('data/names.yaml')) : []);
 export const getCounters = () => (content.exists('data/counters.yaml') ? (content.readYaml('data/counters.yaml') as Counter[]) : []);
 export const getGrammar = () => (content.exists('data/grammar.yaml') ? (content.readYaml('data/grammar.yaml') as { id: string; level: string }[]) : []);
+
+let pitchCache: Record<string, number[]> | null = null;
+const vendorPitch = () => (pitchCache ??= vendor<Record<string, number[]>>('pitch.json'));
+
+type VendorKanji = { char: string; strokes: number; on: string[]; kun: string[]; meanings: string[] };
+let kanjiCache: Map<string, VendorKanji> | null = null;
+const vendorKanji = () => (kanjiCache ??= new Map(vendor<VendorKanji[]>('kanji.json').map((k) => [k.char, k])));
+/** Indonesian kanji meanings (authored; content/data/kanji-id.yaml). */
+const kanjiId = () => (content.exists('data/kanji-id.yaml') ? (content.readYaml('data/kanji-id.yaml') as Record<string, string>) : {});
+
+function kanjiCard(char: string, lesson: Lesson): JaKanjiCard {
+  const k = vendorKanji().get(char);
+  const id = kanjiId()[char];
+  const en = k?.meanings.slice(0, 2).join(', ') ?? '';
+  return {
+    char,
+    strokes: k?.strokes ?? 0,
+    on: (k?.on ?? []).slice(0, 3),
+    kun: (k?.kun ?? []).filter((r) => !r.startsWith('-') && !r.endsWith('-')).slice(0, 3),
+    meaning: id ? { text: id, lang: 'id', en } : { text: en, lang: 'en' },
+    words: [...new Set(lesson.glossary.map((g) => toPlain(g.ja)).filter((w) => w.includes(char)))],
+  };
+}
 
 let lintCache: LintData | null = null;
 /** The imported data the lint checks readings and inventory against. */
@@ -86,6 +110,7 @@ export const model: ContentModel = {
   answerText,
   yaml: 'json',
   meta: { title: 'id' },
+  wordData: (summaries) => wordFacts(summaries),
   lessonData: (l): JaLessonData => {
     const lesson = jl(l);
     const recent = getLessons(lesson.rung, { includeDrafts: true })
@@ -97,6 +122,14 @@ export const model: ContentModel = {
       rungKanji: kanjiUpTo(lesson.rung),
       recentKanji: [...new Set(recent)],
       wordIds: [],
+      kanjiCards: (lesson.kanji ?? []).map((k) => kanjiCard(k, lesson)),
+      pitch: Object.fromEntries(
+        (lesson.sound?.words ?? []).flatMap((w) => {
+          const plain = parseRuby(w.ja).map((x) => x.plain).join('');
+          const a = vendorPitch()[`${plain}|${toHiragana(w.kana)}`] ?? vendorPitch()[`${plain}|${w.kana}`];
+          return a ? [[plain, a[0]]] : [];
+        }),
+      ),
     };
   },
   check: {

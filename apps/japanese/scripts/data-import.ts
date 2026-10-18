@@ -62,7 +62,8 @@ for (const level of LEVELS) {
   const [, ...rows] = csv(read(`jlpt-${level.toLowerCase()}.csv`).toString('utf8'));
   for (const [expression, reading, meaning] of rows) {
     if (!expression) continue;
-    const ja = expression.trim();
+    // Notes in parentheses ("よろしく (かん)") are not part of the spelling.
+    const ja = expression.replace(/\s*[（(][^)）]*[)）]\s*/g, '').trim();
     // Some readings list alternatives ("いく; ゆく"): the first is the reading, the rest are accepted.
     // Notes in parentheses ("けっこん (する)", "(〜を) とお") and a leading 〜 are not part of the reading.
     const clean = (x: string) => x.replace(/[（(][^)）]*[)）]/g, '').replace(/^[～〜]/, '').replace(/\s+/g, '');

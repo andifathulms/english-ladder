@@ -27,6 +27,7 @@
   --pitch: #2E4C7A;
   --beat: color-mix(in srgb, var(--ink) 12%, transparent);
   --seal: #B23A22;
+  --seal-ink: #FFFFFF;
   --grid-line: color-mix(in srgb, var(--accent) 22%, transparent);
 
   /* Japanese type (DESIGN §4.2): room above for furigana. --ja-scale is the Ukuran teks Jepang

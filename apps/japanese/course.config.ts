@@ -15,15 +15,36 @@ import { voiceScorer, canSpeak, chunkMax, estimateMs, sentenceSplit, sampleText,
 import { ALLOWED_SETTINGS, DEFAULT_SETTINGS, EXTENSIONS, SCHEMA_VERSION, STORAGE_KEY, THEME_COLOR } from '@/course/progress';
 import type { Rung } from '@/course/types';
 import { Seigaiha } from '@/components/Seigaiha';
+import { checkSlots } from '@/components/check/slots';
+import { DeckSoon } from '@/components/DeckPanels';
+import { WordsRow, matchesWord } from '@/components/WordsRow';
 import {
+  BoardQuote,
+  CapstoneWrap,
   ClimbExtra,
+  ClimbSeal,
+  DoneSeal,
   DoorsOrnament,
+  GlossExtra,
+  GlossWord,
   JaSizePreview,
   JapaneseSentence,
   JapaneseTargetText,
+  KanjiStrand,
   LevelChip,
+  PlacementWrap,
+  PoliteStrand,
+  ProseTerm,
+  ProseText,
   RungSubtitle,
+  SoundStrand,
+  TalkStrand,
+  TirukanStrand,
+  TitleTarget,
   WordmarkHashigo,
+  WordsStrand,
+  WorkStrand,
+  useJapaneseSession,
 } from '@/components/slots';
 
 const rung = (r: unknown) => r as Rung;
@@ -71,6 +92,21 @@ export const course: CourseConfig = {
       ],
     },
     targetSize: { key: 'jaSize', attr: 'data-ja-size', options: [100, 120, 140], labelKey: 'settings.jaSize', Preview: JaSizePreview },
+    rows: [
+      { group: 'display', key: 'pitchMarks', labelKey: 'settings.pitchMarks', hintKey: 'settings.pitchMarksHint' },
+      { group: 'display', key: 'romajiInWords', labelKey: 'settings.romajiInWords' },
+      { group: 'study', key: 'deckDaily', labelKey: 'settings.deckDaily', options: [{ value: 5, label: '5' }, { value: 10, label: '10' }, { value: 20, label: '20' }] },
+      {
+        group: 'study',
+        key: 'deckFace',
+        labelKey: 'settings.deckFace',
+        options: [
+          { value: 'kanji', labelKey: 'settings.deckFace.kanji' },
+          { value: 'meaning', labelKey: 'settings.deckFace.meaning' },
+          { value: 'audio', labelKey: 'settings.deckFace.audio' },
+        ],
+      },
+    ],
   },
   progress: { schemaVersion: SCHEMA_VERSION, features: { capstones: true, placement: true }, extensions: EXTENSIONS },
 
@@ -82,12 +118,21 @@ export const course: CourseConfig = {
   itemTypes,
   itemText,
   answerText,
+  check: checkSlots,
+  prose: { Term: ProseTerm, Text: ProseText },
   components: {
     Sentence: JapaneseSentence,
     TargetText: JapaneseTargetText as ComponentType<TargetTextProps>,
+    TitleTarget,
+    BoardQuote,
     WordmarkExtra: WordmarkHashigo,
   },
-  lesson: { explain: 'ui', exampleListClass: 'flex flex-col gap-6' },
+  glossary: { Word: GlossWord, Extra: GlossExtra },
+  strands: {
+    examples: [SoundStrand, KanjiStrand, PoliteStrand, WorkStrand, TalkStrand, TirukanStrand],
+    contrast: [WordsStrand],
+  },
+  lesson: { explain: 'ui', useSession: useJapaneseSession, exampleListClass: 'flex flex-col gap-6', DoneBadge: DoneSeal },
   ladder: {
     tiers: ['hard', 'medium', 'easy', 'kana'],
     RungSubtitle,
@@ -111,9 +156,21 @@ export const course: CourseConfig = {
       { result: 'kana-1', climbs: [] },
     ],
     retakeRung: 'kana-1',
+    Wrap: PlacementWrap,
   },
-  capstones: { dialogue: { Icon: IconChat } },
-  climb: { Extra: ClimbExtra },
+  capstones: { Wrap: CapstoneWrap, dialogue: { Icon: IconChat } },
+  climb: { Extra: ClimbExtra, Badge: ClimbSeal },
+  words: {
+    match: matchesWord,
+    Row: WordsRow,
+    tabs: {
+      titleKey: 'words.tab',
+      list: [
+        { hash: 'deck', labelKey: 'words.deckTab', Panel: DeckSoon },
+        { hash: 'kanji', labelKey: 'words.kanjiTab', Panel: DeckSoon },
+      ],
+    },
+  },
   themeColor: THEME_COLOR,
   // The English Ladder fixes the siblings ship with (all on).
   fixes: {

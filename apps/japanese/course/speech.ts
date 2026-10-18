@@ -10,8 +10,8 @@ const NOVELTY = /\b(albert|bad news|bahh|bells|boing|bubbles|cellos|good news|je
 // Markers of the clearer neural or network voices.
 const CLEAR = /\b(natural|neural|online|enhanced|premium|siri)\b|^google\b/i;
 // Japanese voice names on common platforms (macOS, Windows, Android, Edge).
-const FEMALE = /\b(female|woman|kyoko|nanami|haruka|ayumi|sayaka|mayu|aoi|shiori|o-?ren|hattori)\b/i;
-const MALE = /\b(male|man|otoya|keita|ichiro|daichi|naoki)\b/i;
+const FEMALE = /\b(female|woman|kyoko|nanami|haruka|ayumi|sayaka|mayu|aoi|shiori|o-?ren)\b/i;
+const MALE = /\b(male|man|otoya|keita|ichiro|daichi|naoki|hattori)\b/i;
 
 const norm = (v: SpeechSynthesisVoice) => v.lang.replace('_', '-').toLowerCase();
 
