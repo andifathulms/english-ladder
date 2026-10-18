@@ -1,0 +1,7 @@
+# Built from fonts-src/ by npm run fonts:subset (CLAUDE.md §7.6)
+fonts-src/*.ttf
+fonts-src/*.otf
+styles/fonts-zh/
+styles/fonts-zh.css
+styles/fonts-zh.json
+vendor/
