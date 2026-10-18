@@ -1,0 +1,10 @@
+# Japanese Ladder — things only you can do
+
+Added as the build reaches them. Ticked when done.
+
+| # | Task | Needed by | Status |
+|---|---|---|---|
+| H1 | **Find a qualified Japanese teacher** to approve the sequence (PRD §4.1, §12.0) and review lessons. Every lesson stays `status: draft` until a reviewer is named in `review: { by, date }`. | Before content beyond Easy 1; before any release | open |
+| H2 | **Kana recordings**: about 110 kana (hiragana readings; katakana reuses them) plus about 60 minimal and pitch pairs. Commission a native Tokyo-standard speaker, or confirm an open set's licence allows trimming and redistribution in a free public app. Record the choice in `apps/japanese/public/audio/SOURCE.md`. Until then, kana play buttons stay hidden (no speech fallback for single kana or pairs). | M7 / v1.0-kana | open |
+| H3 | **Confirm the JLPT word and kanji list source and its licence** (JLPT has published none since 2010). I'll propose candidates in M1. | M1 → decks in M9 | open |
+| H4 | **Add the deploy secret**: I'll create the deploy key on `japanese-ladder` and the `JAPANESE_PAGES_DEPLOY_KEY` secret as for Arabic and Mandarin, if you'd like me to again; otherwise follow `docs/DEPLOY.md`. | M10 | open |
