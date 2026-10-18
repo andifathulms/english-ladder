@@ -17,7 +17,7 @@ rungs:
     description: { id: "Hiragana dari nol, dengan romaji yang menghilang di akhir anak tangga.", en: "Hiragana from zero, with romaji gone by the end of the rung." }
     topics: ["bunyi bahasa Jepang", "あ–こ", "さ–と", "な–ほ", "ま–ろ", "わ を ん", "dakuten", "ゃ ゅ ょ", "vokal panjang dan っ", "membaca tanpa romaji"]
     threads: ["kana", "sounds", "mora"]
-    inventory: []
+    inventory: [k1-vowels, k1-k-row, k1-s-row, k1-t-row, k1-n-row, k1-h-row, k1-m-row, k1-y-row, k1-r-row, k1-w-n, k1-particles-wa-e, k1-dakuten, k1-yoon, k1-long-vowels, k1-small-tsu, k1-reading]
   - id: kana-2
     name: Kana 2
     name_ja: "カタカナ"
@@ -35,7 +35,7 @@ rungs:
     description: { id: "Katakana dan bunyi yang sering terlewat: vokal panjang, っ, ん dan aksen nada.", en: "Katakana and the sounds learners miss: long vowels, っ, ん and pitch accent." }
     topics: ["kenapa katakana", "ア–ソ", "タ–ホ", "マ–ン", "ー dan dakuten", "ファ ティ ウィ", "kata serapan", "ketukan mora", "aksen nada", "kanji pertama"]
     threads: ["kana", "sounds", "mora", "pitch", "kanji"]
-    inventory: []
+    inventory: [k2-why-katakana, k2-a-so, k2-ta-ho, k2-ma-n, k2-long-mark, k2-extended, k2-loanwords, k2-mora, k2-pitch, k2-first-kanji]
   - id: easy-1
     name: Easy 1
     name_ja: "{初|しょ}{級|きゅう} 1"
@@ -53,7 +53,7 @@ rungs:
     description: { id: "Paruh pertama N5: memperkenalkan diri, benda dan tempat, waktu, harga, dan kegiatan sehari-hari dengan bentuk ます.", en: "First half of N5: introductions, things and places, time, prices and daily actions in the ます form." }
     topics: ["X は Y です", "か dan の", "これ / それ / あれ", "ここ / そこ / あそこ", "angka dan harga", "jam dan hari", "bentuk ます", "へ / に", "を dan で", "bentuk lampau sopan", "kata sifat い", "kata sifat な", "あります / います", "kata bantu bilangan", "ajakan", "sehari penuh"]
     threads: ["particles", "word-order", "verbs", "adjectives", "counters", "existence", "politeness"]
-    inventory: []
+    inventory: [n5-wa-desu, n5-ka, n5-no, n5-kosoado-kore, n5-kosoado-koko, n5-numbers, n5-time, n5-masu, n5-e-ni-motion, n5-wo-de, n5-mashita, n5-i-adj, n5-na-adj, n5-arimasu-imasu, n5-counters, n5-invitation, n5-review-day]
   - id: easy-2
     name: Easy 2
     name_ja: "{初|しょ}{級|きゅう} 2"

@@ -1,0 +1,16 @@
+# Proper names allowed in content without a JLPT list entry (CLAUDE.md §6.1). Indonesian names in
+# katakana as Japanese writes them; places in Japan. Draft data.
+- { ja: アンディ, kana: アンディ, id: Andi }
+- { ja: リナ, kana: リナ, id: Rina }
+- { ja: ブディ, kana: ブディ, id: Budi }
+- { ja: デウィ, kana: デウィ, id: Dewi }
+- { ja: シティ, kana: シティ, id: Siti }
+- { ja: プトゥ, kana: プトゥ, id: Putu }
+- { ja: "{田中|た|なか}", kana: たなか, id: Tanaka }
+- { ja: "{山田|やま|だ}", kana: やまだ, id: Yamada }
+- { ja: "{鈴木|すず|き}", kana: すずき, id: Suzuki }
+- { ja: "{佐藤|さ|とう}", kana: さとう, id: Sato }
+- { ja: "{東京|とう|きょう}", kana: とうきょう, id: Tokyo }
+- { ja: "{大阪|おお|さか}", kana: おおさか, id: Osaka }
+- { ja: インドネシア, kana: インドネシア, id: Indonesia }
+- { ja: ジャカルタ, kana: ジャカルタ, id: Jakarta }

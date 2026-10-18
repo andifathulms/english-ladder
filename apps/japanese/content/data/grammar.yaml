@@ -1,0 +1,47 @@
+# Inventory ids per rung (CLAUDE.md §5.4, §6.1). Kana points for the Kana rungs; grammar points per
+# JLPT level in the common textbook order (Minna no Nihongo, Genki, Irodori). Draft data: the teacher
+# checks the order with the sequence (docs/japanese/human-tasks.md H1). Lessons may only use points
+# introduced by earlier lessons, earlier rungs, or themselves.
+- { id: k1-vowels, level: kana, title: { id: "Lima vokal あいうえお", en: "The five vowels あいうえお" } }
+- { id: k1-k-row, level: kana, title: { id: "Baris か", en: "The か row" } }
+- { id: k1-s-row, level: kana, title: { id: "Baris さ (し dibaca shi)", en: "The さ row (し is shi)" } }
+- { id: k1-t-row, level: kana, title: { id: "Baris た (ち chi, つ tsu)", en: "The た row (ち chi, つ tsu)" } }
+- { id: k1-n-row, level: kana, title: { id: "Baris な", en: "The な row" } }
+- { id: k1-h-row, level: kana, title: { id: "Baris は (ふ fu)", en: "The は row (ふ fu)" } }
+- { id: k1-m-row, level: kana, title: { id: "Baris ま", en: "The ま row" } }
+- { id: k1-y-row, level: kana, title: { id: "Baris や", en: "The や row" } }
+- { id: k1-r-row, level: kana, title: { id: "Baris ら (r dan l satu bunyi)", en: "The ら row (r/l one sound)" } }
+- { id: k1-w-n, level: kana, title: { id: "わ を ん", en: "わ を ん" } }
+- { id: k1-particles-wa-e, level: kana, title: { id: "は dan へ sebagai partikel (wa, e)", en: "は and へ as particles (wa, e)" } }
+- { id: k1-dakuten, level: kana, title: { id: "Dakuten dan handakuten", en: "Dakuten and handakuten" } }
+- { id: k1-yoon, level: kana, title: { id: "Kana kecil ゃ ゅ ょ", en: "Small ゃ ゅ ょ" } }
+- { id: k1-long-vowels, level: kana, title: { id: "Vokal panjang", en: "Long vowels" } }
+- { id: k1-small-tsu, level: kana, title: { id: "っ kecil", en: "The small っ" } }
+- { id: k1-reading, level: kana, title: { id: "Membaca tanpa romaji", en: "Reading without romaji" } }
+- { id: k2-why-katakana, level: kana, title: { id: "Kenapa katakana", en: "Why katakana" } }
+- { id: k2-a-so, level: kana, title: { id: "ア sampai ソ", en: "ア to ソ" } }
+- { id: k2-ta-ho, level: kana, title: { id: "タ sampai ホ", en: "タ to ホ" } }
+- { id: k2-ma-n, level: kana, title: { id: "マ sampai ン, huruf mirip", en: "マ to ン, look-alikes" } }
+- { id: k2-long-mark, level: kana, title: { id: "Tanda panjang ー dan dakuten katakana", en: "The long mark ー and katakana dakuten" } }
+- { id: k2-extended, level: kana, title: { id: "Katakana tambahan ファ ティ ウィ", en: "Extended katakana ファ ティ ウィ" } }
+- { id: k2-loanwords, level: kana, title: { id: "Kata serapan dan teman palsu", en: "Loanwords and false friends" } }
+- { id: k2-mora, level: kana, title: { id: "Ketukan mora", en: "Mora rhythm" } }
+- { id: k2-pitch, level: kana, title: { id: "Kesadaran aksen nada", en: "Pitch accent awareness" } }
+- { id: k2-first-kanji, level: kana, title: { id: "Kanji pertama", en: "First kanji" } }
+- { id: n5-wa-desu, level: N5, title: { id: "X は Y です", en: "X は Y です" } }
+- { id: n5-ka, level: N5, title: { id: "Pertanyaan dengan か", en: "Questions with か" } }
+- { id: n5-no, level: N5, title: { id: "の di antara kata benda", en: "の between nouns" } }
+- { id: n5-kosoado-kore, level: N5, title: { id: "これ / それ / あれ, この / その / あの", en: "これ / それ / あれ, この / その / あの" } }
+- { id: n5-kosoado-koko, level: N5, title: { id: "ここ / そこ / あそこ", en: "ここ / そこ / あそこ" } }
+- { id: n5-numbers, level: N5, title: { id: "Angka dan harga", en: "Numbers and prices" } }
+- { id: n5-time, level: N5, title: { id: "Jam dan hari", en: "Time and days" } }
+- { id: n5-masu, level: N5, title: { id: "Bentuk ます, kata kerja di akhir", en: "The ます form, verb last" } }
+- { id: n5-e-ni-motion, level: N5, title: { id: "へ / に untuk arah", en: "へ / に for direction" } }
+- { id: n5-wo-de, level: N5, title: { id: "を dan で", en: "を and で" } }
+- { id: n5-mashita, level: N5, title: { id: "Lampau sopan ～ました / ～ませんでした", en: "Past polite ～ました / ～ませんでした" } }
+- { id: n5-i-adj, level: N5, title: { id: "Kata sifat い", en: "い adjectives" } }
+- { id: n5-na-adj, level: N5, title: { id: "Kata sifat な", en: "な adjectives" } }
+- { id: n5-arimasu-imasu, level: N5, title: { id: "あります / います dan kata posisi", en: "あります / います and position words" } }
+- { id: n5-counters, level: N5, title: { id: "Kata bantu bilangan", en: "Counters" } }
+- { id: n5-invitation, level: N5, title: { id: "～ませんか, ～ましょう", en: "～ませんか, ～ましょう" } }
+- { id: n5-review-day, level: N5, title: { id: "Sehari penuh (ulangan)", en: "A whole day (review)" } }
