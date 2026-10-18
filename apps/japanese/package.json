@@ -4,14 +4,17 @@
   "private": true,
   "description": "A calm, levelled Japanese course for Indonesian speakers, from zero to N1.",
   "scripts": {
+    "predev": "npm run fonts:subset",
     "dev": "next dev",
-    "prebuild": "npm run data:check && npm run content:check",
+    "prebuild": "npm run data:check && npm run content:check && npm run fonts:subset",
     "build": "next build",
     "preview": "node ../../packages/ladder-core/scripts/serve.mjs",
     "data:fetch": "tsx scripts/data-fetch.ts",
     "data:import": "tsx scripts/data-import.ts",
     "data:check": "tsx scripts/data-check.ts",
     "content:check": "tsx ../../packages/ladder-core/scripts/content-check.ts",
+    "fonts:fetch": "tsx ../../packages/ladder-core/scripts/fonts-fetch.ts",
+    "fonts:subset": "tsx ../../packages/ladder-core/scripts/fonts-subset.ts",
     "icons": "node ../../packages/ladder-core/scripts/make-icons.mjs '#2A2830'",
     "sw": "node ../../packages/ladder-core/scripts/make-sw.mjs --cache-first strokes:.json japanese-ladder- v0.1.0 '' rung/kana-1/ rung/kana-2/ rung/easy-1/ placement/ review/ words/ me/ settings/ about/ manifest.webmanifest icons/icon.svg audio/manifest.json",
     "test": "vitest run",
@@ -25,5 +28,8 @@
     "next": "14.2.33",
     "react": "18.3.1",
     "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "subset-font": "2.4.0"
   }
 }

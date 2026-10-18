@@ -32,7 +32,8 @@ export type ToKana = { kana: string; /** Romaji not yet converted (the learner i
 
 /**
  * Live IME-like conversion: romaji → kana as far as it can go; what's left is pending. A double
- * consonant (kk, tt, tch) gives っ; n before a consonant (not y) gives ん; n' or nn gives ん; - gives ー
+ * consonant (kk, tt, tch) gives っ; n before a consonant (not y) gives ん; n' gives ん, and so does nn
+ * unless a vowel or y follows (minna → みんな); - gives ー
  * (in katakana). With `final`, a trailing n becomes ん.
  */
 export function romajiToKana(input: string, script: 'hiragana' | 'katakana' = 'hiragana', final = false): ToKana {
@@ -45,6 +46,12 @@ export function romajiToKana(input: string, script: 'hiragana' | 'katakana' = 'h
     // Kana already typed (or a helper key) passes through.
     if (/[぀-ヿ]/u.test(c)) {
       out += c;
+      i++;
+      continue;
+    }
+    // nn before a vowel or y is ん + an n-syllable (minna → みんな); otherwise nn is ん.
+    if (rest.startsWith('nn') && rest.length > 2 && (VOWEL.test(rest[2]) || rest[2] === 'y')) {
+      out += 'ん';
       i++;
       continue;
     }

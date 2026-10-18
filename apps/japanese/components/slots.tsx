@@ -10,23 +10,41 @@ import type { Rung } from '@/course/types';
 import { toPlain } from '@/lib/ja/text';
 import { JaText } from './ja/JaText';
 import { JlptChip } from './JlptChip';
+import { JaSentence } from './ja/JaSentence';
 
 const jr = (r: CoreRung) => r as unknown as Rung;
 
-/** Target lines (until JaSentence lands in M2): the plain Japanese, then the meaning. */
-export function JapaneseSentence({ line }: SentenceSlotProps) {
-  return (
-    <div className="flex flex-col gap-1">
-      <JaText as="p" className="ja-line text-ja-sentence font-medium">
-        {toPlain(line.text)}
-      </JaText>
-      {line.meaning && (
-        <p lang="id" className="id-text">
-          {line.meaning.id}
-        </p>
-      )}
-    </div>
-  );
+type JaLine = { ja: string; kana: string; id?: string; en?: string; note?: { id: string; en: string } };
+const raw = (x: { raw?: unknown }) => x.raw as JaLine;
+
+/** Target lines through JaSentence, sized and supported per place (DESIGN §6.4). */
+export function JapaneseSentence({ line, use }: SentenceSlotProps) {
+  const e = raw(line);
+  switch (use) {
+    case 'example':
+      return <JaSentence ja={e.ja} id={e.id} en={e.en} note={line.note} />;
+    case 'worked':
+      return <JaSentence ja={e.ja} id={e.id} en={e.en} note={e.note} />;
+    case 'pairOff':
+      return <JaSentence ja={e.ja} off play={false} size="body" />;
+    case 'pairNatural':
+      return <JaSentence ja={e.ja} size="body" />;
+    case 'reading':
+      // The reading is a list of lines (adapter.reading.text).
+      return (
+        <ol className="flex flex-col gap-3">
+          {(line.raw as JaLine[]).map((l, i) => (
+            <li key={i}>
+              <JaSentence ja={l.ja} size="body" />
+            </li>
+          ))}
+        </ol>
+      );
+    case 'dialogue':
+      return <JaSentence ja={e.ja} id={e.id} en={e.en} size="body" />;
+    case 'tirukan':
+      return <JaSentence ja={e.ja} id={e.id} en={e.en} play={false} />;
+  }
 }
 
 const JA_SIZE: Record<NonNullable<TargetTextProps['size']>, string> = {

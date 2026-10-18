@@ -1,0 +1,53 @@
+# Counters (CLAUDE.md §5.4): readings 1–10 are authored, never computed. Draft data: the teacher
+# checks it with the lessons (docs/japanese/human-tasks.md H1).
+- counter: 本
+  reading: ほん
+  readings: [いっぽん, にほん, さんぼん, よんほん, ごほん, ろっぽん, ななほん, はっぽん, きゅうほん, じゅっぽん]
+  alt: { 10: [じっぽん] }
+  id_classifier: batang
+  objects: { id: "benda panjang: pena, botol, payung", en: "long things: pens, bottles, umbrellas" }
+- counter: 枚
+  reading: まい
+  readings: [いちまい, にまい, さんまい, よんまい, ごまい, ろくまい, ななまい, はちまい, きゅうまい, じゅうまい]
+  id_classifier: lembar
+  objects: { id: "benda tipis: kertas, kaus, piring", en: "flat things: paper, shirts, plates" }
+- counter: 匹
+  reading: ひき
+  readings: [いっぴき, にひき, さんびき, よんひき, ごひき, ろっぴき, ななひき, はっぴき, きゅうひき, じゅっぴき]
+  alt: { 10: [じっぴき] }
+  id_classifier: ekor
+  objects: { id: "hewan kecil: kucing, anjing, ikan", en: "small animals: cats, dogs, fish" }
+- counter: 冊
+  reading: さつ
+  readings: [いっさつ, にさつ, さんさつ, よんさつ, ごさつ, ろくさつ, ななさつ, はっさつ, きゅうさつ, じゅっさつ]
+  alt: { 10: [じっさつ] }
+  objects: { id: "buku dan majalah", en: "books and magazines" }
+- counter: 個
+  reading: こ
+  readings: [いっこ, にこ, さんこ, よんこ, ごこ, ろっこ, ななこ, はっこ, きゅうこ, じゅっこ]
+  alt: { 10: [じっこ] }
+  id_classifier: buah
+  objects: { id: "benda kecil: apel, telur, kotak", en: "small things: apples, eggs, boxes" }
+- counter: 人
+  reading: にん
+  readings: [ひとり, ふたり, さんにん, よにん, ごにん, ろくにん, ななにん, はちにん, きゅうにん, じゅうにん]
+  alt: { 7: [しちにん] }
+  id_classifier: orang
+  objects: { id: "orang", en: "people" }
+- counter: つ
+  reading: つ
+  readings: [ひとつ, ふたつ, みっつ, よっつ, いつつ, むっつ, ななつ, やっつ, ここのつ, とお]
+  objects: { id: "benda umum (sampai 10)", en: "general things (up to 10)" }
+- counter: 時
+  reading: じ
+  readings: [いちじ, にじ, さんじ, よじ, ごじ, ろくじ, しちじ, はちじ, くじ, じゅうじ]
+  objects: { id: "jam (pukul)", en: "o'clock" }
+- counter: 分
+  reading: ふん
+  readings: [いっぷん, にふん, さんぷん, よんぷん, ごふん, ろっぷん, ななふん, はっぷん, きゅうふん, じゅっぷん]
+  alt: { 10: [じっぷん] }
+  objects: { id: "menit", en: "minutes" }
+- counter: 円
+  reading: えん
+  readings: [いちえん, にえん, さんえん, よえん, ごえん, ろくえん, ななえん, はちえん, きゅうえん, じゅうえん]
+  objects: { id: "yen", en: "yen" }
