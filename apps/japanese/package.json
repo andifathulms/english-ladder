@@ -14,6 +14,8 @@
     "data:check": "tsx scripts/data-check.ts",
     "content:check": "tsx ../../packages/ladder-core/scripts/content-check.ts",
     "strokes:extract": "tsx scripts/strokes-extract.ts",
+    "audio:list": "tsx scripts/audio-list.ts",
+    "audio:ingest": "tsx ../../packages/ladder-core/scripts/audio-ingest.ts",
     "fonts:fetch": "tsx ../../packages/ladder-core/scripts/fonts-fetch.ts",
     "fonts:subset": "tsx ../../packages/ladder-core/scripts/fonts-subset.ts",
     "icons": "node ../../packages/ladder-core/scripts/make-icons.mjs '#2A2830'",

@@ -21,6 +21,17 @@ export function hasFfmpeg(): boolean {
   }
 }
 
+/**
+ * The manifest key for a recording's file stem. Keys with non-ASCII characters are named in ASCII as
+ * <prefix>-u<hex>-u<hex>… (file systems store kana and the like in different normal forms), e.g.
+ * kana-u304d-u3083 → kana-きゃ. Other stems are their own key.
+ */
+export function keyOf(stem: string): string {
+  const m = /^([a-z]+)((?:-u[0-9a-f]{4,5})+)$/.exec(stem);
+  if (!m) return stem;
+  return `${m[1]}-${m[2].split('-u').filter(Boolean).map((h) => String.fromCodePoint(parseInt(h, 16))).join('')}`;
+}
+
 export function readManifest(): Manifest {
   return fs.existsSync(MANIFEST) ? (JSON.parse(fs.readFileSync(MANIFEST, 'utf8')) as Manifest) : {};
 }

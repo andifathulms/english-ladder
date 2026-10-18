@@ -10,6 +10,7 @@ import { useSettings, useT } from '@ladder/core/components/ProgressProvider';
 import type { Bilingual, JaKanjiCard, Lesson } from '@/course/types';
 import type { JapaneseKey } from '@/i18n/overrides';
 import { toPlain } from '@/lib/ja/text';
+import { soundAudio } from '@/lib/ja/audio';
 import { JaSentence } from './ja/JaSentence';
 import { JaText } from './ja/JaText';
 import { StrokeOrder } from '@ladder/core/components/strokes/StrokeOrder';
@@ -36,11 +37,12 @@ export function SoundCard({ sound, pitch }: { sound: NonNullable<Lesson['sound']
       <ul className="flex flex-wrap gap-x-8 gap-y-4">
         {sound.words.map((w) => {
           const accent = pitch[toPlain(w.ja)];
+          const audio = soundAudio(sound.kind, w);
           return (
             <li key={w.ja} className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
                 <JaText className="text-ja-body">{toPlain(w.ja)}</JaText>
-                <PlayButton text={w.ja} onPlay={() => run(w.ja)} playing={playing === w.ja} small />
+                <PlayButton text={audio} onPlay={() => run(audio)} playing={playing === audio} small />
               </div>
               {pitchMarks && accent !== undefined && <PitchLineMini kana={w.kana} accent={accent} label={`${w.kana}: ${accent}`} />}
               <MoraBeatsMini kana={w.kana} label={`${w.kana}: ${w.kana.replace(/\s+/g, '').length}`} />

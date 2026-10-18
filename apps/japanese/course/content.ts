@@ -11,6 +11,8 @@ import { answerText, itemText, itemTypes } from './items';
 import { wordFacts } from './words';
 import { CurriculumSchema, DialogueSchema, LessonFrontmatterSchema, NamesSchema, PlacementSchema, ReadingSchema, TestPoolSchema } from './schema';
 import { lintLessons, type LintData } from './lint';
+// Circular (audio reads lessons through this module); used only inside check.extra, after both load.
+import { allAudio } from './audio';
 import { toHiragana } from '@/lib/ja/kana';
 import { parseRuby, toKana, toPlain } from '@/lib/ja/text';
 import type { Counter } from '@/lib/ja/counters';
@@ -176,6 +178,12 @@ export const model: ContentModel = {
           const chars = [...(l.kanji ?? []), ...l.check.filter((c) => c.type === 'trace').map((c) => (c as { char: string }).char)];
           for (const ch of chars) if (!strokeFile(ch)) ctx.err(`${l.id}: no stroke file for ${ch} (run npm run strokes:extract)`);
         }
+      // Live rungs' kana and pair words are recorded: they never fall back to speech (CLAUDE.md §11).
+      const manifestFile = path.join(process.cwd(), 'public', 'audio', 'manifest.json');
+      const recorded = fs.existsSync(manifestFile) ? (JSON.parse(fs.readFileSync(manifestFile, 'utf8')) as Record<string, unknown>) : {};
+      const live = (ctx.rungs as unknown as Rung[]).filter((r) => r.status === 'live');
+      const unrecorded = allAudio(live).filter((a) => a.kind !== 'text' && !recorded[a.key]);
+      if (unrecorded.length) ctx.err(`${unrecorded.length} kana and pair recordings missing on live rungs (npm run audio:list -- --kana): ${unrecorded.slice(0, 12).map((a) => a.text).join(' ')}${unrecorded.length > 12 ? ' …' : ''}`);
       // Japanese lint: readings, inventory, kanji, register, the Kana 1 script rule, reviewers, sizes.
       for (const f of lintLessons(ctx.rungs as unknown as Rung[], ctx.lessonsByRung as unknown as Map<string, Lesson[]>, lintData())) (f.level === 'error' ? ctx.err : ctx.warn)(f.message);
     },

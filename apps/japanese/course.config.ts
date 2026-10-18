@@ -4,7 +4,7 @@ import type { ComponentType } from 'react';
 import type { CourseConfig, TargetTextProps } from '@ladder/core/course/types';
 import { baseStrings, extendStrings } from '@ladder/core/lib/i18n';
 import { IconChat } from '@ladder/core/components/ui/Icon';
-import { isKanaKey, jaAudioKey, spokenJa } from '@/lib/ja/audio';
+import { jaAudioKey, speechFallback, spokenJa } from '@/lib/ja/audio';
 import { idOverrides, enOverrides, type JapaneseKey } from '@/i18n/overrides';
 import { registry } from '@/visuals/registry';
 import { VISUAL_IDS } from '@/visuals/visualIds';
@@ -113,7 +113,7 @@ export const course: CourseConfig = {
 
   speech: { voiceScorer, sentenceSplit, canSpeak, sampleText, rateScale, chunkMax, estimateMs },
   // Recorded audio first, keyed by the reading; single kana and minimal pairs never fall back to speech.
-  audio: { key: jaAudioKey, spoken: spokenJa, speechFallback: (t) => !isKanaKey(t) },
+  audio: { key: jaAudioKey, spoken: spokenJa, speechFallback },
   text,
   adapter,
   itemTypes,

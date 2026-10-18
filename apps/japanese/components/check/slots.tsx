@@ -12,7 +12,7 @@ import { useT } from '@ladder/core/components/ProgressProvider';
 import { useCanPlay, usePlay } from '@ladder/core/components/useSpeech';
 import { hasJapanese, toPlain } from '@/lib/ja/text';
 import { morae } from '@/lib/ja/kana';
-import { isKanaKey } from '@/lib/ja/audio';
+import { pairKey, shownText } from '@/lib/ja/audio';
 import type { JapaneseKey } from '@/i18n/overrides';
 import { JaInline } from '../ja/JaInline';
 import { KanaInput } from '../ja/KanaInput';
@@ -109,7 +109,7 @@ function ListenPrompt({ item, audio, prompt }: { item: CoreItem | ExtraItem; aud
         <div className="flex flex-col gap-1 rounded-md bg-paper-2 p-4">
           <p className="text-small text-muted">{t('check.listenNoAudio')}</p>
           <p className="text-ja-sentence">
-            <JaInline text={isKanaKey(audio) ? audio.slice(5) : audio} furigana={false} />
+            <JaInline text={shownText(audio)} furigana={false} />
           </p>
         </div>
       )}
@@ -172,7 +172,7 @@ function KanaAnswer({ item, mode, value, solved, tone, onChange, submit }: Answe
 function MoraPrompt({ item }: { item: ExtraItem }) {
   const { t } = useT<JapaneseKey>();
   const m = item as MoraItem;
-  return <ListenPrompt item={item} audio={m.audio} prompt={m.prompt ?? t(m.ask === 'count' ? 'check.moraCount' : 'check.moraSpelling')} />;
+  return <ListenPrompt item={item} audio={pairKey(m.audio)} prompt={m.prompt ?? t(m.ask === 'count' ? 'check.moraCount' : 'check.moraSpelling')} />;
 }
 
 /** An option pill with the course's look, for custom option content. */
@@ -223,7 +223,7 @@ function MoraOption({ value, index, state, disabled, onClick }: { value: string;
 function PitchPrompt({ item }: { item: ExtraItem }) {
   const { t } = useT<JapaneseKey>();
   const p = item as PitchItem;
-  return <ListenPrompt item={item} audio={p.audio} prompt={p.prompt ?? t('check.pitchPrompt')} />;
+  return <ListenPrompt item={item} audio={pairKey(p.audio)} prompt={p.prompt ?? t('check.pitchPrompt')} />;
 }
 
 /** Pitch options: the meaning, with the word and its pitch line. */
