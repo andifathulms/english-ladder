@@ -104,6 +104,8 @@ export type CheckSlots = {
   correctPillByGrade?: boolean;
   /** A wrong answer tried again counts once towards the why line. */
   dedupeWrong?: boolean;
+  /** The why line's text (inline and in the feedback sheet). Default: the plain string. */
+  WhyText?: ComponentType<{ text: string }>;
   /** The tray for tile items (order, and course types with tiles). */
   TileTray?: ComponentType<TileTrayProps & { item: CheckItem; slots: number }>;
   /** Option layout: full-width pills, and the 1–4 number badge. */

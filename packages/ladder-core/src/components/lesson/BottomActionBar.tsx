@@ -3,6 +3,7 @@
 import type { Bilingual } from '@ladder/core/lib/types';
 import { IconCheck } from '../ui/Icon';
 import { useT } from '../ProgressProvider';
+import { useCourse } from '@ladder/core/course/context';
 
 type Props = {
   children: React.ReactNode;
@@ -12,6 +13,7 @@ type Props = {
 
 export function BottomActionBar({ children, feedback }: Props) {
   const { t, lang } = useT();
+  const Why = useCourse().check?.WhyText;
   return (
     <div
       className={`sticky bottom-0 z-10 transition-colors duration-base ${
@@ -28,7 +30,7 @@ export function BottomActionBar({ children, feedback }: Props) {
               </span>
               {t('check.correctShort')}
             </p>
-            <p className="max-w-measure text-ink">{lang === 'en' ? feedback.en : feedback.id}</p>
+            <p className="max-w-measure text-ink">{Why ? <Why text={lang === 'en' ? feedback.en : feedback.id} /> : lang === 'en' ? feedback.en : feedback.id}</p>
           </div>
         )}
       </div>

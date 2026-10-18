@@ -2,7 +2,7 @@
 
 // Mandarin Ladder's check-item rendering (CourseConfig.check): Chinese prompts, options and tiles in
 // ruby per the item's pinyin setting, and the tone / pinyin / build / trace item types (CLAUDE.md §5.4).
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import type { AnswerProps, CheckSlots, TileTrayProps } from '@ladder/core/course/types';
 import type { CheckItem as CoreItem, ExtraItem } from '@ladder/core/lib/types';
 import type { PillState } from '@ladder/core/components/check/OptionPill';
@@ -21,6 +21,8 @@ import { PinyinInput } from '../zh/PinyinInput';
 import { ComponentTiles } from '../zh/ComponentTiles';
 import { Pinyin } from '../zh/Pinyin';
 import { TraceCheck } from './TraceCheck';
+import { ProseTerm } from '../slots';
+import { parseInline } from '@ladder/core/lib/markup';
 
 type Py = { py?: Record<string, string>; show_pinyin?: boolean };
 const pyOf = (item: CoreItem | ExtraItem) => item as unknown as Py;
@@ -245,6 +247,23 @@ function TraceAnswer({ item, mode, solved, onChange, submit }: AnswerProps) {
   );
 }
 
+/** Why lines with their markup drawn (D5): **term** and [[focus]] as in explanations, *italic*; other text as before. */
+function WhyText({ text }: { text: string }) {
+  return (
+    <>
+      {parseInline(text).map((tok, i) =>
+        tok.t === 'strong' || tok.t === 'focus' ? (
+          <ProseTerm key={i} text={tok.v} kind={tok.t} />
+        ) : tok.t === 'em' ? (
+          <em key={i}>{tok.v}</em>
+        ) : (
+          <Fragment key={i}>{tok.v}</Fragment>
+        ),
+      )}
+    </>
+  );
+}
+
 export const checkSlots: CheckSlots = {
   Inline,
   Prompt,
@@ -254,6 +273,7 @@ export const checkSlots: CheckSlots = {
   rootAttrs: (item) => ({ 'data-type': item.type }),
   correctPillByGrade: true,
   dedupeWrong: true,
+  WhyText,
   optionLayout: (item, options) => {
     const zh = options.some(hasHan);
     return { wide: zh || item.type === 'fix' || item.type === 'scene' || item.type === 'listen', badge: zh };

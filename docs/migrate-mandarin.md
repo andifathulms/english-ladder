@@ -255,6 +255,12 @@ The trace items' why lines in the feedback sheet show literal asterisks (`**横*
 renders them as plain text. Kept here so the migration is pixel-identical; it will be fixed on
 `fix/mandarin-trace-markup` with an updated Mandarin baseline.
 
+**Fixed on `fix/mandarin-trace-markup`:** a `check.WhyText` slot (core default: the plain string,
+so English and Arabic are unchanged at 60/60 and 224/224) lets Mandarin draw `**term**`, `[[focus]]`
+and `*italic*` in why lines, inline and in the feedback sheet; plain text renders as before. The
+Mandarin baseline is updated for the 16 shots that show such a line: `lesson-dasar2-step4-correct`,
+`lesson-easy1-step4-correct`, `test-result` and `climb` (over the results page), × 2 widths × 2 themes.
+
 ### 8.7 Results
 
 | Gate | Result |

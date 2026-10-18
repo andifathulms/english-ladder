@@ -171,3 +171,19 @@ describe('BottomActionBar', () => {
     expect(screen.getByText(why.id)).toBeInTheDocument();
   });
 });
+
+import { WhyLine } from '@ladder/core/components/check/WhyLine';
+
+describe('why lines (D5)', () => {
+  it('draws **term** markup instead of printing the asterisks', () => {
+    const { container } = render(
+      <AllProviders>
+        <WhyLine why={{ id: '**横** dari kiri ke kanan.', en: '**横** left to right.' }} />
+      </AllProviders>,
+    );
+    expect(container.textContent).not.toContain('**');
+    const term = container.querySelector('[lang="zh-Hans"]');
+    expect(term?.textContent).toBe('横');
+    expect(term?.className).toContain('text-accent');
+  });
+});
