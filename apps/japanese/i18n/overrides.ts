@@ -64,7 +64,27 @@ export type JapaneseKey =
   | 'settings.deckFace'
   | 'settings.deckFace.kanji'
   | 'settings.deckFace.meaning'
-  | 'settings.deckFace.audio';
+  | 'settings.deckFace.audio'
+  | 'check.kanaHelpers'
+  | 'check.kanaLabel'
+  | 'check.kanaPromptAudio'
+  | 'check.kanaPromptRead'
+  | 'check.moraCount'
+  | 'check.moraSpelling'
+  | 'check.pitchPrompt'
+  | 'check.formPrompt'
+  | 'check.beats'
+  | 'form.masu'
+  | 'form.masen'
+  | 'form.mashita'
+  | 'form.masendeshita'
+  | 'form.masho'
+  | 'form.te'
+  | 'form.nai'
+  | 'form.ta'
+  | 'form.dict'
+  | 'form.potential'
+  | 'form.volitional';
 
 type Overrides = Partial<StringTable> & Partial<Record<JapaneseKey, string>>;
 
@@ -157,6 +177,26 @@ export const idOverrides: Overrides = {
   'settings.deckFace.kanji': 'Kanji',
   'settings.deckFace.meaning': 'Arti',
   'settings.deckFace.audio': 'Suara',
+  'check.kanaHelpers': 'Kana tambahan',
+  'check.kanaLabel': 'Ketik dengan romaji: berubah jadi kana',
+  'check.kanaPromptAudio': 'Dengarkan, lalu tulis dalam kana.',
+  'check.kanaPromptRead': 'Tulis bacaannya dalam kana.',
+  'check.moraCount': 'Dengarkan, lalu hitung ketukannya.',
+  'check.moraSpelling': 'Dengarkan, lalu pilih tulisannya.',
+  'check.pitchPrompt': 'Dengarkan, lalu pilih artinya.',
+  'check.formPrompt': 'Ubah ke bentuk ini:',
+  'check.beats': '{n} ketukan',
+  'form.masu': 'bentuk ます',
+  'form.masen': 'bentuk ません',
+  'form.mashita': 'bentuk ました',
+  'form.masendeshita': 'bentuk ませんでした',
+  'form.masho': 'bentuk ましょう',
+  'form.te': 'bentuk て',
+  'form.nai': 'bentuk ない',
+  'form.ta': 'bentuk た',
+  'form.dict': 'bentuk kamus',
+  'form.potential': 'bentuk potensial',
+  'form.volitional': 'bentuk ajakan',
 };
 
 export const enOverrides: Overrides = {
@@ -248,4 +288,24 @@ export const enOverrides: Overrides = {
   'settings.deckFace.kanji': 'Kanji',
   'settings.deckFace.meaning': 'Meaning',
   'settings.deckFace.audio': 'Sound',
+  'check.kanaHelpers': 'Extra kana',
+  'check.kanaLabel': 'Type in romaji: it turns into kana',
+  'check.kanaPromptAudio': 'Listen, then write it in kana.',
+  'check.kanaPromptRead': 'Write its reading in kana.',
+  'check.moraCount': 'Listen, then count the beats.',
+  'check.moraSpelling': 'Listen, then choose the spelling.',
+  'check.pitchPrompt': 'Listen, then choose the meaning.',
+  'check.formPrompt': 'Change it to this form:',
+  'check.beats': '{n} beats',
+  'form.masu': 'ます form',
+  'form.masen': 'ません form',
+  'form.mashita': 'ました form',
+  'form.masendeshita': 'ませんでした form',
+  'form.masho': 'ましょう form',
+  'form.te': 'て form',
+  'form.nai': 'ない form',
+  'form.ta': 'た form',
+  'form.dict': 'dictionary form',
+  'form.potential': 'potential form',
+  'form.volitional': 'volitional form',
 };

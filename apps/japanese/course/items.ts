@@ -3,7 +3,8 @@
 import type { ItemTypeLogic } from '@ladder/core/lib/check/itemTypes';
 import type { ExtraItem } from '@ladder/core/lib/types';
 import { stripMarkup } from '@ladder/core/lib/markup';
-import { normJa } from '@/lib/ja/text';
+import { normJa, toKana } from '@/lib/ja/text';
+import { toHiragana } from '@/lib/ja/kana';
 
 /** Japanese without markup or spaces; Latin text as written (markup removed). */
 const plain = (s: string) => {
@@ -12,7 +13,70 @@ const plain = (s: string) => {
 };
 const prompted = (i: ExtraItem, fallback: string) => (i.prompt ? plain(i.prompt as string) : fallback);
 
-export const itemTypes: Record<string, ItemTypeLogic> = {};
+type Kana = ExtraItem & { audio?: string; ja?: string; prompt?: string; answer: string; accept?: string[]; script: 'hiragana' | 'katakana' | 'any' };
+type Mora = ExtraItem & { audio: string; prompt?: string; ask: 'count' | 'spelling'; options: string[]; answer: string };
+type Pitch = ExtraItem & { audio: string; prompt?: string; pair: { ja: string; kana: string; pitch: number; id: string }[]; answer: string };
+type Form = ExtraItem & { word: string; target: string; prompt?: string; options?: string[]; answer: string; accept?: string[] };
+
+const str = (r: string | string[]) => (Array.isArray(r) ? r.join('') : r);
+/** Kana compared exactly after normJa (long vowels and っ count); `any` unifies the two scripts. */
+const sameKana = (given: string, want: string, script: Kana['script']) => {
+  const a = normJa(given);
+  const b = normJa(want);
+  return script === 'any' ? toHiragana(a) === toHiragana(b) : a === b;
+};
+/** The plain spelling and the reading of a Japanese answer (ruby markup allowed). */
+const forms = (s: string) => {
+  try {
+    return [normJa(s), normJa(toKana(s))];
+  } catch {
+    return [normJa(s)];
+  }
+};
+
+export const itemTypes: Record<string, ItemTypeLogic> = {
+  kana: {
+    grade: (i, r) => {
+      const k = i as Kana;
+      return [k.answer, ...(k.accept ?? [])].some((a) => sameKana(str(r), a, k.script));
+    },
+    itemText: (i) => prompted(i, (i as Kana).ja ? 'Tulis bacaannya dalam kana.' : 'Dengarkan, lalu tulis dalam kana.'),
+    answerText: (i) => (i as Kana).answer,
+    sentences: () => [],
+    // An empty box is not an answer in the rung test (the placement check counts any response).
+    answered: (_i, r, where) => where === 'placement' || str(r).trim() !== '',
+  },
+  mora: {
+    grade: (i, r) => normJa(str(r)) === normJa((i as Mora).answer),
+    itemText: (i) => prompted(i, (i as Mora).ask === 'count' ? 'Dengarkan, lalu hitung ketukannya.' : 'Dengarkan, lalu pilih tulisannya.'),
+    answerText: (i) => (i as Mora).answer,
+    sentences: () => [],
+    options: (i) => (i as Mora).options,
+  },
+  pitch: {
+    grade: (i, r) => str(r) === (i as Pitch).answer,
+    itemText: (i) => prompted(i, 'Dengarkan, lalu pilih artinya.'),
+    answerText: (i) => {
+      const p = i as Pitch;
+      const w = p.pair.find((x) => x.id === p.answer)!;
+      return `${plain(w.ja)} · ${w.id}`;
+    },
+    sentences: () => [],
+    options: (i) => (i as Pitch).pair.map((p) => p.id),
+  },
+  form: {
+    grade: (i, r) => {
+      const f = i as Form;
+      const given = forms(str(r));
+      return [f.answer, ...(f.accept ?? [])].some((a) => forms(a).some((x) => given.includes(x)));
+    },
+    itemText: (i) => prompted(i, `Ubah ${plain((i as Form).word)}.`),
+    answerText: (i) => plain((i as Form).answer),
+    sentences: () => [],
+    options: (i) => (i as Form).options ?? [],
+    answered: (_i, r, where) => where === 'placement' || str(r).trim() !== '',
+  },
+};
 
 type Core = ExtraItem & { prompt?: string; wrong?: string; answer?: string | string[] };
 

@@ -2,7 +2,8 @@
 // lessons, warnings in drafts, except where the rule is mechanical (markup, kana = ruby readings, no
 // romaji, Kana 1 kanji), which is an error either way.
 import { kanjiOf, parseRuby, toKana, type Word } from '@/lib/ja/text';
-import { toHiragana } from '@/lib/ja/kana';
+import { morae, toHiragana } from '@/lib/ja/kana';
+import { conjugate, type Target, type WordType } from '@/lib/ja/conjugate';
 import { counterReadings, type Counter } from '@/lib/ja/counters';
 import type { CheckItem, GlossaryEntry, Lesson, Rung } from './types';
 
@@ -19,7 +20,44 @@ export type LintData = {
   counters: Counter[];
   /** Inventory ids (content/data/grammar.yaml). */
   grammar: Set<string>;
+  /** Tokyo accent numbers ("plain|kana" → [n…]), for pitch items. */
+  pitch?: Map<string, number[]>;
 };
+
+/** Checks for the Japanese item types (kana, mora, pitch, form). */
+export function lintItem(c: CheckItem, data: LintData, types: Map<string, string>): string[] {
+  const out: string[] = [];
+  const plainOf = (s: string) => parseRuby(s).map((w) => w.plain).join('');
+  if (c.type === 'kana') {
+    for (const a of [c.answer, ...(c.accept ?? [])]) if (!/^[\u3040-\u30ffー]+$/u.test(a)) out.push(`kana answer "${a}" must be kana only`);
+    if (c.audio && !c.audio.startsWith('kana-') && toHiragana(toKana(c.audio).replace(/\s+/g, '')) !== toHiragana(c.answer) && c.script !== 'katakana') {
+      out.push(`kana answer "${c.answer}" does not match the audio's reading "${toKana(c.audio)}"`);
+    }
+  }
+  if (c.type === 'mora' && c.ask === 'count') {
+    const n = morae(toKana(c.audio)).length;
+    if (String(n) !== c.answer) out.push(`mora count: "${toKana(c.audio)}" has ${n} beats, the answer says ${c.answer}`);
+  }
+  if (c.type === 'pitch' && data.pitch) {
+    for (const w of c.pair) {
+      const known = data.pitch.get(`${plainOf(w.ja)}|${w.kana}`);
+      if (known && !known.includes(w.pitch)) out.push(`pitch: ${plainOf(w.ja)} is ${known.join('/')} in the pitch data, not ${w.pitch}`);
+    }
+  }
+  if (c.type === 'form') {
+    const type = types.get(plainOf(c.word));
+    if (type && ['verb-1', 'verb-2', 'verb-3', 'adj-i', 'adj-na'].includes(type)) {
+      try {
+        const want = conjugate(plainOf(c.word), type as WordType, c.target as Target);
+        const given = [c.answer, ...(c.accept ?? [])].map(plainOf);
+        if (!given.includes(want)) out.push(`form: the rules give ${want} for ${plainOf(c.word)} → ${c.target}, the answer says ${plainOf(c.answer)}`);
+      } catch (e) {
+        out.push(`form: ${(e as Error).message}`);
+      }
+    }
+  }
+  return out;
+}
 
 const LEVELS = ['N5', 'N4', 'N3', 'N2', 'N1'];
 /** Rungs where every example sentence is polite (casual from Easy 3; CLAUDE.md §6.2). */
@@ -91,6 +129,7 @@ export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>, data: 
   const kanjiSoFar = new Set<string>();
   const kanaSoFar = new Set<string>();
   const glossSoFar = new Set<string>();
+  const typesSoFar = new Map<string, string>();
 
   for (const rung of rungs) {
     const level = rung.jlpt === '—' ? 'N5' : rung.jlpt;
@@ -108,7 +147,11 @@ export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>, data: 
       }
       for (const k of l.kanji ?? []) kanjiSoFar.add(k);
       for (const k of l.kana_new ?? []) for (const c of k) kanaSoFar.add(c);
-      for (const g of l.glossary) glossSoFar.add(g.ja);
+      for (const g of l.glossary) {
+        glossSoFar.add(g.ja);
+        if (g.type) typesSoFar.set(parseRuby(g.ja).map((w) => w.plain).join(''), g.type);
+      }
+      for (const c of l.check) for (const m of lintItem(c, data, typesSoFar)) rule(`check ${c.id}: ${m}`);
 
       // Every Japanese line: markup parses, kana = the ruby readings, no romaji, readings fit.
       const lines: { ja: string; kana?: string; what: string }[] = [

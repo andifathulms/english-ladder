@@ -110,3 +110,29 @@ describe('Japanese lint', () => {
     expect(run(lesson({ introduces: ['n5-nope'] }))).toContain('error: introduces "n5-nope", which is not in content/data/grammar.yaml');
   });
 });
+
+import { lintItem } from '@/course/lint';
+
+describe('item lint', () => {
+  const why = { id: 'x', en: 'x' };
+  const types = new Map([['食べる', 'verb-2']]);
+  const pitchData = { ...data, pitch: new Map([['箸|はし', [1]], ['橋|はし', [2]]]) };
+  it('kana answers are kana and match the audio', () => {
+    expect(lintItem({ id: 'a', type: 'kana', audio: 'きって', answer: 'kitte', script: 'hiragana', why } as never, data, types)).toContain('kana answer "kitte" must be kana only');
+    expect(lintItem({ id: 'a', type: 'kana', audio: 'きって', answer: 'きて', script: 'hiragana', why } as never, data, types)[0]).toMatch(/does not match/);
+  });
+  it('mora counts are counted, not trusted', () => {
+    expect(lintItem({ id: 'a', type: 'mora', audio: 'おばあさん', ask: 'count', options: ['4', '5'], answer: '4', why } as never, data, types)).toEqual(['mora count: "おばあさん" has 5 beats, the answer says 4']);
+  });
+  it('pitch pairs match the pitch data', () => {
+    const pair = [
+      { ja: '{箸|はし}', kana: 'はし', pitch: 2, id: 'sumpit' },
+      { ja: '{橋|はし}', kana: 'はし', pitch: 2, id: 'jembatan' },
+    ];
+    expect(lintItem({ id: 'a', type: 'pitch', audio: 'x', pair, answer: 'sumpit', why } as never, pitchData, types)).toEqual(['pitch: 箸 is 1 in the pitch data, not 2']);
+  });
+  it('form answers are checked against the conjugation rules', () => {
+    expect(lintItem({ id: 'a', type: 'form', word: '{食|た}べる', target: 'masu', answer: '{食|た}べます', why } as never, data, types)).toEqual([]);
+    expect(lintItem({ id: 'a', type: 'form', word: '{食|た}べる', target: 'te', answer: '{食|た}べって', why } as never, data, types)).toEqual(['form: the rules give 食べて for 食べる → te, the answer says 食べって']);
+  });
+});

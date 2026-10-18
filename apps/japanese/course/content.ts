@@ -77,7 +77,8 @@ function lintData(): LintData {
     }
   }
   const names = new Set(getNames().map((n) => parseRuby(n.ja).map((w) => w.plain).join('')));
-  lintCache = { jmdict, kanji, words, names, counters: getCounters(), grammar: new Set(getGrammar().map((g) => g.id)) };
+  const pitch = new Map(Object.entries(vendorPitch()));
+  lintCache = { jmdict, kanji, words, names, counters: getCounters(), grammar: new Set(getGrammar().map((g) => g.id)), pitch };
   return lintCache;
 }
 
