@@ -167,3 +167,121 @@ treating an empty pinyin answer as unanswered is part of E-M1.
 - **D5. Raw `**…**` in trace why lines.** The live app shows literal asterisks in some feedback
   sheets (visible in the baseline). Should I keep that for parity, or fix it and list the
   difference? I'd keep it and list it as a follow-up.
+
+**Answers (2026-10-17):** D1 yes (Playwright on the live site, throwaway profile). D2 yes, same as
+Arabic, run by me, source workflow to `workflow_dispatch` only, and stop before the Pages switch.
+D3 plain files, no LFS (note in `docs/DEPLOY.md` to reconsider past ~500 MB). D4 all `fixes.*`
+on. D5 keep the literal `**…**` for parity here, list it below, and fix it afterwards on
+`fix/mandarin-trace-markup` with an updated baseline.
+
+## 8. Report
+
+### 8.1 What went into core
+
+Everything is optional `CourseConfig` / `ContentModel` / `ItemTypeLogic` fields; absent means
+today's English and Arabic behaviour. English parity (60/60) and Arabic parity (224/224) stayed at
+0 differing pixels after every commit.
+
+| Commit | Into core |
+|---|---|
+| `1531338` | E-M13, E-M17: `audio.key`, `audio.speechFallback`, `audio.spoken`, `PlayOpts.onChar`; `speech.chunkMax`, `speech.estimateMs` (Tirukan pause); Mandarin's more general `audio-lib`/`audio-ingest` |
+| `3553432` | E-M15: `progress.extensions` (stored after `opened`, validated on load, emptied on reset), `store.getExt`/`updateExt`, `progress.onCompleteLesson` |
+| `6dcf2bc` | E-M1–E-M4: `check.types[t].Answer` (submit/onChange; core keeps sfx, misses, solved, why), `ItemTypeLogic.answered` + `isAnswered`, slots get the item, `rootAttrs`, `correctPillByGrade`, `dedupeWrong`, pill `data-*`/raw label, TileTray `tileAttrs`/`tileClass`/`Label`/`AfterLine`, `pillStyles`, IconChat/IconCards |
+| `5b58596` | E-M5–E-M9: `ladder.RungSubtitle` (rail, board, climb, placement), `adapter.rung.levelLabel` + `useLevel`, `ladder.LevelChip`, `ladder.tierRange`, `ladder.longRung`, `ContentModel.rungData` → `ladder.RungExtra`, `target.topicAttrs`, `components.wordmarkAlign` |
+| `92539f5` | E-M10–E-M12: `ContentModel.lessonData` → `useLessonData` (and `completeLesson`), `visualData(ids, { lesson })`, `ContentModel.postParse`, `summaryExtra`, `adapter.lesson.quote`/`closingQuote`, `Title.raw`/`Quote.raw`, `components.TitleTarget`, `capstones.Wrap`, `glossary.Word`/`Extra` |
+| `10a180e` | E-M14, E-M16, E-M19: `words.tab` (#hash, Segmented) + `ContentModel.wordsPageData`, `words.Row` data, search `dir="auto"` only for RTL, `make-sw.mjs --cache-first dir:ext` |
+| `1a4e297` | Answer-text overrides for engine item types (`answerText`, beside `itemText`) |
+| (app commit) | `capstones.dialogue.Icon` (the card icon when it differs from the header badge) |
+
+E-M18 needed nothing new: Mandarin's checks (data files, dialogues and decks, placement sections,
+item pinyin, HSK lint, stroke files and names, audio) run through `check.extra`; `data:check` stays
+an app script.
+
+### 8.2 What stayed in the app (`apps/mandarin`)
+
+- `content/` and `public/` (audio, strokes, manifest, icons): byte-identical to the source
+  (`diff -r` clean apart from the generated `sw.js`); same lesson, item and word ids.
+- `lib/zh` (text, pinyin, sandhi, align, contour, ids, trace, syllables, and `audio.ts` for the
+  `syl-` and sha1(normZh) keys), `lib/deck/schedule.ts`.
+- `course/`: schema, types, adapter, item types (tone, pinyin, trace, build) and the core types'
+  wording, text rules, speech, progress (key `mandarin-ladder:v1`, schema 1, deck and traces),
+  content model and checks, item pinyin (`autopy`), HSK data, lesson and visual data, words data,
+  lint, used characters.
+- `components/`: zh (ZhText, ZhSentence, ZhInline, Ruby, Pinyin, WordSheet, PinyinInput,
+  ToneOption, ComponentTiles, TracePad, deck), TraceCheck, strand cards, toggles, Grid, HskChip,
+  About, plus `slots.tsx`, `check/slots.tsx` and `WordsRow.tsx`.
+- `visuals/` (8 visuals and their data hook), `styles/theme.css` (generated: only the tokens that
+  differ from core), `styles/mandarin.css` (fonts, `.zh`, tone colours, keyframes), the other
+  hanzi classes as a Tailwind plugin, `i18n/overrides.ts` (159 own keys), fonts and scripts
+  (data:*, fonts:*, strokes:extract, audio:list, audio:syllables; audio:ingest and content:check
+  are core's).
+
+### 8.3 Drift removed
+
+Mandarin's modified copies of engine files were not carried over; core does what they did through
+config. That covers CheckItemView, OptionPill, TileTray, TestRunner, PlacementRunner,
+ClimbMoment, the ladder components, LessonPlayer, Prose, PairCard, PlayButton, ReadingView,
+DialogueView, GlossaryChips, TirukanCard, Sentence, WordsView, SettingsView, ProgressProvider,
+useSpeech, AppNav, Mark, tier.ts, VisualData, `lib/progress/*`, `lib/check/*`,
+`lib/speech/{audio,speak}`, `lib/content/{load,visualData}`, `lib/i18n/*`, routes, basePath,
+markup, tokens and globals CSS, the routes' logic, `serve.mjs`, `content-check.ts`, `audio-lib.ts`,
+`audio-ingest.ts` and the place-scene drawing (core's `PlaceDrawing`). Also dropped: `UPSTREAM.md`.
+
+### 8.4 Couldn't be made (fully) generic
+
+- **Opaque course types at the boundary**, as for Arabic: app code casts core's `Rung`, `Lesson`
+  and items to Mandarin's types where it reads its own fields. Mandarin rungs have no `cefr`;
+  every place core reads it is replaced by `levelLabel`, `LevelChip` and `tierRange`.
+- **`.zh` lives unlayered** in `mandarin.css`, not in the Tailwind plugin: plugin components sort
+  before core's `.label`, and the source relied on `.zh` coming after it (a hanzi measure-word chip
+  inside a mono label keeps normal spacing and case). No utility on a `.zh` element conflicts.
+- **Font subsetting scans the app's UI folders** (`i18n`, `components`, `visuals`, `app`, and the
+  voice sample in `course/speech.ts`), since the UI moved out of `lib/i18n` and `components/visuals`.
+  The subset files are byte-identical to the source build's.
+
+### 8.5 Behaviour differences from the live app
+
+1. **The service worker file changes once**: generated from the core template with the same cache
+   name (`mandarin-ladder-v1.0.0`), precache list, audio route and stroke route. Only the comments
+   and the prefix constant differ. Browsers install it as an update; nothing cached is lost.
+2. **Option pills' `data-option` holds the label without markup** (the source kept the raw label).
+   It is an attribute for tests only; nothing visible changes.
+
+There are no visual differences.
+
+### 8.6 Known issue kept for parity (D5)
+
+The trace items' why lines in the feedback sheet show literal asterisks (`**横**`) because the source
+renders them as plain text. Kept here so the migration is pixel-identical; it will be fixed on
+`fix/mandarin-trace-markup` with an updated Mandarin baseline.
+
+### 8.7 Results
+
+| Gate | Result |
+|---|---|
+| English parity | **60/60, 0 differing pixels**, after every engine commit and at the end |
+| Arabic parity | **224/224, 0 differing pixels**, after every engine commit and at the end |
+| Mandarin parity vs the source build (`dd8f5fa`) | **212/212, 0 differing pixels**: every route, all six lesson steps + feedback sheet for Dasar 1, Dasar 2 (trace drawn along the medians) and Easy 1, placement item and result, test item, climb, results, review, My words, the deck tab, deck card front/back/done, 360/1280 × light/dark |
+| Mandarin parity vs the **live site** with a learner's imported progress | **26/28 at 0 px** (home, rung Easy 1 and Dasar 2, the deck, My words, Saya, Settings). `imported-me` at 1280 differs by 22–27 px of antialiasing on two circle edges in the sidebar (the wordmark disc, one week-strip ring); see below |
+| Live export import | `live-export.json` (placement 20/20, Easy 1 lesson 10 with a trace, the Dasar 2 reading, five deck reviews, settings) imports and exports back byte for byte (unit); the e2e imports it through Settings and shows the same continue card, "lewat cek" climbs, capstone date, lessons, My words and settings |
+| Unit tests (root `npm run test`) | English + core 119 ✓, Arabic 347 ✓, Mandarin 912 ✓ (the source's 909, none dropped, + 3 live-import tests) |
+| `content:check` | Mandarin 11 rungs, 38 lessons, 338 items, 0 errors, 14 warnings: identical to the source. `data:check` 0 errors |
+| e2e | Mandarin 61 ✓ (the source's 60 unchanged + the live-import test) |
+| Lint | all three clean |
+| Byte checks | `content/` and `public/` identical to the source (bar `sw.js`); theme script identical; `audio:list` CSV identical (829 rows); subset fonts and `fonts-zh.css` identical file for file |
+
+`imported-me__{light,dark}__1280`: three fresh captures of the **live site** differ among
+themselves (one by 6 px), and the local build lands on a fourth antialiasing state on the same
+two circle edges; text, layout and colours are identical. I kept the live captures as the
+baseline. **Please approve** this as a sub-pixel rendering difference, as with Arabic's
+`imported-me`. `not-found__dark__360` (1 px) and `rung-hard-3__dark__1280` are the known bistable
+shots; both matched at 0 px in the previous full run.
+
+### 8.8 What's left
+
+1. Deploy (D2): create the deploy key on `mandarin-ladder`, the `MANDARIN_PAGES_DEPLOY_KEY`
+   secret, push `docs/moved-to-monorepo` (README note, `workflow_dispatch` only; committed
+   locally as `2c7ef48`), merge to main and run the first publish. **Then stop before switching
+   `mandarin-ladder` Pages to `gh-pages`**, so you can check the live site right after.
+2. Approve §8.5 and the `imported-me` antialiasing note above.
+3. After merge: `fix/mandarin-trace-markup` (D5) with an updated Mandarin baseline.

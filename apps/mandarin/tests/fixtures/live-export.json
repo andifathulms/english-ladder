@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "lessons": {
+    "easy1-10-letak": {
+      "step": 5,
+      "furthest": 5,
+      "completed": true,
+      "lastOpened": 1792288628475
+    },
+    "easy1-02-pertanyaan": {
+      "step": 2,
+      "furthest": 2,
+      "completed": false,
+      "lastOpened": 1792288633630
+    }
+  },
+  "items": {
+    "e1-10-c1": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792288624016
+    },
+    "e1-10-c2": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792288626453
+    },
+    "e1-10-c3": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792288627035
+    },
+    "e1-10-c4": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792288627602
+    },
+    "e1-10-c5": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792288628186
+    },
+    "e1-10-c6": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792288629818
+    },
+    "d2-r-c1": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792288631570
+    },
+    "d2-r-c2": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792288631869
+    },
+    "d2-r-c3": {
+      "firstTry": true,
+      "box": 2,
+      "lastSeen": 1792288632151
+    }
+  },
+  "rungs": {
+    "dasar-1": {
+      "tests": [],
+      "climbed": true,
+      "via": "placement"
+    },
+    "dasar-2": {
+      "tests": [],
+      "climbed": true,
+      "via": "placement"
+    }
+  },
+  "capstones": {
+    "dasar-2": {
+      "reading": "2026-10-18T01:57:12.153Z"
+    }
+  },
+  "placement": {
+    "score": 20,
+    "total": 20,
+    "result": "easy-1",
+    "missed": [],
+    "date": "2026-10-18T01:57:02.070Z"
+  },
+  "days": [
+    "2026-10-18"
+  ],
+  "opened": [
+    "easy1-10-letak",
+    "easy1-02-pertanyaan"
+  ],
+  "deck": {
+    "w-1-03d9a673": {
+      "box": 1,
+      "due": 20745,
+      "learned": true,
+      "lastSeen": 0,
+      "first": 20744
+    },
+    "w-1-9af81d33": {
+      "box": 1,
+      "due": 20745,
+      "learned": true,
+      "lastSeen": 0,
+      "first": 20744
+    },
+    "w-1-a221ad55": {
+      "box": 1,
+      "due": 20745,
+      "learned": true,
+      "lastSeen": 0,
+      "first": 20744
+    },
+    "w-1-378f3b20": {
+      "box": 2,
+      "due": 20746,
+      "learned": true,
+      "lastSeen": 1792288634554,
+      "first": 20744
+    },
+    "w-1-46349300": {
+      "box": 1,
+      "due": 20745,
+      "learned": true,
+      "lastSeen": 1792288634768,
+      "first": 20744
+    },
+    "w-1-ed5c25e2": {
+      "box": 2,
+      "due": 20746,
+      "learned": true,
+      "lastSeen": 1792288634970,
+      "first": 20744
+    },
+    "w-1-68dd8b72": {
+      "box": 1,
+      "due": 20745,
+      "learned": true,
+      "lastSeen": 1792288634352,
+      "first": 20744
+    },
+    "w-1-66f2a83a": {
+      "box": 1,
+      "due": 20745,
+      "learned": true,
+      "lastSeen": 0,
+      "first": 20744
+    },
+    "w-1-e35c7108": {
+      "box": 1,
+      "due": 20745,
+      "learned": true,
+      "lastSeen": 0,
+      "first": 20744
+    },
+    "w-1-b66e12a4": {
+      "box": 1,
+      "due": 20745,
+      "learned": true,
+      "lastSeen": 0,
+      "first": 20744
+    },
+    "w-1-f86129b4": {
+      "box": 2,
+      "due": 20746,
+      "learned": true,
+      "lastSeen": 1792288634136,
+      "first": 20744
+    },
+    "w-1-9c30d2eb": {
+      "box": 1,
+      "due": 20745,
+      "learned": true,
+      "lastSeen": 0,
+      "first": 20744
+    },
+    "w-1-0d4f014e": {
+      "box": 1,
+      "due": 20745,
+      "learned": true,
+      "lastSeen": 0,
+      "first": 20744
+    },
+    "w-1-fb282b02": {
+      "box": 1,
+      "due": 20745,
+      "learned": true,
+      "lastSeen": 0,
+      "first": 20744
+    }
+  },
+  "traces": {
+    "上": {
+      "bestMisses": 0,
+      "lastSeen": 1792288629818
+    }
+  },
+  "settings": {
+    "uiLang": "id",
+    "voice": "male",
+    "rate": 0.75,
+    "sfx": true,
+    "textSize": 100,
+    "zhSize": 140,
+    "toneColours": "rung",
+    "deckDaily": 10,
+    "deckFace": "hanzi",
+    "theme": "dark",
+    "motion": "system"
+  }
+}
