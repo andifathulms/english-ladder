@@ -18,8 +18,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # English Ladder deploys to this repo's Pages (below). Arabic Ladder deploys to its own repo's
-    # Pages (deploy-arabic). See docs/DEPLOY.md.
+    # English Ladder deploys to this repo's Pages (below). Arabic and Mandarin Ladder deploy to their
+    # own repos' Pages (deploy-arabic, deploy-mandarin). See docs/DEPLOY.md.
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,7 +27,14 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # Root scripts run every app: English (with the engine's tests) and Arabic.
+      - name: Cache Mandarin source fonts
+        uses: actions/cache@v4
+        with:
+          path: apps/mandarin/fonts-src
+          key: fonts-src-${{ hashFiles('apps/mandarin/scripts/fonts-fetch.ts') }}
+      - run: npm run fonts:fetch -w mandarin-ladder
+      - run: npm run fonts:subset -w mandarin-ladder
+      # Root scripts run every app: English (with the engine's tests), Arabic and Mandarin.
       - run: npm run lint
       - run: npm run test
       - run: npm run content:check
@@ -50,9 +57,15 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Cache Mandarin source fonts
+        uses: actions/cache@v4
+        with:
+          path: apps/mandarin/fonts-src
+          key: fonts-src-${{ hashFiles('apps/mandarin/scripts/fonts-fetch.ts') }}
+      - run: npm run fonts:fetch -w mandarin-ladder
       - run: npx playwright install --with-deps chromium
       - name: Build without base path for e2e
-        run: npm run build && npm run build:arabic
+        run: npm run build && npm run build:arabic && npm run build:mandarin
         env:
           NEXT_PUBLIC_SHOW_DRAFTS: 'true'
       - run: npm run test:e2e
@@ -104,3 +117,44 @@ jobs:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'deploy: Arabic Ladder from ${{ github.repository }}@${{ github.sha }}'
+
+  # Mandarin Ladder stays at https://andifathulms.github.io/mandarin-ladder/: build apps/mandarin with
+  # that base path and push apps/mandarin/out to the gh-pages branch of andifathulms/mandarin-ladder.
+  # Needs the MANDARIN_PAGES_DEPLOY_KEY secret (docs/DEPLOY.md).
+  deploy-mandarin:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: [build, e2e]
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages-mandarin
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Cache Mandarin source fonts
+        uses: actions/cache@v4
+        with:
+          path: apps/mandarin/fonts-src
+          key: fonts-src-${{ hashFiles('apps/mandarin/scripts/fonts-fetch.ts') }}
+      - run: npm run fonts:fetch -w mandarin-ladder
+      - name: Build static site (apps/mandarin)
+        run: npm run build:mandarin
+        env:
+          NEXT_PUBLIC_BASE_PATH: /mandarin-ladder
+          NEXT_PUBLIC_SHOW_DRAFTS: 'true'
+      - run: touch apps/mandarin/out/.nojekyll
+      - name: Push to mandarin-ladder gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.MANDARIN_PAGES_DEPLOY_KEY }}
+          external_repository: andifathulms/mandarin-ladder
+          publish_branch: gh-pages
+          publish_dir: apps/mandarin/out
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'deploy: Mandarin Ladder from ${{ github.repository }}@${{ github.sha }}'

@@ -4,20 +4,24 @@ Each app builds to `apps/<app>/out` with `output: 'export'` (fully static). Ever
 link and asset already works with and without a base path, so a course can live at a domain
 root or under a sub-path.
 
-Two courses ship from this repo (`.github/workflows/deploy.yml`):
+Three courses ship from this repo (`.github/workflows/deploy.yml`):
 
 | Course | Built with | Published to | Job |
 |---|---|---|---|
 | English Ladder | `NEXT_PUBLIC_BASE_PATH=/<this repo>` | this repo's Pages (Actions artifact) | `build` → `deploy` |
 | Arabic Ladder | `NEXT_PUBLIC_BASE_PATH=/arabic-ladder` | `gh-pages` branch of `andifathulms/arabic-ladder` | `deploy-arabic` (option B) |
+| Mandarin Ladder | `NEXT_PUBLIC_BASE_PATH=/mandarin-ladder` | `gh-pages` branch of `andifathulms/mandarin-ladder` | `deploy-mandarin` (option B) |
 
-Arabic keeps its live URL, <https://andifathulms.github.io/arabic-ladder/>, so learners' bookmarks
-and their saved progress (`localStorage` is per origin + path) carry over. The `arabic-ladder`
-repo is now only the deploy target; development happens here.
+Arabic and Mandarin keep their live URLs (<https://andifathulms.github.io/arabic-ladder/>,
+<https://andifathulms.github.io/mandarin-ladder/>), so learners' bookmarks and their saved progress
+(`localStorage` is per origin + path) carry over. The `arabic-ladder` and `mandarin-ladder` repos
+are now only deploy targets; development happens here.
 
-CI (`build`, `e2e`) checks both apps on every push and pull request: lint, unit tests (English's
-run includes the engine's), `content:check`, and the Playwright suites. `deploy-arabic` runs on
-`main` after both pass.
+CI (`build`, `e2e`) checks all three apps on every push and pull request: lint, unit tests
+(English's run includes the engine's), `content:check`, and the Playwright suites. Mandarin's
+hanzi fonts are subset at build time: CI fetches the source fonts (`npm run fonts:fetch -w
+mandarin-ladder`, cached by the fetch script's hash) and subsets them before the tests and builds.
+`deploy-arabic` and `deploy-mandarin` run on `main` after both pass.
 
 ## One-time setup for Arabic Ladder (option B)
 
@@ -46,6 +50,30 @@ To check a deploy: open the URL, then DevTools → Application → Service worke
 A fine-grained personal access token (contents: read/write on `arabic-ladder` only) works too:
 store it as `ARABIC_PAGES_TOKEN` and replace `deploy_key:` with `personal_token:` in the job.
 The deploy key is preferred: it is scoped to one repo and isn't tied to a person.
+
+## One-time setup for Mandarin Ladder (option B)
+
+The same six steps as Arabic, with Mandarin's names:
+
+1. `ssh-keygen -t ed25519 -C "ladder monorepo → mandarin-ladder gh-pages" -f mandarin_pages_key -N ""`
+2. `andifathulms/mandarin-ladder` → Settings → Deploy keys: add `mandarin_pages_key.pub` with
+   **Allow write access**.
+3. This repo → Actions secrets: `MANDARIN_PAGES_DEPLOY_KEY` = the private key. Delete both files.
+4. First publish: run the workflow on `main`; `deploy-mandarin` creates `gh-pages` in
+   `mandarin-ladder`.
+5. `mandarin-ladder` → Settings → Pages → *Deploy from a branch*, `gh-pages`, `/ (root)`.
+6. `mandarin-ladder`'s own `deploy.yml` runs only by hand (`workflow_dispatch`), on its
+   `docs/moved-to-monorepo` branch; merge it.
+
+To check a deploy: the service worker is `mandarin-ladder-v1.0.0` and Local storage still holds
+`mandarin-ladder:v1`.
+
+### Mandarin's media in git
+
+Mandarin ships recorded audio (`apps/mandarin/public/audio`, about 1,600 mp3s) and stroke data
+(`public/strokes`, one JSON per character), about 19 MB in all, as plain files: no Git LFS. LFS
+would complicate the Pages build and has bandwidth limits. Reconsider LFS (or moving media to a
+release asset or CDN) if the repository grows past about 500 MB (`git count-objects -vH`).
 
 ## Adding another course
 
