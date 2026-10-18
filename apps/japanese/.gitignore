@@ -1,0 +1,7 @@
+# Built from fonts-src/ by npm run fonts:subset
+fonts-src/*.ttf
+fonts-src/*.otf
+styles/fonts-ja/
+styles/fonts-ja.css
+styles/fonts-ja.json
+vendor-src/

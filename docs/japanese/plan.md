@@ -4,7 +4,7 @@ Branch `feat/japanese-ladder`. Written after reading `README.md`, `docs/ladder-c
 `docs/migrate-arabic.md`, `docs/migrate-mandarin.md`, `docs/DEPLOY.md`, the three Japanese spec
 files, and the code as it is now (English, Arabic and Mandarin on `ladder-core`).
 
-**Status: waiting for approval. No code written yet.**
+**Status: approved 2026-10-18, with all recommendations (R1–R23, C1–C8).**
 
 ---
 

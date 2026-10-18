@@ -1,0 +1,200 @@
+# Japanese Ladder curriculum (docs/japanese/PRD.md §4.2). Rungs go live as their content lands.
+rungs:
+  - id: kana-1
+    name: Kana 1
+    name_ja: "ひらがな"
+    tier: kana
+    jlpt: "—"
+    jft: false
+    cefr: "Pre-A1"
+    status: soon
+    optional: true
+    lessons: 10
+    furigana: "—"
+    romaji: fade
+    words_cum: 40
+    kanji_cum: 0
+    description: { id: "Hiragana dari nol, dengan romaji yang menghilang di akhir anak tangga.", en: "Hiragana from zero, with romaji gone by the end of the rung." }
+    topics: ["bunyi bahasa Jepang", "あ–こ", "さ–と", "な–ほ", "ま–ろ", "わ を ん", "dakuten", "ゃ ゅ ょ", "vokal panjang dan っ", "membaca tanpa romaji"]
+    threads: ["kana", "sounds", "mora"]
+    inventory: []
+  - id: kana-2
+    name: Kana 2
+    name_ja: "カタカナ"
+    tier: kana
+    jlpt: "—"
+    jft: false
+    cefr: "Pre-A1"
+    status: soon
+    optional: true
+    lessons: 10
+    furigana: "always"
+    romaji: none
+    words_cum: 120
+    kanji_cum: 10
+    description: { id: "Katakana dan bunyi yang sering terlewat: vokal panjang, っ, ん dan aksen nada.", en: "Katakana and the sounds learners miss: long vowels, っ, ん and pitch accent." }
+    topics: ["kenapa katakana", "ア–ソ", "タ–ホ", "マ–ン", "ー dan dakuten", "ファ ティ ウィ", "kata serapan", "ketukan mora", "aksen nada", "kanji pertama"]
+    threads: ["kana", "sounds", "mora", "pitch", "kanji"]
+    inventory: []
+  - id: easy-1
+    name: Easy 1
+    name_ja: "{初|しょ}{級|きゅう} 1"
+    tier: easy
+    jlpt: "N5"
+    jft: false
+    cefr: "A1"
+    status: soon
+    optional: false
+    lessons: 16
+    furigana: "always"
+    romaji: none
+    words_cum: 400
+    kanji_cum: 50
+    description: { id: "Paruh pertama N5: memperkenalkan diri, benda dan tempat, waktu, harga, dan kegiatan sehari-hari dengan bentuk ます.", en: "First half of N5: introductions, things and places, time, prices and daily actions in the ます form." }
+    topics: ["X は Y です", "か dan の", "これ / それ / あれ", "ここ / そこ / あそこ", "angka dan harga", "jam dan hari", "bentuk ます", "へ / に", "を dan で", "bentuk lampau sopan", "kata sifat い", "kata sifat な", "あります / います", "kata bantu bilangan", "ajakan", "sehari penuh"]
+    threads: ["particles", "word-order", "verbs", "adjectives", "counters", "existence", "politeness"]
+    inventory: []
+  - id: easy-2
+    name: Easy 2
+    name_ja: "{初|しょ}{級|きゅう} 2"
+    tier: easy
+    jlpt: "N5"
+    jft: false
+    cefr: "A1"
+    status: soon
+    optional: false
+    lessons: 16
+    furigana: "always"
+    romaji: none
+    words_cum: 800
+    kanji_cum: 100
+    description: { id: "Paruh kedua N5: bentuk て dan kegunaannya, keinginan, alasan, perbandingan.", en: "Second half of N5: the て form and its uses, wanting, reasons, comparison." }
+    topics: ["bentuk て", "～てください", "～ています", "～たい", "から", "perbandingan", "keluarga", "arah"]
+    threads: ["te-form", "verbs", "politeness"]
+    inventory: []
+  - id: easy-3
+    name: Easy 3
+    name_ja: "{初|しょ}{級|きゅう} 3"
+    tier: easy
+    jlpt: "N4"
+    jft: false
+    cefr: "A2−"
+    status: soon
+    optional: false
+    lessons: 16
+    furigana: "new"
+    romaji: none
+    words_cum: 1100
+    kanji_cum: 200
+    description: { id: "N4 bagian pertama: bentuk biasa, bahasa santai, kemampuan, pengalaman, pengandaian.", en: "N4 part one: plain forms, casual speech, potential, experience, conditionals." }
+    topics: ["bentuk kamus", "bentuk ない dan た", "bahasa santai", "～と思います", "bentuk potensial", "～たことがあります", "pengandaian"]
+    threads: ["plain-form", "conditionals", "politeness"]
+    inventory: []
+  - id: medium-1
+    name: Medium 1
+    name_ja: "{中|ちゅう}{級|きゅう} 1"
+    tier: medium
+    jlpt: "N4"
+    jft: true
+    cefr: "A2"
+    status: soon
+    optional: false
+    lessons: 16
+    furigana: "new"
+    romaji: none
+    words_cum: 1500
+    kanji_cum: 300
+    description: { id: "N4 bagian kedua dan kesiapan JFT-Basic: memberi dan menerima, pasif, keigo dasar di tempat kerja.", en: "N4 part two and JFT-Basic readiness: giving and receiving, passive, basic workplace keigo." }
+    topics: ["あげる / もらう / くれる", "pasif", "kausatif", "～そう / ～よう", "keigo kerja dasar", "kesiapan JFT-Basic"]
+    threads: ["giving-receiving", "keigo", "work"]
+    inventory: []
+  - id: medium-2
+    name: Medium 2
+    name_ja: "{中|ちゅう}{級|きゅう} 2"
+    tier: medium
+    jlpt: "N3"
+    jft: false
+    cefr: "B1−"
+    status: soon
+    optional: false
+    lessons: 16
+    furigana: "on-request"
+    romaji: none
+    words_cum: 2400
+    kanji_cum: 475
+    description: { id: "N3 bagian pertama: sistem keigo, pengandaian lanjut, membaca pengumuman.", en: "N3 part one: the keigo system, more conditionals, reading notices." }
+    topics: ["尊敬語", "謙譲語", "～ように", "～ために", "pengumuman"]
+    threads: ["keigo", "conditionals", "work"]
+    inventory: []
+  - id: medium-3
+    name: Medium 3
+    name_ja: "{中|ちゅう}{級|きゅう} 3"
+    tier: medium
+    jlpt: "N3"
+    jft: false
+    cefr: "B1"
+    status: soon
+    optional: false
+    lessons: 16
+    furigana: "on-request"
+    romaji: none
+    words_cum: 3700
+    kanji_cum: 650
+    description: { id: "N3 bagian kedua: email dan dokumen kerja, mendengar dengan kecepatan alami.", en: "N3 part two: work emails and documents, listening at natural speed." }
+    topics: ["のです", "email kerja", "dokumen", "mendengar alami"]
+    threads: ["work", "keigo"]
+    inventory: []
+  - id: hard-1
+    name: Hard 1
+    name_ja: "{上|じょう}{級|きゅう} 1"
+    tier: hard
+    jlpt: "N2"
+    jft: false
+    cefr: "B2−"
+    status: soon
+    optional: false
+    lessons: 18
+    furigana: "on-request"
+    romaji: none
+    words_cum: 4800
+    kanji_cum: 825
+    description: { id: "N2 bagian pertama: gaya tulisan dan pasangan nuansa.", en: "N2 part one: written style and nuance pairs." }
+    topics: ["gaya tulisan", "～わけ", "～はず", "～べき"]
+    threads: ["work"]
+    inventory: []
+  - id: hard-2
+    name: Hard 2
+    name_ja: "{上|じょう}{級|きゅう} 2"
+    tier: hard
+    jlpt: "N2"
+    jft: false
+    cefr: "B2"
+    status: soon
+    optional: false
+    lessons: 18
+    furigana: "off"
+    romaji: none
+    words_cum: 6000
+    kanji_cum: 1000
+    description: { id: "N2 bagian kedua: berita dan bahasa bisnis, rapat dan email resmi.", en: "N2 part two: news and business Japanese, meetings and formal email." }
+    topics: ["berita", "bahasa bisnis", "rapat", "email resmi"]
+    threads: ["work", "keigo"]
+    inventory: []
+  - id: hard-3
+    name: Hard 3
+    name_ja: "{上|じょう}{級|きゅう} 3"
+    tier: hard
+    jlpt: "N1"
+    jft: false
+    cefr: "C1"
+    status: soon
+    optional: false
+    lessons: 20
+    furigana: "off"
+    romaji: none
+    words_cum: 10000
+    kanji_cum: 2000
+    description: { id: "N1: tata bahasa resmi dan sastra, ungkapan, teks panjang asli.", en: "N1: formal and literary grammar, idioms, long authentic texts." }
+    topics: ["tata bahasa resmi", "四字熟語", "teks panjang", "menerjemahkan"]
+    threads: ["work"]
+    inventory: []

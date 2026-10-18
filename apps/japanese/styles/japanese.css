@@ -1,0 +1,27 @@
+/* Japanese Ladder's unlayered CSS: the subset Japanese faces and the Japanese animations.
+   The .ja-* / .rt / .tategaki-free component classes are a Tailwind plugin in tailwind.config.ts. */
+@import './fonts-ja.css';
+
+/* Japanese: never italic, letter-spaced, uppercased or synthesised bold (DESIGN §4.4). After the
+   component classes (.label), so Japanese inside a mono label keeps normal spacing and case. */
+.ja {
+  letter-spacing: normal;
+  text-transform: none;
+  font-style: normal;
+  font-synthesis: none;
+}
+
+/* The 済 seal presses in (DESIGN §5 stamp). */
+@keyframes seal-stamp {
+  from {
+    transform: scale(1.15) rotate(-4deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(-4deg);
+    opacity: 1;
+  }
+}
+.seal-stamp {
+  animation: seal-stamp var(--m-stamp-d) var(--ease-stamp) both;
+}

@@ -1,0 +1,26 @@
+{
+  "name": "japanese-ladder",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A calm, levelled Japanese course for Indonesian speakers, from zero to N1.",
+  "scripts": {
+    "dev": "next dev",
+    "prebuild": "npm run content:check",
+    "build": "next build",
+    "preview": "node ../../packages/ladder-core/scripts/serve.mjs",
+    "content:check": "tsx ../../packages/ladder-core/scripts/content-check.ts",
+    "icons": "node ../../packages/ladder-core/scripts/make-icons.mjs '#2A2830'",
+    "sw": "node ../../packages/ladder-core/scripts/make-sw.mjs --cache-first strokes:.json japanese-ladder- v0.1.0 '' rung/kana-1/ rung/kana-2/ rung/easy-1/ placement/ review/ words/ me/ settings/ about/ manifest.webmanifest icons/icon.svg audio/manifest.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "lint": "next lint",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@ladder/core": "*",
+    "next": "14.2.33",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  }
+}
