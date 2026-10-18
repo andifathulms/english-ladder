@@ -261,7 +261,7 @@ export function CheckItemView(props: Practice | Test) {
             </button>
           )}
         </div>
-      ) : view?.Answer ? (
+      ) : view?.Answer && !options.length ? (
         <view.Answer
           item={item as ExtraItem}
           mode={props.mode}
@@ -284,6 +284,7 @@ export function CheckItemView(props: Practice | Test) {
               state={pillState(opt)}
               disabled={practice && (solved || wrong.includes(opt))}
               onClick={() => pick(opt)}
+              item={item as ExtraItem}
             />
           ))}
         </div>

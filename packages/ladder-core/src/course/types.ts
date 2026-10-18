@@ -133,9 +133,10 @@ export type CheckSlots = {
     string,
     {
       Prompt: ComponentType<{ item: ExtraItem; solved: boolean }>;
-      /** The answer area, when the type is answered some other way than options or tiles. */
+      /** The answer area, when the type is answered some other way than options or tiles (an item
+       *  of the type that has options gets option pills instead). */
       Answer?: ComponentType<AnswerProps>;
-      Option?: ComponentType<{ value: string; index: number; state: import('@ladder/core/components/check/OptionPill').PillState; disabled?: boolean; onClick: () => void }>;
+      Option?: ComponentType<{ value: string; index: number; state: import('@ladder/core/components/check/OptionPill').PillState; disabled?: boolean; onClick: () => void; item: ExtraItem }>;
       /** UI string key for the option group's aria-label, when Option is set. */
       optionsLabelKey?: string;
     }
