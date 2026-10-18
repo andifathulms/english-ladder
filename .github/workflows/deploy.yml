@@ -31,7 +31,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: apps/mandarin/fonts-src
-          key: fonts-src-${{ hashFiles('apps/mandarin/scripts/fonts-fetch.ts') }}
+          key: fonts-src-${{ hashFiles('apps/mandarin/fonts.config.ts') }}
       - run: npm run fonts:fetch -w mandarin-ladder
       - run: npm run fonts:subset -w mandarin-ladder
       # Root scripts run every app: English (with the engine's tests), Arabic and Mandarin.
@@ -61,7 +61,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: apps/mandarin/fonts-src
-          key: fonts-src-${{ hashFiles('apps/mandarin/scripts/fonts-fetch.ts') }}
+          key: fonts-src-${{ hashFiles('apps/mandarin/fonts.config.ts') }}
       - run: npm run fonts:fetch -w mandarin-ladder
       - run: npx playwright install --with-deps chromium
       - name: Build without base path for e2e
@@ -139,7 +139,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: apps/mandarin/fonts-src
-          key: fonts-src-${{ hashFiles('apps/mandarin/scripts/fonts-fetch.ts') }}
+          key: fonts-src-${{ hashFiles('apps/mandarin/fonts.config.ts') }}
       - run: npm run fonts:fetch -w mandarin-ladder
       - name: Build static site (apps/mandarin)
         run: npm run build:mandarin
