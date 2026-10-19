@@ -79,6 +79,14 @@ function reverb(c: AudioContext): AudioNode {
   return input;
 }
 
+/** One short sine for a course's own cues (e.g. Japanese MoraBeats' tick); off with the sound setting. */
+export function blip(freq: number, durMs: number, peak: number) {
+  if (!enabled) return;
+  const c = audio();
+  if (!c) return;
+  tone(c, c.destination, freq, c.currentTime + 0.005, durMs / 1000, 'sine', peak);
+}
+
 export function sfx(name: SfxName) {
   if (!enabled) return;
   const c = audio();
