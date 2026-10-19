@@ -143,7 +143,8 @@ function ChartGrid({ label, rows, cols, k, romajiShown, marks, onChoose, t }: Gr
   };
   return (
     <div role="group" aria-label={label} className="overflow-x-auto" onKeyDown={onKeyDown}>
-      <div className="grid w-max gap-[6px]" style={{ gridTemplateColumns: `repeat(${cols}, 56px)` }}>
+      {/* Cells are squares up to 56px (DESIGN §8.1), down to 44px so five columns fit at 360px. */}
+      <div className="grid gap-[6px]" style={{ gridTemplateColumns: `repeat(${cols}, minmax(44px, 56px))` }}>
         {rows.flatMap((r, y) =>
           (r.length === 1 && cols === 5 ? [r[0], null, null, null, null] : r).map((e, x) => {
             if (!e) return <span key={`${y}-${x}`} aria-hidden />;
@@ -163,7 +164,7 @@ function ChartGrid({ label, rows, cols, k, romajiShown, marks, onChoose, t }: Gr
                 onClick={() => onChoose(e)}
                 aria-label={shown ? t('kana.cell', { kana, romaji }) : kana}
                 data-kana={e.hira}
-                className={`relative flex h-[56px] w-[56px] flex-col items-center justify-center rounded-md bg-surface ${marks.has(e.hira) || marks.has(e.kata) ? 'ring-2 ring-accent' : ''}`}
+                className={`relative flex aspect-square w-full flex-col items-center justify-center rounded-md bg-surface ${marks.has(e.hira) || marks.has(e.kata) ? 'ring-2 ring-accent' : ''}`}
               >
                 <span lang="ja" aria-hidden className="ja font-ja text-[1.75rem] leading-none">
                   {kana}

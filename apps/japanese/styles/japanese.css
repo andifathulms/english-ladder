@@ -78,3 +78,14 @@
 .origin-to {
   animation: origin-to var(--m-morph-d) var(--ease) both;
 }
+
+/* MoraBeats (DESIGN §8.3): 40px beats, 34px on phones so a six-beat word fits beside its play button. */
+.beats {
+  --beat-w: 40px;
+}
+@media (max-width: 480px) {
+  .beats {
+    --beat-w: 34px;
+  }
+}
+

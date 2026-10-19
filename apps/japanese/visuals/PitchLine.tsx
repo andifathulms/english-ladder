@@ -42,7 +42,7 @@ export function PitchLine({ state, interactive = true, onStateChange, lang, pair
 
   return (
     <div className="flex flex-col gap-4" data-visual="pitch-line">
-      <div className="grid gap-3 rounded-lg bg-paper-2 p-4 min-[480px]:grid-cols-2">
+      <div className="grid gap-3 min-[480px]:grid-cols-2">
         {pair.map((w) => (
           <PitchCard key={`${w.ja}-${w.accent}`} word={w} lang={lang} t={t} />
         ))}

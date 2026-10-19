@@ -22,7 +22,7 @@ const BEAT_MS = 220;
 const tick = () => blip(1320, 20, 0.04);
 
 /**
- * MoraBeats (DESIGN §8.3): a word on a row of beat blocks (40×40, --beat): っ an empty hatched block,
+ * MoraBeats (DESIGN §8.3): a word on a row of beat blocks (40×40, 34 under 480px; --beat): っ an empty hatched block,
  * a long vowel one block across two beats, ん its own. Play lights the blocks in time with the audio
  * (or alone, with a soft tick, when nothing can play). Compare shows two words in rows with their beat
  * counts; minimal pairs play from recordings only.
@@ -41,7 +41,7 @@ export function MoraBeats({ state, interactive = true, onStateChange, lang, word
 
   return (
     <div className="flex flex-col gap-4" data-visual="mora-beats">
-      <div className="flex flex-col gap-4 rounded-lg bg-paper-2 p-4">
+      <div className="beats flex flex-col gap-4">
         {shown.map((w) => (
           <BeatRow key={w.ja} word={w} pair={compare} lang={lang} t={t} />
         ))}
@@ -100,21 +100,26 @@ function BeatRow({ word, pair, lang, t }: { word: Word; pair: boolean; lang: 'id
   const meaning = lang === 'en' && word.en ? word.en : word.id;
   const label = t('beats.label', { word: toPlain(word.ja), n });
   return (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className="flex items-start gap-3">
       <button type="button" onClick={run} aria-label={`${t('beats.play')}: ${toPlain(word.ja)}`} className="flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full bg-accent text-accent-ink">
         <IconPlay size={20} />
       </button>
-      <span role="img" aria-label={`${label} · ${meaning}`} className="flex items-center gap-[4px]">
-        {bs.map((b, i) => (
-          <BeatBlock key={i} b={b} lit={i === lit} />
-        ))}
-      </span>
-      <span aria-hidden className="label tnum text-muted">
-        {n}
-      </span>
-      <span lang={lang === 'en' && word.en ? 'en' : 'id'} className="text-small text-muted">
-        {meaning}
-      </span>
+      <div className="flex min-w-0 flex-col gap-1">
+        {/* One line of blocks, so the rows of a pair line up beat for beat. */}
+        <span className="flex items-center gap-2 overflow-x-auto">
+          <span role="img" aria-label={`${label} · ${meaning}`} className="flex shrink-0 flex-nowrap items-center gap-[4px]">
+            {bs.map((b, i) => (
+              <BeatBlock key={i} b={b} lit={i === lit} />
+            ))}
+          </span>
+          <span aria-hidden className="label tnum text-muted">
+            {n}
+          </span>
+        </span>
+        <span lang={lang === 'en' && word.en ? 'en' : 'id'} className="text-small text-muted">
+          {meaning}
+        </span>
+      </div>
     </div>
   );
 }
@@ -127,8 +132,8 @@ function BeatBlock({ b, lit }: { b: Block; lit: boolean }) {
       lang="ja"
       data-beats={b.beats}
       data-kind={b.kind}
-      className={`ja flex h-[40px] items-center justify-center rounded-[6px] font-ja text-ja-body leading-none transition-colors duration-quick ${lit ? 'bg-accent-soft' : 'bg-beat'}`}
-      style={{ width: b.beats === 2 ? 84 : 40, ...hatch }}
+      className={`ja flex shrink-0 items-center justify-center rounded-[6px] font-ja text-ja-body leading-none transition-colors duration-quick ${lit ? 'bg-accent-soft' : 'bg-beat'}`}
+      style={{ height: 'var(--beat-w)', width: b.beats === 2 ? 'calc(var(--beat-w) * 2 + 4px)' : 'var(--beat-w)', ...hatch }}
     >
       {b.text}
     </span>
