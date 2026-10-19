@@ -210,8 +210,8 @@ export const LessonFrontmatterSchema = z
       })
       .strict()
       .optional(),
-    /** Kanji introduced here (Kanji card). */
-    kanji: z.array(z.string().length(1)).max(8).optional(),
+    /** Kanji introduced here (Kanji card). Easy lessons take 3–8 (lint); Kana 2's last lesson ten. */
+    kanji: z.array(z.string().length(1)).max(10).optional(),
     /** Kana introduced here (Kana rungs: the romaji fade and the chart). */
     kana_new: z.array(z.string().min(1)).max(30).optional(),
     /** Sopan card: one meaning at two or three politeness levels. */
