@@ -39,8 +39,12 @@ describe('normJa and audio keys', () => {
     expect(normJa('ｶﾀｶﾅ')).toBe('カタカナ');
   });
 
-  it('keys text by its reading, so kanji and kana spellings share a recording', () => {
-    expect(jaAudioKey('{箱|はこ}')).toBe(jaAudioKey('はこ'));
+  it('keys text by its reading, and kanji text by its spelling too, so homophones differ', () => {
+    // 橋 (bridge) and 箸 (chopsticks) are both はし: a pitch pair needs two recordings.
+    expect(jaAudioKey('{橋|はし}')).not.toBe(jaAudioKey('{箸|はし}'));
+    expect(jaAudioKey('[[{橋|はし}]]')).toBe(jaAudioKey('{橋|はし}'));
+    // Markup and spacing don't change the key.
+    expect(jaAudioKey('わたし [[は]] ほん を よみます 。')).toBe(jaAudioKey('わたし は ほん を よみます 。'));
     expect(jaAudioKey(kanaKey('きゃ'))).toBe('kana-きゃ');
   });
 });

@@ -2,7 +2,7 @@
 import { stripMarkup } from '@ladder/core/lib/markup';
 import { sha1 } from '@ladder/core/lib/speech/sha1';
 import { morae, toHiragana } from './kana';
-import { normJa, toKana } from './text';
+import { hasKanji, normJa, toKana, toPlain } from './text';
 
 /** A single kana's recording key: kana-<hiragana>, e.g. kana-きゃ. Katakana share the hiragana clip. */
 export const kanaKey = (kana: string) => `kana-${toHiragana(kana)}`;
@@ -27,21 +27,48 @@ export function spokenJa(text: string): string {
   }
 }
 
-/** The audio key: sha1(normJa(reading)), first 12 hex digits; a kana key is its own key (in hiragana). */
+/** Kana-only text of one mora (a worked あ, the word え): it is that kana's recording. */
+function singleKana(t: string): string | null {
+  let written: string;
+  try {
+    written = toPlain(stripMarkup(t)).replace(/\s+/g, '');
+  } catch {
+    return null;
+  }
+  // The written text itself is kana (a kanji read as one mora, like 目, stays a word).
+  return /^[ぁ-ゖァ-ヺ]+$/u.test(written) && morae(written).length === 1 ? written : null;
+}
+
+/**
+ * The audio key: sha1 of the reading, first 12 hex digits. Text with kanji adds its written form,
+ * so homophones get their own recordings: 橋 and 箸 are both はし, but a pitch pair must play two
+ * different clips. A kana key is its own key (in hiragana), and so is any one-mora kana text, so a
+ * lone kana never plays from the browser voice.
+ */
 export function jaAudioKey(text: string): string {
   const t = unpair(text);
-  return isKanaKey(t) ? kanaKey(t.slice(5)) : sha1(normJa(spokenJa(t))).slice(0, 12);
+  if (isKanaKey(t)) return kanaKey(t.slice(5));
+  const one = singleKana(t);
+  if (one) return kanaKey(one);
+  const reading = normJa(spokenJa(t));
+  let written = '';
+  try {
+    written = normJa(toPlain(stripMarkup(t)));
+  } catch {
+    written = '';
+  }
+  return sha1(hasKanji(written) ? `${reading}|${written}` : reading).slice(0, 12);
 }
 
 /** Whether a string may play with the browser voice when it has no recording (CLAUDE.md §7.7). */
-export const speechFallback = (text: string) => !isKanaKey(text) && !isPairKey(text);
+export const speechFallback = (text: string) => !isPairKey(text) && !isKanaKey(jaAudioKey(text));
 
 /**
- * What a Bunyi word plays: a single kana its kana recording; long vowels, small っ and pitch are
- * minimal pairs (recordings only); anything else the word itself.
+ * What a Bunyi word plays: a single kana its kana recording; long vowels, small っ, mora and pitch
+ * contrasts are minimal pairs (recordings only); anything else the word itself.
  */
 export function soundAudio(kind: string, w: { ja: string; kana: string }): string {
-  if (kind === 'long-vowel' || kind === 'small-tsu' || kind === 'pitch') return pairKey(w.ja);
+  if (kind === 'long-vowel' || kind === 'small-tsu' || kind === 'mora' || kind === 'pitch') return pairKey(w.ja);
   if (morae(w.kana).length === 1 && !/[一-鿿]/u.test(w.ja)) return kanaKey(w.kana.trim());
   return w.ja;
 }

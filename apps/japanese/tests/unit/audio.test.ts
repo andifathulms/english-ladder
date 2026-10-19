@@ -19,6 +19,16 @@ describe('audio keys', () => {
     expect(speechFallback(pairKey('おばさん'))).toBe(false);
     expect(speechFallback('{今日|=きょう} は')).toBe(true);
   });
+  it('play one-mora kana text (a worked あ, the word え, きゃ) from the kana recording', () => {
+    expect(jaAudioKey('あ')).toBe('kana-あ');
+    expect(jaAudioKey('[[え]]')).toBe('kana-え');
+    expect(jaAudioKey('キャ')).toBe('kana-きゃ');
+    expect(speechFallback('[[え]]')).toBe(false);
+    // Two morae, or a kanji, stay text: words the browser voice may read.
+    expect(jaAudioKey('いえ')).toMatch(/^[0-9a-f]{12}$/);
+    expect(jaAudioKey('{目|め}')).toMatch(/^[0-9a-f]{12}$/);
+    expect(speechFallback('いえ')).toBe(true);
+  });
   it('show the text itself when nothing can play', () => {
     expect(shownText('kana-あ')).toBe('あ');
     expect(shownText(pairKey('おばさん'))).toBe('おばさん');
