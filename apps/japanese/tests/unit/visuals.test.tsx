@@ -184,3 +184,74 @@ describe('PitchLine', () => {
     expect(container.querySelector('[data-accent="1"] [data-drop]')).not.toBeNull();
   });
 });
+
+// Easy 1 visuals (DESIGN §8.6–8.8).
+import { getCounters } from '@/course/content';
+import { Counters, changedNumbers } from '@/visuals/Counters';
+import { ParticleTrain, moveCar, trainSentence } from '@/visuals/ParticleTrain';
+import { PlaceSceneJa, placeSentenceJa } from '@/visuals/PlaceSceneJa';
+
+describe('PlaceSceneJa', () => {
+  it('puts the position after the object: 箱 の 上 (under: テーブル の 下)', () => {
+    expect(placeSentenceJa('on').ja).toBe('ボール は {箱|はこ} の [[{上|うえ}]] に あります 。');
+    expect(placeSentenceJa('under').ja).toContain('テーブル の [[{下|した}]]');
+    expect(placeSentenceJa('under').id).toBe('Bolanya ada di bawah meja.');
+  });
+  it('moves the ball and says where it is', () => {
+    wrap(<PlaceSceneJa lang="id" />);
+    fireEvent.click(screen.getByRole('radio', { name: /中 なか/ }));
+    expect(screen.getAllByText(/ボールは箱の中にあります。/).length).toBeGreaterThan(0);
+  });
+});
+
+describe('Counters', () => {
+  const counters = getCounters();
+  const hon = counters.find((c) => c.counter === '本')!;
+  it('finds the numbers whose reading changes, from the authored readings', () => {
+    expect(changedNumbers(hon)).toEqual([1, 3, 6, 8, 10]);
+    expect(changedNumbers(counters.find((c) => c.counter === '枚')!)).toEqual([]);
+  });
+  it('highlights the sound change: 3本 さんぼん', () => {
+    const { container } = render(
+      <AllProviders>
+        <VisualDataProvider value={{ counters }}>
+          <Counters lang="id" initial={{ counter: '本', n: 3 }} />
+        </VisualDataProvider>
+      </AllProviders>,
+    );
+    expect(container.querySelector('[data-reading]')).toHaveTextContent('さんぼん');
+    expect(container.querySelector('[data-change]')).toHaveTextContent('ぼ');
+    expect(screen.getByText('sebatang pena')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Kurangi satu' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Kurangi satu' }));
+    expect(container.querySelector('[data-reading]')).toHaveTextContent('いっぽん');
+  });
+});
+
+describe('ParticleTrain', () => {
+  const cars = [
+    { ja: 'わたし', particle: 'は', id: 'saya' },
+    { ja: 'うち', particle: 'で', id: 'di rumah' },
+    { ja: 'ごはん', particle: 'を', id: 'nasi' },
+  ];
+  const verb = { ja: '{食|た}べます', id: 'makan' };
+  const indonesian = [
+    { text: 'Saya', ref: 0 },
+    { text: 'makan', ref: 'verb' as const },
+    { text: 'nasi', ref: 2 },
+    { text: 'di rumah', ref: 1 },
+  ];
+  it('keeps the verb last whatever the order of the cars', () => {
+    expect(trainSentence(cars, [0, 1, 2], verb.ja)).toBe('わたし は うち で ごはん を {食|た}べます 。');
+    expect(trainSentence(cars, [0, 2, 1], verb.ja)).toBe('わたし は ごはん を うち で {食|た}べます 。');
+    expect(moveCar([0, 1, 2], 2, 1)).toEqual([0, 1, 2]);
+    expect(moveCar([0, 1, 2], 1, 1)).toEqual([0, 2, 1]);
+  });
+  it('reorders cars with the arrow buttons; the locomotive has none', () => {
+    const { container } = wrap(<ParticleTrain lang="id" cars={cars} verb={verb} indonesian={indonesian} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Pindahkan ごはん ke kiri' }));
+    expect([...container.querySelectorAll('[data-car]')].map((c) => c.getAttribute('data-car'))).toEqual(['0', '2', '1']);
+    expect(container.querySelector('[data-loco] button')).toBeNull();
+    expect(screen.getByText('わたしはごはんをうちで食べます。')).toBeInTheDocument();
+  });
+});

@@ -2,7 +2,9 @@
 // text size, pitch marks, romaji in My words, word decks), and three state parts of its own: the word
 // deck, the kanji deck and traced characters, stored after `opened`.
 import type { ProgressExtension } from '@ladder/core/lib/progress/config';
-import type { Settings } from '@ladder/core/lib/progress/types';
+import type { ProgressState, Settings } from '@ladder/core/lib/progress/types';
+import { validDeckCards } from '@ladder/core/lib/deck/schedule';
+import { teachDeck } from '@ladder/core/lib/deck/progress';
 import * as store from '@ladder/core/lib/progress/store';
 
 export const STORAGE_KEY = 'japanese-ladder:v1';
@@ -40,9 +42,8 @@ export type Traces = Record<string, TraceProgress>;
 
 const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
 
-/** Deck cards (core deck engine, M9): kept as stored, malformed entries dropped. */
-const validCards = (d: unknown) =>
-  isObj(d) ? Object.fromEntries(Object.entries(d).filter(([, v]) => isObj(v) && typeof v.box === 'number' && typeof v.due === 'number')) : {};
+/** Deck cards (core deck engine): malformed entries dropped, missing fields filled. */
+const validCards = (d: unknown) => validDeckCards(d);
 
 const validTraces = (t: unknown): Traces =>
   isObj(t) ? (Object.fromEntries(Object.entries(t).filter(([, v]) => isObj(v) && typeof v.bestMisses === 'number')) as Traces) : {};
@@ -59,4 +60,10 @@ export function recordTrace(char: string, misses: number) {
     ...t,
     [char]: { bestMisses: Math.min(t[char]?.bestMisses ?? Infinity, misses), lastSeen: Date.now() },
   }));
+}
+
+/** A completed lesson's words and kanji join Kartu kata and Kartu kanji as learned (PRD §5.7). */
+export function onCompleteLesson(s: ProgressState, _lessonId: string, data: unknown): ProgressState {
+  const d = data as { wordIds?: string[]; kanjiIds?: string[] } | undefined;
+  return teachDeck(teachDeck(s, 'deck', d?.wordIds ?? []), 'kanjiDeck', d?.kanjiIds ?? []);
 }

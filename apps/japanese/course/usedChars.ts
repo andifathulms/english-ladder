@@ -34,7 +34,7 @@ function walk(dir: string, exts: RegExp, skip: string[] = []): string[] {
  * Japanese characters in order of first appearance: all kana, then content (lessons in curriculum
  * order, then the rest of content/ except the imported data), the UI, and every kanji on the live
  * rungs' JLPT levels. `strokes` is what a learner can trace or open stroke order for: kana, and kanji
- * from content and the live rungs' lists (not UI chrome).
+ * from content and the deck levels' lists (not UI chrome).
  */
 export function usedChars(): { ordered: string[]; strokes: Set<string> } {
   const ordered: string[] = [];
@@ -55,8 +55,9 @@ export function usedChars(): { ordered: string[]; strokes: Set<string> } {
   for (const f of walk(path.join(ROOT, 'content'), /\.ya?ml$/, ['vendor'])) add(fs.readFileSync(f, 'utf8'), !f.endsWith('curriculum.yaml') && !f.includes(`${path.sep}data${path.sep}`));
   for (const dir of ['i18n', 'components', 'visuals', 'app']) for (const f of walk(path.join(ROOT, dir), /\.(ts|tsx)$/)) add(fs.readFileSync(f, 'utf8'), false);
   add(fs.readFileSync(path.join(ROOT, 'course', 'speech.ts'), 'utf8'), false);
-  // The decks show every kanji and word of the live rungs' levels.
-  const levels = new Set<string>(rungs.filter((r) => r.status === 'live' && r.jlpt !== '—').map((r) => r.jlpt));
+  // The decks show every kanji and word of each JLPT level whose rungs have lessons (course/decks.ts).
+  const hasLessons = (id: string) => walk(path.join(ROOT, 'content', id), /^\d{2}-.*\.md$/).length > 0;
+  const levels = new Set<string>(rungs.filter((r) => r.jlpt !== '—' && hasLessons(r.id)).map((r) => r.jlpt));
   if (levels.size) {
     const kanji = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/data/vendor/kanji.json'), 'utf8')) as { char: string; jlpt: string | null }[];
     const words = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/data/vendor/jlpt-words.json'), 'utf8')) as { ja: string; kana: string; jlpt: string }[];

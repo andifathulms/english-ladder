@@ -114,7 +114,75 @@ export type JapaneseKey =
   | 'pitch.low'
   | 'pitch.particle'
   | 'pitch.contrast'
-  | 'pitch.play';
+  | 'pitch.play'
+  | 'place.compare'
+  | 'counters.choose'
+  | 'counters.number'
+  | 'counters.minus'
+  | 'counters.plus'
+  | 'counters.changed'
+  | 'counters.none'
+  | 'counters.id'
+  | 'train.label'
+  | 'train.left'
+  | 'train.right'
+  | 'train.verbLast'
+  | 'train.compare'
+  | 'deck.learned'
+  | 'deck.today'
+  | 'deck.start'
+  | 'deck.nothing'
+  | 'deck.filter'
+  | 'deck.filter.all'
+  | 'deck.filter.new'
+  | 'deck.filter.learned'
+  | 'deck.filter.lessons'
+  | 'deck.state.new'
+  | 'deck.state.learned'
+  | 'deck.more'
+  | 'deck.flip'
+  | 'deck.again'
+  | 'deck.know'
+  | 'deck.close'
+  | 'deck.summary'
+  | 'deck.done'
+  | 'deck.back'
+  | 'kanjiDeck.learned'
+  | 'kanjiDeck.today'
+  | 'kanjiDeck.start'
+  | 'kanjiDeck.nothing'
+  | 'kanjiDeck.filter'
+  | 'kanjiDeck.filter.all'
+  | 'kanjiDeck.filter.new'
+  | 'kanjiDeck.filter.learned'
+  | 'kanjiDeck.filter.lessons'
+  | 'kanjiDeck.state.new'
+  | 'kanjiDeck.state.learned'
+  | 'kanjiDeck.more'
+  | 'kanjiDeck.flip'
+  | 'kanjiDeck.again'
+  | 'kanjiDeck.know'
+  | 'kanjiDeck.close'
+  | 'kanjiDeck.summary'
+  | 'kanjiDeck.done'
+  | 'kanjiDeck.back'
+  | 'deck.title'
+  | 'deck.list'
+  | 'deck.none'
+  | 'deck.playWord'
+  | 'deck.pitch'
+  | 'deck.level'
+  | 'kanjiDeck.title'
+  | 'kanjiDeck.list'
+  | 'kanjiDeck.none'
+  | 'kanji.on'
+  | 'kanji.kun'
+  | 'kanji.strokes'
+  | 'kanji.trace'
+  | 'kanji.traceTitle'
+  | 'kanji.traceClean'
+  | 'kanji.traceDone'
+  | 'rung.deckMeta';
 
 type Overrides = Partial<StringTable> & Partial<Record<JapaneseKey, string>>;
 
@@ -257,6 +325,74 @@ export const idOverrides: Overrides = {
   'pitch.particle': 'partikel が {level}',
   'pitch.contrast': 'Bahasa Indonesia tidak punya nada kata: suara naik-turun hanya untuk kalimat, misalnya saat bertanya. Di bahasa Jepang, tinggi-rendah tiap ketukan bisa membedakan dua kata.',
   'pitch.play': 'Putar',
+  'place.compare': 'Bandingkan dengan bahasa Indonesia',
+  'counters.choose': 'Pilih benda',
+  'counters.number': 'Jumlah',
+  'counters.minus': 'Kurangi satu',
+  'counters.plus': 'Tambah satu',
+  'counters.changed': 'Bunyinya berubah pada {list}.',
+  'counters.none': 'Bunyinya tidak berubah.',
+  'counters.id': 'Dalam bahasa Indonesia:',
+  'train.label': 'Kereta kalimat',
+  'train.left': 'Pindahkan {car} ke kiri',
+  'train.right': 'Pindahkan {car} ke kanan',
+  'train.verbLast': 'Kata kerja selalu di belakang. Gerbong lain boleh pindah, karena partikelnya yang menandai peran.',
+  'train.compare': 'Bandingkan dengan bahasa Indonesia',
+  'deck.learned': '{n} dari {total} dipelajari',
+  'deck.today': 'Hari ini: {n} baru · {k} diulang',
+  'deck.start': 'Mulai',
+  'deck.nothing': 'Tidak ada kartu untuk hari ini',
+  'deck.filter': 'Saring',
+  'deck.filter.all': 'Semua',
+  'deck.filter.new': 'baru',
+  'deck.filter.learned': 'dipelajari',
+  'deck.filter.lessons': 'dari pelajaran',
+  'deck.state.new': 'baru',
+  'deck.state.learned': 'dipelajari',
+  'deck.more': 'dan {n} lagi: pakai pencarian',
+  'deck.flip': 'Balik kartu',
+  'deck.again': 'Belum ingat',
+  'deck.know': 'Ingat',
+  'deck.close': 'Tutup kartu',
+  'deck.summary': '{k} dari {n} kamu ingat.',
+  'deck.done': 'Kartu berikutnya muncul lagi sesuai jadwal ulangnya.',
+  'deck.back': 'Kembali ke daftar',
+  'kanjiDeck.learned': '{n} dari {total} dipelajari',
+  'kanjiDeck.today': 'Hari ini: {n} baru · {k} diulang',
+  'kanjiDeck.start': 'Mulai',
+  'kanjiDeck.nothing': 'Tidak ada kartu untuk hari ini',
+  'kanjiDeck.filter': 'Saring',
+  'kanjiDeck.filter.all': 'Semua',
+  'kanjiDeck.filter.new': 'baru',
+  'kanjiDeck.filter.learned': 'dipelajari',
+  'kanjiDeck.filter.lessons': 'dari pelajaran',
+  'kanjiDeck.state.new': 'baru',
+  'kanjiDeck.state.learned': 'dipelajari',
+  'kanjiDeck.more': 'dan {n} lagi: pakai pencarian',
+  'kanjiDeck.flip': 'Balik kartu',
+  'kanjiDeck.again': 'Belum ingat',
+  'kanjiDeck.know': 'Ingat',
+  'kanjiDeck.close': 'Tutup kartu',
+  'kanjiDeck.summary': '{k} dari {n} kamu ingat.',
+  'kanjiDeck.done': 'Kartu berikutnya muncul lagi sesuai jadwal ulangnya.',
+  'kanjiDeck.back': 'Kembali ke daftar',
+  'deck.title': 'Kartu kata {level}',
+  'deck.list': 'Semua kata',
+  'deck.none': 'Kartu kata muncul begitu anak tangga JLPT pertama punya pelajaran.',
+  'deck.playWord': 'Putar kata',
+  'deck.pitch': 'Aksen nada {n}',
+  'deck.level': 'JLPT {level} · perkiraan',
+  'kanjiDeck.title': 'Kartu kanji {level}',
+  'kanjiDeck.list': 'Semua kanji',
+  'kanjiDeck.none': 'Kartu kanji muncul begitu anak tangga JLPT pertama punya pelajaran.',
+  'kanji.on': 'on',
+  'kanji.kun': 'kun',
+  'kanji.strokes': 'goresan',
+  'kanji.trace': 'Latihan menulis',
+  'kanji.traceTitle': 'Latihan menulis kanji ini',
+  'kanji.traceClean': 'Rapi, tanpa salah goresan.',
+  'kanji.traceDone': 'Selesai, {n} goresan perlu diulang.',
+  'rung.deckMeta': '{n} kata, daftar perkiraan',
 };
 
 export const enOverrides: Overrides = {
@@ -398,4 +534,72 @@ export const enOverrides: Overrides = {
   'pitch.particle': 'particle が {level}',
   'pitch.contrast': 'Indonesian has no word pitch: the voice rises and falls only over a sentence, for example in a question. In Japanese, the high and low of each beat can tell two words apart.',
   'pitch.play': 'Play',
+  'place.compare': 'Compare with Indonesian',
+  'counters.choose': 'Choose a thing',
+  'counters.number': 'Number',
+  'counters.minus': 'One fewer',
+  'counters.plus': 'One more',
+  'counters.changed': 'The sound changes at {list}.',
+  'counters.none': 'The sound does not change.',
+  'counters.id': 'In Indonesian:',
+  'train.label': 'Sentence train',
+  'train.left': 'Move {car} left',
+  'train.right': 'Move {car} right',
+  'train.verbLast': 'The verb always goes last. The other cars can move, because the particles mark the roles.',
+  'train.compare': 'Compare with Indonesian',
+  'deck.learned': '{n} of {total} learned',
+  'deck.today': 'Today: {n} new · {k} to review',
+  'deck.start': 'Start',
+  'deck.nothing': 'No cards for today',
+  'deck.filter': 'Filter',
+  'deck.filter.all': 'All',
+  'deck.filter.new': 'new',
+  'deck.filter.learned': 'learned',
+  'deck.filter.lessons': 'from lessons',
+  'deck.state.new': 'new',
+  'deck.state.learned': 'learned',
+  'deck.more': 'and {n} more: use the search',
+  'deck.flip': 'Turn the card',
+  'deck.again': 'Not yet',
+  'deck.know': 'Got it',
+  'deck.close': 'Close the cards',
+  'deck.summary': 'You remembered {k} of {n}.',
+  'deck.done': 'Each card comes back on its review day.',
+  'deck.back': 'Back to the list',
+  'kanjiDeck.learned': '{n} of {total} learned',
+  'kanjiDeck.today': 'Today: {n} new · {k} to review',
+  'kanjiDeck.start': 'Start',
+  'kanjiDeck.nothing': 'No cards for today',
+  'kanjiDeck.filter': 'Filter',
+  'kanjiDeck.filter.all': 'All',
+  'kanjiDeck.filter.new': 'new',
+  'kanjiDeck.filter.learned': 'learned',
+  'kanjiDeck.filter.lessons': 'from lessons',
+  'kanjiDeck.state.new': 'new',
+  'kanjiDeck.state.learned': 'learned',
+  'kanjiDeck.more': 'and {n} more: use the search',
+  'kanjiDeck.flip': 'Turn the card',
+  'kanjiDeck.again': 'Not yet',
+  'kanjiDeck.know': 'Got it',
+  'kanjiDeck.close': 'Close the cards',
+  'kanjiDeck.summary': 'You remembered {k} of {n}.',
+  'kanjiDeck.done': 'Each card comes back on its review day.',
+  'kanjiDeck.back': 'Back to the list',
+  'deck.title': 'Word cards {level}',
+  'deck.list': 'All words',
+  'deck.none': 'Word cards appear once the first JLPT rung has lessons.',
+  'deck.playWord': 'Play the word',
+  'deck.pitch': 'Pitch accent {n}',
+  'deck.level': 'JLPT {level} · estimate',
+  'kanjiDeck.title': 'Kanji cards {level}',
+  'kanjiDeck.list': 'All kanji',
+  'kanjiDeck.none': 'Kanji cards appear once the first JLPT rung has lessons.',
+  'kanji.on': 'on',
+  'kanji.kun': 'kun',
+  'kanji.strokes': 'strokes',
+  'kanji.trace': 'Practise writing',
+  'kanji.traceTitle': 'Practise writing this kanji',
+  'kanji.traceClean': 'Neat, no stroke missed.',
+  'kanji.traceDone': 'Done, {n} strokes to try again.',
+  'rung.deckMeta': '{n} words, an estimated list',
 };

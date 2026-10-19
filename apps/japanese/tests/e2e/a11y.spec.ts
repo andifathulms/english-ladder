@@ -12,9 +12,13 @@ const steps: Record<string, number[]> = {
   '/rung/kana-2/09-aksen-nada/': [1, 2],
   '/rung/kana-2/10-kanji-pertama/': [1, 2],
   '/rung/easy-1/01-hajimemashite/': [0, 2, 3],
+  '/rung/easy-1/07-masu/': [1],
+  '/rung/easy-1/13-arimasu-imasu/': [1, 4],
+  '/rung/easy-1/14-counters/': [1, 2],
+  '/rung/easy-1/16-ichinichi/': [2],
 };
 const lessons = Object.keys(steps);
-const routes = ['/', '/placement/', '/rung/kana-1/', '/rung/kana-2/', '/rung/easy-1/', '/rung/hard-3/', ...lessons, '/rung/kana-1/test/', '/rung/kana-2/test/', '/rung/kana-2/read/', '/review/', '/words/', '/words/#deck', '/words/#kanji', '/me/', '/settings/', '/about/'];
+const routes = ['/', '/placement/', '/rung/kana-1/', '/rung/kana-2/', '/rung/easy-1/', '/rung/hard-3/', ...lessons, '/rung/kana-1/test/', '/rung/kana-2/test/', '/rung/kana-2/read/', '/rung/easy-1/test/', '/rung/easy-1/read/', '/rung/easy-1/talk/', '/review/', '/words/', '/words/#deck', '/words/#kanji', '/me/', '/settings/', '/about/'];
 
 for (const scheme of ['light', 'dark'] as const) {
   for (const route of routes) {

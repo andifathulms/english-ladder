@@ -12,12 +12,12 @@ import { adapter } from '@/course/adapter';
 import { answerText, itemText, itemTypes } from '@/course/items';
 import { text } from '@/course/text';
 import { voiceScorer, canSpeak, chunkMax, estimateMs, sentenceSplit, sampleText, rateScale } from '@/course/speech';
-import { ALLOWED_SETTINGS, DEFAULT_SETTINGS, EXTENSIONS, SCHEMA_VERSION, STORAGE_KEY, THEME_COLOR } from '@/course/progress';
+import { ALLOWED_SETTINGS, DEFAULT_SETTINGS, EXTENSIONS, SCHEMA_VERSION, STORAGE_KEY, THEME_COLOR, onCompleteLesson } from '@/course/progress';
 import type { Rung } from '@/course/types';
 import { Seigaiha } from '@/components/Seigaiha';
 import { strokes } from '@/components/strokes';
 import { checkSlots } from '@/components/check/slots';
-import { DeckSoon } from '@/components/DeckPanels';
+import { DeckLinks, KanjiDeckPanel, WordDeckPanel } from '@/components/decks';
 import { WordsRow, matchesWord } from '@/components/WordsRow';
 import {
   BoardQuote,
@@ -109,7 +109,7 @@ export const course: CourseConfig = {
       },
     ],
   },
-  progress: { schemaVersion: SCHEMA_VERSION, features: { capstones: true, placement: true }, extensions: EXTENSIONS },
+  progress: { schemaVersion: SCHEMA_VERSION, features: { capstones: true, placement: true }, extensions: EXTENSIONS, onCompleteLesson },
 
   speech: { voiceScorer, sentenceSplit, canSpeak, sampleText, rateScale, chunkMax, estimateMs },
   // Recorded audio first, keyed by the reading; single kana and minimal pairs never fall back to speech.
@@ -140,6 +140,7 @@ export const course: CourseConfig = {
     LevelChip,
     tierRange,
     longRung: { minLessons: 13 },
+    RungExtra: DeckLinks,
     rungMeta: (r, t) => [t(`rung.furigana.${rung(r).furigana}`), ' · ', t(`rung.romaji.${rung(r).romaji}`)],
   },
   home: {
@@ -167,8 +168,8 @@ export const course: CourseConfig = {
     tabs: {
       titleKey: 'words.tab',
       list: [
-        { hash: 'deck', labelKey: 'words.deckTab', Panel: DeckSoon },
-        { hash: 'kanji', labelKey: 'words.kanjiTab', Panel: DeckSoon },
+        { hash: 'deck', labelKey: 'words.deckTab', Panel: WordDeckPanel },
+        { hash: 'kanji', labelKey: 'words.kanjiTab', Panel: KanjiDeckPanel },
       ],
     },
   },

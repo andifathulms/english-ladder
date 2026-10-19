@@ -54,3 +54,40 @@ test('the Kana 1 test draws 14 items', async ({ page }) => {
   await page.getByRole('button', { name: /Mulai/ }).click();
   await expect(page.getByText(/1 \/ 14/)).toBeVisible();
 });
+
+// Easy 1 visuals and the decks (DESIGN §6.8, §8.6–8.8).
+test('Easy 1 lesson 7: ParticleTrain keeps the verb last when a car moves', async ({ page }) => {
+  await page.goto('/rung/easy-1/07-masu/');
+  await toStep(page, 1);
+  const train = page.locator('[data-visual="particle-train"]');
+  await train.getByRole('button', { name: /ke kiri/ }).last().click();
+  await expect(train.locator('li').last()).toHaveAttribute('data-loco');
+});
+
+test('Easy 1 lesson 14: Counters shows the sound change of 本', async ({ page }) => {
+  await page.goto('/rung/easy-1/14-counters/');
+  await toStep(page, 1);
+  const c = page.locator('[data-visual="counters"]');
+  await expect(c.locator('[data-reading]')).toHaveText('さんぼん');
+  await c.getByRole('button', { name: 'Kurangi satu' }).click();
+  await c.getByRole('button', { name: 'Kurangi satu' }).click();
+  await expect(c.locator('[data-reading]')).toHaveText('いっぽん');
+});
+
+test('the kanji deck opens a card with stroke order and tracing', async ({ page }) => {
+  await page.goto('/words/#kanji');
+  await page.getByRole('button', { name: /^Mulai/ }).first().click();
+  await page.getByRole('button', { name: 'Balik kartu' }).click();
+  await expect(page.locator('[data-back]')).toBeVisible();
+  await page.getByRole('button', { name: 'Latihan menulis' }).click();
+  await expect(page.locator('[data-trace] svg').first()).toBeVisible();
+  await page.getByRole('button', { name: 'Ingat', exact: true }).click();
+  await expect(page.getByText(/2 \//)).toBeVisible();
+});
+
+test('My words opens Kartu kata N5 and Kartu kanji N5', async ({ page }) => {
+  await page.goto('/words/#deck');
+  await expect(page.getByRole('heading', { name: 'Kartu kata N5' })).toBeVisible();
+  await page.goto('/words/#kanji');
+  await expect(page.getByRole('heading', { name: 'Kartu kanji N5' })).toBeVisible();
+});

@@ -26,6 +26,8 @@ export type JaLessonData = {
   recentKanji: string[];
   /** Deck word ids of the glossary, which join the word deck when the lesson is done. */
   wordIds: string[];
+  /** Deck ids of the lesson's new kanji (k-<char>), which join the kanji deck when the lesson is done. */
+  kanjiIds: string[];
   /** The Kanji card: this lesson's new kanji. */
   kanjiCards: JaKanjiCard[];
   /** Tokyo accent numbers for the lesson's Bunyi words (plain spelling → accent), where known. */

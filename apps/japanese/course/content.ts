@@ -9,6 +9,8 @@ import { jaAudioKey, speechFallback, spokenJa } from '@/lib/ja/audio';
 import { adapter } from './adapter';
 import { answerText, itemText, itemTypes } from './items';
 import { wordFacts } from './words';
+// Circular (decks reads lessons through this module); used only inside functions, after both load.
+import { decksData, deckLevels, kanjiDeck, wordDeck, wordIdOf } from './decks';
 import { CurriculumSchema, DialogueSchema, KanaFileSchema, LessonFrontmatterSchema, NamesSchema, PlacementSchema, ReadingSchema, TestPoolSchema } from './schema';
 import { lintLessons, type LintData } from './lint';
 // Circular (audio reads lessons through this module); used only inside check.extra, after both load.
@@ -117,8 +119,19 @@ export const model: ContentModel = {
   yaml: 'json',
   meta: { title: 'id' },
   wordData: (summaries) => wordFacts(summaries),
-  // The kana grid, for KanaChart and KanaOrigins.
-  visualData: (ids) => (ids.has('kana-chart') || ids.has('kana-origins') ? { kana: getKana() } : {}),
+  // The words page's Kartu kata and Kartu kanji: one deck each per JLPT level with lessons.
+  wordsPageData: () => decksData(),
+  // Rung pages of a level with decks link to them.
+  rungData: (r) => {
+    const level = (r as unknown as Rung).jlpt;
+    if (!deckLevels().some((d) => d.level === level)) return null;
+    return { level, words: wordDeck(level).length, kanji: kanjiDeck(level).length };
+  },
+  // The kana grid for KanaChart and KanaOrigins; counter readings for Counters.
+  visualData: (ids) => ({
+    ...(ids.has('kana-chart') || ids.has('kana-origins') ? { kana: getKana() } : {}),
+    ...(ids.has('counters') ? { counters: getCounters() } : {}),
+  }),
   lessonData: (l): JaLessonData => {
     const lesson = jl(l);
     const recent = getLessons(lesson.rung, { includeDrafts: true })
@@ -129,7 +142,8 @@ export const model: ContentModel = {
       kanaNew: lesson.kana_new ?? [],
       rungKanji: kanjiUpTo(lesson.rung),
       recentKanji: [...new Set(recent)],
-      wordIds: [],
+      wordIds: lesson.glossary.flatMap((g) => wordIdOf(g) ?? []),
+      kanjiIds: (lesson.kanji ?? []).map((k) => `k-${k}`),
       kanjiCards: (lesson.kanji ?? []).map((k) => kanjiCard(k, lesson)),
       pitch: Object.fromEntries(
         (lesson.sound?.words ?? []).flatMap((w) => {
