@@ -171,3 +171,44 @@ jobs:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'deploy: Mandarin Ladder from ${{ github.repository }}@${{ github.sha }}'
+
+  # Japanese Ladder lives at https://andifathulms.github.io/japanese-ladder/: build apps/japanese with
+  # that base path and push apps/japanese/out to the gh-pages branch of andifathulms/japanese-ladder.
+  # Needs the JAPANESE_PAGES_DEPLOY_KEY secret (docs/DEPLOY.md).
+  deploy-japanese:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: [build, e2e]
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages-japanese
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Cache Japanese source fonts
+        uses: actions/cache@v4
+        with:
+          path: apps/japanese/fonts-src
+          key: fonts-src-ja-${{ hashFiles('apps/japanese/fonts.config.ts') }}
+      - run: npm run fonts:fetch -w japanese-ladder
+      - name: Build static site (apps/japanese)
+        run: npm run build:japanese
+        env:
+          NEXT_PUBLIC_BASE_PATH: /japanese-ladder
+          NEXT_PUBLIC_SHOW_DRAFTS: 'true'
+      - run: touch apps/japanese/out/.nojekyll
+      - name: Push to japanese-ladder gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.JAPANESE_PAGES_DEPLOY_KEY }}
+          external_repository: andifathulms/japanese-ladder
+          publish_branch: gh-pages
+          publish_dir: apps/japanese/out
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'deploy: Japanese Ladder from ${{ github.repository }}@${{ github.sha }}'

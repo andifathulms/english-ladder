@@ -4,13 +4,14 @@ Each app builds to `apps/<app>/out` with `output: 'export'` (fully static). Ever
 link and asset already works with and without a base path, so a course can live at a domain
 root or under a sub-path.
 
-Three courses ship from this repo (`.github/workflows/deploy.yml`):
+Four courses ship from this repo (`.github/workflows/deploy.yml`):
 
 | Course | Built with | Published to | Job |
 |---|---|---|---|
 | English Ladder | `NEXT_PUBLIC_BASE_PATH=/<this repo>` | this repo's Pages (Actions artifact) | `build` → `deploy` |
 | Arabic Ladder | `NEXT_PUBLIC_BASE_PATH=/arabic-ladder` | `gh-pages` branch of `andifathulms/arabic-ladder` | `deploy-arabic` (option B) |
 | Mandarin Ladder | `NEXT_PUBLIC_BASE_PATH=/mandarin-ladder` | `gh-pages` branch of `andifathulms/mandarin-ladder` | `deploy-mandarin` (option B) |
+| Japanese Ladder | `NEXT_PUBLIC_BASE_PATH=/japanese-ladder` | `gh-pages` branch of `andifathulms/japanese-ladder` | `deploy-japanese` (option B) |
 
 Arabic and Mandarin keep their live URLs (<https://andifathulms.github.io/arabic-ladder/>,
 <https://andifathulms.github.io/mandarin-ladder/>), so learners' bookmarks and their saved progress
@@ -67,6 +68,24 @@ The same six steps as Arabic, with Mandarin's names:
 
 To check a deploy: the service worker is `mandarin-ladder-v1.0.0` and Local storage still holds
 `mandarin-ladder:v1`.
+
+## One-time setup for Japanese Ladder (option B)
+
+The same steps as Mandarin, with Japanese's names. `japanese-ladder` is a new repo, so there is no old
+workflow to stop (step 6).
+
+1. `ssh-keygen -t ed25519 -C "ladder monorepo → japanese-ladder gh-pages" -f japanese_pages_key -N ""`
+2. `andifathulms/japanese-ladder` → Settings → Deploy keys: add `japanese_pages_key.pub` with
+   **Allow write access**.
+3. This repo → Actions secrets: `JAPANESE_PAGES_DEPLOY_KEY` = the private key. Delete both files.
+4. First publish: run the workflow on `main`; `deploy-japanese` creates `gh-pages` in
+   `japanese-ladder`.
+5. `japanese-ladder` → Settings → Pages → *Deploy from a branch*, `gh-pages`, `/ (root)`.
+
+To check a deploy: the service worker is `japanese-ladder-v0.1.0` and Local storage holds
+`japanese-ladder:v1`. Japanese's fonts are subset at build like Mandarin's (Klee One and Noto Sans
+JP, fetched by `npm run fonts:fetch -w japanese-ladder`); its KanjiVG stroke files are committed in
+`apps/japanese/public/strokes` (CC BY-SA 3.0).
 
 ### Mandarin's media in git
 
