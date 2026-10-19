@@ -18,7 +18,7 @@ examples:
   - { ja: "く[[つ]]", kana: "くつ", id: "sepatu", note: { id: "つ dibaca *tsu*: t dan s menyatu, cepat.", en: "つ is read *tsu*: t and s together, quickly." } }
   - { ja: "[[ち]]かい", kana: "ちかい", id: "dekat", note: { id: "ち dibaca *chi*, seperti *ci* di *cicak*.", en: "ち is read *chi*, like *ci* in Indonesian *cicak*." } }
   - { ja: "[[そ]]と", kana: "そと", id: "luar" }
-  - { ja: "た[[か]]い", kana: "たかい", id: "tinggi, mahal" }
+  - { ja: "[[た]]かい", kana: "たかい", id: "tinggi, mahal" }
 pair:
   off: { ja: "あち", kana: "あち" }
   natural: { ja: "あ[[さ]]", kana: "あさ" }

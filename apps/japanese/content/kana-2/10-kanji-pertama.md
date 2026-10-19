@@ -20,8 +20,8 @@ examples:
   - { ja: "[[{本|ほん}]] を よみます 。", kana: "ほん を よみます 。", id: "Saya membaca buku." }
   - { ja: "[[{毎日|まい|にち}]] がっこう へ いきます 。", kana: "まいにち がっこう へ いきます 。", id: "Setiap hari saya pergi ke sekolah.", note: { id: "日 di sini dibaca *nichi*; sendirian dibaca *hi*.", en: "日 is read *nichi* here; on its own it is *hi*." } }
 pair:
-  off: { ja: "{一|いち}つ", kana: "いちつ" }
-  natural: { ja: "[[{一|ひと}]]つ", kana: "ひとつ" }
+  off: { ja: "{人|じん}", kana: "じん" }
+  natural: { ja: "[[{人|ひと}]]", kana: "ひと" }
 tirukan: { ja: "{山|やま} と {川|かわ}", kana: "やま と かわ", id: "gunung dan sungai" }
 check:
   - id: k2-10-c1
@@ -85,7 +85,7 @@ Kanji adalah huruf ketiga bahasa Jepang: setiap kanji membawa arti, bukan hanya 
 Kanji are the third Japanese script: each kanji carries a meaning, not just a sound. Many early kanji began as pictures: 山 mountain, 川 river, 人 person, 口 mouth. On this rung every kanji always has furigana, the small reading above it.
 
 ## contrast.id
-Huruf Latin di bahasa Indonesia hampir selalu dibaca sama. Kanji tidak: 一 dibaca いち saat berhitung, tapi ひと di ひとつ. 日 dibaca にち di 毎日 dan び di 月曜日. Jangan menghafal satu bacaan saja; hafalkan kanji bersama katanya.
+Huruf Latin di bahasa Indonesia hampir selalu dibaca sama. Kanji tidak: 人 sendirian dibaca ひと, tapi じん di インドネシア人, jadi 人 sendirian sebagai じん terdengar aneh. 一 dibaca いち saat berhitung, tapi ひと di ひとつ. Hafalkan kanji bersama katanya, bukan satu bacaan saja.
 
 ## contrast.en
-Latin letters in Indonesian are nearly always read the same way. Kanji aren't: 一 is いち when counting, but ひと in ひとつ. 日 is にち in 毎日 and び in 月曜日. Don't learn just one reading; learn each kanji with its words.
+Latin letters in Indonesian are nearly always read the same way. Kanji aren't: 人 on its own is ひと, but じん in インドネシア人, so 人 alone as じん sounds odd. 一 is いち when counting, but ひと in ひとつ. Learn each kanji with its words, not just one reading.

@@ -17,7 +17,7 @@ examples:
   - { ja: "い[[ぬ]]", kana: "いぬ", id: "anjing" }
   - { ja: "[[は]]な", kana: "はな", id: "bunga, hidung" }
   - { ja: "[[ひ]]と", kana: "ひと", id: "orang" }
-  - { ja: "な[[つ]]", kana: "なつ", id: "musim panas" }
+  - { ja: "[[な]]つ", kana: "なつ", id: "musim panas" }
   - { ja: "[[ふ]]たつ", kana: "ふたつ", id: "dua (buah)", note: { id: "ふ: bibir hampir rapat, udara keluar lembut, seperti meniup lilin pelan.", en: "ふ: lips almost closed, a soft breath, like gently blowing out a candle." } }
 pair:
   off: { ja: "ほな", kana: "ほな" }
