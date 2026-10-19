@@ -77,6 +77,11 @@ describe('Japanese lint', () => {
     expect(run(lesson({ examples: [ex('{山川|やま|がわ} です 。', 'やまがわ です 。')] }))).toEqual([]);
   });
 
+  it('leaves the off half of a pair wrong on purpose, but still checks its kana', () => {
+    expect(run(lesson({ pair: { off: { ja: '{箱|ばこ}', kana: 'ばこ' }, natural: { ja: '{箱|はこ}', kana: 'はこ' } } }))).toEqual([]);
+    expect(run(lesson({ pair: { off: { ja: '{箱|ばこ}', kana: 'はこ' }, natural: { ja: '{箱|はこ}', kana: 'はこ' } } }))).toContain('error: pair.off: kana "はこ" ≠ the ruby readings "ばこ"');
+  });
+
   it('takes counter readings from counters.yaml', () => {
     expect(run(lesson({ examples: [ex('{三本|さん|ほん} です 。', 'さんほん です 。')] }))).toContain('warn: example 1: 三本 is read さんぼん, not さんほん');
   });

@@ -181,7 +181,8 @@ export function lintLessons(rungs: Rung[], byRung: Map<string, Lesson[]>, data: 
           if (LATIN.test(line.kana)) err(`${line.what}: Latin letters in kana (romaji is never authored)`);
           if (toKana(line.ja) !== line.kana.trim().replace(/\s+/g, ' ')) err(`${line.what}: kana "${line.kana}" ≠ the ruby readings "${toKana(line.ja)}"`);
         }
-        for (const w of words) for (const m of checkWordReadings(w, data)) rule(`${line.what}: ${m}`);
+        // The off half of a pair is wrong on purpose (いちつ for 一つ): only its markup and kana are checked.
+        if (line.what !== 'pair.off') for (const w of words) for (const m of checkWordReadings(w, data)) rule(`${line.what}: ${m}`);
         // Counters: readings come from counters.yaml only.
         for (const w of words) {
           const m = /^([一二三四五六七八九十])([本枚匹冊個人時分円])$/u.exec(w.plain);
