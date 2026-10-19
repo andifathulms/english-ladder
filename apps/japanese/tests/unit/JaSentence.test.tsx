@@ -54,4 +54,18 @@ describe('JaSentence', () => {
     const none = mount({ furigana: '—', romaji: 'hide' }, 'わたし は がくせい です 。');
     expect(none.querySelectorAll('[lang="ja-Latn"]')).toHaveLength(0);
   });
+
+  it('keeps punctuation with its word, so 。 never starts a line (romaji on or off)', () => {
+    for (const romaji of ['show', 'hide'] as const) {
+      const c = mount({ furigana: 'always', romaji }, 'わたし は ほん を よみます 。');
+      const words = [...c.querySelectorAll('p[lang="ja"] > .ja-word')];
+      expect(words).toHaveLength(5);
+      expect(words[4].textContent).toMatch(/^よみます.*。$/u);
+      expect(words[4].querySelector('.whitespace-nowrap')).not.toBeNull();
+    }
+    // An opening bracket sits with the word after it.
+    const q = mount({ furigana: 'always' }, '「 はい 」 と いいます 。');
+    const first = q.querySelector('p[lang="ja"] > .ja-word')!;
+    expect(first.textContent).toBe('「はい」');
+  });
 });

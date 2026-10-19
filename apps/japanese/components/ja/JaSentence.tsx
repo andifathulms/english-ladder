@@ -30,6 +30,9 @@ type Props = {
   className?: string;
 };
 
+/** Opening brackets sit with the word after them; every other punctuation mark with the word before. */
+const OPENERS = /^[「『（(]+$/u;
+
 const SIZE: Record<JaSize, string> = {
   sentence: 'text-ja-sentence font-semibold',
   body: 'text-ja-body',
@@ -97,12 +100,27 @@ export function JaSentence({ ja, id, en, size = 'sentence', play = true, note, o
   const anyRomaji = ctx.romaji !== 'hide' && !off;
   const hasKanji = kanjiOf(plain).length > 0;
 
+  // Which word a punctuation token sits with: an opener (「『（) with the next word, others with the
+  // word before. A token with no word to attach to renders on its own.
+  const attachedTo = (j: number): number => {
+    const w = words[j];
+    if (!w?.isPunct) return j;
+    if (OPENERS.test(w.plain)) return words[j + 1] && !words[j + 1].isPunct ? j + 1 : j;
+    let k = j - 1;
+    while (k >= 0 && words[k].isPunct) k--;
+    return k >= 0 ? k : j;
+  };
   const line = (
     <p
       lang="ja"
       className={`ja-line ja font-ja ${SIZE[size]} ${off ? 'off-text' : 'text-ink'} ${size === 'glyph' ? 'text-center' : ''} min-w-0`}
     >
       {words.map((w, i) => {
+        // Punctuation never starts a line (kinsoku): it renders inside its word's no-wrap span.
+        if (w.isPunct && attachedTo(i) !== i) return null;
+        const before = OPENERS.test(words[i - 1]?.plain ?? '') && attachedTo(i - 1) === i ? <Furigana word={words[i - 1]} visible={visible(i - 1)} /> : null;
+        const after: React.ReactNode[] = [];
+        for (let j = i + 1; j < words.length && words[j].isPunct && attachedTo(j) === i; j++) after.push(<Furigana key={j} word={words[j]} visible={visible(j)} />);
         const focus = w.segs.some((s) => s.focus) && !off;
         const cls = [focus ? 'ja-focus' : '', spokenIdx === i ? 'ja-speaking' : ''].filter(Boolean).join(' ');
         const holdProps = canHold
@@ -124,7 +142,7 @@ export function JaSentence({ ja, id, en, size = 'sentence', play = true, note, o
           : {};
         const romaji = romajiFor(w);
         const text = <Furigana word={w} visible={visible(i)} />;
-        const body = anyRomaji && !w.isPunct ? (
+        const core = anyRomaji && !w.isPunct ? (
           <span className="inline-flex flex-col items-center align-top">
             <span>{text}</span>
             <span lang="ja-Latn" className={`romaji font-normal leading-tight ${romaji ? '' : 'invisible'}`} aria-hidden={romaji ? undefined : true}>
@@ -133,6 +151,15 @@ export function JaSentence({ ja, id, en, size = 'sentence', play = true, note, o
           </span>
         ) : (
           text
+        );
+        const body = before || after.length ? (
+          <span className="whitespace-nowrap">
+            {before}
+            {core}
+            {after}
+          </span>
+        ) : (
+          core
         );
         const sep = i > 0 && !w.isPunct ? <wbr /> : null;
         if (focus && noteText) {
