@@ -63,6 +63,7 @@ glossary:
   - { ja: "あお", kana: "あお", id: "biru", en: "blue", type: noun, jlpt: N5 }
   - { ja: "え", kana: "え", id: "gambar", en: "picture", type: noun, jlpt: N5 }
   - { ja: "あう", kana: "あう", id: "bertemu", en: "to meet", type: verb-1, jlpt: N5 }
+next: kana1-02-baris-ka
 ---
 
 ## concept.id
