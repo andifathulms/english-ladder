@@ -106,7 +106,7 @@ function BeatRow({ word, pair, lang, t }: { word: Word; pair: boolean; lang: 'id
       </button>
       <div className="flex min-w-0 flex-col gap-1">
         {/* One line of blocks, so the rows of a pair line up beat for beat. */}
-        <span className="flex items-center gap-2 overflow-x-auto">
+        <span className="flex flex-wrap items-center gap-2">
           <span role="img" aria-label={`${label} · ${meaning}`} className="flex shrink-0 flex-nowrap items-center gap-[4px]">
             {bs.map((b, i) => (
               <BeatBlock key={i} b={b} lit={i === lit} />
@@ -132,7 +132,7 @@ function BeatBlock({ b, lit }: { b: Block; lit: boolean }) {
       lang="ja"
       data-beats={b.beats}
       data-kind={b.kind}
-      className={`ja flex shrink-0 items-center justify-center rounded-[6px] font-ja text-ja-body leading-none transition-colors duration-quick ${lit ? 'bg-accent-soft' : 'bg-beat'}`}
+      className={`ja flex shrink-0 items-center justify-center overflow-hidden rounded-[6px] font-ja text-ja-body leading-none transition-colors duration-quick ${lit ? 'bg-accent-soft' : 'bg-beat'}`}
       style={{ height: 'var(--beat-w)', width: b.beats === 2 ? 'calc(var(--beat-w) * 2 + 4px)' : 'var(--beat-w)', ...hatch }}
     >
       {b.text}
