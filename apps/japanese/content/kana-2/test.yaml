@@ -1,0 +1,61 @@
+# Kana 2 rung test (PRD §5.5): draw 14 of 28, pass 11, at least one item from every lesson.
+# Pitch items play recordings only. Ids are permanent.
+# Draft: written by Claude, to be checked by a Japanese teacher (docs/japanese/human-tasks.md H1).
+rung: kana-2
+draw: 14
+pass: 11
+items:
+  # 1 · why katakana
+  - { id: k2-t-01, from: kana2-01-kenapa-katakana, type: choice, cue: "Kata ini ditulis dengan huruf apa?", prompt: "ホテル", options: [katakana, hiragana, kanji], answer: katakana, why: { id: "Kata serapan ditulis katakana.", en: "Loanwords are written in katakana." } }
+  - { id: k2-t-02, from: kana2-01-kenapa-katakana, type: listen, audio: "テレビ", options: [テレビ, ラジオ, カメラ], answer: テレビ, why: { id: "テレビ: te-re-bi.", en: "テレビ: te-re-bi." } }
+  - { id: k2-t-03, from: kana2-01-kenapa-katakana, type: choice, prompt: "パン", options: [roti, pena, kopi], answer: roti, why: { id: "パン artinya roti.", en: "パン means bread." } }
+  # 2 · ア–ソ
+  - { id: k2-t-04, from: kana2-02-a-so, type: listen, audio: "kana-ケ", options: [ケ, ク, キ], answer: ケ, why: { id: "ケ: ke.", en: "ケ: ke." } }
+  - { id: k2-t-05, from: kana2-02-a-so, type: choice, prompt: "イカ", options: [cumi-cumi, es krim, kiwi], answer: cumi-cumi, why: { id: "イカ artinya cumi-cumi.", en: "イカ means squid." } }
+  - { id: k2-t-06, from: kana2-02-a-so, type: kana, audio: "アイス", answer: アイス, script: katakana, why: { id: "アイス: a-i-su.", en: "アイス: a-i-su." } }
+  # 3 · タ–ホ
+  - { id: k2-t-07, from: kana2-03-ta-ho, type: listen, audio: "kana-ツ", options: [ツ, シ, ソ], answer: ツ, why: { id: "ツ: tsu.", en: "ツ: tsu." } }
+  - { id: k2-t-08, from: kana2-03-ta-ho, type: choice, prompt: "ネクタイ", options: [dasi, pisau, tenis], answer: dasi, why: { id: "ネクタイ artinya dasi.", en: "ネクタイ means necktie." } }
+  - { id: k2-t-09, from: kana2-03-ta-ho, type: order, prompt: "Susun kata *ujian*.", tiles: [ト, ス, テ], answer: [テ, ス, ト], why: { id: "テスト: te-su-to.", en: "テスト: te-su-to." } }
+  # 4 · マ–ン
+  - { id: k2-t-10, from: kana2-04-ma-n, type: listen, audio: "kana-シ", options: [シ, ツ, ン], answer: シ, why: { id: "シ: shi. Titiknya di kiri.", en: "シ: shi. Its dots are on the left." } }
+  - { id: k2-t-11, from: kana2-04-ma-n, type: choice, prompt: "トイレ", options: [toilet, hotel, kelas], answer: toilet, why: { id: "トイレ artinya toilet.", en: "トイレ means toilet." } }
+  - { id: k2-t-12, from: kana2-04-ma-n, type: kana, audio: "カメラ", answer: カメラ, script: katakana, why: { id: "カメラ: ka-me-ra.", en: "カメラ: ka-me-ra." } }
+  # 5 · ー and dakuten
+  - { id: k2-t-13, from: kana2-05-tanda-panjang, type: mora, audio: "ノート", ask: count, options: ["2", "3", "4"], answer: "3", why: { id: "ノ-ー-ト: tiga ketukan.", en: "ノ-ー-ト: three beats." } }
+  - { id: k2-t-14, from: kana2-05-tanda-panjang, type: listen, audio: "ペン", options: [ペン, ベン, ヘン], answer: ペン, why: { id: "ペン: lingkaran kecil, bunyi p.", en: "ペン: the small circle, a p sound." } }
+  - { id: k2-t-15, from: kana2-05-tanda-panjang, type: choice, prompt: "デパート", options: [toserba, apartemen, hotel], answer: toserba, why: { id: "デパート artinya toserba.", en: "デパート means department store." } }
+  # 6 · extended katakana
+  - { id: k2-t-16, from: kana2-06-katakana-tambahan, type: listen, audio: "kana-ファ", options: [ファ, ハ, フ], answer: ファ, why: { id: "ファ: fa.", en: "ファ: fa." } }
+  - { id: k2-t-17, from: kana2-06-katakana-tambahan, type: choice, prompt: "シャワー", options: [pancuran, kemeja, saku], answer: pancuran, why: { id: "シャワー artinya pancuran.", en: "シャワー means shower." } }
+  - { id: k2-t-18, from: kana2-06-katakana-tambahan, type: mora, audio: "ベッド", ask: spelling, options: [ベド, ベッド, ベード], answer: ベッド, why: { id: "Ada jeda sebelum ド: ベッド.", en: "There's a pause before ド: ベッド." } }
+  # 7 · loanwords
+  - { id: k2-t-19, from: kana2-07-kata-serapan, type: choice, prompt: "アルバイト", options: [kerja paruh waktu, toko, kantor], answer: kerja paruh waktu, why: { id: "アルバイト: kerja paruh waktu.", en: "アルバイト: part-time job." } }
+  - { id: k2-t-20, from: kana2-07-kata-serapan, type: choice, prompt: "Bahasa Jepang untuk *minimarket*?", options: [コンビニ, スーパー, デパート], answer: コンビニ, why: { id: "Minimarket: コンビニ. スーパー supermarket, デパート toserba.", en: "Convenience store: コンビニ. スーパー is a supermarket, デパート a department store." } }
+  - { id: k2-t-21, from: kana2-07-kata-serapan, type: kana, audio: "スマホ", answer: スマホ, script: katakana, why: { id: "スマホ: su-ma-ho.", en: "スマホ: su-ma-ho." } }
+  # 8 · mora rhythm
+  - { id: k2-t-22, from: kana2-08-ketukan, type: mora, audio: "スプーン", ask: count, options: ["3", "4", "5"], answer: "4", why: { id: "ス-プ-ー-ン: empat ketukan.", en: "ス-プ-ー-ン: four beats." } }
+  - { id: k2-t-23, from: kana2-08-ketukan, type: mora, audio: "きって", ask: count, options: ["2", "3", "4"], answer: "3", why: { id: "き-っ-て: tiga ketukan.", en: "き-っ-て: three beats." } }
+  - { id: k2-t-24, from: kana2-08-ketukan, type: mora, audio: "カレンダー", ask: spelling, options: [カレンダ, カレンダー, カーレンダー], answer: カレンダー, why: { id: "Hanya vokal terakhir yang panjang: カレンダー.", en: "Only the last vowel is long: カレンダー." } }
+  # 9 · pitch
+  - id: k2-t-25
+    from: kana2-09-aksen-nada
+    type: pitch
+    audio: "{橋|はし}"
+    pair:
+      - { ja: "{橋|はし}", kana: "はし", pitch: 2, id: "jembatan", en: "bridge" }
+      - { ja: "{箸|はし}", kana: "はし", pitch: 1, id: "sumpit", en: "chopsticks" }
+    answer: jembatan
+    why: { id: "Rendah lalu tinggi: はし jembatan.", en: "Low then high: はし, bridge." }
+  - id: k2-t-26
+    from: kana2-09-aksen-nada
+    type: pitch
+    audio: "{雨|あめ}"
+    pair:
+      - { ja: "{雨|あめ}", kana: "あめ", pitch: 1, id: "hujan", en: "rain" }
+      - { ja: "{飴|あめ}", kana: "あめ", pitch: 0, id: "permen", en: "candy" }
+    answer: hujan
+    why: { id: "Tinggi lalu rendah: あめ hujan.", en: "High then low: あめ, rain." }
+  # 10 · first kanji
+  - { id: k2-t-27, from: kana2-10-kanji-pertama, type: choice, prompt: "口", furigana: false, options: [mulut, gunung, orang], answer: mulut, why: { id: "口 (くち): mulut.", en: "口 (くち): mouth." } }
+  - { id: k2-t-28, from: kana2-10-kanji-pertama, type: kana, ja: "山", furigana: false, answer: やま, why: { id: "山 dibaca やま: gunung.", en: "山 is read やま: mountain." } }

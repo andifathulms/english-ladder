@@ -1,0 +1,46 @@
+# Kana 2 capstone: Baca dan dengar (PRD §5.5): a short kana text using only what Kana 1–2 taught
+# (polite ます/です, は を へ で が), with the first kanji ruby'd. Item ids are permanent. Draft.
+rung: kana-2
+title: { id: "Sehari Rina", en: "Rina's day", ja: "リナ さん の まいにち", kana: "リナ さん の まいにち" }
+lines:
+  - { ja: "わたし は リナ です 。", kana: "わたし は リナ です 。", id: "Saya Rina.", en: "I'm Rina." }
+  - { ja: "インドネシア{人|じん} です 。", kana: "インドネシアじん です 。", id: "Saya orang Indonesia.", en: "I'm Indonesian." }
+  - { ja: "{毎日|まい|にち} でんしゃ で かいしゃ へ いきます 。", kana: "まいにち でんしゃ で かいしゃ へ いきます 。", id: "Setiap hari saya pergi ke kantor naik kereta.", en: "Every day I go to work by train." }
+  - { ja: "あさ 、 コンビニ で パン と コーヒー を かいます 。", kana: "あさ 、 コンビニ で パン と コーヒー を かいます 。", id: "Pagi hari saya membeli roti dan kopi di minimarket.", en: "In the morning I buy bread and coffee at the convenience store." }
+  - { ja: "ひる は レストラン で カレー を たべます 。", kana: "ひる は レストラン で カレー を たべます 。", id: "Siang hari saya makan kari di restoran.", en: "At noon I eat curry at a restaurant." }
+  - { ja: "よる は テレビ を みます 。", kana: "よる は テレビ を みます 。", id: "Malam hari saya menonton televisi.", en: "In the evening I watch TV." }
+  - { ja: "にほん の テレビ は ちょっと むずかしい です 。", kana: "にほん の テレビ は ちょっと むずかしい です 。", id: "Televisi Jepang agak sulit.", en: "Japanese TV is a little difficult." }
+  - { ja: "でも 、 たのしい です 。", kana: "でも 、 たのしい です 。", id: "Tapi menyenangkan.", en: "But it's fun." }
+glossary:
+  - { ja: "カレー", kana: "カレー", id: "kari", en: "curry", type: noun, jlpt: N5 }
+  - { ja: "たべる", kana: "たべる", id: "makan", en: "to eat", type: verb-2, jlpt: N5 }
+  - { ja: "みる", kana: "みる", id: "melihat, menonton", en: "to see, to watch", type: verb-2, jlpt: N5 }
+  - { ja: "むずかしい", kana: "むずかしい", id: "sulit", en: "difficult", type: adj-i, jlpt: N5 }
+  - { ja: "たのしい", kana: "たのしい", id: "menyenangkan", en: "fun", type: adj-i, jlpt: N5 }
+  - { ja: "ひる", kana: "ひる", id: "siang", en: "noon", type: noun, jlpt: N5 }
+  - { ja: "でも", kana: "でも", id: "tapi", en: "but", type: other, jlpt: N5 }
+items:
+  - id: rd-k2-c1
+    type: choice
+    prompt: "Rina orang mana?"
+    options: [orang Indonesia, orang Jepang, orang Thailand]
+    answer: orang Indonesia
+    why: { id: "インドネシア人 です: saya orang Indonesia.", en: "インドネシア人 です: I'm Indonesian." }
+  - id: rd-k2-c2
+    type: choice
+    prompt: "Apa yang Rina beli di minimarket pagi hari?"
+    options: ["パン と コーヒー", "カレー", "おちゃ"]
+    answer: "パン と コーヒー"
+    why: { id: "コンビニ で パン と コーヒー を かいます: roti dan kopi.", en: "コンビニ で パン と コーヒー を かいます: bread and coffee." }
+  - id: rd-k2-c3
+    type: listen
+    audio: "よる は テレビ を みます 。"
+    options: ["よる は テレビ を みます 。", "あさ は テレビ を みます 。", "よる は ラジオ を ききます 。"]
+    answer: "よる は テレビ を みます 。"
+    why: { id: "よる: malam. テレビ を みます: menonton televisi.", en: "よる: evening. テレビ を みます: watch TV." }
+  - id: rd-k2-c4
+    type: choice
+    prompt: "Menurut Rina, televisi Jepang..."
+    options: ["agak sulit, tapi menyenangkan", "mudah dan menyenangkan", "membosankan"]
+    answer: "agak sulit, tapi menyenangkan"
+    why: { id: "ちょっと むずかしい です。でも、たのしい です。", en: "ちょっと むずかしい です。でも、たのしい です。" }

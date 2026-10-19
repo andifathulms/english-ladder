@@ -1,0 +1,45 @@
+# Kana 1 rung test (PRD §5.5): draw 14 of 28, pass 11, at least one item from every lesson.
+# No tracing in the test (it is graded only in lessons). Ids are permanent.
+# Draft: written by Claude, to be checked by a Japanese teacher (docs/japanese/human-tasks.md H1).
+rung: kana-1
+draw: 14
+pass: 11
+items:
+  # 1 · vowels
+  - { id: k1-t-01, from: kana1-01-lima-vokal, type: listen, audio: "kana-う", options: [あ, う, お], answer: う, why: { id: "う: u, bibir tidak terlalu bulat.", en: "う: u, lips not too rounded." } }
+  - { id: k1-t-02, from: kana1-01-lima-vokal, type: choice, prompt: "あお", options: [biru, rumah, atas], answer: biru, why: { id: "あお artinya biru.", en: "あお means blue." } }
+  - { id: k1-t-03, from: kana1-01-lima-vokal, type: kana, audio: "うえ", answer: うえ, why: { id: "うえ: u-e, atas.", en: "うえ: u-e, above." } }
+  # 2 · か row
+  - { id: k1-t-04, from: kana1-02-baris-ka, type: listen, audio: "kana-け", options: [け, き, こ], answer: け, why: { id: "け: ke.", en: "け: ke." } }
+  - { id: k1-t-05, from: kana1-02-baris-ka, type: choice, prompt: "えき", options: [stasiun, kolam, wajah], answer: stasiun, why: { id: "えき artinya stasiun.", en: "えき means station." } }
+  - { id: k1-t-06, from: kana1-02-baris-ka, type: order, prompt: "Susun kata *wajah*.", tiles: [お, か], answer: [か, お], why: { id: "かお: ka-o.", en: "かお: ka-o." } }
+  # 3 · さ and た rows
+  - { id: k1-t-07, from: kana1-03-baris-sa-ta, type: listen, audio: "kana-し", options: [し, す, ち], answer: し, why: { id: "し dibaca *shi*.", en: "し is read *shi*." } }
+  - { id: k1-t-08, from: kana1-03-baris-sa-ta, type: choice, prompt: "そと", options: [luar, bawah, pagi], answer: luar, why: { id: "そと artinya luar.", en: "そと means outside." } }
+  - { id: k1-t-09, from: kana1-03-baris-sa-ta, type: kana, audio: "かさ", answer: かさ, why: { id: "かさ: ka-sa, payung.", en: "かさ: ka-sa, umbrella." } }
+  # 4 · な and は rows
+  - { id: k1-t-10, from: kana1-04-baris-na-ha, type: listen, audio: "kana-ね", options: [ね, ぬ, の], answer: ね, why: { id: "ね: ne.", en: "ね: ne." } }
+  - { id: k1-t-11, from: kana1-04-baris-na-ha, type: choice, prompt: "いぬ", options: [anjing, kucing, orang], answer: anjing, why: { id: "いぬ artinya anjing.", en: "いぬ means dog." } }
+  - { id: k1-t-12, from: kana1-04-baris-na-ha, type: kana, audio: "はこ", answer: はこ, why: { id: "はこ: ha-ko, kotak.", en: "はこ: ha-ko, box." } }
+  # 5 · ま, や and ら rows
+  - { id: k1-t-13, from: kana1-05-baris-ma-ya-ra, type: listen, audio: "kana-ろ", options: [ろ, る, ら], answer: ろ, why: { id: "ろ: ro.", en: "ろ: ro." } }
+  - { id: k1-t-14, from: kana1-05-baris-ma-ya-ra, type: choice, prompt: "ゆき", options: [salju, hujan, malam], answer: salju, why: { id: "ゆき artinya salju.", en: "ゆき means snow." } }
+  - { id: k1-t-15, from: kana1-05-baris-ma-ya-ra, type: order, prompt: "Susun kata *malam*.", tiles: [る, よ], answer: [よ, る], why: { id: "よる: yo-ru.", en: "よる: yo-ru." } }
+  # 6 · わ を ん and particles
+  - { id: k1-t-16, from: kana1-06-wa-wo-n, type: gap, cue: "Saya membaca buku.", prompt: "わたし ___ ほん を よみます 。", options: [は, わ, へ], answer: は, why: { id: "Partikel topik ditulis は, dibaca *wa*.", en: "The topic particle is written は, said *wa*." } }
+  - { id: k1-t-17, from: kana1-06-wa-wo-n, type: gap, cue: "Saya pergi ke sungai.", prompt: "かわ ___ いきます 。", options: [へ, え, は], answer: へ, why: { id: "Arah ditulis へ, dibaca *e*.", en: "Direction is written へ, said *e*." } }
+  - { id: k1-t-18, from: kana1-06-wa-wo-n, type: kana, audio: "てんき", answer: てんき, why: { id: "てんき: te-n-ki, cuaca.", en: "てんき: te-n-ki, weather." } }
+  # 7 · dakuten
+  - { id: k1-t-19, from: kana1-07-dakuten, type: listen, audio: "kana-ぱ", options: [ぱ, ば, は], answer: ぱ, why: { id: "ぱ: lingkaran kecil, bunyi p.", en: "ぱ: the small circle, a p sound." } }
+  - { id: k1-t-20, from: kana1-07-dakuten, type: choice, prompt: "でんわ", options: [telepon, surat, tas], answer: telepon, why: { id: "でんわ artinya telepon.", en: "でんわ means telephone." } }
+  - { id: k1-t-21, from: kana1-07-dakuten, type: kana, audio: "かばん", answer: かばん, why: { id: "かばん: ka-ba-n, tas.", en: "かばん: ka-ba-n, bag." } }
+  # 8 · small ゃ ゅ ょ
+  - { id: k1-t-22, from: kana1-08-kana-kecil, type: listen, audio: "kana-きょ", options: [きょ, きよ, こ], answer: きょ, why: { id: "きょ: satu ketukan, *kyo*.", en: "きょ: one beat, *kyo*." } }
+  - { id: k1-t-23, from: kana1-08-kana-kecil, type: mora, audio: "でんしゃ", ask: count, options: ["3", "4", "5"], answer: "3", why: { id: "で-ん-しゃ: tiga ketukan.", en: "で-ん-しゃ: three beats." } }
+  - { id: k1-t-24, from: kana1-08-kana-kecil, type: choice, prompt: "じしょ", options: [kamus, dokter, foto], answer: kamus, why: { id: "じしょ artinya kamus.", en: "じしょ means dictionary." } }
+  # 9 · long vowels and っ
+  - { id: k1-t-25, from: kana1-09-panjang-dan-tsu, type: mora, audio: "おじさん", ask: spelling, options: [おじさん, おじいさん, おっじさん], answer: おじさん, why: { id: "Tidak ada vokal panjang: おじさん, paman.", en: "No long vowel: おじさん, uncle." } }
+  - { id: k1-t-26, from: kana1-09-panjang-dan-tsu, type: mora, audio: "ざっし", ask: count, options: ["2", "3", "4"], answer: "3", why: { id: "ざ-っ-し: tiga ketukan.", en: "ざ-っ-し: three beats." } }
+  # 10 · reading
+  - { id: k1-t-27, from: kana1-10-membaca, type: choice, prompt: "ともだち と おちゃ を のみます 。", options: [Saya minum teh dengan teman., Saya minum air dengan teman., Saya membaca buku dengan teman.], answer: Saya minum teh dengan teman., why: { id: "ともだち: teman. おちゃ: teh.", en: "ともだち: friend. おちゃ: tea." } }
+  - { id: k1-t-28, from: kana1-10-membaca, type: order, cue: "Saya pelajar.", tiles: [です, がくせい, は, わたし], answer: [わたし, は, がくせい, です], why: { id: "わたし は がくせい です: です di akhir.", en: "わたし は がくせい です: です at the end." } }

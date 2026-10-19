@@ -1,0 +1,33 @@
+# Cek kana (PRD §5.2): 20 items, no feedback until the end.
+# 17+ → Easy 1 (Kana 1 and 2 climbed); 12–16 → Kana 2 (Kana 1 climbed); under 12 → Kana 1.
+# Sections: hiragana 6, katakana 4, dakuten and small kana 3, by ear 3, typing 2, kanji 2.
+# Ear items are minimal pairs: recordings only. Ids are permanent.
+# Draft: written by Claude, to be checked by a Japanese teacher (docs/japanese/human-tasks.md H1).
+thresholds: { easy1: 17, kana2: 12 }
+items:
+  # ---------- hiragana (6) ----------
+  - { id: pl-01, section: hiragana, from: kana1-04-baris-na-ha, type: choice, prompt: "さかな", options: [ikan, kucing, buku], answer: ikan, why: { id: "さかな artinya ikan.", en: "さかな means fish." } }
+  - { id: pl-02, section: hiragana, from: kana1-05-baris-ma-ya-ra, type: choice, prompt: "やま", options: [gunung, sungai, malam], answer: gunung, why: { id: "やま artinya gunung.", en: "やま means mountain." } }
+  - { id: pl-03, section: hiragana, from: kana1-03-baris-sa-ta, type: choice, prompt: "つくえ", options: [meja, kursi, sepatu], answer: meja, why: { id: "つくえ artinya meja belajar.", en: "つくえ means desk." } }
+  - { id: pl-04, section: hiragana, from: kana1-05-baris-ma-ya-ra, type: choice, prompt: "ふゆ", options: [musim dingin, musim panas, musim semi], answer: musim dingin, why: { id: "ふゆ artinya musim dingin.", en: "ふゆ means winter." } }
+  - { id: pl-05, section: hiragana, from: kana1-03-baris-sa-ta, type: choice, prompt: "ちかい", options: [dekat, tinggi, dingin], answer: dekat, why: { id: "ちかい artinya dekat.", en: "ちかい means near." } }
+  - { id: pl-06, section: hiragana, from: kana1-10-membaca, type: choice, prompt: "わたし は がくせい です 。", options: [Saya pelajar., Saya guru., Saya dokter.], answer: Saya pelajar., why: { id: "がくせい artinya pelajar.", en: "がくせい means student." } }
+  # ---------- katakana (4) ----------
+  - { id: pl-07, section: katakana, from: kana2-05-tanda-panjang, type: choice, prompt: "コーヒー", options: [kopi, teh, susu], answer: kopi, why: { id: "コーヒー artinya kopi.", en: "コーヒー means coffee." } }
+  - { id: pl-08, section: katakana, from: kana2-01-kenapa-katakana, type: choice, prompt: "レストラン", options: [restoran, hotel, toilet], answer: restoran, why: { id: "レストラン artinya restoran.", en: "レストラン means restaurant." } }
+  - { id: pl-09, section: katakana, from: kana2-06-katakana-tambahan, type: choice, prompt: "シャツ", options: [kemeja, saku, sepatu], answer: kemeja, why: { id: "シャツ artinya kemeja.", en: "シャツ means shirt." } }
+  - { id: pl-10, section: katakana, from: kana2-04-ma-n, type: choice, prompt: "トイレ", options: [toilet, kamera, kelas], answer: toilet, why: { id: "トイレ artinya toilet.", en: "トイレ means toilet." } }
+  # ---------- dakuten and small kana (3) ----------
+  - { id: pl-11, section: dakuten, from: kana1-07-dakuten, type: choice, prompt: "かぎ", options: [kunci, angin, tas], answer: kunci, why: { id: "かぎ artinya kunci.", en: "かぎ means key." } }
+  - { id: pl-12, section: dakuten, from: kana1-08-kana-kecil, type: choice, prompt: "でんしゃ", options: [kereta, telepon, perusahaan], answer: kereta, why: { id: "でんしゃ artinya kereta.", en: "でんしゃ means train." } }
+  - { id: pl-13, section: dakuten, from: kana1-08-kana-kecil, type: choice, prompt: "じしょ", options: [kamus, dokter, foto], answer: kamus, why: { id: "じしょ artinya kamus.", en: "じしょ means dictionary." } }
+  # ---------- long vowels and っ by ear (3) ----------
+  - { id: pl-14, section: ear, from: kana1-09-panjang-dan-tsu, type: mora, audio: "おばあさん", ask: spelling, options: [おばさん, おばあさん], answer: おばあさん, why: { id: "あ panjang: おばあさん, nenek.", en: "A long a: おばあさん, grandmother." } }
+  - { id: pl-15, section: ear, from: kana1-09-panjang-dan-tsu, type: mora, audio: "きって", ask: spelling, options: [きて, きって], answer: きって, why: { id: "Ada jeda sebelum て: きって, perangko.", en: "A pause before て: きって, stamp." } }
+  - { id: pl-16, section: ear, from: kana1-08-kana-kecil, type: mora, audio: "びょういん", ask: spelling, options: [びょういん, びよういん], answer: びょういん, why: { id: "ょ kecil: びょういん, rumah sakit.", en: "A small ょ: びょういん, hospital." } }
+  # ---------- typing a heard word (2) ----------
+  - { id: pl-17, section: typing, from: kana1-09-panjang-dan-tsu, type: kana, audio: "がっこう", answer: がっこう, why: { id: "がっこう: ketik *gakkou*.", en: "がっこう: type *gakkou*." } }
+  - { id: pl-18, section: typing, from: kana2-05-tanda-panjang, type: kana, audio: "コーヒー", answer: コーヒー, script: katakana, why: { id: "コーヒー: ketik *ko-hi-*.", en: "コーヒー: type *ko-hi-*." } }
+  # ---------- two basic kanji (2) ----------
+  - { id: pl-19, section: kanji, from: kana2-10-kanji-pertama, type: choice, prompt: "山", furigana: false, options: [gunung, sungai, orang], answer: gunung, why: { id: "山 (やま): gunung.", en: "山 (やま): mountain." } }
+  - { id: pl-20, section: kanji, from: kana2-10-kanji-pertama, type: choice, prompt: "人", furigana: false, options: [orang, mulut, buku], answer: orang, why: { id: "人 (ひと): orang.", en: "人 (ひと): person." } }
