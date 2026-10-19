@@ -1,0 +1,48 @@
+# Easy 1 capstone: Baca dan dengar (PRD §5.5). Only Easy 1 grammar: は です, か, の, numbers, time,
+# ます, へ, を/で (place of action), ました, い/な adjectives, and と (with). Every kanji has ruby. Ids are permanent.
+# Draft: written by Claude, to be checked by a Japanese teacher (docs/japanese/human-tasks.md H1).
+rung: easy-1
+title: { id: "Seminggu Andi", en: "Andi's week", ja: "アンディ さん の {一週間|いっ|しゅう|かん}", kana: "アンディ さん の いっしゅうかん" }
+lines:
+  - { ja: "わたし は アンディ です 。 インドネシア{人|じん} です 。", kana: "わたし は アンディ です 。 インドネシアじん です 。", id: "Saya Andi. Saya orang Indonesia.", en: "I'm Andi. I'm Indonesian." }
+  - { ja: "{今|いま} {大阪|おお|さか} の {工場|こう|じょう} で はたらきます 。", kana: "いま おおさか の こうじょう で はたらきます 。", id: "Sekarang saya bekerja di pabrik di Osaka.", en: "I now work at a factory in Osaka." }
+  - { ja: "{毎日|まい|にち} {工場|こう|じょう} へ {行|い}きます 。 {仕事|し|ごと} は {八時|はち|じ} {半|はん} です 。", kana: "まいにち こうじょう へ いきます 。 しごと は はちじ はん です 。", id: "Setiap hari saya pergi ke pabrik. Kerjanya jam setengah sembilan.", en: "Every day I go to the factory. Work is at half past eight." }
+  - { ja: "{昼|ひる} は {食堂|しょく|どう} で カレー を {食|た}べます 。 {三百五十円|さん|びゃく|ご|じゅう|えん} です 。", kana: "ひる は しょくどう で カレー を たべます 。 さんびゃくごじゅうえん です 。", id: "Siang hari saya makan kari di kantin. Harganya 350 yen.", en: "At lunch I eat curry in the canteen. It's 350 yen." }
+  - { ja: "{安|やす}い です 。 おいしい です 。", kana: "やすい です 。 おいしい です 。", id: "Murah. Enak.", en: "It's cheap. It's tasty." }
+  - { ja: "{土曜日|ど|よう|び} は {休|やす}み です 。", kana: "どようび は やすみ です 。", id: "Hari Sabtu libur.", en: "Saturday is my day off." }
+  - { ja: "{先週|せん|しゅう} の {土曜日|ど|よう|び} は {友|とも}だち と {京都|きょう|と} へ {行|い}きました 。", kana: "せんしゅう の どようび は ともだち と きょうと へ いきました 。", id: "Sabtu lalu saya pergi ke Kyoto dengan teman.", en: "Last Saturday I went to Kyoto with a friend." }
+  - { ja: "{京都|きょう|と} は とても きれい な まち です 。", kana: "きょうと は とても きれい な まち です 。", id: "Kyoto kota yang sangat indah.", en: "Kyoto is a very beautiful town." }
+  - { ja: "{日曜日|にち|よう|び} は うち で {日本語|に|ほん|ご} を {勉強|べん|きょう}します 。", kana: "にちようび は うち で にほんご を べんきょうします 。", id: "Hari Minggu saya belajar bahasa Jepang di rumah.", en: "On Sunday I study Japanese at home." }
+glossary:
+  - { ja: "はたらく", kana: "はたらく", id: "bekerja", en: "to work", type: verb-1, jlpt: N5 }
+  - { ja: "{仕事|し|ごと}", kana: "しごと", id: "pekerjaan", en: "work", type: noun, jlpt: N5 }
+  - { ja: "{工場|こう|じょう}", kana: "こうじょう", id: "pabrik", en: "factory", type: noun }
+  - { ja: "{昼|ひる}", kana: "ひる", id: "siang", en: "noon", type: noun, jlpt: N5 }
+  - { ja: "{先週|せん|しゅう}", kana: "せんしゅう", id: "minggu lalu", en: "last week", type: noun, jlpt: N5 }
+  - { ja: "とても", kana: "とても", id: "sangat", en: "very", type: adverb, jlpt: N5 }
+  - { ja: "まち", kana: "まち", id: "kota", en: "town", type: noun, jlpt: N5 }
+items:
+  - id: rd-e1-c1
+    type: choice
+    prompt: "Andi bekerja di mana?"
+    options: [di pabrik di Osaka, di kantin di Osaka, di sekolah di Kyoto]
+    answer: di pabrik di Osaka
+    why: { id: "大阪 の 工場 で はたらきます: di pabrik di Osaka.", en: "大阪 の 工場 で はたらきます: at a factory in Osaka." }
+  - id: rd-e1-c2
+    type: choice
+    prompt: "Berapa harga kari di kantin?"
+    options: ["350 yen", "530 yen", "300 yen"]
+    answer: "350 yen"
+    why: { id: "三百五十円: さんびゃくごじゅうえん, 350 yen.", en: "三百五十円: さんびゃくごじゅうえん, 350 yen." }
+  - id: rd-e1-c3
+    type: listen
+    audio: "{京都|きょう|と} は とても きれい な まち です 。"
+    options: ["{京都|きょう|と} は とても きれい な まち です 。", "{大阪|おお|さか} は とても きれい な まち です 。", "{京都|きょう|と} は {安|やす}い です 。"]
+    answer: "{京都|きょう|と} は とても きれい な まち です 。"
+    why: { id: "きれい な まち: kota yang indah. Kata sifat な memakai な sebelum kata benda.", en: "きれい な まち: a beautiful town. な adjectives take な before a noun." }
+  - id: rd-e1-c4
+    type: choice
+    prompt: "Apa yang Andi lakukan hari Minggu?"
+    options: [belajar bahasa Jepang di rumah, pergi ke Kyoto, bekerja di pabrik]
+    answer: belajar bahasa Jepang di rumah
+    why: { id: "日曜日 は うち で 日本語 を 勉強します.", en: "日曜日 は うち で 日本語 を 勉強します." }

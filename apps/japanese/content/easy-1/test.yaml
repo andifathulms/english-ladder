@@ -1,0 +1,69 @@
+# Easy 1 rung test (PRD §5.5): draw 20 of 40, pass 15, at least one item from every lesson.
+# Every kanji carries ruby except in reading items (furigana: false), which use only kanji taught by then.
+# Ids are permanent. Draft: written by Claude, to be checked by a Japanese teacher (human-tasks.md H1).
+rung: easy-1
+draw: 20
+pass: 15
+items:
+  # 1 · X は Y です
+  - { id: e1-t-01, from: easy1-01-hajimemashite, type: gap, cue: "Saya pelajar.", prompt: "わたし ___ {学生|がく|せい} です 。", options: [は, を, か], answer: は, why: { id: "は menandai topik: わたし.", en: "は marks the topic: わたし." } }
+  - { id: e1-t-02, from: easy1-01-hajimemashite, type: order, cue: "Pak Tanaka guru.", tiles: [です, "{田中|た|なか}", "{先生|せん|せい}", さん, は], answer: ["{田中|た|なか}", さん, は, "{先生|せん|せい}", です], why: { id: "です selalu di akhir.", en: "です always goes last." } }
+  - { id: e1-t-03, from: easy1-01-hajimemashite, type: kana, ja: "{先生|せん|せい}", furigana: false, answer: せんせい, why: { id: "先生 dibaca せんせい: guru.", en: "先生 is read せんせい: teacher." } }
+  # 2 · か and の
+  - { id: e1-t-04, from: easy1-02-ka-no, type: gap, cue: "Apakah Budi pelajar?", prompt: "ブディ さん は {学生|がく|せい} です ___ 。", options: [か, の, は], answer: か, why: { id: "か di akhir menjadikan kalimat pertanyaan.", en: "か at the end makes a question." } }
+  - { id: e1-t-05, from: easy1-02-ka-no, type: fix, wrong: "{名前|な|まえ} の わたし は リナ です 。", options: ["わたし の {名前|な|まえ} は リナ です 。", "わたし は {名前|な|まえ} の リナ です 。"], answer: "わたし の {名前|な|まえ} は リナ です 。", why: { id: "Pemilik dulu: わたし の 名前.", en: "The owner first: わたし の 名前." } }
+  - { id: e1-t-06, from: easy1-02-ka-no, type: choice, prompt: "お{名前|な|まえ} は {何|なん} です か 。", options: [Namanya siapa?, Kamu dari mana?, Kamu pelajar?], answer: Namanya siapa?, why: { id: "お名前 は 何 です か: menanyakan nama.", en: "お名前 は 何 です か asks for a name." } }
+  # 3 · これ / それ / あれ
+  - { id: e1-t-07, from: easy1-03-kore-sore-are, type: gap, cue: "Itu apa? (dekat lawan bicaramu)", prompt: "___ は {何|なん} です か 。", options: [それ, これ, あの], answer: それ, why: { id: "Dekat lawan bicara: それ.", en: "Near the listener: それ." } }
+  - { id: e1-t-08, from: easy1-03-kore-sore-are, type: gap, cue: "Buku ini buku bahasa Jepang.", prompt: "___ {本|ほん} は {日本語|に|ほん|ご} の {本|ほん} です 。", options: [この, これ, ここ], answer: この, why: { id: "Sebelum kata benda: この.", en: "Before a noun: この." } }
+  - { id: e1-t-09, from: easy1-03-kore-sore-are, type: kana, ja: "{電話|でん|わ}", furigana: false, answer: でんわ, why: { id: "電話 dibaca でんわ: telepon.", en: "電話 is read でんわ: telephone." } }
+  # 4 · ここ / そこ / あそこ
+  - { id: e1-t-10, from: easy1-04-koko-soko, type: choice, prompt: "トイレ は どこ です か 。", options: [Toiletnya di mana?, Ini toilet?, Toiletnya di sana.], answer: Toiletnya di mana?, why: { id: "どこ: di mana.", en: "どこ: where." } }
+  - { id: e1-t-11, from: easy1-04-koko-soko, type: fix, wrong: "{出口|で|ぐち} は あそこ に です 。", options: ["{出口|で|ぐち} は あそこ です 。", "{出口|で|ぐち} に あそこ です 。"], answer: "{出口|で|ぐち} は あそこ です 。", why: { id: "あそこ sudah berarti *di sana*: tanpa partikel sebelum です.", en: "あそこ already means *over there*: no particle before です." } }
+  - { id: e1-t-12, from: easy1-04-koko-soko, type: choice, prompt: "出口", furigana: false, options: [pintu keluar, pintu masuk, toilet], answer: pintu keluar, why: { id: "出口 (でぐち): pintu keluar. 入口 (いりぐち): pintu masuk.", en: "出口 (でぐち): exit. 入口 (いりぐち): entrance." } }
+  # 5 · numbers and prices
+  - { id: e1-t-13, from: easy1-05-ikura, type: listen, audio: "{百六十円|ひゃく|ろく|じゅう|えん} です 。", options: ["160 yen", "106 yen", "600 yen"], answer: "160 yen", why: { id: "ひゃく (100) + ろくじゅう (60): 160.", en: "ひゃく (100) + ろくじゅう (60): 160." } }
+  - { id: e1-t-14, from: easy1-05-ikura, type: gap, cue: "Ini berapa?", prompt: "これ は ___ です か 。", options: [いくら, いくつ, どこ], answer: いくら, why: { id: "Harga: いくら.", en: "A price: いくら." } }
+  - { id: e1-t-15, from: easy1-05-ikura, type: kana, ja: "{九十円|きゅう|じゅう|えん}", furigana: false, answer: きゅうじゅうえん, why: { id: "九十円: きゅうじゅうえん, 90 yen.", en: "九十円: きゅうじゅうえん, 90 yen." } }
+  # 6 · time
+  - { id: e1-t-16, from: easy1-06-nanji, type: gap, cue: "Jam setengah lima.", prompt: "___ {半|はん} です 。", options: ["{四時|よ|じ}", "{五時|ご|じ}", "{四時|よん|じ}"], answer: "{四時|よ|じ}", why: { id: "4.30 dihitung dari jam empat: 四時半, dibaca よじ はん.", en: "4:30 counts from four: 四時半, read よじ はん." } }
+  - { id: e1-t-17, from: easy1-06-nanji, type: listen, audio: "{今|いま} {午後|ご|ご} {二時|に|じ} です 。", options: ["Sekarang jam dua siang.", "Sekarang jam dua pagi.", "Sekarang jam dua belas."], answer: "Sekarang jam dua siang.", why: { id: "ごご: siang/sore. ごぜん: pagi.", en: "ごご: p.m. ごぜん: a.m." } }
+  - { id: e1-t-18, from: easy1-06-nanji, type: kana, ja: "{今|いま}", furigana: false, answer: いま, why: { id: "今: いま, sekarang.", en: "今: いま, now." } }
+  # 7 · ます, verb last
+  - { id: e1-t-19, from: easy1-07-masu, type: order, cue: "Saya membaca buku.", tiles: ["{読|よ}みます", を, わたし, "{本|ほん}", は], answer: [わたし, は, "{本|ほん}", を, "{読|よ}みます"], why: { id: "Kata kerja selalu di akhir.", en: "The verb always goes last." } }
+  - { id: e1-t-20, from: easy1-07-masu, type: form, word: "{食|た}べます", target: masen, options: ["{食|た}べません", "{食|た}べないです", "{食|た}べました"], answer: "{食|た}べません", why: { id: "Tidak: ます jadi ません.", en: "Not: ます becomes ません." } }
+  - { id: e1-t-21, from: easy1-07-masu, type: choice, prompt: "シティ さん は コーヒー を {飲|の}みません 。", options: [Siti tidak minum kopi., Siti minum kopi., Siti membeli kopi.], answer: Siti tidak minum kopi., why: { id: "ません: tidak.", en: "ません: not." } }
+  # 8 · へ / に
+  - { id: e1-t-22, from: easy1-08-iku-kuru, type: gap, cue: "Saya pergi ke stasiun.", prompt: "{駅|えき} ___ {行|い}きます 。", options: [へ, を, で], answer: へ, why: { id: "Arah: へ (atau に) sesudah tempat.", en: "Direction: へ (or に) after the place." } }
+  - { id: e1-t-23, from: easy1-08-iku-kuru, type: choice, cue: "Kamu ke rumah teman. Kata kerjanya:", prompt: "{友|とも}だち の うち へ ___ 。", options: ["{行|い}きます", "{来|き}ます"], answer: "{行|い}きます", why: { id: "きます hanya untuk datang ke tempat pembicara; ke rumah teman: いきます.", en: "きます is only coming to where the speaker is; to a friend's house: いきます." } }
+  - { id: e1-t-24, from: easy1-08-iku-kuru, type: kana, ja: "{毎日|まい|にち}", furigana: false, answer: まいにち, why: { id: "毎日: まいにち, setiap hari.", en: "毎日: まいにち, every day." } }
+  # 9 · を and で
+  - { id: e1-t-25, from: easy1-09-wo-de, type: gap, cue: "Saya makan di kantin.", prompt: "{食堂|しょく|どう} ___ {食|た}べます 。", options: [で, を, へ], answer: で, why: { id: "Tempat kegiatan: で.", en: "Where an action happens: で." } }
+  - { id: e1-t-26, from: easy1-09-wo-de, type: gap, cue: "Saya minum air.", prompt: "{水|みず} ___ {飲|の}みます 。", options: [を, で, に], answer: を, why: { id: "Objek: を.", en: "The object: を." } }
+  # 10 · ました
+  - { id: e1-t-27, from: easy1-10-mashita, type: form, word: "{行|い}きます", target: mashita, options: ["{行|い}きました", "{行|い}きませんでした", "{行|い}くました"], answer: "{行|い}きました", why: { id: "Lampau: ます jadi ました.", en: "Past: ます becomes ました." } }
+  - { id: e1-t-28, from: easy1-10-mashita, type: choice, prompt: "{昨日|=きのう} テレビ を {見|み}ませんでした 。", options: [Kemarin saya tidak menonton TV., Kemarin saya menonton TV., Besok saya tidak menonton TV.], answer: Kemarin saya tidak menonton TV., why: { id: "ませんでした: tidak (lampau).", en: "ませんでした: didn't." } }
+  # 11 · い adjectives
+  - { id: e1-t-29, from: easy1-11-i-adj, type: choice, prompt: "この かばん は {高|たか}い です 。", options: [Tas ini mahal., Tas ini murah., Tas ini kecil.], answer: Tas ini mahal., why: { id: "たかい: mahal (juga tinggi).", en: "たかい: expensive (also tall)." } }
+  - { id: e1-t-30, from: easy1-11-i-adj, type: order, cue: "Ini kemeja putih.", tiles: [シャツ, "{白|しろ}い", です, これ, は], answer: [これ, は, "{白|しろ}い", シャツ, です], why: { id: "Kata sifat sebelum kata benda: 白い シャツ.", en: "The adjective comes before the noun: 白い シャツ." } }
+  # 12 · な adjectives
+  - { id: e1-t-31, from: easy1-12-na-adj, type: gap, cue: "Ini kota yang tenang.", prompt: "ここ は {静|しず}か ___ {町|まち} です 。", options: [な, の, い], answer: な, why: { id: "Kata sifat な memakai な sebelum kata benda.", en: "な adjectives take な before a noun." } }
+  - { id: e1-t-32, from: easy1-12-na-adj, type: fix, wrong: "リナ さん は {元気|げん|き} な です 。", options: ["リナ さん は {元気|げん|き} です 。", "リナ さん は {元気|げん|き} い です 。"], answer: "リナ さん は {元気|げん|き} です 。", why: { id: "Sebelum です tidak ada な.", en: "No な before です." } }
+  # 13 · あります / います
+  - { id: e1-t-33, from: easy1-13-arimasu-imasu, type: gap, cue: "Kucingnya ada di bawah meja.", prompt: "ねこ は テーブル の {下|した} に ___ 。", options: [います, あります, です], answer: います, why: { id: "Makhluk hidup: います. Benda: あります.", en: "Living things: います. Things: あります." } }
+  - id: e1-t-34
+    from: easy1-13-arimasu-imasu
+    type: scene
+    visual: { id: place-scene-ja, props: { state: in } }
+    options: ["ボール は {箱|はこ} の {中|なか} に あります 。", "ボール は {箱|はこ} の {上|うえ} に あります 。", "ボール は {箱|はこ} の {前|まえ} に あります 。"]
+    answer: "ボール は {箱|はこ} の {中|なか} に あります 。"
+    why: { id: "Bolanya di dalam kotak: 箱 の 中.", en: "The ball is inside the box: 箱 の 中." }
+  # 14 · counters
+  - { id: e1-t-35, from: easy1-14-counters, type: gap, cue: "Saya beli tiga batang pena.", prompt: "ペン を ___ {買|か}います 。", options: ["{三本|さん|ぼん}", "{三枚|さん|まい}", "{三匹|さん|びき}"], answer: "{三本|さん|ぼん}", why: { id: "Benda panjang: 本. Tiga: さんぼん.", en: "Long things: 本. Three: さんぼん." } }
+  - { id: e1-t-36, from: easy1-14-counters, type: listen, audio: "{一冊|いっ|さつ}", options: ["{一冊|いっ|さつ}", "{一枚|いち|まい}", "{一個|いっ|こ}"], answer: "{一冊|いっ|さつ}", why: { id: "いっさつ: satu buku.", en: "いっさつ: one book." } }
+  # 15 · ませんか / ましょう
+  - { id: e1-t-37, from: easy1-15-masenka, type: choice, prompt: "いっしょに {昼|ひる}ごはん を {食|た}べませんか 。", options: [Mau makan siang bareng?, Kamu tidak makan siang?, Saya tidak makan siang.], answer: Mau makan siang bareng?, why: { id: "ませんか: ajakan yang sopan.", en: "ませんか: a polite invitation." } }
+  - { id: e1-t-38, from: easy1-15-masenka, type: form, word: "{休|やす}みます", target: masho, options: ["{休|やす}みましょう", "{休|やす}みませんか", "{休|やす}みました"], answer: "{休|やす}みましょう", why: { id: "Ayo: ます jadi ましょう.", en: "Let's: ます becomes ましょう." } }
+  # 16 · a whole day
+  - { id: e1-t-39, from: easy1-16-ichinichi, type: fix, wrong: "コンビニ に おにぎり を {買|か}います 。", options: ["コンビニ で おにぎり を {買|か}います 。", "コンビニ を おにぎり で {買|か}います 。"], answer: "コンビニ で おにぎり を {買|か}います 。", why: { id: "Tempat kegiatan (membeli): で.", en: "Where you do something (buy): で." } }
+  - { id: e1-t-40, from: easy1-16-ichinichi, type: choice, prompt: "{外|そと}", furigana: false, options: [luar, toko, dalam], answer: luar, why: { id: "外 (そと): luar.", en: "外 (そと): outside." } }

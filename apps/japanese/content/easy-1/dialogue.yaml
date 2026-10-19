@@ -1,0 +1,35 @@
+# Easy 1 capstone: Ngobrol (PRD §5.5): a 6–10 line exchange at work, Easy 1 grammar only, polite throughout.
+# Item ids are permanent. Draft: written by Claude, to be checked by a Japanese teacher (human-tasks.md H1).
+rung: easy-1
+title: { id: "Hari pertama di pabrik", en: "First day at the factory", ja: "{工場|こう|じょう} の {一日目|いち|にち|め}", kana: "こうじょう の いちにちめ" }
+lines:
+  - { who: "Suzuki", ja: "おはよう ございます 。 {鈴木|すず|き} です 。", kana: "おはよう ございます 。 すずき です 。", id: "Selamat pagi. Saya Suzuki." }
+  - { who: Andi, ja: "はじめまして 。 アンディ です 。 インドネシア{人|じん} です 。 よろしく おねがいします 。", kana: "はじめまして 。 アンディ です 。 インドネシアじん です 。 よろしく おねがいします 。", id: "Salam kenal. Saya Andi, orang Indonesia. Mohon bimbingannya." }
+  - { who: "Suzuki", ja: "よろしく おねがいします 。 ここ は {休|やす}み の {部屋|=へや} です 。", kana: "よろしく おねがいします 。 ここ は やすみ の へや です 。", id: "Salam kenal. Ini ruang istirahat." }
+  - { who: Andi, ja: "すみません 、 トイレ は どこ です か 。", kana: "すみません 、 トイレ は どこ です か 。", id: "Permisi, toiletnya di mana?" }
+  - { who: "Suzuki", ja: "あそこ です 。 {食堂|しょく|どう} の {右|みぎ} に あります 。", kana: "あそこ です 。 しょくどう の みぎ に あります 。", id: "Di sana. Ada di sebelah kanan kantin." }
+  - { who: Andi, ja: "{休|やす}み は {何時|なん|じ} です か 。", kana: "やすみ は なんじ です か 。", id: "Istirahatnya jam berapa?" }
+  - { who: "Suzuki", ja: "{十二時|じゅう|に|じ} です 。 いっしょに {食堂|しょく|どう} で {食|た}べませんか 。", kana: "じゅうにじ です 。 いっしょに しょくどう で たべませんか 。", id: "Jam dua belas. Mau makan bareng di kantin?" }
+  - { who: Andi, ja: "はい 、 {食|た}べましょう 。 ありがとう ございます 。", kana: "はい 、 たべましょう 。 ありがとう ございます 。", id: "Ya, ayo makan. Terima kasih." }
+note:
+  id: "Di tempat kerja Jepang, おはようございます dipakai sebagai salam pertama hari itu, bahkan sore hari. よろしくおねがいします menutup perkenalan: artinya kira-kira *mohon kerja samanya*."
+  en: "At Japanese workplaces, おはようございます is the first greeting of the day, even in the afternoon. よろしくおねがいします closes an introduction: roughly *I look forward to working with you*."
+items:
+  - id: dl-e1-c1
+    type: choice
+    prompt: "Di mana toiletnya?"
+    options: [di sebelah kanan kantin, di sebelah kiri kantin, di ruang istirahat]
+    answer: di sebelah kanan kantin
+    why: { id: "食堂 の 右 に あります: di sebelah kanan kantin.", en: "食堂 の 右 に あります: to the right of the canteen." }
+  - id: dl-e1-c2
+    type: choice
+    prompt: "Jam berapa istirahatnya?"
+    options: ["12.00", "2.00", "10.00"]
+    answer: "12.00"
+    why: { id: "十二時: jam dua belas.", en: "十二時: twelve o'clock." }
+  - id: dl-e1-c3
+    type: listen
+    audio: "いっしょに {食堂|しょく|どう} で {食|た}べませんか 。"
+    options: ["いっしょに {食堂|しょく|どう} で {食|た}べませんか 。", "{食堂|しょく|どう} で {食|た}べました 。", "{食堂|しょく|どう} は どこ です か 。"]
+    answer: "いっしょに {食堂|しょく|どう} で {食|た}べませんか 。"
+    why: { id: "ませんか: ajakan. Pak Suzuki mengajak Andi makan bersama.", en: "ませんか: an invitation. Mr Suzuki invites Andi to eat together." }

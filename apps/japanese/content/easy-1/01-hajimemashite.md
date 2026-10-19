@@ -87,6 +87,7 @@ extra:
   - { ja: "です", reason: "The polite copula is grammar (n5-wa-desu), not a list word." }
   - { ja: "はじめまして", reason: "Set greeting taught in every first lesson; the community list places it at N2." }
   - { ja: "よろしく おねがいします", reason: "Set greeting taught in every first lesson; the community list places its parts at N3/N2." }
+next: easy1-02-ka-no
 ---
 
 ## concept.id
