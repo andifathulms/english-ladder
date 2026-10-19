@@ -50,3 +50,31 @@
 .hint-pulse {
   animation: hint-pulse 1200ms ease-in-out infinite;
 }
+
+/* KanaOrigins (DESIGN §8.2, `morph`): the source kanji shrinks and fades as the kana grows in. */
+@keyframes origin-from {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+@keyframes origin-to {
+  from {
+    opacity: 0;
+    transform: scale(1.15);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.origin-from {
+  animation: origin-from var(--m-morph-d) var(--ease) both;
+}
+.origin-to {
+  animation: origin-to var(--m-morph-d) var(--ease) both;
+}

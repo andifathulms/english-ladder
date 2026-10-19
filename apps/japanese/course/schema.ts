@@ -300,3 +300,19 @@ export const PlacementSchema = z
 
 /** Proper names allowed in content without a list entry. */
 export const NamesSchema = z.array(z.object({ ...JaKana, id: z.string().min(1) }).strict());
+
+/** content/data/kana.yaml (lib/ja/kanaTable.ts): one entry per mora, both scripts. */
+const KanaEntrySchema = z
+  .object({
+    hira: z.string().regex(/^[ぁ-ゖ]$/u),
+    kata: z.string().regex(/^[ァ-ヺ]$/u),
+    row: z.enum(['', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w', 'nn', 'g', 'z', 'd', 'b', 'p']),
+    col: z.enum(['', 'a', 'i', 'u', 'e', 'o']),
+    origin: z.object({ hira: z.string().length(1).optional(), kata: z.string().length(1).optional() }).strict().optional(),
+    base: z.string().length(1).optional(),
+    note: z.string().regex(/^(irregular|particle|same-as:[ぁ-ゖ])$/u).optional(),
+    lesson: z.number().int().min(1).max(10),
+  })
+  .strict();
+
+export const KanaFileSchema = z.object({ seion: z.array(KanaEntrySchema).length(46), dakuon: z.array(KanaEntrySchema).length(25) }).strict();

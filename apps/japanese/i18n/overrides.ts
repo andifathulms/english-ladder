@@ -84,7 +84,37 @@ export type JapaneseKey =
   | 'form.ta'
   | 'form.dict'
   | 'form.potential'
-  | 'form.volitional';
+  | 'form.volitional'
+  | 'kana.chart'
+  | 'kana.script'
+  | 'kana.dakuten'
+  | 'kana.combos'
+  | 'kana.combosTitle'
+  | 'kana.cell'
+  | 'kana.noteIrregular'
+  | 'kana.noteParticle'
+  | 'kana.noteSameAs'
+  | 'kana.sheetTitle'
+  | 'kana.close'
+  | 'kana.irregularMark'
+  | 'origins.choose'
+  | 'origins.label'
+  | 'origins.unknown'
+  | 'origins.replay'
+  | 'origins.hiraNote'
+  | 'origins.kataNote'
+  | 'beats.play'
+  | 'beats.choose'
+  | 'beats.label'
+  | 'beats.long'
+  | 'beats.small'
+  | 'pitch.choose'
+  | 'pitch.label'
+  | 'pitch.high'
+  | 'pitch.low'
+  | 'pitch.particle'
+  | 'pitch.contrast'
+  | 'pitch.play';
 
 type Overrides = Partial<StringTable> & Partial<Record<JapaneseKey, string>>;
 
@@ -197,6 +227,36 @@ export const idOverrides: Overrides = {
   'form.dict': 'bentuk kamus',
   'form.potential': 'bentuk potensial',
   'form.volitional': 'bentuk ajakan',
+  'kana.chart': 'Tabel kana',
+  'kana.script': 'Huruf',
+  'kana.dakuten': 'Dakuten',
+  'kana.combos': 'Kana gabungan',
+  'kana.combosTitle': 'Kana gabungan: kana kolom い dengan ゃ ゅ ょ kecil',
+  'kana.cell': '{kana}, dibaca {romaji}',
+  'kana.noteIrregular': '{kana} dibaca {romaji}, bukan {regular}.',
+  'kana.noteParticle': '{kana} sekarang hanya dipakai sebagai partikel, dan dibaca seperti {like}.',
+  'kana.noteSameAs': '{kana} dibaca sama dengan {like}, dan jarang dipakai.',
+  'kana.sheetTitle': 'Kana {kana}',
+  'kana.close': 'Tutup',
+  'kana.irregularMark': 'bacaan khusus',
+  'origins.choose': 'Pilih kana',
+  'origins.label': '{kana} berasal dari kanji {kanji}',
+  'origins.unknown': 'Asal {kana} tidak diketahui pasti.',
+  'origins.replay': 'Putar lagi',
+  'origins.hiraNote': 'Hiragana lahir dari tulisan tangan cepat seluruh kanji.',
+  'origins.kataNote': 'Katakana diambil dari sebagian kanji.',
+  'beats.play': 'Putar dengan ketukan',
+  'beats.choose': 'Pilih kata',
+  'beats.label': '{word}: {n} ketukan',
+  'beats.long': 'vokal panjang',
+  'beats.small': 'っ kecil: satu ketukan diam',
+  'pitch.choose': 'Pilih kata',
+  'pitch.label': '{word}, {meaning}: {pattern}',
+  'pitch.high': 'tinggi',
+  'pitch.low': 'rendah',
+  'pitch.particle': 'partikel が {level}',
+  'pitch.contrast': 'Bahasa Indonesia tidak punya nada kata: suara naik-turun hanya untuk kalimat, misalnya saat bertanya. Di bahasa Jepang, tinggi-rendah tiap ketukan bisa membedakan dua kata.',
+  'pitch.play': 'Putar',
 };
 
 export const enOverrides: Overrides = {
@@ -308,4 +368,34 @@ export const enOverrides: Overrides = {
   'form.dict': 'dictionary form',
   'form.potential': 'potential form',
   'form.volitional': 'volitional form',
+  'kana.chart': 'Kana chart',
+  'kana.script': 'Script',
+  'kana.dakuten': 'Dakuten',
+  'kana.combos': 'Combinations',
+  'kana.combosTitle': 'Combinations: the い-column kana with a small ゃ ゅ ょ',
+  'kana.cell': '{kana}, read {romaji}',
+  'kana.noteIrregular': '{kana} is read {romaji}, not {regular}.',
+  'kana.noteParticle': '{kana} is now used only as a particle, and is read like {like}.',
+  'kana.noteSameAs': '{kana} sounds the same as {like}, and is rare.',
+  'kana.sheetTitle': 'The kana {kana}',
+  'kana.close': 'Close',
+  'kana.irregularMark': 'special reading',
+  'origins.choose': 'Choose a kana',
+  'origins.label': '{kana} comes from the kanji {kanji}',
+  'origins.unknown': 'Where {kana} came from is not known for sure.',
+  'origins.replay': 'Play again',
+  'origins.hiraNote': 'Hiragana grew from fast handwriting of a whole kanji.',
+  'origins.kataNote': 'Katakana took one part of a kanji.',
+  'beats.play': 'Play with beats',
+  'beats.choose': 'Choose a word',
+  'beats.label': '{word}: {n} beats',
+  'beats.long': 'long vowel',
+  'beats.small': 'small っ: one silent beat',
+  'pitch.choose': 'Choose a word',
+  'pitch.label': '{word}, {meaning}: {pattern}',
+  'pitch.high': 'high',
+  'pitch.low': 'low',
+  'pitch.particle': 'particle が {level}',
+  'pitch.contrast': 'Indonesian has no word pitch: the voice rises and falls only over a sentence, for example in a question. In Japanese, the high and low of each beat can tell two words apart.',
+  'pitch.play': 'Play',
 };

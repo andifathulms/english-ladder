@@ -1,0 +1,87 @@
+# Kana (CLAUDE.md §5.4) for KanaChart, KanaOrigins and the lessons. One entry per mora, with both
+# scripts side by side (the chart and the origins switch between them). Romaji is never authored:
+# lib/ja/romaji.ts generates it. Row and column ids name the gojūon grid; they are ids, not readings.
+#
+#   origin: the kanji each kana came from (hiragana: a cursive whole; katakana: a part of it).
+#           Standard textbook attributions; ン has no agreed source, so it has none.
+#   note:   irregular  read differently from its row (し ち つ ふ, じ): the chart says how
+#           particle   を: today only the object particle, read like お
+#           same-as:X  ぢ づ: read like じ ず, and rare
+#   lesson: the Kana 1 / Kana 2 lesson that teaches it (the chart dims the rest when asked).
+#
+# Draft data: the teacher checks it with the lessons (docs/japanese/human-tasks.md H1).
+
+seion:
+  - { hira: あ, kata: ア, row: "", col: a, origin: { hira: 安, kata: 阿 }, lesson: 1 }
+  - { hira: い, kata: イ, row: "", col: i, origin: { hira: 以, kata: 伊 }, lesson: 1 }
+  - { hira: う, kata: ウ, row: "", col: u, origin: { hira: 宇, kata: 宇 }, lesson: 1 }
+  - { hira: え, kata: エ, row: "", col: e, origin: { hira: 衣, kata: 江 }, lesson: 1 }
+  - { hira: お, kata: オ, row: "", col: o, origin: { hira: 於, kata: 於 }, lesson: 1 }
+  - { hira: か, kata: カ, row: k, col: a, origin: { hira: 加, kata: 加 }, lesson: 2 }
+  - { hira: き, kata: キ, row: k, col: i, origin: { hira: 幾, kata: 幾 }, lesson: 2 }
+  - { hira: く, kata: ク, row: k, col: u, origin: { hira: 久, kata: 久 }, lesson: 2 }
+  - { hira: け, kata: ケ, row: k, col: e, origin: { hira: 計, kata: 介 }, lesson: 2 }
+  - { hira: こ, kata: コ, row: k, col: o, origin: { hira: 己, kata: 己 }, lesson: 2 }
+  - { hira: さ, kata: サ, row: s, col: a, origin: { hira: 左, kata: 散 }, lesson: 3 }
+  - { hira: し, kata: シ, row: s, col: i, origin: { hira: 之, kata: 之 }, lesson: 3, note: irregular }
+  - { hira: す, kata: ス, row: s, col: u, origin: { hira: 寸, kata: 須 }, lesson: 3 }
+  - { hira: せ, kata: セ, row: s, col: e, origin: { hira: 世, kata: 世 }, lesson: 3 }
+  - { hira: そ, kata: ソ, row: s, col: o, origin: { hira: 曽, kata: 曽 }, lesson: 3 }
+  - { hira: た, kata: タ, row: t, col: a, origin: { hira: 太, kata: 多 }, lesson: 3 }
+  - { hira: ち, kata: チ, row: t, col: i, origin: { hira: 知, kata: 千 }, lesson: 3, note: irregular }
+  - { hira: つ, kata: ツ, row: t, col: u, origin: { hira: 川, kata: 川 }, lesson: 3, note: irregular }
+  - { hira: て, kata: テ, row: t, col: e, origin: { hira: 天, kata: 天 }, lesson: 3 }
+  - { hira: と, kata: ト, row: t, col: o, origin: { hira: 止, kata: 止 }, lesson: 3 }
+  - { hira: な, kata: ナ, row: n, col: a, origin: { hira: 奈, kata: 奈 }, lesson: 4 }
+  - { hira: に, kata: ニ, row: n, col: i, origin: { hira: 仁, kata: 仁 }, lesson: 4 }
+  - { hira: ぬ, kata: ヌ, row: n, col: u, origin: { hira: 奴, kata: 奴 }, lesson: 4 }
+  - { hira: ね, kata: ネ, row: n, col: e, origin: { hira: 祢, kata: 祢 }, lesson: 4 }
+  - { hira: の, kata: ノ, row: n, col: o, origin: { hira: 乃, kata: 乃 }, lesson: 4 }
+  - { hira: は, kata: ハ, row: h, col: a, origin: { hira: 波, kata: 八 }, lesson: 4 }
+  - { hira: ひ, kata: ヒ, row: h, col: i, origin: { hira: 比, kata: 比 }, lesson: 4 }
+  - { hira: ふ, kata: フ, row: h, col: u, origin: { hira: 不, kata: 不 }, lesson: 4, note: irregular }
+  - { hira: へ, kata: ヘ, row: h, col: e, origin: { hira: 部, kata: 部 }, lesson: 4 }
+  - { hira: ほ, kata: ホ, row: h, col: o, origin: { hira: 保, kata: 保 }, lesson: 4 }
+  - { hira: ま, kata: マ, row: m, col: a, origin: { hira: 末, kata: 末 }, lesson: 5 }
+  - { hira: み, kata: ミ, row: m, col: i, origin: { hira: 美, kata: 三 }, lesson: 5 }
+  - { hira: む, kata: ム, row: m, col: u, origin: { hira: 武, kata: 牟 }, lesson: 5 }
+  - { hira: め, kata: メ, row: m, col: e, origin: { hira: 女, kata: 女 }, lesson: 5 }
+  - { hira: も, kata: モ, row: m, col: o, origin: { hira: 毛, kata: 毛 }, lesson: 5 }
+  - { hira: や, kata: ヤ, row: y, col: a, origin: { hira: 也, kata: 也 }, lesson: 5 }
+  - { hira: ゆ, kata: ユ, row: y, col: u, origin: { hira: 由, kata: 由 }, lesson: 5 }
+  - { hira: よ, kata: ヨ, row: y, col: o, origin: { hira: 与, kata: 与 }, lesson: 5 }
+  - { hira: ら, kata: ラ, row: r, col: a, origin: { hira: 良, kata: 良 }, lesson: 5 }
+  - { hira: り, kata: リ, row: r, col: i, origin: { hira: 利, kata: 利 }, lesson: 5 }
+  - { hira: る, kata: ル, row: r, col: u, origin: { hira: 留, kata: 流 }, lesson: 5 }
+  - { hira: れ, kata: レ, row: r, col: e, origin: { hira: 礼, kata: 礼 }, lesson: 5 }
+  - { hira: ろ, kata: ロ, row: r, col: o, origin: { hira: 呂, kata: 呂 }, lesson: 5 }
+  - { hira: わ, kata: ワ, row: w, col: a, origin: { hira: 和, kata: 和 }, lesson: 6 }
+  - { hira: を, kata: ヲ, row: w, col: o, origin: { hira: 遠, kata: 乎 }, lesson: 6, note: particle }
+  - { hira: ん, kata: ン, row: nn, col: "", origin: { hira: 无 }, lesson: 6 }
+
+dakuon:
+  - { hira: が, kata: ガ, row: g, col: a, base: か, lesson: 7 }
+  - { hira: ぎ, kata: ギ, row: g, col: i, base: き, lesson: 7 }
+  - { hira: ぐ, kata: グ, row: g, col: u, base: く, lesson: 7 }
+  - { hira: げ, kata: ゲ, row: g, col: e, base: け, lesson: 7 }
+  - { hira: ご, kata: ゴ, row: g, col: o, base: こ, lesson: 7 }
+  - { hira: ざ, kata: ザ, row: z, col: a, base: さ, lesson: 7 }
+  - { hira: じ, kata: ジ, row: z, col: i, base: し, lesson: 7, note: irregular }
+  - { hira: ず, kata: ズ, row: z, col: u, base: す, lesson: 7 }
+  - { hira: ぜ, kata: ゼ, row: z, col: e, base: せ, lesson: 7 }
+  - { hira: ぞ, kata: ゾ, row: z, col: o, base: そ, lesson: 7 }
+  - { hira: だ, kata: ダ, row: d, col: a, base: た, lesson: 7 }
+  - { hira: ぢ, kata: ヂ, row: d, col: i, base: ち, lesson: 7, note: "same-as:じ" }
+  - { hira: づ, kata: ヅ, row: d, col: u, base: つ, lesson: 7, note: "same-as:ず" }
+  - { hira: で, kata: デ, row: d, col: e, base: て, lesson: 7 }
+  - { hira: ど, kata: ド, row: d, col: o, base: と, lesson: 7 }
+  - { hira: ば, kata: バ, row: b, col: a, base: は, lesson: 7 }
+  - { hira: び, kata: ビ, row: b, col: i, base: ひ, lesson: 7 }
+  - { hira: ぶ, kata: ブ, row: b, col: u, base: ふ, lesson: 7 }
+  - { hira: べ, kata: ベ, row: b, col: e, base: へ, lesson: 7 }
+  - { hira: ぼ, kata: ボ, row: b, col: o, base: ほ, lesson: 7 }
+  - { hira: ぱ, kata: パ, row: p, col: a, base: は, lesson: 7 }
+  - { hira: ぴ, kata: ピ, row: p, col: i, base: ひ, lesson: 7 }
+  - { hira: ぷ, kata: プ, row: p, col: u, base: ふ, lesson: 7 }
+  - { hira: ぺ, kata: ペ, row: p, col: e, base: へ, lesson: 7 }
+  - { hira: ぽ, kata: ポ, row: p, col: o, base: ほ, lesson: 7 }

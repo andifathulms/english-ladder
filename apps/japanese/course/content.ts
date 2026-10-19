@@ -5,21 +5,22 @@ import path from 'node:path';
 import { createContent, type ContentModel } from '@ladder/core/lib/content/load';
 import { configureAudio } from '@ladder/core/lib/speech/audio';
 import { normJa } from '@/lib/ja/text';
-import { isKanaKey, jaAudioKey, spokenJa } from '@/lib/ja/audio';
+import { jaAudioKey, speechFallback, spokenJa } from '@/lib/ja/audio';
 import { adapter } from './adapter';
 import { answerText, itemText, itemTypes } from './items';
 import { wordFacts } from './words';
-import { CurriculumSchema, DialogueSchema, LessonFrontmatterSchema, NamesSchema, PlacementSchema, ReadingSchema, TestPoolSchema } from './schema';
+import { CurriculumSchema, DialogueSchema, KanaFileSchema, LessonFrontmatterSchema, NamesSchema, PlacementSchema, ReadingSchema, TestPoolSchema } from './schema';
 import { lintLessons, type LintData } from './lint';
 // Circular (audio reads lessons through this module); used only inside check.extra, after both load.
 import { allAudio } from './audio';
 import { toHiragana } from '@/lib/ja/kana';
 import { parseRuby, toKana, toPlain } from '@/lib/ja/text';
 import type { Counter } from '@/lib/ja/counters';
+import type { KanaData } from '@/lib/ja/kanaTable';
 import type { Dialogue, JaKanjiCard, JaLessonData, Lesson, Placement, Reading, Rung, TestPool } from './types';
 
 // Audio keys (audio:list, the manifest check) use the same scheme as the app.
-configureAudio({ normalise: normJa, key: jaAudioKey, spoken: spokenJa, speechFallback: (t) => !isKanaKey(t) });
+configureAudio({ normalise: normJa, key: jaAudioKey, spoken: spokenJa, speechFallback });
 
 const jl = (l: unknown) => l as Lesson;
 
@@ -28,6 +29,8 @@ const vendor = <T>(f: string): T => JSON.parse(fs.readFileSync(path.join(content
 /** Proper names allowed without a list entry (content/data/names.yaml). */
 export const getNames = () => (content.exists('data/names.yaml') ? NamesSchema.parse(content.readYaml('data/names.yaml')) : []);
 export const getCounters = () => (content.exists('data/counters.yaml') ? (content.readYaml('data/counters.yaml') as Counter[]) : []);
+/** The kana grid (content/data/kana.yaml), validated. */
+export const getKana = (): KanaData => KanaFileSchema.parse(content.readYaml('data/kana.yaml'));
 export const getGrammar = () => (content.exists('data/grammar.yaml') ? (content.readYaml('data/grammar.yaml') as { id: string; level: string }[]) : []);
 
 let pitchCache: Record<string, number[]> | null = null;
@@ -114,6 +117,8 @@ export const model: ContentModel = {
   yaml: 'json',
   meta: { title: 'id' },
   wordData: (summaries) => wordFacts(summaries),
+  // The kana grid, for KanaChart and KanaOrigins.
+  visualData: (ids) => (ids.has('kana-chart') || ids.has('kana-origins') ? { kana: getKana() } : {}),
   lessonData: (l): JaLessonData => {
     const lesson = jl(l);
     const recent = getLessons(lesson.rung, { includeDrafts: true })
