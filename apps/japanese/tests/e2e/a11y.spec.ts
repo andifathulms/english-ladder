@@ -3,12 +3,22 @@ import { expect, test } from '@playwright/test';
 
 // Every route in light and dark (the dark run at 140% Japanese size, CLAUDE.md §9), and the lesson
 // steps that carry Japanese text and strand cards.
-const lessons = ['/rung/kana-1/01-lima-vokal/', '/rung/easy-1/01-hajimemashite/'];
-const routes = ['/', '/placement/', '/rung/kana-1/', '/rung/kana-2/', '/rung/easy-1/', '/rung/hard-3/', ...lessons, '/review/', '/words/', '/words/#deck', '/words/#kanji', '/me/', '/settings/', '/about/'];
+// Steps per lesson: 1 is the See step, where the Kana visuals live.
+const steps: Record<string, number[]> = {
+  '/rung/kana-1/01-lima-vokal/': [0, 2, 3],
+  '/rung/kana-1/02-baris-ka/': [1],
+  '/rung/kana-1/03-baris-sa-ta/': [1, 2],
+  '/rung/kana-1/09-panjang-dan-tsu/': [1],
+  '/rung/kana-2/09-aksen-nada/': [1, 2],
+  '/rung/kana-2/10-kanji-pertama/': [1, 2],
+  '/rung/easy-1/01-hajimemashite/': [0, 2, 3],
+};
+const lessons = Object.keys(steps);
+const routes = ['/', '/placement/', '/rung/kana-1/', '/rung/kana-2/', '/rung/easy-1/', '/rung/hard-3/', ...lessons, '/rung/kana-1/test/', '/rung/kana-2/test/', '/rung/kana-2/read/', '/review/', '/words/', '/words/#deck', '/words/#kanji', '/me/', '/settings/', '/about/'];
 
 for (const scheme of ['light', 'dark'] as const) {
   for (const route of routes) {
-    for (const step of lessons.includes(route) ? [0, 2, 3] : [0]) {
+    for (const step of steps[route] ?? [0]) {
       test(`axe: ${route}${step ? ` step ${step}` : ''} (${scheme})`, async ({ page }) => {
         await page.emulateMedia({ colorScheme: scheme });
         if (scheme === 'dark') {
