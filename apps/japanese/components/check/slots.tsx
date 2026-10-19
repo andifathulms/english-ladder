@@ -47,9 +47,9 @@ const Wrong = ({ text, item }: { text: string; item: CoreItem }) => <Prompt item
 
 /** Japanese option labels at --t-ja-body with furigana per the item; Latin labels as written. */
 function PillLabel({ raw, wrong, item }: { text: string; wrong: boolean; raw: string; item?: CoreItem }) {
-  const strike = wrong ? 'line-through decoration-[1.5px]' : '';
-  if (hasJapanese(raw)) return <JaInline text={raw} furigana={fu(item)} className={`min-w-0 flex-1 text-ja-body font-normal ${strike}`} />;
-  return <span className={strike}>{raw}</span>;
+  // Japanese is marked wrong with a wavy underline, never struck through (styles/japanese.css).
+  if (hasJapanese(raw)) return <JaInline text={raw} furigana={fu(item)} className={`min-w-0 flex-1 text-ja-body font-normal ${wrong ? 'ja-wrong' : ''}`} />;
+  return <span className={wrong ? 'line-through decoration-[1.5px]' : ''}>{raw}</span>;
 }
 
 /** Word tiles with furigana when they are Japanese; the answer line shows the joined sentence. */
@@ -208,7 +208,7 @@ function MoraOption({ value, index, state, disabled, onClick }: { value: string;
     <Pill index={index} state={state} disabled={disabled} onClick={onClick}>
       {ja ? (
         <span className="flex flex-col gap-1">
-          <span lang="ja" className={`ja font-ja text-ja-body font-normal ${state === 'wrong' ? 'line-through decoration-[1.5px]' : ''}`}>
+          <span lang="ja" className={`ja font-ja text-ja-body font-normal ${state === 'wrong' ? 'ja-wrong' : ''}`}>
             {value}
           </span>
           <MoraBeatsMini kana={value} label={t('check.beats', { n: morae(value).length })} />

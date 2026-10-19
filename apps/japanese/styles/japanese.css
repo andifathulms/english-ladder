@@ -89,3 +89,18 @@
   }
 }
 
+/*
+ * Wrong Japanese (pair cards, struck options, test answers): a wavy underline in --off instead of a
+ * line-through. A line through kanji makes another character (人 → 大) or hides one (一). The ✕
+ * label and the colour still say "wrong". Japanese only; DESIGN §4.4 says strikethrough (listed for
+ * the owner's review in docs/japanese/m8-review.md).
+ */
+.ja.off-text,
+.off-text .ja,
+.ja-wrong {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: var(--off);
+  text-underline-offset: 0.3em;
+}
