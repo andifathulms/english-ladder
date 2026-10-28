@@ -18,7 +18,7 @@ rungs:
       en: "Five vowels just like Indonesian, the letters that surprise, r and rr, and word stress. You can already pronounce this."
     topics: [lima vokal, h j ñ ll v, c dan z, r dan rr, tekanan dan aksen, membaca nyaring]
     threads: [sounds, stress]
-    inventory: []
+    inventory: [d-vowels, d-letters, d-c-z, d-r-rr, d-stress, d-reading]
   - id: easy-1
     name: Easy 1
     subtitle: Aku dan duniaku
@@ -34,7 +34,7 @@ rungs:
       en: "Greetings, introducing yourself, gender and plurals, ser and estar, hay, and -ar, -er, -ir verbs."
     topics: [¡Hola!, ser, el/la un/una, jamak dan persesuaian, angka dan tener, estar, ser atau estar, hay, kata kerja -ar, -er dan -ir, keluarga dan mi/tu/su, letak benda]
     threads: [gender, agreement, ser-estar, present, variety]
-    inventory: []
+    inventory: [a1-greetings, a1-ser-identity, a1-gender, a1-plural-agreement, a1-numbers-tener, a1-estar, a1-ser-estar, a1-hay, a1-present-ar, a1-present-er-ir, a1-possessives, a1-prep-place]
   - id: easy-2
     name: Easy 2
     subtitle: Sehari-hari
@@ -50,7 +50,7 @@ rungs:
       en: "Stem-changing verbs, irregular yo forms, ir a, routines, time, gustar, shopping, food, directions, weather and comparisons."
     topics: [e→ie o→ue e→i, yo tak beraturan, ir a, kata kerja refleksif, jam dan hari, gustar, belanja dan warna, memesan makanan, arah dan perintah tú, cuaca, perbandingan, satu hari utuh]
     threads: [present, irregular, reflexive, gustar, commands, variety]
-    inventory: []
+    inventory: [a1-stem-change, a1-yo-irregular, a1-ir-a, a1-reflexive, a1-time, a1-gustar, a1-demonstratives, a1-quisiera, a1-imperative-tu, a1-weather, a1-comparisons, a1-review]
   - id: easy-3
     name: Easy 3
     subtitle: Dulu dan nanti
@@ -66,7 +66,7 @@ rungs:
       en: "The pretérito perfecto and indefinido, object pronouns, por and para, estar + gerund, and the future."
     topics: [pretérito perfecto, pretérito indefinido, indefinido tak beraturan, lo la le, por dan para, estar + gerundio, ir a dan futuro]
     threads: [past, pronouns, por-para, future]
-    inventory: []
+    inventory: [a2-perfecto, a2-indefinido, a2-object-pronouns, a2-por-para, a2-estar-gerund, a2-futuro]
   - id: medium-1
     name: Medium 1
     subtitle: Cerita
@@ -82,7 +82,7 @@ rungs:
       en: "The imperfecto against the indefinido, storytelling, soler, se lo, usted commands, the future and the conditional."
     topics: [imperfecto, indefinido atau imperfecto, bercerita, soler, se lo, perintah usted, futuro dan condicional]
     threads: [past, aspect, pronouns, commands, future]
-    inventory: []
+    inventory: [a2-imperfecto, a2-soler, a2-double-pronouns, a2-imperative-usted, a2-condicional]
   - id: medium-2
     name: Medium 2
     subtitle: Pendapat
@@ -98,7 +98,7 @@ rungs:
       en: "The subjunctive after wishes, feelings and opinions; ojalá; commands; relative clauses; recognising voseo."
     topics: [quiero que, espero que, no creo que, ojalá, perintah positif dan negatif, que donde lo que, voseo]
     threads: [subjunctive, commands, variety]
-    inventory: []
+    inventory: [b1-subjunctive, b1-ojala, b1-imperative-neg, b1-relatives, b1-voseo]
   - id: medium-3
     name: Medium 3
     subtitle: Kemungkinan
@@ -114,7 +114,7 @@ rungs:
       en: "The subjunctive in time and purpose clauses, the pluperfect, si sentences, and reported speech."
     topics: [cuando llegues, para que, pluscuamperfecto, si + presente, dijo que]
     threads: [subjunctive, past, register]
-    inventory: []
+    inventory: [b1-subj-time, b1-pluscuamperfecto, b1-si-present, b1-reported]
   - id: hard-1
     name: Hard 1
     subtitle: Nuansa
@@ -130,7 +130,7 @@ rungs:
       en: "The imperfect subjunctive, si clauses II and III, the passive, nuances of aspect, and connectors."
     topics: [subjuntivo imperfecto, si II dan III, se pasif, ser pasif, nuansa aspek, kata penghubung]
     threads: [subjunctive, aspect, register]
-    inventory: []
+    inventory: [b2-subj-imperfect, b2-si-clauses, b2-passive, b2-connectors]
   - id: hard-2
     name: Hard 2
     subtitle: Bahasa kerja dan akademik
@@ -146,7 +146,7 @@ rungs:
       en: "Formal register, emails, meetings, academic writing, and vocabulary from different regions."
     topics: [ragam formal, surel, rapat, tulisan akademik, kosakata wilayah, vosotros]
     threads: [register, variety]
-    inventory: []
+    inventory: [b2-register, hard2-vosotros]
   - id: hard-3
     name: Hard 3
     subtitle: Fasih
@@ -162,4 +162,4 @@ rungs:
       en: "Idioms and refranes, the subjunctive in all its corners, nominalisation, long authentic texts, and interpreting."
     topics: [idiom, refranes, subjuntivo lanjut, nominalisasi, teks autentik, menerjemahkan]
     threads: [subjunctive, register, variety]
-    inventory: []
+    inventory: [c1-idioms, c1-nominalisation]

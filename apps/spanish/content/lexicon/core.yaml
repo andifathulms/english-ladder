@@ -1,0 +1,60 @@
+# Function words a rung may use without a glossary entry (CLAUDE.md §4.1): articles, pronouns,
+# prepositions, conjunctions, question words, numbers, greetings. Content words come from the rung's
+# word list (content/data/words/<rung>.yaml) and lesson glossaries. Verb forms are checked by the
+# inventory lint, not listed here. Later rungs inherit earlier rungs' words.
+rungs:
+  dasar:
+    - [hola, adiós, gracias, por, favor, sí, no, y, o, de, en, con, el, la, los, las, un, una]
+  easy-1:
+    - [unos, unas, al, del, lo]
+    - [yo, tú, él, ella, usted, nosotros, nosotras, vosotros, vosotras, ellos, ellas, ustedes]
+    - [me, te, se]
+    - [mi, mis, tu, tus, su, sus, nuestro, nuestra, nuestros, nuestras, vuestro, vuestra]
+    - [a, sin, para, sobre, debajo, detrás, delante, entre, desde, hasta, cerca, lejos]
+    - [e, u, pero, porque, también, tampoco, muy, mucho, mucha, muchos, muchas, poco, poca, pocos, pocas, bien, mal, más, ya, solo]
+    - [qué, quién, quiénes, dónde, adónde, cuándo, cómo, cuál, cuáles, cuánto, cuánta, cuántos, cuántas]
+    - [aquí, allí, ahí, hoy, ahora, nada, algo]
+    - [buenos, buenas, días, tardes, noches, perdón, gusto, encantado, encantada, bienvenido, bienvenida, luego, mañana, señor, señora, señorita]
+    - [cero, uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez, once, doce, trece, catorce, quince]
+    - [dieciséis, diecisiete, dieciocho, diecinueve, veinte, veintiuno, veintiún, veintidós, veintitrés, veinticuatro, veinticinco]
+    - [veintiséis, veintisiete, veintiocho, veintinueve, treinta, cuarenta, cincuenta, sesenta, setenta, ochenta, noventa, cien, ciento]
+    - [años, año]
+  easy-2:
+    - [que, le, les, nos, os, mí, ti, conmigo, contigo]
+    - [este, esta, estos, estas, ese, esa, esos, esas, aquel, aquella, aquellos, aquellas, esto, eso, aquello]
+    - [antes, después, primero, tarde, temprano, siempre, nunca, vez, veces, todos, todo, toda, todas, cada, otro, otra, otros, otras]
+    - [tan, como, menos, mejor, peor, mayor, menor, cuando, entonces, normalmente, casi]
+    - [media, cuarto, punto]
+  easy-3: [lo, la, los, las, ayer, anoche, todavía, aún]
+  medium-1: []
+  medium-2: [ojalá, si]
+  medium-3: []
+  hard-1: []
+  hard-2: []
+  hard-3: []
+spain_only:
+  coche: carro
+  ordenador: computadora
+  móvil: celular
+  zumo: jugo
+  piso: departamento
+  gafas: lentes
+  patata: papa
+  patatas: papas
+  billete: boleto
+  aparcar: estacionar
+  conducir: manejar
+  coger: tomar
+  vale: está bien
+latam_only:
+  carro: coche
+  computadora: ordenador
+  celular: móvil
+  jugo: zumo
+  departamento: piso
+  lentes: gafas
+  papa: patata
+  papas: patatas
+  boleto: billete
+  estacionar: aparcar
+  manejar: conducir

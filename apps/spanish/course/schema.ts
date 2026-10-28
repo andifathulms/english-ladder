@@ -34,6 +34,8 @@ const itemBase = {
   section: z.enum(PLACEMENT_SECTIONS).optional(),
   /** Typed answers: strict, or lenient about accent marks. Default: the rung's (CLAUDE.md §3.3). */
   accents: Accents.optional(),
+  /** `id`: the prompt and options are Indonesian (e.g. "what does mesa mean?"), so the Spanish lint skips them. */
+  lang: z.enum(['es', 'id']).optional(),
 };
 
 const optionsMsg = { message: 'answer must be one of the options' };
@@ -332,5 +334,73 @@ export const PlacementSchema = z
     });
   });
 
-/** Proper names allowed in content without a list entry. */
+/** Proper names (people, places) allowed in content without a list entry. */
 export const NamesSchema = z.array(z.string().min(1));
+
+// ---------- data files (content/data, content/lexicon) ----------
+
+const Override = z.union([z.array(z.string()).length(6), z.record(z.enum(PERSONS), z.string()), z.object({ stem: z.string().min(1) }).strict(), z.string()]);
+
+/** content/data/verbs.yaml (lib/es/conjugate.ts VerbData). */
+export const VerbsSchema = z.array(
+  z
+    .object({
+      inf: z.string().regex(/^[a-záéíóúüñ]*(ar|er|ir|ír)(se)?$/),
+      id: z.string().min(1),
+      en: z.string().optional(),
+      stem: z.enum(['ie', 'ue', 'i', 'u-ue']).optional(),
+      zc: z.boolean().optional(),
+      stress: z.enum(['i', 'u']).optional(),
+      irregular: z.record(z.enum([...TENSES, 'gerundio', 'participio']), Override).optional(),
+      check: z.record(z.enum(TENSES), z.array(z.string()).length(6)).optional(),
+    })
+    .strict(),
+);
+
+/** content/data/grammar.yaml: grammar points with their PCIC level and what the lint detects. */
+export const GrammarSchema = z.array(
+  z
+    .object({
+      id: z.string().regex(/^[a-z0-9-]+$/),
+      level: z.enum(['A1', 'A2', 'B1', 'B2', 'C1']),
+      pcic: z.string().min(1),
+      desc: z.string().min(1),
+      verbs: z.array(z.string()).optional(),
+      forms: z.array(z.string()).optional(),
+      detect: z.string().optional(),
+      note: z.string().optional(),
+    })
+    .strict(),
+);
+
+const Bi = z.object({ id: z.string().min(1), en: z.string().min(1) }).strict();
+/** content/data/bridges.yaml: Indonesian ← Portuguese → Spanish bridges and false friends. */
+export const BridgesSchema = z
+  .object({
+    bridges: z.array(z.object({ es: z.string().min(1), pt: z.string().min(1), id: z.string().min(1), kind: z.enum(['same', 'near', 'off']) }).strict()),
+    false_friends: z.array(
+      z
+        .object({
+          es: z.string().min(1),
+          means: Bi,
+          looks_like: z.object({ id: z.string().optional(), en: z.string().optional() }).strict(),
+          warn: Bi,
+        })
+        .strict(),
+    ),
+  })
+  .strict();
+
+/** content/lexicon/core.yaml: function words per rung, and the words only one variety uses. */
+export const LexiconSchema = z
+  .object({
+    rungs: z.record(z.array(z.union([z.string(), z.array(z.string())])).transform((xs) => xs.flat().map(String))),
+    /** Words a Latin American (`es`) line must not use, with the Latin American word. */
+    spain_only: z.record(z.string()),
+    /** Words a Spain (`es_es`) line must not use, with the Spain word. */
+    latam_only: z.record(z.string()),
+  })
+  .strict();
+
+/** content/data/words/<rung>.yaml: the rung's word list (the deck), lemmas with meanings. */
+export const WordListSchema = z.array(GlossaryEntry);

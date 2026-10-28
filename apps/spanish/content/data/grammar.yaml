@@ -21,14 +21,14 @@
 - { id: d-reading, level: A1, pcic: "Pronunciación 1", desc: "Reading aloud with the spelling rules" }
 
 # ---------- Easy 1 (A1) ----------
-- { id: a1-greetings, level: A1, pcic: "Funciones 2.1", desc: "Greetings; tú and usted", verbs: [llamarse], forms: [me llamo, te llamas, se llama] }
+- { id: a1-greetings, level: A1, pcic: "Funciones 2.1", desc: "Greetings; tú and usted", verbs: [llamarse], forms: [me llamo, te llamas, se llama, estoy, estás, está, están, estáis] }
 - { id: a1-ser-identity, level: A1, pcic: "Gramática 9.1.1", desc: "ser: identity, origin, profession", verbs: [ser] }
 - { id: a1-gender, level: A1, pcic: "Gramática 1.1, 3.1", desc: "Noun gender; el/la, un/una; early exceptions (el día, la mano)" }
 - { id: a1-plural-agreement, level: A1, pcic: "Gramática 1.2, 2.1", desc: "Plurals; article–noun–adjective agreement" }
 - { id: a1-numbers-tener, level: A1, pcic: "Gramática 6.1, 9.1.1", desc: "Numbers 0–100; age with tener", verbs: [tener], note: "PCIC lists tener's vowel change under A2; taught here as the verb for age" }
 - { id: a1-estar, level: A1, pcic: "Gramática 9.1.1", desc: "estar: location, mood, temporary state", verbs: [estar] }
 - { id: a1-ser-estar, level: A1, pcic: "Gramática 9.1.1", desc: "ser or estar: the first contrast" }
-- { id: a1-hay, level: A1, pcic: "Gramática 9.1.1", desc: "hay: there is, there are", verbs: [haber] }
+- { id: a1-hay, level: A1, pcic: "Gramática 9.1.1", desc: "hay: there is, there are", forms: [hay] }
 - { id: a1-present-ar, level: A1, pcic: "Gramática 9.1.1", desc: "Present of regular -ar verbs", detect: present-ar }
 - { id: a1-present-er-ir, level: A1, pcic: "Gramática 9.1.1, 14.2", desc: "Present of regular -er and -ir verbs; question words", detect: present-er-ir }
 - { id: a1-possessives, level: A1, pcic: "Gramática 5.1", desc: "Family; possessives mi, tu, su, nuestro" }
