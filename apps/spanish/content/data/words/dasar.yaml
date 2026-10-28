@@ -1,0 +1,37 @@
+# Dasar word list (the Kartu kata deck for Dasar): the lessons' words. Draft for the teacher's review.
+# Shape: GlossaryEntry (course/schema.ts). Ordered by lesson.
+- { es: mesa, id: meja, pos: noun, gender: f, plural: mesas, bridge: { pt: mesa, id: meja } }
+- { es: zapato, id: sepatu, pos: noun, gender: m, plural: zapatos, bridge: { pt: sapato, id: sepatu } }
+- { es: bandera, id: bendera, pos: noun, gender: f, plural: banderas, bridge: { pt: bandeira, id: bendera } }
+- { es: domingo, id: "hari Minggu", pos: noun, gender: m, plural: domingos, bridge: { pt: domingo, id: Minggu } }
+- { es: queso, id: keju, pos: noun, gender: m, plural: quesos, bridge: { pt: queijo, id: keju } }
+- { es: hola, id: halo, pos: interj }
+- { es: gracias, id: "terima kasih", pos: interj }
+- { es: adiós, id: "selamat tinggal", pos: interj }
+- { es: jamón, id: "daging ham", pos: noun, gender: m, plural: jamones }
+- { es: gente, id: "orang-orang", pos: noun, gender: f }
+- { es: llave, id: kunci, pos: noun, gender: f, plural: llaves }
+- { es: vaca, id: sapi, pos: noun, gender: f, plural: vacas }
+- { es: calle, id: jalan, pos: noun, gender: f, plural: calles }
+- { es: ciudad, id: kota, pos: noun, gender: f, plural: ciudades }
+- { es: cielo, id: langit, pos: noun, gender: m, plural: cielos }
+- { es: guitarra, id: gitar, pos: noun, gender: f, plural: guitarras }
+- { es: pingüino, id: penguin, pos: noun, gender: m, plural: pingüinos }
+- { es: pero, id: tetapi, pos: conj }
+- { es: perro, id: anjing, pos: noun, gender: m, plural: perros }
+- { es: caro, id: mahal, pos: adj }
+- { es: carro, id: mobil, pos: noun, gender: m, plural: carros, es_es: coche }
+- { es: radio, id: radio, pos: noun, gender: f, plural: radios }
+- { es: café, id: kopi, pos: noun, gender: m, plural: cafés }
+- { es: casa, id: rumah, pos: noun, gender: f, plural: casas }
+- { es: árbol, id: pohon, pos: noun, gender: m, plural: árboles }
+- { es: música, id: musik, pos: noun, gender: f }
+- { es: lápiz, id: pensil, pos: noun, gender: m, plural: lápices }
+- { es: joven, id: muda, pos: adj }
+- { es: salida, id: "pintu keluar", pos: noun, gender: f, plural: salidas }
+- { es: entrada, id: "pintu masuk", pos: noun, gender: f, plural: entradas }
+- { es: baño, id: "kamar mandi, toilet", pos: noun, gender: m, plural: baños }
+- { es: leche, id: susu, pos: noun, gender: f }
+- { es: menú, id: menu, pos: noun, gender: m, plural: menús }
+- { es: agua, id: air, pos: noun, gender: f, el: true, plural: aguas }
+- { es: éxito, id: sukses, pos: noun, gender: m, plural: éxitos }

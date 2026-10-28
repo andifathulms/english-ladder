@@ -1,0 +1,30 @@
+# Dasar rung test (PRD §5.5): draw 10 of 18, pass 8, at least one item from every lesson.
+# Draft for the teacher's review. Spain recognition: one item (d-t-09).
+rung: dasar
+draw: 10
+pass: 8
+items:
+  # 1 · five vowels, words you already know
+  - { id: d-t-01, from: dasar-01-kamu-sudah-bisa, type: listen, audio: "zapato", options: [zapato, mesa, queso], answer: zapato, why: { id: "*Za-PA-to*: sepatu.", en: "*Za-PA-to*: shoe." } }
+  - { id: d-t-02, from: dasar-01-kamu-sudah-bisa, type: choice, lang: id, prompt: "*Meja* dalam bahasa Spanyol adalah …", options: [mesa, queso, bandera], answer: mesa, why: { id: "*Meja* datang dari bahasa Portugis *mesa*, sama dengan bahasa Spanyol.", en: "*Meja* comes from Portuguese *mesa*, the same word as in Spanish." } }
+  - { id: d-t-03, from: dasar-01-kamu-sudah-bisa, type: choice, lang: id, prompt: "Kata Spanyol mana yang mirip *bendera*?", options: [bandera, domingo, zapato], answer: bandera, why: { id: "*Bendera* ← *bandeira* (Portugis) → *bandera*.", en: "*Bendera* ← *bandeira* (Portuguese) → *bandera*." } }
+  # 2 · letters that surprise
+  - { id: d-t-04, from: dasar-02-huruf-kejutan, type: choice, lang: id, prompt: "Huruf mana yang tidak pernah dibaca?", options: [h, j, ñ], answer: h, why: { id: "*H* selalu diam: *hola* terdengar seperti *ola*.", en: "*H* is always silent: *hola* sounds like *ola*." } }
+  - { id: d-t-05, from: dasar-02-huruf-kejutan, type: listen, audio: "el jamón", options: ["el jamón", "la gente"], answer: "el jamón", why: { id: "*J* seperti *kh*: *el khamón*.", en: "*J* like *kh*: *el khamón*." } }
+  - { id: d-t-06, from: dasar-02-huruf-kejutan, type: choice, lang: id, prompt: "*Ñ* dalam *España* dibaca seperti …", options: ["ny dalam nyanyi", "n biasa", "ng dalam bunga"], answer: "ny dalam nyanyi", why: { id: "*Ñ* dibaca *ny*: *Es-pa-nya*.", en: "*Ñ* sounds like *ny*: *Es-pa-nya*." } }
+  # 3 · c and z, qu, gu, gü
+  - { id: d-t-07, from: dasar-03-c-dan-z, type: listen, audio: "el cielo", options: ["el cielo", "el queso"], answer: "el cielo", why: { id: "*C* sebelum *i* dibaca *s*: *el sielo*.", en: "*C* before *i* sounds like *s*: *el sielo*." } }
+  - { id: d-t-08, from: dasar-03-c-dan-z, type: choice, lang: id, prompt: "*Qu* dalam *queso* dibaca seperti …", options: ["k", "ku", "kw"], answer: "k", why: { id: "*Qu* sebelum *e*: *u*-nya diam, jadi *keso*.", en: "*Qu* before *e*: the *u* is silent, so *keso*." } }
+  - { id: d-t-09, from: dasar-03-c-dan-z, type: listen, variety: es, prompt: "Dengarkan suara dari Spanyol, lalu pilih.", audio: "la ciudad", options: ["la ciudad", "el cielo"], answer: "la ciudad", why: { id: "Di Spanyol, *c* sebelum *i* terdengar seperti *th*: *la thiudad*.", en: "In Spain, *c* before *i* sounds like *th*: *la thiudad*." } }
+  # 4 · r and rr
+  - { id: d-t-10, from: dasar-04-r-dan-rr, type: listen, audio: "perro", options: [pero, perro], answer: perro, why: { id: "Getaran panjang: *perro*, anjing.", en: "A long roll: *perro*, dog." } }
+  - { id: d-t-11, from: dasar-04-r-dan-rr, type: listen, audio: "carro", options: [caro, carro], answer: carro, why: { id: "Getaran panjang: *carro*, mobil.", en: "A long roll: *carro*, car." } }
+  - { id: d-t-12, from: dasar-04-r-dan-rr, type: choice, lang: id, prompt: "*Pero* berarti …", options: [tetapi, anjing, mahal], answer: tetapi, why: { id: "*Pero* dengan satu *r* berarti tetapi; *perro* anjing.", en: "*Pero* with one *r* means but; *perro* is dog." } }
+  # 5 · stress and the accent mark
+  - { id: d-t-13, from: dasar-05-tekanan, type: stress, word: "música", syllables: [mu, si, ca], stressed: 0, needsAccent: true, why: { id: "*MÚ-si-ca*: suku ketiga dari belakang selalu perlu aksen.", en: "*MÚ-si-ca*: third from last always needs an accent." } }
+  - { id: d-t-14, from: dasar-05-tekanan, type: stress, word: "casa", syllables: [ca, sa], stressed: 0, needsAccent: false, why: { id: "*CA-sa*: aturan biasa, tanpa aksen.", en: "*CA-sa*: the default, no accent." } }
+  - { id: d-t-15, from: dasar-05-tekanan, type: stress, word: "árbol", syllables: [ar, bol], stressed: 0, needsAccent: true, why: { id: "*ÁR-bol*: berakhir *l* tapi ditekan di depan, jadi perlu aksen.", en: "*ÁR-bol*: ends in *l* but is stressed first, so it needs an accent." } }
+  # 6 · reading aloud
+  - { id: d-t-16, from: dasar-06-membaca, type: choice, lang: id, prompt: "Kamu mencari toilet. Tanda mana yang kamu ikuti?", options: [Baños, Salida, Entrada], answer: Baños, why: { id: "*Baños*: kamar mandi, toilet.", en: "*Baños*: toilets." } }
+  - { id: d-t-17, from: dasar-06-membaca, type: stress, word: "menú", syllables: [me, nu], stressed: 1, needsAccent: true, why: { id: "*Me-NÚ*: ditekan di akhir dan berakhir vokal, jadi perlu aksen.", en: "*Me-NÚ*: stressed last, ends in a vowel, so it needs an accent." } }
+  - { id: d-t-18, from: dasar-06-membaca, type: choice, lang: id, prompt: "Apa arti *éxito*?", options: [sukses, "pintu keluar", "pintu masuk"], answer: sukses, why: { id: "*Éxito* berarti sukses. Pintu keluar adalah *salida*.", en: "*Éxito* means success. An exit is *salida*." } }
