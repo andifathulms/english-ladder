@@ -10,6 +10,7 @@ describe('course config', () => {
   it('has its own keys and every English Ladder fix on', () => {
     expect(STORAGE_KEY).toBe('spanish-ladder:v1');
     expect(course.cachePrefix).toBe('spanish-ladder-');
+    expect(course.rangeLabel).toBe('A1 → C1');
     expect(Object.values(course.fixes ?? {}).every(Boolean)).toBe(true);
     expect(Object.keys(course.fixes ?? {})).toHaveLength(9);
   });

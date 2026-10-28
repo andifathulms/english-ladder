@@ -1,7 +1,6 @@
 // Spanish Ladder's course configuration: everything the shared engine needs to run the course
 // (docs/spanish/CLAUDE.md, adjusted by docs/spanish/plan.md).
 import type { CourseConfig } from '@ladder/core/course/types';
-import { Contours } from '@ladder/core/components/ui/Contours';
 import { baseStrings, extendStrings } from '@ladder/core/lib/i18n';
 import { idOverrides, enOverrides, type SpanishKey } from '@/i18n/overrides';
 import { registry } from '@/visuals/registry';
@@ -9,13 +8,19 @@ import { VISUAL_IDS } from '@/visuals/visualIds';
 import { adapter } from '@/course/adapter';
 import { text } from '@/course/text';
 import { voiceScorer, canSpeak, sentenceSplit, sampleText } from '@/course/speech';
-import { SpanishSentence } from '@/components/slots';
+import { ClimbExtra, DeleChip, DoorNote, SpanishSentence, WordmarkEscalera, rungSubtitle } from '@/components/slots';
+import { Azulejo } from '@/components/Azulejo';
+import { SoundStrand, SpainStrand, TalkStrand, TirukanStrand, WordsStrand } from '@/components/StrandCards';
+import { WordsRow, matchesWord } from '@/components/WordsRow';
+import { WordDeckPanel } from '@/components/decks';
 import { ALLOWED_SETTINGS, DEFAULT_SETTINGS, EXTENSIONS, SCHEMA_VERSION, STORAGE_KEY, THEME_COLOR, onCompleteLesson } from '@/course/progress';
 
 export const course: CourseConfig = {
   id: 'spanish-ladder',
   name: 'Spanish Ladder',
-  rangeLabel: 'A1 → C1 · DELE',
+  // DESIGN §2 asks for "A1 → C1 · DELE" beside *escalera*; that wraps in the sidebar and the phone header,
+  // so the wordmark keeps A1 → C1 and every rung chip carries DELE.
+  rangeLabel: 'A1 → C1',
   storageKey: STORAGE_KEY,
   cachePrefix: 'spanish-ladder-',
   exportFilePrefix: 'spanish-ladder-progress',
@@ -84,9 +89,29 @@ export const course: CourseConfig = {
   audio: { defaultVariety: 'latam' },
   text,
   adapter,
-  components: { Sentence: SpanishSentence },
+  components: { Sentence: SpanishSentence, WordmarkExtra: WordmarkEscalera },
+  strands: {
+    examples: [SoundStrand, SpainStrand, TalkStrand, TirukanStrand],
+    contrast: [WordsStrand],
+  },
   lesson: { explain: 'ui' },
-  ladder: { tiers: ['hard', 'medium', 'easy', 'dasar'] },
+  ladder: {
+    tiers: ['hard', 'medium', 'easy', 'dasar'],
+    LevelChip: DeleChip,
+    rungSubtitle: (r) => rungSubtitle(r),
+  },
+  home: {
+    welcome: 'twoDoor',
+    // Door 1 opens Easy 1, lesson 1; Dasar is optional, offered in the line under the door.
+    firstRung: (rungs) => rungs.find((r) => r.id === 'easy-1'),
+    DoorNote,
+  },
+  climb: { Extra: ClimbExtra },
+  words: {
+    match: matchesWord,
+    Row: WordsRow,
+    tabs: { titleKey: 'words.tab', list: [{ hash: 'deck', labelKey: 'words.deckTab', Panel: WordDeckPanel }] },
+  },
   themeColor: THEME_COLOR,
   // The English Ladder fixes the siblings ship with (all on).
   fixes: {
@@ -103,5 +128,5 @@ export const course: CourseConfig = {
 
   visuals: registry as CourseConfig['visuals'],
   visualIds: VISUAL_IDS,
-  boardPattern: Contours,
+  boardPattern: Azulejo,
 };

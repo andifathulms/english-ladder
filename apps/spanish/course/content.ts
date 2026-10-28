@@ -21,6 +21,7 @@ import {
 } from './schema';
 import { lintLessons, lintPool, type LintData } from './lint';
 import type { CheckItem, Dialogue, GlossaryEntry, Lesson, Placement, Reading, Rung, TestPool } from './types';
+import { wordIdOf, type EsLessonData } from './lessonData';
 
 const sl = (l: unknown) => l as Lesson;
 
@@ -79,6 +80,16 @@ export const model: ContentModel = {
   },
   adapter,
   yaml: 'json',
+  lessonData: (l): EsLessonData => {
+    const lesson = sl(l);
+    const { bridges } = getData();
+    const named = new Set([...(lesson.words?.bridges ?? []), ...lesson.glossary.filter((g) => g.bridge).map((g) => g.es)]);
+    return {
+      wordIds: lesson.glossary.map((g) => wordIdOf(g.es)),
+      bridges: bridges.bridges.filter((b) => named.has(b.es)),
+      falseFriends: bridges.false_friends.filter((f) => named.has(f.es)),
+    };
+  },
   // Typed items carry their accent mode from the rung, so grading needs no rung lookup.
   postParse: {
     lesson: (l) => ({ ...l, check: stampAccents(sl(l).check, rungAccents(l.rung)) as unknown as Lesson['check'] }) as never,

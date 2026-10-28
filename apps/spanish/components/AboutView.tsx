@@ -2,6 +2,7 @@
 
 import { useT } from '@ladder/core/components/ProgressProvider';
 import { PageShell } from '@ladder/core/components/ui/PageShell';
+import type { SpanishKey } from '@/i18n/overrides';
 
 const REPO = 'https://github.com/andifathulms/spanish-ladder';
 
@@ -61,7 +62,7 @@ const copy = {
 };
 
 export function AboutView() {
-  const { t, lang } = useT();
+  const { t, lang } = useT<SpanishKey>();
   return (
     <PageShell title={t('about.title')} back={{ href: '/me/', label: t('nav.me') }}>
       {copy[lang].map((s) => (
@@ -70,6 +71,27 @@ export function AboutView() {
           <p className="max-w-measure">{s.p}</p>
         </section>
       ))}
+      <section className="flex flex-col gap-2">
+        <h2 className="text-h2">{t('about.dataTitle')}</h2>
+        <p className="max-w-measure">
+          {lang === 'en' ? 'Word frequencies (the order of the word deck) come from ' : 'Frekuensi kata (urutan kartu kata) berasal dari '}
+          <a href="https://github.com/hermitdave/FrequencyWords" rel="noopener">
+            FrequencyWords
+          </a>
+          {lang === 'en'
+            ? ' by Hermit Dave, built from the OpenSubtitles 2018 corpus, licensed '
+            : ' oleh Hermit Dave, dibuat dari korpus OpenSubtitles 2018, berlisensi '}
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener license">
+            CC BY-SA 4.0
+          </a>
+          {lang === 'en' ? '. The subset used here is shared under the same licence. Level tags on the deck are estimates.' : '. Potongan yang dipakai di sini dibagikan dengan lisensi yang sama. Label tingkat di kartu kata adalah perkiraan.'}
+        </p>
+        <p className="max-w-measure">
+          {lang === 'en'
+            ? 'Topic order is checked against the Plan Curricular del Instituto Cervantes (© Instituto Cervantes), cited by section; no text from it is copied. Verbs, grammar points, word bridges and lessons are written for this course.'
+            : 'Urutan topik dicocokkan dengan Plan Curricular del Instituto Cervantes (© Instituto Cervantes), dikutip per bagian; tidak ada teksnya yang disalin. Kata kerja, poin tata bahasa, jembatan kata dan pelajaran ditulis untuk kursus ini.'}
+        </p>
+      </section>
       <section className="flex flex-col gap-2">
         <h2 className="text-h2">{lang === 'en' ? 'Corrections' : 'Koreksi'}</h2>
         <p className="max-w-measure">

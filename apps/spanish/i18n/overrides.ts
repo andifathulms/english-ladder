@@ -4,6 +4,55 @@ import type { StringTable } from '@ladder/core/lib/i18n';
 
 /** Keys only Spanish Ladder's components use (useT<SpanishKey>()). */
 export type SpanishKey =
+  | 'tense.presente'
+  | 'tense.preterito'
+  | 'tense.imperfecto'
+  | 'tense.futuro'
+  | 'tense.condicional'
+  | 'tense.subjuntivo'
+  | 'tense.imperativo'
+  | 'number.sg'
+  | 'number.pl'
+  | 'check.formPrompt'
+  | 'check.formLabel'
+  | 'check.dictationPrompt'
+  | 'check.dictationLabel'
+  | 'check.conjugatePrompt'
+  | 'check.agreePrompt'
+  | 'check.article'
+  | 'check.adjective'
+  | 'check.stressPrompt'
+  | 'check.stressSyllable'
+  | 'check.needsAccent'
+  | 'check.yes'
+  | 'check.no'
+  | 'check.accentNote'
+  | 'accent.a'
+  | 'accent.e'
+  | 'accent.i'
+  | 'accent.o'
+  | 'accent.u'
+  | 'accent.ue'
+  | 'accent.n'
+  | 'accent.q'
+  | 'accent.x'
+  | 'gender.m'
+  | 'gender.f'
+  | 'gender.mf'
+  | 'sound.pairs'
+  | 'lesson.spain'
+  | 'lesson.spainLatam'
+  | 'lesson.spainEs'
+  | 'words.bridges'
+  | 'words.portuguese'
+  | 'words.bridgeOff'
+  | 'words.falseFriends'
+  | 'words.plural'
+  | 'words.tab'
+  | 'words.deckTab'
+  | 'home.doorNote'
+  | 'home.doorNoteLink'
+  | 'deck.soon'
   | 'placement.section.dasar'
   | 'placement.section.easy1'
   | 'placement.section.easy2'
@@ -34,6 +83,55 @@ export type SpanishKey =
 type Overrides = Partial<StringTable> & Partial<Record<SpanishKey, string>>;
 
 export const idOverrides: Overrides = {
+  'tense.presente': 'presente',
+  'tense.preterito': 'pretérito indefinido',
+  'tense.imperfecto': 'imperfecto',
+  'tense.futuro': 'futuro',
+  'tense.condicional': 'condicional',
+  'tense.subjuntivo': 'subjuntivo',
+  'tense.imperativo': 'perintah (imperativo)',
+  'number.sg': 'tunggal',
+  'number.pl': 'jamak',
+  'check.formPrompt': 'Tulis bentuk yang tepat.',
+  'check.formLabel': 'Bentuknya',
+  'check.dictationPrompt': 'Dengarkan, lalu tulis kalimatnya.',
+  'check.dictationLabel': 'Kalimat yang kamu dengar',
+  'check.conjugatePrompt': 'Isi tabelnya:',
+  'check.agreePrompt': 'Pilih artikel dan bentuk kata sifat yang cocok.',
+  'check.article': 'Artikel',
+  'check.adjective': 'Kata sifat',
+  'check.stressPrompt': 'Ketuk suku kata yang ditekan:',
+  'check.stressSyllable': 'Suku kata yang ditekan',
+  'check.needsAccent': 'Perlu aksen?',
+  'check.yes': 'Ya',
+  'check.no': 'Tidak',
+  'check.accentNote': 'Hampir sempurna: *{answer}*, dengan aksen.',
+  'accent.a': 'a dengan aksen',
+  'accent.e': 'e dengan aksen',
+  'accent.i': 'i dengan aksen',
+  'accent.o': 'o dengan aksen',
+  'accent.u': 'u dengan aksen',
+  'accent.ue': 'u dengan dua titik',
+  'accent.n': 'eñe',
+  'accent.q': 'tanda tanya pembuka',
+  'accent.x': 'tanda seru pembuka',
+  'gender.m': 'maskulin',
+  'gender.f': 'feminin',
+  'gender.mf': 'maskulin atau feminin',
+  'sound.pairs': 'Pasangan bunyi',
+  'lesson.spain': 'España',
+  'lesson.spainLatam': 'América Latina',
+  'lesson.spainEs': 'España',
+  'words.bridges': 'Jembatan kata',
+  'words.portuguese': 'Portugis',
+  'words.bridgeOff': 'Jembatan ini menyesatkan',
+  'words.falseFriends': 'Teman palsu',
+  'words.plural': 'jamak:',
+  'words.tab': 'Kata',
+  'words.deckTab': 'Kartu kata',
+  'home.doorNote': 'Mau latihan bunyi dulu?',
+  'home.doorNoteLink': 'Mulai dari Dasar.',
+  'deck.soon': 'Kartu kata A1 terbuka bersama pelajaran Easy 1.',
   'app.name': 'Spanish Ladder',
   'nav.words': 'Kata',
   'rung.inProgress': '{n} dari {total} pelajaran',
@@ -89,6 +187,55 @@ export const idOverrides: Overrides = {
 };
 
 export const enOverrides: Overrides = {
+  'tense.presente': 'present',
+  'tense.preterito': 'preterite',
+  'tense.imperfecto': 'imperfect',
+  'tense.futuro': 'future',
+  'tense.condicional': 'conditional',
+  'tense.subjuntivo': 'subjunctive',
+  'tense.imperativo': 'command (imperativo)',
+  'number.sg': 'singular',
+  'number.pl': 'plural',
+  'check.formPrompt': 'Write the right form.',
+  'check.formLabel': 'The form',
+  'check.dictationPrompt': 'Listen, then write the sentence.',
+  'check.dictationLabel': 'The sentence you heard',
+  'check.conjugatePrompt': 'Fill in the grid:',
+  'check.agreePrompt': 'Pick the article and the adjective form that agree.',
+  'check.article': 'Article',
+  'check.adjective': 'Adjective',
+  'check.stressPrompt': 'Tap the stressed syllable:',
+  'check.stressSyllable': 'The stressed syllable',
+  'check.needsAccent': 'Needs an accent?',
+  'check.yes': 'Yes',
+  'check.no': 'No',
+  'check.accentNote': 'Almost perfect: *{answer}*, with its accent.',
+  'accent.a': 'a with an accent',
+  'accent.e': 'e with an accent',
+  'accent.i': 'i with an accent',
+  'accent.o': 'o with an accent',
+  'accent.u': 'u with an accent',
+  'accent.ue': 'u with a diaeresis',
+  'accent.n': 'eñe (n with a tilde)',
+  'accent.q': 'opening question mark',
+  'accent.x': 'opening exclamation mark',
+  'gender.m': 'masculine',
+  'gender.f': 'feminine',
+  'gender.mf': 'masculine or feminine',
+  'sound.pairs': 'Sound pairs',
+  'lesson.spain': 'España',
+  'lesson.spainLatam': 'América Latina',
+  'lesson.spainEs': 'España',
+  'words.bridges': 'Word bridges',
+  'words.portuguese': 'Portuguese',
+  'words.bridgeOff': 'This bridge misleads',
+  'words.falseFriends': 'False friends',
+  'words.plural': 'plural:',
+  'words.tab': 'Words',
+  'words.deckTab': 'Word deck',
+  'home.doorNote': 'Want to practise the sounds first?',
+  'home.doorNoteLink': 'Start with Dasar.',
+  'deck.soon': 'The A1 word deck opens with the Easy 1 lessons.',
   'app.name': 'Spanish Ladder',
   'nav.words': 'Words',
   'rung.inProgress': '{n} of {total} lessons',

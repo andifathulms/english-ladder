@@ -8,8 +8,8 @@ export type Finding = { level: 'error' | 'warn'; message: string };
 
 export type Grammar = { id: string; level: string; verbs?: string[]; forms?: string[]; detect?: string };
 export type Bridges = {
-  bridges: { es: string; pt: string; id: string; kind: string }[];
-  false_friends: { es: string }[];
+  bridges: { es: string; pt: string; id: string; kind: 'same' | 'near' | 'off' }[];
+  false_friends: { es: string; means: { id: string; en: string }; warn: { id: string; en: string } }[];
 };
 export type Lexicon = { rungs: Record<string, string[]>; spain_only: Record<string, string>; latam_only: Record<string, string> };
 
