@@ -1,0 +1,38 @@
+# Baca dan dengar (Easy 1): one connected text using only Easy 1 grammar and words. Draft.
+rung: easy-1
+title: { id: "Keluarga di Lima", en: "A family in Lima", es: "Una familia en Lima" }
+lines:
+  - { es: "Me llamo Camila y soy de Lima, en Perú.", id: "Namaku Camila dan aku dari Lima, di Peru." }
+  - { es: "Tengo veintiocho años y soy enfermera.", id: "Umurku dua puluh delapan tahun dan aku perawat." }
+  - { es: "Vivo con mi familia en una casa grande.", id: "Aku tinggal bersama keluargaku di rumah yang besar." }
+  - { es: "Mi madre es profesora y mi padre trabaja en un banco.", id: "Ibuku guru dan ayahku bekerja di bank." }
+  - { es: "Tengo un hermano, Pablo. Tiene veinte años y es muy simpático.", id: "Aku punya satu saudara laki-laki, Pablo. Umurnya dua puluh tahun dan dia ramah sekali." }
+  - { es: "Él estudia en la universidad y habla inglés muy bien.", id: "Dia kuliah dan bahasa Inggrisnya bagus sekali." }
+  - { es: "En nuestra calle hay un mercado y un parque.", id: "Di jalan kami ada pasar dan taman." }
+  - { es: "Los domingos comemos arroz con pollo en el parque.", id: "Setiap hari Minggu kami makan nasi dengan ayam di taman." }
+  - { es: "Hoy estoy cansada, pero estoy contenta.", id: "Hari ini aku capek, tapi aku senang." }
+  - { es: "¿Y tú? ¿Dónde vives? ¿Cómo es tu familia?", id: "Kamu bagaimana? Kamu tinggal di mana? Keluargamu seperti apa?" }
+glossary:
+  - { es: enfermera, id: "perawat (perempuan)", pos: noun, gender: f }
+  - { es: domingo, id: "hari Minggu", pos: noun, gender: m, bridge: { pt: domingo, id: Minggu } }
+  - { es: veintiocho, id: "dua puluh delapan", pos: num }
+items:
+  - id: e1-r-1
+    type: choice
+    prompt: "¿De dónde es Camila?"
+    options: ["Es de Lima.", "Es de Bogotá.", "Es de Madrid."]
+    answer: "Es de Lima."
+    why: { id: "*Soy de Lima, en Perú.*", en: "*Soy de Lima, en Perú.*" }
+  - id: e1-r-2
+    type: choice
+    prompt: "¿Dónde trabaja su padre?"
+    options: ["En un banco.", "En una escuela.", "En un hospital."]
+    answer: "En un banco."
+    why: { id: "*Mi padre trabaja en un banco.*", en: "*Mi padre trabaja en un banco.*" }
+  - id: e1-r-3
+    type: choice
+    lang: id
+    prompt: "Apa yang mereka makan setiap hari Minggu?"
+    options: ["nasi dengan ayam", "ikan", "roti"]
+    answer: "nasi dengan ayam"
+    why: { id: "*Los domingos comemos arroz con pollo.*", en: "*Los domingos comemos arroz con pollo.*" }

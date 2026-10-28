@@ -1,0 +1,53 @@
+# Easy 1 rung test (PRD §5.5): draw 16 of 36, pass 12, at least one item from every lesson. Draft.
+rung: easy-1
+draw: 16
+pass: 12
+items:
+  # 01 greetings
+  - { id: e1-t-01, from: easy1-01-hola, type: gap, cue: "Kamu menyapa temanmu Lucía.", prompt: "Hola, Lucía. ¿Cómo ___?", options: [estás, está], answer: estás, why: { id: "Teman: *tú*, jadi *estás*.", en: "A friend: *tú*, so *estás*." } }
+  - { id: e1-t-02, from: easy1-01-hola, type: choice, lang: id, prompt: "Apa yang kamu ucapkan saat pertama kali bertemu seseorang?", options: ["Mucho gusto.", "Buenas noches.", "Hasta luego."], answer: "Mucho gusto.", why: { id: "*Mucho gusto* = senang berkenalan.", en: "*Mucho gusto* = nice to meet you." } }
+  - { id: e1-t-03, from: easy1-01-hola, type: gap, cue: "Kamu menyapa seorang bapak tua.", prompt: "Buenos días, señor. ¿Cómo ___ usted?", options: [está, estás], answer: está, why: { id: "*Usted* memakai *está*.", en: "*Usted* takes *está*." } }
+  # 02 ser
+  - { id: e1-t-04, from: easy1-02-soy-de, type: gap, cue: "Aku dari Indonesia.", prompt: "___ de Indonesia.", options: [Soy, Es, Eres], answer: Soy, why: { id: "*Yo*: *soy*.", en: "*Yo*: *soy*." } }
+  - { id: e1-t-05, from: easy1-02-soy-de, type: form, cue: "Mereka dari Kolombia.", base: ser, target: { person: ellos, tense: presente }, frame: "Ellos ___ de Colombia.", answer: son, why: { id: "*Ellos*: *son*.", en: "*Ellos*: *son*." } }
+  - { id: e1-t-06, from: easy1-02-soy-de, type: listen, variety: es, audio: "¿De dónde sois?", options: ["¿De dónde sois?", "¿De dónde son?"], answer: "¿De dónde sois?", why: { id: "*Sois* (Spanyol) = *son* untuk *vosotros*; cukup dikenali.", en: "*Sois* (Spain) is *son* for *vosotros*; recognise it." } }
+  # 03 gender
+  - { id: e1-t-07, from: easy1-03-el-la, type: gap, cue: "Itu sebuah meja.", prompt: "Es ___ mesa.", options: [una, un], answer: una, why: { id: "*Mesa* feminin.", en: "*Mesa* is feminine." } }
+  - { id: e1-t-08, from: easy1-03-el-la, type: gap, cue: "Masalahnya besar.", prompt: "___ problema es grande.", options: [El, La], answer: El, why: { id: "*Problema* maskulin, walau berakhir -a.", en: "*Problema* is masculine, though it ends in -a." } }
+  - { id: e1-t-09, from: easy1-03-el-la, type: choice, lang: id, prompt: "Kata mana yang maskulin?", options: [día, mano, casa], answer: día, why: { id: "*El día*: pengecualian.", en: "*El día*: an exception." } }
+  # 04 plural and agreement
+  - { id: e1-t-10, from: easy1-04-plural, type: agree, noun: { es: flores, gender: f, number: pl, id: bunga-bunga }, adj: rojo, definite: true, options: { article: [los, las], adjective: [rojos, rojas] }, answers: { article: las, adjective: rojas }, why: { id: "*Flor* feminin: *las flores rojas*.", en: "*Flor* is feminine: *las flores rojas*." } }
+  - { id: e1-t-11, from: easy1-04-plural, type: gap, cue: "Itu mobil-mobil putih.", prompt: "Son carros ___.", options: [blancos, blancas, blanco], answer: blancos, why: { id: "*Carros* maskulin jamak.", en: "*Carros* is masculine plural." } }
+  - { id: e1-t-12, from: easy1-04-plural, type: fix, cue: "Kotanya cantik.", wrong: "La ciudad es bonito.", options: ["La ciudad es bonita.", "La ciudad es bonitos."], answer: "La ciudad es bonita.", why: { id: "*Ciudad* feminin: *bonita*.", en: "*Ciudad* is feminine: *bonita*." } }
+  # 05 numbers and tener
+  - { id: e1-t-13, from: easy1-05-tengo-anos, type: gap, cue: "Umurku tiga puluh tahun.", prompt: "___ treinta años.", options: [Tengo, Soy, Estoy], answer: Tengo, why: { id: "Umur: *tener*.", en: "Age: *tener*." } }
+  - { id: e1-t-14, from: easy1-05-tengo-anos, type: listen, audio: "Tengo dieciséis años.", options: ["Tengo dieciséis años.", "Tengo sesenta años.", "Tengo seis años."], answer: "Tengo dieciséis años.", why: { id: "*Dieciséis* = 16.", en: "*Dieciséis* = 16." } }
+  - { id: e1-t-15, from: easy1-05-tengo-anos, type: form, cue: "Kami punya dua anjing.", base: tener, target: { person: nosotros, tense: presente }, frame: "___ dos perros.", answer: tenemos, why: { id: "*Nosotros*: *tenemos*, tanpa *ie*.", en: "*Nosotros*: *tenemos*, no *ie*." } }
+  # 06 estar
+  - { id: e1-t-16, from: easy1-06-estoy, type: gap, cue: "Aku di rumah.", prompt: "___ en casa.", options: [Estoy, Soy], answer: Estoy, why: { id: "Tempat: *estar*.", en: "Location: *estar*." } }
+  - { id: e1-t-17, from: easy1-06-estoy, type: gap, cue: "Anak-anak senang.", prompt: "Los niños están ___.", options: [contentos, contento], answer: contentos, why: { id: "Jamak: *contentos*.", en: "Plural: *contentos*." } }
+  - { id: e1-t-18, from: easy1-06-estoy, type: dictation, audio: "¿Dónde estás?", answer: "¿Dónde estás?", why: { id: "*Dónde* dan *estás* beraksen.", en: "*Dónde* and *estás* carry accents." } }
+  # 07 ser or estar
+  - { id: e1-t-19, from: easy1-07-ser-estar, type: gap, cue: "Lucía dokter.", prompt: "Lucía ___ médica.", options: [es, está], answer: es, why: { id: "Pekerjaan: *ser*.", en: "A job: *ser*." } }
+  - { id: e1-t-20, from: easy1-07-ser-estar, type: gap, cue: "Supnya dingin.", prompt: "La sopa ___ fría.", options: [está, es], answer: está, why: { id: "Keadaan sekarang: *estar*.", en: "A state right now: *estar*." } }
+  - { id: e1-t-21, from: easy1-07-ser-estar, type: choice, lang: id, prompt: "*Diego es aburrido* artinya…", options: ["Diego membosankan", "Diego sedang bosan"], answer: "Diego membosankan", why: { id: "*Ser* = sifat: membosankan.", en: "*Ser* = character: boring." } }
+  # 08 hay
+  - { id: e1-t-22, from: easy1-08-hay, type: gap, cue: "Ada pasar di kota.", prompt: "___ un mercado en la ciudad.", options: [Hay, Está, Es], answer: Hay, why: { id: "Sesuatu yang baru disebut: *hay*.", en: "Something new: *hay*." } }
+  - { id: e1-t-23, from: easy1-08-hay, type: gap, cue: "Pasarnya di Jalan Lima.", prompt: "El mercado ___ en la calle Lima.", options: [está, hay], answer: está, why: { id: "*El mercado* sudah tertentu: *está*.", en: "*El mercado* is a known one: *está*." } }
+  - { id: e1-t-24, from: easy1-08-hay, type: listen, audio: "No hay restaurantes aquí.", options: ["No hay restaurantes aquí.", "Hay restaurantes aquí."], answer: "No hay restaurantes aquí.", why: { id: "*No hay* = tidak ada.", en: "*No hay* = there aren't any." } }
+  # 09 -ar verbs
+  - { id: e1-t-25, from: easy1-09-hablo, type: conjugate, verb: trabajar, tense: presente, persons: [yo, tu, ellos], answers: { yo: trabajo, tu: trabajas, ellos: trabajan }, why: { id: "*-ar*: *-o*, *-as*, *-an*.", en: "*-ar*: *-o*, *-as*, *-an*." } }
+  - { id: e1-t-26, from: easy1-09-hablo, type: gap, cue: "Kami bicara bahasa Inggris.", prompt: "___ inglés.", options: [Hablamos, Hablan, Hablo], answer: Hablamos, why: { id: "*Nosotros*: *-amos*.", en: "*Nosotros*: *-amos*." } }
+  - { id: e1-t-27, from: easy1-09-hablo, type: gap, cue: "Kalian kerja di bank?", prompt: "¿Ustedes ___ en un banco?", options: [trabajan, trabajamos], answer: trabajan, why: { id: "*Ustedes*: sama dengan *ellos*, *-an*.", en: "*Ustedes*: like *ellos*, *-an*." } }
+  # 10 -er/-ir verbs and questions
+  - { id: e1-t-28, from: easy1-10-como-vivo, type: conjugate, verb: beber, tense: presente, persons: [yo, el, nosotros], answers: { yo: bebo, el: bebe, nosotros: bebemos }, why: { id: "*-er*: *-o*, *-e*, *-emos*.", en: "*-er*: *-o*, *-e*, *-emos*." } }
+  - { id: e1-t-29, from: easy1-10-como-vivo, type: gap, cue: "Kami tinggal di Lima.", prompt: "___ en Lima.", options: [Vivimos, Vivemos, Viven], answer: Vivimos, why: { id: "*-ir*: *nosotros* memakai *-imos*.", en: "*-ir*: *nosotros* takes *-imos*." } }
+  - { id: e1-t-30, from: easy1-10-como-vivo, type: gap, cue: "Kamu makan apa?", prompt: "¿___ comes?", options: [Qué, Dónde, Cuándo], answer: Qué, why: { id: "*¿Qué?* = apa.", en: "*¿Qué?* = what." } }
+  # 11 possessives
+  - { id: e1-t-31, from: easy1-11-mi-familia, type: gap, cue: "Orang tuaku tinggal di Bali.", prompt: "___ padres viven en Bali.", options: [Mis, Mi], answer: Mis, why: { id: "*Padres* jamak: *mis*.", en: "*Padres* is plural: *mis*." } }
+  - { id: e1-t-32, from: easy1-11-mi-familia, type: gap, cue: "Rumah kami kecil.", prompt: "___ casa es pequeña.", options: [Nuestra, Nuestro], answer: Nuestra, why: { id: "*Casa* feminin: *nuestra*.", en: "*Casa* is feminine: *nuestra*." } }
+  - { id: e1-t-33, from: easy1-11-mi-familia, type: fix, cue: "Siapa nama saudaramu?", wrong: "¿Cómo se llama tú hermano?", options: ["¿Cómo se llama tu hermano?", "¿Cómo se llama tú hermano?"], answer: "¿Cómo se llama tu hermano?", why: { id: "*Tu* (milikmu) tanpa aksen.", en: "*Tu* (your) has no accent." } }
+  # 12 places
+  - { id: e1-t-34, from: easy1-12-donde-esta, type: scene, prompt: "¿Dónde está la pelota?", visual: { id: place-scene-es, props: { state: behind } }, options: ["La pelota está detrás de la caja.", "La pelota está delante de la caja.", "La pelota está en la caja."], answer: "La pelota está detrás de la caja.", why: { id: "*Detrás de* = di belakang.", en: "*Detrás de* = behind." } }
+  - { id: e1-t-35, from: easy1-12-donde-esta, type: gap, cue: "Kucingnya di atas kasur.", prompt: "El gato está ___ la cama.", options: [sobre, debajo de], answer: sobre, why: { id: "*Sobre* = di atas.", en: "*Sobre* = on." } }
+  - { id: e1-t-36, from: easy1-12-donde-esta, type: gap, cue: "Bank di sebelah masjid.", prompt: "El banco está ___ la mezquita.", options: [al lado de, en], answer: al lado de, why: { id: "*Al lado de* = di sebelah.", en: "*Al lado de* = next to." } }

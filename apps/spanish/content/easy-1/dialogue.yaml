@@ -1,0 +1,37 @@
+# Ngobrol (Easy 1): a short exchange at a market in Mexico City. Draft.
+rung: easy-1
+title: { id: "Di pasar Coyoacán", en: "At the Coyoacán market", es: "En el mercado" }
+city: Ciudad de México
+variety: latam
+lines:
+  - { who: Mateo, es: "¡Hola, Rina! ¿Cómo estás?", id: "Halo, Rina! Apa kabar?" }
+  - { who: Rina, es: "Muy bien, gracias. ¿Dónde estamos?", id: "Baik, terima kasih. Kita di mana?" }
+  - { who: Mateo, es: "Estamos en el mercado de Coyoacán.", id: "Kita di pasar Coyoacán." }
+  - { who: Rina, es: "¡Hay mucha fruta!", id: "Banyak sekali buahnya!" }
+  - { who: Mateo, es: "Sí. ¿Qué comes en Indonesia?", id: "Iya. Di Indonesia kamu makan apa?" }
+  - { who: Rina, es: "Como arroz y pescado. ¿Y tú?", id: "Nasi dan ikan. Kamu?" }
+  - { who: Mateo, es: "Yo como tacos. ¡Aquí hay tacos muy ricos!", id: "Aku makan taco. Di sini ada taco yang enak sekali!" }
+  - { who: Rina, es: "¿Tacos? ¡Necesito un taco ahora!", id: "Taco? Aku perlu taco sekarang juga!" }
+note:
+  id: "Di Meksiko, *mercado* adalah pasar tradisional, tempat orang makan dan belanja."
+  en: "In Mexico, a *mercado* is a traditional market where people eat and shop."
+items:
+  - id: e1-g-1
+    type: choice
+    prompt: "¿Dónde están Mateo y Rina?"
+    options: ["En el mercado.", "En la escuela.", "En casa."]
+    answer: "En el mercado."
+    why: { id: "*Estamos en el mercado de Coyoacán.*", en: "*Estamos en el mercado de Coyoacán.*" }
+  - id: e1-g-2
+    type: choice
+    prompt: "¿Qué come Rina en Indonesia?"
+    options: ["Arroz y pescado.", "Tacos.", "Pan."]
+    answer: "Arroz y pescado."
+    why: { id: "*Como arroz y pescado.*", en: "*Como arroz y pescado.*" }
+  - id: e1-g-3
+    type: choice
+    lang: id
+    prompt: "Apa yang Rina inginkan di akhir?"
+    options: ["taco", "kopi", "buah"]
+    answer: "taco"
+    why: { id: "*¡Necesito un taco ahora!*", en: "*¡Necesito un taco ahora!*" }

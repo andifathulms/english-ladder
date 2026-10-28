@@ -1,0 +1,486 @@
+# Easy 1 word list (the A1 deck, part 1): lemmas with their meaning, gender and Spain form. Draft data.
+# Lessons may use any word on this list or an earlier rung's (CLAUDE.md §4.1).
+- {es: hola, id: halo, en: hello, pos: interj}
+- {es: adiós, id: selamat tinggal, en: goodbye, pos: interj}
+- {es: gracias, id: terima kasih, en: thank you, pos: interj}
+- {es: chao, id: dah, en: bye, pos: interj}
+- {es: buenos días, id: selamat pagi, en: good morning, pos: expr}
+- {es: buenas tardes, id: 'selamat siang, selamat sore', en: good afternoon, pos: expr}
+- {es: buenas noches, id: selamat malam, en: 'good evening, good night', pos: expr}
+- {es: mucho gusto, id: senang berkenalan, en: nice to meet you, pos: expr}
+- {es: hasta luego, id: sampai nanti, en: see you later, pos: expr}
+- {es: por favor, id: 'tolong, silakan', en: please, pos: expr}
+- {es: de nada, id: sama-sama, en: you're welcome, pos: expr}
+- {es: lo siento, id: maaf, en: sorry, pos: expr}
+- {es: persona, id: orang, en: person, pos: noun, gender: f}
+- {es: hombre, id: laki-laki, en: man, pos: noun, gender: m}
+- {es: mujer, id: perempuan, en: woman, pos: noun, gender: f}
+- {es: niño, id: anak laki-laki, en: 'boy, child', pos: noun, gender: m}
+- {es: niña, id: anak perempuan, en: girl, pos: noun, gender: f}
+- {es: chico, id: anak muda; teman-teman (sapaan), en: 'boy, guy', pos: noun, gender: m}
+- {es: chica, id: gadis, en: girl, pos: noun, gender: f}
+- {es: amigo, id: teman (laki-laki), en: friend, pos: noun, gender: m}
+- {es: amiga, id: teman (perempuan), en: friend, pos: noun, gender: f}
+- {es: familia, id: keluarga, en: family, pos: noun, gender: f}
+- {es: padre, id: ayah, en: father, pos: noun, gender: m}
+- {es: madre, id: ibu, en: mother, pos: noun, gender: f}
+- {es: papá, id: 'bapak, ayah', en: dad, pos: noun, gender: m}
+- {es: mamá, id: 'mama, ibu', en: mum, pos: noun, gender: f}
+- {es: hermano, id: saudara laki-laki, en: brother, pos: noun, gender: m}
+- {es: hermana, id: saudara perempuan, en: sister, pos: noun, gender: f}
+- {es: hijo, id: anak laki-laki, en: son, pos: noun, gender: m}
+- {es: hija, id: anak perempuan, en: daughter, pos: noun, gender: f}
+- {es: abuelo, id: kakek, en: grandfather, pos: noun, gender: m}
+- {es: abuela, id: nenek, en: grandmother, pos: noun, gender: f}
+- {es: tío, id: paman, en: uncle, pos: noun, gender: m}
+- {es: tía, id: bibi, en: aunt, pos: noun, gender: f}
+- {es: primo, id: sepupu (laki-laki), en: cousin, pos: noun, gender: m}
+- {es: prima, id: sepupu (perempuan), en: cousin, pos: noun, gender: f}
+- {es: esposo, id: suami, en: husband, pos: noun, gender: m}
+- {es: esposa, id: istri, en: wife, pos: noun, gender: f}
+- {es: bebé, id: bayi, en: baby, pos: noun, gender: m}
+- {es: nombre, id: nama, en: name, pos: noun, gender: m}
+- {es: apellido, id: nama keluarga, en: surname, pos: noun, gender: m}
+- {es: vecino, id: tetangga (laki-laki), en: neighbour, pos: noun, gender: m}
+- {es: vecina, id: tetangga (perempuan), en: neighbour, pos: noun, gender: f}
+- {es: compañero, id: rekan (laki-laki), en: 'classmate, colleague', pos: noun, gender: m}
+- {es: compañera, id: rekan (perempuan), en: 'classmate, colleague', pos: noun, gender: f}
+- {es: jefe, id: bos (laki-laki), en: boss, pos: noun, gender: m}
+- {es: jefa, id: bos (perempuan), en: boss, pos: noun, gender: f}
+- {es: profesor, id: guru (laki-laki), en: teacher, pos: noun, gender: m}
+- {es: profesora, id: guru (perempuan), en: teacher, pos: noun, gender: f}
+- {es: estudiante, id: 'pelajar, mahasiswa', en: student, pos: noun, gender: mf}
+- {es: médico, id: dokter (laki-laki), en: doctor, pos: noun, gender: m}
+- {es: médica, id: dokter (perempuan), en: doctor, pos: noun, gender: f}
+- {es: enfermero, id: perawat (laki-laki), en: nurse, pos: noun, gender: m}
+- {es: enfermera, id: perawat (perempuan), en: nurse, pos: noun, gender: f}
+- {es: ingeniero, id: insinyur (laki-laki), en: engineer, pos: noun, gender: m}
+- {es: ingeniera, id: insinyur (perempuan), en: engineer, pos: noun, gender: f}
+- {es: abogado, id: pengacara (laki-laki), en: lawyer, pos: noun, gender: m}
+- {es: abogada, id: pengacara (perempuan), en: lawyer, pos: noun, gender: f}
+- {es: cocinero, id: juru masak (laki-laki), en: cook, pos: noun, gender: m}
+- {es: cocinera, id: juru masak (perempuan), en: cook, pos: noun, gender: f}
+- {es: vendedor, id: penjual (laki-laki), en: seller, pos: noun, gender: m}
+- {es: vendedora, id: penjual (perempuan), en: seller, pos: noun, gender: f}
+- {es: casa, id: rumah, en: 'house, home', pos: noun, gender: f}
+- {es: ciudad, id: kota, en: city, pos: noun, gender: f}
+- {es: país, id: negara, en: country, pos: noun, gender: m}
+- {es: pueblo, id: 'desa, kota kecil', en: 'village, town', pos: noun, gender: m}
+- {es: calle, id: jalan, en: street, pos: noun, gender: f}
+- es: escuela
+  id: sekolah
+  en: school
+  pos: noun
+  gender: f
+  bridge: {pt: escola, id: sekolah}
+- {es: universidad, id: universitas, en: university, pos: noun, gender: f}
+- {es: oficina, id: kantor, en: office, pos: noun, gender: f}
+- {es: trabajo, id: 'pekerjaan, tempat kerja', en: 'work, job', pos: noun, gender: m}
+- {es: mercado, id: pasar, en: market, pos: noun, gender: m}
+- {es: tienda, id: toko, en: shop, pos: noun, gender: f}
+- {es: restaurante, id: restoran, en: restaurant, pos: noun, gender: m}
+- {es: hospital, id: rumah sakit, en: hospital, pos: noun, gender: m}
+- {es: banco, id: bank, en: bank, pos: noun, gender: m}
+- {es: parque, id: taman, en: park, pos: noun, gender: m}
+- {es: playa, id: pantai, en: beach, pos: noun, gender: f}
+- {es: montaña, id: gunung, en: mountain, pos: noun, gender: f}
+- {es: mezquita, id: masjid, en: mosque, pos: noun, gender: f}
+- es: iglesia
+  id: gereja
+  en: church
+  pos: noun
+  gender: f
+  bridge: {pt: igreja, id: gereja}
+- {es: estación, id: stasiun, en: station, pos: noun, gender: f}
+- {es: aeropuerto, id: bandara, en: airport, pos: noun, gender: m}
+- {es: hotel, id: hotel, en: hotel, pos: noun, gender: m}
+- {es: cocina, id: dapur, en: kitchen, pos: noun, gender: f}
+- {es: baño, id: kamar mandi, en: bathroom, pos: noun, gender: m}
+- {es: habitación, id: kamar, en: 'room, bedroom', pos: noun, gender: f}
+- {es: sala, id: ruang tamu, en: living room, pos: noun, gender: f}
+- {es: jardín, id: 'kebun, halaman', en: garden, pos: noun, gender: m}
+- {es: puerta, id: pintu, en: door, pos: noun, gender: f}
+- {es: ventana, id: jendela, en: window, pos: noun, gender: f}
+- {es: departamento, id: apartemen, en: flat, pos: noun, gender: m, es_es: piso}
+- {es: edificio, id: gedung, en: building, pos: noun, gender: m}
+- {es: lado, id: sisi, en: side, pos: noun, gender: m}
+- es: mesa
+  id: meja
+  en: table
+  pos: noun
+  gender: f
+  bridge: {pt: mesa, id: meja}
+- {es: silla, id: kursi, en: chair, pos: noun, gender: f}
+- {es: cama, id: 'kasur, tempat tidur', en: bed, pos: noun, gender: f}
+- {es: sofá, id: sofa, en: sofa, pos: noun, gender: m}
+- {es: libro, id: buku, en: book, pos: noun, gender: m}
+- {es: cuaderno, id: buku tulis, en: notebook, pos: noun, gender: m}
+- {es: lápiz, id: pensil, en: pencil, pos: noun, gender: m}
+- {es: bolígrafo, id: pulpen, en: pen, pos: noun, gender: m}
+- {es: papel, id: kertas, en: paper, pos: noun, gender: m}
+- {es: mochila, id: tas punggung, en: backpack, pos: noun, gender: f}
+- {es: bolsa, id: 'tas, kantong', en: bag, pos: noun, gender: f}
+- {es: caja, id: kotak, en: box, pos: noun, gender: f}
+- {es: llave, id: kunci, en: key, pos: noun, gender: f}
+- {es: celular, id: HP, en: mobile phone, pos: noun, gender: m, es_es: móvil}
+- {es: teléfono, id: telepon, en: phone, pos: noun, gender: m}
+- {es: computadora, id: komputer, en: computer, pos: noun, gender: f, es_es: ordenador}
+- {es: carro, id: mobil, en: car, pos: noun, gender: m, es_es: coche}
+- {es: moto, id: motor, en: motorbike, pos: noun, gender: f}
+- {es: bicicleta, id: sepeda, en: bicycle, pos: noun, gender: f}
+- {es: autobús, id: bus, en: bus, pos: noun, gender: m}
+- {es: tren, id: kereta, en: train, pos: noun, gender: m}
+- {es: reloj, id: jam, en: 'clock, watch', pos: noun, gender: m}
+- {es: foto, id: foto, en: photo, pos: noun, gender: f}
+- {es: mapa, id: peta, en: map, pos: noun, gender: m}
+- {es: día, id: hari, en: day, pos: noun, gender: m}
+- {es: problema, id: masalah, en: problem, pos: noun, gender: m}
+- {es: mano, id: tangan, en: hand, pos: noun, gender: f}
+- {es: idioma, id: bahasa, en: language, pos: noun, gender: m}
+- {es: pelota, id: bola, en: ball, pos: noun, gender: f}
+- es: bandera
+  id: bendera
+  en: flag
+  pos: noun
+  gender: f
+  bridge: {pt: bandeira, id: bendera}
+- es: zapato
+  id: sepatu
+  en: shoe
+  pos: noun
+  gender: m
+  bridge: {pt: sapato, id: sepatu}
+- es: camisa
+  id: kemeja
+  en: shirt
+  pos: noun
+  gender: f
+  bridge: {pt: camisa, id: kemeja}
+- {es: ropa, id: pakaian, en: clothes, pos: noun, gender: f}
+- {es: dinero, id: uang, en: money, pos: noun, gender: m}
+- {es: perro, id: anjing, en: dog, pos: noun, gender: m}
+- {es: gato, id: kucing, en: cat, pos: noun, gender: m}
+- {es: árbol, id: pohon, en: tree, pos: noun, gender: m}
+- {es: flor, id: bunga, en: flower, pos: noun, gender: f}
+- {es: clase, id: 'kelas, pelajaran', en: class, pos: noun, gender: f}
+- {es: examen, id: ujian, en: exam, pos: noun, gender: m}
+- {es: tarea, id: 'PR, tugas', en: homework, pos: noun, gender: f}
+- {es: pregunta, id: pertanyaan, en: question, pos: noun, gender: f}
+- {es: respuesta, id: jawaban, en: answer, pos: noun, gender: f}
+- {es: palabra, id: kata, en: word, pos: noun, gender: f}
+- {es: número, id: 'angka, nomor', en: number, pos: noun, gender: m}
+- {es: semana, id: minggu (tujuh hari), en: week, pos: noun, gender: f}
+- {es: mes, id: bulan, en: month, pos: noun, gender: m}
+- {es: hora, id: jam (waktu), en: 'hour, time', pos: noun, gender: f}
+- {es: noche, id: malam, en: night, pos: noun, gender: f}
+- {es: cumpleaños, id: ulang tahun, en: birthday, pos: noun, gender: m}
+- es: domingo
+  id: hari Minggu
+  en: Sunday
+  pos: noun
+  gender: m
+  bridge: {pt: domingo, id: Minggu}
+- es: fiesta
+  id: pesta
+  en: party
+  pos: noun
+  gender: f
+  bridge: {pt: festa, id: pesta}
+- es: jabón
+  id: sabun
+  en: soap
+  pos: noun
+  gender: m
+  bridge: {pt: sabão, id: sabun}
+- {es: música, id: musik, en: music, pos: noun, gender: f}
+- {es: película, id: film, en: film, pos: noun, gender: f}
+- {es: español, id: bahasa Spanyol, en: Spanish (language), pos: noun, gender: m}
+- {es: inglés, id: bahasa Inggris, en: English (language), pos: noun, gender: m}
+- {es: indonesio, id: bahasa Indonesia, en: Indonesian (language), pos: noun, gender: m}
+- {es: carta, id: surat, en: letter, pos: noun, gender: f}
+- {es: periódico, id: koran, en: newspaper, pos: noun, gender: m}
+- {es: cabeza, id: kepala, en: head, pos: noun, gender: f}
+- {es: ojo, id: mata, en: eye, pos: noun, gender: m}
+- {es: pelo, id: rambut, en: hair, pos: noun, gender: m}
+- {es: boca, id: mulut, en: mouth, pos: noun, gender: f}
+- {es: agua, id: air, en: water, pos: noun, gender: f, el: true}
+- {es: café, id: kopi, en: coffee, pos: noun, gender: m}
+- {es: té, id: teh, en: tea, pos: noun, gender: m}
+- {es: leche, id: susu, en: milk, pos: noun, gender: f}
+- {es: jugo, id: jus, en: juice, pos: noun, gender: m, es_es: zumo}
+- {es: pan, id: roti, en: bread, pos: noun, gender: m}
+- {es: arroz, id: 'nasi, beras', en: rice, pos: noun, gender: m}
+- {es: pollo, id: ayam, en: chicken, pos: noun, gender: m}
+- {es: pescado, id: ikan, en: fish, pos: noun, gender: m}
+- {es: carne, id: daging, en: meat, pos: noun, gender: f}
+- {es: fruta, id: buah, en: fruit, pos: noun, gender: f}
+- {es: manzana, id: apel, en: apple, pos: noun, gender: f}
+- {es: plátano, id: pisang, en: banana, pos: noun, gender: m}
+- {es: huevo, id: telur, en: egg, pos: noun, gender: m}
+- {es: sopa, id: sup, en: soup, pos: noun, gender: f}
+- es: queso
+  id: keju
+  en: cheese
+  pos: noun
+  gender: m
+  bridge: {pt: queijo, id: keju}
+- {es: comida, id: makanan, en: 'food, meal', pos: noun, gender: f}
+- {es: plato, id: piring; hidangan, en: 'plate, dish', pos: noun, gender: m}
+- {es: vaso, id: gelas, en: glass, pos: noun, gender: m}
+- {es: taza, id: cangkir, en: cup, pos: noun, gender: f}
+- {es: botella, id: botol, en: bottle, pos: noun, gender: f}
+- {es: taco, id: taco, en: taco, pos: noun, gender: m}
+- {es: tortilla, id: tortila, en: tortilla, pos: noun, gender: f}
+- {es: grande, id: besar, en: big, pos: adj}
+- {es: pequeño, id: kecil, en: small, pos: adj}
+- {es: nuevo, id: baru, en: new, pos: adj}
+- {es: viejo, id: 'tua, lama', en: old, pos: adj}
+- {es: bonito, id: 'cantik, indah', en: 'pretty, nice', pos: adj}
+- {es: feo, id: jelek, en: ugly, pos: adj}
+- {es: alto, id: tinggi, en: tall, pos: adj}
+- {es: bajo, id: pendek, en: short, pos: adj}
+- {es: guapo, id: 'tampan, cantik', en: good-looking, pos: adj}
+- {es: simpático, id: 'ramah, menyenangkan', en: 'nice, friendly', pos: adj}
+- {es: antipático, id: tidak ramah, en: unfriendly, pos: adj}
+- {es: inteligente, id: pintar, en: clever, pos: adj}
+- {es: amable, id: baik hati, en: kind, pos: adj}
+- {es: joven, id: muda, en: young, pos: adj}
+- {es: mayor, id: lebih tua, en: older, pos: adj}
+- {es: cansado, id: 'lelah, capek', en: tired, pos: adj}
+- {es: contento, id: senang, en: 'happy, glad', pos: adj}
+- {es: triste, id: sedih, en: sad, pos: adj}
+- {es: enfermo, id: sakit, en: ill, pos: adj}
+- {es: ocupado, id: sibuk, en: busy, pos: adj}
+- {es: aburrido, id: bosan; membosankan, en: bored; boring, pos: adj}
+- {es: nervioso, id: gugup, en: nervous, pos: adj}
+- {es: tranquilo, id: tenang, en: calm, pos: adj}
+- {es: abierto, id: buka, en: open, pos: adj}
+- {es: cerrado, id: tutup, en: closed, pos: adj}
+- {es: limpio, id: bersih, en: clean, pos: adj}
+- {es: sucio, id: kotor, en: dirty, pos: adj}
+- {es: caliente, id: panas, en: hot, pos: adj}
+- {es: frío, id: dingin, en: cold, pos: adj}
+- {es: rico, id: enak; kaya, en: tasty; rich, pos: adj}
+- {es: bueno, id: 'baik, bagus', en: good, pos: adj}
+- {es: malo, id: buruk, en: bad, pos: adj}
+- {es: fácil, id: mudah, en: easy, pos: adj}
+- {es: difícil, id: sulit, en: difficult, pos: adj}
+- {es: interesante, id: menarik, en: interesting, pos: adj}
+- {es: importante, id: penting, en: important, pos: adj}
+- {es: blanco, id: putih, en: white, pos: adj}
+- {es: negro, id: hitam, en: black, pos: adj}
+- {es: rojo, id: merah, en: red, pos: adj}
+- {es: azul, id: biru, en: blue, pos: adj}
+- {es: verde, id: hijau, en: green, pos: adj}
+- {es: amarillo, id: kuning, en: yellow, pos: adj}
+- {es: gris, id: abu-abu, en: grey, pos: adj}
+- {es: largo, id: panjang, en: long, pos: adj}
+- {es: corto, id: pendek, en: short, pos: adj}
+- {es: barato, id: murah, en: cheap, pos: adj}
+- {es: caro, id: mahal, en: expensive, pos: adj}
+- {es: feliz, id: bahagia, en: happy, pos: adj}
+- {es: mexicano, id: orang Meksiko; dari Meksiko, en: Mexican, pos: adj}
+- {es: colombiano, id: orang Kolombia; dari Kolombia, en: Colombian, pos: adj}
+- {es: peruano, id: orang Peru; dari Peru, en: Peruvian, pos: adj}
+- {es: indonesio, id: orang Indonesia; dari Indonesia, en: Indonesian, pos: adj}
+- {es: favorito, id: favorit, en: favourite, pos: adj}
+- es: español
+  id: orang Spanyol; dari Spanyol
+  en: Spanish
+  pos: adj
+  forms: [español, española, españoles, españolas]
+- es: ser
+  id: adalah (identitas, asal, sifat)
+  en: to be
+  pos: verb
+  verb: {group: er, irregular: true}
+- es: estar
+  id: berada, sedang (tempat, keadaan)
+  en: to be
+  pos: verb
+  verb: {group: ar, irregular: true}
+- es: tener
+  id: punya; berumur
+  en: to have
+  pos: verb
+  verb: {group: er, irregular: true}
+- es: llamarse
+  id: bernama
+  en: to be called
+  pos: verb
+  verb: {group: ar, reflexive: true}
+- es: hablar
+  id: berbicara
+  en: to speak
+  pos: verb
+  verb: {group: ar}
+- es: trabajar
+  id: bekerja
+  en: to work
+  pos: verb
+  verb: {group: ar}
+- es: estudiar
+  id: belajar, kuliah
+  en: to study
+  pos: verb
+  verb: {group: ar}
+- es: cocinar
+  id: memasak
+  en: to cook
+  pos: verb
+  verb: {group: ar}
+- es: comprar
+  id: membeli
+  en: to buy
+  pos: verb
+  verb: {group: ar}
+- es: tomar
+  id: minum, mengambil, naik
+  en: to take, to drink
+  pos: verb
+  verb: {group: ar}
+- es: escuchar
+  id: mendengarkan
+  en: to listen
+  pos: verb
+  verb: {group: ar}
+- es: necesitar
+  id: perlu
+  en: to need
+  pos: verb
+  verb: {group: ar}
+- es: caminar
+  id: berjalan kaki
+  en: to walk
+  pos: verb
+  verb: {group: ar}
+- es: llegar
+  id: tiba
+  en: to arrive
+  pos: verb
+  verb: {group: ar}
+- es: mirar
+  id: melihat, menonton
+  en: to look, to watch
+  pos: verb
+  verb: {group: ar}
+- es: ayudar
+  id: membantu
+  en: to help
+  pos: verb
+  verb: {group: ar}
+- es: visitar
+  id: mengunjungi
+  en: to visit
+  pos: verb
+  verb: {group: ar}
+- es: enseñar
+  id: mengajar
+  en: to teach
+  pos: verb
+  verb: {group: ar}
+- es: bailar
+  id: menari
+  en: to dance
+  pos: verb
+  verb: {group: ar}
+- es: cantar
+  id: bernyanyi
+  en: to sing
+  pos: verb
+  verb: {group: ar}
+- es: nadar
+  id: berenang
+  en: to swim
+  pos: verb
+  verb: {group: ar}
+- es: descansar
+  id: beristirahat
+  en: to rest
+  pos: verb
+  verb: {group: ar}
+- es: lavar
+  id: mencuci
+  en: to wash
+  pos: verb
+  verb: {group: ar}
+- es: limpiar
+  id: membersihkan
+  en: to clean
+  pos: verb
+  verb: {group: ar}
+- es: esperar
+  id: menunggu
+  en: to wait
+  pos: verb
+  verb: {group: ar}
+- es: viajar
+  id: bepergian
+  en: to travel
+  pos: verb
+  verb: {group: ar}
+- es: comer
+  id: makan
+  en: to eat
+  pos: verb
+  verb: {group: er}
+- es: beber
+  id: minum
+  en: to drink
+  pos: verb
+  verb: {group: er}
+- es: leer
+  id: membaca
+  en: to read
+  pos: verb
+  verb: {group: er}
+- es: aprender
+  id: belajar (hal baru)
+  en: to learn
+  pos: verb
+  verb: {group: er}
+- es: comprender
+  id: memahami
+  en: to understand
+  pos: verb
+  verb: {group: er}
+- es: vender
+  id: menjual
+  en: to sell
+  pos: verb
+  verb: {group: er}
+- es: correr
+  id: berlari
+  en: to run
+  pos: verb
+  verb: {group: er}
+- es: vivir
+  id: tinggal, hidup
+  en: to live
+  pos: verb
+  verb: {group: ir}
+- es: escribir
+  id: menulis
+  en: to write
+  pos: verb
+  verb: {group: ir}
+- es: abrir
+  id: membuka
+  en: to open
+  pos: verb
+  verb: {group: ir}
+- es: recibir
+  id: menerima
+  en: to receive
+  pos: verb
+  verb: {group: ir}
+- es: compartir
+  id: berbagi
+  en: to share
+  pos: verb
+  verb: {group: ir}
+- {es: muy bien, id: baik sekali, en: very well, pos: expr}
+- {es: también, id: juga, en: also, pos: adv}
+- {es: dentro, id: di dalam, en: inside, pos: adv}
+- {es: fuera, id: di luar, en: outside, pos: adv}
+- {es: un poco, id: sedikit, en: a little, pos: expr}

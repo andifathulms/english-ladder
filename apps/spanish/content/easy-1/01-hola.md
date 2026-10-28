@@ -98,7 +98,7 @@ glossary:
   - { es: usted, id: "Anda, Bapak, Ibu", pos: pron }
   - { es: chico, id: "anak muda; teman-teman (sapaan)", pos: noun, gender: m }
   - { es: llamarse, id: bernama, pos: verb, verb: { group: ar, reflexive: true } }
-next: null
+next: easy1-02-soy-de
 ---
 
 ## concept.id
