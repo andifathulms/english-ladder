@@ -74,3 +74,12 @@ those two baseline shots instead.
 M5: commit C1, C2, C3 one at a time through the four-app gate; the Spanish item types (`form`,
 `conjugate`, `agree`, `dictation`, `stress`) with the accent bar and the lenient-accent note;
 the placement check by section.
+
+## Decisions (answered 2026-10-29)
+
+All as recommended:
+1. Japanese `me__{light,dark}__1280` count as known antialiasing on the wordmark disc, like Mandarin's
+   `imported-me`. The baseline stays.
+2. The wordmark keeps "A1 → C1" beside *escalera*.
+3. No core change for the Madrid dialogue: it's marked by its title and Spain voices.
+4. Easy 2 keeps the textbook order (stem changes and yo-irregulars at A1); the teacher confirms (H1).
