@@ -4,6 +4,8 @@ import type { StringTable } from '@ladder/core/lib/i18n';
 
 /** Keys only Spanish Ladder's components use (useT<SpanishKey>()). */
 export type SpanishKey =
+  | 'words.seeConjugation'
+  | 'words.close'
   | 'tense.presente'
   | 'tense.preterito'
   | 'tense.imperfecto'
@@ -83,6 +85,8 @@ export type SpanishKey =
 type Overrides = Partial<StringTable> & Partial<Record<SpanishKey, string>>;
 
 export const idOverrides: Overrides = {
+  'words.seeConjugation': 'lihat konjugasi',
+  'words.close': 'Tutup',
   'tense.presente': 'presente',
   'tense.preterito': 'pretérito indefinido',
   'tense.imperfecto': 'imperfecto',
@@ -187,6 +191,8 @@ export const idOverrides: Overrides = {
 };
 
 export const enOverrides: Overrides = {
+  'words.seeConjugation': 'see conjugation',
+  'words.close': 'Close',
   'tense.presente': 'present',
   'tense.preterito': 'preterite',
   'tense.imperfecto': 'imperfect',

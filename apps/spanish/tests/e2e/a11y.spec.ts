@@ -6,7 +6,7 @@ const steps: Record<string, number[]> = {
   '/rung/easy-1/01-hola/': [0, 1, 2, 3, 4],
 };
 const lessons = Object.keys(steps);
-const routes = ['/', '/placement/', '/rung/dasar/', '/rung/easy-1/', '/rung/easy-2/', '/rung/hard-3/', ...lessons, '/review/', '/words/', '/me/', '/settings/', '/about/'];
+const routes = ['/', '/placement/', '/rung/dasar/', '/rung/easy-1/', '/rung/easy-2/', '/rung/hard-3/', ...lessons, '/visuals/', '/review/', '/words/', '/me/', '/settings/', '/about/'];
 
 for (const scheme of ['light', 'dark'] as const) {
   for (const route of routes) {

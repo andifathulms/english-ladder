@@ -157,7 +157,7 @@ export const course: CourseConfig = {
     cefrLabelLocalised: true,
   },
 
-  visuals: registry as CourseConfig['visuals'],
+  visuals: registry,
   visualIds: VISUAL_IDS,
   boardPattern: Azulejo,
 };

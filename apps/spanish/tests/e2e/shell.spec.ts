@@ -41,3 +41,14 @@ test('My words: gender chips and the deck tab', async ({ page }) => {
   await page.goto('/words/#deck');
   await expect(page.getByText(/Kartu kata A1 terbuka/)).toBeVisible();
 });
+
+test('My words: a verb opens its conjugation grid in a sheet', async ({ page }) => {
+  await page.goto('/rung/easy-1/01-hola/');
+  for (let i = 0; i < 4; i++) await page.getByRole('button', { name: /^Lanjut/ }).click();
+  await page.goto('/words/');
+  await page.getByRole('button', { name: 'lihat konjugasi' }).click();
+  const sheet = page.getByRole('dialog');
+  await expect(sheet.getByRole('table')).toContainText('me llamo');
+  await sheet.getByRole('button', { name: 'Tutup' }).click();
+  await expect(sheet).toBeHidden();
+});

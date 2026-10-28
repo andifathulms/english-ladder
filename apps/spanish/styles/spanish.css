@@ -12,3 +12,32 @@
 .es-ending {
   color: var(--accent);
 }
+
+/* ripple (DESIGN §5): changed endings flip in, left to right, --m-ripple-gap apart. */
+@keyframes es-flip {
+  from {
+    opacity: 0.2;
+    transform: rotateX(90deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.es-flip {
+  display: inline-block;
+  animation: es-flip var(--m-object-d) var(--ease-object) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion='full']) .es-flip {
+    animation: none;
+  }
+}
+:root[data-motion='reduce'] .es-flip {
+  animation: none;
+}
+
+/* The verb sheet in My words. */
+dialog::backdrop {
+  background: rgb(var(--shadow-rgb) / 0.4);
+}

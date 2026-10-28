@@ -84,6 +84,10 @@ export const model: ContentModel = {
   itemText,
   answerText,
   yaml: 'json',
+  // ConjugationGrid reads verbs.yaml (forms come from lib/es with the listed irregular cells).
+  visualData: (ids) => (ids.has('conjugation-grid') ? { verbs: getData().verbs } : undefined),
+  // My words: verbs open their grid in a sheet.
+  wordData: () => ({ verbs: getData().verbs }),
   lessonData: (l): EsLessonData => {
     const lesson = sl(l);
     const { bridges } = getData();
