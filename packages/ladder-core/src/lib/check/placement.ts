@@ -13,9 +13,23 @@ export type PlacementScore = {
   missed: string[];
 };
 
-/** The first outcome whose threshold the score reaches; the last outcome is the fallback. */
-export function placementOutcome(score: number, p: Placement, outcomes: PlacementOutcome[]): PlacementOutcome {
-  return outcomes.find((o) => !o.threshold || score >= (p.thresholds[o.threshold] ?? Infinity)) ?? outcomes[outcomes.length - 1];
+/**
+ * The first outcome whose threshold the total reaches and whose section requirements are all met
+ * (each section's share correct ≥ `min`); the last outcome is the fallback.
+ */
+export function placementOutcome(
+  score: number,
+  p: Placement,
+  outcomes: PlacementOutcome[],
+  bySection: Record<string, { score: number; total: number }> = {},
+): PlacementOutcome {
+  const meets = (o: PlacementOutcome) =>
+    (!o.threshold || score >= (p.thresholds[o.threshold] ?? Infinity)) &&
+    (o.requires ?? []).every((r) => {
+      const s = bySection[r.section];
+      return !!s && s.total > 0 && s.score / s.total >= r.min;
+    });
+  return outcomes.find((o) => (o.threshold || o.requires ? meets(o) : true)) ?? outcomes[outcomes.length - 1];
 }
 
 export function scorePlacement(
@@ -38,5 +52,5 @@ export function scorePlacement(
       sec.score += 1;
     } else if (item.from && !missed.includes(item.from)) missed.push(item.from);
   }
-  return { score, total: p.items.length, bySection, result: placementOutcome(score, p, cfg.outcomes).result, missed };
+  return { score, total: p.items.length, bySection, result: placementOutcome(score, p, cfg.outcomes, bySection).result, missed };
 }

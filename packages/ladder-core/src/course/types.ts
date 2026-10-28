@@ -176,6 +176,9 @@ export type PlacementOutcome = {
   result: string;
   /** Key into placement.yaml `thresholds`; omit on the last (fallback) outcome. */
   threshold?: string;
+  /** Sections that must each reach `min` (a share, 0–1) for this outcome (Spanish: the first rung
+   *  under 75% places you). With `threshold`, both must hold. */
+  requires?: { section: string; min: number }[];
   /** Rungs marked climbed (via placement) by this outcome. */
   climbs: string[];
 };

@@ -33,6 +33,21 @@ describe('placement', () => {
     expect(placementOutcome(0, p, outcomes).result).toBe('script-1');
   });
 
+  it('places by section requirements: the first rung where a section falls under the share', () => {
+    const bySection = (forms: number, sounds: number) => ({ forms: { score: forms, total: 2 }, sounds: { score: sounds, total: 2 } });
+    const bySections = [
+      { result: 'easy-1', requires: [{ section: 'forms', min: 0.75 }, { section: 'sounds', min: 0.75 }], climbs: ['script-1', 'script-2'] },
+      { result: 'script-2', requires: [{ section: 'forms', min: 0.75 }], climbs: ['script-1'] },
+      { result: 'script-1', climbs: [] },
+    ];
+    expect(placementOutcome(4, p, bySections, bySection(2, 2)).result).toBe('easy-1');
+    expect(placementOutcome(3, p, bySections, bySection(2, 1)).result).toBe('script-2');
+    // A high total doesn't help when the first section falls short.
+    expect(placementOutcome(3, p, bySections, bySection(1, 2)).result).toBe('script-1');
+    const s = scorePlacement(p, { '1': 'a', '2': 'a', '3': 'b' }, { sections: ['forms', 'sounds'], outcomes: bySections }, fakeArabic.text);
+    expect(s.result).toBe('script-2');
+  });
+
   it('scores by section and collects the lessons behind misses', () => {
     const s = scorePlacement(p, { '1': 'a', '2': 'b', '3': 'a' }, { sections: ['forms', 'sounds'], outcomes }, fakeArabic.text);
     expect(s).toMatchObject({ score: 2, total: 4, result: 'script-2', missed: ['s1-b', 's2-a'] });
