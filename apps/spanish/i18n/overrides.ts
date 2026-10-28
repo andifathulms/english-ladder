@@ -4,6 +4,30 @@ import type { StringTable } from '@ladder/core/lib/i18n';
 
 /** Keys only Spanish Ladder's components use (useT<SpanishKey>()). */
 export type SpanishKey =
+  | 'deck.title'
+  | 'deck.list'
+  | 'deck.none'
+  | 'deck.playWord'
+  | 'deck.level'
+  | 'deck.learned'
+  | 'deck.today'
+  | 'deck.start'
+  | 'deck.nothing'
+  | 'deck.filter'
+  | 'deck.filter.all'
+  | 'deck.filter.new'
+  | 'deck.filter.learned'
+  | 'deck.filter.lessons'
+  | 'deck.state.new'
+  | 'deck.state.learned'
+  | 'deck.more'
+  | 'deck.flip'
+  | 'deck.again'
+  | 'deck.know'
+  | 'deck.close'
+  | 'deck.summary'
+  | 'deck.done'
+  | 'deck.back'
   | 'words.seeConjugation'
   | 'words.close'
   | 'tense.presente'
@@ -85,6 +109,30 @@ export type SpanishKey =
 type Overrides = Partial<StringTable> & Partial<Record<SpanishKey, string>>;
 
 export const idOverrides: Overrides = {
+  'deck.title': 'Kartu kata {level}',
+  'deck.list': 'Semua kata',
+  'deck.none': 'Kartu kata muncul begitu A1 punya pelajaran.',
+  'deck.playWord': 'Putar kata',
+  'deck.level': '{level} · perkiraan',
+  'deck.learned': '{n} dari {total} dipelajari',
+  'deck.today': 'Hari ini: {n} baru · {k} diulang',
+  'deck.start': 'Mulai',
+  'deck.nothing': 'Tidak ada kartu untuk hari ini',
+  'deck.filter': 'Saring',
+  'deck.filter.all': 'Semua',
+  'deck.filter.new': 'baru',
+  'deck.filter.learned': 'dipelajari',
+  'deck.filter.lessons': 'dari pelajaran',
+  'deck.state.new': 'baru',
+  'deck.state.learned': 'dipelajari',
+  'deck.more': 'dan {n} lagi: pakai pencarian',
+  'deck.flip': 'Balik kartu',
+  'deck.again': 'Belum ingat',
+  'deck.know': 'Ingat',
+  'deck.close': 'Tutup kartu',
+  'deck.summary': '{k} dari {n} kamu ingat.',
+  'deck.done': 'Kartu berikutnya muncul lagi sesuai jadwal ulangnya.',
+  'deck.back': 'Kembali ke daftar',
   'words.seeConjugation': 'lihat konjugasi',
   'words.close': 'Tutup',
   'tense.presente': 'presente',
@@ -191,6 +239,30 @@ export const idOverrides: Overrides = {
 };
 
 export const enOverrides: Overrides = {
+  'deck.title': 'Word cards {level}',
+  'deck.list': 'All words',
+  'deck.none': 'Word cards appear once A1 has lessons.',
+  'deck.playWord': 'Play the word',
+  'deck.level': '{level} · estimate',
+  'deck.learned': '{n} of {total} learned',
+  'deck.today': 'Today: {n} new · {k} to review',
+  'deck.start': 'Start',
+  'deck.nothing': 'No cards for today',
+  'deck.filter': 'Filter',
+  'deck.filter.all': 'All',
+  'deck.filter.new': 'new',
+  'deck.filter.learned': 'learned',
+  'deck.filter.lessons': 'from lessons',
+  'deck.state.new': 'new',
+  'deck.state.learned': 'learned',
+  'deck.more': 'and {n} more: use the search',
+  'deck.flip': 'Turn the card',
+  'deck.again': 'Not yet',
+  'deck.know': 'Got it',
+  'deck.close': 'Close the cards',
+  'deck.summary': 'You remembered {k} of {n}.',
+  'deck.done': 'Each card comes back on its review day.',
+  'deck.back': 'Back to the list',
   'words.seeConjugation': 'see conjugation',
   'words.close': 'Close',
   'tense.presente': 'present',

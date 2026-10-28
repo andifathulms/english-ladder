@@ -30,7 +30,7 @@ test('lesson Examples step: Bunyi, España, Ngobrol and Tirukan, with es-419 and
   await expect(page.locator('main [lang="es-419"]').first()).toBeVisible();
 });
 
-test('My words: gender chips and the deck tab', async ({ page }) => {
+test('My words: gender chips and the word deck', async ({ page }) => {
   await page.goto('/rung/easy-1/01-hola/');
   for (let i = 0; i < 4; i++) await page.getByRole('button', { name: /^Lanjut/ }).click();
   await page.goto('/words/');
@@ -38,8 +38,14 @@ test('My words: gender chips and the deck tab', async ({ page }) => {
   await expect(page.getByText('maskulin', { exact: false }).first()).toBeAttached();
   await page.getByPlaceholder(/Cari/).fill('adios');
   await expect(page.getByText('adiós', { exact: true })).toBeVisible();
+  // Kartu kata: the A1 deck, most frequent words first; a card flips and grades.
   await page.goto('/words/#deck');
-  await expect(page.getByText(/Kartu kata A1 terbuka/)).toBeVisible();
+  await expect(page.getByText('Kartu kata A1').first()).toBeVisible();
+  await page.getByRole('button', { name: /^Mulai/ }).first().click();
+  await expect(page.locator('[data-deck-card]')).toBeVisible();
+  await page.getByRole('button', { name: 'Balik kartu' }).click();
+  await expect(page.locator('[data-back]')).toBeVisible();
+  await page.getByRole('button', { name: 'Ingat', exact: true }).click();
 });
 
 test('My words: a verb opens its conjugation grid in a sheet', async ({ page }) => {

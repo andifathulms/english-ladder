@@ -23,6 +23,8 @@ import { lintLessons, lintPool, type LintData } from './lint';
 import type { CheckItem, Dialogue, GlossaryEntry, Lesson, Placement, Reading, Rung, TestPool } from './types';
 import { wordIdOf, type EsLessonData } from './lessonData';
 import { answerText, itemText, itemTypes } from './items';
+// Circular (decks reads lessons through this module); used only inside wordsPageData, after both load.
+import { decksData } from './decks';
 
 const sl = (l: unknown) => l as Lesson;
 
@@ -90,6 +92,8 @@ export const model: ContentModel = {
   visualData: (ids) => (ids.has('conjugation-grid') ? { verbs: getData().verbs } : undefined),
   // My words: verbs open their grid in a sheet.
   wordData: () => ({ verbs: getData().verbs }),
+  // The words page's Kartu kata: the A1 deck, most frequent words first.
+  wordsPageData: () => decksData(),
   lessonData: (l): EsLessonData => {
     const lesson = sl(l);
     const { bridges } = getData();
