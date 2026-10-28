@@ -30,6 +30,7 @@ export function TwoDoorWelcome({ firstHref, placementHref }: Props) {
   const { t } = useT();
   const { boardPattern: Board, home } = useCourse();
   const Ornament = home?.Ornament;
+  const DoorNote = home?.DoorNote;
   return (
     <section className="board flex flex-col gap-4 p-6 min-[900px]:gap-5 min-[900px]:p-9" aria-labelledby="welcome-title">
       <Board />
@@ -43,6 +44,7 @@ export function TwoDoorWelcome({ firstHref, placementHref }: Props) {
       <p className="max-w-measure text-board-muted">{t('home.doorsBody')}</p>
       <div className="flex flex-col gap-3">
         {firstHref && <Door href={firstHref} title={t('home.door1')} sub={t('home.door1Sub')} primary />}
+        {firstHref && DoorNote && <DoorNote />}
         {placementHref && <Door href={placementHref} title={t('home.door2')} sub={t('home.door2Sub')} primary={false} />}
       </div>
     </section>

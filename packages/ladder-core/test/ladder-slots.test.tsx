@@ -40,3 +40,19 @@ describe('ladder slots', () => {
     expect(b.getByTestId('level').textContent).toBe('HSK 1');
   });
 });
+
+describe('two-door welcome', () => {
+  it('shows a course line under door 1 only when the course gives one (home.DoorNote)', async () => {
+    const { TwoDoorWelcome } = await import('@ladder/core/components/ladder/TwoDoorWelcome');
+    const a = wrap(fakeArabic, <TwoDoorWelcome firstHref="/rung/a/" placementHref="/placement/" />);
+    expect(a.queryByTestId('door-note')).toBeNull();
+    a.unmount();
+    const withNote = { ...fakeArabic, home: { ...fakeArabic.home, DoorNote: () => <p data-testid="door-note">Mulai dari Dasar.</p> } };
+    const b = wrap(withNote, <TwoDoorWelcome firstHref="/rung/a/" placementHref="/placement/" />);
+    expect(b.getByTestId('door-note').textContent).toBe('Mulai dari Dasar.');
+    b.unmount();
+    // No first door, no note under it.
+    const c = wrap(withNote, <TwoDoorWelcome firstHref={null} placementHref="/placement/" />);
+    expect(c.queryByTestId('door-note')).toBeNull();
+  });
+});

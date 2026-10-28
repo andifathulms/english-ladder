@@ -386,6 +386,8 @@ export type CourseConfig = {
     firstRung?: (rungs: Rung[]) => Rung | undefined;
     /** A small mark at the top inline-end of the two-door board (Arabic: سُلَّم). */
     Ornament?: ComponentType;
+    /** A line under the first door (Spanish: "Mau latihan bunyi dulu? Mulai dari Dasar."). */
+    DoorNote?: ComponentType;
   };
   /** A placement check (placement.yaml) for learners who already know some of the course. */
   placement?: PlacementConfig;
