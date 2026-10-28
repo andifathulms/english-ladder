@@ -1,0 +1,14 @@
+/* Spanish Ladder's own classes (DESIGN §4, §6). Token colours only. */
+
+/* Tirukan: the stressed syllable of each word, underlined lightly. */
+.es-stress {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+/* Endings (DESIGN §4): verb and adjective endings in the accent colour, not bold. */
+.es-ending {
+  color: var(--accent);
+}

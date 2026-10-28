@@ -9,6 +9,7 @@ import { VISUAL_IDS } from '@/visuals/visualIds';
 import { adapter } from '@/course/adapter';
 import { text } from '@/course/text';
 import { voiceScorer, canSpeak, sentenceSplit, sampleText } from '@/course/speech';
+import { SpanishSentence } from '@/components/slots';
 import { ALLOWED_SETTINGS, DEFAULT_SETTINGS, EXTENSIONS, SCHEMA_VERSION, STORAGE_KEY, THEME_COLOR, onCompleteLesson } from '@/course/progress';
 
 export const course: CourseConfig = {
@@ -83,6 +84,7 @@ export const course: CourseConfig = {
   audio: { defaultVariety: 'latam' },
   text,
   adapter,
+  components: { Sentence: SpanishSentence },
   lesson: { explain: 'ui' },
   ladder: { tiers: ['hard', 'medium', 'easy', 'dasar'] },
   themeColor: THEME_COLOR,
