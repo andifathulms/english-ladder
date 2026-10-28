@@ -5,7 +5,7 @@ Branch `feat/spanish-ladder`. Written after reading `README.md`, `docs/DEPLOY.md
 M8 review and human tasks, the three Spanish spec files, and the code as it is on `main` (`75487ba`:
 English, Arabic, Mandarin and Japanese on `ladder-core`, Japanese's C1–C8 merged).
 
-**Status: draft, waiting for approval.**
+**Status: approved 2026-10-28, with all recommendations (C1–C4, C5 deferred, R1–R21).**
 
 ---
 

@@ -1,0 +1,107 @@
+/* Spanish Ladder token values (DESIGN §3: terracotta, azulejo and cream) and Spanish-only tokens,
+   over the core defaults. Only what differs from core is set here. */
+@import '@ladder/core/styles/tokens.css';
+
+:root {
+  --paper: #F6F1E7;
+  --paper-2: #ECE5D6;
+  --surface: #FFFDF8;
+  --ink: #22201C;
+  --muted: #625B52;
+  --rule: #E0D7C6;
+  --accent: #1E4FA0;
+  --accent-soft: #E2EAF6;
+  --board: #7D3B24;
+  --board-2: #93492E;
+  --board-ink: #F6F1E7;
+  --board-muted: #EBCDBF;
+  --brass: #E2BE7A;
+  --off: #9B3254;
+  --off-bg: #F6E2E8;
+  --easy: #2D7480;
+  --easy-soft: #E1EEF0;
+  --subject: #556B2F;
+  --shadow-rgb: 70 40 25;
+  /* Spanish-only (DESIGN §3.2) */
+  --dasar: #865A22;
+  --dasar-soft: #F3E8D6;
+  --masc: #1F6E78;
+  --fem: #9A5B0E;
+  --es: #A0402A;
+  --es-soft: #F7E4DE;
+  /* Spanish motion (DESIGN §5) */
+  --m-ripple-gap: 60ms;
+  --m-sweep-d: 600ms;
+}
+
+/* Dark: the OS preference unless the learner chose light, and the explicit choice. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #15120F;
+    --paper-2: #1C1814;
+    --surface: #2A231E;
+    --ink: #EFE9DF;
+    --muted: #B3AAA0;
+    --rule: #3A322B;
+    --accent: #8FB2EE;
+    --accent-ink: #15120F;
+    --accent-soft: #1F2A40;
+    --board: #5E2C1B;
+    --board-2: #723722;
+    --board-ink: #F2ECDF;
+    --board-muted: #DDBFB2;
+    --brass: #E6C487;
+    --off: #F08FB0;
+    --off-bg: #3A1B26;
+    --easy: #7CC4CF;
+    --easy-soft: #13282B;
+    --subject: #A9BE6A;
+    --shadow-rgb: 0 0 0;
+    --dasar: #D9AE6E;
+    --dasar-soft: #2A2216;
+    --masc: #7CC4CF;
+    --fem: #E6B45C;
+    --es: #F09A80;
+    --es-soft: #3A211A;
+  }
+}
+:root[data-theme='dark'] {
+  --paper: #15120F;
+  --paper-2: #1C1814;
+  --surface: #2A231E;
+  --ink: #EFE9DF;
+  --muted: #B3AAA0;
+  --rule: #3A322B;
+  --accent: #8FB2EE;
+  --accent-ink: #15120F;
+  --accent-soft: #1F2A40;
+  --board: #5E2C1B;
+  --board-2: #723722;
+  --board-ink: #F2ECDF;
+  --board-muted: #DDBFB2;
+  --brass: #E6C487;
+  --off: #F08FB0;
+  --off-bg: #3A1B26;
+  --easy: #7CC4CF;
+  --easy-soft: #13282B;
+  --subject: #A9BE6A;
+  --shadow-rgb: 0 0 0;
+  --dasar: #D9AE6E;
+  --dasar-soft: #2A2216;
+  --masc: #7CC4CF;
+  --fem: #E6B45C;
+  --es: #F09A80;
+  --es-soft: #3A211A;
+}
+
+/* Reduced motion: ripple, boot and sweep become instant (DESIGN §5). */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion='full']) {
+    --m-ripple-gap: 0ms;
+    --m-sweep-d: 0ms;
+  }
+}
+:root[data-motion='reduce'] {
+  --m-ripple-gap: 0ms;
+  --m-sweep-d: 0ms;
+}

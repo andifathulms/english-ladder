@@ -1,0 +1,165 @@
+# Spanish Ladder curriculum (PRD §4.2). Ten rungs, CEFR / DELE A1 → C1, topic order checked against
+# the Plan Curricular del Instituto Cervantes (PCIC). Explanations: Indonesian until Medium 1, mixed at
+# Medium 2–3, Spanish with Indonesian notes at Hard (PRD §4.2).
+rungs:
+  - id: dasar
+    name: Dasar
+    subtitle: Bunyi dan ejaan
+    tier: dasar
+    cefr: Pre-A1
+    dele: "—"
+    explain_lang: id
+    status: soon
+    optional: true
+    lessons: 6
+    words_target: 30
+    description:
+      id: "Lima vokal yang sama dengan bahasa Indonesia, huruf yang mengejutkan, r dan rr, dan tekanan kata. Kamu sudah bisa mengucapkan ini."
+      en: "Five vowels just like Indonesian, the letters that surprise, r and rr, and word stress. You can already pronounce this."
+    topics: [lima vokal, h j ñ ll v, c dan z, r dan rr, tekanan dan aksen, membaca nyaring]
+    threads: [sounds, stress]
+    inventory: []
+  - id: easy-1
+    name: Easy 1
+    subtitle: Aku dan duniaku
+    tier: easy
+    cefr: A1
+    dele: A1
+    explain_lang: id
+    status: soon
+    lessons: 12
+    words_target: 250
+    description:
+      id: "Menyapa, memperkenalkan diri, gender dan bentuk jamak, ser dan estar, hay, dan kata kerja -ar, -er, -ir."
+      en: "Greetings, introducing yourself, gender and plurals, ser and estar, hay, and -ar, -er, -ir verbs."
+    topics: [¡Hola!, ser, el/la un/una, jamak dan persesuaian, angka dan tener, estar, ser atau estar, hay, kata kerja -ar, -er dan -ir, keluarga dan mi/tu/su, letak benda]
+    threads: [gender, agreement, ser-estar, present, variety]
+    inventory: []
+  - id: easy-2
+    name: Easy 2
+    subtitle: Sehari-hari
+    tier: easy
+    cefr: A1
+    dele: A1
+    explain_lang: id
+    status: soon
+    lessons: 12
+    words_target: 250
+    description:
+      id: "Kata kerja yang berubah akar, bentuk yo yang tak beraturan, ir a, rutinitas, jam, gustar, belanja, makan, arah, cuaca dan perbandingan."
+      en: "Stem-changing verbs, irregular yo forms, ir a, routines, time, gustar, shopping, food, directions, weather and comparisons."
+    topics: [e→ie o→ue e→i, yo tak beraturan, ir a, kata kerja refleksif, jam dan hari, gustar, belanja dan warna, memesan makanan, arah dan perintah tú, cuaca, perbandingan, satu hari utuh]
+    threads: [present, irregular, reflexive, gustar, commands, variety]
+    inventory: []
+  - id: easy-3
+    name: Easy 3
+    subtitle: Dulu dan nanti
+    tier: easy
+    cefr: A2
+    dele: A2
+    explain_lang: id
+    status: soon
+    lessons: 12
+    words_target: 300
+    description:
+      id: "Pretérito perfecto dan indefinido, kata ganti objek, por dan para, estar + gerundio, dan masa depan."
+      en: "The pretérito perfecto and indefinido, object pronouns, por and para, estar + gerund, and the future."
+    topics: [pretérito perfecto, pretérito indefinido, indefinido tak beraturan, lo la le, por dan para, estar + gerundio, ir a dan futuro]
+    threads: [past, pronouns, por-para, future]
+    inventory: []
+  - id: medium-1
+    name: Medium 1
+    subtitle: Cerita
+    tier: medium
+    cefr: A2
+    dele: A2
+    explain_lang: id
+    status: soon
+    lessons: 12
+    words_target: 300
+    description:
+      id: "Imperfecto dan bedanya dengan indefinido, bercerita, soler, se lo, perintah usted, futuro dan condicional."
+      en: "The imperfecto against the indefinido, storytelling, soler, se lo, usted commands, the future and the conditional."
+    topics: [imperfecto, indefinido atau imperfecto, bercerita, soler, se lo, perintah usted, futuro dan condicional]
+    threads: [past, aspect, pronouns, commands, future]
+    inventory: []
+  - id: medium-2
+    name: Medium 2
+    subtitle: Pendapat
+    tier: medium
+    cefr: B1
+    dele: B1
+    explain_lang: mixed
+    status: soon
+    lessons: 12
+    words_target: 400
+    description:
+      id: "Subjuntivo setelah keinginan, perasaan dan pendapat; ojalá; perintah; klausa relatif; mengenali voseo."
+      en: "The subjunctive after wishes, feelings and opinions; ojalá; commands; relative clauses; recognising voseo."
+    topics: [quiero que, espero que, no creo que, ojalá, perintah positif dan negatif, que donde lo que, voseo]
+    threads: [subjunctive, commands, variety]
+    inventory: []
+  - id: medium-3
+    name: Medium 3
+    subtitle: Kemungkinan
+    tier: medium
+    cefr: B1
+    dele: B1
+    explain_lang: mixed
+    status: soon
+    lessons: 12
+    words_target: 400
+    description:
+      id: "Subjuntivo dalam klausa waktu dan tujuan, pluscuamperfecto, kalimat si, dan kalimat tidak langsung."
+      en: "The subjunctive in time and purpose clauses, the pluperfect, si sentences, and reported speech."
+    topics: [cuando llegues, para que, pluscuamperfecto, si + presente, dijo que]
+    threads: [subjunctive, past, register]
+    inventory: []
+  - id: hard-1
+    name: Hard 1
+    subtitle: Nuansa
+    tier: hard
+    cefr: B2
+    dele: B2
+    explain_lang: es
+    status: soon
+    lessons: 12
+    words_target: 500
+    description:
+      id: "Subjuntivo imperfecto, kalimat si II dan III, pasif, nuansa aspek, dan kata penghubung."
+      en: "The imperfect subjunctive, si clauses II and III, the passive, nuances of aspect, and connectors."
+    topics: [subjuntivo imperfecto, si II dan III, se pasif, ser pasif, nuansa aspek, kata penghubung]
+    threads: [subjunctive, aspect, register]
+    inventory: []
+  - id: hard-2
+    name: Hard 2
+    subtitle: Bahasa kerja dan akademik
+    tier: hard
+    cefr: B2
+    dele: B2
+    explain_lang: es
+    status: soon
+    lessons: 12
+    words_target: 500
+    description:
+      id: "Ragam formal, surel, rapat, tulisan akademik, dan kosakata dari berbagai wilayah."
+      en: "Formal register, emails, meetings, academic writing, and vocabulary from different regions."
+    topics: [ragam formal, surel, rapat, tulisan akademik, kosakata wilayah, vosotros]
+    threads: [register, variety]
+    inventory: []
+  - id: hard-3
+    name: Hard 3
+    subtitle: Fasih
+    tier: hard
+    cefr: C1
+    dele: C1
+    explain_lang: es
+    status: soon
+    lessons: 12
+    words_target: 600
+    description:
+      id: "Idiom dan refranes, subjuntivo di semua sudutnya, nominalisasi, teks autentik panjang, dan menerjemahkan."
+      en: "Idioms and refranes, the subjunctive in all its corners, nominalisation, long authentic texts, and interpreting."
+    topics: [idiom, refranes, subjuntivo lanjut, nominalisasi, teks autentik, menerjemahkan]
+    threads: [subjunctive, register, variety]
+    inventory: []
