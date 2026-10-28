@@ -111,7 +111,8 @@ function scopeFor(rungs: Rung[], lessonsByRung: Map<string, Lesson[]>, data: Lin
     for (const w of data.lexicon.rungs[r.id] ?? []) core.add(w.toLowerCase());
     for (const g of data.wordLists[r.id] ?? []) surfacesOf(g, surfaces, verbs);
     const lessons = lessonsByRung.get(r.id) ?? [];
-    if (i < ri) for (const id of r.inventory) ids.add(id);
+    // Earlier rungs, and (for a test, capstone or placement section) this rung, whole.
+    if (i < ri || order === Infinity) for (const id of r.inventory) ids.add(id);
     for (const l of lessons) {
       if (i === ri && l.order > order) continue;
       for (const id of l.introduces) ids.add(id);

@@ -22,6 +22,7 @@ import {
 import { lintLessons, lintPool, type LintData } from './lint';
 import type { CheckItem, Dialogue, GlossaryEntry, Lesson, Placement, Reading, Rung, TestPool } from './types';
 import { wordIdOf, type EsLessonData } from './lessonData';
+import { answerText, itemText, itemTypes } from './items';
 
 const sl = (l: unknown) => l as Lesson;
 
@@ -79,6 +80,9 @@ export const model: ContentModel = {
     placement: PlacementSchema as unknown as ContentModel['schemas']['placement'],
   },
   adapter,
+  itemTypes,
+  itemText,
+  answerText,
   yaml: 'json',
   lessonData: (l): EsLessonData => {
     const lesson = sl(l);

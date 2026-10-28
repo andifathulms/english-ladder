@@ -77,6 +77,14 @@ check:
     options: ["Buenas noches.", "Buenos días.", "Buenas tardes."]
     answer: "Buenas noches."
     why: { id: "*Buenas noches*: selamat malam, juga untuk pamit tidur.", en: "*Buenas noches*: good evening, and good night." }
+  - id: e1-01-c6
+    type: form
+    cue: "Tanya kabar Diego, temanmu."
+    base: estar
+    target: { person: tu, tense: presente }
+    frame: "¿Cómo ___, Diego?"
+    answer: estás
+    why: { id: "Untuk *tú*, *estar* menjadi *estás*, dengan aksen di *á*.", en: "With *tú*, *estar* becomes *estás*, with an accent on the *á*." }
 glossary:
   - { es: hola, id: halo, pos: interj }
   - { es: adiós, id: "selamat tinggal", pos: interj }

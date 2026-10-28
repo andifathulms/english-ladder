@@ -13,6 +13,8 @@ import { Azulejo } from '@/components/Azulejo';
 import { SoundStrand, SpainStrand, TalkStrand, TirukanStrand, WordsStrand } from '@/components/StrandCards';
 import { WordsRow, matchesWord } from '@/components/WordsRow';
 import { WordDeckPanel } from '@/components/decks';
+import { checkSlots } from '@/components/check/slots';
+import { answerText, itemText, itemTypes } from '@/course/items';
 import { ALLOWED_SETTINGS, DEFAULT_SETTINGS, EXTENSIONS, SCHEMA_VERSION, STORAGE_KEY, THEME_COLOR, onCompleteLesson } from '@/course/progress';
 
 export const course: CourseConfig = {
@@ -89,6 +91,24 @@ export const course: CourseConfig = {
   audio: { defaultVariety: 'latam' },
   text,
   adapter,
+  itemTypes,
+  itemText,
+  answerText,
+  check: checkSlots,
+  // The accent bar under every text field (CLAUDE.md §5.3).
+  input: {
+    accentKeys: [
+      { char: 'á', labelKey: 'accent.a' },
+      { char: 'é', labelKey: 'accent.e' },
+      { char: 'í', labelKey: 'accent.i' },
+      { char: 'ó', labelKey: 'accent.o' },
+      { char: 'ú', labelKey: 'accent.u' },
+      { char: 'ü', labelKey: 'accent.ue' },
+      { char: 'ñ', labelKey: 'accent.n' },
+      { char: '¿', labelKey: 'accent.q' },
+      { char: '¡', labelKey: 'accent.x' },
+    ],
+  },
   components: { Sentence: SpanishSentence, WordmarkExtra: WordmarkEscalera },
   strands: {
     examples: [SoundStrand, SpainStrand, TalkStrand, TirukanStrand],
@@ -105,6 +125,17 @@ export const course: CourseConfig = {
     // Door 1 opens Easy 1, lesson 1; Dasar is optional, offered in the line under the door.
     firstRung: (rungs) => rungs.find((r) => r.id === 'easy-1'),
     DoorNote,
+  },
+  placement: {
+    sections: ['dasar', 'easy1', 'easy2', 'easy3'],
+    // The first rung where a section is under 75% (PRD §5.2). Passing everything while Easy 3 is still
+    // soon places the learner in Easy 2, with Dasar and Easy 1 climbed (plan R8).
+    outcomes: [
+      { result: 'easy-2', requires: [{ section: 'dasar', min: 0.75 }, { section: 'easy1', min: 0.75 }], climbs: ['dasar', 'easy-1'] },
+      { result: 'easy-1', requires: [{ section: 'dasar', min: 0.75 }], climbs: ['dasar'] },
+      { result: 'dasar', climbs: [] },
+    ],
+    retakeRung: 'easy-1',
   },
   climb: { Extra: ClimbExtra },
   words: {
