@@ -8,6 +8,7 @@
     "prebuild": "npm run content:check",
     "build": "next build",
     "preview": "node ../../packages/ladder-core/scripts/serve.mjs",
+    "data:import": "tsx scripts/data-import.ts",
     "content:check": "tsx ../../packages/ladder-core/scripts/content-check.ts",
     "audio:ingest": "tsx ../../packages/ladder-core/scripts/audio-ingest.ts",
     "icons": "node ../../packages/ladder-core/scripts/make-icons.mjs '#7D3B24'",

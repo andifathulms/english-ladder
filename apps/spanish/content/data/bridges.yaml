@@ -1,0 +1,41 @@
+# Bridges and false friends for the Kata card (CLAUDE.md §4.6). Draft data: every entry needs the
+# teacher's check (human-tasks H1). Lessons may only show bridges and false friends listed here.
+#
+# bridges: an Indonesian word inherited from Portuguese, the Portuguese word, and the Spanish word it
+#   leads to. `kind: same` when the Spanish word is the Portuguese one (or spelled like it);
+#   `kind: near` when it differs a little; `kind: off` when the bridge points the wrong way (garpu ←
+#   garfo, but a fork in Spanish is tenedor), shown as a warning, not as help.
+# false_friends: a Spanish word that looks like an Indonesian (or English) one but means something else.
+bridges:
+  - { es: mesa, pt: mesa, id: meja, kind: same }
+  - { es: zapato, pt: sapato, id: sepatu, kind: near }
+  - { es: bandera, pt: bandeira, id: bendera, kind: near }
+  - { es: domingo, pt: domingo, id: Minggu, kind: same }
+  - { es: queso, pt: queijo, id: keju, kind: near }
+  - { es: mantequilla, pt: manteiga, id: mentega, kind: near }
+  - { es: muñeca, pt: boneca, id: boneka, kind: near }
+  - { es: armario, pt: armário, id: lemari, kind: near }
+  - { es: camisa, pt: camisa, id: kemeja, kind: same }
+  - { es: jabón, pt: sabão, id: sabun, kind: near }
+  - { es: fiesta, pt: festa, id: pesta, kind: near }
+  - { es: iglesia, pt: igreja, id: gereja, kind: near }
+  - { es: tinta, pt: tinta, id: tinta, kind: same }
+  - { es: escuela, pt: escola, id: sekolah, kind: near }
+  - { es: soldado, pt: soldado, id: serdadu, kind: same }
+  - { es: caldo, pt: caldo, id: kaldu, kind: same }
+  - { es: trigo, pt: trigo, id: terigu, kind: same }
+  - { es: bola, pt: bola, id: bola, kind: same }
+  - { es: pasear, pt: passear, id: pesiar, kind: near }
+  - { es: tenedor, pt: garfo, id: garpu, kind: off }
+  - { es: ventana, pt: janela, id: jendela, kind: off }
+false_friends:
+  - { es: pasar, means: { id: "lewat, terjadi", en: "to pass, to happen" }, looks_like: { id: pasar }, warn: { id: "Pasar (tempat belanja) dalam bahasa Spanyol adalah *mercado*.", en: "A market is *mercado* in Spanish." } }
+  - { es: nada, means: { id: "tidak ada apa-apa", en: nothing }, looks_like: { id: nada }, warn: { id: "Nada (bunyi musik) adalah *tono* atau *nota*.", en: "A musical tone is *tono* or *nota*." } }
+  - { es: pena, means: { id: "rasa sedih, malu, hukuman", en: "sorrow, shame, penalty" }, looks_like: { id: pena }, warn: { id: "Pena (alat tulis) adalah *bolígrafo* atau *pluma*.", en: "A pen is *bolígrafo* or *pluma*." } }
+  - { es: mantel, means: { id: "taplak meja", en: tablecloth }, looks_like: { id: mantel }, warn: { id: "Mantel (jas hujan, jaket) adalah *abrigo* atau *chaqueta*.", en: "A coat is *abrigo* or *chaqueta*." } }
+  - { es: cursi, means: { id: "norak, berlebihan", en: "cheesy, tacky" }, looks_like: { id: kursi }, warn: { id: "Kursi adalah *silla*.", en: "A chair is *silla*." } }
+  - { es: sopa, means: { id: sup, en: soup }, looks_like: { id: sabun }, warn: { id: "Sabun adalah *jabón*. Sopa itu sup.", en: "Soap is *jabón*. Sopa is soup." } }
+  - { es: embarazada, means: { id: hamil, en: pregnant }, looks_like: { en: embarrassed }, warn: { id: "Malu adalah *avergonzado* atau *avergonzada*.", en: "Embarrassed is *avergonzado* or *avergonzada*." } }
+  - { es: carpeta, means: { id: "map (folder)", en: folder }, looks_like: { id: karpet }, warn: { id: "Karpet adalah *alfombra*.", en: "A carpet is *alfombra*." } }
+  - { es: éxito, means: { id: sukses, en: success }, looks_like: { en: exit }, warn: { id: "Pintu keluar adalah *salida*.", en: "An exit is *salida*." } }
+  - { es: ropa, means: { id: pakaian, en: clothes }, looks_like: { en: rope }, warn: { id: "Tali adalah *cuerda*.", en: "A rope is *cuerda*." } }

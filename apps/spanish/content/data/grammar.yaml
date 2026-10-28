@@ -1,0 +1,79 @@
+# Grammar points (CLAUDE.md §3.4): ids used by curriculum `inventory` and lesson `introduces`.
+# Draft data for the teacher's review.
+#
+# - level: the PCIC level the point belongs to (Plan Curricular del Instituto Cervantes, Gramática and
+#   Pronunciación inventories). `pcic` cites the inventory section. Only 9.1.1 (presente: regular
+#   paradigm, ser, estar, haber, ir at A1; vowel and spelling irregularities at A2) was confirmed
+#   online on 2026-10-28; the other section numbers are from the published inventory's chapter
+#   order and are marked for the reviewer to check (docs/spanish/human-tasks.md H1).
+# - where PCIC places a point later than this course teaches it, `note` says so. Those points are
+#   taught as the textbooks do (PRD §4.1) and need the teacher's approval.
+# - verbs: verbs whose present tense the point teaches (the lint allows their forms from here on).
+# - forms: fixed chunks the point teaches before their grammar (quisiera, me llamo).
+# - detect: what the lint looks for to tell this point is used (lib: course/lint.ts).
+
+# ---------- Dasar (pronunciation and spelling; PCIC Pronunciación y prosodia, Ortografía) ----------
+- { id: d-vowels, level: A1, pcic: "Pronunciación 1", desc: "Five vowels, as in Indonesian; words Indonesian already has" }
+- { id: d-letters, level: A1, pcic: "Ortografía 1", desc: "h silent, j and g+e/i, ñ, ll/y, b = v" }
+- { id: d-c-z, level: A1, pcic: "Ortografía 1", desc: "c and z: /s/ in Latin America, /θ/ in Spain; qu, gu, güe" }
+- { id: d-r-rr, level: A1, pcic: "Pronunciación 1", desc: "r (one tap) and rr (a roll)" }
+- { id: d-stress, level: A1, pcic: "Ortografía 3", desc: "Stress: aguda, llana, esdrújula and the written accent" }
+- { id: d-reading, level: A1, pcic: "Pronunciación 1", desc: "Reading aloud with the spelling rules" }
+
+# ---------- Easy 1 (A1) ----------
+- { id: a1-greetings, level: A1, pcic: "Funciones 2.1", desc: "Greetings; tú and usted", verbs: [llamarse], forms: [me llamo, te llamas, se llama] }
+- { id: a1-ser-identity, level: A1, pcic: "Gramática 9.1.1", desc: "ser: identity, origin, profession", verbs: [ser] }
+- { id: a1-gender, level: A1, pcic: "Gramática 1.1, 3.1", desc: "Noun gender; el/la, un/una; early exceptions (el día, la mano)" }
+- { id: a1-plural-agreement, level: A1, pcic: "Gramática 1.2, 2.1", desc: "Plurals; article–noun–adjective agreement" }
+- { id: a1-numbers-tener, level: A1, pcic: "Gramática 6.1, 9.1.1", desc: "Numbers 0–100; age with tener", verbs: [tener], note: "PCIC lists tener's vowel change under A2; taught here as the verb for age" }
+- { id: a1-estar, level: A1, pcic: "Gramática 9.1.1", desc: "estar: location, mood, temporary state", verbs: [estar] }
+- { id: a1-ser-estar, level: A1, pcic: "Gramática 9.1.1", desc: "ser or estar: the first contrast" }
+- { id: a1-hay, level: A1, pcic: "Gramática 9.1.1", desc: "hay: there is, there are", verbs: [haber] }
+- { id: a1-present-ar, level: A1, pcic: "Gramática 9.1.1", desc: "Present of regular -ar verbs", detect: present-ar }
+- { id: a1-present-er-ir, level: A1, pcic: "Gramática 9.1.1, 14.2", desc: "Present of regular -er and -ir verbs; question words", detect: present-er-ir }
+- { id: a1-possessives, level: A1, pcic: "Gramática 5.1", desc: "Family; possessives mi, tu, su, nuestro" }
+- { id: a1-prep-place, level: A1, pcic: "Gramática 12 (preposiciones)", desc: "en, sobre, debajo de, al lado de, detrás de, delante de" }
+
+# ---------- Easy 2 (A1) ----------
+- { id: a1-stem-change, level: A2, pcic: "Gramática 9.1.1", desc: "Stem-changing verbs: e→ie, o→ue, e→i", detect: stem-change, note: "PCIC places vowel irregularities at A2; taught at the end of A1 as the textbooks do" }
+- { id: a1-yo-irregular, level: A2, pcic: "Gramática 9.1.1", desc: "Irregular yo forms: hago, salgo, pongo, vengo, traigo", verbs: [hacer, salir, poner, venir, traer, decir, conocer, saber, ver, dar, oír], note: "PCIC lists saber and dar at A2" }
+- { id: a1-ir-a, level: A1, pcic: "Gramática 9.1.1, 12 (perífrasis)", desc: "ir; ir a + infinitive for plans", verbs: [ir], detect: ir-a }
+- { id: a1-reflexive, level: A1, pcic: "Gramática 7.1 (reflexivos)", desc: "Reflexive verbs and daily routine", detect: reflexive }
+- { id: a1-time, level: A1, pcic: "Nociones generales 3", desc: "Telling the time; days; frequency" }
+- { id: a1-gustar, level: A1, pcic: "Gramática 7.1 (átonos de OI), 9.1.1", desc: "gustar, encantar: me gusta / me gustan", detect: gustar }
+- { id: a1-demonstratives, level: A1, pcic: "Gramática 4", desc: "este, ese, aquel; prices and colours" }
+- { id: a1-quisiera, level: A1, pcic: "Funciones 4.1", desc: "Ordering: quisiera, para mí", forms: [quisiera], note: "quisiera is a fixed chunk here; its tense (imperfect subjunctive) comes at B2" }
+- { id: a1-imperative-tu, level: A1, pcic: "Gramática 9.3", desc: "tú commands for directions (gira, sigue)", detect: imperative-tu }
+- { id: a1-weather, level: A1, pcic: "Nociones específicas (clima)", desc: "Weather: hace, está, hay; llueve, nieva", verbs: [llover, nevar] }
+- { id: a1-comparisons, level: A1, pcic: "Gramática 2.3", desc: "más/menos … que, tan … como, mejor/peor" }
+- { id: a1-review, level: A1, pcic: "—", desc: "A whole day: review" }
+
+# ---------- later rungs (outline; the lint uses the detectors) ----------
+- { id: a2-perfecto, level: A2, pcic: "Gramática 9.1.2", desc: "Pretérito perfecto (he comido)", detect: perfecto }
+- { id: a2-indefinido, level: A2, pcic: "Gramática 9.1.3", desc: "Pretérito indefinido, regular and irregular", detect: preterito }
+- { id: a2-object-pronouns, level: A2, pcic: "Gramática 7.1", desc: "Direct and indirect object pronouns and their position" }
+- { id: a2-por-para, level: A2, pcic: "Gramática 12 (preposiciones)", desc: "por and para" }
+- { id: a2-estar-gerund, level: A2, pcic: "Gramática 12 (perífrasis)", desc: "estar + gerundio", detect: estar-gerund }
+- { id: a2-futuro, level: A2, pcic: "Gramática 9.1.6", desc: "Simple future (intro)", detect: futuro }
+- { id: a2-imperfecto, level: A2, pcic: "Gramática 9.1.4", desc: "Imperfecto and its contrast with the indefinido", detect: imperfecto }
+- { id: a2-soler, level: A2, pcic: "Gramática 12 (perífrasis)", desc: "soler + infinitive" }
+- { id: a2-double-pronouns, level: B1, pcic: "Gramática 7.1", desc: "Double object pronouns (se lo)", detect: se-lo }
+- { id: a2-imperative-usted, level: A2, pcic: "Gramática 9.3", desc: "usted commands", detect: imperative-usted }
+- { id: a2-condicional, level: B1, pcic: "Gramática 9.1.7", desc: "Conditional", detect: condicional }
+- { id: b1-subjunctive, level: B1, pcic: "Gramática 9.2.1", desc: "Present subjunctive after wishes, feelings and opinions", detect: subjuntivo }
+- { id: b1-ojala, level: B1, pcic: "Gramática 9.2.1", desc: "ojalá" }
+- { id: b1-imperative-neg, level: B1, pcic: "Gramática 9.3", desc: "Negative commands" }
+- { id: b1-relatives, level: B1, pcic: "Gramática 16 (relativas)", desc: "que, donde, lo que" }
+- { id: b1-voseo, level: B1, pcic: "Gramática 7.1, 9.1.1", desc: "Voseo, for recognition" }
+- { id: b1-subj-time, level: B1, pcic: "Gramática 16 (temporales, finales)", desc: "Subjunctive in time and purpose clauses" }
+- { id: b1-pluscuamperfecto, level: B1, pcic: "Gramática 9.1.5", desc: "Pluscuamperfecto" }
+- { id: b1-si-present, level: B1, pcic: "Gramática 16 (condicionales)", desc: "si + present" }
+- { id: b1-reported, level: B1, pcic: "Gramática 16 (estilo indirecto)", desc: "Reported speech" }
+- { id: b2-subj-imperfect, level: B2, pcic: "Gramática 9.2.3", desc: "Imperfect subjunctive" }
+- { id: b2-si-clauses, level: B2, pcic: "Gramática 16 (condicionales)", desc: "si clauses II and III" }
+- { id: b2-passive, level: B2, pcic: "Gramática 14 (pasiva)", desc: "Passive se and ser passive" }
+- { id: b2-connectors, level: B2, pcic: "Tácticas 1", desc: "Connectors" }
+- { id: b2-register, level: B2, pcic: "Géneros discursivos", desc: "Formal register, emails, meetings" }
+- { id: hard2-vosotros, level: B2, pcic: "Gramática 9.1.1", desc: "Producing vosotros forms", detect: vosotros }
+- { id: c1-idioms, level: C1, pcic: "Saberes y comportamientos", desc: "Idioms and refranes" }
+- { id: c1-nominalisation, level: C1, pcic: "Gramática 10", desc: "Nominalisation" }
