@@ -1,0 +1,40 @@
+# Ngobrol (Easy 2): the Spain-set dialogue (PRD §5.5, plan R7). Set in Madrid, played in Spain voices
+# (variety es): vosotros and Spain words (vale, zumo) are expected here. Draft for review; needs the Spain
+# speaker's check (review.es_by on the España content).
+rung: easy-2
+title: { id: "Sore di Madrid", en: "An afternoon in Madrid", es: "Una tarde en Madrid" }
+city: Madrid
+variety: es
+lines:
+  - { who: Carmen, es: "¡Hola, chicos! ¿Qué queréis hacer esta tarde?", id: "Halo, teman-teman! Sore ini kalian mau ngapain?" }
+  - { who: Javier, es: "Yo quiero ir al Retiro. Hace sol.", id: "Aku mau ke Retiro. Cuacanya cerah." }
+  - { who: Rina, es: "¡Vale! ¿Cómo vamos? ¿En metro?", id: "Oke! Kita naik apa? Metro?" }
+  - { who: Carmen, es: "Sí, el metro está aquí cerca. Podemos tomar la línea dos.", id: "Iya, metronya dekat. Kita bisa naik jalur dua." }
+  - { who: Javier, es: "Después, ¿tomamos un zumo de naranja?", id: "Habis itu, minum jus jeruk yuk?" }
+  - { who: Rina, es: "¡Sí! Me encanta el zumo de naranja.", id: "Ayo! Aku suka banget jus jeruk." }
+  - { who: Carmen, es: "Yo prefiero un café con leche.", id: "Aku lebih suka kopi susu." }
+  - { who: Javier, es: "Vale. ¿A qué hora salís mañana?", id: "Oke. Besok kalian berangkat jam berapa?" }
+  - { who: Rina, es: "A las nueve. ¡Gracias por todo!", id: "Jam sembilan. Makasih untuk semuanya!" }
+note:
+  id: "Di Spanyol, teman-teman disapa dengan *vosotros*: *queréis*, *salís*. Di Amerika Latin: *ustedes quieren*, *ustedes salen*. *Vale* artinya oke."
+  en: "In Spain, friends are addressed with *vosotros*: *queréis*, *salís*. In Latin America: *ustedes quieren*, *ustedes salen*. *Vale* means OK."
+items:
+  - id: e2-g-1
+    type: choice
+    prompt: "¿Adónde quiere ir Javier?"
+    options: ["Al Retiro.", "Al mercado.", "A la playa."]
+    answer: "Al Retiro."
+    why: { id: "*Yo quiero ir al Retiro.*", en: "*Yo quiero ir al Retiro.*" }
+  - id: e2-g-2
+    type: choice
+    lang: id
+    prompt: "*Queréis* dipakai di Spanyol untuk…"
+    options: ["kalian (teman)", "Anda", "mereka"]
+    answer: "kalian (teman)"
+    why: { id: "*Vosotros queréis*: kalian mau (di Spanyol).", en: "*Vosotros queréis*: you all want (in Spain)." }
+  - id: e2-g-3
+    type: choice
+    prompt: "¿Qué toma Carmen?"
+    options: ["Un café con leche.", "Un zumo de naranja.", "Agua."]
+    answer: "Un café con leche."
+    why: { id: "*Yo prefiero un café con leche.*", en: "*Yo prefiero un café con leche.*" }

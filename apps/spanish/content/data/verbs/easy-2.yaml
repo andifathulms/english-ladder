@@ -1,0 +1,15 @@
+# Verbs added with Easy 2's lessons (draft data for the teacher's review). Same shape as verbs.yaml.
+- inf: desear
+  id: menginginkan (¿Qué desea?)
+  check:
+    presente: [deseo, deseas, desea, deseamos, deseáis, desean]
+- inf: rezar
+  id: berdoa, salat
+  check:
+    presente: [rezo, rezas, reza, rezamos, rezáis, rezan]
+    preterito: [recé, rezaste, rezó, rezamos, rezasteis, rezaron]
+- inf: probar
+  id: mencoba, mencicipi
+  stem: ue
+  check:
+    presente: [pruebo, pruebas, prueba, probamos, probáis, prueban]

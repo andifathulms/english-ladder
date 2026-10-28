@@ -1,0 +1,54 @@
+# Easy 2 rung test (PRD §5.5): draw 16 of 36, pass 12, at least one item from every lesson.
+# Draft for the teacher's review. One Spain recognition item (e2-t-03); learners never produce vosotros.
+rung: easy-2
+draw: 16
+pass: 12
+items:
+  # 01 stem changes
+  - { id: e2-t-01, from: easy2-01-quiero-puedo, type: gap, cue: "Kamu bisa datang?", prompt: "¿___ venir?", options: [Puedes, Podes, Puede], answer: Puedes, why: { id: "*Poder*, o → ue: *puedes*.", en: "*Poder*, o → ue: *puedes*." } }
+  - { id: e2-t-02, from: easy2-01-quiero-puedo, type: form, cue: "Kelasnya mulai jam delapan.", base: empezar, target: { person: ellos, tense: presente }, frame: "Las clases ___ a las ocho.", answer: empiezan, why: { id: "*Empezar*, e → ie: *empiezan*.", en: "*Empezar*, e → ie: *empiezan*." } }
+  - { id: e2-t-03, from: easy2-01-quiero-puedo, type: listen, variety: es, prompt: "Dengarkan kalimat dari Spanyol, lalu pilih.", audio: "¿Podéis venir hoy?", options: ["¿Podéis venir hoy?", "¿Pueden venir hoy?"], answer: "¿Podéis venir hoy?", why: { id: "*Podéis*: bentuk *vosotros* di Spanyol, sama dengan *pueden* di Amerika Latin.", en: "*Podéis*: Spain's *vosotros* form, Latin American *pueden*." } }
+  # 02 yo irregulars
+  - { id: e2-t-04, from: easy2-02-hago-salgo, type: gap, cue: "Aku menaruh baju di lemari.", prompt: "___ la ropa en el armario.", options: [Pongo, Pono, Pone], answer: Pongo, why: { id: "*Poner* → *pongo*.", en: "*Poner* → *pongo*." } }
+  - { id: e2-t-05, from: easy2-02-hago-salgo, type: gap, cue: "Aku kenal restoran yang enak.", prompt: "___ un restaurante bueno.", options: [Conozco, Sé, Conoco], answer: Conozco, why: { id: "Tempat yang pernah kamu datangi: *conocer* → *conozco*.", en: "A place you've been: *conocer* → *conozco*." } }
+  - { id: e2-t-06, from: easy2-02-hago-salgo, type: conjugate, verb: hacer, tense: presente, persons: [yo, tu, nosotros], answers: { yo: hago, tu: haces, nosotros: hacemos }, why: { id: "Hanya *yo* tak beraturan: *hago*.", en: "Only *yo* is irregular: *hago*." } }
+  # 03 ir a
+  - { id: e2-t-07, from: easy2-03-voy-a, type: gap, cue: "Kita akan memasak.", prompt: "Vamos ___ cocinar.", options: [a, de, en], answer: a, why: { id: "*Ir a* + kata kerja dasar.", en: "*Ir a* + infinitive." } }
+  - { id: e2-t-08, from: easy2-03-voy-a, type: gap, cue: "Kamu mau ke mana?", prompt: "¿Adónde ___?", options: [vas, va, voy], answer: vas, why: { id: "*Tú* → *vas*.", en: "*Tú* → *vas*." } }
+  - { id: e2-t-09, from: easy2-03-voy-a, type: order, cue: "Aku pergi ke pasar.", tiles: [mercado, Voy, al], answer: [Voy, al, mercado], why: { id: "*A* + *el* = *al*.", en: "*A* + *el* = *al*." } }
+  # 04 reflexives
+  - { id: e2-t-10, from: easy2-04-me-levanto, type: gap, cue: "Kamu tidur jam berapa?", prompt: "¿A qué hora ___ acuestas?", options: [te, me, se], answer: te, why: { id: "*Tú* → *te acuestas*.", en: "*Tú* → *te acuestas*." } }
+  - { id: e2-t-11, from: easy2-04-me-levanto, type: form, cue: "Mateo mandi pagi-pagi.", base: ducharse, target: { person: el, tense: presente }, frame: "Mateo ___ por la mañana.", answer: "se ducha", why: { id: "*Él* → *se ducha*.", en: "*Él* → *se ducha*." } }
+  - { id: e2-t-12, from: easy2-04-me-levanto, type: choice, lang: id, prompt: "*Me levanto* artinya…", options: ["Aku bangun.", "Aku mengangkat.", "Aku tidur."], answer: "Aku bangun.", why: { id: "Dengan *me*, *levantarse* artinya bangun dari tempat tidur.", en: "With *me*, *levantarse* means to get up." } }
+  # 05 time
+  - { id: e2-t-13, from: easy2-05-que-hora-es, type: choice, lang: id, prompt: "*Son las cuatro y media* itu jam…", options: ["4.30", "3.30", "4.15"], answer: "4.30", why: { id: "*Las cuatro y media*: setengah lima.", en: "*Las cuatro y media*: 4:30." } }
+  - { id: e2-t-14, from: easy2-05-que-hora-es, type: gap, cue: "Kelasnya jam sembilan.", prompt: "La clase es ___ las nueve.", options: [a, en, de], answer: a, why: { id: "Jadwal: *a las nueve*.", en: "A schedule: *a las nueve*." } }
+  - { id: e2-t-15, from: easy2-05-que-hora-es, type: dictation, audio: "Son las dos y cuarto.", answer: "Son las dos y cuarto.", why: { id: "*Y cuarto*: lewat seperempat.", en: "*Y cuarto*: quarter past." } }
+  # 06 gustar
+  - { id: e2-t-16, from: easy2-06-me-gusta, type: gap, cue: "Kami nggak suka dingin.", prompt: "No ___ gusta el frío.", options: [nos, les, me], answer: nos, why: { id: "*Kami* → *nos*.", en: "*We* → *nos*." } }
+  - { id: e2-t-17, from: easy2-06-me-gusta, type: gap, cue: "Kalian suka film?", prompt: "¿Les ___ las películas?", options: [gustan, gusta], answer: gustan, why: { id: "*Las películas* jamak: *gustan*.", en: "*Las películas* is plural: *gustan*." } }
+  - { id: e2-t-18, from: easy2-06-me-gusta, type: fix, wrong: "Yo gusto la música.", options: ["Me gusta la música.", "Me gusto la música.", "Yo gusta la música."], answer: "Me gusta la música.", why: { id: "Musiknya yang \"menyenangkan\": *me gusta la música*.", en: "The music is what \"pleases\": *me gusta la música*." } }
+  # 07 demonstratives
+  - { id: e2-t-19, from: easy2-07-este-ese, type: gap, cue: "Gaun itu cantik.", prompt: "___ vestido es bonito.", options: [Ese, Esa, Esos], answer: Ese, why: { id: "*Vestido* maskulin: *ese*.", en: "*Vestido* is masculine: *ese*." } }
+  - { id: e2-t-20, from: easy2-07-este-ese, type: gap, cue: "Toko yang di sana itu murah.", prompt: "___ tienda es barata.", options: [Aquella, Aquel, Esta], answer: Aquella, why: { id: "Jauh dan feminin: *aquella*.", en: "Far and feminine: *aquella*." } }
+  - { id: e2-t-21, from: easy2-07-este-ese, type: agree, noun: { es: zapatos, gender: m, number: pl, id: sepatu }, adj: negro, definite: true, options: { article: [los, las], adjective: [negros, negras] }, answers: { article: los, adjective: negros }, why: { id: "*Zapatos* maskulin jamak: *los* dan *negros*.", en: "*Zapatos* is masculine plural: *los* and *negros*." } }
+  # 08 ordering
+  - { id: e2-t-22, from: easy2-08-quisiera, type: gap, cue: "Saya mau supnya.", prompt: "___ la sopa, por favor.", options: [Quisiera, Quisiere, Quisieras], answer: Quisiera, why: { id: "*Quisiera*: cara sopan memesan.", en: "*Quisiera*: the polite way to order." } }
+  - { id: e2-t-23, from: easy2-08-quisiera, type: choice, prompt: "¿Qué dices para ver los platos?", options: ["El menú, por favor.", "La cuenta, por favor.", "Sin hielo, por favor."], answer: "El menú, por favor.", why: { id: "*El menú*: daftar makanan.", en: "*El menú*: the list of dishes." } }
+  - { id: e2-t-24, from: easy2-08-quisiera, type: gap, cue: "Untuk saya, ikannya.", prompt: "___ mí, el pescado.", options: [Para, Por, A], answer: Para, why: { id: "*Para mí*: untuk saya.", en: "*Para mí*: for me." } }
+  # 09 directions
+  - { id: e2-t-25, from: easy2-09-gira, type: gap, cue: "Belok kiri.", prompt: "Gira a la ___.", options: [izquierda, derecha], answer: izquierda, why: { id: "*Izquierda*: kiri; *derecha*: kanan.", en: "*Izquierda*: left; *derecha*: right." } }
+  - { id: e2-t-26, from: easy2-09-gira, type: form, cue: "Naik metro.", base: tomar, target: { person: tu, tense: imperativo }, frame: "___ el metro.", answer: toma, why: { id: "Perintah untuk *tú*: *toma*.", en: "A *tú* command: *toma*." } }
+  - { id: e2-t-27, from: easy2-09-gira, type: listen, audio: "Sigue derecho dos cuadras.", options: ["Sigue derecho dos cuadras.", "Sigo derecho dos cuadras.", "Gira a la derecha en dos cuadras."], answer: "Sigue derecho dos cuadras.", why: { id: "*Sigue derecho*: jalan terus.", en: "*Sigue derecho*: go straight on." } }
+  # 10 weather
+  - { id: e2-t-28, from: easy2-10-hace-calor, type: gap, cue: "Dingin.", prompt: "___ frío.", options: [Hace, Es, Hay], answer: Hace, why: { id: "*Hace frío*.", en: "*Hace frío*." } }
+  - { id: e2-t-29, from: easy2-10-hace-calor, type: gap, cue: "Di Santiago turun salju.", prompt: "En Santiago ___.", options: [nieva, nevar, nieve], answer: nieva, why: { id: "*Nevar* → *nieva*.", en: "*Nevar* → *nieva*." } }
+  - { id: e2-t-30, from: easy2-10-hace-calor, type: choice, lang: id, prompt: "*Está nublado* artinya…", options: ["Mendung.", "Hujan.", "Berangin."], answer: "Mendung.", why: { id: "*Nublado*: berawan, mendung.", en: "*Nublado*: cloudy." } }
+  # 11 comparisons
+  - { id: e2-t-31, from: easy2-11-mas-que, type: gap, cue: "Metro lebih murah daripada taksi.", prompt: "El metro es ___ caro que el taxi.", options: [menos, más, tan], answer: menos, why: { id: "Kurang mahal: *menos caro*.", en: "Less expensive: *menos caro*." } }
+  - { id: e2-t-32, from: easy2-11-mas-que, type: gap, cue: "Rina lebih muda daripada Andi.", prompt: "Rina es ___ que Andi.", options: [menor, mayor, mejor], answer: menor, why: { id: "Umur: *menor* (lebih muda).", en: "Age: *menor* (younger)." } }
+  - { id: e2-t-33, from: easy2-11-mas-que, type: fix, wrong: "Lima es más grande de Bogotá.", options: ["Lima es más grande que Bogotá.", "Lima es más grande como Bogotá.", "Lima es grande que Bogotá."], answer: "Lima es más grande que Bogotá.", why: { id: "*Más … que*, bukan *de*.", en: "*Más … que*, not *de*." } }
+  # 12 a whole day
+  - { id: e2-t-34, from: easy2-12-un-dia, type: gap, cue: "Sore hari aku ke gym.", prompt: "Por la tarde ___ al gimnasio.", options: [voy, va, vamos], answer: voy, why: { id: "*Yo* → *voy*.", en: "*Yo* → *voy*." } }
+  - { id: e2-t-35, from: easy2-12-un-dia, type: conjugate, verb: levantarse, tense: presente, persons: [yo, tu, nosotros], answers: { yo: me levanto, tu: te levantas, nosotros: nos levantamos }, why: { id: "Kata ganti ikut orangnya: *me, te, nos*.", en: "The pronoun follows the person: *me, te, nos*." } }
+  - { id: e2-t-36, from: easy2-12-un-dia, type: dictation, audio: "Me gusta cocinar por la noche.", answer: "Me gusta cocinar por la noche.", why: { id: "*Me gusta* + kata kerja dasar.", en: "*Me gusta* + infinitive." } }

@@ -1,0 +1,252 @@
+# Easy 2 word list (Sehari-hari, A1): the deck and the lexicon the lint checks against. Draft data for
+# the teacher's review. Every Easy 2 glossary word, plus everyday words for the rung's topics: routine,
+# time, days and months, food and ordering, shopping and clothes, colours, the city and directions,
+# weather and seasons. es_es gives the Spain word where Spain uses another one.
+- { es: "querer", id: "mau, ingin", en: "to want", pos: "verb", verb: {"group": "er", "irregular": true} }
+- { es: "poder", id: "bisa, boleh", en: "can", pos: "verb", verb: {"group": "er", "irregular": true} }
+- { es: "pedir", id: "meminta, memesan", en: "to ask for, to order", pos: "verb", verb: {"group": "ir", "irregular": true} }
+- { es: "pensar", id: "berpikir", en: "to think", pos: "verb", verb: {"group": "ar", "irregular": true} }
+- { es: "empezar", id: "mulai", en: "to start", pos: "verb", verb: {"group": "ar", "irregular": true} }
+- { es: "cerrar", id: "menutup", en: "to close", pos: "verb", verb: {"group": "ar", "irregular": true} }
+- { es: "entender", id: "mengerti", en: "to understand", pos: "verb", verb: {"group": "er", "irregular": true} }
+- { es: "preferir", id: "lebih suka", en: "to prefer", pos: "verb", verb: {"group": "ir", "irregular": true} }
+- { es: "dormir", id: "tidur", en: "to sleep", pos: "verb", verb: {"group": "ir", "irregular": true} }
+- { es: "volver", id: "kembali, pulang", en: "to come back", pos: "verb", verb: {"group": "er", "irregular": true} }
+- { es: "almorzar", id: "makan siang", en: "to have lunch", pos: "verb", verb: {"group": "ar", "irregular": true} }
+- { es: "costar", id: "berharga", en: "to cost", pos: "verb", verb: {"group": "ar", "irregular": true} }
+- { es: "jugar", id: "bermain", en: "to play", pos: "verb", verb: {"group": "ar", "irregular": true} }
+- { es: "encontrar", id: "menemukan", en: "to find", pos: "verb", verb: {"group": "ar", "irregular": true} }
+- { es: "seguir", id: "terus, mengikuti", en: "to carry on, to follow", pos: "verb", verb: {"group": "ir", "irregular": true} }
+- { es: "repetir", id: "mengulang", en: "to repeat", pos: "verb", verb: {"group": "ir", "irregular": true} }
+- { es: "probar", id: "mencoba, mencicipi", en: "to try, to taste", pos: "verb", verb: {"group": "ar", "irregular": true} }
+- { es: "hacer", id: "membuat, melakukan", en: "to do, to make", pos: "verb", verb: {"group": "er", "irregular": true} }
+- { es: "salir", id: "keluar, berangkat", en: "to go out, to leave", pos: "verb", verb: {"group": "ir", "irregular": true} }
+- { es: "poner", id: "menaruh", en: "to put", pos: "verb", verb: {"group": "er", "irregular": true} }
+- { es: "venir", id: "datang", en: "to come", pos: "verb", verb: {"group": "ir", "irregular": true} }
+- { es: "traer", id: "membawa (ke sini)", en: "to bring", pos: "verb", verb: {"group": "er", "irregular": true} }
+- { es: "decir", id: "berkata, bilang", en: "to say", pos: "verb", verb: {"group": "ir", "irregular": true} }
+- { es: "saber", id: "tahu", en: "to know (facts)", pos: "verb", verb: {"group": "er", "irregular": true} }
+- { es: "conocer", id: "kenal", en: "to know (people, places)", pos: "verb", verb: {"group": "er", "irregular": true} }
+- { es: "ver", id: "melihat, menonton", en: "to see, to watch", pos: "verb", verb: {"group": "er", "irregular": true} }
+- { es: "dar", id: "memberi", en: "to give", pos: "verb", verb: {"group": "ar", "irregular": true} }
+- { es: "oír", id: "mendengar", en: "to hear", pos: "verb", verb: {"group": "ir", "irregular": true} }
+- { es: "ir", id: "pergi", en: "to go", pos: "verb", verb: {"group": "ir", "irregular": true} }
+- { es: "levantarse", id: "bangun (dari tempat tidur)", en: "to get up", pos: "verb", verb: {"group": "ar", "reflexive": true} }
+- { es: "despertarse", id: "bangun (dari tidur)", en: "to wake up", pos: "verb", verb: {"group": "ar", "irregular": true, "reflexive": true} }
+- { es: "ducharse", id: "mandi (pancuran)", en: "to shower", pos: "verb", verb: {"group": "ar", "reflexive": true} }
+- { es: "bañarse", id: "mandi", en: "to bathe", pos: "verb", verb: {"group": "ar", "reflexive": true} }
+- { es: "lavarse", id: "mencuci (badan sendiri)", en: "to wash (oneself)", pos: "verb", verb: {"group": "ar", "reflexive": true} }
+- { es: "cepillarse", id: "menyikat (gigi)", en: "to brush (one's teeth)", pos: "verb", verb: {"group": "ar", "reflexive": true} }
+- { es: "peinarse", id: "menyisir rambut", en: "to comb one's hair", pos: "verb", verb: {"group": "ar", "reflexive": true} }
+- { es: "vestirse", id: "berpakaian", en: "to get dressed", pos: "verb", verb: {"group": "ir", "irregular": true, "reflexive": true} }
+- { es: "acostarse", id: "pergi tidur", en: "to go to bed", pos: "verb", verb: {"group": "ar", "irregular": true, "reflexive": true} }
+- { es: "quedarse", id: "tinggal (sebentar)", en: "to stay", pos: "verb", verb: {"group": "ar", "reflexive": true} }
+- { es: "gustar", id: "disukai (suka)", en: "to like (to please)", pos: "verb", verb: {"group": "ar"} }
+- { es: "encantar", id: "sangat disukai", en: "to love (a thing)", pos: "verb", verb: {"group": "ar"} }
+- { es: "desayunar", id: "sarapan", en: "to have breakfast", pos: "verb", verb: {"group": "ar"} }
+- { es: "cenar", id: "makan malam", en: "to have dinner", pos: "verb", verb: {"group": "ar"} }
+- { es: "pagar", id: "membayar", en: "to pay", pos: "verb", verb: {"group": "ar"} }
+- { es: "desear", id: "menginginkan", en: "to wish, to want", pos: "verb", verb: {"group": "ar"} }
+- { es: "girar", id: "berbelok", en: "to turn", pos: "verb", verb: {"group": "ar"} }
+- { es: "cruzar", id: "menyeberang", en: "to cross", pos: "verb", verb: {"group": "ar"} }
+- { es: "llover", id: "hujan", en: "to rain", pos: "verb", verb: {"group": "er", "irregular": true} }
+- { es: "nevar", id: "turun salju", en: "to snow", pos: "verb", verb: {"group": "ar", "irregular": true} }
+- { es: "rezar", id: "berdoa, salat", en: "to pray", pos: "verb", verb: {"group": "ar"} }
+- { es: "terminar", id: "selesai", en: "to finish", pos: "verb", verb: {"group": "ar"} }
+- { es: "llevar", id: "membawa, memakai (baju)", en: "to carry, to wear", pos: "verb", verb: {"group": "ar"} }
+- { es: "buscar", id: "mencari", en: "to look for", pos: "verb", verb: {"group": "ar"} }
+- { es: "manejar", id: "menyetir", en: "to drive", pos: "verb", verb: {"group": "ar"}, es_es: "conducir" }
+- { es: "pasar", id: "lewat, menghabiskan (waktu)", en: "to pass, to spend (time)", pos: "verb", verb: {"group": "ar"} }
+- { es: "desayuno", id: "sarapan", en: "breakfast", pos: "noun", gender: "m" }
+- { es: "almuerzo", id: "makan siang", en: "lunch", pos: "noun", gender: "m" }
+- { es: "cena", id: "makan malam", en: "dinner", pos: "noun", gender: "f" }
+- { es: "ducha", id: "pancuran, shower", en: "shower", pos: "noun", gender: "f" }
+- { es: "diente", id: "gigi", en: "tooth", pos: "noun", gender: "m" }
+- { es: "toalla", id: "handuk", en: "towel", pos: "noun", gender: "f" }
+- { es: "despertador", id: "jam weker", en: "alarm clock", pos: "noun", gender: "m" }
+- { es: "minuto", id: "menit", en: "minute", pos: "noun", gender: "m" }
+- { es: "momento", id: "saat, sebentar", en: "moment", pos: "noun", gender: "m" }
+- { es: "mediodía", id: "tengah hari", en: "midday", pos: "noun", gender: "m" }
+- { es: "medianoche", id: "tengah malam", en: "midnight", pos: "noun", gender: "f" }
+- { es: "lunes", id: "Senin", en: "Monday", pos: "noun", gender: "m" }
+- { es: "martes", id: "Selasa", en: "Tuesday", pos: "noun", gender: "m" }
+- { es: "miércoles", id: "Rabu", en: "Wednesday", pos: "noun", gender: "m" }
+- { es: "jueves", id: "Kamis", en: "Thursday", pos: "noun", gender: "m" }
+- { es: "viernes", id: "Jumat", en: "Friday", pos: "noun", gender: "m" }
+- { es: "sábado", id: "Sabtu", en: "Saturday", pos: "noun", gender: "m" }
+- { es: "enero", id: "Januari", en: "January", pos: "noun", gender: "m" }
+- { es: "febrero", id: "Februari", en: "February", pos: "noun", gender: "m" }
+- { es: "marzo", id: "Maret", en: "March", pos: "noun", gender: "m" }
+- { es: "abril", id: "April", en: "April", pos: "noun", gender: "m" }
+- { es: "mayo", id: "Mei", en: "May", pos: "noun", gender: "m" }
+- { es: "junio", id: "Juni", en: "June", pos: "noun", gender: "m" }
+- { es: "julio", id: "Juli", en: "July", pos: "noun", gender: "m" }
+- { es: "agosto", id: "Agustus", en: "August", pos: "noun", gender: "m" }
+- { es: "septiembre", id: "September", en: "September", pos: "noun", gender: "m" }
+- { es: "octubre", id: "Oktober", en: "October", pos: "noun", gender: "m" }
+- { es: "noviembre", id: "November", en: "November", pos: "noun", gender: "m" }
+- { es: "diciembre", id: "Desember", en: "December", pos: "noun", gender: "m" }
+- { es: "deporte", id: "olahraga", en: "sport", pos: "noun", gender: "m" }
+- { es: "gimnasio", id: "gym, pusat kebugaran", en: "gym", pos: "noun", gender: "m" }
+- { es: "fútbol", id: "sepak bola", en: "football, soccer", pos: "noun", gender: "m" }
+- { es: "cine", id: "bioskop", en: "cinema", pos: "noun", gender: "m" }
+- { es: "vacaciones", id: "liburan", en: "holidays", pos: "noun", gender: "f" }
+- { es: "armario", id: "lemari", en: "wardrobe", pos: "noun", gender: "m", bridge: {"pt": "armário", "id": "lemari"} }
+- { es: "mesero", id: "pelayan (restoran)", en: "waiter", pos: "noun", gender: "m", es_es: "camarero" }
+- { es: "ensalada", id: "salad", en: "salad", pos: "noun", gender: "f" }
+- { es: "mantequilla", id: "mentega", en: "butter", pos: "noun", gender: "f", bridge: {"pt": "manteiga", "id": "mentega"} }
+- { es: "naranja", id: "jeruk", en: "orange", pos: "noun", gender: "f" }
+- { es: "papa", id: "kentang", en: "potato", pos: "noun", gender: "f", es_es: "patata" }
+- { es: "tomate", id: "tomat", en: "tomato", pos: "noun", gender: "m" }
+- { es: "verdura", id: "sayur", en: "vegetable", pos: "noun", gender: "f" }
+- { es: "postre", id: "hidangan penutup", en: "dessert", pos: "noun", gender: "m" }
+- { es: "helado", id: "es krim", en: "ice cream", pos: "noun", gender: "m" }
+- { es: "hielo", id: "es (batu)", en: "ice", pos: "noun", gender: "m" }
+- { es: "azúcar", id: "gula", en: "sugar", pos: "noun", gender: "m" }
+- { es: "sal", id: "garam", en: "salt", pos: "noun", gender: "f" }
+- { es: "cuenta", id: "tagihan", en: "bill", pos: "noun", gender: "f" }
+- { es: "propina", id: "tip", en: "tip", pos: "noun", gender: "f" }
+- { es: "supermercado", id: "supermarket", en: "supermarket", pos: "noun", gender: "m" }
+- { es: "precio", id: "harga", en: "price", pos: "noun", gender: "m" }
+- { es: "peso", id: "peso (mata uang)", en: "peso", pos: "noun", gender: "m" }
+- { es: "tarjeta", id: "kartu", en: "card", pos: "noun", gender: "f" }
+- { es: "efectivo", id: "uang tunai", en: "cash", pos: "noun", gender: "m" }
+- { es: "regalo", id: "hadiah", en: "present", pos: "noun", gender: "m" }
+- { es: "talla", id: "ukuran (baju)", en: "size", pos: "noun", gender: "f" }
+- { es: "camiseta", id: "kaus", en: "T-shirt", pos: "noun", gender: "f" }
+- { es: "pantalón", id: "celana panjang", en: "trousers", pos: "noun", gender: "m" }
+- { es: "falda", id: "rok", en: "skirt", pos: "noun", gender: "f" }
+- { es: "vestido", id: "gaun", en: "dress", pos: "noun", gender: "m" }
+- { es: "chaqueta", id: "jaket", en: "jacket", pos: "noun", gender: "f" }
+- { es: "suéter", id: "sweter", en: "sweater", pos: "noun", gender: "m" }
+- { es: "abrigo", id: "mantel, jaket tebal", en: "coat", pos: "noun", gender: "m" }
+- { es: "calcetín", id: "kaus kaki", en: "sock", pos: "noun", gender: "m" }
+- { es: "gorra", id: "topi", en: "cap", pos: "noun", gender: "f" }
+- { es: "color", id: "warna", en: "colour", pos: "noun", gender: "m" }
+- { es: "avenida", id: "jalan raya", en: "avenue", pos: "noun", gender: "f" }
+- { es: "esquina", id: "sudut jalan", en: "corner", pos: "noun", gender: "f" }
+- { es: "cuadra", id: "blok", en: "block", pos: "noun", gender: "f", es_es: "manzana" }
+- { es: "plaza", id: "alun-alun", en: "square", pos: "noun", gender: "f" }
+- { es: "farmacia", id: "apotek", en: "pharmacy", pos: "noun", gender: "f" }
+- { es: "museo", id: "museum", en: "museum", pos: "noun", gender: "m" }
+- { es: "parada", id: "halte", en: "stop", pos: "noun", gender: "f" }
+- { es: "metro", id: "kereta bawah tanah", en: "metro", pos: "noun", gender: "m" }
+- { es: "línea", id: "jalur", en: "line", pos: "noun", gender: "f" }
+- { es: "avión", id: "pesawat", en: "plane", pos: "noun", gender: "m" }
+- { es: "taxi", id: "taksi", en: "taxi", pos: "noun", gender: "m" }
+- { es: "semáforo", id: "lampu lalu lintas", en: "traffic light", pos: "noun", gender: "m" }
+- { es: "centro", id: "pusat kota", en: "centre", pos: "noun", gender: "m" }
+- { es: "puente", id: "jembatan", en: "bridge", pos: "noun", gender: "m" }
+- { es: "derecha", id: "kanan", en: "right", pos: "noun", gender: "f" }
+- { es: "izquierda", id: "kiri", en: "left", pos: "noun", gender: "f" }
+- { es: "tiempo", id: "cuaca; waktu", en: "weather; time", pos: "noun", gender: "m" }
+- { es: "clima", id: "iklim", en: "climate", pos: "noun", gender: "m" }
+- { es: "calor", id: "panas", en: "heat", pos: "noun", gender: "m" }
+- { es: "frío", id: "dingin", en: "cold", pos: "noun", gender: "m" }
+- { es: "sol", id: "matahari", en: "sun", pos: "noun", gender: "m" }
+- { es: "lluvia", id: "hujan", en: "rain", pos: "noun", gender: "f" }
+- { es: "viento", id: "angin", en: "wind", pos: "noun", gender: "m" }
+- { es: "nube", id: "awan", en: "cloud", pos: "noun", gender: "f" }
+- { es: "nieve", id: "salju", en: "snow", pos: "noun", gender: "f" }
+- { es: "grado", id: "derajat", en: "degree", pos: "noun", gender: "m" }
+- { es: "temperatura", id: "suhu", en: "temperature", pos: "noun", gender: "f" }
+- { es: "paraguas", id: "payung", en: "umbrella", pos: "noun", gender: "m" }
+- { es: "primavera", id: "musim semi", en: "spring", pos: "noun", gender: "f" }
+- { es: "verano", id: "musim panas", en: "summer", pos: "noun", gender: "m" }
+- { es: "otoño", id: "musim gugur", en: "autumn", pos: "noun", gender: "m" }
+- { es: "invierno", id: "musim dingin", en: "winter", pos: "noun", gender: "m" }
+- { es: "nublado", id: "mendung", en: "cloudy", pos: "adj" }
+- { es: "morado", id: "ungu", en: "purple", pos: "adj" }
+- { es: "marrón", id: "cokelat (warna)", en: "brown", pos: "adj", forms: ["marrón", "marrón", "marrones", "marrones"] }
+- { es: "cómodo", id: "nyaman", en: "comfortable", pos: "adj" }
+- { es: "rápido", id: "cepat", en: "fast", pos: "adj" }
+- { es: "lento", id: "lambat", en: "slow", pos: "adj" }
+- { es: "delicioso", id: "lezat", en: "delicious", pos: "adj" }
+- { es: "dulce", id: "manis", en: "sweet", pos: "adj" }
+- { es: "picante", id: "pedas", en: "spicy", pos: "adj" }
+- { es: "libre", id: "bebas, kosong", en: "free", pos: "adj" }
+- { es: "normal", id: "biasa", en: "normal", pos: "adj" }
+- { es: "siguiente", id: "berikutnya", en: "next", pos: "adj" }
+- { es: "derecho", id: "lurus, terus", en: "straight on", pos: "adv", es_es: "recto" }
+- { es: "recto", id: "lurus (Spanyol)", en: "straight on (Spain)", pos: "adv" }
+- { es: "enfrente", id: "di seberang", en: "opposite", pos: "adv" }
+- { es: "claro", id: "tentu", en: "of course", pos: "interj" }
+- { es: "de acuerdo", id: "baiklah, setuju", en: "all right", pos: "expr" }
+- { es: "fin de semana", id: "akhir pekan", en: "weekend", pos: "expr" }
+- { es: "todos los días", id: "setiap hari", en: "every day", pos: "expr" }
+- { es: "por la mañana", id: "pagi hari", en: "in the morning", pos: "expr" }
+- { es: "por la tarde", id: "sore hari", en: "in the afternoon", pos: "expr" }
+- { es: "por la noche", id: "malam hari", en: "at night", pos: "expr" }
+- { es: "a veces", id: "kadang-kadang", en: "sometimes", pos: "expr" }
+- { es: "qué bien", id: "asyik, bagus", en: "great", pos: "expr" }
+- { es: "coche", id: "mobil (Spanyol)", en: "car (Spain)", pos: "noun", gender: "m" }
+- { es: "zumo", id: "jus (Spanyol)", en: "juice (Spain)", pos: "noun", gender: "m" }
+- { es: "camarero", id: "pelayan (Spanyol)", en: "waiter (Spain)", pos: "noun", gender: "m" }
+- { es: "móvil", id: "ponsel (Spanyol)", en: "mobile phone (Spain)", pos: "noun", gender: "m" }
+- { es: "ordenador", id: "komputer (Spanyol)", en: "computer (Spain)", pos: "noun", gender: "m" }
+- { es: "patata", id: "kentang (Spanyol)", en: "potato (Spain)", pos: "noun", gender: "f" }
+- { es: "vale", id: "oke (Spanyol)", en: "OK (Spain)", pos: "interj" }
+
+- { es: "bufanda", id: "syal", en: "scarf", pos: "noun", gender: "f" }
+- { es: "guante", id: "sarung tangan", en: "glove", pos: "noun", gender: "m" }
+- { es: "cinturón", id: "ikat pinggang", en: "belt", pos: "noun", gender: "m" }
+- { es: "bota", id: "sepatu bot", en: "boot", pos: "noun", gender: "f" }
+- { es: "sandalia", id: "sandal", en: "sandal", pos: "noun", gender: "f" }
+- { es: "pijama", id: "piyama", en: "pyjamas", pos: "noun", gender: "m" }
+- { es: "traje", id: "setelan jas", en: "suit", pos: "noun", gender: "m" }
+- { es: "bolso", id: "tas tangan", en: "handbag", pos: "noun", gender: "m" }
+- { es: "frijol", id: "kacang merah", en: "bean", pos: "noun", gender: "m", es_es: "alubia" }
+- { es: "cebolla", id: "bawang bombai", en: "onion", pos: "noun", gender: "f" }
+- { es: "ajo", id: "bawang putih", en: "garlic", pos: "noun", gender: "m" }
+- { es: "limón", id: "jeruk nipis, lemon", en: "lime, lemon", pos: "noun", gender: "m" }
+- { es: "galleta", id: "biskuit", en: "biscuit", pos: "noun", gender: "f" }
+- { es: "pastel", id: "kue", en: "cake", pos: "noun", gender: "m" }
+- { es: "refresco", id: "minuman ringan", en: "soft drink", pos: "noun", gender: "m" }
+- { es: "sándwich", id: "roti lapis", en: "sandwich", pos: "noun", gender: "m" }
+- { es: "yogur", id: "yoghurt", en: "yoghurt", pos: "noun", gender: "m" }
+- { es: "mango", id: "mangga", en: "mango", pos: "noun", gender: "m" }
+- { es: "piña", id: "nanas", en: "pineapple", pos: "noun", gender: "f" }
+- { es: "fresa", id: "stroberi", en: "strawberry", pos: "noun", gender: "f" }
+- { es: "uva", id: "anggur", en: "grape", pos: "noun", gender: "f" }
+- { es: "sandía", id: "semangka", en: "watermelon", pos: "noun", gender: "f" }
+- { es: "aguacate", id: "alpukat", en: "avocado", pos: "noun", gender: "m" }
+- { es: "chocolate", id: "cokelat", en: "chocolate", pos: "noun", gender: "m" }
+- { es: "cliente", id: "pelanggan", en: "customer", pos: "noun", gender: "m" }
+- { es: "oferta", id: "promo", en: "offer", pos: "noun", gender: "f" }
+- { es: "descuento", id: "diskon", en: "discount", pos: "noun", gender: "m" }
+- { es: "centro comercial", id: "mal", en: "shopping centre", pos: "noun", gender: "m" }
+- { es: "barrio", id: "lingkungan, kampung", en: "neighbourhood", pos: "noun", gender: "m" }
+- { es: "biblioteca", id: "perpustakaan", en: "library", pos: "noun", gender: "f" }
+- { es: "correo", id: "kantor pos; surat", en: "post office; mail", pos: "noun", gender: "m" }
+- { es: "gasolinera", id: "pom bensin", en: "petrol station", pos: "noun", gender: "f" }
+- { es: "estacionamiento", id: "tempat parkir", en: "car park", pos: "noun", gender: "m", es_es: "aparcamiento" }
+- { es: "cruce", id: "persimpangan", en: "crossing", pos: "noun", gender: "m" }
+- { es: "rutina", id: "rutinitas", en: "routine", pos: "noun", gender: "f" }
+- { es: "siesta", id: "tidur siang", en: "nap", pos: "noun", gender: "f" }
+- { es: "alarma", id: "alarm", en: "alarm", pos: "noun", gender: "f" }
+- { es: "tormenta", id: "badai", en: "storm", pos: "noun", gender: "f" }
+- { es: "trueno", id: "guntur", en: "thunder", pos: "noun", gender: "m" }
+- { es: "humedad", id: "kelembapan", en: "humidity", pos: "noun", gender: "f" }
+- { es: "estación seca", id: "musim kemarau", en: "dry season", pos: "noun", gender: "f" }
+- { es: "estación de lluvias", id: "musim hujan", en: "rainy season", pos: "noun", gender: "f" }
+- { es: "pasta de dientes", id: "pasta gigi", en: "toothpaste", pos: "noun", gender: "f" }
+- { es: "cepillo", id: "sikat", en: "brush", pos: "noun", gender: "m" }
+- { es: "peine", id: "sisir", en: "comb", pos: "noun", gender: "m" }
+- { es: "espejo", id: "cermin", en: "mirror", pos: "noun", gender: "m" }
+- { es: "gorro", id: "topi rajut", en: "woolly hat", pos: "noun", gender: "m" }
+- { es: "lentes de sol", id: "kacamata hitam", en: "sunglasses", pos: "noun", gender: "m", es_es: "gafas de sol" }
+- { es: "húmedo", id: "lembap", en: "humid", pos: "adj" }
+- { es: "seco", id: "kering", en: "dry", pos: "adj" }
+- { es: "salado", id: "asin", en: "salty", pos: "adj" }
+- { es: "amargo", id: "pahit", en: "bitter", pos: "adj" }
+- { es: "lleno", id: "penuh, kenyang", en: "full", pos: "adj" }
+- { es: "vacío", id: "kosong", en: "empty", pos: "adj" }
+- { es: "soleado", id: "cerah", en: "sunny", pos: "adj" }
+- { es: "fresco", id: "segar, sejuk", en: "fresh, cool", pos: "adj" }
+- { es: "rosa", id: "merah muda", en: "pink", pos: "adj", forms: ["rosa", "rosa", "rosas", "rosas"] }
+- { es: "naranja", id: "oranye", en: "orange (colour)", pos: "adj", forms: ["naranja", "naranja", "naranjas", "naranjas"] }
+- { es: "claro", id: "terang (warna)", en: "light (colour)", pos: "adj" }
+- { es: "oscuro", id: "gelap (warna)", en: "dark (colour)", pos: "adj" }
+- { es: "elegante", id: "elegan", en: "smart", pos: "adj" }
+- { es: "ancho", id: "lebar, longgar", en: "wide, loose", pos: "adj" }
+- { es: "estrecho", id: "sempit", en: "narrow, tight", pos: "adj" }

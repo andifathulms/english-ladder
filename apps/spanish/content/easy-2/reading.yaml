@@ -1,0 +1,41 @@
+# Baca dan dengar (Easy 2): one connected text with the rung's grammar and words. Draft for review.
+rung: easy-2
+title: { id: "Hari Valentina", en: "Valentina's day", es: "El día de Valentina" }
+lines:
+  - { es: "Valentina trabaja en un hospital de Bogotá.", id: "Valentina bekerja di sebuah rumah sakit di Bogotá." }
+  - { es: "Se levanta a las cinco y media, porque empieza a trabajar a las siete.", id: "Dia bangun jam setengah enam, karena mulai kerja jam tujuh." }
+  - { es: "Desayuna café con leche y pan.", id: "Dia sarapan kopi susu dan roti." }
+  - { es: "Toma el autobús en la esquina de su calle.", id: "Dia naik bus di sudut jalan rumahnya." }
+  - { es: "Al mediodía almuerza con sus compañeros: sopa, arroz y pollo.", id: "Siang hari dia makan bersama rekan-rekannya: sup, nasi dan ayam." }
+  - { es: "Por la tarde, cuando sale del hospital, va al parque.", id: "Sore hari, sepulang dari rumah sakit, dia pergi ke taman." }
+  - { es: "Le gusta caminar, pero cuando llueve, prefiere ir al cine.", id: "Dia suka jalan kaki, tapi kalau hujan, dia lebih suka ke bioskop." }
+  - { es: "Por la noche cena y ve una película.", id: "Malam hari dia makan malam dan menonton film." }
+  - { es: "Se acuesta a las diez, porque el día siguiente empieza temprano.", id: "Dia tidur jam sepuluh, karena hari berikutnya dimulai pagi-pagi." }
+glossary:
+  - { es: hospital, id: "rumah sakit", pos: noun, gender: m }
+  - { es: leche, id: susu, pos: noun, gender: f }
+  - { es: pan, id: roti, pos: noun, gender: m }
+  - { es: cine, id: bioskop, pos: noun, gender: m }
+  - { es: caminar, id: "berjalan kaki", pos: verb, verb: { group: ar } }
+  - { es: siguiente, id: berikutnya, pos: adj }
+items:
+  - id: e2-r-1
+    type: choice
+    prompt: "¿Dónde trabaja Valentina?"
+    options: ["En un hospital.", "En una tienda.", "En un restaurante."]
+    answer: "En un hospital."
+    why: { id: "*Trabaja en un hospital de Bogotá.*", en: "*Trabaja en un hospital de Bogotá.*" }
+  - id: e2-r-2
+    type: gap
+    cue: "Valentina bangun jam setengah enam."
+    prompt: "Valentina se levanta a las cinco y ___."
+    options: [media, cuarto]
+    answer: media
+    why: { id: "*A las cinco y media*: 5.30.", en: "*A las cinco y media*: 5:30." }
+  - id: e2-r-3
+    type: choice
+    lang: id
+    prompt: "Kalau hujan, Valentina…"
+    options: ["pergi ke bioskop", "jalan-jalan di taman", "tidur lebih awal"]
+    answer: "pergi ke bioskop"
+    why: { id: "*Cuando llueve, prefiere ir al cine.*", en: "*Cuando llueve, prefiere ir al cine.*" }
