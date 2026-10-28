@@ -10,6 +10,7 @@
     "preview": "node ../../packages/ladder-core/scripts/serve.mjs",
     "data:import": "tsx scripts/data-import.ts",
     "content:check": "tsx ../../packages/ladder-core/scripts/content-check.ts",
+    "audio:list": "tsx scripts/audio-list.ts",
     "audio:ingest": "tsx ../../packages/ladder-core/scripts/audio-ingest.ts",
     "icons": "node ../../packages/ladder-core/scripts/make-icons.mjs '#7D3B24'",
     "sw": "node ../../packages/ladder-core/scripts/make-sw.mjs spanish-ladder- v0.1.0 '' rung/dasar/ rung/easy-1/ rung/easy-2/ placement/ review/ words/ me/ settings/ about/ manifest.webmanifest icons/icon.svg audio/manifest.json",
