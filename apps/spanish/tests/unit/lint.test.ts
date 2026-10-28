@@ -49,8 +49,8 @@ describe('lint: inventory (CLAUDE.md §4.1)', () => {
 
 describe('lint: words and spelling', () => {
   it('an unknown word is a warning in a draft and an error once reviewed', () => {
-    expect(warns(lint(example('[[Hola]], gato.'))).join('\n')).toMatch(/unknown word "gato"/);
-    expect(errors(lint((l) => ({ ...example('[[Hola]], gato.')(l), status: 'reviewed', review: { by: 'X', date: '2026-12-01' } }))).join('\n')).toMatch(/gato/);
+    expect(warns(lint(example('[[Hola]], jirafa.'))).join('\n')).toMatch(/unknown word "jirafa"/);
+    expect(errors(lint((l) => ({ ...example('[[Hola]], jirafa.')(l), status: 'reviewed', review: { by: 'X', date: '2026-12-01' } }))).join('\n')).toMatch(/jirafa/);
   });
 
   it('a known word with wrong accents is always an error', () => {
@@ -112,5 +112,18 @@ describe('lint: bridges', () => {
     const fs = lint((l) => ({ glossary: [...l.glossary, { es: 'mesa', id: 'meja', pos: 'noun', gender: 'f', bridge: { pt: 'mesa', id: 'meja' } }, { es: 'zapato', id: 'sepatu', pos: 'noun', gender: 'm', bridge: { pt: 'zapato', id: 'sepatu' } }] }));
     expect(errors(fs).join('\n')).toMatch(/bridge for "zapato"/);
     expect(errors(fs).join('\n')).not.toMatch(/bridge for "mesa"/);
+  });
+});
+
+describe('lint: M7 follow-ups', () => {
+  it('a glossary es_es word is known in Spain lines only', () => {
+    const withCarro = (l: Lesson) => ({ glossary: [...l.glossary, { es: 'carro', id: 'mobil', pos: 'noun' as const, gender: 'm' as const, es_es: 'coche' }] });
+    expect(lint((l) => ({ ...withCarro(l), ...example('El [[carro]].', { es_es: 'El [[coche]].' })(l) }))).toEqual([]);
+  });
+  it('invariable plurals agree in either number (el lunes, los lunes)', () => {
+    const lunes = (l: Lesson) => ({ glossary: [...l.glossary, { es: 'lunes', id: 'Senin', pos: 'noun' as const, gender: 'm' as const, plural: 'lunes' }] });
+    expect(errors(lint((l) => ({ ...lunes(l), ...example('Los [[lunes]].')(l) })))).toEqual([]);
+    expect(errors(lint((l) => ({ ...lunes(l), ...example('El [[lunes]].')(l) })))).toEqual([]);
+    expect(errors(lint((l) => ({ ...lunes(l), ...example('La [[lunes]].')(l) }))).join('\n')).toMatch(/article/);
   });
 });

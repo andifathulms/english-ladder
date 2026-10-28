@@ -56,6 +56,8 @@ type Scope = {
   allowedVerbs: Set<string>;
   names: Set<string>;
   extra: Set<string>;
+  /** Spain words given as a glossary entry's es_es: known in Spain lines only. */
+  spainWords: Set<string>;
   hasId: (id: string) => boolean;
 };
 
@@ -67,7 +69,8 @@ function addSurface(map: Map<string, Surface[]>, form: string, s: Surface) {
 }
 
 /** Every surface form of a word list or glossary entry (nouns and their plural; adjectives' four forms). */
-function surfacesOf(g: GlossaryEntry, map: Map<string, Surface[]>, verbs: Set<string>) {
+function surfacesOf(g: GlossaryEntry, map: Map<string, Surface[]>, verbs: Set<string>, spain?: Set<string>) {
+  if (g.es_es && spain) for (const w of g.es_es.toLowerCase().split(/\s+/)) spain.add(w);
   const words = g.es.split(/\s+/);
   if (g.pos === 'verb') {
     verbs.add(g.es.toLowerCase());
@@ -106,24 +109,25 @@ function scopeFor(rungs: Rung[], lessonsByRung: Map<string, Lesson[]>, data: Lin
   const core = new Set<string>();
   const surfaces = new Map<string, Surface[]>();
   const verbs = new Set<string>();
+  const spainWords = new Set<string>();
   for (let i = 0; i <= ri; i++) {
     const r = rungs[i];
     for (const w of data.lexicon.rungs[r.id] ?? []) core.add(w.toLowerCase());
-    for (const g of data.wordLists[r.id] ?? []) surfacesOf(g, surfaces, verbs);
+    for (const g of data.wordLists[r.id] ?? []) surfacesOf(g, surfaces, verbs, spainWords);
     const lessons = lessonsByRung.get(r.id) ?? [];
     // Earlier rungs, and (for a test, capstone or placement section) this rung, whole.
     if (i < ri || order === Infinity) for (const id of r.inventory) ids.add(id);
     for (const l of lessons) {
       if (i === ri && l.order > order) continue;
       for (const id of l.introduces) ids.add(id);
-      for (const g of l.glossary) surfacesOf(g, surfaces, verbs);
+      for (const g of l.glossary) surfacesOf(g, surfaces, verbs, spainWords);
     }
   }
   const grammar = data.grammar.filter((g) => ids.has(g.id));
   const chunkForms = new Set(grammar.flatMap((g) => g.forms ?? []).flatMap((f) => f.toLowerCase().split(/\s+/)));
   const allowedVerbs = new Set(grammar.flatMap((g) => g.verbs ?? []));
   const names = new Set(data.names.flatMap((n) => n.split(/\s+/)));
-  return { ids, core, surfaces, verbs, chunkForms, allowedVerbs, names, extra: new Set(extra.flatMap((e) => e.toLowerCase().split(/\s+/))), hasId: (id) => ids.has(id) };
+  return { ids, core, surfaces, verbs, chunkForms, allowedVerbs, names, extra: new Set(extra.flatMap((e) => e.toLowerCase().split(/\s+/))), spainWords, hasId: (id) => ids.has(id) };
 }
 
 // ---------- inventory: which grammar point a verb reading needs ----------
@@ -142,7 +146,7 @@ function neededFor(f: FormInfo, v: VerbData | undefined, scope: Scope, variety: 
   if (f.person === 'vosotros' && variety !== 'es') return 'hard2-vosotros';
   if (f.tense === 'gerundio') return 'a2-estar-gerund';
   if (f.tense === 'participio') return 'a2-perfecto';
-  if (f.tense === 'imperativo') return f.person === 'tu' ? 'a1-imperative-tu' : 'a2-imperative-usted';
+  if (f.tense === 'imperativo') return f.person === 'tu' ? 'a1-imperative-tu' : f.person === 'vosotros' ? (variety === 'es' ? null : 'hard2-vosotros') : 'a2-imperative-usted';
   if (f.tense !== 'presente') return TENSE_ID[f.tense] ?? null;
   // Present tense.
   if (scope.allowedVerbs.has(f.inf)) return null;
@@ -213,6 +217,7 @@ function lintText(t: Text, scope: Scope, data: LintData, draft: boolean, out: Fi
   const toks = tokens(t.text);
   const vByInf = new Map(data.verbs.map((v) => [v.inf, v]));
   const known = (tok: Tok) =>
+    (t.variety === 'es' && scope.spainWords.has(tok.low)) ||
     scope.core.has(tok.low) || scope.surfaces.has(tok.low) || scope.extra.has(tok.low) || scope.chunkForms.has(tok.low) || (tok.raw[0] !== tok.low[0] && scope.names.has(tok.raw));
 
   toks.forEach((tok, i) => {
@@ -281,16 +286,17 @@ function lintText(t: Text, scope: Scope, data: LintData, draft: boolean, out: Fi
   // Agreement in simple noun phrases (CLAUDE.md §4.5): article + noun (+ adjective).
   toks.forEach((tok, i) => {
     const art = tok.low === 'del' || tok.low === 'al' ? ARTICLES.el : ARTICLES[tok.low];
-    const noun = toks[i + 1] && scope.surfaces.get(toks[i + 1].low)?.find((s) => s.kind === 'noun');
-    if (!art || !noun || !noun.gender) return;
-    const genders: Gender[] = noun.gender === 'mf' ? ['m', 'f'] : [noun.gender];
-    const want = genders.map((g) => article(g, noun.number!, art.def, { el: noun.el }));
+    const nouns = (toks[i + 1] && scope.surfaces.get(toks[i + 1].low)?.filter((s) => s.kind === 'noun' && s.gender)) ?? [];
+    if (!art || !nouns.length) return;
+    // A noun can read as singular and plural (el lunes, los lunes): any reading that agrees will do.
+    const want = nouns.flatMap((n) => (n.gender === 'mf' ? (['m', 'f'] as Gender[]) : [n.gender as Gender]).map((g) => article(g, n.number!, art.def, { el: n.el })));
     const given = tok.low === 'del' || tok.low === 'al' ? 'el' : tok.low;
     if (!want.includes(given)) err(`"${tok.raw} ${toks[i + 1].raw}": the article is "${want[0]}"`);
+    const noun = nouns.find((n) => (n.gender === 'mf' ? (['m', 'f'] as Gender[]) : [n.gender as Gender]).some((g) => article(g, n.number!, art.def, { el: n.el }) === given)) ?? nouns[0];
     const adjTok = toks[i + 2];
     const adj = adjTok && scope.surfaces.get(adjTok.low)?.find((s) => s.kind === 'adj');
     if (!adj || noun.gender === 'mf') return;
-    const form = agreeAdj(adj.lemma, noun.gender, noun.number!, adj.forms);
+    const form = agreeAdj(adj.lemma, noun.gender as Gender, noun.number!, adj.forms);
     if (form !== adjTok.low) err(`"${toks[i + 1].raw} ${adjTok.raw}": the adjective agrees as "${form}"`);
   });
 }
