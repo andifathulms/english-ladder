@@ -26,7 +26,10 @@ import {
 } from '@/lib/es';
 import { SYLLABLES } from './es-words';
 
-const VERBS = yaml.load(fs.readFileSync(path.join(__dirname, '../../content/data/verbs.yaml'), 'utf8'), { schema: yaml.JSON_SCHEMA }) as VerbData[];
+// verbs.yaml and the verbs added with each rung's lessons (data/verbs/*.yaml).
+const DATA = path.join(__dirname, '../../content/data');
+const verbFiles = [path.join(DATA, 'verbs.yaml'), ...(fs.existsSync(path.join(DATA, 'verbs')) ? fs.readdirSync(path.join(DATA, 'verbs')).filter((f) => f.endsWith('.yaml')).map((f) => path.join(DATA, 'verbs', f)) : [])];
+const VERBS = verbFiles.flatMap((f) => yaml.load(fs.readFileSync(f, 'utf8'), { schema: yaml.JSON_SCHEMA }) as VerbData[]);
 const verb = (inf: string) => VERBS.find((v) => v.inf === inf)!;
 
 describe('syllabify', () => {

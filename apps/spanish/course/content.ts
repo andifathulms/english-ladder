@@ -43,7 +43,9 @@ let dataCache: LintData | null = null;
 export function getData(): LintData {
   if (dataCache) return dataCache;
   const read = <T>(file: string, parse: (x: unknown) => T, empty: T): T => (content.exists(file) ? parse(content.readYaml(file)) : empty);
-  const verbs = read('data/verbs.yaml', (x) => VerbsSchema.parse(x), []) as VerbData[];
+  // verbs.yaml plus data/verbs/*.yaml (verbs added with a rung's lessons), in name order.
+  const extraFiles = (dir: string) => (content.exists(dir) ? fs.readdirSync(path.join(content.contentDir, dir)).filter((f) => f.endsWith('.yaml')).sort().map((f) => `${dir}/${f}`) : []);
+  const verbs = ['data/verbs.yaml', ...extraFiles('data/verbs')].flatMap((f) => read(f, (x) => VerbsSchema.parse(x), [])) as VerbData[];
   const wordLists: Record<string, GlossaryEntry[]> = {};
   for (const r of content.getCurriculum()) {
     const file = `data/words/${r.id}.yaml`;
@@ -54,7 +56,7 @@ export function getData(): LintData {
     grammar: read('data/grammar.yaml', (x) => GrammarSchema.parse(x), []),
     bridges: read('data/bridges.yaml', (x) => BridgesSchema.parse(x), { bridges: [], false_friends: [] }),
     lexicon: read('lexicon/core.yaml', (x) => LexiconSchema.parse(x), { rungs: {}, spain_only: {}, latam_only: {} }),
-    names: read('data/names.yaml', (x) => NamesSchema.parse(x), []),
+    names: ['data/names.yaml', ...extraFiles('data/names')].flatMap((f) => read(f, (x) => NamesSchema.parse(x), [])),
     wordLists,
     formIndex: buildFormIndex(verbs),
   };
@@ -132,7 +134,7 @@ export const model: ContentModel = {
       }
       const infs = new Set<string>();
       for (const v of data.verbs) {
-        if (infs.has(v.inf)) ctx.err(`data/verbs.yaml: duplicate verb "${v.inf}"`);
+        if (infs.has(v.inf)) ctx.err(`data/verbs: duplicate verb "${v.inf}"`);
         infs.add(v.inf);
       }
       // Lessons: inventory, lexicon, conjugation, agreement, accents, variety, bridges, sizes.
