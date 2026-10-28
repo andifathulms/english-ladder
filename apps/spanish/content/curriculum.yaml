@@ -9,7 +9,7 @@ rungs:
     cefr: Pre-A1
     dele: "—"
     explain_lang: id
-    status: soon
+    status: live
     optional: true
     lessons: 6
     words_target: 30
@@ -26,7 +26,7 @@ rungs:
     cefr: A1
     dele: A1
     explain_lang: id
-    status: soon
+    status: live
     lessons: 12
     words_target: 250
     description:
@@ -42,7 +42,7 @@ rungs:
     cefr: A1
     dele: A1
     explain_lang: id
-    status: soon
+    status: live
     lessons: 12
     words_target: 250
     description:

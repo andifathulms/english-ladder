@@ -4,9 +4,16 @@ import { expect, test } from '@playwright/test';
 // Every route in light and dark (the dark run at 130% text size). Lesson routes join as content lands.
 const steps: Record<string, number[]> = {
   '/rung/easy-1/01-hola/': [0, 1, 2, 3, 4],
+  '/rung/dasar/05-tekanan/': [1, 2, 4],
+  '/rung/easy-1/04-plural/': [1, 3],
+  '/rung/easy-1/07-ser-estar/': [1],
+  '/rung/easy-1/12-donde-esta/': [1, 2],
+  '/rung/easy-2/01-quiero-puedo/': [1, 2, 3],
+  '/rung/easy-2/04-me-levanto/': [1],
+  '/rung/easy-2/06-me-gusta/': [1],
 };
 const lessons = Object.keys(steps);
-const routes = ['/', '/placement/', '/rung/dasar/', '/rung/easy-1/', '/rung/easy-2/', '/rung/hard-3/', ...lessons, '/visuals/', '/review/', '/words/', '/me/', '/settings/', '/about/'];
+const routes = ['/', '/placement/', '/rung/dasar/', '/rung/easy-1/', '/rung/easy-2/', '/rung/hard-3/', ...lessons, '/rung/dasar/test/', '/rung/easy-1/test/', '/rung/easy-1/read/', '/rung/easy-1/talk/', '/rung/easy-2/read/', '/rung/easy-2/talk/', '/visuals/', '/review/', '/words/', '/me/', '/settings/', '/about/'];
 
 for (const scheme of ['light', 'dark'] as const) {
   for (const route of routes) {
