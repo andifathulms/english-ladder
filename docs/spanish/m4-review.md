@@ -9,7 +9,7 @@ Branch `feat/spanish-ladder`, 2026-10-29. This is the first planned review stop 
 |---|---|---|
 | P0 | `98ff435` | Japanese parity harness and baseline (196 shots); `test:parity` runs all four siblings |
 | M0 | `064389e` | `apps/spanish` from `apps/english`: config (all `fixes.*` on), theme (terracotta, azulejo, cream), brand, routes incl. placement and talk, ten-rung curriculum, root scripts and CI |
-| M1 | `d58d0e4` | `lib/es`: syllables, stress, conjugation (seven tenses), agreement, articles, form index. Data: 106 verbs with hand-written reference forms, grammar points with PCIC references, bridges and false friends, frequency subset (FrequencyWords, CC BY-SA 4.0) with `SOURCE.md` |
+| M1 | `3fa8b0b` | `lib/es`: syllables, stress, conjugation (seven tenses), agreement, articles, form index. Data: 106 verbs with hand-written reference forms, grammar points with PCIC references, bridges and false friends, frequency subset (FrequencyWords, CC BY-SA 4.0) with `SOURCE.md` |
 | M2 | `3744206` | Content pipeline: data schemas, lint (inventory, lexicon, accents and ¿ ¡, variety, agreement, check items against `lib/es`, bridges), accent mode stamped per rung, inventories, Easy 1 lesson 1 as a draft |
 | M3 | `292f4b5` | Sentence slot (es-419 / es-ES lines, Tirukan stress underline), glyph coverage from the fonts' character maps |
 | M4 | `38dba16` (core C4), `0dc095b` | Azulejo; two doors with the Dasar line; DELE chips; strand cards Bunyi, España, Ngobrol, Tirukan, Kata; My words row with gender chips; deck tab placeholder; About data and licences |
