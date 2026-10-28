@@ -435,6 +435,9 @@ export type CourseConfig = {
     /** The quoted resume line on the board (continue card). Default: the display serif line. */
     BoardQuote?: ComponentType<{ quote: Quote; rung: Rung | undefined }>;
   };
+  /** Text fields: keys for letters a phone keyboard hides, shown by AccentBar (Spanish á é í ó ú ü ñ ¿ ¡).
+   *  `labelKey` names each key for screen readers. */
+  input?: { accentKeys: { char: string; labelKey: string }[] };
   /** Handwriting: stroke naming and matching (see StrokesConfig). */
   strokes?: StrokesConfig;
   /** Visual id → component (the lesson/scene registry). */

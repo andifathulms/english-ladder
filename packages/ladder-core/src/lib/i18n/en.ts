@@ -79,6 +79,7 @@ export const en: Record<StringKey, string> = {
   'check.tapTiles': 'Tap words to build the sentence. Tap again to send one back.',
   'check.answerLine': 'Your sentence',
   'check.tray': 'Available words',
+  'accentBar.label': 'Special letters',
   'check.checkOrder': 'Check',
   'check.fixPrompt': "This sentence isn't right. Pick the correct version.",
   'check.scenePrompt': 'Which sentence matches the picture?',

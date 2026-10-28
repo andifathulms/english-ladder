@@ -78,6 +78,7 @@ export const id = {
   'check.tapTiles': 'Ketuk kata untuk menyusun kalimat. Ketuk lagi untuk mengembalikan.',
   'check.answerLine': 'Kalimatmu',
   'check.tray': 'Kata yang tersedia',
+  'accentBar.label': 'Huruf khusus',
   'check.checkOrder': 'Periksa',
   'check.fixPrompt': 'Kalimat ini belum tepat. Pilih versi yang benar.',
   'check.scenePrompt': 'Kalimat mana yang cocok dengan gambarnya?',
