@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import type { GradeNote } from '@ladder/core/lib/check/itemTypes';
 import type { Lesson, LessonSummary, Rung } from '@ladder/core/lib/types';
 import * as store from '@ladder/core/lib/progress/store';
 import { sfx } from '@ladder/core/lib/speech/sfx';
@@ -52,6 +53,8 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
   const [ready, setReady] = useState(false);
   const [checkIndex, setCheckIndex] = useState(0);
   const [solved, setSolved] = useState<boolean[]>(() => lesson.check.map(() => false));
+  // Notes a correct answer carried (e.g. accepted without its accents), per check item.
+  const [notes, setNotes] = useState<Record<number, GradeNote | undefined>>({});
   const [freshNotch, setFreshNotch] = useState<number | undefined>(undefined);
   const [localExplain, setLocalExplain] = useState<'id' | 'en' | null>(null);
   const useSession = course.lesson?.useSession ?? useNoSession;
@@ -282,7 +285,10 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
             items={lesson.check}
             index={checkIndex}
             solved={solved}
-            onSolved={(i) => setSolved((s) => s.map((v, j) => (j === i ? true : v)))}
+            onSolved={(i, note) => {
+              setSolved((s) => s.map((v, j) => (j === i ? true : v)));
+              setNotes((n) => ({ ...n, [i]: note }));
+            }}
           />
         </>
       );
@@ -407,7 +413,7 @@ export function LessonPlayer({ lesson, rung, rungLessons, next, hasTest, spiralR
         </div>
       </main>
 
-      <BottomActionBar feedback={step === 4 && solved[checkIndex] ? lesson.check[checkIndex].why : null}>
+      <BottomActionBar feedback={step === 4 && solved[checkIndex] ? lesson.check[checkIndex].why : null} note={step === 4 && solved[checkIndex] ? notes[checkIndex] : null}>
         {step < 5 ? (
           <button
             type="button"

@@ -3,13 +3,21 @@
 // so grade(), itemText() and content:check handle them. Rendering is registered separately in
 // CourseConfig.check (client only).
 import type { TextRules } from '@ladder/core/course/types';
+import type { Settings } from '../progress/types';
 import { isCoreItem, type CheckItem, type ExtraItem } from '../types';
 
 export type Response = string | string[];
 
+/** A note shown with a correct answer (a UI string key and its params), e.g. Spanish "Almost: *está*". */
+export type GradeNote = { key: string; params?: Record<string, string | number> };
+export type GradeResult = { correct: boolean; note?: GradeNote };
+/** What grading may consult beyond the item: the learner's settings (e.g. strict accents always). */
+export type GradeContext = { settings?: Settings };
+
 export type ItemTypeLogic = {
-  /** Grades a response; `text` are the course's text rules. */
-  grade(item: ExtraItem, response: Response, text: TextRules): boolean;
+  /** Grades a response; `text` are the course's text rules. A result may carry a note shown with a
+   *  correct answer (e.g. accepted without its accents). */
+  grade(item: ExtraItem, response: Response, text: TextRules, ctx?: GradeContext): boolean | GradeResult;
   /** One-line text for the continue card and review lists. */
   itemText(item: ExtraItem): string;
   /** The correct answer as a sentence-ish string (test results). */

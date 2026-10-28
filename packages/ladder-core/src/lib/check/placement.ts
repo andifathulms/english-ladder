@@ -1,6 +1,7 @@
 import type { CheckItem, Placement } from '../types';
 import type { PlacementOutcome, TextRules } from '@ladder/core/course/types';
 import { grade, type Response } from './grade';
+import type { GradeContext } from './itemTypes';
 
 export type PlacementScore = {
   score: number;
@@ -22,6 +23,7 @@ export function scorePlacement(
   answers: Record<string, Response | undefined>,
   cfg: { sections: string[]; outcomes: PlacementOutcome[] },
   text: TextRules,
+  ctx?: GradeContext,
 ): PlacementScore {
   const bySection = Object.fromEntries(cfg.sections.map((s) => [s, { score: 0, total: 0 }]));
   const missed: string[] = [];
@@ -30,7 +32,7 @@ export function scorePlacement(
     const sec = bySection[item.section ?? cfg.sections[0]] ?? (bySection[cfg.sections[0]] as { score: number; total: number });
     sec.total += 1;
     const a = answers[item.id];
-    const ok = a !== undefined && grade(item, a, text).correct;
+    const ok = a !== undefined && grade(item, a, text, ctx).correct;
     if (ok) {
       score += 1;
       sec.score += 1;

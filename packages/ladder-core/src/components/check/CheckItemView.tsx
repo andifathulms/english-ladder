@@ -5,14 +5,15 @@ import { isCoreItem, type CheckItem, type ExtraItem } from '@ladder/core/lib/typ
 import { grade, type Response } from '@ladder/core/lib/check/grade';
 import { sfx } from '@ladder/core/lib/speech/sfx';
 import { stripMarkup } from '@ladder/core/lib/markup';
-import { itemType } from '@ladder/core/lib/check/itemTypes';
+import { itemType, type GradeNote } from '@ladder/core/lib/check/itemTypes';
 import { OptionPill, type PillState } from './OptionPill';
 import { TileTray } from './TileTray';
 import { WhyLine } from './WhyLine';
+import { NoteLine } from './NoteLine';
 import { Sentence } from '../lesson/Sentence';
 import { VisualStage } from '../visuals/VisualStage';
 import { IconPlay } from '../ui/Icon';
-import { useT } from '../ProgressProvider';
+import { useSettings, useT } from '../ProgressProvider';
 import { useCanSpeak, useSpeak } from '../useSpeech';
 import { useCourse } from '@ladder/core/course/context';
 
@@ -25,8 +26,9 @@ type Practice = Common & {
   mode: 'practice';
   /** Already solved earlier (e.g. going back to a finished item). */
   solved?: boolean;
-  onSolved: (firstTry: boolean) => void;
-  /** The parent shows the why line in its feedback sheet once solved. */
+  /** `note`: what the grade added to a correct answer (e.g. accepted without accents). */
+  onSolved: (firstTry: boolean, note?: GradeNote) => void;
+  /** The parent shows the why line (and the note) in its feedback sheet once solved. */
   whyInSheet?: boolean;
 };
 type Test = Common & { mode: 'test'; value?: Response; onChange: (r: Response) => void };
@@ -91,6 +93,8 @@ export function CheckItemView(props: Practice | Test) {
   const { item } = props;
   const { t } = useT();
   const { text, check: slots = {} } = useCourse();
+  const settings = useSettings();
+  const ctx = { settings };
   // Course item types (anything but the engine's own) carry their logic and rendering.
   const extraTypeName = isCoreItem(item) ? null : (item as { type: string }).type;
   const logic = extraTypeName ? itemType(extraTypeName) : undefined;
@@ -105,6 +109,7 @@ export function CheckItemView(props: Practice | Test) {
   const tileItem = item.type === 'order' || !!logic?.tiles;
   const [wrong, setWrong] = useState<string[]>([]);
   const [solved, setSolved] = useState(props.mode === 'practice' && !!props.solved);
+  const [note, setNote] = useState<GradeNote | undefined>(undefined);
   const [placed, setPlaced] = useState<number[]>(() => {
     if (!tileItem) return [];
     if (props.mode === 'practice' && props.solved) return answerTiles.map((w) => tiles.indexOf(w));
@@ -132,10 +137,13 @@ export function CheckItemView(props: Practice | Test) {
       return;
     }
     if (solved || wrong.includes(opt)) return;
-    if (grade(item, opt, text).correct) {
+    const r = grade(item, opt, text, ctx);
+    if (r.correct) {
       setSolved(true);
+      setNote(r.note);
       sfx('correct');
-      props.onSolved(missesRef.current === 0);
+      if (r.note) props.onSolved(missesRef.current === 0, r.note);
+      else props.onSolved(missesRef.current === 0);
     } else {
       missesRef.current += 1;
       setWrong((w) => [...w, opt]);
@@ -147,11 +155,14 @@ export function CheckItemView(props: Practice | Test) {
   const submit = (resp: Response, opts: { misses?: number } = {}) => {
     if (!practice || solved) return;
     if (opts.misses !== undefined) missesRef.current = opts.misses;
-    if (grade(item, resp, text).correct) {
+    const r = grade(item, resp, text, ctx);
+    if (r.correct) {
       setSolved(true);
+      setNote(r.note);
       setOrderOff(false);
       sfx('correct');
-      props.onSolved(missesRef.current === 0);
+      if (r.note) props.onSolved(missesRef.current === 0, r.note);
+      else props.onSolved(missesRef.current === 0);
     } else {
       const key = Array.isArray(resp) ? resp.join(' ') : resp;
       missesRef.current += 1;
@@ -187,7 +198,7 @@ export function CheckItemView(props: Practice | Test) {
   const pillState = (opt: string): PillState => {
     if (!practice) return props.value === opt ? 'selected' : 'idle';
     const answer = 'answer' in item && typeof item.answer === 'string' ? item.answer : '';
-    if (solved && (slots.correctPillByGrade ? grade(item, opt, text).correct : stripMarkup(opt) === stripMarkup(answer))) return 'correct';
+    if (solved && (slots.correctPillByGrade ? grade(item, opt, text, ctx).correct : stripMarkup(opt) === stripMarkup(answer))) return 'correct';
     if (wrong.includes(opt)) return 'wrong';
     return 'idle';
   };
@@ -310,6 +321,7 @@ export function CheckItemView(props: Practice | Test) {
         {practice && !solved && missed > 0 && <p className="text-off">{t('check.wrong')}</p>}
         {practice && solved && !inSheet && <p className="sr-only">{t('check.correct')}</p>}
         {showWhy && <WhyLine why={item.why} hint={!solved} />}
+        {solved && !inSheet && note && <NoteLine note={note} />}
       </div>
     </div>
   );

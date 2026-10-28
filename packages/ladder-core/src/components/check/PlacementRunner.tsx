@@ -12,7 +12,7 @@ import { translate } from '@ladder/core/lib/i18n';
 import * as store from '@ladder/core/lib/progress/store';
 import { lessonHref, rungHref } from '@ladder/core/lib/routes';
 import { useCourse } from '@ladder/core/course/context';
-import { useT } from '../ProgressProvider';
+import { useSettings, useT } from '../ProgressProvider';
 import { IconArrowLeft, IconArrowRight, IconCheck, IconClose } from '../ui/Icon';
 import { TargetText } from '../ui/TargetText';
 import { BottomActionBar } from '../lesson/BottomActionBar';
@@ -32,6 +32,7 @@ const show = (r: Response | undefined) => (r === undefined ? '—' : Array.isArr
  */
 export function PlacementRunner({ placement, rungs, lessons }: Props) {
   const { t, lang } = useT();
+  const settings = useSettings();
   const course = useCourse();
   const cfg = course.placement!;
   const Wrap = cfg.Wrap ?? Fragment;
@@ -49,7 +50,7 @@ export function PlacementRunner({ placement, rungs, lessons }: Props) {
     window.scrollTo({ top: 0 });
   };
   const finish = () => {
-    const score = scorePlacement(placement, answers, cfg, course.text);
+    const score = scorePlacement(placement, answers, cfg, course.text, { settings });
     const outcome = cfg.outcomes.find((o) => o.result === score.result)!;
     store.applyPlacement({ score: score.score, total: score.total, result: score.result, missed: score.missed }, outcome.climbs);
     setPhase({ kind: 'result', score, review: false });
@@ -205,7 +206,7 @@ export function PlacementRunner({ placement, rungs, lessons }: Props) {
             <h2 className="text-h2">{t('test.reviewTitle')}</h2>
             <ul className="flex flex-col gap-3">
               {items.map((item) => {
-                const ok = answers[item.id] !== undefined && grade(item, answers[item.id], course.text).correct;
+                const ok = answers[item.id] !== undefined && grade(item, answers[item.id], course.text, { settings }).correct;
                 return (
                   <li key={item.id} className="card flex flex-col gap-2 p-4">
                     <p className="flex items-start gap-2">

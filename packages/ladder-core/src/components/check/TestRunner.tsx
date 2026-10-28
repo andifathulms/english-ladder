@@ -9,7 +9,7 @@ import { newSeed } from '@ladder/core/lib/check/random';
 import { answerText } from '@ladder/core/lib/check/text';
 import * as store from '@ladder/core/lib/progress/store';
 import { lessonHref, rungHref } from '@ladder/core/lib/routes';
-import { useProgress, useT, type T } from '../ProgressProvider';
+import { useProgress, useSettings, useT, type T } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
 import { useTextAttrs } from '../ui/TargetText';
 import { IconArrowLeft, IconArrowRight, IconCheck, IconClose } from '../ui/Icon';
@@ -29,6 +29,7 @@ const show = (r: Response | undefined) => (r === undefined ? '—' : Array.isArr
 
 export function TestRunner({ rung, next, pool, lessons }: Props) {
   const { t, lang } = useT();
+  const settings = useSettings();
   const course = useCourse();
   const progress = useProgress();
   const [phase, setPhase] = useState<Phase>({ kind: 'intro' });
@@ -44,7 +45,7 @@ export function TestRunner({ rung, next, pool, lessons }: Props) {
     window.scrollTo({ top: 0 });
   };
 
-  const results = items.map((item) => ({ item, given: answers[item.id], ok: answers[item.id] !== undefined && grade(item, answers[item.id], course.text).correct }));
+  const results = items.map((item) => ({ item, given: answers[item.id], ok: answers[item.id] !== undefined && grade(item, answers[item.id], course.text, { settings }).correct }));
   const score = results.filter((r) => r.ok).length;
   const passed = score >= pool.pass;
 

@@ -1,5 +1,5 @@
 import { isCoreItem, type CheckItem, type ExtraItem } from '../types';
-import { extraType } from './itemTypes';
+import { extraType, type GradeContext, type GradeResult } from './itemTypes';
 import type { TextRules } from '@ladder/core/course/types';
 import { stripMarkup } from '../markup';
 
@@ -15,8 +15,11 @@ export function sameOrder(given: string[], expected: string[], text: TextRules, 
   return g.every((w, i) => (text.equals && item ? text.equals(w, e[i], item) : text.tokenEquals(w, e[i], i)));
 }
 
-export function grade(item: CheckItem, response: Response, text: TextRules): { correct: boolean } {
-  if (!isCoreItem(item)) return { correct: extraType(item).grade(item as ExtraItem, response, text) };
+export function grade(item: CheckItem, response: Response, text: TextRules, ctx?: GradeContext): GradeResult {
+  if (!isCoreItem(item)) {
+    const r = extraType(item).grade(item as ExtraItem, response, text, ctx);
+    return typeof r === 'boolean' ? { correct: r } : r;
+  }
   if (item.type === 'order') {
     if (!Array.isArray(response)) return { correct: false };
     return { correct: [item.answer, ...(item.accept ?? [])].some((a) => sameOrder(response, a, text, item)) };

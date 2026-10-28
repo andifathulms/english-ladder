@@ -1,5 +1,6 @@
 'use client';
 
+import type { GradeNote } from '@ladder/core/lib/check/itemTypes';
 import Link from 'next/link';
 import { useState } from 'react';
 import type { CheckItem } from '@ladder/core/lib/types';
@@ -19,7 +20,7 @@ export function ReviewRunner({ items }: Props) {
   // fixes.reviewExit: a close control while running.
   const exit = !!useCourse().fixes?.reviewExit;
   const progress = useProgress();
-  const [run, setRun] = useState<{ items: CheckItem[]; i: number; solved: boolean; first: boolean[] } | null>(null);
+  const [run, setRun] = useState<{ items: CheckItem[]; i: number; solved: boolean; first: boolean[]; note?: GradeNote } | null>(null);
   const [done, setDone] = useState<boolean[] | null>(null);
 
   const completed = Object.values(progress.lessons).filter((l) => l.completed).length;
@@ -116,14 +117,14 @@ export function ReviewRunner({ items }: Props) {
             mode="practice"
             item={item}
             whyInSheet
-            onSolved={(firstTry) => {
+            onSolved={(firstTry, note) => {
               store.recordAnswer(item.id, firstTry);
-              setRun({ ...run, solved: true, first: [...run.first, firstTry] });
+              setRun({ ...run, solved: true, first: [...run.first, firstTry], note });
             }}
           />
         </div>
       </main>
-      <BottomActionBar feedback={run.solved ? item.why : null}>
+      <BottomActionBar feedback={run.solved ? item.why : null} note={run.solved ? run.note : null}>
         <button
           type="button"
           className={`btn w-full max-w-[360px] ${run.solved ? 'btn-good' : 'btn-primary'}`}
@@ -132,7 +133,7 @@ export function ReviewRunner({ items }: Props) {
             if (last) {
               setDone(run.first);
               setRun(null);
-            } else setRun({ ...run, i: run.i + 1, solved: false });
+            } else setRun({ ...run, i: run.i + 1, solved: false, note: undefined });
           }}
         >
           {last ? t('test.finish') : t('lesson.next')} <IconArrowRight />

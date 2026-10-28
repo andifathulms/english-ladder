@@ -1,6 +1,8 @@
 'use client';
 
 import type { Bilingual } from '@ladder/core/lib/types';
+import type { GradeNote } from '@ladder/core/lib/check/itemTypes';
+import { NoteLine } from '../check/NoteLine';
 import { IconCheck } from '../ui/Icon';
 import { useT } from '../ProgressProvider';
 import { useCourse } from '@ladder/core/course/context';
@@ -9,9 +11,11 @@ type Props = {
   children: React.ReactNode;
   /** After a correct answer: the bar becomes a green sheet with the why line, in the thumb zone. */
   feedback?: Bilingual | null;
+  /** A note the grade added to the correct answer, under the why line. */
+  note?: GradeNote | null;
 };
 
-export function BottomActionBar({ children, feedback }: Props) {
+export function BottomActionBar({ children, feedback, note }: Props) {
   const { t, lang } = useT();
   const Why = useCourse().check?.WhyText;
   return (
@@ -31,6 +35,7 @@ export function BottomActionBar({ children, feedback }: Props) {
               {t('check.correctShort')}
             </p>
             <p className="max-w-measure text-ink">{Why ? <Why text={lang === 'en' ? feedback.en : feedback.id} /> : lang === 'en' ? feedback.en : feedback.id}</p>
+            {note && <NoteLine note={note} />}
           </div>
         )}
       </div>
