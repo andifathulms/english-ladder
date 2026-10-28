@@ -75,3 +75,9 @@ placement or home areas differs.
 
 M7: Dasar (6), Easy 1 (12), Easy 2 (12) lessons as drafts, test pools, readings, dialogues, the A1
 word lists and deck.
+
+## Decisions (answered 2026-10-29)
+
+All as recommended: Agreement uses *carro*; the clock keeps midnight at the top with stepped morning
+icons; the grid shows one tense at a time until Easy 3; SerEstar's person stands above the panels on
+phones.
