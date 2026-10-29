@@ -1,0 +1,39 @@
+# Bridges and false friends for the Kata card (CLAUDE.md §3.4, §4.7). Draft data: every entry needs the
+# teacher's check (human-tasks H1). Lessons may only show bridges and false friends listed here.
+#
+# bridges: an Indonesian word inherited from Dutch, the Dutch word, and the German word it leads to.
+#   `kind: same` when the German word is spelled (nearly) like the Dutch one; `kind: near` when it
+#   differs a little; `kind: off` when the Indonesian word points the wrong way (shown as a warning).
+# false_friends: a German word that looks like an Indonesian (or English) one but means something else.
+bridges:
+  - { de: Koffer, nl: koffer, id: koper, kind: same }
+  - { de: Handtuch, nl: handdoek, id: handuk, kind: near }
+  - { de: Apotheke, nl: apotheek, id: apotek, kind: near }
+  - { de: Strom, nl: stroom, id: setrum, kind: near, note: { id: "Setrum dari bahasa Belanda stroom: arus listrik. Bahasa Jerman: der Strom.", en: "Setrum comes from Dutch stroom, electric current. German: der Strom." } }
+  - { de: gratis, nl: gratis, id: gratis, kind: same }
+  - { de: Bank, nl: bank, id: bank, kind: same }
+  - { de: Tante, nl: tante, id: tante, kind: same }
+  - { de: Kantine, nl: kantine, id: kantin, kind: same }
+  - { de: Polizei, nl: politie, id: polisi, kind: near }
+  - { de: Fabrik, nl: fabriek, id: pabrik, kind: near }
+  - { de: Klinik, nl: kliniek, id: klinik, kind: near }
+  - { de: Büro, nl: bureau, id: biro, kind: near, note: { id: "Biro dari bureau. Kantor (kantoor) dalam bahasa Jerman juga das Büro.", en: "Biro comes from bureau. An office (kantor, Dutch kantoor) is also das Büro in German." } }
+  - { de: Haltestelle, nl: halte, id: halte, kind: near }
+  - { de: Kassierer, nl: kassier, id: kasir, kind: near, note: { id: "Orangnya der Kassierer; tempat membayarnya die Kasse.", en: "The person is der Kassierer; the checkout is die Kasse." } }
+  - { de: Zimmer, nl: kamer, id: kamar, kind: off, note: { id: "Kamar dari bahasa Belanda kamer, tapi bahasa Jerman memakai das Zimmer.", en: "Kamar comes from Dutch kamer, but German uses das Zimmer." } }
+  - { de: Arzt, nl: dokter, id: dokter, kind: off, note: { id: "Dokter yang mengobati: der Arzt. Doktor adalah gelar.", en: "A physician is der Arzt. Doktor is the title." } }
+  - { de: Karotte, nl: wortel, id: wortel, kind: off, note: { id: "Wortel dari bahasa Belanda; bahasa Jerman: die Karotte atau die Möhre.", en: "Wortel is Dutch; German says die Karotte or die Möhre." } }
+  - { de: Kino, nl: bioscoop, id: bioskop, kind: off, note: { id: "Bioskop dari bahasa Belanda bioscoop, tapi bahasa Jerman: das Kino.", en: "Bioskop comes from Dutch bioscoop, but German says das Kino." } }
+  - { de: Waschbecken, nl: wastafel, id: wastafel, kind: off }
+  - { de: Bremse, nl: rem, id: rem, kind: off }
+false_friends:
+  - { de: Pension, id: penginapan kecil, looks_like: { id: pensiun }, note: { id: "Die Pension: penginapan kecil. Pensiun: die Rente.", en: "Die Pension is a small guesthouse. Retirement (pensiun) is die Rente." } }
+  - { de: Rechnung, id: tagihan, looks_like: { id: rekening }, note: { id: "Die Rechnung: tagihan. Rekening bank: das Konto.", en: "Die Rechnung is a bill. A bank account (rekening) is das Konto." } }
+  - { de: Pantoffel, id: sandal rumah, looks_like: { id: pantofel }, note: { id: "Der Pantoffel: sandal rumah. Sepatu pantofel: der Halbschuh.", en: "Der Pantoffel is a slipper. Smart leather shoes (pantofel) are Halbschuhe." } }
+  - { de: Kantor, id: pemimpin paduan suara gereja, looks_like: { id: kantor }, note: { id: "Kantor dalam bahasa Jerman: das Büro.", en: "An office (kantor) in German is das Büro." } }
+  - { de: Gift, id: racun, looks_like: { en: gift }, note: { id: "Das Gift: racun! Hadiah: das Geschenk.", en: "Das Gift means poison. A present is das Geschenk." } }
+  - { de: Handy, id: HP, looks_like: { en: handy }, note: { id: "Das Handy: ponsel, HP.", en: "Das Handy is a mobile phone." } }
+  - { de: Chef, id: atasan, looks_like: { en: chef }, note: { id: "Der Chef: atasan, bos. Juru masak: der Koch.", en: "Der Chef is the boss. A cook is der Koch." } }
+  - { de: Rat, id: nasihat; dewan, looks_like: { en: rat }, note: { id: "Der Rat: nasihat atau dewan. Tikus: die Ratte.", en: "Der Rat is advice or a council. A rat is die Ratte." } }
+  - { de: bekommen, id: mendapat, looks_like: { en: become }, note: { id: "Bekommen: mendapat. Menjadi: werden.", en: "Bekommen means to get. To become is werden." } }
+  - { de: also, id: jadi; maka, looks_like: { en: also }, note: { id: "Also: jadi, maka. Juga: auch.", en: "Also means so, therefore. Also (juga) is auch." } }

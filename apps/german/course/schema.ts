@@ -325,3 +325,81 @@ export const PlacementSchema = z
 
 /** Proper names (people, places) allowed in content without a list entry. */
 export const NamesSchema = z.array(z.string().min(1));
+
+// ---------- content/data (CLAUDE.md §3.4) ----------
+
+const LEVEL = z.enum(['A1', 'A2', 'B1', 'B2', 'C1']);
+const SixForms = z.array(z.string()).length(6);
+const Cells = z.union([SixForms, z.record(z.enum(PERSONS), z.string())]);
+
+/** content/data/verbs.yaml: one verb (lib/de/conjugate.ts VerbData). */
+export const VerbSchema = z
+  .object({
+    inf: z.string().regex(/^[a-zäöüß]+$/),
+    id: z.string().min(1),
+    en: z.string().optional(),
+    sep: z.string().optional(),
+    vowel: z.enum(['a-ä', 'e-i', 'e-ie', 'au-äu', 'o-ö']).optional(),
+    aux: z.enum(['haben', 'sein']),
+    partizip: z.string().min(1),
+    praet: z.object({ stem: z.string().min(1), weak: z.boolean().optional() }).strict().optional(),
+    irregular: z.record(z.enum(TENSES), Cells).optional(),
+    check: z.record(z.enum(TENSES), SixForms).optional(),
+  })
+  .strict()
+  .refine((v) => !v.sep || v.inf.startsWith(v.sep), { message: 'sep must be the start of inf' })
+  .refine((v) => !v.sep || v.partizip.startsWith(v.sep), { message: 'a separable participle starts with the prefix' });
+export const VerbsSchema = z.array(VerbSchema);
+
+/** content/data/nouns.yaml: one noun; every value authored (lib/de/nouns.ts only checks them). */
+export const NounSchema = z
+  .object({
+    de: z.string().regex(/^[A-ZÄÖÜ]/, 'nouns are capitalised'),
+    gender: z.enum(GENDERS),
+    plural: z.string().nullable(),
+    pattern: z.enum(['-', '¨', '-e', '¨e', '-er', '¨er', '-n', '-en', '-nen', '-s', '-se', 'other']).nullable(),
+    id: z.string().min(1),
+    person: z.boolean().optional(),
+    exception: z.string().optional(),
+    parts: z.array(z.string().min(1)).min(2).optional(),
+    links: z.array(z.string().nullable()).optional(),
+    level: LEVEL.optional(),
+  })
+  .strict()
+  .refine((n) => (n.plural === null) === (n.pattern === null), { message: 'plural and pattern are both set or both null' })
+  .refine((n) => !n.links || (n.parts && n.links.length === n.parts.length - 1), { message: 'links: one per joint (parts − 1)' });
+export const NounsSchema = z.array(NounSchema);
+
+/** content/data/grammar.yaml: one grammar point. */
+export const GrammarPointSchema = z
+  .object({
+    id: z.string().regex(/^(d|a1|a2|b1|b2|c1)-[a-z0-9-]+$/),
+    level: LEVEL,
+    desc: z.string().min(1),
+    verbs: z.array(z.string()).optional(),
+    chunks: z.array(z.string()).optional(),
+    detect: z.enum(['dative', 'perfekt', 'subordinate', 'genitive', 'konj2', 'relative', 'passive', 'adj-ending']).optional(),
+    note: z.string().optional(),
+  })
+  .strict();
+export const GrammarSchema = z.array(GrammarPointSchema);
+
+const BridgeNote = Bilingual.optional();
+/** content/data/bridges.yaml: Indonesian ← Dutch ↔ German bridges and false friends. */
+export const BridgesSchema = z
+  .object({
+    bridges: z.array(
+      z.object({ de: z.string().min(1), nl: z.string().min(1), id: z.string().min(1), kind: z.enum(['same', 'near', 'off']), note: BridgeNote }).strict(),
+    ),
+    false_friends: z.array(
+      z
+        .object({
+          de: z.string().min(1),
+          id: z.string().min(1),
+          looks_like: z.object({ id: z.string().optional(), en: z.string().optional() }).strict(),
+          note: Bilingual,
+        })
+        .strict(),
+    ),
+  })
+  .strict();

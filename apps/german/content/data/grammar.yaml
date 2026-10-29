@@ -1,0 +1,63 @@
+# Grammar points (CLAUDE.md §3.4): ids used by curriculum `inventory` and lesson `introduces`.
+# Draft data for the teacher's review (docs/german/human-tasks.md H1).
+#
+# - level: the Profile Deutsch level of the point (Glaboniat et al., Profile deutsch, Langenscheidt;
+#   Grammatik inventory), as the reviewer will check it. Where the course teaches a point earlier
+#   than its level (as A1 textbooks do), `note` says so.
+# - verbs: verbs whose forms the point teaches (the lint allows them from here on).
+# - chunks: fixed phrases taught before their grammar (wie geht's, ich möchte, im Supermarkt).
+# - detect: what the inventory lint looks for to tell the point is used (course/lint.ts, §4.1):
+#   dative, perfekt, subordinate, genitive, konj2, relative, passive, adj-ending.
+
+# ---------- Dasar (sounds and spelling) ----------
+- { id: d-bridges, level: A1, desc: "Words known through Dutch; nouns are capitalised" }
+- { id: d-umlauts, level: A1, desc: "a/ä, o/ö, u/ü (Mutter/Mütter, schon/schön)" }
+- { id: d-diphthongs, level: A1, desc: "ei and ie, eu/äu; long and short vowels" }
+- { id: d-consonants, level: A1, desc: "ch (ich, ach), sch, sp/st, z, w, v, j" }
+- { id: d-devoicing, level: A1, desc: "Final devoicing (Tag = /taːk/), ß and ss, r" }
+- { id: d-stress, level: A1, desc: "Word stress and reading aloud" }
+
+# ---------- Easy 1 (A1.1) ----------
+- { id: a1-greetings-register, level: A1, desc: "Greetings; du and Sie", chunks: ["Wie geht's?", "Wie geht es Ihnen?", "Guten Tag", "Tschüss", "Auf Wiedersehen"] }
+- { id: a1-sein-heissen, level: A1, desc: "sein; ich heiße, ich komme aus", verbs: [sein, heißen, kommen] }
+- { id: a1-present-regular, level: A1, desc: "Present tense of regular verbs; e-insertion (arbeitest)", verbs: [wohnen, arbeiten, lernen, machen, spielen, kaufen, kochen, hören, sagen, fragen] }
+- { id: a1-verb-second, level: A1, desc: "The finite verb in position 2; inversion after a fronted part" }
+- { id: a1-questions, level: A1, desc: "W-questions and yes/no questions (verb first)" }
+- { id: a1-gender-definite, level: A1, desc: "Noun gender; der, die, das; first ending clues (-ung, -chen, -e)" }
+- { id: a1-numbers, level: A1, desc: "Numbers 0–100; age; telephone numbers", chunks: ["Wie alt bist du?", "Ich bin … Jahre alt."] }
+- { id: a1-indefinite-kein, level: A1, desc: "ein, eine; kein, keine; nicht or kein" }
+- { id: a1-haben-possessives, level: A1, desc: "haben; family; mein and dein", verbs: [haben] }
+- { id: a1-plural, level: A1, desc: "Plural patterns: -e, -en, -er, umlaut, -s; die in the plural" }
+- { id: a1-accusative, level: A1, desc: "Accusative of articles: den, einen, keinen (only the masculine changes)" }
+- { id: a1-moechte-shopping, level: A1, desc: "möchte; prices and euros", verbs: [möchten, kosten, brauchen], note: "möchte is taught as a set form before the modal verbs (Easy 2)" }
+- { id: a1-place-chunks, level: A1, desc: "in, auf, unter, neben, hinter, vor as fixed phrases", chunks: [im, am, auf dem, auf der, unter dem, unter der, neben dem, neben der, hinter dem, hinter der, vor dem, vor der, in der], note: "dative forms appear only as chunks until Easy 2 lesson 6" }
+
+# ---------- Easy 2 (A1.2) ----------
+- { id: a1-time, level: A1, desc: "Clock times and the daily schedule; um, am, im", chunks: [um, am, im] }
+- { id: a1-separable, level: A1, desc: "Separable verbs: the prefix goes to the end", verbs: [aufstehen, anrufen, einkaufen, fernsehen, mitkommen, ankommen, abholen, aufräumen, anfangen] }
+- { id: a1-modals, level: A1, desc: "können, müssen, wollen, dürfen; the infinitive at the end", verbs: [können, müssen, wollen, dürfen, sollen, mögen] }
+- { id: a1-pronouns-akk, level: A1, desc: "Accusative pronouns: mich, dich, ihn, sie, es, uns, euch" }
+- { id: a1-imperative, level: A1, desc: "The imperative with Sie and du: instructions at work" }
+- { id: a1-dative-prepositions, level: A1, desc: "The dative after mit, bei, zu, aus, von, nach", detect: dative }
+- { id: a1-wechsel, level: A1, desc: "Two-way prepositions: wo? + dative, wohin? + accusative; links, rechts, geradeaus", verbs: [legen, stellen, liegen, stehen] }
+- { id: a1-doctor, level: A1, desc: "Appointments; body parts; wehtun", verbs: [wehtun] }
+- { id: a1-housing, level: A1, desc: "Rooms, furniture and the classified ad (vocabulary; no new grammar)" }
+- { id: a1-forms, level: A1, desc: "Forms and personal data (vocabulary; the A1 writing task)" }
+- { id: a1-perfekt-intro, level: A1, desc: "Perfekt with haben and sein (regular and the first irregulars); war and hatte", detect: perfekt }
+- { id: a1-review, level: A1, desc: "A whole day: capstone and A1 review" }
+
+# ---------- later rungs (status: soon; the ids the detectors need) ----------
+- { id: a2-perfekt-full, level: A2, desc: "Perfekt of separable, inseparable and -ieren verbs", detect: perfekt }
+- { id: a2-dative-pronouns, level: A2, desc: "Dative pronouns; helfen, gefallen, gehören", detect: dative }
+- { id: a2-weil-dass, level: A2, desc: "weil and dass: the verb at the end", detect: subordinate }
+- { id: a2-comparison, level: A2, desc: "Comparatives and superlatives" }
+- { id: a2-adj-endings, level: A2, desc: "Adjective endings after definite and indefinite articles", detect: adj-ending }
+- { id: a2-wenn, level: A2, desc: "wenn clauses", detect: subordinate }
+- { id: a2-reflexive, level: A2, desc: "Reflexive verbs" }
+- { id: a2-werden, level: A2, desc: "werden: future and 'become'", verbs: [werden] }
+- { id: b1-relative, level: B1, desc: "Relative clauses", detect: relative }
+- { id: b1-genitive, level: B1, desc: "The genitive", detect: genitive }
+- { id: b1-konj2, level: B1, desc: "Konjunktiv II: würde, hätte, wäre", detect: konj2 }
+- { id: b1-passive, level: B1, desc: "The passive (present and past)", detect: passive }
+- { id: b1-praeteritum, level: B1, desc: "The Präteritum for narration" }
+- { id: b1-zu-infinitive, level: B1, desc: "Infinitive with zu" }

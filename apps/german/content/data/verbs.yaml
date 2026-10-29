@@ -1,0 +1,717 @@
+# Verbs used up to the live rungs (CLAUDE.md §3.4). Draft data for the teacher's review.
+#
+# - sep: separable prefix (aufstehen → auf); aux + partizip: the Perfekt (participle with its prefix)
+# - vowel: present-tense stem-vowel change for du and er/sie/es (a-ä, e-i, e-ie, au-äu)
+# - praet: Präteritum stem; `weak: true` takes the weak endings (hatte, konnte, brachte)
+# - irregular: cells the rules in lib/de/conjugate.ts don't produce (a list is all six persons:
+#   ich, du, er/sie/es, wir, ihr, sie/Sie; a map is some of them)
+# - check: reference forms, written out by hand; the library is tested against them. Imperativ lists
+#   du, ihr and Sie in the du, ihr and sie cells (ich, er and wir are empty).
+
+# ---------- irregular ----------
+- inf: sein
+  id: adalah, ada
+  aux: sein
+  partizip: gewesen
+  praet: { stem: war }
+  irregular:
+    praesens: [bin, bist, ist, sind, seid, sind]
+    imperativ: { du: sei, ihr: seid, sie: seien Sie }
+    konj2: [wäre, wärst, wäre, wären, wärt, wären]
+  check:
+    praesens: [bin, bist, ist, sind, seid, sind]
+    praeteritum: [war, warst, war, waren, wart, waren]
+    perfekt: [bin gewesen, bist gewesen, ist gewesen, sind gewesen, seid gewesen, sind gewesen]
+    imperativ: ['', sei, '', '', seid, seien Sie]
+    konj2: [wäre, wärst, wäre, wären, wärt, wären]
+- inf: haben
+  id: punya
+  aux: haben
+  partizip: gehabt
+  praet: { stem: hatt, weak: true }
+  irregular:
+    praesens: [habe, hast, hat, haben, habt, haben]
+    konj2: [hätte, hättest, hätte, hätten, hättet, hätten]
+  check:
+    praesens: [habe, hast, hat, haben, habt, haben]
+    praeteritum: [hatte, hattest, hatte, hatten, hattet, hatten]
+    konj2: [hätte, hättest, hätte, hätten, hättet, hätten]
+- inf: werden
+  id: menjadi; akan
+  aux: sein
+  partizip: geworden
+  praet: { stem: wurd, weak: true }
+  irregular:
+    praesens: [werde, wirst, wird, werden, werdet, werden]
+    konj2: [würde, würdest, würde, würden, würdet, würden]
+  check:
+    praesens: [werde, wirst, wird, werden, werdet, werden]
+    praeteritum: [wurde, wurdest, wurde, wurden, wurdet, wurden]
+- inf: wissen
+  id: tahu
+  aux: haben
+  partizip: gewusst
+  praet: { stem: wusst, weak: true }
+  irregular:
+    praesens: [weiß, weißt, weiß, wissen, wisst, wissen]
+  check:
+    praesens: [weiß, weißt, weiß, wissen, wisst, wissen]
+- inf: tun
+  id: melakukan
+  aux: haben
+  partizip: getan
+  praet: { stem: tat }
+  irregular:
+    praesens: [tue, tust, tut, tun, tut, tun]
+  check:
+    praesens: [tue, tust, tut, tun, tut, tun]
+- inf: wehtun
+  id: sakit (terasa sakit)
+  sep: weh
+  aux: haben
+  partizip: wehgetan
+  praet: { stem: tat }
+  irregular:
+    praesens: [tue, tust, tut, tun, tut, tun]
+  check:
+    praesens: [tue weh, tust weh, tut weh, tun weh, tut weh, tun weh]
+
+# ---------- modal verbs ----------
+- inf: können
+  id: bisa
+  aux: haben
+  partizip: gekonnt
+  praet: { stem: konnt, weak: true }
+  irregular:
+    praesens: [kann, kannst, kann, können, könnt, können]
+    konj2: [könnte, könntest, könnte, könnten, könntet, könnten]
+  check:
+    praesens: [kann, kannst, kann, können, könnt, können]
+    praeteritum: [konnte, konntest, konnte, konnten, konntet, konnten]
+- inf: müssen
+  id: harus
+  aux: haben
+  partizip: gemusst
+  praet: { stem: musst, weak: true }
+  irregular:
+    praesens: [muss, musst, muss, müssen, müsst, müssen]
+    konj2: [müsste, müsstest, müsste, müssten, müsstet, müssten]
+  check:
+    praesens: [muss, musst, muss, müssen, müsst, müssen]
+- inf: dürfen
+  id: boleh
+  aux: haben
+  partizip: gedurft
+  praet: { stem: durft, weak: true }
+  irregular:
+    praesens: [darf, darfst, darf, dürfen, dürft, dürfen]
+    konj2: [dürfte, dürftest, dürfte, dürften, dürftet, dürften]
+  check:
+    praesens: [darf, darfst, darf, dürfen, dürft, dürfen]
+- inf: wollen
+  id: mau, ingin
+  aux: haben
+  partizip: gewollt
+  praet: { stem: wollt, weak: true }
+  irregular:
+    praesens: [will, willst, will, wollen, wollt, wollen]
+    konj2: [wollte, wolltest, wollte, wollten, wolltet, wollten]
+  check:
+    praesens: [will, willst, will, wollen, wollt, wollen]
+- inf: sollen
+  id: sebaiknya, harus (disuruh)
+  aux: haben
+  partizip: gesollt
+  praet: { stem: sollt, weak: true }
+  irregular:
+    praesens: [soll, sollst, soll, sollen, sollt, sollen]
+    konj2: [sollte, solltest, sollte, sollten, solltet, sollten]
+  check:
+    praesens: [soll, sollst, soll, sollen, sollt, sollen]
+- inf: mögen
+  id: suka
+  aux: haben
+  partizip: gemocht
+  praet: { stem: mocht, weak: true }
+  irregular:
+    praesens: [mag, magst, mag, mögen, mögt, mögen]
+    konj2: [möchte, möchtest, möchte, möchten, möchtet, möchten]
+  check:
+    praesens: [mag, magst, mag, mögen, mögt, mögen]
+- inf: möchten
+  id: ingin (dengan sopan)
+  aux: haben
+  partizip: gemocht
+  praet: { stem: wollt, weak: true }
+  irregular:
+    praesens: [möchte, möchtest, möchte, möchten, möchtet, möchten]
+  check:
+    praesens: [möchte, möchtest, möchte, möchten, möchtet, möchten]
+
+# ---------- strong verbs (stem-vowel changes, listed participles) ----------
+- inf: fahren
+  id: pergi (dengan kendaraan), menyetir
+  vowel: a-ä
+  aux: sein
+  partizip: gefahren
+  praet: { stem: fuhr }
+  check:
+    praesens: [fahre, fährst, fährt, fahren, fahrt, fahren]
+    praeteritum: [fuhr, fuhrst, fuhr, fuhren, fuhrt, fuhren]
+    perfekt: [bin gefahren, bist gefahren, ist gefahren, sind gefahren, seid gefahren, sind gefahren]
+    imperativ: ['', fahr, '', '', fahrt, fahren Sie]
+- inf: schlafen
+  id: tidur
+  vowel: a-ä
+  aux: haben
+  partizip: geschlafen
+  praet: { stem: schlief }
+  check:
+    praesens: [schlafe, schläfst, schläft, schlafen, schlaft, schlafen]
+- inf: tragen
+  id: membawa, memakai (baju)
+  vowel: a-ä
+  aux: haben
+  partizip: getragen
+  praet: { stem: trug }
+  check:
+    praesens: [trage, trägst, trägt, tragen, tragt, tragen]
+- inf: waschen
+  id: mencuci
+  vowel: a-ä
+  aux: haben
+  partizip: gewaschen
+  praet: { stem: wusch }
+  check:
+    praesens: [wasche, wäschst, wäscht, waschen, wascht, waschen]
+- inf: laufen
+  id: berlari, berjalan
+  vowel: au-äu
+  aux: sein
+  partizip: gelaufen
+  praet: { stem: lief }
+  check:
+    praesens: [laufe, läufst, läuft, laufen, lauft, laufen]
+- inf: halten
+  id: memegang, berhenti
+  vowel: a-ä
+  aux: haben
+  partizip: gehalten
+  praet: { stem: hielt }
+  check:
+    praesens: [halte, hältst, hält, halten, haltet, halten]
+- inf: lesen
+  id: membaca
+  vowel: e-ie
+  aux: haben
+  partizip: gelesen
+  praet: { stem: las }
+  check:
+    praesens: [lese, liest, liest, lesen, lest, lesen]
+    imperativ: ['', lies, '', '', lest, lesen Sie]
+- inf: sehen
+  id: melihat
+  vowel: e-ie
+  aux: haben
+  partizip: gesehen
+  praet: { stem: sah }
+  check:
+    praesens: [sehe, siehst, sieht, sehen, seht, sehen]
+- inf: essen
+  id: makan
+  vowel: e-i
+  aux: haben
+  partizip: gegessen
+  praet: { stem: aß }
+  check:
+    praesens: [esse, isst, isst, essen, esst, essen]
+    imperativ: ['', iss, '', '', esst, essen Sie]
+- inf: sprechen
+  id: berbicara
+  vowel: e-i
+  aux: haben
+  partizip: gesprochen
+  praet: { stem: sprach }
+  check:
+    praesens: [spreche, sprichst, spricht, sprechen, sprecht, sprechen]
+- inf: nehmen
+  id: mengambil
+  vowel: e-i
+  aux: haben
+  partizip: genommen
+  praet: { stem: nahm }
+  irregular:
+    praesens: { du: nimmst, er: nimmt }
+    imperativ: { du: nimm }
+  check:
+    praesens: [nehme, nimmst, nimmt, nehmen, nehmt, nehmen]
+    imperativ: ['', nimm, '', '', nehmt, nehmen Sie]
+- inf: geben
+  id: memberi
+  vowel: e-i
+  aux: haben
+  partizip: gegeben
+  praet: { stem: gab }
+  check:
+    praesens: [gebe, gibst, gibt, geben, gebt, geben]
+- inf: helfen
+  id: membantu
+  vowel: e-i
+  aux: haben
+  partizip: geholfen
+  praet: { stem: half }
+  check:
+    praesens: [helfe, hilfst, hilft, helfen, helft, helfen]
+- inf: treffen
+  id: bertemu
+  vowel: e-i
+  aux: haben
+  partizip: getroffen
+  praet: { stem: traf }
+  check:
+    praesens: [treffe, triffst, trifft, treffen, trefft, treffen]
+- inf: vergessen
+  id: lupa
+  vowel: e-i
+  aux: haben
+  partizip: vergessen
+  praet: { stem: vergaß }
+  check:
+    praesens: [vergesse, vergisst, vergisst, vergessen, vergesst, vergessen]
+- inf: empfehlen
+  id: menyarankan
+  vowel: e-ie
+  aux: haben
+  partizip: empfohlen
+  praet: { stem: empfahl }
+  check:
+    praesens: [empfehle, empfiehlst, empfiehlt, empfehlen, empfehlt, empfehlen]
+- inf: kommen
+  id: datang
+  aux: sein
+  partizip: gekommen
+  praet: { stem: kam }
+  check:
+    praesens: [komme, kommst, kommt, kommen, kommt, kommen]
+    praeteritum: [kam, kamst, kam, kamen, kamt, kamen]
+    imperativ: ['', komm, '', '', kommt, kommen Sie]
+- inf: gehen
+  id: pergi, berjalan
+  aux: sein
+  partizip: gegangen
+  praet: { stem: ging }
+  check:
+    praesens: [gehe, gehst, geht, gehen, geht, gehen]
+    praeteritum: [ging, gingst, ging, gingen, gingt, gingen]
+    perfekt: [bin gegangen, bist gegangen, ist gegangen, sind gegangen, seid gegangen, sind gegangen]
+- inf: heißen
+  id: bernama
+  aux: haben
+  partizip: geheißen
+  praet: { stem: hieß }
+  check:
+    praesens: [heiße, heißt, heißt, heißen, heißt, heißen]
+- inf: schreiben
+  id: menulis
+  aux: haben
+  partizip: geschrieben
+  praet: { stem: schrieb }
+  check:
+    praesens: [schreibe, schreibst, schreibt, schreiben, schreibt, schreiben]
+- inf: trinken
+  id: minum
+  aux: haben
+  partizip: getrunken
+  praet: { stem: trank }
+  check:
+    praesens: [trinke, trinkst, trinkt, trinken, trinkt, trinken]
+- inf: finden
+  id: menemukan, menganggap
+  aux: haben
+  partizip: gefunden
+  praet: { stem: fand }
+  check:
+    praesens: [finde, findest, findet, finden, findet, finden]
+- inf: bleiben
+  id: tinggal, tetap
+  aux: sein
+  partizip: geblieben
+  praet: { stem: blieb }
+  check:
+    praesens: [bleibe, bleibst, bleibt, bleiben, bleibt, bleiben]
+- inf: liegen
+  id: terletak, berbaring
+  aux: haben
+  partizip: gelegen
+  praet: { stem: lag }
+  check:
+    praesens: [liege, liegst, liegt, liegen, liegt, liegen]
+- inf: stehen
+  id: berdiri
+  aux: haben
+  partizip: gestanden
+  praet: { stem: stand }
+  check:
+    praesens: [stehe, stehst, steht, stehen, steht, stehen]
+- inf: sitzen
+  id: duduk
+  aux: haben
+  partizip: gesessen
+  praet: { stem: saß }
+  check:
+    praesens: [sitze, sitzt, sitzt, sitzen, sitzt, sitzen]
+- inf: schwimmen
+  id: berenang
+  aux: sein
+  partizip: geschwommen
+  praet: { stem: schwamm }
+  check:
+    praesens: [schwimme, schwimmst, schwimmt, schwimmen, schwimmt, schwimmen]
+- inf: verstehen
+  id: mengerti
+  aux: haben
+  partizip: verstanden
+  praet: { stem: verstand }
+  check:
+    praesens: [verstehe, verstehst, versteht, verstehen, versteht, verstehen]
+- inf: bringen
+  id: membawa
+  aux: haben
+  partizip: gebracht
+  praet: { stem: bracht, weak: true }
+  check:
+    praesens: [bringe, bringst, bringt, bringen, bringt, bringen]
+- inf: kennen
+  id: kenal
+  aux: haben
+  partizip: gekannt
+  praet: { stem: kannt, weak: true }
+  check:
+    praesens: [kenne, kennst, kennt, kennen, kennt, kennen]
+- inf: denken
+  id: berpikir
+  aux: haben
+  partizip: gedacht
+  praet: { stem: dacht, weak: true }
+  check:
+    praesens: [denke, denkst, denkt, denken, denkt, denken]
+
+# ---------- separable ----------
+- inf: aufstehen
+  id: bangun (dari tempat tidur)
+  sep: auf
+  aux: sein
+  partizip: aufgestanden
+  praet: { stem: stand }
+  check:
+    praesens: [stehe auf, stehst auf, steht auf, stehen auf, steht auf, stehen auf]
+    perfekt: [bin aufgestanden, bist aufgestanden, ist aufgestanden, sind aufgestanden, seid aufgestanden, sind aufgestanden]
+    imperativ: ['', steh auf, '', '', steht auf, stehen Sie auf]
+- inf: anrufen
+  id: menelepon
+  sep: an
+  aux: haben
+  partizip: angerufen
+  praet: { stem: rief }
+  check:
+    praesens: [rufe an, rufst an, ruft an, rufen an, ruft an, rufen an]
+- inf: einkaufen
+  id: berbelanja
+  sep: ein
+  aux: haben
+  partizip: eingekauft
+  check:
+    praesens: [kaufe ein, kaufst ein, kauft ein, kaufen ein, kauft ein, kaufen ein]
+    perfekt: [habe eingekauft, hast eingekauft, hat eingekauft, haben eingekauft, habt eingekauft, haben eingekauft]
+- inf: fernsehen
+  id: menonton TV
+  sep: fern
+  vowel: e-ie
+  aux: haben
+  partizip: ferngesehen
+  praet: { stem: sah }
+  check:
+    praesens: [sehe fern, siehst fern, sieht fern, sehen fern, seht fern, sehen fern]
+- inf: mitkommen
+  id: ikut
+  sep: mit
+  aux: sein
+  partizip: mitgekommen
+  praet: { stem: kam }
+  check:
+    praesens: [komme mit, kommst mit, kommt mit, kommen mit, kommt mit, kommen mit]
+- inf: ankommen
+  id: tiba
+  sep: an
+  aux: sein
+  partizip: angekommen
+  praet: { stem: kam }
+  check:
+    praesens: [komme an, kommst an, kommt an, kommen an, kommt an, kommen an]
+- inf: abholen
+  id: menjemput
+  sep: ab
+  aux: haben
+  partizip: abgeholt
+  check:
+    praesens: [hole ab, holst ab, holt ab, holen ab, holt ab, holen ab]
+- inf: aufräumen
+  id: merapikan
+  sep: auf
+  aux: haben
+  partizip: aufgeräumt
+  check:
+    praesens: [räume auf, räumst auf, räumt auf, räumen auf, räumt auf, räumen auf]
+- inf: anfangen
+  id: mulai
+  sep: an
+  vowel: a-ä
+  aux: haben
+  partizip: angefangen
+  praet: { stem: fing }
+  check:
+    praesens: [fange an, fängst an, fängt an, fangen an, fangt an, fangen an]
+- inf: einladen
+  id: mengundang
+  sep: ein
+  vowel: a-ä
+  aux: haben
+  partizip: eingeladen
+  praet: { stem: lud }
+  check:
+    praesens: [lade ein, lädst ein, lädt ein, laden ein, ladet ein, laden ein]
+- inf: aussteigen
+  id: turun (dari kendaraan)
+  sep: aus
+  aux: sein
+  partizip: ausgestiegen
+  praet: { stem: stieg }
+  check:
+    praesens: [steige aus, steigst aus, steigt aus, steigen aus, steigt aus, steigen aus]
+- inf: einsteigen
+  id: naik (ke kendaraan)
+  sep: ein
+  aux: sein
+  partizip: eingestiegen
+  praet: { stem: stieg }
+  check:
+    praesens: [steige ein, steigst ein, steigt ein, steigen ein, steigt ein, steigen ein]
+- inf: umsteigen
+  id: pindah (kendaraan)
+  sep: um
+  aux: sein
+  partizip: umgestiegen
+  praet: { stem: stieg }
+  check:
+    praesens: [steige um, steigst um, steigt um, steigen um, steigt um, steigen um]
+
+# ---------- regular (weak) ----------
+- inf: wohnen
+  id: tinggal
+  aux: haben
+  partizip: gewohnt
+  check:
+    praesens: [wohne, wohnst, wohnt, wohnen, wohnt, wohnen]
+- inf: machen
+  id: membuat, melakukan
+  aux: haben
+  partizip: gemacht
+  check:
+    praesens: [mache, machst, macht, machen, macht, machen]
+    praeteritum: [machte, machtest, machte, machten, machtet, machten]
+    konj2: [würde machen, würdest machen, würde machen, würden machen, würdet machen, würden machen]
+- inf: arbeiten
+  id: bekerja
+  aux: haben
+  partizip: gearbeitet
+  check:
+    praesens: [arbeite, arbeitest, arbeitet, arbeiten, arbeitet, arbeiten]
+    praeteritum: [arbeitete, arbeitetest, arbeitete, arbeiteten, arbeitetet, arbeiteten]
+    perfekt: [habe gearbeitet, hast gearbeitet, hat gearbeitet, haben gearbeitet, habt gearbeitet, haben gearbeitet]
+    imperativ: ['', arbeite, '', '', arbeitet, arbeiten Sie]
+- inf: lernen
+  id: belajar
+  aux: haben
+  partizip: gelernt
+  check:
+    praesens: [lerne, lernst, lernt, lernen, lernt, lernen]
+- inf: spielen
+  id: bermain
+  aux: haben
+  partizip: gespielt
+  check:
+    praesens: [spiele, spielst, spielt, spielen, spielt, spielen]
+- inf: kaufen
+  id: membeli
+  aux: haben
+  partizip: gekauft
+  check:
+    praesens: [kaufe, kaufst, kauft, kaufen, kauft, kaufen]
+- inf: kochen
+  id: memasak
+  aux: haben
+  partizip: gekocht
+  check:
+    praesens: [koche, kochst, kocht, kochen, kocht, kochen]
+- inf: brauchen
+  id: perlu
+  aux: haben
+  partizip: gebraucht
+  check:
+    praesens: [brauche, brauchst, braucht, brauchen, braucht, brauchen]
+- inf: suchen
+  id: mencari
+  aux: haben
+  partizip: gesucht
+  check:
+    praesens: [suche, suchst, sucht, suchen, sucht, suchen]
+- inf: fragen
+  id: bertanya
+  aux: haben
+  partizip: gefragt
+  check:
+    praesens: [frage, fragst, fragt, fragen, fragt, fragen]
+- inf: antworten
+  id: menjawab
+  aux: haben
+  partizip: geantwortet
+  check:
+    praesens: [antworte, antwortest, antwortet, antworten, antwortet, antworten]
+- inf: sagen
+  id: berkata
+  aux: haben
+  partizip: gesagt
+  check:
+    praesens: [sage, sagst, sagt, sagen, sagt, sagen]
+- inf: hören
+  id: mendengar
+  aux: haben
+  partizip: gehört
+  check:
+    praesens: [höre, hörst, hört, hören, hört, hören]
+- inf: warten
+  id: menunggu
+  aux: haben
+  partizip: gewartet
+  check:
+    praesens: [warte, wartest, wartet, warten, wartet, warten]
+- inf: kosten
+  id: berharga
+  aux: haben
+  partizip: gekostet
+  check:
+    praesens: [koste, kostest, kostet, kosten, kostet, kosten]
+- inf: zahlen
+  id: membayar
+  aux: haben
+  partizip: gezahlt
+  check:
+    praesens: [zahle, zahlst, zahlt, zahlen, zahlt, zahlen]
+- inf: bezahlen
+  id: membayar
+  aux: haben
+  partizip: bezahlt
+  check:
+    praesens: [bezahle, bezahlst, bezahlt, bezahlen, bezahlt, bezahlen]
+- inf: besuchen
+  id: mengunjungi
+  aux: haben
+  partizip: besucht
+  check:
+    praesens: [besuche, besuchst, besucht, besuchen, besucht, besuchen]
+- inf: studieren
+  id: kuliah
+  aux: haben
+  partizip: studiert
+  check:
+    praesens: [studiere, studierst, studiert, studieren, studiert, studieren]
+- inf: telefonieren
+  id: menelepon
+  aux: haben
+  partizip: telefoniert
+  check:
+    praesens: [telefoniere, telefonierst, telefoniert, telefonieren, telefoniert, telefonieren]
+- inf: reisen
+  id: bepergian
+  aux: sein
+  partizip: gereist
+  check:
+    praesens: [reise, reist, reist, reisen, reist, reisen]
+- inf: tanzen
+  id: menari
+  aux: haben
+  partizip: getanzt
+  check:
+    praesens: [tanze, tanzt, tanzt, tanzen, tanzt, tanzen]
+- inf: wandern
+  id: mendaki, berjalan jauh
+  aux: sein
+  partizip: gewandert
+  check:
+    praesens: [wandere, wanderst, wandert, wandern, wandert, wandern]
+- inf: duschen
+  id: mandi (pancuran)
+  aux: haben
+  partizip: geduscht
+  check:
+    praesens: [dusche, duschst, duscht, duschen, duscht, duschen]
+- inf: frühstücken
+  id: sarapan
+  aux: haben
+  partizip: gefrühstückt
+  check:
+    praesens: [frühstücke, frühstückst, frühstückt, frühstücken, frühstückt, frühstücken]
+- inf: öffnen
+  id: membuka
+  aux: haben
+  partizip: geöffnet
+  check:
+    praesens: [öffne, öffnest, öffnet, öffnen, öffnet, öffnen]
+- inf: regnen
+  id: hujan
+  aux: haben
+  partizip: geregnet
+  check:
+    praesens: [regne, regnest, regnet, regnen, regnet, regnen]
+- inf: legen
+  id: meletakkan (berbaring)
+  aux: haben
+  partizip: gelegt
+  check:
+    praesens: [lege, legst, legt, legen, legt, legen]
+- inf: stellen
+  id: meletakkan (berdiri)
+  aux: haben
+  partizip: gestellt
+  check:
+    praesens: [stelle, stellst, stellt, stellen, stellt, stellen]
+- inf: setzen
+  id: mendudukkan, menaruh
+  aux: haben
+  partizip: gesetzt
+  check:
+    praesens: [setze, setzt, setzt, setzen, setzt, setzen]
+- inf: leben
+  id: hidup
+  aux: haben
+  partizip: gelebt
+  check:
+    praesens: [lebe, lebst, lebt, leben, lebt, leben]
+- inf: zeigen
+  id: menunjukkan
+  aux: haben
+  partizip: gezeigt
+  check:
+    praesens: [zeige, zeigst, zeigt, zeigen, zeigt, zeigen]
+- inf: erklären
+  id: menjelaskan
+  aux: haben
+  partizip: erklärt
+  check:
+    praesens: [erkläre, erklärst, erklärt, erklären, erklärt, erklären]
+- inf: sammeln
+  id: mengumpulkan
+  aux: haben
+  partizip: gesammelt
+  check:
+    praesens: [sammle, sammelst, sammelt, sammeln, sammelt, sammeln]
