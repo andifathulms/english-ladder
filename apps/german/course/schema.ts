@@ -411,3 +411,12 @@ export const LexiconSchema = z
 
 /** content/data/words/<rung>.yaml: the rung's word list (the deck), lemmas with meanings. */
 export const WordListSchema = z.array(GlossaryEntry);
+
+/** content/data/stress.yaml: authored word stress where the rule is wrong (loanwords). */
+export const StressSchema = z.array(
+  z
+    .object({ word: z.string().min(1), syllables: z.array(z.string().min(1)).min(2), stress: z.number().int().min(0) })
+    .strict()
+    .refine((e) => e.syllables.join('').toLowerCase() === e.word.toLowerCase(), { message: 'syllables must join to the word' })
+    .refine((e) => e.stress < e.syllables.length, { message: 'stress is a syllable index' }),
+);

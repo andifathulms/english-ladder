@@ -11,6 +11,7 @@ import {
   type Kase,
   type Num,
   type Reading,
+  type StressEntry,
   type VerbData,
   type Zone,
 } from '@/lib/de';
@@ -37,6 +38,8 @@ export type LintData = {
   formIndex: Map<string, FormInfo[]>;
   /** Determiner forms and their readings (lib/de/articles determinerReadings). */
   determiners: Map<string, Reading[]>;
+  /** Authored word stress (data/stress.yaml). */
+  stress: StressEntry[];
 };
 
 /** A German string to lint, and where it comes from. `work`: a Kerja card line (Sie register). */

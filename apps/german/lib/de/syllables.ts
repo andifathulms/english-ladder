@@ -72,3 +72,21 @@ export function stressOf(word: string): number {
   if (prefixOf(word.normalize('NFC'))) return 1;
   return 0;
 }
+
+/** A word's stress as content/data/stress.yaml writes it. */
+export type StressEntry = { word: string; syllables: string[]; stress: number };
+
+/**
+ * A word in syllables with its stressed one: the authored entry when there is one (keys
+ * case-insensitive, the word's own spelling kept), else syllabify and stressOf.
+ */
+export function stressSplit(word: string, exceptions: Record<string, StressEntry> = {}): { syllables: string[]; stress: number } {
+  const e = exceptions[word.toLowerCase()];
+  if (e) {
+    // Keep the word's case: split the word itself at the authored lengths.
+    let at = 0;
+    const syllables = e.syllables.map((s) => word.slice(at, (at += s.length)));
+    return { syllables, stress: e.stress };
+  }
+  return { syllables: syllabify(word), stress: stressOf(word) };
+}

@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createContent, type ContentModel } from '@ladder/core/lib/content/load';
-import { buildFormIndex, determinerReadings, type VerbData } from '@/lib/de';
+import { buildFormIndex, determinerReadings, type StressEntry, type VerbData } from '@/lib/de';
 import { adapter } from './adapter';
 import {
   BridgesSchema,
@@ -15,6 +15,7 @@ import {
   NamesSchema,
   NounsSchema,
   PlacementSchema,
+  StressSchema,
   ReadingSchema,
   TestPoolSchema,
   VerbsSchema,
@@ -68,8 +69,20 @@ export function getData(): LintData {
     wordLists,
     formIndex: buildFormIndex(verbs),
     determiners: determinerReadings(),
+    stress: read('data/stress.yaml', (x) => StressSchema.parse(x), []),
   };
   return dataCache;
+}
+
+/** Authored stress for the words of some German lines, by lower-case word. */
+function stressFor(lines: string[]): Record<string, StressEntry> {
+  const byWord = new Map(getData().stress.map((e) => [e.word.toLowerCase(), e]));
+  const out: Record<string, StressEntry> = {};
+  for (const w of lines.join(' ').toLowerCase().match(/[a-zäöüß]+/g) ?? []) {
+    const e = byWord.get(w);
+    if (e) out[w] = e;
+  }
+  return out;
 }
 
 /** Word frequency ranks (content/data/vendor/frequency.json), keyed lower-case. */
@@ -115,6 +128,7 @@ export const model: ContentModel = {
       bridges: bridges.bridges.filter((b) => named.has(b.de)),
       falseFriends: bridges.false_friends.filter((f) => named.has(f.de)),
       compounds: compoundsOf(lesson),
+      stress: stressFor([lesson.tirukan.de, ...(lesson.sound?.words ?? [])]),
     };
   },
   // Typed items carry their spelling mode from the rung, so grading needs no rung lookup.
