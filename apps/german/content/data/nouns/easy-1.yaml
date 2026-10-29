@@ -1,0 +1,35 @@
+# Nouns added with Easy 1 (CLAUDE.md §3.4), same shape as nouns.yaml. Draft data for the teacher's review.
+# Every value is authored; plurals match their pattern (lib/de pluralOf), genders their ending clue.
+
+# ---------- people ----------
+- { de: Junge, gender: m, plural: Jungen, pattern: "-n", id: anak laki-laki; cowok, person: true, level: A1 }
+- { de: Mama, gender: f, plural: Mamas, pattern: "-s", id: mama; ibu, level: A1 }
+- { de: Papa, gender: m, plural: Papas, pattern: "-s", id: papa; ayah, level: A1 }
+- { de: Schülerin, gender: f, plural: Schülerinnen, pattern: "-nen", id: murid (perempuan), level: A1 }
+- { de: Verkäuferin, gender: f, plural: Verkäuferinnen, pattern: "-nen", id: penjual (perempuan), level: A1 }
+- { de: Köchin, gender: f, plural: Köchinnen, pattern: "-nen", id: juru masak (perempuan), level: A1 }
+- { de: Kellner, gender: m, plural: Kellner, pattern: "-", id: pelayan, person: true, level: A1 }
+- { de: Kellnerin, gender: f, plural: Kellnerinnen, pattern: "-nen", id: pelayan (perempuan), level: A1 }
+- { de: Chefin, gender: f, plural: Chefinnen, pattern: "-nen", id: atasan (perempuan), level: A1 }
+- { de: Azubi, gender: m, plural: Azubis, pattern: "-s", id: peserta Ausbildung, person: true, level: A1 }
+- { de: Indonesier, gender: m, plural: Indonesier, pattern: "-", id: orang Indonesia, person: true, level: A1 }
+- { de: Indonesierin, gender: f, plural: Indonesierinnen, pattern: "-nen", id: orang Indonesia (perempuan), level: A1 }
+- { de: Kassierer, gender: m, plural: Kassierer, pattern: "-", id: kasir (orangnya), person: true, level: A1 }
+
+# ---------- places, things, food ----------
+- { de: Kurs, gender: m, plural: Kurse, pattern: "-e", id: kursus, level: A1 }
+- { de: Deutschkurs, gender: m, plural: Deutschkurse, pattern: "-e", id: kursus bahasa Jerman, parts: [Deutsch, Kurs], level: A1 }
+- { de: Fernseher, gender: m, plural: Fernseher, pattern: "-", id: televisi, level: A1 }
+- { de: Hobby, gender: n, plural: Hobbys, pattern: "-s", id: hobi, level: A1 }
+- { de: Hähnchen, gender: n, plural: Hähnchen, pattern: "-", id: ayam (masakan), level: A1 }
+- { de: Getränk, gender: n, plural: Getränke, pattern: "-e", id: minuman, level: A1 }
+- { de: Kilo, gender: n, plural: Kilos, pattern: "-s", id: kilo, level: A1 }
+- { de: Stück, gender: n, plural: Stücke, pattern: "-e", id: potong; buah, level: A1 }
+- { de: Euro, gender: m, plural: Euro, pattern: "-", id: euro, level: A1 }
+- { de: Cent, gender: m, plural: Cent, pattern: "-", id: sen, level: A1 }
+- { de: Appetit, gender: m, plural: null, pattern: null, id: selera makan, level: A1 }
+- { de: Wiedersehen, gender: n, plural: null, pattern: null, id: pertemuan kembali, level: A1 }
+
+# ---------- numbers ----------
+- { de: Zahl, gender: f, plural: Zahlen, pattern: "-en", id: angka, level: A1 }
+- { de: Handynummer, gender: f, plural: Handynummern, pattern: "-n", id: nomor HP, parts: [Handy, Nummer], level: A1 }

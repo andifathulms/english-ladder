@@ -1,0 +1,20 @@
+# Verbs added with Easy 1 (CLAUDE.md §3.4), same shape as verbs.yaml, every present form written out by
+# hand in check.praesens (ich, du, er/sie/es, wir, ihr, sie/Sie). Draft data for the teacher's review.
+- inf: bestellen
+  id: memesan
+  aux: haben
+  partizip: bestellt
+  check:
+    praesens: [bestelle, bestellst, bestellt, bestellen, bestellt, bestellen]
+- inf: putzen
+  id: membersihkan
+  aux: haben
+  partizip: geputzt
+  check:
+    praesens: [putze, putzt, putzt, putzen, putzt, putzen]
+- inf: pflegen
+  id: merawat
+  aux: haben
+  partizip: gepflegt
+  check:
+    praesens: [pflege, pflegst, pflegt, pflegen, pflegt, pflegen]

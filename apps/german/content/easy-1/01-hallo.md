@@ -96,7 +96,7 @@ glossary:
   - { de: auch, id: juga, pos: adv }
   - { de: du, id: kamu, pos: pron }
   - { de: Sie, id: "Anda, Bapak, Ibu", pos: pron }
-next: null
+next: easy1-02-ich-heisse
 ---
 
 ## concept.id

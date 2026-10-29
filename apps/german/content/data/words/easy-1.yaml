@@ -1,0 +1,276 @@
+# Easy 1 word list (the A1 deck, part 1; curriculum words_target 250): every glossary word of Easy 1
+# lessons 01–12 plus the A1.1 words their topics need (greetings, family, jobs, home, food and shopping,
+# numbers, common verbs). Nouns and verbs match nouns.yaml / verbs.yaml and their easy-1 files. Draft data.
+# Lessons and capstones may use any word on this list or an earlier rung's (CLAUDE.md §4.1).
+- {de: hallo, id: halo, en: hello, pos: interj}
+- {de: tschüss, id: dah (akrab), en: bye, pos: interj}
+- {de: danke, id: terima kasih, en: thanks, pos: interj}
+- {de: bitte, id: tolong; silakan, en: please, pos: interj}
+- {de: ja, id: ya, en: 'yes', pos: interj}
+- {de: nein, id: tidak; bukan, en: 'no', pos: interj}
+- {de: Entschuldigung, id: permisi; maaf, en: excuse me; sorry, pos: interj}
+- {de: Guten Morgen, id: selamat pagi, en: good morning, pos: expr}
+- {de: Guten Tag, id: selamat siang, en: hello; good day, pos: expr}
+- {de: Guten Abend, id: selamat malam, en: good evening, pos: expr}
+- {de: Gute Nacht, id: selamat tidur, en: good night, pos: expr}
+- {de: Auf Wiedersehen, id: sampai jumpa (sopan), en: goodbye, pos: expr}
+- {de: bis später, id: sampai nanti, en: see you later, pos: expr}
+- {de: bis bald, id: sampai jumpa lagi, en: see you soon, pos: expr}
+- {de: Wie geht’s?, id: apa kabar?, en: how's it going?, pos: expr}
+- {de: Wie geht es Ihnen?, id: apa kabar? (sopan), en: how are you? (formal), pos: expr}
+- {de: Danke schön, id: terima kasih banyak, en: thank you very much, pos: expr}
+- {de: Vielen Dank, id: terima kasih banyak, en: many thanks, pos: expr}
+- {de: Herzlich willkommen, id: selamat datang, en: welcome, pos: expr}
+- {de: Wie bitte?, id: 'maaf, apa?', en: pardon?, pos: expr}
+- {de: Guten Appetit!, id: selamat makan, en: enjoy your meal, pos: expr}
+- {de: Kein Problem, id: tidak masalah, en: no problem, pos: expr}
+- {de: zu Hause, id: di rumah, en: at home, pos: expr}
+- {de: Ich weiß nicht., id: aku nggak tahu, en: I don't know, pos: expr}
+- {de: Wie alt bist du?, id: umurmu berapa?, en: how old are you?, pos: expr}
+- {de: Wie alt sind Sie?, id: umur Anda berapa?, en: how old are you? (formal), pos: expr}
+- {de: wie viele, id: berapa (banyak), en: how many, pos: expr}
+- {de: du, id: kamu, en: you (friend), pos: pron}
+- {de: Sie, id: 'Anda, Bapak, Ibu', en: you (formal), pos: pron}
+- {de: was, id: apa, en: what, pos: pron}
+- {de: wer, id: siapa, en: who, pos: pron}
+- {de: wo, id: di mana, en: where, pos: adv}
+- {de: woher, id: dari mana, en: where from, pos: adv}
+- {de: wie, id: bagaimana, en: how, pos: adv}
+- {de: wann, id: kapan, en: when, pos: adv}
+- {de: mein, id: '-ku', en: my, pos: det}
+- {de: dein, id: '-mu', en: your, pos: det}
+- {de: aus, id: dari (asal), en: from, pos: prep}
+- {de: in, id: di; di dalam, en: in, pos: prep}
+- {de: auf, id: di atas, en: 'on', pos: prep}
+- {de: unter, id: di bawah, en: under, pos: prep}
+- {de: neben, id: di sebelah, en: next to, pos: prep}
+- {de: hinter, id: di belakang, en: behind, pos: prep}
+- {de: vor, id: di depan, en: in front of, pos: prep}
+- {de: für, id: untuk, en: for, pos: prep}
+- {de: und, id: dan, en: and, pos: conj}
+- {de: oder, id: atau, en: or, pos: conj}
+- {de: aber, id: tetapi, en: but, pos: conj}
+- {de: auch, id: juga, en: also, pos: adv}
+- {de: nicht, id: tidak, en: not, pos: adv}
+- {de: heute, id: hari ini, en: today, pos: adv}
+- {de: jetzt, id: sekarang, en: now, pos: adv}
+- {de: hier, id: di sini, en: here, pos: adv}
+- {de: dort, id: di sana, en: there, pos: adv}
+- {de: viel, id: banyak, en: a lot, pos: adv}
+- {de: sehr, id: sangat, en: very, pos: adv}
+- {de: gern, id: dengan senang hati; suka, en: gladly; like to, pos: adv}
+- {de: zusammen, id: bersama; semuanya, en: together; altogether, pos: adv}
+- {de: oft, id: sering, en: often, pos: adv}
+- {de: nur, id: hanya, en: only, pos: adv}
+- {de: noch, id: masih; lagi, en: still; more, pos: adv}
+- {de: schon, id: sudah, en: already, pos: adv}
+- {de: gut, id: baik; bagus, en: good, pos: adj}
+- {de: schlecht, id: buruk; jelek, en: bad, pos: adj}
+- {de: neu, id: baru, en: new, pos: adj}
+- {de: alt, id: tua; lama, en: old, pos: adj}
+- {de: jung, id: muda, en: young, pos: adj}
+- {de: groß, id: besar; tinggi, en: big; tall, pos: adj}
+- {de: klein, id: kecil, en: small, pos: adj}
+- {de: schön, id: indah; bagus, en: beautiful; nice, pos: adj}
+- {de: müde, id: capek, en: tired, pos: adj}
+- {de: krank, id: sakit, en: ill, pos: adj}
+- {de: lecker, id: enak, en: tasty, pos: adj}
+- {de: heiß, id: panas, en: hot, pos: adj}
+- {de: kalt, id: dingin, en: cold, pos: adj}
+- {de: warm, id: hangat, en: warm, pos: adj}
+- {de: teuer, id: mahal, en: expensive, pos: adj}
+- {de: billig, id: murah, en: cheap, pos: adj}
+- {de: nett, id: baik hati; ramah, en: nice; kind, pos: adj}
+- {de: richtig, id: benar, en: right, pos: adj}
+- {de: falsch, id: salah, en: wrong, pos: adj}
+- {de: toll, id: keren, en: great, pos: adj}
+- {de: ledig, id: lajang, en: single, pos: adj}
+- {de: verheiratet, id: sudah menikah, en: married, pos: adj}
+- {de: Mann, id: laki-laki; suami, en: man; husband, pos: noun, gender: m, plural: Männer}
+- {de: Frau, id: perempuan; istri; Ibu (sapaan), en: woman; wife; Mrs, pos: noun, gender: f, plural: Frauen}
+- {de: Herr, id: Bapak (sapaan); tuan, en: Mr; gentleman, pos: noun, gender: m, plural: Herren}
+- {de: Kind, id: anak, en: child, pos: noun, gender: 'n', plural: Kinder}
+- {de: Mädchen, id: anak perempuan, en: girl, pos: noun, gender: 'n', plural: Mädchen}
+- {de: Junge, id: anak laki-laki; cowok, en: boy, pos: noun, gender: m, plural: Jungen}
+- {de: Familie, id: keluarga, en: family, pos: noun, gender: f, plural: Familien}
+- {de: Vater, id: ayah, en: father, pos: noun, gender: m, plural: Väter}
+- {de: Mutter, id: ibu, en: mother, pos: noun, gender: f, plural: Mütter}
+- {de: Papa, id: papa; ayah, en: dad, pos: noun, gender: m, plural: Papas}
+- {de: Mama, id: mama; ibu, en: mum, pos: noun, gender: f, plural: Mamas}
+- {de: Bruder, id: saudara laki-laki, en: brother, pos: noun, gender: m, plural: Brüder}
+- {de: Schwester, id: saudara perempuan, en: sister, pos: noun, gender: f, plural: Schwestern}
+- {de: Sohn, id: anak laki-laki, en: son, pos: noun, gender: m, plural: Söhne}
+- {de: Tochter, id: anak perempuan, en: daughter, pos: noun, gender: f, plural: Töchter}
+- {de: Oma, id: nenek, en: grandma, pos: noun, gender: f, plural: Omas}
+- {de: Opa, id: kakek, en: grandpa, pos: noun, gender: m, plural: Opas}
+- {de: Onkel, id: paman, en: uncle, pos: noun, gender: m, plural: Onkel}
+- {de: Tante, id: bibi; tante, en: aunt, pos: noun, gender: f, plural: Tanten, bridge: {nl: tante, id: tante}}
+- {de: Freund, id: teman (laki-laki), en: friend, pos: noun, gender: m, plural: Freunde}
+- {de: Freundin, id: teman (perempuan), en: friend (female), pos: noun, gender: f, plural: Freundinnen}
+- {de: Nachbar, id: tetangga, en: neighbour, pos: noun, gender: m, plural: Nachbarn}
+- {de: Beruf, id: profesi; pekerjaan, en: occupation, pos: noun, gender: m, plural: Berufe}
+- {de: Arbeit, id: pekerjaan; kerja, en: work, pos: noun, gender: f, plural: Arbeiten}
+- {de: Ausbildung, id: pendidikan vokasi (Ausbildung), en: vocational training, pos: noun, gender: f, plural: Ausbildungen}
+- {de: Azubi, id: peserta Ausbildung, en: trainee, pos: noun, gender: m, plural: Azubis}
+- {de: Lehrer, id: guru, en: teacher, pos: noun, gender: m, plural: Lehrer}
+- {de: Lehrerin, id: guru (perempuan), en: teacher (female), pos: noun, gender: f, plural: Lehrerinnen}
+- {de: Student, id: mahasiswa, en: student, pos: noun, gender: m, plural: Studenten}
+- {de: Studentin, id: mahasiswi, en: student (female), pos: noun, gender: f, plural: Studentinnen}
+- {de: Schüler, id: murid, en: pupil, pos: noun, gender: m, plural: Schüler}
+- {de: Schülerin, id: murid (perempuan), en: pupil (female), pos: noun, gender: f, plural: Schülerinnen}
+- {de: Arzt, id: dokter, en: doctor, pos: noun, gender: m, plural: Ärzte}
+- {de: Ärztin, id: dokter (perempuan), en: doctor (female), pos: noun, gender: f, plural: Ärztinnen}
+- {de: Krankenschwester, id: perawat (perempuan), en: nurse, pos: noun, gender: f, plural: Krankenschwestern}
+- {de: Pfleger, id: perawat (laki-laki), en: nurse; carer, pos: noun, gender: m, plural: Pfleger}
+- {de: Pflegerin, id: perawat (perempuan), en: nurse; carer (female), pos: noun, gender: f, plural: Pflegerinnen}
+- {de: Patient, id: pasien, en: patient, pos: noun, gender: m, plural: Patienten}
+- {de: Patientin, id: pasien (perempuan), en: patient (female), pos: noun, gender: f, plural: Patientinnen}
+- {de: Mechaniker, id: montir, en: mechanic, pos: noun, gender: m, plural: Mechaniker}
+- {de: Fahrer, id: sopir, en: driver, pos: noun, gender: m, plural: Fahrer}
+- {de: Verkäufer, id: penjual, en: shop assistant, pos: noun, gender: m, plural: Verkäufer}
+- {de: Verkäuferin, id: penjual (perempuan), en: shop assistant (female), pos: noun, gender: f, plural: Verkäuferinnen}
+- {de: Koch, id: juru masak, en: cook, pos: noun, gender: m, plural: Köche}
+- {de: Köchin, id: juru masak (perempuan), en: cook (female), pos: noun, gender: f, plural: Köchinnen}
+- {de: Kellner, id: pelayan, en: waiter, pos: noun, gender: m, plural: Kellner}
+- {de: Kellnerin, id: pelayan (perempuan), en: waitress, pos: noun, gender: f, plural: Kellnerinnen}
+- {de: Ingenieur, id: insinyur, en: engineer, pos: noun, gender: m, plural: Ingenieure}
+- {de: Kassierer, id: kasir (orangnya), en: cashier, pos: noun, gender: m, plural: Kassierer, bridge: {nl: kassier, id: kasir}}
+- {de: Kollege, id: rekan kerja, en: colleague, pos: noun, gender: m, plural: Kollegen}
+- {de: Kollegin, id: rekan kerja (perempuan), en: colleague (female), pos: noun, gender: f, plural: Kolleginnen}
+- {de: Chef, id: atasan; bos, en: boss, pos: noun, gender: m, plural: Chefs}
+- {de: Chefin, id: atasan (perempuan), en: boss (female), pos: noun, gender: f, plural: Chefinnen}
+- {de: Büro, id: kantor, en: office, pos: noun, gender: 'n', plural: Büros, bridge: {nl: bureau, id: biro}}
+- {de: Krankenhaus, id: rumah sakit, en: hospital, pos: noun, gender: 'n', plural: Krankenhäuser}
+- {de: Klinik, id: klinik, en: clinic, pos: noun, gender: f, plural: Kliniken, bridge: {nl: kliniek, id: klinik}}
+- {de: Kantine, id: kantin, en: canteen, pos: noun, gender: f, plural: Kantinen, bridge: {nl: kantine, id: kantin}}
+- {de: Schule, id: sekolah, en: school, pos: noun, gender: f, plural: Schulen}
+- {de: Universität, id: universitas, en: university, pos: noun, gender: f, plural: Universitäten}
+- {de: Kurs, id: kursus, en: course, pos: noun, gender: m, plural: Kurse}
+- {de: Deutschkurs, id: kursus bahasa Jerman, en: German course, pos: noun, gender: m, plural: Deutschkurse}
+- {de: Medikament, id: obat, en: medicine, pos: noun, gender: 'n', plural: Medikamente}
+- {de: Land, id: negara, en: country, pos: noun, gender: 'n', plural: Länder}
+- {de: Stadt, id: kota, en: town; city, pos: noun, gender: f, plural: Städte}
+- {de: Sprache, id: bahasa, en: language, pos: noun, gender: f, plural: Sprachen}
+- {de: Indonesier, id: orang Indonesia, en: Indonesian (man), pos: noun, gender: m, plural: Indonesier}
+- {de: Indonesierin, id: orang Indonesia (perempuan), en: Indonesian (woman), pos: noun, gender: f, plural: Indonesierinnen}
+- {de: Supermarkt, id: supermarket, en: supermarket, pos: noun, gender: m, plural: Supermärkte}
+- {de: Markt, id: pasar, en: market, pos: noun, gender: m, plural: Märkte}
+- {de: Kasse, id: kasir (tempat bayar), en: till; checkout, pos: noun, gender: f, plural: Kassen}
+- {de: Apotheke, id: apotek, en: pharmacy, pos: noun, gender: f, plural: Apotheken, bridge: {nl: apotheek, id: apotek}}
+- {de: Bank, id: bank, en: bank, pos: noun, gender: f, plural: Banken, bridge: {nl: bank, id: bank}}
+- {de: Post, id: kantor pos, en: post office, pos: noun, gender: f, plural: —}
+- {de: Haus, id: rumah, en: house, pos: noun, gender: 'n', plural: Häuser}
+- {de: Wohnung, id: apartemen; tempat tinggal, en: flat, pos: noun, gender: f, plural: Wohnungen}
+- {de: Zimmer, id: kamar, en: room, pos: noun, gender: 'n', plural: Zimmer}
+- {de: Wohnzimmer, id: ruang tamu, en: living room, pos: noun, gender: 'n', plural: Wohnzimmer}
+- {de: Küche, id: dapur, en: kitchen, pos: noun, gender: f, plural: Küchen}
+- {de: Tisch, id: meja, en: table, pos: noun, gender: m, plural: Tische}
+- {de: Stuhl, id: kursi, en: chair, pos: noun, gender: m, plural: Stühle}
+- {de: Bett, id: tempat tidur, en: bed, pos: noun, gender: 'n', plural: Betten}
+- {de: Schrank, id: lemari, en: cupboard, pos: noun, gender: m, plural: Schränke}
+- {de: Sofa, id: sofa, en: sofa, pos: noun, gender: 'n', plural: Sofas}
+- {de: Lampe, id: lampu, en: lamp, pos: noun, gender: f, plural: Lampen}
+- {de: Fenster, id: jendela, en: window, pos: noun, gender: 'n', plural: Fenster}
+- {de: Tür, id: pintu, en: door, pos: noun, gender: f, plural: Türen}
+- {de: Kühlschrank, id: kulkas, en: fridge, pos: noun, gender: m, plural: Kühlschränke}
+- {de: Schlüssel, id: kunci, en: key, pos: noun, gender: m, plural: Schlüssel}
+- {de: Handy, id: HP, en: mobile phone, pos: noun, gender: 'n', plural: Handys}
+- {de: Zeitung, id: koran, en: newspaper, pos: noun, gender: f, plural: Zeitungen}
+- {de: Computer, id: komputer, en: computer, pos: noun, gender: m, plural: Computer}
+- {de: Tasche, id: tas, en: bag, pos: noun, gender: f, plural: Taschen}
+- {de: Buch, id: buku, en: book, pos: noun, gender: 'n', plural: Bücher}
+- {de: Foto, id: foto, en: photo, pos: noun, gender: 'n', plural: Fotos}
+- {de: Handtuch, id: handuk, en: towel, pos: noun, gender: 'n', plural: Handtücher, bridge: {nl: handdoek, id: handuk}}
+- {de: Auto, id: mobil, en: car, pos: noun, gender: 'n', plural: Autos}
+- {de: Bus, id: bus, en: bus, pos: noun, gender: m, plural: Busse}
+- {de: Fahrrad, id: sepeda, en: bicycle, pos: noun, gender: 'n', plural: Fahrräder}
+- {de: Motorrad, id: sepeda motor, en: motorbike, pos: noun, gender: 'n', plural: Motorräder}
+- {de: Hund, id: anjing, en: dog, pos: noun, gender: m, plural: Hunde}
+- {de: Katze, id: kucing, en: cat, pos: noun, gender: f, plural: Katzen}
+- {de: Essen, id: makanan, en: food, pos: noun, gender: 'n', plural: —}
+- {de: Getränk, id: minuman, en: drink, pos: noun, gender: 'n', plural: Getränke}
+- {de: Frühstück, id: sarapan, en: breakfast, pos: noun, gender: 'n', plural: Frühstücke}
+- {de: Mittagessen, id: makan siang, en: lunch, pos: noun, gender: 'n', plural: Mittagessen}
+- {de: Abendessen, id: makan malam, en: dinner, pos: noun, gender: 'n', plural: Abendessen}
+- {de: Brot, id: roti, en: bread, pos: noun, gender: 'n', plural: Brote}
+- {de: Brötchen, id: roti kecil, en: bread roll, pos: noun, gender: 'n', plural: Brötchen}
+- {de: Reis, id: nasi; beras, en: rice, pos: noun, gender: m, plural: —}
+- {de: Wasser, id: air, en: water, pos: noun, gender: 'n', plural: —}
+- {de: Kaffee, id: kopi, en: coffee, pos: noun, gender: m, plural: Kaffees}
+- {de: Tee, id: teh, en: tea, pos: noun, gender: m, plural: Tees}
+- {de: Milch, id: susu, en: milk, pos: noun, gender: f, plural: —}
+- {de: Saft, id: jus, en: juice, pos: noun, gender: m, plural: Säfte}
+- {de: Ei, id: telur, en: egg, pos: noun, gender: 'n', plural: Eier}
+- {de: Apfel, id: apel, en: apple, pos: noun, gender: m, plural: Äpfel}
+- {de: Banane, id: pisang, en: banana, pos: noun, gender: f, plural: Bananen}
+- {de: Tomate, id: tomat, en: tomato, pos: noun, gender: f, plural: Tomaten}
+- {de: Kartoffel, id: kentang, en: potato, pos: noun, gender: f, plural: Kartoffeln}
+- {de: Obst, id: buah-buahan, en: fruit, pos: noun, gender: 'n', plural: —}
+- {de: Gemüse, id: sayur, en: vegetables, pos: noun, gender: 'n', plural: —}
+- {de: Fleisch, id: daging, en: meat, pos: noun, gender: 'n', plural: —}
+- {de: Fisch, id: ikan, en: fish, pos: noun, gender: m, plural: Fische}
+- {de: Hähnchen, id: ayam (masakan), en: chicken (food), pos: noun, gender: 'n', plural: Hähnchen}
+- {de: Suppe, id: sup, en: soup, pos: noun, gender: f, plural: Suppen}
+- {de: Kuchen, id: kue, en: cake, pos: noun, gender: m, plural: Kuchen}
+- {de: Flasche, id: botol, en: bottle, pos: noun, gender: f, plural: Flaschen}
+- {de: Tasse, id: cangkir, en: cup, pos: noun, gender: f, plural: Tassen}
+- {de: Kilo, id: kilo, en: kilo, pos: noun, gender: 'n', plural: Kilos}
+- {de: Preis, id: harga, en: price, pos: noun, gender: m, plural: Preise}
+- {de: Euro, id: euro, en: euro, pos: noun, gender: m, plural: Euro}
+- {de: Cent, id: sen, en: cent, pos: noun, gender: m, plural: Cent}
+- {de: Geld, id: uang, en: money, pos: noun, gender: 'n', plural: —}
+- {de: Rechnung, id: tagihan; bon, en: bill, pos: noun, gender: f, plural: Rechnungen}
+- {de: Jahr, id: tahun, en: year, pos: noun, gender: 'n', plural: Jahre}
+- {de: Zahl, id: angka, en: number, pos: noun, gender: f, plural: Zahlen}
+- {de: Nummer, id: nomor, en: 'number (phone, room)', pos: noun, gender: f, plural: Nummern}
+- {de: Telefonnummer, id: nomor telepon, en: phone number, pos: noun, gender: f, plural: Telefonnummern}
+- {de: Handynummer, id: nomor HP, en: mobile number, pos: noun, gender: f, plural: Handynummern}
+- {de: Name, id: nama, en: name, pos: noun, gender: m, plural: Namen}
+- {de: Adresse, id: alamat, en: address, pos: noun, gender: f, plural: Adressen}
+- {de: Frage, id: pertanyaan, en: question, pos: noun, gender: f, plural: Fragen}
+- {de: Antwort, id: jawaban, en: answer, pos: noun, gender: f, plural: Antworten}
+- {de: Problem, id: masalah, en: problem, pos: noun, gender: 'n', plural: Probleme}
+- {de: Hobby, id: hobi, en: hobby, pos: noun, gender: 'n', plural: Hobbys}
+- {de: Fußball, id: sepak bola, en: football, pos: noun, gender: m, plural: Fußbälle}
+- {de: Musik, id: musik, en: music, pos: noun, gender: f, plural: —}
+- {de: sein, id: adalah; berada, en: to be, pos: verb, verb: {aux: sein, partizip: gewesen}}
+- {de: haben, id: punya, en: to have, pos: verb, verb: {aux: haben, partizip: gehabt}}
+- {de: heißen, id: bernama, en: to be called, pos: verb, verb: {aux: haben, partizip: geheißen}}
+- {de: kommen, id: datang, en: to come, pos: verb, verb: {aux: sein, partizip: gekommen}}
+- {de: wohnen, id: tinggal, en: to live (somewhere), pos: verb, verb: {aux: haben, partizip: gewohnt}}
+- {de: arbeiten, id: bekerja, en: to work, pos: verb, verb: {aux: haben, partizip: gearbeitet}}
+- {de: lernen, id: belajar, en: to learn, pos: verb, verb: {aux: haben, partizip: gelernt}}
+- {de: machen, id: membuat; melakukan, en: to make; to do, pos: verb, verb: {aux: haben, partizip: gemacht}}
+- {de: kochen, id: memasak, en: to cook, pos: verb, verb: {aux: haben, partizip: gekocht}}
+- {de: spielen, id: bermain, en: to play, pos: verb, verb: {aux: haben, partizip: gespielt}}
+- {de: hören, id: mendengar, en: to hear; to listen, pos: verb, verb: {aux: haben, partizip: gehört}}
+- {de: kaufen, id: membeli, en: to buy, pos: verb, verb: {aux: haben, partizip: gekauft}}
+- {de: sagen, id: berkata, en: to say, pos: verb, verb: {aux: haben, partizip: gesagt}}
+- {de: fragen, id: bertanya, en: to ask, pos: verb, verb: {aux: haben, partizip: gefragt}}
+- {de: antworten, id: menjawab, en: to answer, pos: verb, verb: {aux: haben, partizip: geantwortet}}
+- {de: sprechen, id: berbicara, en: to speak, pos: verb, verb: {aux: haben, partizip: gesprochen}}
+- {de: verstehen, id: mengerti, en: to understand, pos: verb, verb: {aux: haben, partizip: verstanden}}
+- {de: wissen, id: tahu, en: to know (a fact), pos: verb, verb: {aux: haben, partizip: gewusst}}
+- {de: kennen, id: kenal, en: 'to know (a person, a place)', pos: verb, verb: {aux: haben, partizip: gekannt}}
+- {de: trinken, id: minum, en: to drink, pos: verb, verb: {aux: haben, partizip: getrunken}}
+- {de: essen, id: makan, en: to eat, pos: verb, verb: {aux: haben, partizip: gegessen}}
+- {de: sehen, id: melihat, en: to see, pos: verb, verb: {aux: haben, partizip: gesehen}}
+- {de: brauchen, id: perlu, en: to need, pos: verb, verb: {aux: haben, partizip: gebraucht}}
+- {de: kosten, id: berharga, en: to cost, pos: verb, verb: {aux: haben, partizip: gekostet}}
+- {de: möchten, id: 'ingin, mau (sopan)', en: would like, pos: verb, verb: {aux: haben, partizip: gemocht}}
+- {de: bestellen, id: memesan, en: to order, pos: verb, verb: {aux: haben, partizip: bestellt}}
+- {de: zahlen, id: membayar, en: to pay, pos: verb, verb: {aux: haben, partizip: gezahlt}}
+- {de: bezahlen, id: membayar, en: to pay (for), pos: verb, verb: {aux: haben, partizip: bezahlt}}
+- {de: warten, id: menunggu, en: to wait, pos: verb, verb: {aux: haben, partizip: gewartet}}
+- {de: gehen, id: pergi; berjalan, en: to go; to walk, pos: verb, verb: {aux: sein, partizip: gegangen}}
+- {de: fahren, id: pergi (naik kendaraan); menyetir, en: to go (by vehicle); to drive, pos: verb, verb: {aux: sein, partizip: gefahren}}
+- {de: lesen, id: membaca, en: to read, pos: verb, verb: {aux: haben, partizip: gelesen}}
+- {de: schreiben, id: menulis, en: to write, pos: verb, verb: {aux: haben, partizip: geschrieben}}
+- {de: suchen, id: mencari, en: to look for, pos: verb, verb: {aux: haben, partizip: gesucht}}
+- {de: finden, id: menemukan; menganggap, en: to find, pos: verb, verb: {aux: haben, partizip: gefunden}}
+- {de: nehmen, id: mengambil, en: to take, pos: verb, verb: {aux: haben, partizip: genommen}}
+- {de: studieren, id: kuliah, en: to study (at university), pos: verb, verb: {aux: haben, partizip: studiert}}
+- {de: besuchen, id: mengunjungi, en: to visit, pos: verb, verb: {aux: haben, partizip: besucht}}
+- {de: schlafen, id: tidur, en: to sleep, pos: verb, verb: {aux: haben, partizip: geschlafen}}
+- {de: putzen, id: membersihkan, en: to clean, pos: verb, verb: {aux: haben, partizip: geputzt}}
+- {de: pflegen, id: merawat, en: to care for, pos: verb, verb: {aux: haben, partizip: gepflegt}}
