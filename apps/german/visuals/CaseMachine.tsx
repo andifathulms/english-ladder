@@ -8,7 +8,7 @@ import { article, KASES, type Gender, type Kase } from '@/lib/de/articles';
 import { conjugate } from '@/lib/de/conjugate';
 import { GenderChip } from '@/components/GenderChip';
 import { CASE_LABEL, CaseWord } from '@/components/de/CaseWord';
-import { nounOf, verbOf, type DeVisualData } from './data';
+import { CASE_MACHINE_NOUNS, nounOf, verbOf, type DeVisualData } from './data';
 
 type Role = Exclude<Kase, 'gen'>;
 /** Sentence frames per verb: which roles it takes, in German order, and its Indonesian verb. */
@@ -20,11 +20,7 @@ const FRAMES = {
 };
 type FrameId = keyof typeof FRAMES;
 const QUESTION: Record<Role, string> = { nom: 'WER?', akk: 'WEN? / WAS?', dat: 'WEM?' };
-const DEFAULT_NOUNS: Record<Role, string[]> = {
-  nom: ['Mann', 'Frau', 'Kind', 'Lehrer', 'Ärztin'],
-  dat: ['Kind', 'Frau', 'Mann', 'Patient', 'Kollegin'],
-  akk: ['Ball', 'Tasche', 'Buch', 'Apfel', 'Brief'],
-};
+const DEFAULT_NOUNS = CASE_MACHINE_NOUNS;
 
 const COPY = {
   id: { article: 'Artikel tak tentu (ein)', grid: 'Tabel artikel', role: { nom: 'subjek', akk: 'objek langsung', dat: 'penerima' }, noun: 'Kata benda', sentence: 'Kalimat', on: 'tampil', off: 'sembunyi' },

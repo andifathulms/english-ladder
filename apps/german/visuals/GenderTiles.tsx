@@ -6,7 +6,7 @@ import type { VisualProps } from '@ladder/core/components/visuals/types';
 import { CLUES, genderClue } from '@/lib/de/nouns';
 import type { Gender } from '@/lib/de/articles';
 import { GenderChip } from '@/components/GenderChip';
-import { nounOf, type DeVisualData } from './data';
+import { GENDER_TILES_NOUNS, nounOf, type DeVisualData } from './data';
 
 const GENDERS: Gender[] = ['m', 'f', 'n'];
 const ARTICLE = { m: 'der', f: 'die', n: 'das' } as const;
@@ -16,7 +16,6 @@ const TRAY_CLUES: Record<Gender, string[]> = {
   f: ['-ung', '-heit', '-keit', '-schaft'],
   n: ['-chen', '-lein', '-ment'],
 };
-const DEFAULT_NOUNS = ['Zeitung', 'Mädchen', 'Lehrer', 'Freiheit', 'Wohnung', 'Brötchen', 'Tisch', 'Hand', 'Dokument', 'Kuchen'];
 
 const COPY = {
   id: {
@@ -49,7 +48,7 @@ type Props = VisualProps<State> & { nouns?: string[] };
  * clues sit on the tray edges and light up when a matching noun lands; exceptions say "hafalkan saja".
  * Pick a tile, then a tray (keyboard and screen reader: both are buttons). Genders come from nouns.yaml.
  */
-export function GenderTiles({ state, interactive = true, onStateChange, nouns = DEFAULT_NOUNS, lang }: Props) {
+export function GenderTiles({ state, interactive = true, onStateChange, nouns = GENDER_TILES_NOUNS, lang }: Props) {
   const c = COPY[lang];
   const data = useVisualData<DeVisualData>();
   const words = nouns.map((w) => nounOf(data, w)).filter((n): n is NonNullable<typeof n> => !!n);

@@ -24,6 +24,7 @@ import {
 import { bracketFocusError, lintLessons, lintPool, type LintData } from './lint';
 import type { CheckItem, Dialogue, GlossaryEntry, Lesson, Placement, Reading, Rung, TestPool } from './types';
 import { wordIdOf, type DeCompound, type DeLessonData } from './lessonData';
+import { neededWords } from '@/visuals/data';
 import { answerText, itemText, itemTypes } from './items';
 // Circular (decks reads lessons through this module); used only inside wordsPageData, after both load.
 import { decksData } from './decks';
@@ -122,12 +123,22 @@ export const model: ContentModel = {
   answerText,
   yaml: 'json',
   // The visuals read nouns (genders, plurals, compound parts) and verbs; forms come from lib/de.
-  visualData: (ids) => {
-    if (!['gender-tiles', 'case-machine', 'verb-bracket', 'wechsel-scene', 'compound-builder', 'day-planner'].some((id) => ids.has(id))) return undefined;
+  visualData: (ids, ctx) => {
+    if (!['gender-tiles', 'case-machine', 'verb-bracket', 'compound-builder', 'day-planner'].some((id) => ids.has(id))) return undefined;
+    // Only the nouns and verbs the page's visuals name (or their defaults), plus compound parts.
+    const lesson = ctx.lesson ? sl(ctx.lesson) : null;
+    const specs = lesson
+      ? [...(lesson.visual ? [lesson.visual] : []), ...lesson.check.flatMap((c) => (c.type === 'scene' ? [c.visual] : []))]
+      : [...ids].map((id) => ({ id }));
+    const want = neededWords(specs as { id: string; props?: Record<string, unknown> }[]);
     const { nouns, verbs } = getData();
+    const picked = nouns.filter((n) => want.nouns.has(n.de));
+    const parts = new Set(picked.flatMap((n) => n.parts ?? []));
     return {
-      nouns: nouns.map((n) => ({ de: n.de, gender: n.gender, plural: n.plural, id: n.id, ...(n.person ? { person: true } : {}), ...(n.exception ? { exception: n.exception } : {}), ...(n.parts ? { parts: n.parts, links: n.links ?? null } : {}) })),
-      verbs,
+      nouns: nouns
+        .filter((n) => want.nouns.has(n.de) || parts.has(n.de))
+        .map((n) => ({ de: n.de, gender: n.gender, plural: n.plural, id: n.id, ...(n.person ? { person: true } : {}), ...(n.exception ? { exception: n.exception } : {}), ...(n.parts ? { parts: n.parts, links: n.links ?? null } : {}) })),
+      verbs: verbs.filter((v) => want.verbs.has(v.inf)),
     };
   },
   // The words page's Kartu kata: the A1 deck, most frequent words first.

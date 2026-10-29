@@ -6,7 +6,7 @@ import type { VisualProps } from '@ladder/core/components/visuals/types';
 import { Toggle } from '@ladder/core/components/ui/Toggle';
 import { conjugate, conjugateParts, type Person } from '@/lib/de/conjugate';
 import type { Zone } from '@/lib/de/bracket';
-import { verbOf, type DeVisualData } from './data';
+import { BRACKET_DEFAULTS, verbOf, type DeVisualData } from './data';
 import { useFlip } from './useFlip';
 
 const PERSON_OF: Record<string, Person> = { ich: 'ich', du: 'du', er: 'er', sie: 'er', es: 'er', wir: 'wir', ihr: 'ihr', Sie: 'sie' };
@@ -38,7 +38,7 @@ type Props = VisualProps<BracketState> & {
  * the modal in the verb zone and the main verb, as an infinitive, at the end; a separable prefix flies
  * to the end; the weil toggle (Easy 3) sends the verb to the very end. Forms come from lib/de.
  */
-export function VerbBracket({ state, interactive = true, onStateChange, verb = 'aufstehen', subject = 'ich', parts = ['um 6 Uhr'], modal = 'können', weil = false, id, lang }: Props) {
+export function VerbBracket({ state, interactive = true, onStateChange, verb = BRACKET_DEFAULTS.verb, subject = 'ich', parts = ['um 6 Uhr'], modal = BRACKET_DEFAULTS.modal, weil = false, id, lang }: Props) {
   const c = COPY[lang];
   const data = useVisualData<DeVisualData>();
   const [own, setOwn] = useState<BracketState>({ front: subject, modal: false, sub: false });

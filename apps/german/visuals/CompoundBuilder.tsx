@@ -7,9 +7,8 @@ import type { VisualProps } from '@ladder/core/components/visuals/types';
 import { useReducedMotion } from '@ladder/core/components/ProgressProvider';
 import { compound } from '@/lib/de/nouns';
 import { GenderChip } from '@/components/GenderChip';
-import { nounOf, type DeVisualData } from './data';
+import { COMPOUNDS, nounOf, type DeVisualData } from './data';
 
-const DEFAULT = ['Krankenhaus', 'Handtuch', 'Arbeitsplatz', 'Wochenende', 'Kühlschrank'];
 
 const COPY = {
   id: {
@@ -38,7 +37,7 @@ type Props = VisualProps<CompoundState> & { compounds?: string[] };
  * compound takes the last block's gender; the linking -s- or -n- shows as a small joint. Parts and
  * genders come from nouns.yaml; the joined word from lib/de compound().
  */
-export function CompoundBuilder({ state, interactive = true, onStateChange, compounds = DEFAULT, lang }: Props) {
+export function CompoundBuilder({ state, interactive = true, onStateChange, compounds = COMPOUNDS, lang }: Props) {
   const c = COPY[lang];
   const data = useVisualData<DeVisualData>();
   const reduced = useReducedMotion();
