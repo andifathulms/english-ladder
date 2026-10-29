@@ -5,7 +5,7 @@ reading `README.md`, `docs/DEPLOY.md`, `docs/ladder-core-report.md`, the Arabic 
 docs, the Japanese and Spanish plans and reviews, the three German spec files, and the code as it is
 now (English, Arabic, Mandarin, Japanese and Spanish on `ladder-core`).
 
-**Status: draft, waiting for approval.**
+**Status: approved 2026-10-29, with all recommendations: G1–G4 (G5 only if needed); no core change for caps grading, spelling equivalences or milestone chips; Mandarin's mouth drawing moves to core; capital ẞ dropped from the glyph requirement (fonts stay `latin`); the Goethe lists for level tagging only; the `german-ladder` repo created at M9.**
 
 ---
 
