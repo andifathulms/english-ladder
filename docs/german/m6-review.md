@@ -50,3 +50,8 @@ pages: `/me`, `/review`, `/not-found` and the rung pages have no mouth or place 
 4. **WechselScene's nouns.** The box is *die Kiste* (added to `nouns.yaml`), the table *der Tisch* (for
    *unter*), and *zwischen* uses the two boxes: *zwischen den Kisten*. The ball *liegt* (wo?) or *Ich lege
    den Ball* (wohin?).
+
+## Decisions (2026-10-29)
+
+Approved as recommended: the core Toggle fix as G6 (gated on all five apps); tap only for GenderTiles
+and DayPlanner in v1; the WESSEN? slot with Medium 2; WechselScene's nouns as listed.
