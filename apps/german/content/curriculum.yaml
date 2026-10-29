@@ -1,0 +1,160 @@
+# German Ladder curriculum (PRD §4.2). Ten rungs in CEFR half-levels A1.1 → C1, checked against Profile
+# Deutsch and the Goethe-Institut word lists, with exits marked at A1, B1 and B2 (and C1). Explanations:
+# Indonesian until Medium 1, mixed at Medium 2–3, German with Indonesian notes at Hard.
+rungs:
+  - id: dasar
+    name: Dasar
+    subtitle: Bunyi dan ejaan
+    tier: dasar
+    cefr: Pre-A1
+    explain_lang: id
+    status: soon
+    optional: true
+    lessons: 6
+    words_target: 30
+    description:
+      id: "Kata yang sudah kamu kenal dari bahasa Belanda, umlaut ü dan ö, dua bunyi ch, dan ejaan yang bisa ditebak."
+      en: "Words you know through Dutch, the umlauts ü and ö, the two ch sounds, and spelling you can predict."
+    topics: [kamu sudah tahu, a ä o ö u ü, ei ie eu, ch sch sp st, Tag dibaca Tak, ß dan r, membaca nyaring]
+    threads: [sounds]
+    inventory: []
+  - id: easy-1
+    name: Easy 1
+    subtitle: Hallo!
+    tier: easy
+    cefr: A1.1
+    explain_lang: id
+    status: soon
+    lessons: 12
+    words_target: 250
+    description:
+      id: "Menyapa dengan du dan Sie, sein, kata kerja di posisi kedua, der/die/das, angka, haben, jamak dan akusatif."
+      en: "Greeting with du and Sie, sein, the verb in second place, der/die/das, numbers, haben, plurals and the accusative."
+    topics: [Hallo du Sie, ich heiße, verba di posisi 2, pertanyaan W, der die das, angka, ein kein, haben dan keluarga, jamak, akusatif, möchte dan belanja, letak benda]
+    threads: [gender, plural, cases, word-order, register, work]
+    inventory: []
+  - id: easy-2
+    name: Easy 2
+    subtitle: Alltag
+    tier: easy
+    cefr: A1.2
+    milestone: { label: "A1 · Goethe", exam: "Goethe-Zertifikat A1 / Start Deutsch 1" }
+    explain_lang: id
+    status: soon
+    lessons: 12
+    words_target: 300
+    description:
+      id: "Jam dan jadwal, kata kerja terpisah, kata kerja modal, datif, Wechselpräpositionen, formulir, dan Perfekt pertama. Selesai di sini: level ujian A1."
+      en: "Time and schedules, separable verbs, modal verbs, the dative, two-way prepositions, forms, and a first Perfekt. Finish here: the A1 exam level."
+    topics: [um am im, aufstehen, können müssen, mich dich, perintah, mit dem Bus, wo dan wohin, ke dokter, tempat tinggal, formulir, ich habe gearbeitet, satu hari utuh]
+    threads: [separable, modals, cases, prepositions, perfekt, work]
+    inventory: []
+  - id: easy-3
+    name: Easy 3
+    subtitle: Gestern und morgen
+    tier: easy
+    cefr: A2.1
+    explain_lang: id
+    status: soon
+    lessons: 12
+    words_target: 300
+    description:
+      id: "Perfekt lengkap, datif untuk orang, weil dan dass dengan kata kerja di akhir, perbandingan."
+      en: "The full Perfekt, the dative for people, weil and dass with the verb at the end, comparisons."
+    topics: [Perfekt, kata ganti datif, helfen gefallen, weil, dass, perbandingan]
+    threads: [perfekt, cases, subordinate]
+    inventory: []
+  - id: medium-1
+    name: Medium 1
+    subtitle: Unterwegs
+    tier: medium
+    cefr: A2.2
+    milestone: { label: "A2", exam: "Goethe-Zertifikat A2" }
+    explain_lang: id
+    status: soon
+    lessons: 12
+    words_target: 350
+    description:
+      id: "Akhiran kata sifat, kalimat wenn, kata kerja refleksif, werden, dan perjalanan."
+      en: "Adjective endings, wenn clauses, reflexive verbs, werden, and travel."
+    topics: [akhiran kata sifat, wenn, refleksif, Präteritum modal, werden, kereta dan birokrasi]
+    threads: [adjective-endings, subordinate]
+    inventory: []
+  - id: medium-2
+    name: Medium 2
+    subtitle: Meinungen
+    tier: medium
+    cefr: B1.1
+    explain_lang: mixed
+    status: soon
+    lessons: 12
+    words_target: 400
+    description:
+      id: "Akhiran kata sifat lengkap, kalimat relatif, genitif, Konjunktiv II, dan berpendapat."
+      en: "All adjective endings, relative clauses, the genitive, Konjunktiv II, and giving opinions."
+    topics: [akhiran lengkap, kalimat relatif, genitif, würde hätte wäre, pendapat, Austria dan Swiss]
+    threads: [adjective-endings, konjunktiv, cases]
+    inventory: []
+  - id: medium-3
+    name: Medium 3
+    subtitle: Beruf
+    tier: medium
+    cefr: B1.2
+    milestone: { label: "B1 · Ausbildung", exam: "Goethe-Zertifikat B1" }
+    explain_lang: mixed
+    status: soon
+    lessons: 12
+    words_target: 450
+    description:
+      id: "Pasif, Präteritum untuk bercerita, zu + infinitif, lamaran kerja dan tempat Ausbildung."
+      en: "The passive, the Präteritum for narrating, zu + infinitive, job applications and the Ausbildung workplace."
+    topics: [pasif, Präteritum, zu, sowohl als auch, lamaran, wawancara, Ausbildung]
+    threads: [passive, work]
+    inventory: []
+  - id: hard-1
+    name: Hard 1
+    subtitle: Genauer
+    tier: hard
+    cefr: B2.1
+    explain_lang: de
+    status: soon
+    lessons: 12
+    words_target: 500
+    description:
+      id: "Pasif dengan modal, Konjunktiv I, gaya nominal, partisip sebagai kata sifat."
+      en: "The passive with modals, Konjunktiv I, nominal style, participles as adjectives."
+    topics: [pasif modal, Konjunktiv I, gaya nominal, partisip, preposisi genitif]
+    threads: [passive, konjunktiv, register]
+    inventory: []
+  - id: hard-2
+    name: Hard 2
+    subtitle: Pflege, Arbeit, Studium
+    tier: hard
+    cefr: B2.2
+    milestone: { label: "B2 · Pflege/Studium", exam: "Goethe-Zertifikat B2 / telc Deutsch B1-B2 Pflege" }
+    explain_lang: de
+    status: soon
+    lessons: 12
+    words_target: 600
+    description:
+      id: "Komunikasi perawatan, surel dan rapat kerja, membaca akademik."
+      en: "Nursing communication, workplace email and meetings, academic reading."
+    topics: [serah terima pasien, dokumentasi, surel kerja, rapat, membaca akademik]
+    threads: [work, register]
+    inventory: []
+  - id: hard-3
+    name: Hard 3
+    subtitle: Fließend
+    tier: hard
+    cefr: C1
+    milestone: { label: "C1 · TestDaF/DSH", exam: "TestDaF / DSH" }
+    explain_lang: de
+    status: soon
+    lessons: 12
+    words_target: 700
+    description:
+      id: "Idiom, tulisan akademik, teks autentik panjang, dan kendali ragam bahasa."
+      en: "Idioms, academic writing, long authentic texts, and control of register."
+    topics: [Redewendungen, tulisan akademik, teks autentik, ragam bahasa]
+    threads: [register]
+    inventory: []

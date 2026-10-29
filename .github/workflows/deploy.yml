@@ -41,7 +41,7 @@ jobs:
       - run: npm run fonts:fetch -w japanese-ladder
       - run: npm run fonts:subset -w mandarin-ladder
       - run: npm run fonts:subset -w japanese-ladder
-      # Root scripts run every app: English (with the engine's tests), Arabic, Mandarin, Japanese and Spanish.
+      # Root scripts run every app: English (with the engine's tests), Arabic, Mandarin, Japanese, Spanish and German.
       - run: npm run lint
       - run: npm run test
       - run: npm run content:check
@@ -78,7 +78,7 @@ jobs:
       - run: npm run fonts:fetch -w japanese-ladder
       - run: npx playwright install --with-deps chromium
       - name: Build without base path for e2e
-        run: npm run build && npm run build:arabic && npm run build:mandarin && npm run build:japanese && npm run build:spanish
+        run: npm run build && npm run build:arabic && npm run build:mandarin && npm run build:japanese && npm run build:spanish && npm run build:german
         env:
           NEXT_PUBLIC_SHOW_DRAFTS: 'true'
       - run: npm run test:e2e
