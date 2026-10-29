@@ -363,9 +363,10 @@ export type CourseConfig = {
   /** The climb moment: the rung's subtitle above the title, the line with its last word accented,
    *  and an extra line below (Arabic: سُلَّمًا سُلَّمًا). Absent: English's layout. */
   climb?: {
-    Extra?: ComponentType;
+    /** Gets the climbed rung (German: the exit line on A1, B1, B2 rungs); slots may ignore it. */
+    Extra?: ComponentType<{ rung: Rung }>;
     /** A mark above the rung's name on the climb moment (Japanese: a large 済 seal). */
-    Badge?: ComponentType;
+    Badge?: ComponentType<{ rung: Rung }>;
   };
   /** --paper of each theme, for the browser chrome's theme-color (fixes.themeColorFollowsTheme). */
   themeColor?: { light: string; dark: string };
