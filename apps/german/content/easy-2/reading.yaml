@@ -1,0 +1,45 @@
+# Baca dan dengar (Easy 2): a short message chain between two course friends, using only Easy 2
+# grammar and words. Draft.
+rung: easy-2
+title: { id: "Rina sakit", en: "Rina is ill", de: "Nachrichten von Rina" }
+lines:
+  - { de: "Hallo Lena! Wie geht es dir?", id: "Halo Lena! Apa kabar?" }
+  - { de: "Ich bin krank. Ich habe Fieber und mein Hals tut weh.", id: "Aku sakit. Aku demam dan tenggorokanku sakit." }
+  - { de: "Heute kann ich leider nicht zum Deutschkurs kommen.", id: "Hari ini sayangnya aku nggak bisa datang ke kursus bahasa Jerman." }
+  - { de: "Ich habe um elf Uhr einen Termin beim Arzt.", id: "Jam sebelas aku ada janji dengan dokter." }
+  - { de: "Die Praxis ist in der Lindenstraße, neben der Apotheke.", id: "Praktiknya di Lindenstraße, di sebelah apotek." }
+  - { de: "Gestern war ich schon sehr müde.", id: "Kemarin aku sudah capek banget." }
+  - { de: "Kannst du mich am Abend anrufen? Am Freitag komme ich wieder.", id: "Kamu bisa telepon aku malam nanti? Hari Jumat aku masuk lagi." }
+  - { de: "Viele Grüße, Rina", id: "Salam, Rina" }
+  - { de: "Liebe Rina, gute Besserung!", id: "Rina sayang, semoga cepat sembuh!" }
+  - { de: "Heute haben wir die Uhrzeit gelernt. Das ist nicht schwer.", id: "Hari ini kita belajar jam. Nggak susah, kok." }
+  - { de: "Ich rufe dich um sieben Uhr an. Trink viel Tee und bleib im Bett!", id: "Aku telepon kamu jam tujuh. Minum teh yang banyak dan istirahat di tempat tidur, ya!" }
+  - { de: "Bis bald, Lena", id: "Sampai nanti, Lena" }
+glossary:
+  - { de: schwer, id: sulit; berat, en: difficult; heavy, pos: adj }
+items:
+  - id: e2-r-1
+    type: choice
+    prompt: "Warum kommt Rina heute nicht zum Kurs?"
+    options: ["Sie ist krank.", "Sie hat keine Zeit.", "Sie muss arbeiten."]
+    answer: "Sie ist krank."
+    why: { id: "*Ich bin krank. Ich habe Fieber …*", en: "*Ich bin krank. Ich habe Fieber …*" }
+  - id: e2-r-2
+    type: choice
+    prompt: "Wann hat Rina einen Termin beim Arzt?"
+    options: ["Um elf Uhr.", "Um sieben Uhr.", "Am Freitag."]
+    answer: "Um elf Uhr."
+    why: { id: "*Ich habe um elf Uhr einen Termin beim Arzt.*", en: "*Ich habe um elf Uhr einen Termin beim Arzt.*" }
+  - id: e2-r-3
+    type: choice
+    lang: id
+    prompt: "Di mana praktik dokternya?"
+    options: ["di Lindenstraße, di sebelah apotek", "di Lindenstraße, di seberang apotek", "di sebelah tempat kursus"]
+    answer: "di Lindenstraße, di sebelah apotek"
+    why: { id: "*In der Lindenstraße, neben der Apotheke.* *Neben* = di sebelah.", en: "*In der Lindenstraße, neben der Apotheke.* *Neben* = next to." }
+  - id: e2-r-4
+    type: choice
+    prompt: "Was macht Lena um sieben Uhr?"
+    options: ["Sie ruft Rina an.", "Sie besucht Rina.", "Sie geht zum Arzt."]
+    answer: "Sie ruft Rina an."
+    why: { id: "*Ich rufe dich um sieben Uhr an.*", en: "*Ich rufe dich um sieben Uhr an.*" }

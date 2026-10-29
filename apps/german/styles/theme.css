@@ -1,0 +1,125 @@
+/* German Ladder token values (DESIGN §3: petrol, Bauhaus red and cream), and the gender and case
+   tokens (§3.2), over the core defaults. Only what differs from core is set here. */
+@import '@ladder/core/styles/tokens.css';
+
+:root {
+  --paper: #F4F3EE;
+  --paper-2: #E8E6DE;
+  --surface: #FFFFFC;
+  --ink: #1D2224;
+  --muted: #5A6265;
+  --rule: #DCDAD0;
+  --accent: #B3311F;
+  --accent-soft: #F6E1DC;
+  --board: #17464F;
+  --board-2: #1F5862;
+  --board-ink: #F4F3EE;
+  --board-muted: #B9CFD2;
+  --brass: #E3B341;
+  --off: #8E3A6E;
+  --off-bg: #F3E3EE;
+  --easy: #2D7480;
+  --easy-soft: #E1EEF0;
+  --subject: #2A5DB0;
+  --shadow-rgb: 23 70 79;
+  /* German-only (DESIGN §3.2): the Dasar tier, gender chips, case letters, the Kerja edge. */
+  --dasar: #865A22;
+  --dasar-soft: #F3E8D6;
+  --masc: #1F6E78;
+  --fem: #9A5B0E;
+  --neut: #5E5B70;
+  --work: #17464F;
+  --nom: var(--ink);
+  --akk: #2A5DB0;
+  --dat: #8A3FA0;
+  --gen: #6B5A1E;
+  /* German motion (DESIGN §5) */
+  --m-fly-d: 500ms;
+  --m-snap-d: 200ms;
+  --ease-snap: cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+
+/* Dark: the OS preference unless the learner chose light, and the explicit choice. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #121718;
+    --paper-2: #182022;
+    --surface: #212A2D;
+    --ink: #ECEDEA;
+    --muted: #A9B3B6;
+    --rule: #2F393C;
+    --accent: #F08B78;
+    --accent-ink: #121718;
+    --accent-soft: #3A1E19;
+    --board: #123A41;
+    --board-2: #194A53;
+    --board-ink: #F2F0EA;
+    --board-muted: #A9C3C7;
+    --brass: #EBC25E;
+    --off: #EE9CC8;
+    --off-bg: #3A1B2E;
+    --easy: #7CC4CF;
+    --easy-soft: #13282B;
+    --subject: #8FB2EE;
+    --shadow-rgb: 0 0 0;
+    --dasar: #D9AE6E;
+    --dasar-soft: #2A2216;
+    --masc: #7CC4CF;
+    --fem: #E6B45C;
+    --neut: #B3B0C8;
+    --work: #A9C3C7;
+    --akk: #8FB2EE;
+    --dat: #D7A3E6;
+    --gen: #D6C27A;
+  }
+}
+:root[data-theme='dark'] {
+  --paper: #121718;
+  --paper-2: #182022;
+  --surface: #212A2D;
+  --ink: #ECEDEA;
+  --muted: #A9B3B6;
+  --rule: #2F393C;
+  --accent: #F08B78;
+  --accent-ink: #121718;
+  --accent-soft: #3A1E19;
+  --board: #123A41;
+  --board-2: #194A53;
+  --board-ink: #F2F0EA;
+  --board-muted: #A9C3C7;
+  --brass: #EBC25E;
+  --off: #EE9CC8;
+  --off-bg: #3A1B2E;
+  --easy: #7CC4CF;
+  --easy-soft: #13282B;
+  --subject: #8FB2EE;
+  --shadow-rgb: 0 0 0;
+  --dasar: #D9AE6E;
+  --dasar-soft: #2A2216;
+  --masc: #7CC4CF;
+  --fem: #E6B45C;
+  --neut: #B3B0C8;
+  --work: #A9C3C7;
+  --akk: #8FB2EE;
+  --dat: #D7A3E6;
+  --gen: #D6C27A;
+}
+
+/* Case colours off (Settings): case letters keep their labels and take the ink colour. */
+:root[data-case-colours='off'] {
+  --akk: var(--ink);
+  --dat: var(--ink);
+  --gen: var(--ink);
+}
+
+/* Reduced motion: shift, fly, flip and snap become instant (DESIGN §5). */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion='full']) {
+    --m-fly-d: 0ms;
+    --m-snap-d: 0ms;
+  }
+}
+:root[data-motion='reduce'] {
+  --m-fly-d: 0ms;
+  --m-snap-d: 0ms;
+}

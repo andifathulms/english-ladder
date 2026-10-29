@@ -1,7 +1,7 @@
 'use client';
 
 import { useLayoutEffect, useRef, useState } from 'react';
-import { BALL_R, PLACE_SPEC, isPlace, type Place, type Slot } from './geometry';
+import { BALL_R, isPlace, placeSpec, type AnyPlace, type Place, type Slot } from './geometry';
 import { useReducedMotion } from '@ladder/core/components/ProgressProvider';
 
 // Illustration tones (DESIGN §10). Light from the top-left: top lightest, front base, side darkest.
@@ -10,11 +10,11 @@ const SUBJECT_LIGHT = 'color-mix(in srgb, var(--subject) 55%, var(--card-top))';
 const SUBJECT_DARK = 'color-mix(in srgb, var(--subject) 75%, var(--ink))';
 const f = (fill: string, extra: React.CSSProperties = {}) => ({ style: { fill, ...extra } });
 
-function Ball({ place, from }: { place: Place; from: Place | null }) {
+function Ball({ place, from }: { place: AnyPlace; from: AnyPlace | null }) {
   const reduced = useReducedMotion();
   const ref = useRef<SVGGElement>(null);
-  const to = PLACE_SPEC[place];
-  const start = from ? PLACE_SPEC[from] : to;
+  const to = placeSpec(place);
+  const start = from ? placeSpec(from) : to;
 
   useLayoutEffect(() => {
     const g = ref.current;
@@ -38,7 +38,7 @@ function Ball({ place, from }: { place: Place; from: Place | null }) {
       {/* Ground shadow: smaller when the ball is lifted onto the box */}
       <ellipse
         cx={0}
-        cy={BALL_R - 0.5}
+        cy={BALL_R - 0.5 + (to.float ?? 0)}
         rx={to.lifted ? 8 : 13}
         ry={3.5}
         style={{ fill: 'var(--ink)', opacity: 0.12, transition: 'rx var(--m-object-d) var(--ease-object)' }}
@@ -51,8 +51,9 @@ function Ball({ place, from }: { place: Place; from: Place | null }) {
 }
 
 type DrawingProps = {
-  place: Place;
-  from: Place | null;
+  /** One of the six places, or (opt-in) above / between. */
+  place: AnyPlace;
+  from: AnyPlace | null;
   /** Text alternative for the scene. */
   alt: string;
   /** Object labels drawn in the scene (e.g. table · طاولة · meja). */
@@ -64,7 +65,9 @@ type DrawingProps = {
  * visual (PlaceSceneAr) supplies its own labels, controls and sentence.
  */
 export function PlaceDrawing({ place, from, alt, labels }: DrawingProps) {
-  const slot: Slot = PLACE_SPEC[place].slot;
+  const slot: Slot = placeSpec(place).slot;
+  // The second box only shows for "between", so the six places draw exactly as before.
+  const second = place === 'between';
   const ball = (s: Slot) => (slot === s ? <Ball key={place} place={place} from={from} /> : null);
   const glass = place === 'in';
   return (
@@ -103,6 +106,15 @@ export function PlaceDrawing({ place, from, alt, labels }: DrawingProps) {
         </g>
         <polygon points="232,124 252,108 252,136 232,152" {...f('var(--card-side)')} />
         <line x1="148" y1="124.5" x2="232" y2="124.5" style={{ stroke: 'var(--card-side)', strokeWidth: 1.5 }} />
+
+        {second && (
+          <g data-second-box className="fade-in">
+            <ellipse cx="320" cy="150" rx="38" ry="5" style={{ fill: 'var(--ink)', opacity: 0.08 }} />
+            <rect x="286" y="124" width="50" height="28" {...f('var(--card)')} />
+            <polygon points="286,124 336,124 352,111 302,111" {...f('var(--card-top)')} />
+            <polygon points="336,124 352,111 352,139 336,152" {...f('var(--card-side)')} />
+          </g>
+        )}
 
         {ball('front')}
 

@@ -1,0 +1,43 @@
+# Easy 1 rung test (PRD §5.5): draw 16 of 26, pass 12, at least one item from every lesson (two in the pool). Draft.
+rung: easy-1
+draw: 16
+pass: 12
+items:
+  # 01 greetings, du and Sie
+  - { id: e1-t-01, from: easy1-01-hallo, type: gap, cue: "Kamu menyapa Pak Weber, tetanggamu yang sudah tua.", prompt: "Guten Morgen, Herr Weber. Wie geht es ___?", options: [Ihnen, dir], answer: Ihnen, why: { id: "Tetangga yang lebih tua disapa *Sie*: *Wie geht es Ihnen?*", en: "An older neighbour is *Sie*: *Wie geht es Ihnen?*" } }
+  - { id: e1-t-02, from: easy1-01-hallo, type: choice, prompt: "Wie geht’s?", options: ["Gut, danke. Und dir?", "Ich heiße Lena.", "Tschüss!"], answer: "Gut, danke. Und dir?", why: { id: "*Wie geht’s?* = apa kabar? Jawabannya: *Gut, danke.*", en: "*Wie geht’s?* = how's it going? The answer: *Gut, danke.*" } }
+  # 02 sein, heißen, kommen aus
+  - { id: e1-t-03, from: easy1-02-ich-heisse, type: form, cue: "Aku montir.", base: sein, target: { person: ich, tense: praesens }, frame: "Ich ___ Mechaniker.", options: [bin, bist, ist], answer: bin, why: { id: "*Ich bin*.", en: "*Ich bin*." } }
+  - { id: e1-t-04, from: easy1-02-ich-heisse, type: gap, cue: "Mereka dari Jakarta.", prompt: "Sie ___ aus Jakarta.", options: [kommen, kommt, komme], answer: kommen, why: { id: "*Sie* (mereka) memakai *-en*: *kommen*.", en: "*Sie* (they) takes *-en*: *kommen*." } }
+  # 03 present tense, verb in position 2
+  - { id: e1-t-05, from: easy1-03-ich-wohne, type: wordorder, cue: "Di Hamburg Budi kerja.", tiles: [arbeitet, Budi, In Hamburg], answer: [In Hamburg, arbeitet, Budi], zones: [p1, verb, middle], why: { id: "Tempat di depan, kata kerja di posisi 2, lalu *Budi*.", en: "The place first, the verb in position 2, then *Budi*." } }
+  - { id: e1-t-06, from: easy1-03-ich-wohne, type: form, cue: "Dewi kerja di München.", base: arbeiten, target: { person: er, tense: praesens }, frame: "Dewi ___ in München.", options: [arbeitet, arbeit, arbeiten], answer: arbeitet, why: { id: "*Arbeit-* + *e* + *t*: *arbeitet*.", en: "*Arbeit-* + *e* + *t*: *arbeitet*." } }
+  # 04 questions
+  - { id: e1-t-07, from: easy1-04-fragen, type: gap, cue: "Kamu tinggal di mana?", prompt: "___ wohnst du?", options: [Wo, Woher, Wer], answer: Wo, why: { id: "*Wo* = di mana.", en: "*Wo* = where." } }
+  - { id: e1-t-08, from: easy1-04-fragen, type: wordorder, cue: "Anda bisa bahasa Inggris?", tiles: [Englisch, Sie, Sprechen], answer: [Sprechen, Sie, Englisch], zones: [verb, middle, middle], why: { id: "Pertanyaan ja/nein: kata kerja di depan.", en: "A yes/no question: the verb first." } }
+  # 05 der, die, das
+  - { id: e1-t-09, from: easy1-05-der-die-das, type: gender, noun: Brötchen, answer: n, why: { id: "*-chen* selalu *das*.", en: "*-chen* is always *das*." } }
+  - { id: e1-t-10, from: easy1-05-der-die-das, type: gender, noun: Wohnzimmer, answer: n, why: { id: "Kata terakhir menentukan: *das Zimmer* → *das Wohnzimmer*.", en: "The last word decides: *das Zimmer* → *das Wohnzimmer*." } }
+  # 06 numbers
+  - { id: e1-t-11, from: easy1-06-zahlen, type: listen, audio: "Ich bin neunzehn Jahre alt.", options: ["Ich bin neunzehn Jahre alt.", "Ich bin neunzig Jahre alt."], answer: "Ich bin neunzehn Jahre alt.", why: { id: "*-zehn* = belasan: 19. *Neunzig* = 90.", en: "*-zehn* = teens: 19. *Neunzig* = 90." } }
+  - { id: e1-t-12, from: easy1-06-zahlen, type: dictation, audio: "zweiundfünfzig", answer: "zweiundfünfzig", why: { id: "52 = *zwei-und-fünfzig*, satu kata.", en: "52 = *zwei-und-fünfzig*, one word." } }
+  # 07 ein, kein, nicht
+  - { id: e1-t-13, from: easy1-07-ein-kein, type: gap, cue: "Ini bukan kopi.", prompt: "Das ist ___ Kaffee.", options: [kein, keine, nicht], answer: kein, why: { id: "*Der Kaffee* → *kein Kaffee*.", en: "*Der Kaffee* → *kein Kaffee*." } }
+  - { id: e1-t-14, from: easy1-07-ein-kein, type: fix, cue: "Aku nggak capek.", wrong: "Ich bin kein müde.", options: ["Ich bin nicht müde.", "Ich bin keine müde."], answer: "Ich bin nicht müde.", why: { id: "Kata sifat disangkal dengan *nicht*.", en: "An adjective is negated with *nicht*." } }
+  # 08 haben, mein, dein
+  - { id: e1-t-15, from: easy1-08-meine-familie, type: gap, cue: "Ayahmu tinggal di mana?", prompt: "Wo wohnt ___ Vater?", options: [dein, deine], answer: dein, why: { id: "*Der Vater* → *dein Vater*.", en: "*Der Vater* → *dein Vater*." } }
+  - { id: e1-t-16, from: easy1-08-meine-familie, type: form, cue: "Kamu punya saudara perempuan.", base: haben, target: { person: du, tense: praesens }, frame: "Du ___ eine Schwester.", options: [hast, habst, hat], answer: hast, why: { id: "*Du hast*, tanpa *b*.", en: "*Du hast*, no *b*." } }
+  # 09 plurals
+  - { id: e1-t-17, from: easy1-09-plural, type: gap, cue: "Kami punya dua anjing.", prompt: "Wir haben zwei ___.", options: [Hunde, Hund, Hünde], answer: Hunde, why: { id: "*Der Hund, die Hunde*: *-e*, tanpa umlaut.", en: "*Der Hund, die Hunde*: *-e*, no umlaut." } }
+  - { id: e1-t-18, from: easy1-09-plural, type: listen, audio: "Die Bücher sind neu.", options: ["Die Bücher sind neu.", "Das Buch ist neu."], answer: "Die Bücher sind neu.", why: { id: "*Bücher* dan *sind*: jamak.", en: "*Bücher* and *sind*: plural." } }
+  # 10 accusative
+  - { id: e1-t-19, from: easy1-10-akkusativ, type: case, cue: "Kami punya anjing.", sentence: "Wir haben ___ Hund.", role: akk, noun: Hund, options: [einen, ein, einer], answer: einen, why: { id: "*Der Hund* sebagai objek: *einen Hund*.", en: "*Der Hund* as the object: *einen Hund*." } }
+  - { id: e1-t-20, from: easy1-10-akkusativ, type: case, cue: "Aku beli tasnya.", sentence: "Ich kaufe ___ Tasche.", role: akk, noun: Tasche, options: [die, den, der], answer: die, why: { id: "Feminin tidak berubah: *die Tasche*.", en: "The feminine doesn't change: *die Tasche*." } }
+  - { id: e1-t-21, from: easy1-10-akkusativ, type: fix, cue: "Aku nggak punya komputer.", wrong: "Ich habe kein Computer.", options: ["Ich habe keinen Computer.", "Ich habe keiner Computer."], answer: "Ich habe keinen Computer.", why: { id: "*Der Computer* sebagai objek: *keinen*.", en: "*Der Computer* as the object: *keinen*." } }
+  # 11 möchte, prices
+  - { id: e1-t-22, from: easy1-11-einkaufen, type: gap, cue: "Saya mau sup, ya.", prompt: "Ich ___ eine Suppe, bitte.", options: [möchte, möchtest, möchten], answer: möchte, why: { id: "*Ich möchte*.", en: "*Ich möchte*." } }
+  - { id: e1-t-23, from: easy1-11-einkaufen, type: case, cue: "Saya mau jus.", sentence: "Ich möchte ___ Saft.", role: akk, noun: Saft, options: [einen, ein], answer: einen, why: { id: "*Der Saft* sebagai objek: *einen Saft*.", en: "*Der Saft* as the object: *einen Saft*." } }
+  - { id: e1-t-24, from: easy1-11-einkaufen, type: listen, audio: "Das macht neun Euro fünfzig.", options: ["Das macht neun Euro fünfzig.", "Das macht neunzehn Euro fünfzig."], answer: "Das macht neun Euro fünfzig.", why: { id: "*Neun* = 9; *neunzehn* = 19. Jadi 9,50 €.", en: "*Neun* = 9; *neunzehn* = 19. So €9.50." } }
+  # 12 where things are
+  - { id: e1-t-25, from: easy1-12-wo-ist, type: gap, cue: "Kucingnya di atas sofa.", prompt: "Die Katze ist ___ Sofa.", options: [auf dem, auf der, im], answer: auf dem, why: { id: "*Das Sofa* → *auf dem Sofa*.", en: "*Das Sofa* → *auf dem Sofa*." } }
+  - { id: e1-t-26, from: easy1-12-wo-ist, type: gap, cue: "Rina di dapur.", prompt: "Rina ist ___ Küche.", options: [in der, im], answer: in der, why: { id: "*Die Küche* → *in der Küche*. *Im* untuk *der* dan *das*.", en: "*Die Küche* → *in der Küche*. *Im* is for *der* and *das*." } }

@@ -1,0 +1,37 @@
+# Ngobrol (Easy 1): two students meet in a campus canteen in Hamburg. Draft.
+rung: easy-1
+title: { id: "Di kantin kampus", en: "In the campus canteen", de: "In der Kantine" }
+setting: "Hamburg, di kantin kampus"
+lines:
+  - { who: Jonas, de: "Hallo! Bist du neu hier?", id: "Halo! Kamu baru di sini?" }
+  - { who: Andi, de: "Ja. Ich heiße Andi. Ich komme aus Indonesien.", id: "Iya. Namaku Andi. Aku dari Indonesia." }
+  - { who: Jonas, de: "Ich bin Jonas. Was machst du hier?", id: "Aku Jonas. Kamu ngapain di sini?" }
+  - { who: Andi, de: "Ich mache einen Deutschkurs. Und du?", id: "Aku ikut kursus bahasa Jerman. Kamu?" }
+  - { who: Jonas, de: "Ich bin Student. Ich studiere hier in Hamburg.", id: "Aku mahasiswa. Aku kuliah di sini, di Hamburg." }
+  - { who: Jonas, de: "Möchtest du einen Kaffee?", id: "Kamu mau kopi?" }
+  - { who: Andi, de: "Nein, danke. Ich trinke keinen Kaffee. Ich möchte einen Tee.", id: "Nggak, makasih. Aku nggak minum kopi. Aku mau teh." }
+  - { who: Jonas, de: "Der Tee ist hier sehr gut. Er kostet nur einen Euro.", id: "Teh di sini enak banget. Harganya cuma satu euro." }
+  - { who: Andi, de: "Toll! Danke, Jonas.", id: "Mantap! Makasih, Jonas." }
+note:
+  id: "Di kampus dan di antara mahasiswa, orang Jerman langsung memakai *du*, walaupun baru kenal."
+  en: "On campus and among students, Germans use *du* straight away, even with someone they've just met."
+items:
+  - id: e1-g-1
+    type: choice
+    prompt: "Woher kommt Andi?"
+    options: ["Aus Indonesien.", "Aus Hamburg."]
+    answer: "Aus Indonesien."
+    why: { id: "*Ich komme aus Indonesien.*", en: "*Ich komme aus Indonesien.*" }
+  - id: e1-g-2
+    type: choice
+    prompt: "Was möchte Andi?"
+    options: ["Einen Tee.", "Einen Kaffee.", "Wasser."]
+    answer: "Einen Tee."
+    why: { id: "*Ich trinke keinen Kaffee. Ich möchte einen Tee.*", en: "*Ich trinke keinen Kaffee. Ich möchte einen Tee.*" }
+  - id: e1-g-3
+    type: choice
+    lang: id
+    prompt: "Berapa harga tehnya?"
+    options: ["satu euro", "dua euro", "sepuluh euro"]
+    answer: "satu euro"
+    why: { id: "*Er kostet nur einen Euro.*", en: "*Er kostet nur einen Euro.*" }

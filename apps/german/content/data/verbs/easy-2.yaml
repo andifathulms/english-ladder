@@ -1,0 +1,180 @@
+# Verbs added with Easy 2 (CLAUDE.md §3.4), same shape as verbs.yaml, every present form written out by
+# hand in check.praesens (ich, du, er/sie/es, wir, ihr, sie/Sie); check.perfekt for the verbs the Perfekt
+# lesson (easy2-11) uses. Strong verbs list their Präteritum stem. Draft data for the teacher's review.
+
+# ---------- time and daily life ----------
+- inf: beginnen
+  id: mulai
+  aux: haben
+  partizip: begonnen
+  praet: { stem: begann }
+  check:
+    praesens: [beginne, beginnst, beginnt, beginnen, beginnt, beginnen]
+- inf: beten
+  id: berdoa; salat
+  aux: haben
+  partizip: gebetet
+  # be- here is part of the stem, not a prefix; the weak stem is listed so the rule doesn't drop ge-.
+  praet: { stem: betet, weak: true }
+  check:
+    praesens: [bete, betest, betet, beten, betet, beten]
+- inf: klingeln
+  id: berdering; membunyikan bel
+  aux: haben
+  partizip: geklingelt
+  check:
+    praesens: [klingle, klingelst, klingelt, klingeln, klingelt, klingeln]
+- inf: dauern
+  id: berlangsung; makan waktu
+  aux: haben
+  partizip: gedauert
+  check:
+    praesens: [dauere, dauerst, dauert, dauern, dauert, dauern]
+- inf: feiern
+  id: merayakan; berpesta
+  aux: haben
+  partizip: gefeiert
+  check:
+    praesens: [feiere, feierst, feiert, feiern, feiert, feiern]
+- inf: schicken
+  id: mengirim
+  aux: haben
+  partizip: geschickt
+  check:
+    praesens: [schicke, schickst, schickt, schicken, schickt, schicken]
+
+# ---------- rules and instructions ----------
+- inf: rauchen
+  id: merokok
+  aux: haben
+  partizip: geraucht
+  check:
+    praesens: [rauche, rauchst, raucht, rauchen, raucht, rauchen]
+- inf: parken
+  id: parkir
+  aux: haben
+  partizip: geparkt
+  check:
+    praesens: [parke, parkst, parkt, parken, parkt, parken]
+- inf: schließen
+  id: menutup
+  aux: haben
+  partizip: geschlossen
+  praet: { stem: schloss }
+  check:
+    praesens: [schließe, schließt, schließt, schließen, schließt, schließen]
+    imperativ: ['', schließ, '', '', schließt, schließen Sie]
+- inf: messen
+  id: mengukur
+  vowel: e-i
+  aux: haben
+  partizip: gemessen
+  praet: { stem: maß }
+  check:
+    praesens: [messe, misst, misst, messen, messt, messen]
+    imperativ: ['', miss, '', '', messt, messen Sie]
+
+# ---------- travel and directions ----------
+- inf: abfahren
+  id: berangkat (kendaraan)
+  sep: ab
+  vowel: a-ä
+  aux: sein
+  partizip: abgefahren
+  praet: { stem: fuhr }
+  check:
+    praesens: [fahre ab, fährst ab, fährt ab, fahren ab, fahrt ab, fahren ab]
+- inf: abbiegen
+  id: berbelok
+  sep: ab
+  aux: sein
+  partizip: abgebogen
+  praet: { stem: bog }
+  check:
+    praesens: [biege ab, biegst ab, biegt ab, biegen ab, biegt ab, biegen ab]
+    imperativ: ['', bieg ab, '', '', biegt ab, biegen Sie ab]
+- inf: fliegen
+  id: terbang; naik pesawat
+  aux: sein
+  partizip: geflogen
+  praet: { stem: flog }
+  check:
+    praesens: [fliege, fliegst, fliegt, fliegen, fliegt, fliegen]
+    perfekt: [bin geflogen, bist geflogen, ist geflogen, sind geflogen, seid geflogen, sind geflogen]
+
+# ---------- phone, doctor ----------
+- inf: zurückrufen
+  id: menelepon balik
+  sep: zurück
+  aux: haben
+  partizip: zurückgerufen
+  praet: { stem: rief }
+  check:
+    praesens: [rufe zurück, rufst zurück, ruft zurück, rufen zurück, ruft zurück, rufen zurück]
+- inf: mitbringen
+  id: membawa (serta)
+  sep: mit
+  aux: haben
+  partizip: mitgebracht
+  praet: { stem: bracht, weak: true }
+  check:
+    praesens: [bringe mit, bringst mit, bringt mit, bringen mit, bringt mit, bringen mit]
+    imperativ: ['', bring mit, '', '', bringt mit, bringen Sie mit]
+- inf: husten
+  id: batuk
+  aux: haben
+  partizip: gehustet
+  check:
+    praesens: [huste, hustest, hustet, husten, hustet, husten]
+- inf: untersuchen
+  id: memeriksa
+  aux: haben
+  partizip: untersucht
+  # unter- is inseparable here; the weak stem is listed because the regular rule would add ge-.
+  praet: { stem: untersucht, weak: true }
+  check:
+    praesens: [untersuche, untersuchst, untersucht, untersuchen, untersucht, untersuchen]
+
+# ---------- housing and forms ----------
+- inf: mieten
+  id: menyewa
+  aux: haben
+  partizip: gemietet
+  check:
+    praesens: [miete, mietest, mietet, mieten, mietet, mieten]
+- inf: vermieten
+  id: menyewakan
+  aux: haben
+  partizip: vermietet
+  check:
+    praesens: [vermiete, vermietest, vermietet, vermieten, vermietet, vermieten]
+- inf: umziehen
+  id: pindah (rumah)
+  sep: um
+  aux: sein
+  partizip: umgezogen
+  praet: { stem: zog }
+  check:
+    praesens: [ziehe um, ziehst um, zieht um, ziehen um, zieht um, ziehen um]
+- inf: ausfüllen
+  id: mengisi (formulir)
+  sep: aus
+  aux: haben
+  partizip: ausgefüllt
+  check:
+    praesens: [fülle aus, füllst aus, füllt aus, füllen aus, füllt aus, füllen aus]
+    imperativ: ['', füll aus, '', '', füllt aus, füllen Sie aus]
+- inf: unterschreiben
+  id: menandatangani
+  aux: haben
+  partizip: unterschrieben
+  praet: { stem: unterschrieb }
+  check:
+    praesens: [unterschreibe, unterschreibst, unterschreibt, unterschreiben, unterschreibt, unterschreiben]
+    imperativ: ['', unterschreib, '', '', unterschreibt, unterschreiben Sie]
+- inf: buchstabieren
+  id: mengeja
+  aux: haben
+  partizip: buchstabiert
+  check:
+    praesens: [buchstabiere, buchstabierst, buchstabiert, buchstabieren, buchstabiert, buchstabieren]

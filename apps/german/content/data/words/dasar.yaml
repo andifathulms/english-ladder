@@ -1,0 +1,43 @@
+# Dasar word list (the Kartu kata deck for Dasar): every lesson glossary word, ordered by lesson.
+# Draft for the teacher's review. Shape: GlossaryEntry (course/schema.ts).
+# 01 · words you already know through Dutch
+- { de: Koffer, id: koper, pos: noun, gender: m, plural: Koffer, bridge: { nl: koffer, id: koper } }
+- { de: Handtuch, id: handuk, pos: noun, gender: n, plural: Handtücher, bridge: { nl: handdoek, id: handuk } }
+- { de: Apotheke, id: apotek, pos: noun, gender: f, plural: Apotheken, bridge: { nl: apotheek, id: apotek } }
+- { de: Strom, id: "listrik, arus listrik", pos: noun, gender: m, plural: Ströme, bridge: { nl: stroom, id: setrum } }
+- { de: Kantine, id: kantin, pos: noun, gender: f, plural: Kantinen, bridge: { nl: kantine, id: kantin } }
+- { de: Tante, id: "tante, bibi", pos: noun, gender: f, plural: Tanten, bridge: { nl: tante, id: tante } }
+# 02 · ä, ö, ü
+- { de: Mutter, id: ibu, pos: noun, gender: f, plural: Mütter }
+- { de: Tür, id: pintu, pos: noun, gender: f, plural: Türen }
+- { de: schön, id: "indah, bagus", pos: adj }
+- { de: schon, id: sudah, pos: adv }
+- { de: Brötchen, id: "roti bulat kecil", pos: noun, gender: n, plural: Brötchen }
+- { de: Käse, id: keju, pos: noun, gender: m, plural: Käse }
+# 03 · ei, ie, eu; long and short vowels
+- { de: Ei, id: telur, pos: noun, gender: n, plural: Eier }
+- { de: Arbeit, id: "pekerjaan, kerja", pos: noun, gender: f, plural: Arbeiten }
+- { de: Miete, id: "sewa (rumah)", pos: noun, gender: f, plural: Mieten }
+- { de: neu, id: baru, pos: adj }
+- { de: Haus, id: rumah, pos: noun, gender: n, plural: Häuser }
+- { de: Bett, id: "tempat tidur", pos: noun, gender: n, plural: Betten }
+# 04 · ch, sch, sp/st, z, w, v, j
+- { de: ich, id: "saya, aku", pos: pron }
+- { de: Buch, id: buku, pos: noun, gender: n, plural: Bücher }
+- { de: Schule, id: sekolah, pos: noun, gender: f, plural: Schulen }
+- { de: Stadt, id: kota, pos: noun, gender: f, plural: Städte }
+- { de: Zeit, id: waktu, pos: noun, gender: f, plural: Zeiten }
+- { de: Wasser, id: air, pos: noun, gender: n, plural: "—" }
+- { de: Vater, id: ayah, pos: noun, gender: m, plural: Väter }
+# 05 · final devoicing, ß and ss, r
+- { de: Tag, id: hari, pos: noun, gender: m, plural: Tage }
+- { de: Hund, id: anjing, pos: noun, gender: m, plural: Hunde }
+- { de: Straße, id: jalan, pos: noun, gender: f, plural: Straßen }
+- { de: groß, id: "besar, tinggi", pos: adj }
+- { de: Brot, id: roti, pos: noun, gender: n, plural: Brote }
+# 06 · stress and reading aloud
+- { de: Ausgang, id: "pintu keluar", pos: noun, gender: m, plural: Ausgänge }
+- { de: Eingang, id: "pintu masuk", pos: noun, gender: m, plural: Eingänge }
+- { de: Kaffee, id: kopi, pos: noun, gender: m, plural: Kaffees }
+- { de: Kuchen, id: kue, pos: noun, gender: m, plural: Kuchen }
+- { de: gut, id: "baik, enak", pos: adj }

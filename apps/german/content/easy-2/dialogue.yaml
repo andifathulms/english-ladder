@@ -1,0 +1,44 @@
+# Ngobrol (Easy 2): a patient checks in at a doctor's reception in Hamburg. Sie throughout. Draft.
+rung: easy-2
+title: { id: "Di praktik dokter", en: "At the doctor's", de: "In der Praxis" }
+setting: "Hamburg, di resepsionis praktik dokter"
+lines:
+  - { who: Siti, de: "Guten Morgen. Ich habe um neun Uhr einen Termin.", id: "Selamat pagi. Saya ada janji jam sembilan." }
+  - { who: Herr Klein, de: "Guten Morgen. Wie ist Ihr Name, bitte?", id: "Selamat pagi. Nama Anda siapa?" }
+  - { who: Siti, de: "Mein Name ist Siti Hartono.", id: "Nama saya Siti Hartono." }
+  - { who: Herr Klein, de: "Danke. Haben Sie Ihre Gesundheitskarte?", id: "Terima kasih. Anda bawa kartu asuransi kesehatan?" }
+  - { who: Siti, de: "Ja, hier, bitte.", id: "Ya, ini." }
+  - { who: Herr Klein, de: "Was haben Sie?", id: "Keluhannya apa?" }
+  - { who: Siti, de: "Ich habe seit gestern Fieber, und mein Hals tut weh.", id: "Sejak kemarin saya demam, dan tenggorokan saya sakit." }
+  - { who: Herr Klein, de: "Füllen Sie bitte dieses Formular aus. Dann nehmen Sie im Wartezimmer Platz.", id: "Silakan isi formulir ini. Lalu silakan duduk di ruang tunggu." }
+  - { who: Siti, de: "Danke. Wie lange muss ich warten?", id: "Terima kasih. Saya harus menunggu berapa lama?" }
+  - { who: Herr Klein, de: "Nur zwanzig Minuten.", id: "Cuma dua puluh menit." }
+note:
+  id: "Di Jerman, ke dokter hampir selalu dengan janji temu (*Termin*). Di resepsionis kamu menunjukkan *Gesundheitskarte*, dan sering mengisi formulir dulu."
+  en: "In Germany you almost always see a doctor by appointment (*Termin*). At reception you show your *Gesundheitskarte* (health insurance card) and often fill in a form first."
+items:
+  - id: e2-g-1
+    type: choice
+    prompt: "Wann hat Siti einen Termin?"
+    options: ["Um neun Uhr.", "Um halb zehn.", "Um zehn Uhr."]
+    answer: "Um neun Uhr."
+    why: { id: "*Ich habe um neun Uhr einen Termin.*", en: "*Ich habe um neun Uhr einen Termin.*" }
+  - id: e2-g-2
+    type: choice
+    prompt: "Was hat Siti?"
+    options: ["Sie hat Fieber, und ihr Hals tut weh.", "Ihr Bauch tut weh.", "Ihr Rücken tut weh."]
+    answer: "Sie hat Fieber, und ihr Hals tut weh."
+    why: { id: "*Ich habe seit gestern Fieber, und mein Hals tut weh.*", en: "*Ich habe seit gestern Fieber, und mein Hals tut weh.*" }
+  - id: e2-g-3
+    type: choice
+    lang: id
+    prompt: "Berapa lama Siti harus menunggu?"
+    options: ["20 menit", "2 jam", "10 menit"]
+    answer: "20 menit"
+    why: { id: "*Nur zwanzig Minuten.*", en: "*Nur zwanzig Minuten.*" }
+  - id: e2-g-4
+    type: listen
+    audio: "Nehmen Sie im Wartezimmer Platz."
+    options: ["Nehmen Sie im Wartezimmer Platz.", "Nehmen Sie im Wohnzimmer Platz."]
+    answer: "Nehmen Sie im Wartezimmer Platz."
+    why: { id: "*Das Wartezimmer* = ruang tunggu (*warten* + *Zimmer*).", en: "*Das Wartezimmer* = waiting room (*warten* + *Zimmer*)." }

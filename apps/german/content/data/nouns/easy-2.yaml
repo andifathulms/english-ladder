@@ -1,0 +1,122 @@
+# Nouns added with Easy 2 (CLAUDE.md §3.4), same shape as nouns.yaml. Draft data for the teacher's review.
+# Every value is authored; plurals match their pattern (lib/de pluralOf), genders their ending clue,
+# compounds their parts (the last part decides the gender).
+
+# ---------- time, days, months ----------
+- { de: Viertel, gender: n, plural: Viertel, pattern: "-", id: seperempat, level: A1 }
+- { de: Vormittag, gender: m, plural: Vormittage, pattern: "-e", id: pagi menjelang siang, level: A1 }
+- { de: Nachmittag, gender: m, plural: Nachmittage, pattern: "-e", id: sore, level: A1 }
+- { de: Montag, gender: m, plural: Montage, pattern: "-e", id: Senin, level: A1 }
+- { de: Dienstag, gender: m, plural: Dienstage, pattern: "-e", id: Selasa, level: A1 }
+- { de: Mittwoch, gender: m, plural: Mittwoche, pattern: "-e", id: Rabu, level: A1 }
+- { de: Donnerstag, gender: m, plural: Donnerstage, pattern: "-e", id: Kamis, level: A1 }
+- { de: Freitag, gender: m, plural: Freitage, pattern: "-e", id: Jumat, level: A1 }
+- { de: Samstag, gender: m, plural: Samstage, pattern: "-e", id: Sabtu, level: A1 }
+- { de: Sonntag, gender: m, plural: Sonntage, pattern: "-e", id: Minggu, level: A1 }
+- { de: Januar, gender: m, plural: null, pattern: null, id: Januari, level: A1 }
+- { de: Februar, gender: m, plural: null, pattern: null, id: Februari, level: A1 }
+- { de: März, gender: m, plural: null, pattern: null, id: Maret, level: A1 }
+- { de: April, gender: m, plural: null, pattern: null, id: April, level: A1 }
+- { de: Mai, gender: m, plural: null, pattern: null, id: Mei, level: A1 }
+- { de: Juni, gender: m, plural: null, pattern: null, id: Juni, level: A1 }
+- { de: Juli, gender: m, plural: null, pattern: null, id: Juli, level: A1 }
+- { de: August, gender: m, plural: null, pattern: null, id: Agustus, level: A1 }
+- { de: September, gender: m, plural: null, pattern: null, id: September, level: A1 }
+- { de: Oktober, gender: m, plural: null, pattern: null, id: Oktober, level: A1 }
+- { de: November, gender: m, plural: null, pattern: null, id: November, level: A1 }
+- { de: Dezember, gender: m, plural: null, pattern: null, id: Desember, level: A1 }
+- { de: Uhrzeit, gender: f, plural: Uhrzeiten, pattern: "-en", id: jam (waktu), parts: [Uhr, Zeit], level: A1 }
+- { de: Pause, gender: f, plural: Pausen, pattern: "-n", id: istirahat, level: A1 }
+- { de: Feierabend, gender: m, plural: Feierabende, pattern: "-e", id: jam pulang kerja, level: A2 }
+- { de: Alltag, gender: m, plural: null, pattern: null, id: keseharian, level: A2 }
+- { de: Wecker, gender: m, plural: Wecker, pattern: "-", id: jam weker, level: A2 }
+
+# ---------- work and shifts ----------
+- { de: Dienst, gender: m, plural: Dienste, pattern: "-e", id: dinas; giliran kerja, level: A2 }
+- { de: Frühschicht, gender: f, plural: Frühschichten, pattern: "-en", id: sif pagi, parts: [Früh, Schicht], level: B1 }
+- { de: Spätschicht, gender: f, plural: Spätschichten, pattern: "-en", id: sif siang, parts: [Spät, Schicht], level: B1 }
+- { de: Nachtschicht, gender: f, plural: Nachtschichten, pattern: "-en", id: sif malam, parts: [Nacht, Schicht], level: B1 }
+- { de: Werkstatt, gender: f, plural: Werkstätten, pattern: "other", id: bengkel, level: A2 }
+- { de: Maschine, gender: f, plural: Maschinen, pattern: "-n", id: mesin, level: A2 }
+- { de: Handschuh, gender: m, plural: Handschuhe, pattern: "-e", id: sarung tangan, parts: [Hand, Schuh], level: A2 }
+- { de: Vorsicht, gender: f, plural: null, pattern: null, id: hati-hati, level: A2 }
+- { de: Seife, gender: f, plural: Seifen, pattern: "-n", id: sabun, level: A2 }
+- { de: Maske, gender: f, plural: Masken, pattern: "-n", id: masker, level: B1 }
+- { de: Rollstuhl, gender: m, plural: Rollstühle, pattern: "¨e", id: kursi roda, parts: [Roll, Stuhl], level: B1 }
+- { de: Notfall, gender: m, plural: Notfälle, pattern: "¨e", id: keadaan darurat, level: A2 }
+- { de: Schild, gender: n, plural: Schilder, pattern: "-er", id: papan petunjuk; rambu, level: A1 }
+- { de: Gruß, gender: m, plural: Grüße, pattern: "¨e", id: salam, level: A1 }
+- { de: Satz, gender: m, plural: Sätze, pattern: "¨e", id: kalimat, level: A1 }
+
+# ---------- free time ----------
+- { de: Freizeit, gender: f, plural: null, pattern: null, id: waktu luang, level: A1 }
+- { de: Schwimmbad, gender: n, plural: Schwimmbäder, pattern: "¨er", id: kolam renang, parts: [Schwimm, Bad], level: A1 }
+- { de: Konzert, gender: n, plural: Konzerte, pattern: "-e", id: konser, level: A1 }
+- { de: Ausflug, gender: m, plural: Ausflüge, pattern: "¨e", id: tamasya, level: A2 }
+- { de: Lust, gender: f, plural: null, pattern: null, id: keinginan; minat, level: A2 }
+- { de: Reise, gender: f, plural: Reisen, pattern: "-n", id: perjalanan, level: A1 }
+
+# ---------- transport and directions ----------
+- { de: U-Bahn, gender: f, plural: U-Bahnen, pattern: "-en", id: kereta bawah tanah, level: A1 }
+- { de: S-Bahn, gender: f, plural: S-Bahnen, pattern: "-en", id: kereta komuter, level: A1 }
+- { de: Straßenbahn, gender: f, plural: Straßenbahnen, pattern: "-en", id: trem, parts: [Straße, Bahn], links: [n], level: A1 }
+- { de: Taxi, gender: n, plural: Taxis, pattern: "-s", id: taksi, level: A1 }
+- { de: Flugzeug, gender: n, plural: Flugzeuge, pattern: "-e", id: pesawat, level: A1 }
+- { de: Gleis, gender: n, plural: Gleise, pattern: "-e", id: jalur (peron), level: A1 }
+- { de: Hauptbahnhof, gender: m, plural: Hauptbahnhöfe, pattern: "¨e", id: stasiun pusat, parts: [Haupt, Bahnhof], level: A1 }
+- { de: Ankunft, gender: f, plural: Ankünfte, pattern: "¨e", id: kedatangan, level: A1 }
+- { de: Achtung, gender: f, plural: null, pattern: null, id: perhatian, level: A1 }
+- { de: Verspätung, gender: f, plural: Verspätungen, pattern: "-en", id: keterlambatan, level: A1 }
+- { de: Regal, gender: n, plural: Regale, pattern: "-e", id: rak, level: A1 }
+- { de: Ecke, gender: f, plural: Ecken, pattern: "-n", id: sudut; tikungan, level: A1 }
+- { de: Kreuzung, gender: f, plural: Kreuzungen, pattern: "-en", id: perempatan, level: A2 }
+
+# ---------- body and health ----------
+- { de: Hals, gender: m, plural: Hälse, pattern: "¨e", id: leher; tenggorokan, level: A1 }
+- { de: Kopfschmerz, gender: m, plural: Kopfschmerzen, pattern: "-en", id: sakit kepala, parts: [Kopf, Schmerz], level: A1 }
+- { de: Bauchschmerz, gender: m, plural: Bauchschmerzen, pattern: "-en", id: sakit perut, parts: [Bauch, Schmerz], level: A1 }
+- { de: Erkältung, gender: f, plural: Erkältungen, pattern: "-en", id: pilek; masuk angin, level: A2 }
+- { de: Husten, gender: m, plural: null, pattern: null, id: batuk, level: A2 }
+- { de: Praxis, gender: f, plural: Praxen, pattern: "other", id: tempat praktik (dokter), level: A1 }
+- { de: Hausarzt, gender: m, plural: Hausärzte, pattern: "¨e", id: dokter umum (langganan), parts: [Haus, Arzt], level: A2 }
+- { de: Krankmeldung, gender: f, plural: Krankmeldungen, pattern: "-en", id: surat keterangan sakit, level: B1 }
+- { de: Gesundheitskarte, gender: f, plural: Gesundheitskarten, pattern: "-n", id: kartu asuransi kesehatan, parts: [Gesundheit, Karte], links: [s], level: B1 }
+- { de: Versicherung, gender: f, plural: Versicherungen, pattern: "-en", id: asuransi, level: A2 }
+- { de: Krankenkasse, gender: f, plural: Krankenkassen, pattern: "-n", id: asuransi kesehatan, parts: [Kranken, Kasse], level: A2 }
+- { de: Wartezimmer, gender: n, plural: Wartezimmer, pattern: "-", id: ruang tunggu, parts: [Warte, Zimmer], level: A2 }
+- { de: Besserung, gender: f, plural: null, pattern: null, id: kesembuhan (Gute Besserung!), level: A1 }
+- { de: Pflaster, gender: n, plural: Pflaster, pattern: "-", id: plester, level: A2 }
+
+# ---------- housing ----------
+- { de: Balkon, gender: m, plural: Balkone, pattern: "-e", id: balkon, level: A1 }
+- { de: Flur, gender: m, plural: Flure, pattern: "-e", id: lorong (rumah), level: A2 }
+- { de: Toilette, gender: f, plural: Toiletten, pattern: "-n", id: toilet, level: A1 }
+- { de: Dusche, gender: f, plural: Duschen, pattern: "-n", id: pancuran (mandi), level: A1 }
+- { de: Keller, gender: m, plural: Keller, pattern: "-", id: ruang bawah tanah, level: A1 }
+- { de: Sessel, gender: m, plural: Sessel, pattern: "-", id: kursi berlengan, level: A1 }
+- { de: Herd, gender: m, plural: Herde, pattern: "-e", id: kompor, level: A1 }
+- { de: Waschmaschine, gender: f, plural: Waschmaschinen, pattern: "-n", id: mesin cuci, parts: [Wasch, Maschine], level: A1 }
+- { de: Etage, gender: f, plural: Etagen, pattern: "-n", id: lantai (tingkat), level: A2 }
+- { de: Anzeige, gender: f, plural: Anzeigen, pattern: "-n", id: iklan, level: A1 }
+- { de: Quadratmeter, gender: m, plural: Quadratmeter, pattern: "-", id: meter persegi, level: A1 }
+- { de: Vermieter, gender: m, plural: Vermieter, pattern: "-", id: pemilik sewaan, person: true, level: A1 }
+- { de: Vermieterin, gender: f, plural: Vermieterinnen, pattern: "-nen", id: pemilik sewaan (perempuan), level: A1 }
+- { de: Licht, gender: n, plural: Lichter, pattern: "-er", id: lampu; cahaya, level: A1 }
+- { de: Müll, gender: m, plural: null, pattern: null, id: sampah, level: A2 }
+
+# ---------- forms and personal data ----------
+- { de: Vorname, gender: m, plural: Vornamen, pattern: "-n", id: nama depan, level: A1 }
+- { de: Nachname, gender: m, plural: Nachnamen, pattern: "-n", id: nama keluarga, level: A1 }
+- { de: Ort, gender: m, plural: Orte, pattern: "-e", id: tempat, level: A1 }
+- { de: Geburtsort, gender: m, plural: Geburtsorte, pattern: "-e", id: tempat lahir, parts: [Geburt, Ort], links: [s], level: A1 }
+- { de: Wohnort, gender: m, plural: Wohnorte, pattern: "-e", id: tempat tinggal, parts: [Wohn, Ort], level: A1 }
+- { de: Geburtsdatum, gender: n, plural: Geburtsdaten, pattern: "other", id: tanggal lahir, parts: [Geburt, Datum], links: [s], level: A1 }
+- { de: Hausnummer, gender: f, plural: Hausnummern, pattern: "-n", id: nomor rumah, parts: [Haus, Nummer], level: A1 }
+- { de: Postleitzahl, gender: f, plural: Postleitzahlen, pattern: "-en", id: kode pos, level: A1 }
+- { de: Staatsangehörigkeit, gender: f, plural: Staatsangehörigkeiten, pattern: "-en", id: kewarganegaraan, level: A1 }
+- { de: Nationalität, gender: f, plural: Nationalitäten, pattern: "-en", id: kebangsaan, level: A1 }
+- { de: Familienstand, gender: m, plural: null, pattern: null, id: status pernikahan, level: A1 }
+- { de: Geschlecht, gender: n, plural: Geschlechter, pattern: "-er", id: jenis kelamin, level: A1 }
+- { de: Unterschrift, gender: f, plural: Unterschriften, pattern: "-en", id: tanda tangan, level: A1 }
+- { de: Anmeldung, gender: f, plural: Anmeldungen, pattern: "-en", id: pendaftaran; lapor alamat, level: A1 }
+- { de: Bürgeramt, gender: n, plural: Bürgerämter, pattern: "¨er", id: kantor layanan warga, level: B1 }

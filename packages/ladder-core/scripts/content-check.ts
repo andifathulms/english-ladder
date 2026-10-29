@@ -20,6 +20,12 @@ const visualIds = new Set(course.visualIds);
 if (content.model.itemTypes) registerItemTypes(content.model.itemTypes);
 for (const [type, fn] of Object.entries(content.model.itemText ?? {})) overrideItemText(type, fn);
 const hooks = content.model.check ?? {};
+/** A line's focus marks: the course's rule (G1) or at most one. */
+const focusError = (s: string): string | null => {
+  const n = focusCount(s);
+  if (hooks.focus) return hooks.focus(s, n);
+  return n > 1 ? 'more than one [[focus]]' : null;
+};
 
 const errors: string[] = [];
 const warnings: string[] = [];
@@ -89,11 +95,13 @@ for (const rung of rungs) {
         claim(c.id, where);
         if (c.type === 'scene' && !visualIds.has(c.visual.id)) err(`${where}: ${c.id}: unknown visual "${c.visual.id}"`);
         for (const s of sentencesOf(c)) {
-          if (focusCount(s) > 1) err(`${where}: ${c.id}: more than one [[focus]] in "${s}"`);
+          const e = focusError(s);
+          if (e) err(`${where}: ${c.id}: ${e} in "${s}"`);
         }
       }
       for (const s of content.adapter.lesson.focusTexts(l)) {
-        if (focusCount(s) > 1) err(`${where}: more than one [[focus]] in "${s}"`);
+        const e = focusError(s);
+        if (e) err(`${where}: ${e} in "${s}"`);
       }
       hooks.lesson?.(l, where, ctx, file);
       lessons.push(l);

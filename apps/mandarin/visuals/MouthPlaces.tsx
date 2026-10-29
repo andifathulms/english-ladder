@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { INITIAL_GROUPS } from '@/lib/zh/syllables';
 import { useRoving } from '@ladder/core/components/visuals/useRoving';
 import type { VisualProps } from '@ladder/core/components/visuals/types';
-import { useReducedMotion, useT } from '@ladder/core/components/ProgressProvider';
+import { useT } from '@ladder/core/components/ProgressProvider';
 import { Toggle } from '@ladder/core/components/ui/Toggle';
+import { MouthDrawing } from '@ladder/core/components/visuals/mouth/MouthDrawing';
 import type { MandarinKey } from '@/i18n/overrides';
 
 type Group = 'lips' | 'tip' | 'teeth' | 'curled' | 'flat' | 'back';
@@ -37,7 +38,6 @@ type Props = VisualProps<Group> & { initial?: Group; aspiration?: boolean };
  */
 export function MouthPlaces({ state, interactive = true, onStateChange, initial, aspiration: aspInit = false }: Props) {
   const { t } = useT<MandarinKey>();
-  const reduced = useReducedMotion();
   const [own, setOwn] = useState<Group>(initial ?? 'tip');
   const g = state ?? own;
   const [puff, setPuff] = useState(aspInit);
@@ -53,40 +53,7 @@ export function MouthPlaces({ state, interactive = true, onStateChange, initial,
 
   return (
     <div className="flex flex-col gap-4" data-visual="mouth-places">
-      <svg viewBox="0 0 400 260" className="h-auto w-full max-w-[480px]" role="img" aria-label={alt}>
-        {/* Face profile, facing left */}
-        <path d="M60,40 C40,70 36,100 46,120 L58,128 C52,136 52,144 58,150 L50,160 C46,190 60,226 120,246" fill="none" style={{ stroke: 'var(--muted)', strokeWidth: 2 }} />
-        {/* Roof of the mouth: ridge, hard palate, soft palate */}
-        <path d="M92,128 C100,118 112,114 122,118 C150,96 200,88 236,94 C262,98 282,110 300,128" fill="none" style={{ stroke: 'var(--ink)', strokeWidth: 3, strokeLinecap: 'round' }} />
-        {/* Lips */}
-        <path d="M58,128 C70,124 84,124 92,128 L90,136 C80,136 68,136 58,134 Z" style={{ fill: 'var(--card-side)' }} />
-        <path d="M58,152 C70,150 82,152 92,156 L94,166 C80,168 66,166 56,160 Z" style={{ fill: 'var(--card-side)' }} />
-        {/* Teeth */}
-        <rect x="88" y="128" width="12" height="14" rx="3" style={{ fill: 'var(--surface)', stroke: 'var(--rule)', strokeWidth: 1.5 }} />
-        <rect x="88" y="152" width="12" height="13" rx="3" style={{ fill: 'var(--surface)', stroke: 'var(--rule)', strokeWidth: 1.5 }} />
-        {/* Jaw floor */}
-        <path d="M96,170 C150,196 230,206 300,200" fill="none" style={{ stroke: 'var(--rule)', strokeWidth: 2 }} />
-        {/* Tongue */}
-        <path
-          d={s.tongue}
-          style={{ fill: 'color-mix(in srgb, var(--subject) 60%, var(--card-top))', transition: reduced ? 'none' : 'd var(--m-object-d) var(--ease-object)' }}
-          data-tongue={g}
-        />
-        {/* The place */}
-        <circle cx={s.place[0]} cy={s.place[1]} r="11" style={{ fill: 'none', stroke: 'var(--accent)', strokeWidth: 3 }} />
-        <circle cx={s.place[0]} cy={s.place[1]} r="4" style={{ fill: 'var(--accent)' }} />
-        {/* A puff of air for aspirated initials */}
-        {puff && pair && (
-          <g aria-hidden style={{ stroke: 'var(--muted)', strokeWidth: 2.5, fill: 'none', strokeLinecap: 'round' }} className={reduced ? undefined : 'fade-in'}>
-            <path d="M44,132 C34,134 28,138 22,136" />
-            <path d="M44,142 C32,142 24,144 16,142" />
-            <path d="M44,152 C34,150 28,154 22,152" />
-          </g>
-        )}
-        <text x="300" y="28" textAnchor="end" className="font-mono" style={{ fill: 'var(--muted)', fontSize: 13 }}>
-          {initials.join(' ')}
-        </text>
-      </svg>
+      <MouthDrawing tongue={s.tongue} tongueKey={g} place={s.place} alt={alt} puff={puff && !!pair} label={initials.join(' ')} />
       <p className="text-small" aria-live="polite">
         {alt}
       </p>

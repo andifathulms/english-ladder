@@ -79,7 +79,7 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
         </div>
 
         <div className={`flex flex-col ${climb ? 'items-center ' : ''}gap-3 text-center`}>
-          {climb?.Badge && <climb.Badge />}
+          {climb?.Badge && <climb.Badge rung={rung} />}
           {climb && course.ladder?.RungSubtitle && <course.ladder.RungSubtitle rung={rung} place="climb" />}
           {climb && subtitle && (
             <TargetText block as="p" size="title" face="display" className="text-center text-brass">
@@ -101,7 +101,7 @@ export function ClimbMoment({ rung, next, onReview }: Props) {
           ) : (
             <p className="font-display text-h2 italic text-brass">{t('climb.line')}</p>
           )}
-          {climb?.Extra && <climb.Extra />}
+          {climb?.Extra && <climb.Extra rung={rung} />}
         </div>
 
         <div className="flex flex-col items-center gap-3">

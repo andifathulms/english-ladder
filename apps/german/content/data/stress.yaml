@@ -1,0 +1,61 @@
+# Word stress the rule in lib/de/syllables.ts gets wrong (CLAUDE.md §5.1): mostly loanwords, and
+# prefixed words with one syllable after the prefix. The Tirukan card underlines the stressed
+# syllable from here first. Syllables are spelled out (they must join to the word); stress counts
+# from 0. Draft data for the teacher's review. Keys are matched case-insensitively.
+- { word: hallo, syllables: [hal, lo], stress: 1 }
+- { word: Hotel, syllables: [Ho, tel], stress: 1 }
+- { word: Familie, syllables: [Fa, mi, lie], stress: 1 }
+- { word: Restaurant, syllables: [Res, tau, rant], stress: 2 }
+- { word: Apotheke, syllables: [A, po, the, ke], stress: 2 }
+- { word: Büro, syllables: [Bü, ro], stress: 1 }
+- { word: Telefon, syllables: [Te, le, fon], stress: 2 }
+- { word: Computer, syllables: [Com, pu, ter], stress: 1 }
+- { word: Musik, syllables: [Mu, sik], stress: 1 }
+- { word: Student, syllables: [Stu, dent], stress: 1 }
+- { word: Studentin, syllables: [Stu, den, tin], stress: 1 }
+- { word: Patient, syllables: [Pa, ti, ent], stress: 2 }
+- { word: Patientin, syllables: [Pa, ti, en, tin], stress: 2 }
+- { word: Banane, syllables: [Ba, na, ne], stress: 1 }
+- { word: Tomate, syllables: [To, ma, te], stress: 1 }
+- { word: Kartoffel, syllables: [Kar, tof, fel], stress: 1 }
+- { word: Adresse, syllables: [Ad, res, se], stress: 1 }
+- { word: Formular, syllables: [For, mu, lar], stress: 2 }
+- { word: Termin, syllables: [Ter, min], stress: 1 }
+- { word: Moment, syllables: [Mo, ment], stress: 1 }
+- { word: Dokument, syllables: [Do, ku, ment], stress: 2 }
+- { word: Medikament, syllables: [Me, di, ka, ment], stress: 3 }
+- { word: Problem, syllables: [Pro, blem], stress: 1 }
+- { word: Museum, syllables: [Mu, se, um], stress: 1 }
+- { word: Moschee, syllables: [Mo, schee], stress: 1 }
+- { word: Ingenieur, syllables: [In, ge, nieur], stress: 2 }
+- { word: Mechaniker, syllables: [Me, cha, ni, ker], stress: 1 }
+- { word: Fabrik, syllables: [Fa, brik], stress: 1 }
+- { word: Mathematik, syllables: [Ma, the, ma, tik], stress: 3 }
+- { word: Kollege, syllables: [Kol, le, ge], stress: 1 }
+- { word: Kollegin, syllables: [Kol, le, gin], stress: 1 }
+- { word: Apartment, syllables: [A, part, ment], stress: 1 }
+- { word: Indonesien, syllables: [In, do, ne, si, en], stress: 2 }
+- { word: Berlin, syllables: [Ber, lin], stress: 1 }
+- { word: Jakarta, syllables: [Ja, kar, ta], stress: 1 }
+- { word: natürlich, syllables: [na, tür, lich], stress: 1 }
+- { word: vielleicht, syllables: [viel, leicht], stress: 1 }
+- { word: zusammen, syllables: [zu, sam, men], stress: 1 }
+- { word: genau, syllables: [ge, nau], stress: 1 }
+- { word: Geschäft, syllables: [Ge, schäft], stress: 1 }
+- { word: Geschenk, syllables: [Ge, schenk], stress: 1 }
+- { word: Besuch, syllables: [Be, such], stress: 1 }
+- { word: Beruf, syllables: [Be, ruf], stress: 1 }
+- { word: Kantine, syllables: [Kan, ti, ne], stress: 1 }
+- { word: Balikpapan, syllables: [Ba, lik, pa, pan], stress: 2 }
+# Easy 2: participles with ge- before one syllable, compounds the rule splits oddly, loanwords.
+- { word: geradeaus, syllables: [ge, ra, de, aus], stress: 3 }
+- { word: gemacht, syllables: [ge, macht], stress: 1 }
+- { word: gegangen, syllables: [ge, gan, gen], stress: 1 }
+- { word: aufstehen, syllables: [auf, ste, hen], stress: 0 }
+- { word: Balkon, syllables: [Bal, kon], stress: 1 }
+- { word: Toilette, syllables: [Toi, let, te], stress: 1 }
+- { word: Tablette, syllables: [Tab, let, te], stress: 1 }
+- { word: Konzert, syllables: [Kon, zert], stress: 1 }
+- { word: Etage, syllables: [E, ta, ge], stress: 1 }
+- { word: zentral, syllables: [zen, tral], stress: 1 }
+- { word: unterschreiben, syllables: [un, ter, schrei, ben], stress: 2 }

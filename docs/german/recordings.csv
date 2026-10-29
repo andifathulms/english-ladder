@@ -1,0 +1,90 @@
+file,kind,text,where
+9d9ae7ce032e,word,Koffer,dasar-01-kamu-sudah-tahu
+0da376d4e6b5,word,Handtuch,dasar-01-kamu-sudah-tahu
+aff94bad6305,word,Apotheke,dasar-01-kamu-sudah-tahu
+5efdbc1f0f7c,word,Kantine,dasar-01-kamu-sudah-tahu
+652fe3e75df6,pair,die Apotheke,dasar-01-kamu-sudah-tahu
+3fc5e809564e,pair,die Kantine,dasar-01-kamu-sudah-tahu
+efdd878faad0,tirukan,"der Koffer, das Handtuch, die Apotheke",dasar-01-kamu-sudah-tahu
+8c46982925f4,pair,schon,dasar-02-umlaut
+8824919735af,pair,schön,dasar-02-umlaut
+7ce07f0e22ed,pair,Mutter,dasar-02-umlaut
+5a1f963c28a5,pair,Mütter,dasar-02-umlaut
+ea7decc797ed,word,Tür,dasar-02-umlaut
+13dbb02fcb04,word,Brötchen,dasar-02-umlaut
+1ae21e3f4353,word,Käse,dasar-02-umlaut
+263d3305da36,pair,die Mütter,dasar-02-umlaut
+ade65108d019,pair,die Tür,dasar-02-umlaut
+b35a009ca1bd,tirukan,"schön, die Tür, der Käse",dasar-02-umlaut
+40933fda21b9,pair,Biene,dasar-03-ei-ie-eu
+cdd4f65f50fa,pair,Beine,dasar-03-ei-ie-eu
+625b4b163f8e,pair,Miete,dasar-03-ei-ie-eu
+9aa02b0ce053,pair,Mitte,dasar-03-ei-ie-eu
+2d22ca0f9e55,word,Ei,dasar-03-ei-ie-eu
+be8d49319e6b,word,Arbeit,dasar-03-ei-ie-eu
+019e70dca6f9,word,neu,dasar-03-ei-ie-eu
+fb1a0f587225,word,Häuser,dasar-03-ei-ie-eu
+a8aae2a687e4,pair,die Miete,dasar-03-ei-ie-eu
+f527510960d1,pair,die Häuser,dasar-03-ei-ie-eu
+da98dc5e929d,tirukan,"das Ei, die Miete, neu",dasar-03-ei-ie-eu
+3a089e957952,pair,Kirche,dasar-04-ich-dan-ach
+e1c75464203d,pair,Kirsche,dasar-04-ich-dan-ach
+90e8bc040d74,word,ich,dasar-04-ich-dan-ach
+1990d1d86fa6,word,Buch,dasar-04-ich-dan-ach
+5b28026b23c1,word,Schule,dasar-04-ich-dan-ach
+bbd04331e5c0,word,Stadt,dasar-04-ich-dan-ach
+f2ab3da5baff,word,Zeit,dasar-04-ich-dan-ach
+596b476cd6e2,word,Vater,dasar-04-ich-dan-ach
+b4170af249a3,pair,das Wasser,dasar-04-ich-dan-ach
+a4dd836bac66,tirukan,"ich, das Buch, die Stadt",dasar-04-ich-dan-ach
+03eef76bed53,pair,Tag,dasar-05-tag-dibaca-tak
+baea56d2b134,pair,Tage,dasar-05-tag-dibaca-tak
+e02bc0c93ac8,pair,Rad,dasar-05-tag-dibaca-tak
+7532528c816d,pair,Rat,dasar-05-tag-dibaca-tak
+bfb23f81b23d,word,Hund,dasar-05-tag-dibaca-tak
+bd066583d6ba,word,Straße,dasar-05-tag-dibaca-tak
+d2aec5a1393a,word,groß,dasar-05-tag-dibaca-tak
+5f00b1d0a498,word,Brot,dasar-05-tag-dibaca-tak
+741e6bb5b9d2,pair,die Tage,dasar-05-tag-dibaca-tak
+610ec18f419b,pair,die Straße,dasar-05-tag-dibaca-tak
+3d4534a8ec2c,tirukan,"der Tag, die Straße, das Brot",dasar-05-tag-dibaca-tak
+910dee0af136,word,Ausgang,dasar-06-membaca-nyaring
+858f56e9b007,word,Eingang,dasar-06-membaca-nyaring
+1a0e968f8636,word,Kaffee,dasar-06-membaca-nyaring
+dbd28d4149ab,word,Kuchen,dasar-06-membaca-nyaring
+5397f3e51bda,pair,Kaffee und Kuchen,dasar-06-membaca-nyaring
+a011ace06167,pair,Das ist die Kantine.,dasar-06-membaca-nyaring
+6098ed5fdb2e,tirukan,"Hallo, Rina! Das ist die Kantine. Der Kaffee ist gut.",dasar-06-membaca-nyaring
+010ca91dc709,pair,das Handtuch,dasar/test.yaml
+bf38c105db93,pair,die Mutter,dasar/test.yaml
+df61e9fa1604,pair,das Ei,dasar/test.yaml
+ede6d589da08,pair,die Arbeit,dasar/test.yaml
+a3a5399fd72e,pair,die Schule,dasar/test.yaml
+8d936df3b1e0,pair,die Zeit,dasar/test.yaml
+ee5f5d2056e1,pair,das Brot,dasar/test.yaml
+8057b735f60d,pair,der Hund,dasar/test.yaml
+a16774932a89,pair,Der Kaffee ist gut.,dasar/test.yaml
+f67c58ee7e51,tirukan,Guten Tag! Wie geht es Ihnen?,easy1-01-hallo
+5d64a7871b70,tirukan,Ich heiße Rina. Ich komme aus Indonesien.,easy1-02-ich-heisse
+b2ed835bb7bf,tirukan,Heute lerne ich Deutsch.,easy1-03-ich-wohne
+5448c73b6125,tirukan,Wo wohnst du?,easy1-04-fragen
+d5dba6d862c2,tirukan,Die Wohnung ist schön.,easy1-05-der-die-das
+b981fafa02fb,tirukan,Ich bin dreiundzwanzig Jahre alt.,easy1-06-zahlen
+5da464f665ad,tirukan,Das ist keine Apotheke.,easy1-07-ein-kein
+a7361307b8d6,tirukan,Das ist meine Familie.,easy1-08-meine-familie
+1dfdfd74abbf,tirukan,Ich habe zwei Kinder.,easy1-09-plural
+ec299301094c,tirukan,Ich habe einen Bruder.,easy1-10-akkusativ
+cfc7cb703118,tirukan,"Ich möchte einen Kaffee, bitte.",easy1-11-einkaufen
+d2d5f9701b93,tirukan,Der Schlüssel ist auf dem Tisch.,easy1-12-wo-ist
+46c6413b4762,tirukan,Es ist halb acht.,easy2-01-uhrzeit
+0881c6dfba60,tirukan,Ich stehe um sechs Uhr auf.,easy2-02-aufstehen
+a0e6cfbc575d,tirukan,Ich kann gut schwimmen.,easy2-03-koennen
+e2526e81193c,tirukan,Ich rufe dich morgen an.,easy2-04-mich-dich
+ebd01276c0fc,tirukan,Waschen Sie bitte die Hände.,easy2-05-imperativ
+e7bac70103e4,tirukan,Ich fahre mit dem Bus zur Arbeit.,easy2-06-mit-dem-bus
+e294d1905772,tirukan,Gehen Sie geradeaus und dann links.,easy2-07-wo-wohin
+1d26fd259828,tirukan,Mein Kopf tut weh.,easy2-08-arzt
+30c2ab999bc0,tirukan,"Das Schlafzimmer ist klein, aber hell.",easy2-09-wohnung
+ec6bd6afe48c,tirukan,Bitte füllen Sie das Formular aus.,easy2-10-formular
+4ac5c44d9db4,tirukan,Ich habe gestern gearbeitet.,easy2-11-perfekt
+c10ba0e63682,tirukan,Ich stehe um halb sechs auf.,easy2-12-ein-tag

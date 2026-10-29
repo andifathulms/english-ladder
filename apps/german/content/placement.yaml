@@ -1,0 +1,223 @@
+# Cek level (PRD §5.2): 24 items, six per section, written for this course (never Goethe exam material).
+# The first section scoring under 75% decides where the learner starts (course.config placement).
+# `from` names the lesson behind an item (highlighted on the placed rung when missed); Easy 3 has no
+# lessons yet (v1.1).
+items:
+  # ---------- Dasar: sounds and spelling ----------
+  - id: pl-d-1
+    from: dasar-02-umlaut
+    section: dasar
+    type: listen
+    audio: "schön"
+    options: ["schön", "schon"]
+    answer: "schön"
+    why: { id: "*Schön* (indah) punya ö: bibir bulat. *Schon* (sudah) tanpa umlaut.", en: "*Schön* (beautiful) has ö: rounded lips. *Schon* (already) has none." }
+  - id: pl-d-2
+    from: dasar-05-tag-dibaca-tak
+    section: dasar
+    type: choice
+    lang: id
+    prompt: "Bagaimana kata *Tag* diucapkan?"
+    options: ["seperti *tak*", "seperti *tag*", "seperti *tah*"]
+    answer: "seperti *tak*"
+    why: { id: "Di akhir kata, *g* dibaca *k*, *d* dibaca *t*, *b* dibaca *p*.", en: "At the end of a word, *g* sounds like *k*, *d* like *t*, *b* like *p*." }
+  - id: pl-d-3
+    from: dasar-03-ei-ie-eu
+    section: dasar
+    type: choice
+    lang: id
+    prompt: "*Ei* dalam *mein* dibaca seperti…"
+    options: ["*ai* dalam *pantai*", "*i* panjang", "*e* dalam *enak*"]
+    answer: "*ai* dalam *pantai*"
+    why: { id: "*Ei* selalu *ai*: *mein*, *drei*, *Arbeit*.", en: "*Ei* always sounds like *ai*: *mein*, *drei*, *Arbeit*." }
+  - id: pl-d-4
+    from: dasar-03-ei-ie-eu
+    section: dasar
+    type: choice
+    lang: id
+    prompt: "*Ie* dalam *Liebe* dibaca…"
+    options: ["*i* panjang", "*ai*", "*i* lalu *e*"]
+    answer: "*i* panjang"
+    why: { id: "*Ie* adalah *i* panjang: *vier*, *Liebe*, *Miete*. Kebalikan dari *ei*.", en: "*Ie* is a long *i*: *vier*, *Liebe*, *Miete*. The opposite of *ei*." }
+  - id: pl-d-5
+    from: dasar-01-kamu-sudah-tahu
+    section: dasar
+    type: choice
+    lang: id
+    prompt: "Kata apa yang selalu diawali huruf besar dalam bahasa Jerman?"
+    options: ["kata benda", "kata kerja", "kata sifat"]
+    answer: "kata benda"
+    why: { id: "Semua kata benda diawali huruf besar: *der Tisch*, *die Arbeit*.", en: "Every noun starts with a capital: *der Tisch*, *die Arbeit*." }
+  - id: pl-d-6
+    from: dasar-01-kamu-sudah-tahu
+    section: dasar
+    type: choice
+    lang: id
+    prompt: "*Koffer* artinya…"
+    options: ["koper", "kopi", "kantor"]
+    answer: "koper"
+    why: { id: "*Koper* datang dari bahasa Belanda *koffer*, sama seperti bahasa Jerman *Koffer*.", en: "*Koper* comes from Dutch *koffer*, just like German *Koffer*." }
+
+  # ---------- Easy 1: verb position, der/die/das, accusative ----------
+  - id: pl-e1-1
+    from: easy1-02-ich-heisse
+    section: easy1
+    type: gap
+    prompt: "Ich ___ aus Indonesien."
+    options: [komme, kommst, kommt]
+    answer: komme
+    why: { id: "*Ich* + *-e*: *ich komme*.", en: "*Ich* takes *-e*: *ich komme*." }
+  - id: pl-e1-2
+    from: easy1-03-ich-wohne
+    section: easy1
+    type: wordorder
+    cue: "Hari ini aku bekerja."
+    tiles: [ich, Heute, arbeite]
+    answer: [Heute, arbeite, ich]
+    zones: [p1, verb, middle]
+    why: { id: "Kata kerja selalu di posisi 2. Kalau *heute* di depan, *ich* pindah ke belakang kata kerja.", en: "The verb is always in position 2. With *heute* in front, *ich* moves after the verb." }
+  - id: pl-e1-3
+    from: easy1-05-der-die-das
+    section: easy1
+    type: gender
+    noun: Zeitung
+    answer: f
+    why: { id: "Kata benda berakhiran *-ung* selalu *die*.", en: "Nouns ending in *-ung* are always *die*." }
+  - id: pl-e1-4
+    from: easy1-10-akkusativ
+    section: easy1
+    type: case
+    cue: "Aku punya seorang saudara laki-laki."
+    sentence: "Ich habe ___ Bruder."
+    role: akk
+    noun: Bruder
+    options: [einen, ein, einem]
+    answer: einen
+    why: { id: "*Bruder* itu *der*, dan objek dari *haben* memakai akusatif: *einen*.", en: "*Bruder* is *der*, and the object of *haben* is accusative: *einen*." }
+  - id: pl-e1-5
+    from: easy1-09-plural
+    section: easy1
+    type: gap
+    cue: "Itu dua anak."
+    prompt: "Das sind zwei ___."
+    options: [Kinder, Kind, Kindes]
+    answer: Kinder
+    why: { id: "Jamak *Kind* adalah *Kinder* (-er).", en: "The plural of *Kind* is *Kinder* (-er)." }
+  - id: pl-e1-6
+    from: easy1-08-meine-familie
+    section: easy1
+    type: gap
+    prompt: "___ du Kinder?"
+    options: [Hast, Habt, Hat]
+    answer: Hast
+    why: { id: "*Du hast*. Dalam pertanyaan ya/tidak, kata kerja di depan.", en: "*Du hast*. In a yes/no question the verb comes first." }
+
+  # ---------- Easy 2: separable and modal verbs, dative, Perfekt ----------
+  - id: pl-e2-1
+    from: easy2-02-aufstehen
+    section: easy2
+    type: wordorder
+    cue: "Aku bangun jam 6."
+    tiles: [auf, Ich, um 6 Uhr, stehe]
+    answer: [Ich, stehe, um 6 Uhr, auf]
+    zones: [p1, verb, middle, end]
+    why: { id: "*Aufstehen* terpisah: *stehe* di posisi 2, *auf* di akhir.", en: "*Aufstehen* separates: *stehe* in position 2, *auf* at the end." }
+  - id: pl-e2-2
+    from: easy2-03-koennen
+    section: easy2
+    type: gap
+    cue: "Hari ini aku tidak bisa datang."
+    prompt: "Ich kann heute nicht ___."
+    options: [kommen, komme, kommt]
+    answer: kommen
+    why: { id: "Setelah kata kerja modal, kata kerja kedua berbentuk infinitif di akhir.", en: "After a modal verb, the second verb goes to the end as an infinitive." }
+  - id: pl-e2-3
+    from: easy2-06-mit-dem-bus
+    section: easy2
+    type: case
+    cue: "Aku naik bus."
+    sentence: "Ich fahre mit ___ Bus."
+    role: dat
+    noun: Bus
+    options: [dem, den, der]
+    answer: dem
+    why: { id: "*Mit* selalu diikuti datif: *der Bus* → *mit dem Bus*.", en: "*Mit* always takes the dative: *der Bus* → *mit dem Bus*." }
+  - id: pl-e2-4
+    from: easy2-07-wo-wohin
+    section: easy2
+    type: wechsel
+    cue: "Aku menaruh buku ke atas meja."
+    scene: { place: on, motion: true }
+    sentence: "Ich lege das Buch auf ___ Tisch."
+    verb: legen
+    options: [den, dem]
+    answer: den
+    why: { id: "Ada gerakan (*wohin?*), jadi akusatif: *auf den Tisch*.", en: "There's movement (*wohin?*), so accusative: *auf den Tisch*." }
+  - id: pl-e2-5
+    from: easy2-11-perfekt
+    section: easy2
+    type: gap
+    cue: "Kemarin aku bekerja."
+    prompt: "Ich ___ gestern gearbeitet."
+    options: [habe, bin, hat]
+    answer: habe
+    why: { id: "*Arbeiten* membentuk Perfekt dengan *haben*: *ich habe gearbeitet*.", en: "*Arbeiten* forms its Perfekt with *haben*: *ich habe gearbeitet*." }
+  - id: pl-e2-6
+    from: easy2-11-perfekt
+    section: easy2
+    type: gap
+    cue: "Kami pergi ke Berlin."
+    prompt: "Wir ___ nach Berlin gefahren."
+    options: [sind, haben, hat]
+    answer: sind
+    why: { id: "Kata kerja gerak seperti *fahren* memakai *sein*: *wir sind gefahren*.", en: "Verbs of movement like *fahren* take *sein*: *wir sind gefahren*." }
+
+  # ---------- Easy 3: Perfekt, weil and dass, comparisons ----------
+  - id: pl-e3-1
+    section: easy3
+    type: wordorder
+    cue: "… karena aku lelah."
+    tiles: [bin, weil, müde, ich]
+    answer: [weil, ich, müde, bin]
+    zones: [p1, middle, middle, verb]
+    why: { id: "Setelah *weil*, kata kerja pindah ke paling akhir.", en: "After *weil*, the verb goes to the very end." }
+  - id: pl-e3-2
+    section: easy3
+    type: gap
+    cue: "Aku tahu bahwa dia datang hari ini."
+    prompt: "Ich weiß, dass er heute ___."
+    options: [kommt, kommen, komme]
+    answer: kommt
+    why: { id: "Setelah *dass*, kata kerja di akhir: *dass er heute kommt*.", en: "After *dass*, the verb is last: *dass er heute kommt*." }
+  - id: pl-e3-3
+    section: easy3
+    type: gap
+    cue: "Bisakah kamu membantuku?"
+    prompt: "Kannst du ___ helfen?"
+    options: [mir, mich, ich]
+    answer: mir
+    why: { id: "*Helfen* memakai datif: *mir*, bukan *mich*.", en: "*Helfen* takes the dative: *mir*, not *mich*." }
+  - id: pl-e3-4
+    section: easy3
+    type: gap
+    cue: "Berlin lebih besar daripada Hamburg."
+    prompt: "Berlin ist größer ___ Hamburg."
+    options: [als, wie, dann]
+    answer: als
+    why: { id: "Perbandingan: *größer als* (lebih besar daripada).", en: "Comparisons: *größer als* (bigger than)." }
+  - id: pl-e3-5
+    section: easy3
+    type: gap
+    cue: "Kemarin aku bangun pagi-pagi."
+    prompt: "Ich bin gestern früh ___."
+    options: [aufgestanden, aufstanden, geaufstanden]
+    answer: aufgestanden
+    why: { id: "Kata kerja terpisah: *ge-* masuk di tengah: *auf-ge-standen*.", en: "Separable verbs put *ge-* in the middle: *auf-ge-standen*." }
+  - id: pl-e3-6
+    section: easy3
+    type: gap
+    cue: "Aku suka gaun itu."
+    prompt: "Das Kleid gefällt ___."
+    options: [mir, mich, ich]
+    answer: mir
+    why: { id: "*Gefallen* memakai datif: yang suka adalah *mir*.", en: "*Gefallen* takes the dative: the one who likes it is *mir*." }

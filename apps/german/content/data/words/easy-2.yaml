@@ -1,0 +1,348 @@
+# Easy 2 word list (the A1 deck, part 2; curriculum words_target 300): every glossary word of Easy 2
+# lessons 01–12 plus the A1.2 words their topics need (days, months, times of day, daily routine,
+# transport and directions, body and health, housing and furniture, forms and personal data, free time).
+# No word from data/words/dasar.yaml or easy-1.yaml is repeated. Nouns and verbs match nouns.yaml /
+# verbs.yaml and their per-rung files. Draft data for the teacher's review.
+
+# ---------- phrases ----------
+- {de: Wie spät ist es?, id: jam berapa sekarang?, en: what time is it?, pos: expr}
+- {de: Wie viel Uhr ist es?, id: jam berapa sekarang?, en: what time is it?, pos: expr}
+- {de: um wie viel Uhr, id: jam berapa (kapan), en: at what time, pos: expr}
+- {de: am Wochenende, id: pada akhir pekan, en: at the weekend, pos: expr}
+- {de: jeden Tag, id: setiap hari, en: every day, pos: expr}
+- {de: zu Fuß, id: jalan kaki, en: on foot, pos: expr}
+- {de: nach Hause, id: pulang (ke rumah), en: home (going home), pos: expr}
+- {de: in der Nähe, id: di dekat sini, en: nearby, pos: expr}
+- {de: Alles klar, id: oke; beres, en: all right, pos: expr}
+- {de: Gute Besserung!, id: semoga lekas sembuh!, en: get well soon!, pos: expr}
+- {de: Was ist los?, id: ada apa?, en: what's wrong?, pos: expr}
+- {de: Bis morgen!, id: sampai besok!, en: see you tomorrow!, pos: expr}
+- {de: Viel Spaß!, id: selamat bersenang-senang!, en: have fun!, pos: expr}
+- {de: Liebe …, id: "… yang baik (pembuka pesan, untuk perempuan)", en: "Dear … (to a woman)", pos: expr}
+- {de: Lieber …, id: "… yang baik (pembuka pesan, untuk laki-laki)", en: "Dear … (to a man)", pos: expr}
+- {de: Viele Grüße, id: salam (penutup pesan), en: best wishes, pos: expr}
+
+# ---------- pronouns ----------
+- {de: mich, id: aku; saya (objek), en: me, pos: pron}
+- {de: dich, id: kamu (objek), en: you (object), pos: pron}
+- {de: ihn, id: dia; -nya (laki-laki; der), en: him; it (der), pos: pron}
+- {de: uns, id: kami; kita (objek), en: us, pos: pron}
+- {de: euch, id: kalian (objek), en: you all (object), pos: pron}
+- {de: man, id: orang (umum), en: one; you (general), pos: pron}
+
+# ---------- prepositions ----------
+- {de: mit, id: dengan; naik, en: with; by, pos: prep}
+- {de: bei, id: di (tempat seseorang), en: at (someone's place), pos: prep}
+- {de: zu, id: "ke (orang; tempat)", en: to, pos: prep}
+- {de: von, id: dari, en: from; of, pos: prep}
+- {de: nach, id: "ke (kota; negara); sesudah", en: "to (towns; countries); after", pos: prep}
+- {de: seit, id: sejak, en: since; for, pos: prep}
+- {de: ab, id: "mulai; dari (jam; tempat)", en: from (a time); departing from, pos: prep}
+- {de: bis, id: sampai, en: until, pos: prep}
+- {de: gegenüber, id: di seberang, en: opposite, pos: prep}
+- {de: zwischen, id: di antara, en: between, pos: prep}
+- {de: über, id: di atas (tidak menempel), en: above; over, pos: prep}
+- {de: ohne, id: tanpa, en: without, pos: prep}
+
+# ---------- adverbs ----------
+- {de: halb, id: setengah, en: half, pos: adv}
+- {de: gestern, id: kemarin, en: yesterday, pos: adv}
+- {de: vorgestern, id: kemarin lusa, en: the day before yesterday, pos: adv}
+- {de: morgen, id: besok, en: tomorrow, pos: adv}
+- {de: morgens, id: setiap pagi, en: in the mornings, pos: adv}
+- {de: mittags, id: setiap siang, en: at midday, pos: adv}
+- {de: nachmittags, id: setiap sore, en: in the afternoons, pos: adv}
+- {de: abends, id: setiap malam, en: in the evenings, pos: adv}
+- {de: nachts, id: malam hari, en: at night, pos: adv}
+- {de: zuerst, id: pertama-tama, en: first, pos: adv}
+- {de: danach, id: sesudah itu, en: after that, pos: adv}
+- {de: immer, id: selalu, en: always, pos: adv}
+- {de: manchmal, id: kadang-kadang, en: sometimes, pos: adv}
+- {de: nie, id: tidak pernah, en: never, pos: adv}
+- {de: links, id: kiri; di kiri, en: left, pos: adv}
+- {de: rechts, id: kanan; di kanan, en: right, pos: adv}
+- {de: geradeaus, id: lurus, en: straight on, pos: adv}
+- {de: sofort, id: segera, en: immediately, pos: adv}
+- {de: gleich, id: sebentar lagi, en: in a moment, pos: adv}
+- {de: lange, id: lama, en: for a long time, pos: adv}
+- {de: mal, id: "-lah; coba (melunakkan)", en: just (softener), pos: adv}
+- {de: leider, id: sayangnya, en: unfortunately, pos: adv}
+- {de: vielleicht, id: mungkin, en: maybe, pos: adv}
+- {de: natürlich, id: tentu saja, en: of course, pos: adv}
+- {de: endlich, id: akhirnya, en: at last, pos: adv}
+- {de: bald, id: segera; sebentar lagi, en: soon, pos: adv}
+
+# ---------- adjectives ----------
+- {de: früh, id: pagi; awal, en: early, pos: adj}
+- {de: spät, id: terlambat; malam, en: late, pos: adj}
+- {de: pünktlich, id: tepat waktu, en: on time, pos: adj}
+- {de: frei, id: libur; kosong; bebas, en: free; off, pos: adj}
+- {de: kurz, id: pendek; sebentar, en: short, pos: adj}
+- {de: schnell, id: cepat, en: fast, pos: adj}
+- {de: langsam, id: pelan; lambat, en: slow, pos: adj}
+- {de: laut, id: keras; berisik, en: loud, pos: adj}
+- {de: klar, id: jelas, en: clear, pos: adj}
+- {de: fertig, id: selesai; siap, en: ready; finished, pos: adj}
+- {de: offen, id: buka, en: open, pos: adj}
+- {de: gesund, id: sehat, en: healthy, pos: adj}
+- {de: schlimm, id: parah, en: bad; serious, pos: adj}
+- {de: hell, id: terang, en: bright, pos: adj}
+- {de: dunkel, id: gelap, en: dark, pos: adj}
+- {de: ruhig, id: tenang, en: quiet; calm, pos: adj}
+- {de: zentral, id: di pusat kota, en: central, pos: adj}
+- {de: günstig, id: murah; terjangkau, en: reasonably priced, pos: adj}
+- {de: möbliert, id: berperabot, en: furnished, pos: adj}
+- {de: schwer, id: sulit; berat, en: difficult; heavy, pos: adj}
+- {de: weit, id: jauh, en: far, pos: adj}
+- {de: geboren, id: lahir, en: born, pos: adj}
+- {de: männlich, id: laki-laki, en: male, pos: adj}
+- {de: weiblich, id: perempuan, en: female, pos: adj}
+- {de: indonesisch, id: (ber)kewarganegaraan Indonesia, en: Indonesian, pos: adj}
+
+# ---------- time ----------
+- {de: Uhr, id: jam; pukul, en: clock; o'clock, pos: noun, gender: f, plural: Uhren}
+- {de: Uhrzeit, id: jam (waktu), en: time (of day), pos: noun, gender: f, plural: Uhrzeiten}
+- {de: Stunde, id: jam (lamanya), en: hour, pos: noun, gender: f, plural: Stunden}
+- {de: Minute, id: menit, en: minute, pos: noun, gender: f, plural: Minuten}
+- {de: Viertel, id: seperempat, en: quarter, pos: noun, gender: 'n', plural: Viertel}
+- {de: Morgen, id: pagi, en: morning, pos: noun, gender: m, plural: Morgen}
+- {de: Vormittag, id: pagi menjelang siang, en: late morning, pos: noun, gender: m, plural: Vormittage}
+- {de: Mittag, id: tengah hari, en: midday, pos: noun, gender: m, plural: Mittage}
+- {de: Nachmittag, id: sore, en: afternoon, pos: noun, gender: m, plural: Nachmittage}
+- {de: Abend, id: malam (petang), en: evening, pos: noun, gender: m, plural: Abende}
+- {de: Nacht, id: malam, en: night, pos: noun, gender: f, plural: Nächte}
+- {de: Woche, id: minggu (pekan), en: week, pos: noun, gender: f, plural: Wochen}
+- {de: Wochenende, id: akhir pekan, en: weekend, pos: noun, gender: 'n', plural: Wochenenden}
+- {de: Monat, id: bulan, en: month, pos: noun, gender: m, plural: Monate}
+- {de: Montag, id: Senin, en: Monday, pos: noun, gender: m, plural: Montage}
+- {de: Dienstag, id: Selasa, en: Tuesday, pos: noun, gender: m, plural: Dienstage}
+- {de: Mittwoch, id: Rabu, en: Wednesday, pos: noun, gender: m, plural: Mittwoche}
+- {de: Donnerstag, id: Kamis, en: Thursday, pos: noun, gender: m, plural: Donnerstage}
+- {de: Freitag, id: Jumat, en: Friday, pos: noun, gender: m, plural: Freitage}
+- {de: Samstag, id: Sabtu, en: Saturday, pos: noun, gender: m, plural: Samstage}
+- {de: Sonntag, id: Minggu, en: Sunday, pos: noun, gender: m, plural: Sonntage}
+- {de: Januar, id: Januari, en: January, pos: noun, gender: m, plural: —}
+- {de: Februar, id: Februari, en: February, pos: noun, gender: m, plural: —}
+- {de: März, id: Maret, en: March, pos: noun, gender: m, plural: —}
+- {de: April, id: April, en: April, pos: noun, gender: m, plural: —}
+- {de: Mai, id: Mei, en: May, pos: noun, gender: m, plural: —}
+- {de: Juni, id: Juni, en: June, pos: noun, gender: m, plural: —}
+- {de: Juli, id: Juli, en: July, pos: noun, gender: m, plural: —}
+- {de: August, id: Agustus, en: August, pos: noun, gender: m, plural: —}
+- {de: September, id: September, en: September, pos: noun, gender: m, plural: —}
+- {de: Oktober, id: Oktober, en: October, pos: noun, gender: m, plural: —}
+- {de: November, id: November, en: November, pos: noun, gender: m, plural: —}
+- {de: Dezember, id: Desember, en: December, pos: noun, gender: m, plural: —}
+- {de: Frühling, id: musim semi, en: spring, pos: noun, gender: m, plural: Frühlinge}
+- {de: Sommer, id: musim panas, en: summer, pos: noun, gender: m, plural: Sommer}
+- {de: Herbst, id: musim gugur, en: autumn, pos: noun, gender: m, plural: Herbste}
+- {de: Winter, id: musim dingin, en: winter, pos: noun, gender: m, plural: Winter}
+- {de: Datum, id: tanggal, en: date, pos: noun, gender: 'n', plural: Daten}
+- {de: Termin, id: janji temu, en: appointment, pos: noun, gender: m, plural: Termine}
+- {de: Pause, id: istirahat, en: break, pos: noun, gender: f, plural: Pausen}
+- {de: Feierabend, id: jam pulang kerja, en: end of the working day, pos: noun, gender: m, plural: Feierabende}
+- {de: Alltag, id: keseharian, en: everyday life, pos: noun, gender: m, plural: —}
+- {de: Wecker, id: jam weker, en: alarm clock, pos: noun, gender: m, plural: Wecker}
+
+# ---------- work, shifts, safety ----------
+- {de: Dienst, id: dinas; giliran kerja, en: duty; shift, pos: noun, gender: m, plural: Dienste}
+- {de: Schicht, id: sif, en: shift, pos: noun, gender: f, plural: Schichten}
+- {de: Frühschicht, id: sif pagi, en: early shift, pos: noun, gender: f, plural: Frühschichten}
+- {de: Spätschicht, id: sif siang, en: late shift, pos: noun, gender: f, plural: Spätschichten}
+- {de: Nachtschicht, id: sif malam, en: night shift, pos: noun, gender: f, plural: Nachtschichten}
+- {de: Station, id: bangsal, en: ward, pos: noun, gender: f, plural: Stationen}
+- {de: Werkstatt, id: bengkel, en: workshop, pos: noun, gender: f, plural: Werkstätten}
+- {de: Maschine, id: mesin, en: machine, pos: noun, gender: f, plural: Maschinen}
+- {de: Hand, id: tangan, en: hand, pos: noun, gender: f, plural: Hände}
+- {de: Handschuh, id: sarung tangan, en: glove, pos: noun, gender: m, plural: Handschuhe}
+- {de: Brille, id: kacamata, en: glasses, pos: noun, gender: f, plural: Brillen}
+- {de: Vorsicht, id: hati-hati, en: caution, pos: noun, gender: f, plural: —}
+- {de: Moment, id: sebentar; saat, en: moment, pos: noun, gender: m, plural: Momente}
+- {de: Prüfung, id: ujian, en: exam, pos: noun, gender: f, plural: Prüfungen}
+- {de: Schild, id: papan petunjuk; rambu, en: sign, pos: noun, gender: 'n', plural: Schilder}
+- {de: Gruß, id: salam, en: greeting, pos: noun, gender: m, plural: Grüße}
+- {de: Satz, id: kalimat, en: sentence, pos: noun, gender: m, plural: Sätze}
+- {de: Hausaufgabe, id: PR, en: homework, pos: noun, gender: f, plural: Hausaufgaben}
+
+# ---------- free time ----------
+- {de: Freizeit, id: waktu luang, en: free time, pos: noun, gender: f, plural: —}
+- {de: Urlaub, id: cuti; liburan, en: holiday; leave, pos: noun, gender: m, plural: Urlaube}
+- {de: Reise, id: perjalanan, en: trip; journey, pos: noun, gender: f, plural: Reisen}
+- {de: Ausflug, id: tamasya, en: day trip, pos: noun, gender: m, plural: Ausflüge}
+- {de: Kino, id: bioskop, en: cinema, pos: noun, gender: 'n', plural: Kinos, bridge: {nl: bioscoop, id: bioskop}}
+- {de: Film, id: film, en: film, pos: noun, gender: m, plural: Filme}
+- {de: Konzert, id: konser, en: concert, pos: noun, gender: 'n', plural: Konzerte}
+- {de: Sport, id: olahraga, en: sport, pos: noun, gender: m, plural: —}
+- {de: Schwimmbad, id: kolam renang, en: swimming pool, pos: noun, gender: 'n', plural: Schwimmbäder}
+- {de: Park, id: taman, en: park, pos: noun, gender: m, plural: Parks}
+- {de: Lust, id: keinginan; minat, en: desire (Lust haben = feel like), pos: noun, gender: f, plural: —}
+- {de: Geschenk, id: hadiah, en: present, pos: noun, gender: 'n', plural: Geschenke}
+
+# ---------- transport and the city ----------
+- {de: Zug, id: kereta, en: train, pos: noun, gender: m, plural: Züge}
+- {de: U-Bahn, id: kereta bawah tanah, en: underground, pos: noun, gender: f, plural: U-Bahnen}
+- {de: Straßenbahn, id: trem, en: tram, pos: noun, gender: f, plural: Straßenbahnen}
+- {de: Taxi, id: taksi, en: taxi, pos: noun, gender: 'n', plural: Taxis}
+- {de: Flugzeug, id: pesawat, en: plane, pos: noun, gender: 'n', plural: Flugzeuge}
+- {de: Bahnhof, id: stasiun, en: station, pos: noun, gender: m, plural: Bahnhöfe}
+- {de: Hauptbahnhof, id: stasiun pusat, en: main station, pos: noun, gender: m, plural: Hauptbahnhöfe}
+- {de: Gleis, id: jalur (peron), en: platform; track, pos: noun, gender: 'n', plural: Gleise}
+- {de: Haltestelle, id: halte, en: stop, pos: noun, gender: f, plural: Haltestellen, bridge: {nl: halte, id: halte}}
+- {de: Flughafen, id: bandara, en: airport, pos: noun, gender: m, plural: Flughäfen}
+- {de: Fahrkarte, id: tiket (bus; kereta), en: ticket, pos: noun, gender: f, plural: Fahrkarten}
+- {de: Achtung, id: perhatian!, en: attention, pos: noun, gender: f, plural: —}
+- {de: Verspätung, id: keterlambatan, en: delay, pos: noun, gender: f, plural: Verspätungen}
+- {de: Weg, id: jalan; rute, en: way, pos: noun, gender: m, plural: Wege}
+- {de: Ampel, id: lampu lalu lintas, en: traffic lights, pos: noun, gender: f, plural: Ampeln}
+- {de: Kreuzung, id: perempatan, en: crossroads, pos: noun, gender: f, plural: Kreuzungen}
+- {de: Ecke, id: sudut; tikungan, en: corner, pos: noun, gender: f, plural: Ecken}
+- {de: Platz, id: tempat; alun-alun, en: place; square, pos: noun, gender: m, plural: Plätze}
+- {de: Kirche, id: gereja, en: church, pos: noun, gender: f, plural: Kirchen}
+- {de: Moschee, id: masjid, en: mosque, pos: noun, gender: f, plural: Moscheen}
+
+# ---------- body and health ----------
+- {de: Kopf, id: kepala, en: head, pos: noun, gender: m, plural: Köpfe}
+- {de: Hals, id: leher; tenggorokan, en: neck; throat, pos: noun, gender: m, plural: Hälse}
+- {de: Bauch, id: perut, en: stomach, pos: noun, gender: m, plural: Bäuche}
+- {de: Rücken, id: punggung, en: back, pos: noun, gender: m, plural: Rücken}
+- {de: Arm, id: lengan, en: arm, pos: noun, gender: m, plural: Arme}
+- {de: Bein, id: kaki (tungkai), en: leg, pos: noun, gender: 'n', plural: Beine}
+- {de: Fuß, id: kaki (telapak), en: foot, pos: noun, gender: m, plural: Füße}
+- {de: Auge, id: mata, en: eye, pos: noun, gender: 'n', plural: Augen}
+- {de: Ohr, id: telinga, en: ear, pos: noun, gender: 'n', plural: Ohren}
+- {de: Nase, id: hidung, en: nose, pos: noun, gender: f, plural: Nasen}
+- {de: Mund, id: mulut, en: mouth, pos: noun, gender: m, plural: Münder}
+- {de: Zahn, id: gigi, en: tooth, pos: noun, gender: m, plural: Zähne}
+- {de: Fieber, id: demam, en: fever, pos: noun, gender: 'n', plural: —}
+- {de: Schmerz, id: rasa sakit, en: pain, pos: noun, gender: m, plural: Schmerzen}
+- {de: Kopfschmerz, id: sakit kepala, en: headache, pos: noun, gender: m, plural: Kopfschmerzen}
+- {de: Bauchschmerz, id: sakit perut, en: stomach ache, pos: noun, gender: m, plural: Bauchschmerzen}
+- {de: Erkältung, id: pilek; masuk angin, en: cold, pos: noun, gender: f, plural: Erkältungen}
+- {de: Husten, id: batuk, en: cough, pos: noun, gender: m, plural: —}
+- {de: Tablette, id: tablet; pil, en: tablet, pos: noun, gender: f, plural: Tabletten}
+- {de: Rezept, id: resep, en: prescription; recipe, pos: noun, gender: 'n', plural: Rezepte}
+- {de: Praxis, id: tempat praktik (dokter), en: surgery; practice, pos: noun, gender: f, plural: Praxen}
+- {de: Hausarzt, id: dokter umum (langganan), en: family doctor, pos: noun, gender: m, plural: Hausärzte}
+- {de: Zahnarzt, id: dokter gigi, en: dentist, pos: noun, gender: m, plural: Zahnärzte}
+- {de: Wartezimmer, id: ruang tunggu, en: waiting room, pos: noun, gender: 'n', plural: Wartezimmer}
+- {de: Krankmeldung, id: surat keterangan sakit, en: sick note, pos: noun, gender: f, plural: Krankmeldungen}
+- {de: Gesundheitskarte, id: kartu asuransi kesehatan, en: health insurance card, pos: noun, gender: f, plural: Gesundheitskarten}
+- {de: Versicherung, id: asuransi, en: insurance, pos: noun, gender: f, plural: Versicherungen}
+- {de: Krankenkasse, id: asuransi kesehatan, en: health insurance fund, pos: noun, gender: f, plural: Krankenkassen}
+
+# ---------- housing ----------
+- {de: Bad, id: kamar mandi, en: bathroom, pos: noun, gender: 'n', plural: Bäder}
+- {de: Schlafzimmer, id: kamar tidur, en: bedroom, pos: noun, gender: 'n', plural: Schlafzimmer}
+- {de: Kinderzimmer, id: kamar anak, en: children's room, pos: noun, gender: 'n', plural: Kinderzimmer}
+- {de: Flur, id: lorong (rumah), en: hall, pos: noun, gender: m, plural: Flure}
+- {de: Balkon, id: balkon, en: balcony, pos: noun, gender: m, plural: Balkone}
+- {de: Toilette, id: toilet, en: toilet, pos: noun, gender: f, plural: Toiletten}
+- {de: Dusche, id: pancuran (mandi), en: shower, pos: noun, gender: f, plural: Duschen}
+- {de: Keller, id: ruang bawah tanah, en: cellar, pos: noun, gender: m, plural: Keller}
+- {de: Garten, id: kebun; halaman, en: garden, pos: noun, gender: m, plural: Gärten}
+- {de: Etage, id: lantai (tingkat), en: floor; storey, pos: noun, gender: f, plural: Etagen}
+- {de: Schreibtisch, id: meja tulis, en: desk, pos: noun, gender: m, plural: Schreibtische}
+- {de: Regal, id: rak, en: shelf, pos: noun, gender: 'n', plural: Regale}
+- {de: Herd, id: kompor, en: cooker, pos: noun, gender: m, plural: Herde}
+- {de: Waschmaschine, id: mesin cuci, en: washing machine, pos: noun, gender: f, plural: Waschmaschinen}
+- {de: Heizung, id: pemanas ruangan, en: heating, pos: noun, gender: f, plural: Heizungen}
+- {de: Anzeige, id: iklan, en: advert, pos: noun, gender: f, plural: Anzeigen}
+- {de: Quadratmeter, id: meter persegi, en: square metre, pos: noun, gender: m, plural: Quadratmeter}
+- {de: Vermieter, id: pemilik sewaan, en: landlord, pos: noun, gender: m, plural: Vermieter}
+
+# ---------- forms and personal data ----------
+- {de: Formular, id: formulir, en: form, pos: noun, gender: 'n', plural: Formulare}
+- {de: Ausweis, id: kartu identitas, en: ID card, pos: noun, gender: m, plural: Ausweise}
+- {de: Pass, id: paspor, en: passport, pos: noun, gender: m, plural: Pässe}
+- {de: Visum, id: visa, en: visa, pos: noun, gender: 'n', plural: Visa}
+- {de: Vorname, id: nama depan, en: first name, pos: noun, gender: m, plural: Vornamen}
+- {de: Nachname, id: nama keluarga, en: surname, pos: noun, gender: m, plural: Nachnamen}
+- {de: Geburtsdatum, id: tanggal lahir, en: date of birth, pos: noun, gender: 'n', plural: Geburtsdaten}
+- {de: Geburtsort, id: tempat lahir, en: place of birth, pos: noun, gender: m, plural: Geburtsorte}
+- {de: Ort, id: tempat, en: place, pos: noun, gender: m, plural: Orte}
+- {de: Wohnort, id: tempat tinggal, en: place of residence, pos: noun, gender: m, plural: Wohnorte}
+- {de: Hausnummer, id: nomor rumah, en: house number, pos: noun, gender: f, plural: Hausnummern}
+- {de: Postleitzahl, id: kode pos, en: postcode, pos: noun, gender: f, plural: Postleitzahlen}
+- {de: Staatsangehörigkeit, id: kewarganegaraan, en: nationality (citizenship), pos: noun, gender: f, plural: Staatsangehörigkeiten}
+- {de: Familienstand, id: status pernikahan, en: marital status, pos: noun, gender: m, plural: —}
+- {de: Geschlecht, id: jenis kelamin, en: sex; gender, pos: noun, gender: 'n', plural: Geschlechter}
+- {de: Unterschrift, id: tanda tangan, en: signature, pos: noun, gender: f, plural: Unterschriften}
+- {de: Anmeldung, id: pendaftaran; lapor alamat, en: registration, pos: noun, gender: f, plural: Anmeldungen}
+- {de: Bürgeramt, id: kantor layanan warga, en: citizens' office, pos: noun, gender: 'n', plural: Bürgerämter}
+- {de: E-Mail, id: surel; email, en: email, pos: noun, gender: f, plural: E-Mails}
+- {de: Brief, id: surat, en: letter, pos: noun, gender: m, plural: Briefe}
+- {de: Nachricht, id: pesan; berita, en: message; news, pos: noun, gender: f, plural: Nachrichten}
+- {de: Jacke, id: jaket, en: jacket, pos: noun, gender: f, plural: Jacken}
+- {de: Schuh, id: sepatu, en: shoe, pos: noun, gender: m, plural: Schuhe}
+
+# ---------- verbs: daily routine (separable) ----------
+- {de: aufstehen, id: bangun (dari tempat tidur), en: to get up, pos: verb, sep: auf, verb: {aux: sein, partizip: aufgestanden}}
+- {de: anfangen, id: mulai, en: to begin, pos: verb, sep: an, verb: {aux: haben, partizip: angefangen}}
+- {de: einkaufen, id: berbelanja, en: to go shopping, pos: verb, sep: ein, verb: {aux: haben, partizip: eingekauft}}
+- {de: anrufen, id: menelepon, en: to phone, pos: verb, sep: an, verb: {aux: haben, partizip: angerufen}}
+- {de: zurückrufen, id: menelepon balik, en: to call back, pos: verb, sep: zurück, verb: {aux: haben, partizip: zurückgerufen}}
+- {de: ankommen, id: tiba, en: to arrive, pos: verb, sep: an, verb: {aux: sein, partizip: angekommen}}
+- {de: abfahren, id: berangkat (kendaraan), en: to depart, pos: verb, sep: ab, verb: {aux: sein, partizip: abgefahren}}
+- {de: fernsehen, id: menonton TV, en: to watch TV, pos: verb, sep: fern, verb: {aux: haben, partizip: ferngesehen}}
+- {de: aufräumen, id: membereskan, en: to tidy up, pos: verb, sep: auf, verb: {aux: haben, partizip: aufgeräumt}}
+- {de: abholen, id: menjemput; mengambil, en: to pick up, pos: verb, sep: ab, verb: {aux: haben, partizip: abgeholt}}
+- {de: mitkommen, id: ikut, en: to come along, pos: verb, sep: mit, verb: {aux: sein, partizip: mitgekommen}}
+- {de: mitbringen, id: membawa (serta), en: to bring along, pos: verb, sep: mit, verb: {aux: haben, partizip: mitgebracht}}
+- {de: einladen, id: mengundang, en: to invite, pos: verb, sep: ein, verb: {aux: haben, partizip: eingeladen}}
+- {de: einsteigen, id: naik (kendaraan), en: to get on, pos: verb, sep: ein, verb: {aux: sein, partizip: eingestiegen}}
+- {de: aussteigen, id: turun (dari kendaraan), en: to get off, pos: verb, sep: aus, verb: {aux: sein, partizip: ausgestiegen}}
+- {de: umsteigen, id: pindah (kendaraan), en: to change (trains), pos: verb, sep: um, verb: {aux: sein, partizip: umgestiegen}}
+- {de: abbiegen, id: berbelok, en: to turn, pos: verb, sep: ab, verb: {aux: sein, partizip: abgebogen}}
+- {de: umziehen, id: pindah (rumah), en: to move house, pos: verb, sep: um, verb: {aux: sein, partizip: umgezogen}}
+- {de: ausfüllen, id: mengisi (formulir), en: to fill in, pos: verb, sep: aus, verb: {aux: haben, partizip: ausgefüllt}}
+- {de: wehtun, id: terasa sakit, en: to hurt, pos: verb, sep: weh, verb: {aux: haben, partizip: wehgetan}}
+
+# ---------- verbs: modal ----------
+- {de: können, id: bisa; dapat, en: can, pos: verb, verb: {aux: haben, partizip: gekonnt}}
+- {de: müssen, id: harus, en: must; have to, pos: verb, verb: {aux: haben, partizip: gemusst}}
+- {de: wollen, id: mau; ingin, en: to want, pos: verb, verb: {aux: haben, partizip: gewollt}}
+- {de: dürfen, id: boleh, en: may; be allowed to, pos: verb, verb: {aux: haben, partizip: gedurft}}
+- {de: sollen, id: sebaiknya; disuruh, en: should; be supposed to, pos: verb, verb: {aux: haben, partizip: gesollt}}
+- {de: mögen, id: suka, en: to like, pos: verb, verb: {aux: haben, partizip: gemocht}}
+
+# ---------- verbs: other ----------
+- {de: frühstücken, id: sarapan, en: to have breakfast, pos: verb, verb: {aux: haben, partizip: gefrühstückt}}
+- {de: duschen, id: mandi (pancuran), en: to shower, pos: verb, verb: {aux: haben, partizip: geduscht}}
+- {de: beginnen, id: mulai, en: to begin, pos: verb, verb: {aux: haben, partizip: begonnen}}
+- {de: beten, id: berdoa; salat, en: to pray, pos: verb, verb: {aux: haben, partizip: gebetet}}
+- {de: klingeln, id: berdering, en: to ring, pos: verb, verb: {aux: haben, partizip: geklingelt}}
+- {de: dauern, id: makan waktu, en: to take (time); last, pos: verb, verb: {aux: haben, partizip: gedauert}}
+- {de: feiern, id: merayakan, en: to celebrate, pos: verb, verb: {aux: haben, partizip: gefeiert}}
+- {de: schicken, id: mengirim, en: to send, pos: verb, verb: {aux: haben, partizip: geschickt}}
+- {de: treffen, id: bertemu, en: to meet, pos: verb, verb: {aux: haben, partizip: getroffen}}
+- {de: schwimmen, id: berenang, en: to swim, pos: verb, verb: {aux: sein, partizip: geschwommen}}
+- {de: tanzen, id: menari, en: to dance, pos: verb, verb: {aux: haben, partizip: getanzt}}
+- {de: wandern, id: mendaki; jalan-jalan di alam, en: to hike, pos: verb, verb: {aux: sein, partizip: gewandert}}
+- {de: reisen, id: bepergian, en: to travel, pos: verb, verb: {aux: sein, partizip: gereist}}
+- {de: laufen, id: berjalan; berlari, en: to walk; run, pos: verb, verb: {aux: sein, partizip: gelaufen}}
+- {de: fliegen, id: terbang; naik pesawat, en: to fly, pos: verb, verb: {aux: sein, partizip: geflogen}}
+- {de: bleiben, id: tinggal; tetap, en: to stay, pos: verb, verb: {aux: sein, partizip: geblieben}}
+- {de: telefonieren, id: bertelepon, en: to be on the phone, pos: verb, verb: {aux: haben, partizip: telefoniert}}
+- {de: rauchen, id: merokok, en: to smoke, pos: verb, verb: {aux: haben, partizip: geraucht}}
+- {de: parken, id: parkir, en: to park, pos: verb, verb: {aux: haben, partizip: geparkt}}
+- {de: waschen, id: mencuci, en: to wash, pos: verb, verb: {aux: haben, partizip: gewaschen}}
+- {de: tragen, id: memakai; membawa, en: to wear; carry, pos: verb, verb: {aux: haben, partizip: getragen}}
+- {de: öffnen, id: membuka, en: to open, pos: verb, verb: {aux: haben, partizip: geöffnet}}
+- {de: schließen, id: menutup, en: to close, pos: verb, verb: {aux: haben, partizip: geschlossen}}
+- {de: messen, id: mengukur, en: to measure; take (a temperature), pos: verb, verb: {aux: haben, partizip: gemessen}}
+- {de: zeigen, id: menunjukkan, en: to show, pos: verb, verb: {aux: haben, partizip: gezeigt}}
+- {de: erklären, id: menjelaskan, en: to explain, pos: verb, verb: {aux: haben, partizip: erklärt}}
+- {de: bringen, id: membawa; mengantar, en: to bring, pos: verb, verb: {aux: haben, partizip: gebracht}}
+- {de: geben, id: memberi, en: to give, pos: verb, verb: {aux: haben, partizip: gegeben}}
+- {de: vergessen, id: lupa, en: to forget, pos: verb, verb: {aux: haben, partizip: vergessen}}
+- {de: legen, id: menaruh (berbaring), en: to lay; put, pos: verb, verb: {aux: haben, partizip: gelegt}}
+- {de: stellen, id: menaruh (berdiri), en: to stand; put, pos: verb, verb: {aux: haben, partizip: gestellt}}
+- {de: liegen, id: terletak (berbaring), en: to lie, pos: verb, verb: {aux: haben, partizip: gelegen}}
+- {de: stehen, id: berdiri; terletak (tegak), en: to stand, pos: verb, verb: {aux: haben, partizip: gestanden}}
+- {de: sitzen, id: duduk, en: to sit, pos: verb, verb: {aux: haben, partizip: gesessen}}
+- {de: husten, id: batuk, en: to cough, pos: verb, verb: {aux: haben, partizip: gehustet}}
+- {de: untersuchen, id: memeriksa, en: to examine, pos: verb, verb: {aux: haben, partizip: untersucht}}
+- {de: mieten, id: menyewa, en: to rent, pos: verb, verb: {aux: haben, partizip: gemietet}}
+- {de: vermieten, id: menyewakan, en: to let, pos: verb, verb: {aux: haben, partizip: vermietet}}
+- {de: unterschreiben, id: menandatangani, en: to sign, pos: verb, verb: {aux: haben, partizip: unterschrieben}}
+- {de: buchstabieren, id: mengeja, en: to spell, pos: verb, verb: {aux: haben, partizip: buchstabiert}}
