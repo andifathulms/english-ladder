@@ -100,3 +100,10 @@ and the FrequencyWords licence confirmation (H3).
 
 Approved: merge to `main` and publish. Audio: v1 ships on the browser's `de-DE` voice (as Spanish); the
 89-clip list stays ready for when a speaker is found (H2 stays open for recordings).
+
+## Live (2026-10-29)
+
+Merged to `main` (`c1f2b14`); CI run 40855117253 passed (build, e2e, all six deploys). German Ladder is
+live at **https://andifathulms.github.io/german-ladder/** — Pages switched itself on from `gh-pages`. Checked
+in a browser: home, door 1 → Easy 1 lesson 1, the A1 exit chip, no page errors or failed requests. The
+siblings redeployed unchanged.
