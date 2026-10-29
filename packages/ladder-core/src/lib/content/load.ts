@@ -86,6 +86,12 @@ export type ContentModel = {
     requiresTestPool?: (rung: Rung, lessonCount: number) => boolean;
     /** Live rungs must have exactly `rung.lessons` lesson files (notch counts from data). */
     lessonCountMatchesCurriculum?: boolean;
+    /**
+     * Linked focus: validates a target line's [[focus]] marks, returning an error message or null.
+     * Default: one mark at most ("more than one [[focus]]"). German allows two that form one verbal
+     * bracket (Ich [[stehe]] um 6 Uhr [[auf]]).
+     */
+    focus?: (text: string, count: number) => string | null;
     /** Extra per-lesson checks (file is the raw source). */
     lesson?: (l: Lesson, where: string, ctx: CheckContext, file: string) => void;
     /** Everything else: data files, capstones, placement, the course's language lint. */
