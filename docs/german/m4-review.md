@@ -62,3 +62,9 @@ Every differing pixel is on the wordmark disc or the week strip, the bistable sp
 - `/`: the board with Bauhaus, door 1, the Dasar line; the ladder with A1.1… chips and exit flags
 - `/rung/easy-1/01-hallo/`: all six steps; the Examples step has Bunyi, Kerja, Ngobrol and Tirukan
 - `/words/` (after opening lesson 1), `/words/#deck`, `/settings/` (Warna kasus, Ejaan), `/about/`
+
+## Decisions (2026-10-29)
+
+Approved as recommended: seven accent keys (no core Shift layer); the exit flag in `--dasar` on paper and
+`--brass` on the board; the climb line with `milestone.exam` as written; the listed parity misses treated
+as the known wordmark-disc and week-strip antialiasing.
