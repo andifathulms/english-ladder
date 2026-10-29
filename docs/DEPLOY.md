@@ -100,7 +100,8 @@ The same steps as Japanese, with Spanish's names. `spanish-ladder` is a new, emp
 4. First publish: run the workflow on `main`; `deploy-spanish` creates `gh-pages` in `spanish-ladder`.
 5. `spanish-ladder` → Settings → Pages → *Deploy from a branch*, `gh-pages`, `/ (root)`.
 
-To check a deploy: the service worker is `spanish-ladder-v0.1.0` and Local storage holds
+Live since 2026-10-29 at <https://andifathulms.github.io/spanish-ladder/> (steps 1–5 done). To check a
+deploy: the service worker is `spanish-ladder-v0.1.0` and Local storage holds
 `spanish-ladder:v1`. Spanish needs no font fetching (Latin faces through `next/font`) and ships no
 media yet (`apps/spanish/public/audio/SOURCE.md`).
 
