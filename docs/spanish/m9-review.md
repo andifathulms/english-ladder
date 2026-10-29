@@ -32,7 +32,7 @@ invariable plurals (el/los lunes) agree either way, and vosotros commands are fi
 Measured locally against the built site through a gzip server (as GitHub Pages serves it), Lighthouse
 12.8, mobile emulation, median of three runs. Accessibility, best practices and SEO are 100 on every page.
 
-| Page | Before | After (`perf/first-paint`) |
+| Page | Before | After |
 |---|---|---|
 | `/rung/easy-1/07-ser-estar/` (a lesson) | 80 | **99** |
 | `/placement/` | 79 | **94** (93–96) |
@@ -78,7 +78,7 @@ reverted that core change. No core code changed on this branch.
 
 ## Decisions for you
 
-1. **Lighthouse**: done on `perf/first-paint` (above); keep Newsreader without its optical-size
+1. **Lighthouse**: done (above, commit 5845580); keep Newsreader without its optical-size
    axis, or restore it?
 2. **The repo**: done (above).
 
