@@ -29,7 +29,10 @@ export type GermanKey =
   | 'settings.deckFace.word'
   | 'settings.deckFace.meaning'
   | 'settings.deckFace.audio'
-  | 'about.dataTitle';
+  | 'about.dataTitle'
+  | 'check.spelling.digraph'
+  | 'check.spelling.umlaut'
+  | 'check.spelling.caps';
 
 type Overrides = Partial<StringTable> & Partial<Record<GermanKey, string>>;
 
@@ -86,6 +89,9 @@ export const idOverrides: Overrides = {
   'settings.deckFace.meaning': 'Arti',
   'settings.deckFace.audio': 'Suara',
   'about.dataTitle': 'Data dan lisensi',
+  'check.spelling.digraph': 'Hampir tepat. Tulisannya *{answer}*: ae, oe, ue dan ss ditulis ä, ö, ü dan ß.',
+  'check.spelling.umlaut': 'Hampir tepat. Jangan lupa umlautnya: *{answer}*.',
+  'check.spelling.caps': 'Kata benda selalu diawali huruf besar: *{answer}*.',
 };
 
 export const enOverrides: Overrides = {
@@ -141,4 +147,7 @@ export const enOverrides: Overrides = {
   'settings.deckFace.meaning': 'Meaning',
   'settings.deckFace.audio': 'Sound',
   'about.dataTitle': 'Data and licences',
+  'check.spelling.digraph': 'Almost. It is written *{answer}*: ae, oe, ue and ss are ä, ö, ü and ß.',
+  'check.spelling.umlaut': 'Almost. Mind the umlaut: *{answer}*.',
+  'check.spelling.caps': 'Nouns always start with a capital: *{answer}*.',
 };

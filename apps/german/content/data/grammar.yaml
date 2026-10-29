@@ -18,7 +18,7 @@
 - { id: d-stress, level: A1, desc: "Word stress and reading aloud" }
 
 # ---------- Easy 1 (A1.1) ----------
-- { id: a1-greetings-register, level: A1, desc: "Greetings; du and Sie", chunks: ["Wie geht's?", "Wie geht es Ihnen?", "Guten Tag", "Tschüss", "Auf Wiedersehen"] }
+- { id: a1-greetings-register, level: A1, desc: "Greetings; du and Sie", chunks: ["Wie geht’s?", "Wie geht es dir?", "Wie geht es Ihnen?", "Und dir?", "Und Ihnen?", "Mir geht es gut.", "Auf Wiedersehen"] }
 - { id: a1-sein-heissen, level: A1, desc: "sein; ich heiße, ich komme aus", verbs: [sein, heißen, kommen] }
 - { id: a1-present-regular, level: A1, desc: "Present tense of regular verbs; e-insertion (arbeitest)", verbs: [wohnen, arbeiten, lernen, machen, spielen, kaufen, kochen, hören, sagen, fragen] }
 - { id: a1-verb-second, level: A1, desc: "The finite verb in position 2; inversion after a fronted part" }
@@ -54,6 +54,7 @@
 - { id: a2-adj-endings, level: A2, desc: "Adjective endings after definite and indefinite articles", detect: adj-ending }
 - { id: a2-wenn, level: A2, desc: "wenn clauses", detect: subordinate }
 - { id: a2-reflexive, level: A2, desc: "Reflexive verbs" }
+- { id: a2-modal-praeteritum, level: A2, desc: "Präteritum of the modal verbs: konnte, musste, wollte, durfte" }
 - { id: a2-werden, level: A2, desc: "werden: future and 'become'", verbs: [werden] }
 - { id: b1-relative, level: B1, desc: "Relative clauses", detect: relative }
 - { id: b1-genitive, level: B1, desc: "The genitive", detect: genitive }

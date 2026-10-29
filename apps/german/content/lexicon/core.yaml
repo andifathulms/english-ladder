@@ -1,0 +1,31 @@
+# Function words a rung may use without a glossary entry (CLAUDE.md §4.1): articles, pronouns,
+# prepositions, conjunctions, question words, numbers, greetings. Content words come from the rung's
+# word list (content/data/words/<rung>.yaml) and lesson glossaries. Verb forms are checked by the
+# inventory lint, not listed here. Dative and genitive forms are listed where the lint allows them
+# (its detectors decide when they may be used). Later rungs inherit earlier rungs' words.
+rungs:
+  dasar:
+    - [hallo, tschüss, danke, bitte, ja, nein, und, oder, der, die, das, ein, eine, ist, nicht]
+  easy-1:
+    - [den, dem, des, einen, einem, einer, eines, kein, keine, keinen, keinem, keiner]
+    - [ich, du, er, sie, es, wir, ihr, Sie, mich, dich, ihn, uns, euch, mir, dir, ihm, ihnen, Ihnen]
+    - [mein, meine, meinen, meinem, meiner, dein, deine, deinen, deinem, deiner, sein, seine, seinen, ihr, ihre, ihren, unser, unsere, unseren, euer, eure, Ihr, Ihre, Ihren]
+    - [in, im, auf, unter, neben, hinter, vor, an, am, aus, mit, von, zu, für, um, nach, bei]
+    - [aber, auch, sehr, gut, nur, noch, schon, gern, gerne, hier, da, dort, heute, jetzt, so, wie, viel, viele, ein, bisschen, sehr, oft, immer, zusammen, wieder, dann]
+    - [was, wer, wo, woher, wohin, wie, wann, warum, welche, welcher, welches, wie, viel]
+    - [guten, gute, tag, morgen, abend, nacht, herzlich, willkommen, entschuldigung, auf, wiedersehen, bis, später, bald]
+    - ["null", eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn, elf, zwölf, dreizehn, vierzehn, fünfzehn, sechzehn, siebzehn, achtzehn, neunzehn, zwanzig]
+    - [einundzwanzig, zweiundzwanzig, dreißig, vierzig, fünfzig, sechzig, siebzig, achtzig, neunzig, hundert]
+    - [jahr, jahre, euro, cent, frau, herr]
+  easy-2:
+    - [halb, viertel, vor, nach, uhr, früh, spät, morgens, mittags, nachmittags, abends, nachts, zuerst, danach, dann, manchmal, nie, selten]
+    - [links, rechts, geradeaus, zwischen, über, gegenüber, seit, zum, zur, beim, vom, ins, ans]
+    - [alle, alles, jeder, jede, jedes, jeden, dies, dieser, diese, dieses, diesen, andere, anderen, etwas, nichts, man]
+    - [denn, doch, mal, also, leider, natürlich, vielleicht, genau, wirklich]
+  easy-3: [weil, dass, gestern, schon, noch, nicht, mehr, als, am, meisten]
+  medium-1: [wenn, sich, werden]
+  medium-2: [des, eines, wegen, trotz, während, dessen, deren, denen]
+  medium-3: [obwohl, damit, sowohl, entweder, weder, noch]
+  hard-1: []
+  hard-2: []
+  hard-3: []

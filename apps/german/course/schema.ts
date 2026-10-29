@@ -403,3 +403,11 @@ export const BridgesSchema = z
     ),
   })
   .strict();
+
+/** content/lexicon/core.yaml: function words per rung (articles, pronouns, prepositions, numbers …). */
+export const LexiconSchema = z
+  .object({ rungs: z.record(z.array(z.union([z.string(), z.array(z.string())])).transform((xs) => xs.flat().map(String))) })
+  .strict();
+
+/** content/data/words/<rung>.yaml: the rung's word list (the deck), lemmas with meanings. */
+export const WordListSchema = z.array(GlossaryEntry);
