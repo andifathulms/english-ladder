@@ -176,3 +176,20 @@ describe('lint: false positives found while writing Easy 1', () => {
     expect(errors(lint(example('Das Haus, das ich kaufe.', [N('Haus'), V('kaufen')]), E2))).toMatch(/relative/);
   });
 });
+
+describe('lint: false positives found while writing Easy 2', () => {
+  it('a prefix before "und" and a second verb', () => {
+    expect(errors(lint(example('Ich stehe auf und frühstücke.', [V('aufstehen'), V('frühstücken')]), E2))).toBe('');
+  });
+  it('prepositions and articles that look like prefixes', () => {
+    expect(errors(lint(example('Die Flasche steht auf dem Tisch.', [N('Flasche'), N('Tisch'), V('stehen'), V('aufstehen')]), { rung: 'easy-2', order: 7, introduces: ['a1-wechsel'] }))).toBe('');
+    expect(errors(lint(example('Ich kaufe ein Brot.', [V('kaufen'), V('einkaufen'), N('Brot')]), E2))).toBe('');
+    expect(errors(lint(example('Ich stehe auf um 6 Uhr.', [V('aufstehen')]), E2))).toMatch(/prefix goes to the end/);
+  });
+  it('a taught phrase keeps its capital mid-sentence', () => {
+    expect(warns(lint(example('Ich fahre nach Hause.', [V('fahren'), G('nach Hause', 'expr')]), E2))).not.toMatch(/capitalised/);
+  });
+  it('a sentence starts after a closing quotation mark', () => {
+    expect(warns(lint(example('Lena sagt: „Hallo!“ Wie geht’s?', [V('sagen')]), E2))).not.toMatch(/"Wie" is capitalised/);
+  });
+});

@@ -57,7 +57,7 @@ function tokens(s: string): Tok[] {
   const out: Tok[] = [];
   for (const m of plain.matchAll(WORD_RE)) {
     const before = plain.slice(0, m.index).trimEnd();
-    out.push({ raw: m[0], low: m[0].toLowerCase(), start: m.index!, sentenceStart: before === '' || /[.!?:„«»"–]$/.test(before) });
+    out.push({ raw: m[0], low: m[0].toLowerCase(), start: m.index!, sentenceStart: before === '' || /[.!?:–]["“”»«‘’']*$/.test(before) || /[„«‚]$/.test(before) });
   }
   return out;
 }
@@ -68,7 +68,11 @@ function clauses(s: string): { text: string; end: string; afterComma: boolean }[
   const out: { text: string; end: string; afterComma: boolean }[] = [];
   let afterComma = false;
   for (const m of plain.matchAll(/([^.!?;,]+)([.!?;,]?)/g)) {
-    if (m[1].trim()) out.push({ text: m[1], end: m[2], afterComma });
+    // "Ich stehe auf und frühstücke": und / aber / oder / denn start a new main clause.
+    const parts = m[1].split(/\s(?=(?:und|aber|oder|denn|sondern)\s)/);
+    parts.forEach((part, k) => {
+      if (part.trim()) out.push({ text: part, end: k === parts.length - 1 ? m[2] : '', afterComma: k === 0 ? afterComma : false });
+    });
     afterComma = m[2] === ',';
   }
   return out;
@@ -226,7 +230,7 @@ function lintText(t: Text, scope: Scope, data: LintData, draft: boolean, out: Fi
     if (/^[a-zäöü]/.test(tok.raw) && nounReadings.length && !otherReadings.length && !scope.core.has(tok.low) && !verbish) {
       err(`"${tok.raw}" is a noun: write "${nounReadings[0].lemma === tok.low ? tok.raw[0].toUpperCase() + tok.raw.slice(1) : tok.raw[0].toUpperCase() + tok.raw.slice(1)}"`);
     }
-    if (/^[A-ZÄÖÜ]/.test(tok.raw) && !tok.sentenceStart && !name && !FORMAL.has(tok.raw) && !nounReadings.length && !nounGender.has(tok.raw) && (scope.core.has(tok.low) || otherReadings.length || verbish)) {
+    if (/^[A-ZÄÖÜ]/.test(tok.raw) && !tok.sentenceStart && !name && !FORMAL.has(tok.raw) && !inChunk(i) && !nounReadings.length && !nounGender.has(tok.raw) && (scope.core.has(tok.low) || otherReadings.length || verbish)) {
       soft(`"${tok.raw}" is capitalised mid-sentence; only nouns, names and Sie are`);
     }
 
@@ -350,7 +354,12 @@ function lintText(t: Text, scope: Scope, data: LintData, draft: boolean, out: Fi
     // Separable prefix: if the clause has the prefix, it must be last.
     const prefixes = new Set(vr.map((f) => f.prefix).filter((p): p is string => !!p));
     for (const p of prefixes) {
-      const at = body.findIndex((x, k) => k > finiteAt && x.low === p);
+      // "steht auf dem Tisch", "mit dem Bus", "ein Brot": a preposition or article, not the prefix.
+      const phraseNext = (k: number) => {
+        const nx = body[k + 1];
+        return !!nx && (data.determiners.has(nx.low) || /^[A-ZÄÖÜ0-9]/.test(nx.raw) || ['mir', 'dir', 'ihm', 'ihr', 'uns', 'euch', 'ihnen', 'mich', 'dich', 'ihn'].includes(nx.low));
+      };
+      const at = body.findIndex((x, k) => k > finiteAt && x.low === p && !phraseNext(k));
       if (at >= 0 && at !== body.length - 1 && !(MODALS.has(vr[0].inf) || AUX.has(vr[0].inf))) err(`"${verbTok.raw} … ${p}": the separable prefix goes to the end of the clause`);
     }
     // Conjugation: a subject pronoun right before or after the finite verb.
