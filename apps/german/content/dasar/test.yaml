@@ -1,0 +1,35 @@
+# Dasar rung test: draw 16 of 24, pass 12, at least one item from every lesson. Draft for the teacher's review.
+rung: dasar
+draw: 16
+pass: 12
+items:
+  # 1 · words you already know; nouns are capitalised
+  - { id: d-t-01, from: dasar-01-kamu-sudah-tahu, type: choice, lang: id, prompt: "*Koffer* artinya …", options: [koper, kopi, kantor], answer: koper, why: { id: "*Koper* datang dari bahasa Belanda *koffer*, sama seperti *der Koffer*.", en: "*Koper* comes from Dutch *koffer*, just like *der Koffer*." } }
+  - { id: d-t-02, from: dasar-01-kamu-sudah-tahu, type: listen, audio: "das Handtuch", options: ["das Handtuch", "der Koffer", "die Tante"], answer: "das Handtuch", why: { id: "*Hand-tuch*: handuk. *Ch* setelah *u* seperti *kh*.", en: "*Hand-tuch*: towel. *Ch* after *u* is like *kh*." } }
+  - { id: d-t-03, from: dasar-01-kamu-sudah-tahu, type: choice, lang: id, prompt: "Mana ejaan yang benar?", options: ["die Apotheke", "die apotheke", "Die apotheke"], answer: "die Apotheke", why: { id: "Kata benda selalu dengan huruf besar: *Apotheke*.", en: "Nouns always take a capital: *Apotheke*." } }
+  - { id: d-t-04, from: dasar-01-kamu-sudah-tahu, type: choice, lang: id, prompt: "Kata Jerman mana yang mirip *kantin*?", options: [Kantine, Tante, Strom], answer: Kantine, why: { id: "*Kantin* ← *kantine* (Belanda) → *die Kantine*.", en: "*Kantin* ← *kantine* (Dutch) → *die Kantine*." } }
+  # 2 · ä, ö, ü
+  - { id: d-t-05, from: dasar-02-umlaut, type: listen, audio: "schon", options: [schon, schön], answer: schon, why: { id: "*Schon* (sudah): *o* biasa, tanpa umlaut. *Schön* (indah) punya *ö*.", en: "*Schon* (already): a plain *o*, no umlaut." } }
+  - { id: d-t-06, from: dasar-02-umlaut, type: listen, audio: "die Mutter", options: ["die Mutter", "die Mütter"], answer: "die Mutter", why: { id: "*Mutter* dengan *u*: satu ibu. *Mütter*: banyak ibu.", en: "*Mutter* with *u*: one mother. *Mütter*: mothers." } }
+  - { id: d-t-07, from: dasar-02-umlaut, type: choice, lang: id, prompt: "Bagaimana membuat bunyi *ö*?", options: ["ucapkan *e* dengan bibir bulat", "ucapkan *o* biasa", "ucapkan *e* biasa"], answer: "ucapkan *e* dengan bibir bulat", why: { id: "Lidah di posisi *e*, bibir bulat: itulah *ö*.", en: "Tongue as for *e*, lips rounded: that is *ö*." } }
+  - { id: d-t-08, from: dasar-02-umlaut, type: choice, lang: id, prompt: "Tanpa umlaut di keyboard, *Käse* ditulis …", options: [Kaese, Kase, Kese], answer: Kaese, why: { id: "*Ä* ditulis *ae*: *Kaese*.", en: "*Ä* is written *ae*: *Kaese*." } }
+  # 3 · ei, ie, eu; long and short vowels
+  - { id: d-t-09, from: dasar-03-ei-ie-eu, type: choice, lang: id, prompt: "*Ie* dalam *Miete* dibaca …", options: ["*i* panjang", "*ai*", "*i* lalu *e*"], answer: "*i* panjang", why: { id: "*Ie* adalah *i* panjang. Kebalikannya, *ei*, dibaca *ai*.", en: "*Ie* is a long *i*. Its mirror image, *ei*, sounds like *ai*." } }
+  - { id: d-t-10, from: dasar-03-ei-ie-eu, type: listen, audio: "das Ei", options: ["das Ei", "neu"], answer: "das Ei", why: { id: "*Ei* dibaca *ai*: telur.", en: "*Ei* sounds like *ai*: egg." } }
+  - { id: d-t-11, from: dasar-03-ei-ie-eu, type: choice, lang: id, prompt: "Kata mana yang punya bunyi *oi*?", options: [neu, Ei, Miete], answer: neu, why: { id: "*Eu* dibaca *oi*: *noi*.", en: "*Eu* sounds like *oi*: *noi*." } }
+  - { id: d-t-12, from: dasar-03-ei-ie-eu, type: dictation, audio: "die Arbeit", answer: "die Arbeit", why: { id: "Bunyi *ai* ditulis *ei*: *Arbeit*.", en: "The *ai* sound is spelled *ei*: *Arbeit*." } }
+  # 4 · ch, sch, sp/st, z, w, v, j
+  - { id: d-t-13, from: dasar-04-ich-dan-ach, type: choice, lang: id, prompt: "Dalam kata mana *ch* dibaca seperti *kh* dalam *akhir*?", options: [Buch, ich], answer: Buch, why: { id: "Setelah *a*, *o*, *u*, *au*: *kh*. Setelah *i*: bunyi yang lebih ringan.", en: "After *a*, *o*, *u*, *au*: *kh*. After *i*: the lighter sound." } }
+  - { id: d-t-14, from: dasar-04-ich-dan-ach, type: listen, audio: "die Schule", options: ["die Schule", "die Stadt", "die Zeit"], answer: "die Schule", why: { id: "*Sch* dibaca *sy*: *Syu-le*.", en: "*Sch* sounds like *sh*: *Shoo-le*." } }
+  - { id: d-t-15, from: dasar-04-ich-dan-ach, type: choice, lang: id, prompt: "*W* dalam *Wasser* dibaca seperti …", options: ["*v* dalam bahasa Inggris *very*", "*w* dalam *wayang*", "*f* dalam *foto*"], answer: "*v* dalam bahasa Inggris *very*", why: { id: "*W* Jerman: gigi atas menyentuh bibir bawah, dengan suara.", en: "German *w*: upper teeth on the lower lip, voiced, like English *v*." } }
+  - { id: d-t-16, from: dasar-04-ich-dan-ach, type: dictation, audio: "die Zeit", answer: "die Zeit", why: { id: "Bunyi *ts* ditulis *z*, dan *ai* ditulis *ei*: *Zeit*.", en: "The *ts* sound is spelled *z*, and *ai* is spelled *ei*: *Zeit*." } }
+  # 5 · final devoicing, ß and ss, r
+  - { id: d-t-17, from: dasar-05-tag-dibaca-tak, type: choice, lang: id, prompt: "*Tag* diucapkan seperti …", options: ["*Tak*", "*Tag* dengan *g* jelas", "*Tah*"], answer: "*Tak*", why: { id: "Di akhir kata, *g* dibaca *k*.", en: "At the end of a word, *g* is said as *k*." } }
+  - { id: d-t-18, from: dasar-05-tag-dibaca-tak, type: choice, lang: id, prompt: "Mana ejaan yang benar di Jerman?", options: [groß, gross, gros], answer: groß, why: { id: "*O* dalam *groß* panjang, jadi *ß*.", en: "The *o* in *groß* is long, so *ß*." } }
+  - { id: d-t-19, from: dasar-05-tag-dibaca-tak, type: listen, audio: "das Brot", options: ["das Brot", "der Hund"], answer: "das Brot", why: { id: "*R* dalam *Brot* dibaca di tenggorokan, mirip *gh*.", en: "The *r* in *Brot* is made in the throat." } }
+  - { id: d-t-20, from: dasar-05-tag-dibaca-tak, type: dictation, audio: "der Hund", answer: "der Hund", why: { id: "Terdengar *Hunt*, tapi ditulis *Hund* (jamaknya *Hunde*).", en: "It sounds like *Hunt*, but it is spelled *Hund* (plural *Hunde*)." } }
+  # 6 · stress and reading aloud
+  - { id: d-t-21, from: dasar-06-membaca-nyaring, type: choice, lang: id, prompt: "Kamu mau masuk ke gedung. Papan mana yang kamu ikuti?", options: [Eingang, Ausgang, Kasse], answer: Eingang, why: { id: "*Eingang*: pintu masuk. *Ausgang*: pintu keluar.", en: "*Eingang*: entrance. *Ausgang*: exit." } }
+  - { id: d-t-22, from: dasar-06-membaca-nyaring, type: choice, lang: id, prompt: "Suku kata mana yang ditekan dalam *Kantine*?", options: ["Kan-TI-ne", "KAN-ti-ne", "Kan-ti-NE"], answer: "Kan-TI-ne", why: { id: "*Kantine* kata serapan: *Kan-TI-ne*.", en: "*Kantine* is a loanword: *Kan-TI-ne*." } }
+  - { id: d-t-23, from: dasar-06-membaca-nyaring, type: listen, audio: "Der Kaffee ist gut.", options: ["Der Kaffee ist gut.", "Der Kuchen ist gut."], answer: "Der Kaffee ist gut.", why: { id: "*Der KAF-fee ist gut*: kopinya enak.", en: "*Der KAF-fee ist gut*: the coffee is good." } }
+  - { id: d-t-24, from: dasar-06-membaca-nyaring, type: choice, lang: id, prompt: "Di menu tertulis *Kaffee und Kuchen*. Apa itu?", options: ["kopi dan kue", "kopi dan keju", "teh dan roti"], answer: "kopi dan kue", why: { id: "*Kaffee*: kopi, *Kuchen*: kue.", en: "*Kaffee*: coffee, *Kuchen*: cake." } }

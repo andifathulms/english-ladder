@@ -1,0 +1,5 @@
+# Nouns added with the Dasar lessons (same shape as nouns.yaml). Draft data for the teacher's review.
+- { de: Strom, gender: m, plural: Ströme, pattern: "¨e", id: listrik; arus listrik }
+- { de: Kantine, gender: f, plural: Kantinen, pattern: "-n", id: kantin }
+- { de: Ausgang, gender: m, plural: Ausgänge, pattern: "¨e", id: pintu keluar, level: A1 }
+- { de: Eingang, gender: m, plural: Eingänge, pattern: "¨e", id: pintu masuk, level: A1 }
