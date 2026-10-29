@@ -27,27 +27,35 @@ invariable plurals (el/los lunes) agree either way, and vosotros commands are fi
 | Lint | all five apps clean |
 | Core | unchanged since C3 (gated at M6) |
 
-## Lighthouse (mobile): below the 95 target
+## Lighthouse (mobile)
 
 Measured locally against the built site through a gzip server (as GitHub Pages serves it), Lighthouse
-12.8, mobile emulation:
+12.8, mobile emulation, median of three runs. Accessibility, best practices and SEO are 100 on every page.
 
-| Page | Performance | Accessibility | Best practices | SEO |
-|---|---|---|---|---|
-| `/` | 78 | 100 | 100 | 100 |
-| `/rung/easy-1/07-ser-estar/` | 80 | 100 | 100 | 100 |
-| `/words/` | 80 | 100 | 100 | 100 |
-| `/placement/` | 79 | 100 | 100 | 100 |
-| English `/`, same setup | 83 | | | |
+| Page | Before | After (`perf/first-paint`) |
+|---|---|---|
+| `/rung/easy-1/07-ser-estar/` (a lesson) | 80 | **99** |
+| `/placement/` | 79 | **94** (93–96) |
+| `/words/` | 80 | **90** (89–98) |
+| `/rung/easy-1/` | — | **89** |
+| `/` | 78 | **88** |
+| English `/`, same setup, for reference | 83 | 83 (unchanged) |
 
-Total blocking time is 10–40 ms and layout shift 0. The gap is **Largest Contentful Paint (5.4–5.9 s)**:
-the LCP element is the lesson's first paragraph, and 92% of it is "render delay". The engine renders
-lesson content in the browser after hydration (it reads progress from localStorage first), which the
-simulated 4× slower CPU stretches to about 5 s; unthrottled, the delay is under 100 ms. English shows
-the same pattern, so it's an engine property, not something Spanish adds. **Reaching 95 needs a core
-change**: render the first step's content on the server and hydrate the progress afterwards. That
-touches every app's first paint, so I haven't done it without you; say if you want it as a separate,
-parity-gated core change.
+**What it was.** Not the engine's rendering: every page's content is in the static HTML and paints at
+once (measured with a 4× slower CPU, first paint and LCP were both 0.2–0.3 s). Lighthouse's slow-4G model
+made the text wait for **580 KB of preloaded fonts** (12 files). Spanish now loads 7 files, about 250 KB:
+- `latin` only. I had added `latin-ext` as DESIGN §4 asks, but `latin` already covers á–ú, ñ, ü, ¿ ¡ « »
+  (the glyph test reads the built fonts).
+- Newsreader **without its optical-size axis**: 120 KB instead of 270 KB. Serif headings are a little
+  heavier and wider at large sizes. **Your call**: say if you'd rather keep the axis, which puts home and
+  My words back near 80.
+- No preload for the display and mono faces. The body face stays preloaded, since most first-screen
+  text uses it. No layout shift was measured (CLS ≤ 0.009).
+
+**Why home and the rung pages stay below 95.** With every font blocked, home scores 94. The rest is the
+size of those pages' HTML (home 19–26 KB gzipped, carrying every lesson summary) on the simulated slow
+connection. Leaving the glossaries out of home's data cut it by 7 KB but didn't move the score, so I
+reverted that core change. No core code changed on this branch.
 
 ## DESIGN §13 checklist
 
@@ -70,9 +78,8 @@ parity-gated core change.
 
 ## Decisions for you
 
-1. **Lighthouse**: accept 78–80 for v1 (with 100 for accessibility, best practices and SEO), or take
-   on the engine change above (server-rendered first step) as its own branch with all five parity
-   gates.
+1. **Lighthouse**: done on `perf/first-paint` (above); keep Newsreader without its optical-size
+   axis, or restore it?
 2. **The repo**: done (above).
 
 ## Next (after your review)
