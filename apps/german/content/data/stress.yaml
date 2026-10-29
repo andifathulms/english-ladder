@@ -47,3 +47,15 @@
 - { word: Beruf, syllables: [Be, ruf], stress: 1 }
 - { word: Kantine, syllables: [Kan, ti, ne], stress: 1 }
 - { word: Balikpapan, syllables: [Ba, lik, pa, pan], stress: 2 }
+# Easy 2: participles with ge- before one syllable, compounds the rule splits oddly, loanwords.
+- { word: geradeaus, syllables: [ge, ra, de, aus], stress: 3 }
+- { word: gemacht, syllables: [ge, macht], stress: 1 }
+- { word: gegangen, syllables: [ge, gan, gen], stress: 1 }
+- { word: aufstehen, syllables: [auf, ste, hen], stress: 0 }
+- { word: Balkon, syllables: [Bal, kon], stress: 1 }
+- { word: Toilette, syllables: [Toi, let, te], stress: 1 }
+- { word: Tablette, syllables: [Tab, let, te], stress: 1 }
+- { word: Konzert, syllables: [Kon, zert], stress: 1 }
+- { word: Etage, syllables: [E, ta, ge], stress: 1 }
+- { word: zentral, syllables: [zen, tral], stress: 1 }
+- { word: unterschreiben, syllables: [un, ter, schrei, ben], stress: 2 }

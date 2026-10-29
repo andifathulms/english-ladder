@@ -24,6 +24,9 @@ rungs:
     - [links, rechts, geradeaus, zwischen, über, gegenüber, seit, zum, zur, beim, vom, ins, ans]
     - [alle, alles, jeder, jede, jedes, jeden, dies, dieser, diese, dieses, diesen, andere, anderen, etwas, nichts, man]
     - [denn, doch, mal, also, leider, natürlich, vielleicht, genau, wirklich]
+    - [ab, ohne, gegen, durch, aufs, einmal, jemand, niemand, oh]
+    # separable prefixes that are not prepositions (sehen … fern, rufen … zurück, tut … weh)
+    - [fern, zurück, weh]
   easy-3: [weil, dass, schon, noch, nicht, mehr, als, am, meisten]
   medium-1: [wenn, sich, werden]
   medium-2: [des, eines, wegen, trotz, während, dessen, deren, denen]
