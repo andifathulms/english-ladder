@@ -1,0 +1,7 @@
+# Easy 3 word list (outline): only what the placement check's Easy 3 section uses until the rung is
+# written (v1.1). Draft.
+- { de: helfen, id: membantu, en: to help, pos: verb, verb: { aux: haben, partizip: geholfen, irregular: true } }
+- { de: gefallen, id: "disukai (… gefällt mir = aku suka …)", en: to please, pos: verb, verb: { aux: haben, partizip: gefallen, irregular: true } }
+- { de: Kleid, id: gaun, en: dress, pos: noun, gender: n, plural: Kleider }
+- { de: größer, id: lebih besar, en: bigger, pos: adj }
+- { de: müde, id: capek, en: tired, pos: adj }

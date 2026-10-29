@@ -2,7 +2,20 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
 // Every route in light and dark (the dark run at 130% text size). Lesson routes join as content lands.
-const steps: Record<string, number[]> = { '/rung/easy-1/01-hallo/': [0, 1, 2, 3, 4] };
+const steps: Record<string, number[]> = {
+  '/rung/easy-1/01-hallo/': [0, 1, 2, 3, 4],
+  '/rung/dasar/02-umlaut/': [1, 2],
+  '/rung/dasar/04-ich-dan-ach/': [1],
+  '/rung/easy-1/03-ich-wohne/': [1],
+  '/rung/easy-1/05-der-die-das/': [1],
+  '/rung/easy-1/10-akkusativ/': [1, 2],
+  '/rung/easy-2/01-uhrzeit/': [1],
+  '/rung/easy-2/07-wo-wohin/': [1],
+  '/rung/easy-2/09-wohnung/': [1, 3],
+  '/rung/easy-2/test/': [0],
+  '/rung/easy-1/read/': [0],
+  '/rung/easy-2/talk/': [0],
+};
 const lessons = Object.keys(steps);
 const routes = ['/', '/rung/dasar/', '/rung/easy-1/', '/rung/easy-2/', '/rung/hard-3/', '/placement/', '/visuals/', ...lessons, '/review/', '/words/', '/me/', '/settings/', '/about/'];
 

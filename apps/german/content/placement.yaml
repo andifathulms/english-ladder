@@ -1,9 +1,11 @@
 # Cek level (PRD §5.2): 24 items, six per section, written for this course (never Goethe exam material).
 # The first section scoring under 75% decides where the learner starts (course.config placement).
-# `from` (the lesson behind an item) is added once the lessons exist (M7).
+# `from` names the lesson behind an item (highlighted on the placed rung when missed); Easy 3 has no
+# lessons yet (v1.1).
 items:
   # ---------- Dasar: sounds and spelling ----------
   - id: pl-d-1
+    from: dasar-02-umlaut
     section: dasar
     type: listen
     audio: "schön"
@@ -11,6 +13,7 @@ items:
     answer: "schön"
     why: { id: "*Schön* (indah) punya ö: bibir bulat. *Schon* (sudah) tanpa umlaut.", en: "*Schön* (beautiful) has ö: rounded lips. *Schon* (already) has none." }
   - id: pl-d-2
+    from: dasar-05-tag-dibaca-tak
     section: dasar
     type: choice
     lang: id
@@ -19,6 +22,7 @@ items:
     answer: "seperti *tak*"
     why: { id: "Di akhir kata, *g* dibaca *k*, *d* dibaca *t*, *b* dibaca *p*.", en: "At the end of a word, *g* sounds like *k*, *d* like *t*, *b* like *p*." }
   - id: pl-d-3
+    from: dasar-03-ei-ie-eu
     section: dasar
     type: choice
     lang: id
@@ -27,6 +31,7 @@ items:
     answer: "*ai* dalam *pantai*"
     why: { id: "*Ei* selalu *ai*: *mein*, *drei*, *Arbeit*.", en: "*Ei* always sounds like *ai*: *mein*, *drei*, *Arbeit*." }
   - id: pl-d-4
+    from: dasar-03-ei-ie-eu
     section: dasar
     type: choice
     lang: id
@@ -35,6 +40,7 @@ items:
     answer: "*i* panjang"
     why: { id: "*Ie* adalah *i* panjang: *vier*, *Liebe*, *Miete*. Kebalikan dari *ei*.", en: "*Ie* is a long *i*: *vier*, *Liebe*, *Miete*. The opposite of *ei*." }
   - id: pl-d-5
+    from: dasar-01-kamu-sudah-tahu
     section: dasar
     type: choice
     lang: id
@@ -43,6 +49,7 @@ items:
     answer: "kata benda"
     why: { id: "Semua kata benda diawali huruf besar: *der Tisch*, *die Arbeit*.", en: "Every noun starts with a capital: *der Tisch*, *die Arbeit*." }
   - id: pl-d-6
+    from: dasar-01-kamu-sudah-tahu
     section: dasar
     type: choice
     lang: id
@@ -53,6 +60,7 @@ items:
 
   # ---------- Easy 1: verb position, der/die/das, accusative ----------
   - id: pl-e1-1
+    from: easy1-02-ich-heisse
     section: easy1
     type: gap
     prompt: "Ich ___ aus Indonesien."
@@ -60,6 +68,7 @@ items:
     answer: komme
     why: { id: "*Ich* + *-e*: *ich komme*.", en: "*Ich* takes *-e*: *ich komme*." }
   - id: pl-e1-2
+    from: easy1-03-ich-wohne
     section: easy1
     type: wordorder
     cue: "Hari ini aku bekerja."
@@ -68,12 +77,14 @@ items:
     zones: [p1, verb, middle]
     why: { id: "Kata kerja selalu di posisi 2. Kalau *heute* di depan, *ich* pindah ke belakang kata kerja.", en: "The verb is always in position 2. With *heute* in front, *ich* moves after the verb." }
   - id: pl-e1-3
+    from: easy1-05-der-die-das
     section: easy1
     type: gender
     noun: Zeitung
     answer: f
     why: { id: "Kata benda berakhiran *-ung* selalu *die*.", en: "Nouns ending in *-ung* are always *die*." }
   - id: pl-e1-4
+    from: easy1-10-akkusativ
     section: easy1
     type: case
     cue: "Aku punya seorang saudara laki-laki."
@@ -84,6 +95,7 @@ items:
     answer: einen
     why: { id: "*Bruder* itu *der*, dan objek dari *haben* memakai akusatif: *einen*.", en: "*Bruder* is *der*, and the object of *haben* is accusative: *einen*." }
   - id: pl-e1-5
+    from: easy1-09-plural
     section: easy1
     type: gap
     cue: "Itu dua anak."
@@ -92,6 +104,7 @@ items:
     answer: Kinder
     why: { id: "Jamak *Kind* adalah *Kinder* (-er).", en: "The plural of *Kind* is *Kinder* (-er)." }
   - id: pl-e1-6
+    from: easy1-08-meine-familie
     section: easy1
     type: gap
     prompt: "___ du Kinder?"
@@ -101,6 +114,7 @@ items:
 
   # ---------- Easy 2: separable and modal verbs, dative, Perfekt ----------
   - id: pl-e2-1
+    from: easy2-02-aufstehen
     section: easy2
     type: wordorder
     cue: "Aku bangun jam 6."
@@ -109,6 +123,7 @@ items:
     zones: [p1, verb, middle, end]
     why: { id: "*Aufstehen* terpisah: *stehe* di posisi 2, *auf* di akhir.", en: "*Aufstehen* separates: *stehe* in position 2, *auf* at the end." }
   - id: pl-e2-2
+    from: easy2-03-koennen
     section: easy2
     type: gap
     cue: "Hari ini aku tidak bisa datang."
@@ -117,6 +132,7 @@ items:
     answer: kommen
     why: { id: "Setelah kata kerja modal, kata kerja kedua berbentuk infinitif di akhir.", en: "After a modal verb, the second verb goes to the end as an infinitive." }
   - id: pl-e2-3
+    from: easy2-06-mit-dem-bus
     section: easy2
     type: case
     cue: "Aku naik bus."
@@ -127,6 +143,7 @@ items:
     answer: dem
     why: { id: "*Mit* selalu diikuti datif: *der Bus* → *mit dem Bus*.", en: "*Mit* always takes the dative: *der Bus* → *mit dem Bus*." }
   - id: pl-e2-4
+    from: easy2-07-wo-wohin
     section: easy2
     type: wechsel
     cue: "Aku menaruh buku ke atas meja."
@@ -137,6 +154,7 @@ items:
     answer: den
     why: { id: "Ada gerakan (*wohin?*), jadi akusatif: *auf den Tisch*.", en: "There's movement (*wohin?*), so accusative: *auf den Tisch*." }
   - id: pl-e2-5
+    from: easy2-11-perfekt
     section: easy2
     type: gap
     cue: "Kemarin aku bekerja."
@@ -145,6 +163,7 @@ items:
     answer: habe
     why: { id: "*Arbeiten* membentuk Perfekt dengan *haben*: *ich habe gearbeitet*.", en: "*Arbeiten* forms its Perfekt with *haben*: *ich habe gearbeitet*." }
   - id: pl-e2-6
+    from: easy2-11-perfekt
     section: easy2
     type: gap
     cue: "Kami pergi ke Berlin."
