@@ -18,7 +18,8 @@ import { parseInline, stripMarkup } from '@ladder/core/lib/markup';
 import type { GradeNote } from '@ladder/core/lib/check/itemTypes';
 import { cellResults, gradeTyped } from '@/course/items';
 import { zonesOf, type Zone } from '@/lib/de/bracket';
-import { article, determinerReadings, type Kase } from '@/lib/de/articles';
+import type { Kase } from '@/lib/de/articles';
+import { CASE_LABEL, CaseWord } from '../de/CaseWord';
 import type { GermanKey } from '@/i18n/overrides';
 import type { CaseItem, ConjugateItem, DictationItem, FormItem, GenderItem, WechselItem, WordorderItem } from '@/course/schema';
 import type { z } from 'zod';
@@ -297,35 +298,11 @@ function GenderOption({ value, state, disabled, onClick }: { value: string; inde
 
 // ---------- case ----------
 
-/** The letters of a determiner that differ from its nominative (d**en**, ein**em**): only those take the case colour. */
-export function changedLetters(form: string, kase: Kase): { stem: string; changed: string } {
-  if (kase === 'nom') return { stem: form, changed: '' };
-  const readings = determinerReadings().get(form.toLowerCase()) ?? [];
-  const r = readings.find((x) => x.kase === kase) ?? readings[0];
-  const nom = r ? (article(r.type, r.gender ?? 'm', r.number, 'nom') ?? '') : '';
-  let i = 0;
-  while (i < form.length && i < nom.length && form[i].toLowerCase() === nom[i].toLowerCase()) i++;
-  return { stem: form.slice(0, i), changed: form.slice(i) };
-}
-
-/** A determiner with its changed letters coloured and its case labelled (never colour alone). */
-export function CaseWord({ form, kase }: { form: string; kase: Kase }) {
-  const { stem, changed } = changedLetters(form, kase);
-  return (
-    <span lang="de" className="whitespace-nowrap">
-      {stem}
-      {changed && <span className={`case-${kase}`}>{changed}</span>}
-    </span>
-  );
-}
-
-const ROLE_LABEL: Record<Kase, string> = { nom: 'Nom', akk: 'Akk', dat: 'Dat', gen: 'Gen' };
-
 function CaseLabel({ kase }: { kase: Kase }) {
   const { t } = useT<GermanKey>();
   return (
     <span className={`label case-${kase} rounded-sm px-2 py-[2px]`} style={{ boxShadow: 'inset 0 0 0 1px currentColor' }} title={t(`check.role.${kase}` as GermanKey)}>
-      {ROLE_LABEL[kase]}
+      {CASE_LABEL[kase]}
       <span className="sr-only"> · {t(`check.role.${kase}` as GermanKey)}</span>
     </span>
   );

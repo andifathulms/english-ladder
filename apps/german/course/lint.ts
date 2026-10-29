@@ -22,7 +22,7 @@ import type { CheckItem, GlossaryEntry, Lesson, Rung } from './types';
 export type Finding = { level: 'error' | 'warn'; message: string };
 
 export type Grammar = { id: string; level: string; verbs?: string[]; chunks?: string[]; detect?: string };
-export type Noun = { de: string; gender: Gender; plural: string | null; parts?: string[]; links?: (string | null)[] };
+export type Noun = { de: string; gender: Gender; plural: string | null; id: string; person?: boolean; exception?: string; parts?: string[]; links?: (string | null)[] };
 export type Bridges = { bridges: DeBridge[]; false_friends: DeFalseFriend[] };
 export type Lexicon = { rungs: Record<string, string[]> };
 

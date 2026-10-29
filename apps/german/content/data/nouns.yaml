@@ -279,6 +279,8 @@
 - { de: Jacke, gender: f, plural: Jacken, pattern: "-n", id: jaket, level: A1 }
 - { de: Schuh, gender: m, plural: Schuhe, pattern: "-e", id: sepatu, level: A1 }
 - { de: Tasche, gender: f, plural: Taschen, pattern: "-n", id: tas, level: A1 }
+- { de: Kiste, gender: f, plural: Kisten, pattern: "-n", id: kotak; peti, level: A2 }
+- { de: Freiheit, gender: f, plural: null, pattern: null, id: kebebasan, level: B1 }
 - { de: Koffer, gender: m, plural: Koffer, pattern: "-", id: koper, level: A1 }
 - { de: Buch, gender: n, plural: Bücher, pattern: "¨er", id: buku, level: A1 }
 - { de: Heft, gender: n, plural: Hefte, pattern: "-e", id: buku tulis, level: A1 }

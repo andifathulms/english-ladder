@@ -121,6 +121,15 @@ export const model: ContentModel = {
   itemText,
   answerText,
   yaml: 'json',
+  // The visuals read nouns (genders, plurals, compound parts) and verbs; forms come from lib/de.
+  visualData: (ids) => {
+    if (!['gender-tiles', 'case-machine', 'verb-bracket', 'wechsel-scene', 'compound-builder', 'day-planner'].some((id) => ids.has(id))) return undefined;
+    const { nouns, verbs } = getData();
+    return {
+      nouns: nouns.map((n) => ({ de: n.de, gender: n.gender, plural: n.plural, id: n.id, ...(n.person ? { person: true } : {}), ...(n.exception ? { exception: n.exception } : {}), ...(n.parts ? { parts: n.parts, links: n.links ?? null } : {}) })),
+      verbs,
+    };
+  },
   // The words page's Kartu kata: the A1 deck, most frequent words first.
   wordsPageData: () => decksData(),
   lessonData: (l): DeLessonData => {

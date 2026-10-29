@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { CheckItemView } from '@ladder/core/components/check/CheckItemView';
 import type { CheckItem } from '@ladder/core/lib/types';
 import { AllProviders } from '../providers';
-import { changedLetters } from '@/components/check/slots';
+import { changedLetters } from '@/components/de/CaseWord';
 
 const why = { id: 'Alasannya.', en: 'The reason.' };
 const practice = (item: Record<string, unknown>) => {
