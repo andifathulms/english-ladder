@@ -2,14 +2,14 @@
 
 // Spanish check items (DESIGN §6): prompts and answer areas for form, conjugate, agree, dictation and
 // stress. Typed answers always show the accent bar (core AccentBar, keys from course.input).
-import { useRef, useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import type { AnswerProps, CheckSlots } from '@ladder/core/course/types';
 import type { ExtraItem } from '@ladder/core/lib/types';
 import { AccentBar } from '@ladder/core/components/ui/AccentBar';
 import { PlayButton } from '@ladder/core/components/lesson/PlayButton';
 import { usePlay } from '@ladder/core/components/useSpeech';
 import { useSettings, useT } from '@ladder/core/components/ProgressProvider';
-import { stripMarkup } from '@ladder/core/lib/markup';
+import { parseInline, stripMarkup } from '@ladder/core/lib/markup';
 import { cellResults, modeOf } from '@/course/items';
 import { foldAccents } from '@/lib/es/text';
 import { stemEnding } from '@/lib/es/conjugate';
@@ -375,8 +375,8 @@ function StressAnswer({ item, mode, value, solved, tone, onChange, submit }: Ans
               disabled={solved}
               lang="es-419"
               onClick={() => choose(0, String(i))}
-              className={`min-h-[48px] min-w-[48px] rounded-md px-3 font-display text-[1.375rem] transition-transform duration-quick ${on ? '-translate-y-[8px]' : ''}`}
-              style={{ boxShadow: `inset 0 0 0 2px ${ring(on)}` }}
+              className="min-h-[48px] min-w-[48px] rounded-md px-3 font-display text-[1.375rem] transition-transform duration-quick"
+              style={{ boxShadow: `inset 0 0 0 2px ${ring(on)}`, transform: on ? 'translateY(-8px)' : undefined }}
             >
               {foldAccents(syl)}
             </button>
@@ -414,7 +414,29 @@ function StressAnswer({ item, mode, value, solved, tone, onChange, submit }: Ans
   );
 }
 
+/** Why lines with their markup: *italic* and [[focus]] are Spanish words, **bold** in the accent. */
+function WhyText({ text }: { text: string }) {
+  return (
+    <>
+      {parseInline(text).map((tok, i) =>
+        tok.t === 'em' || tok.t === 'focus' ? (
+          <em key={i} lang="es-419">
+            {tok.v}
+          </em>
+        ) : tok.t === 'strong' ? (
+          <strong key={i} className="text-accent">
+            {tok.v}
+          </strong>
+        ) : (
+          <Fragment key={i}>{tok.v}</Fragment>
+        ),
+      )}
+    </>
+  );
+}
+
 export const checkSlots: CheckSlots = {
+  WhyText,
   rootAttrs: (item) => ({ 'data-type': item.type }),
   types: {
     form: { Prompt: FormPrompt, Answer: FormAnswer },
