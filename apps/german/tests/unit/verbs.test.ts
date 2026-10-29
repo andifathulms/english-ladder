@@ -1,10 +1,13 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import yaml from 'js-yaml';
 import { describe, expect, it } from 'vitest';
 import { conjugateAll, regularPartizip, TENSES, type VerbData } from '@/lib/de';
 
-const verbs = yaml.load(readFileSync(join(__dirname, '../../content/data/verbs.yaml'), 'utf8')) as VerbData[];
+// verbs.yaml plus the verbs added with each rung's lessons (data/verbs/<rung>.yaml).
+const DATA = join(__dirname, '../../content/data');
+const extra = existsSync(join(DATA, 'verbs')) ? readdirSync(join(DATA, 'verbs')).filter((f) => f.endsWith('.yaml')).map((f) => `verbs/${f}`) : [];
+const verbs = ['verbs.yaml', ...extra].flatMap((f) => (yaml.load(readFileSync(join(DATA, f), 'utf8')) as VerbData[] | null) ?? []);
 
 describe('verbs.yaml', () => {
   it('has unique infinitives', () => {

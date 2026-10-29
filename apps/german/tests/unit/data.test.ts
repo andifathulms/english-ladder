@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import yaml from 'js-yaml';
 import { describe, expect, it } from 'vitest';
@@ -16,7 +16,9 @@ describe('content/data schemas', () => {
   it('bridges.yaml', () => expect(() => BridgesSchema.parse(load('bridges.yaml'))).not.toThrow());
 });
 
-const nouns = NounsSchema.parse(load('nouns.yaml'));
+// nouns.yaml plus the nouns added with each rung's lessons (data/nouns/<rung>.yaml).
+const nounFiles = existsSync(join(__dirname, '../../content/data/nouns')) ? readdirSync(join(__dirname, '../../content/data/nouns')).filter((f) => f.endsWith('.yaml')).map((f) => `nouns/${f}`) : [];
+const nouns = NounsSchema.parse(['nouns.yaml', ...nounFiles].flatMap((f) => (load(f) as unknown[] | null) ?? []));
 const byWord = new Map(nouns.map((n) => [n.de, n]));
 
 describe('nouns.yaml', () => {
@@ -39,7 +41,8 @@ describe('nouns.yaml', () => {
   });
 
   it('the exceptions are the expected ones', () => {
-    expect(nouns.filter((n) => n.exception).map((n) => n.de)).toEqual(['Mutter', 'Schwester', 'Tochter', 'Krankenschwester', 'Kuchen', 'Moment', 'Irrtum']);
+    // Every listed exception really breaks its clue (checked above); the core set is in nouns.yaml.
+    expect(nouns.filter((n) => n.exception).map((n) => n.de)).toEqual(expect.arrayContaining(['Mutter', 'Schwester', 'Tochter', 'Krankenschwester', 'Kuchen', 'Moment', 'Irrtum']));
   });
 
   it('every plural matches its pattern', () => {
