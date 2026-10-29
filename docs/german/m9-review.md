@@ -95,3 +95,8 @@ home slower and added a layout shift on lessons (CLS 0.15), so I kept the Spanis
 
 The German teacher and the Ausbildung/nursing reviewer (H1), recordings or the browser-voice decision (H2),
 and the FrequencyWords licence confirmation (H3).
+
+## Decisions (2026-10-29)
+
+Approved: merge to `main` and publish. Audio: v1 ships on the browser's `de-DE` voice (as Spanish); the
+89-clip list stays ready for when a speaker is found (H2 stays open for recordings).
