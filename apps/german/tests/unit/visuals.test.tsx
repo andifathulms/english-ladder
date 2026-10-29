@@ -24,9 +24,6 @@ const wrap = (ui: React.ReactNode) =>
       <VisualDataProvider value={data}>{ui}</VisualDataProvider>
     </AllProviders>,
   );
-// Core's Toggle names its switch through an id built from the label, which breaks on spaces (noted in
-// the M6 review); find switches by position instead.
-const switches = () => screen.getAllByRole('switch');
 const sentence = (c: HTMLElement) => c.querySelector('[data-sentence]')!.textContent!.replace(/\s+/g, ' ').trim();
 
 it('every visual id is registered', () => {
@@ -38,7 +35,7 @@ describe('MouthPlacesDe (DESIGN §7.1)', () => {
     const { container } = wrap(<MouthPlacesDe lang="id" initial="ü" />);
     expect(container.querySelector('[data-lips="rounded"]')).not.toBeNull();
     expect(container.querySelector('[data-tongue]')?.getAttribute('data-tongue')).toBe('front-high');
-    fireEvent.click(switches()[0]);
+    fireEvent.click(screen.getByRole('switch', { name: 'Bibir bulat' }));
     expect(container.querySelector('[data-lips="rounded"]')).toBeNull();
     expect(container.querySelector('[aria-live]')?.textContent).toMatch(/^i:/);
   });
@@ -79,7 +76,7 @@ describe('CaseMachine (DESIGN §7.3)', () => {
     fireEvent.change(screen.getByRole('combobox', { name: /WEN\?/ }), { target: { value: 'Tasche' } });
     fireEvent.change(screen.getByRole('combobox', { name: /WEM\?/ }), { target: { value: 'Frau' } });
     expect(sentence(container)).toBe('Der Mann gibt der Frau die Tasche.');
-    fireEvent.click(switches()[0]);
+    fireEvent.click(screen.getByRole('switch', { name: 'Artikel tak tentu (ein)' }));
     expect(sentence(container)).toBe('Der Mann gibt einer Frau eine Tasche.');
     document.documentElement.setAttribute('data-case-colours', 'off');
     expect([...container.querySelectorAll('[data-role] .label:not([data-gender])')].map((e) => e.textContent)).toEqual(['WER?', 'Nom', 'WEM?', 'Dat', 'WEN? / WAS?', 'Akk']);
@@ -96,10 +93,10 @@ describe('VerbBracket (DESIGN §7.4)', () => {
   });
   it('the modal sends the infinitive to the end; weil sends the verb last', () => {
     const { container } = wrap(<VerbBracket lang="id" weil />);
-    fireEvent.click(switches()[0]);
+    fireEvent.click(screen.getByRole('switch', { name: 'Tambah kann' }));
     expect(sentence(container)).toBe('Ich kann um 6 Uhr aufstehen.');
-    fireEvent.click(switches()[0]);
-    fireEvent.click(switches()[1]);
+    fireEvent.click(screen.getByRole('switch', { name: 'Tambah kann' }));
+    fireEvent.click(screen.getByRole('switch', { name: 'Jadikan anak kalimat dengan weil' }));
     expect(sentence(container)).toBe('Weil ich um 6 Uhr aufstehe …');
   });
 });
@@ -108,7 +105,7 @@ describe('WechselScene (DESIGN §7.5)', () => {
   it('wo? takes the dative, wohin? the accusative', () => {
     const { container } = wrap(<WechselScene lang="id" />);
     expect(sentence(container)).toBe('Der Ball liegt auf der Kiste. Dat');
-    fireEvent.click(switches()[0]);
+    fireEvent.click(screen.getByRole('switch', { name: 'Ada gerakan (wohin?)' }));
     expect(sentence(container)).toBe('Ich lege den Ball auf die Kiste. Akk');
     expect(container.querySelector('[data-motion-arc]')).not.toBeNull();
   });
