@@ -2,9 +2,10 @@
 
 A calm, levelled language-course engine and the courses built on it. The engine
 (`@ladder/core`) is shared; each course is a thin app that supplies its content, visuals,
-theme and configuration. Courses: **English Ladder** (`apps/english`) and **Arabic Ladder**
-(`apps/arabic`, migrated from its own repo: see `docs/migrate-arabic.md`), both for Indonesian
-speakers.
+theme and configuration. Courses, all for Indonesian speakers: **English Ladder** (`apps/english`),
+**Arabic Ladder** (`apps/arabic`, see `docs/migrate-arabic.md`), **Mandarin Ladder** (`apps/mandarin`,
+see `docs/migrate-mandarin.md`), **Japanese Ladder** (`apps/japanese`, see `docs/japanese/`) and
+**Spanish Ladder** (`apps/spanish`, see `docs/spanish/`).
 
 Read `PRD.md` for what to build, `DESIGN.md` for how it must look, `CLAUDE.md` for how to
 build it, and `RECON.md` for a full map of the engine as it stands.
@@ -55,7 +56,7 @@ npm run content:check  # validate content against the course config
 npm run test           # vitest (engine + app unit/component tests)
 npm run test:e2e       # playwright, against the built site
 npm run lint
-npm run test:parity    # English 60 + Arabic 224 screenshots, 0 differing pixels
+npm run test:parity    # English 60, Arabic 224, Mandarin 212, Japanese 196, Spanish 196 screenshots
 ```
 
 `NEXT_PUBLIC_BASE_PATH` sets the GitHub Pages base path (e.g. `/english-ladder`).
