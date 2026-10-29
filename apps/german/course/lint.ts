@@ -241,7 +241,7 @@ function lintText(t: Text, scope: Scope, data: LintData, draft: boolean, out: Fi
         const ok = AUX.has(inf) ? scope.detects.has('perfekt') : MODALS.has(inf) ? scope.hasId('a2-modal-praeteritum') || scope.hasId('b1-praeteritum') : scope.hasId('b1-praeteritum');
         if (!ok) err(`"${tok.raw}" (${inf}, Präteritum) isn't taught yet`);
       }
-      if (only('imperativ') && !scope.hasId('a1-imperative') && !inChunk(i)) err(`"${tok.raw}" is an imperative, which isn't taught yet (Easy 2 lesson 5)`);
+      if (only('imperativ') && !nonVerb(tok) && !scope.hasId('a1-imperative') && !inChunk(i)) err(`"${tok.raw}" is an imperative, which isn't taught yet (Easy 2 lesson 5)`);
     }
 
     // Lexicon: the word must be known for this rung (words of a taught chunk always are).
@@ -279,7 +279,7 @@ function lintText(t: Text, scope: Scope, data: LintData, draft: boolean, out: Fi
   });
   // Relative clauses: ", der/die/das …" not followed by a noun.
   for (const m of plain.matchAll(/,\s+(der|die|das|den|dem|denen|dessen|deren)\s+([A-Za-zÄÖÜäöüß]+)/g)) {
-    if (RELATIVE.has(m[1]) && !/^[A-ZÄÖÜ]/.test(m[2]) && !scope.detects.has('relative')) err(`", ${m[1]} ${m[2]}" looks like a relative clause, taught in Medium 2`);
+    if (RELATIVE.has(m[1]) && !/^[A-ZÄÖÜ]/.test(m[2]) && !(data.formIndex.get(m[2].toLowerCase()) ?? []).some((f) => FINITE.has(f.tense)) && !scope.detects.has('relative')) err(`", ${m[1]} ${m[2]}" looks like a relative clause, taught in Medium 2`);
   }
   // Perfekt and passive: a participle with haben/sein (Perfekt) or werden (passive) in one clause.
   for (const c of clauses(t.text)) {
@@ -306,7 +306,9 @@ function lintText(t: Text, scope: Scope, data: LintData, draft: boolean, out: Fi
     if (!readings) return;
     // Skip one adjective between them ("ein großes Haus").
     const n1 = toks[i + 1];
-    const noun = n1 && /^[A-ZÄÖÜ]/.test(n1.raw) ? n1 : toks[i + 2] && /^[A-ZÄÖÜ]/.test(toks[i + 2].raw) && n1 && /^[a-zäöü]/.test(n1.raw) && !data.determiners.has(n1.low) ? toks[i + 2] : null;
+    // …but never over a verb: "Das ist Tee" is a pronoun, a verb and a noun.
+    const isVerb = (t: Tok) => (data.formIndex.get(t.low) ?? []).some((f) => FINITE.has(f.tense));
+    const noun = n1 && /^[A-ZÄÖÜ]/.test(n1.raw) ? n1 : toks[i + 2] && /^[A-ZÄÖÜ]/.test(toks[i + 2].raw) && n1 && /^[a-zäöü]/.test(n1.raw) && !data.determiners.has(n1.low) && !isVerb(n1) ? toks[i + 2] : null;
     if (!noun) return;
     const nr = nounGender.get(noun.raw);
     if (!nr) return;

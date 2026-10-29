@@ -163,3 +163,16 @@ describe('bracket focus (G1)', () => {
     expect(f('Ich [[stehe]] [[um]] 6 Uhr [[auf]].')).toMatch(/3 \[\[focus\]\] marks/);
   });
 });
+
+describe('lint: false positives found while writing Easy 1', () => {
+  it('heiß the adjective is not the imperative of heißen', () => {
+    expect(errors(lint(example('Der Kaffee ist heiß.', [N('Kaffee'), G('heiß', 'adj')]), E2))).not.toMatch(/imperative/);
+  });
+  it('"Das ist Tee." is a pronoun, a verb and a noun, not an article', () => {
+    expect(errors(lint(example('Das ist Tee.', [N('Tee'), V('sein')]), E2))).toBe('');
+  });
+  it('", das ist …" is a main clause, not a relative clause', () => {
+    expect(errors(lint(example('Hallo, das ist Rina.', [V('sein')]), E2))).not.toMatch(/relative/);
+    expect(errors(lint(example('Das Haus, das ich kaufe.', [N('Haus'), V('kaufen')]), E2))).toMatch(/relative/);
+  });
+});
