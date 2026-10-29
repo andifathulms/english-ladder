@@ -28,6 +28,7 @@
   --masc: #1F6E78;
   --fem: #9A5B0E;
   --neut: #5E5B70;
+  --work: #17464F;
   --nom: var(--ink);
   --akk: #2A5DB0;
   --dat: #8A3FA0;
@@ -66,6 +67,7 @@
     --masc: #7CC4CF;
     --fem: #E6B45C;
     --neut: #B3B0C8;
+    --work: #A9C3C7;
     --akk: #8FB2EE;
     --dat: #D7A3E6;
     --gen: #D6C27A;
@@ -97,6 +99,7 @@
   --masc: #7CC4CF;
   --fem: #E6B45C;
   --neut: #B3B0C8;
+  --work: #A9C3C7;
   --akk: #8FB2EE;
   --dat: #D7A3E6;
   --gen: #D6C27A;

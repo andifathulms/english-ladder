@@ -22,6 +22,7 @@ const config: Config = {
         masc: v('masc'),
         fem: v('fem'),
         neut: v('neut'),
+        work: v('work'),
         akk: v('akk'),
         dat: v('dat'),
         gen: v('gen'),

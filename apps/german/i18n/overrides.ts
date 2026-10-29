@@ -32,7 +32,62 @@ export type GermanKey =
   | 'about.dataTitle'
   | 'check.spelling.digraph'
   | 'check.spelling.umlaut'
-  | 'check.spelling.caps';
+  | 'check.spelling.caps'
+  | 'deck.title'
+  | 'deck.list'
+  | 'deck.none'
+  | 'deck.playWord'
+  | 'deck.level'
+  | 'deck.learned'
+  | 'deck.today'
+  | 'deck.start'
+  | 'deck.nothing'
+  | 'deck.filter'
+  | 'deck.filter.all'
+  | 'deck.filter.new'
+  | 'deck.filter.learned'
+  | 'deck.filter.lessons'
+  | 'deck.state.new'
+  | 'deck.state.learned'
+  | 'deck.more'
+  | 'deck.flip'
+  | 'deck.again'
+  | 'deck.know'
+  | 'deck.close'
+  | 'deck.summary'
+  | 'deck.done'
+  | 'deck.back'
+  | 'deck.soon'
+  | 'words.close'
+  | 'sound.pairs'
+  | 'words.bridges'
+  | 'words.bridgeOff'
+  | 'words.falseFriends'
+  | 'words.plural'
+  | 'words.tab'
+  | 'words.deckTab'
+  | 'home.doorNote'
+  | 'home.doorNoteLink'
+  | 'gender.m'
+  | 'gender.f'
+  | 'gender.n'
+  | 'lesson.work'
+  | 'words.dutch'
+  | 'words.compounds'
+  | 'words.compoundRule'
+  | 'words.noPlural'
+  | 'words.perfekt'
+  | 'words.clue'
+  | 'rung.exit'
+  | 'rung.preA1'
+  | 'climb.exit'
+  | 'accent.ae'
+  | 'accent.oe'
+  | 'accent.ue'
+  | 'accent.ss'
+  | 'accent.AE'
+  | 'accent.OE'
+  | 'accent.UE';
 
 type Overrides = Partial<StringTable> & Partial<Record<GermanKey, string>>;
 
@@ -92,6 +147,61 @@ export const idOverrides: Overrides = {
   'check.spelling.digraph': 'Hampir tepat. Tulisannya *{answer}*: ae, oe, ue dan ss ditulis ä, ö, ü dan ß.',
   'check.spelling.umlaut': 'Hampir tepat. Jangan lupa umlautnya: *{answer}*.',
   'check.spelling.caps': 'Kata benda selalu diawali huruf besar: *{answer}*.',
+  'deck.title': 'Kartu kata {level}',
+  'deck.list': 'Semua kata',
+  'deck.none': 'Kartu kata muncul begitu A1 punya pelajaran.',
+  'deck.playWord': 'Putar kata',
+  'deck.level': '{level} · perkiraan',
+  'deck.learned': '{n} dari {total} dipelajari',
+  'deck.today': 'Hari ini: {n} baru · {k} diulang',
+  'deck.start': 'Mulai',
+  'deck.nothing': 'Tidak ada kartu untuk hari ini',
+  'deck.filter': 'Saring',
+  'deck.filter.all': 'Semua',
+  'deck.filter.new': 'baru',
+  'deck.filter.learned': 'dipelajari',
+  'deck.filter.lessons': 'dari pelajaran',
+  'deck.state.new': 'baru',
+  'deck.state.learned': 'dipelajari',
+  'deck.more': 'dan {n} lagi: pakai pencarian',
+  'deck.flip': 'Balik kartu',
+  'deck.again': 'Belum ingat',
+  'deck.know': 'Ingat',
+  'deck.close': 'Tutup kartu',
+  'deck.summary': '{k} dari {n} kamu ingat.',
+  'deck.done': 'Kartu berikutnya muncul lagi sesuai jadwal ulangnya.',
+  'deck.back': 'Kembali ke daftar',
+  'deck.soon': 'Kartu kata A1 terbuka bersama pelajaran Easy 1.',
+  'words.close': 'Tutup',
+  'sound.pairs': 'Pasangan bunyi',
+  'words.bridges': 'Jembatan kata',
+  'words.bridgeOff': 'Jembatan ini menyesatkan',
+  'words.falseFriends': 'Teman palsu',
+  'words.plural': 'jamak:',
+  'words.tab': 'Kata',
+  'words.deckTab': 'Kartu kata',
+  'home.doorNote': 'Mau latihan bunyi dulu?',
+  'home.doorNoteLink': 'Mulai dari Dasar.',
+  'gender.m': 'maskulin',
+  'gender.f': 'feminin',
+  'gender.n': 'netral',
+  'lesson.work': 'Kerja',
+  'words.dutch': 'Belanda',
+  'words.compounds': 'Kata majemuk',
+  'words.compoundRule': 'Kata majemuk ikut jenis kata terakhirnya.',
+  'words.noPlural': 'tidak ada',
+  'words.perfekt': 'Perfekt:',
+  'words.clue': 'Petunjuk: akhiran {suffix}',
+  'rung.exit': 'Level ujian',
+  'rung.preA1': 'Pra-A1',
+  'climb.exit': '{level} selesai. Ini level ujian {exam}.',
+  'accent.ae': 'a umlaut',
+  'accent.oe': 'o umlaut',
+  'accent.ue': 'u umlaut',
+  'accent.ss': 'eszett (ss tajam)',
+  'accent.AE': 'A umlaut besar',
+  'accent.OE': 'O umlaut besar',
+  'accent.UE': 'U umlaut besar',
 };
 
 export const enOverrides: Overrides = {
@@ -150,4 +260,59 @@ export const enOverrides: Overrides = {
   'check.spelling.digraph': 'Almost. It is written *{answer}*: ae, oe, ue and ss are ä, ö, ü and ß.',
   'check.spelling.umlaut': 'Almost. Mind the umlaut: *{answer}*.',
   'check.spelling.caps': 'Nouns always start with a capital: *{answer}*.',
+  'deck.title': 'Word cards {level}',
+  'deck.list': 'All words',
+  'deck.none': 'Word cards appear once A1 has lessons.',
+  'deck.playWord': 'Play the word',
+  'deck.level': '{level} · estimate',
+  'deck.learned': '{n} of {total} learned',
+  'deck.today': 'Today: {n} new · {k} to review',
+  'deck.start': 'Start',
+  'deck.nothing': 'No cards for today',
+  'deck.filter': 'Filter',
+  'deck.filter.all': 'All',
+  'deck.filter.new': 'new',
+  'deck.filter.learned': 'learned',
+  'deck.filter.lessons': 'from lessons',
+  'deck.state.new': 'new',
+  'deck.state.learned': 'learned',
+  'deck.more': 'and {n} more: use the search',
+  'deck.flip': 'Turn the card',
+  'deck.again': 'Not yet',
+  'deck.know': 'Got it',
+  'deck.close': 'Close the cards',
+  'deck.summary': 'You remembered {k} of {n}.',
+  'deck.done': 'Each card comes back on its review day.',
+  'deck.back': 'Back to the list',
+  'deck.soon': 'The A1 word deck opens with the Easy 1 lessons.',
+  'words.close': 'Close',
+  'sound.pairs': 'Sound pairs',
+  'words.bridges': 'Word bridges',
+  'words.bridgeOff': 'This bridge misleads',
+  'words.falseFriends': 'False friends',
+  'words.plural': 'plural:',
+  'words.tab': 'Words',
+  'words.deckTab': 'Word deck',
+  'home.doorNote': 'Want to practise the sounds first?',
+  'home.doorNoteLink': 'Start with Dasar.',
+  'gender.m': 'masculine',
+  'gender.f': 'feminine',
+  'gender.n': 'neuter',
+  'lesson.work': 'Work',
+  'words.dutch': 'Dutch',
+  'words.compounds': 'Compounds',
+  'words.compoundRule': 'A compound takes its last word’s gender.',
+  'words.noPlural': 'none',
+  'words.perfekt': 'Perfekt:',
+  'words.clue': 'Clue: the ending {suffix}',
+  'rung.exit': 'Exam level',
+  'rung.preA1': 'Pre-A1',
+  'climb.exit': '{level} done. This is the {exam} exam level.',
+  'accent.ae': 'a umlaut',
+  'accent.oe': 'o umlaut',
+  'accent.ue': 'u umlaut',
+  'accent.ss': 'eszett (sharp s)',
+  'accent.AE': 'capital A umlaut',
+  'accent.OE': 'capital O umlaut',
+  'accent.UE': 'capital U umlaut',
 };

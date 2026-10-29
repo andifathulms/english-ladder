@@ -30,6 +30,7 @@ const PAIRS: [string, string, number][] = [
   ['masc', 'surface', 4.5],
   ['fem', 'surface', 4.5],
   ['neut', 'surface', 4.5],
+  ['work', 'surface', 4.5],
   ['akk', 'surface', 4.5],
   ['dat', 'surface', 4.5],
   ['gen', 'surface', 4.5],
