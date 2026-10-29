@@ -64,9 +64,8 @@ parity-gated core change.
 - `deploy-spanish` builds `apps/spanish` with `NEXT_PUBLIC_BASE_PATH=/spanish-ladder` and drafts on,
   and pushes `out/` to the `gh-pages` branch of `andifathulms/spanish-ladder` with
   `SPANISH_PAGES_DEPLOY_KEY`, as the siblings do. CI's build and e2e jobs include Spanish.
-- **The `spanish-ladder` repo doesn't exist yet** (checked with `gh` on 2026-10-29: the account has
-  english, arabic, mandarin and japanese). So no deploy key or secret was added. Once you create it,
-  I can add both with `gh` (the token has the scopes), or follow `docs/DEPLOY.md`.
+- **Repo, key and secret (done 2026-10-29, on your request):** `andifathulms/spanish-ladder` created
+  (public, empty), deploy key "ladder monorepo" with write access, `SPANISH_PAGES_DEPLOY_KEY` set here.
 - Nothing is merged to `main`, so no publish can run.
 
 ## Decisions for you
@@ -74,8 +73,7 @@ parity-gated core change.
 1. **Lighthouse**: accept 78–80 for v1 (with 100 for accessibility, best practices and SEO), or take
    on the engine change above (server-rendered first step) as its own branch with all five parity
    gates.
-2. **The repo**: create `andifathulms/spanish-ladder` (public, empty), then tell me to add the key and
-   secret.
+2. **The repo**: done (above).
 
 ## Next (after your review)
 
