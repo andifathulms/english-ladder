@@ -87,7 +87,34 @@ export type GermanKey =
   | 'accent.ss'
   | 'accent.AE'
   | 'accent.OE'
-  | 'accent.UE';
+  | 'accent.UE'
+  | 'tense.praesens'
+  | 'tense.perfekt'
+  | 'tense.praeteritum'
+  | 'tense.imperativ'
+  | 'tense.konj2'
+  | 'check.formPrompt'
+  | 'check.formLabel'
+  | 'check.dictationPrompt'
+  | 'check.dictationLabel'
+  | 'check.conjugatePrompt'
+  | 'check.genderPrompt'
+  | 'check.genderOptions'
+  | 'check.casePrompt'
+  | 'check.caseLabel'
+  | 'check.role.nom'
+  | 'check.role.akk'
+  | 'check.role.dat'
+  | 'check.role.gen'
+  | 'check.wo'
+  | 'check.wohin'
+  | 'check.wechselPrompt'
+  | 'check.wordorderPrompt'
+  | 'check.bracket'
+  | 'zone.p1'
+  | 'zone.verb'
+  | 'zone.middle'
+  | 'zone.end';
 
 type Overrides = Partial<StringTable> & Partial<Record<GermanKey, string>>;
 
@@ -202,6 +229,33 @@ export const idOverrides: Overrides = {
   'accent.AE': 'A umlaut besar',
   'accent.OE': 'O umlaut besar',
   'accent.UE': 'U umlaut besar',
+  'tense.praesens': 'Präsens (sekarang)',
+  'tense.perfekt': 'Perfekt (lampau)',
+  'tense.praeteritum': 'Präteritum (lampau tulis)',
+  'tense.imperativ': 'perintah (Imperativ)',
+  'tense.konj2': 'Konjunktiv II',
+  'check.formPrompt': 'Tulis bentuk yang tepat.',
+  'check.formLabel': 'Bentuknya',
+  'check.dictationPrompt': 'Dengarkan, lalu tulis kalimatnya.',
+  'check.dictationLabel': 'Kalimatnya',
+  'check.conjugatePrompt': 'Lengkapi bentuknya:',
+  'check.genderPrompt': 'der, die, atau das?',
+  'check.genderOptions': 'Pilih artikel',
+  'check.casePrompt': 'Isi artikelnya. Perannya:',
+  'check.caseLabel': 'Artikelnya',
+  'check.role.nom': 'subjek (Nominativ)',
+  'check.role.akk': 'objek langsung (Akkusativ)',
+  'check.role.dat': 'objek tak langsung (Dativ)',
+  'check.role.gen': 'pemilik (Genitiv)',
+  'check.wo': 'wo? diam',
+  'check.wohin': 'wohin? bergerak',
+  'check.wechselPrompt': 'Pilih artikelnya.',
+  'check.wordorderPrompt': 'Susun kalimatnya.',
+  'check.bracket': 'Kerangka kalimat',
+  'zone.p1': 'Posisi 1',
+  'zone.verb': 'Verb',
+  'zone.middle': 'Tengah',
+  'zone.end': 'Akhir',
 };
 
 export const enOverrides: Overrides = {
@@ -315,4 +369,31 @@ export const enOverrides: Overrides = {
   'accent.AE': 'capital A umlaut',
   'accent.OE': 'capital O umlaut',
   'accent.UE': 'capital U umlaut',
+  'tense.praesens': 'Präsens (present)',
+  'tense.perfekt': 'Perfekt (past)',
+  'tense.praeteritum': 'Präteritum (written past)',
+  'tense.imperativ': 'imperative',
+  'tense.konj2': 'Konjunktiv II',
+  'check.formPrompt': 'Write the right form.',
+  'check.formLabel': 'The form',
+  'check.dictationPrompt': 'Listen, then write the sentence.',
+  'check.dictationLabel': 'The sentence',
+  'check.conjugatePrompt': 'Fill in the forms:',
+  'check.genderPrompt': 'der, die or das?',
+  'check.genderOptions': 'Pick the article',
+  'check.casePrompt': 'Fill in the article. Its role:',
+  'check.caseLabel': 'The article',
+  'check.role.nom': 'subject (nominative)',
+  'check.role.akk': 'direct object (accusative)',
+  'check.role.dat': 'indirect object (dative)',
+  'check.role.gen': 'owner (genitive)',
+  'check.wo': 'wo? staying',
+  'check.wohin': 'wohin? moving',
+  'check.wechselPrompt': 'Pick the article.',
+  'check.wordorderPrompt': 'Put the sentence in order.',
+  'check.bracket': 'Sentence frame',
+  'zone.p1': 'Position 1',
+  'zone.verb': 'Verb',
+  'zone.middle': 'Middle',
+  'zone.end': 'End',
 };

@@ -10,7 +10,8 @@ import type { GradeContext, GradeResult, ItemTypeLogic } from '@ladder/core/lib/
 import type { ExtraItem } from '@ladder/core/lib/types';
 import { stripMarkup } from '@ladder/core/lib/markup';
 import { baseDe } from '@/lib/de/text';
-import { normDe, type SpellingMode } from '@/lib/de/spelling';
+import { capsCheck, normDe, type SpellingMode } from '@/lib/de/spelling';
+import { PUNCT_END } from '@/lib/de/text';
 import { validOrder, type ClauseType, type Zone } from '@/lib/de/bracket';
 import type { CaseItem, ConjugateItem, DictationItem, FormItem, GenderItem, WechselItem, WordorderItem } from './schema';
 import type { z } from 'zod';
@@ -48,8 +49,10 @@ export function gradeTyped(given: string, accepted: string[], item: Spelling, ct
     const want = stripMarkup(a);
     const r = normDe(stripMarkup(given), want, opts);
     if (r.correct && r.notes.length === 0) return { correct: true };
-    if (r.correct) return { correct: true, note: { key: `check.spelling.${r.notes[0]}`, params: { answer: want } } };
-    if (r.notes.includes('caps') && !caps) caps = want;
+    // The note quotes the answer without its closing mark (the note ends its own sentence).
+    if (r.correct) return { correct: true, note: { key: `check.spelling.${r.notes[0]}`, params: { answer: want.replace(PUNCT_END, '') } } };
+    // The caps note names the nouns written small (Bruder), or the answer when it is one word.
+    if (r.notes.includes('caps') && !caps) caps = capsCheck(stripMarkup(given), want).join(', ') || want.replace(PUNCT_END, '');
   }
   return caps ? { correct: false, note: { key: 'check.spelling.caps', params: { answer: caps } } } : { correct: false };
 }

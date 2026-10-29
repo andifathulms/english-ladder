@@ -14,6 +14,7 @@ import { SoundStrand, TalkStrand, TirukanStrand, WordsStrand, WorkStrand } from 
 import { WordsRow, matchesWord } from '@/components/WordsRow';
 import { WordDeckPanel } from '@/components/decks';
 import { answerText, itemText, itemTypes } from '@/course/items';
+import { checkSlots } from '@/components/check/slots';
 import { ALLOWED_SETTINGS, DEFAULT_SETTINGS, EXTENSIONS, SCHEMA_VERSION, STORAGE_KEY, THEME_COLOR, onCompleteLesson } from '@/course/progress';
 
 export const course: CourseConfig = {
@@ -93,6 +94,7 @@ export const course: CourseConfig = {
   itemTypes,
   itemText,
   answerText,
+  check: checkSlots,
   // The accent bar under every text field (CLAUDE.md §5.3): ä ö ü ß, and Ä Ö Ü for nouns (Äpfel, Übung).
   // Core's bar has no shift layer, so the capitals are keys of their own.
   input: {

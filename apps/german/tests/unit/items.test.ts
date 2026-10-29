@@ -21,7 +21,7 @@ describe('typed answers (CLAUDE.md §5.2)', () => {
     expect(grade(form, 'faehrt', { spellingStrict: 'always' } as never).correct).toBe(false);
   });
   it('a noun without its capital fails with the caps note', () => {
-    expect(gradeTyped('ich habe einen bruder', ['Ich habe einen Bruder'], { nounCaps: true })).toEqual({ correct: false, note: { key: 'check.spelling.caps', params: { answer: 'Ich habe einen Bruder' } } });
+    expect(gradeTyped('ich habe einen bruder', ['Ich habe einen Bruder'], { nounCaps: true })).toEqual({ correct: false, note: { key: 'check.spelling.caps', params: { answer: 'Bruder' } } });
     expect(gradeTyped('ich habe einen bruder', ['Ich habe einen Bruder'], { nounCaps: false }).correct).toBe(true);
   });
   it('options are exact', () => {

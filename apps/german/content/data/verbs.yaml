@@ -254,6 +254,14 @@
   praet: { stem: gab }
   check:
     praesens: [gebe, gibst, gibt, geben, gebt, geben]
+- inf: gefallen
+  id: disukai (… gefällt mir = aku suka …)
+  vowel: a-ä
+  aux: haben
+  partizip: gefallen
+  praet: { stem: gefiel }
+  check:
+    praesens: [gefalle, gefällst, gefällt, gefallen, gefallt, gefallen]
 - inf: helfen
   id: membantu
   vowel: e-i

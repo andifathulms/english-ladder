@@ -18,11 +18,11 @@ rungs:
     - [einundzwanzig, zweiundzwanzig, dreißig, vierzig, fünfzig, sechzig, siebzig, achtzig, neunzig, hundert]
     - [jahr, jahre, euro, cent, frau, herr]
   easy-2:
-    - [halb, viertel, vor, nach, uhr, früh, spät, morgens, mittags, nachmittags, abends, nachts, zuerst, danach, dann, manchmal, nie, selten]
+    - [gestern, halb, viertel, vor, nach, uhr, früh, spät, morgens, mittags, nachmittags, abends, nachts, zuerst, danach, dann, manchmal, nie, selten]
     - [links, rechts, geradeaus, zwischen, über, gegenüber, seit, zum, zur, beim, vom, ins, ans]
     - [alle, alles, jeder, jede, jedes, jeden, dies, dieser, diese, dieses, diesen, andere, anderen, etwas, nichts, man]
     - [denn, doch, mal, also, leider, natürlich, vielleicht, genau, wirklich]
-  easy-3: [weil, dass, gestern, schon, noch, nicht, mehr, als, am, meisten]
+  easy-3: [weil, dass, schon, noch, nicht, mehr, als, am, meisten]
   medium-1: [wenn, sich, werden]
   medium-2: [des, eines, wegen, trotz, während, dessen, deren, denen]
   medium-3: [obwohl, damit, sowohl, entweder, weder, noch]
