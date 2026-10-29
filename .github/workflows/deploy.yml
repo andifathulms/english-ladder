@@ -212,3 +212,38 @@ jobs:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'deploy: Japanese Ladder from ${{ github.repository }}@${{ github.sha }}'
+
+  # Spanish Ladder lives at https://andifathulms.github.io/spanish-ladder/: build apps/spanish with that
+  # base path and push apps/spanish/out to the gh-pages branch of andifathulms/spanish-ladder.
+  # Needs the SPANISH_PAGES_DEPLOY_KEY secret (docs/DEPLOY.md).
+  deploy-spanish:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: [build, e2e]
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages-spanish
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build static site (apps/spanish)
+        run: npm run build:spanish
+        env:
+          NEXT_PUBLIC_BASE_PATH: /spanish-ladder
+          NEXT_PUBLIC_SHOW_DRAFTS: 'true'
+      - run: touch apps/spanish/out/.nojekyll
+      - name: Push to spanish-ladder gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.SPANISH_PAGES_DEPLOY_KEY }}
+          external_repository: andifathulms/spanish-ladder
+          publish_branch: gh-pages
+          publish_dir: apps/spanish/out
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'deploy: Spanish Ladder from ${{ github.repository }}@${{ github.sha }}'

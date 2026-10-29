@@ -4,7 +4,7 @@ Each app builds to `apps/<app>/out` with `output: 'export'` (fully static). Ever
 link and asset already works with and without a base path, so a course can live at a domain
 root or under a sub-path.
 
-Four courses ship from this repo (`.github/workflows/deploy.yml`):
+Five courses ship from this repo (`.github/workflows/deploy.yml`):
 
 | Course | Built with | Published to | Job |
 |---|---|---|---|
@@ -12,6 +12,7 @@ Four courses ship from this repo (`.github/workflows/deploy.yml`):
 | Arabic Ladder | `NEXT_PUBLIC_BASE_PATH=/arabic-ladder` | `gh-pages` branch of `andifathulms/arabic-ladder` | `deploy-arabic` (option B) |
 | Mandarin Ladder | `NEXT_PUBLIC_BASE_PATH=/mandarin-ladder` | `gh-pages` branch of `andifathulms/mandarin-ladder` | `deploy-mandarin` (option B) |
 | Japanese Ladder | `NEXT_PUBLIC_BASE_PATH=/japanese-ladder` | `gh-pages` branch of `andifathulms/japanese-ladder` | `deploy-japanese` (option B) |
+| Spanish Ladder | `NEXT_PUBLIC_BASE_PATH=/spanish-ladder` | `gh-pages` branch of `andifathulms/spanish-ladder` | `deploy-spanish` (option B) |
 
 Arabic and Mandarin keep their live URLs (<https://andifathulms.github.io/arabic-ladder/>,
 <https://andifathulms.github.io/mandarin-ladder/>), so learners' bookmarks and their saved progress
@@ -86,6 +87,22 @@ To check a deploy: the service worker is `japanese-ladder-v0.1.0` and Local stor
 `japanese-ladder:v1`. Japanese's fonts are subset at build like Mandarin's (Klee One and Noto Sans
 JP, fetched by `npm run fonts:fetch -w japanese-ladder`); its KanjiVG stroke files are committed in
 `apps/japanese/public/strokes` (CC BY-SA 3.0).
+
+## One-time setup for Spanish Ladder (option B)
+
+The same steps as Japanese, with Spanish's names. `spanish-ladder` is a new, empty repo.
+
+1. `ssh-keygen -t ed25519 -C "ladder monorepo → spanish-ladder gh-pages" -f spanish_pages_key -N ""`
+2. `andifathulms/spanish-ladder` → Settings → Deploy keys: add `spanish_pages_key.pub` with
+   **Allow write access** (or `gh repo deploy-key add spanish_pages_key.pub --allow-write -R andifathulms/spanish-ladder -t "ladder monorepo"`).
+3. This repo → Actions secrets: `SPANISH_PAGES_DEPLOY_KEY` = the private key (or
+   `gh secret set SPANISH_PAGES_DEPLOY_KEY < spanish_pages_key`). Delete both files.
+4. First publish: run the workflow on `main`; `deploy-spanish` creates `gh-pages` in `spanish-ladder`.
+5. `spanish-ladder` → Settings → Pages → *Deploy from a branch*, `gh-pages`, `/ (root)`.
+
+To check a deploy: the service worker is `spanish-ladder-v0.1.0` and Local storage holds
+`spanish-ladder:v1`. Spanish needs no font fetching (Latin faces through `next/font`) and ships no
+media yet (`apps/spanish/public/audio/SOURCE.md`).
 
 ### Mandarin's media in git
 
