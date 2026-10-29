@@ -30,7 +30,7 @@
     "test": "npm run test -w english-ladder && npm run test -w arabic-ladder && npm run test -w mandarin-ladder && npm run test -w japanese-ladder && npm run test -w spanish-ladder && npm run test -w german-ladder",
     "test:watch": "npm run test:watch -w english-ladder",
     "test:e2e": "npm run test:e2e -w english-ladder && npm run test:e2e -w arabic-ladder && npm run test:e2e -w mandarin-ladder && npm run test:e2e -w japanese-ladder && npm run test:e2e -w spanish-ladder && npm run test:e2e -w german-ladder",
-    "test:parity": "node tests/parity/verify.mjs english && node tests/parity/verify.mjs arabic && node tests/parity/verify.mjs mandarin && node tests/parity/verify.mjs japanese && node tests/parity/verify.mjs spanish",
+    "test:parity": "node tests/parity/verify.mjs english && node tests/parity/verify.mjs arabic && node tests/parity/verify.mjs mandarin && node tests/parity/verify.mjs japanese && node tests/parity/verify.mjs spanish && node tests/parity/verify.mjs german",
     "lint": "npm run lint -w english-ladder && npm run lint -w arabic-ladder && npm run lint -w mandarin-ladder && npm run lint -w japanese-ladder && npm run lint -w spanish-ladder && npm run lint -w german-ladder",
     "format": "prettier --write ."
   },
